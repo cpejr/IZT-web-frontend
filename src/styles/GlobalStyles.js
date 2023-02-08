@@ -2,8 +2,12 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 :root {
- // Variáveis CSS aqui
+  --primary: #d6ceaa;
+  --success: #79b5ac;
+  --reject: #c75233;
+  // Variáveis CSS aqui
 }
+
 
 * {
   margin: 0;
