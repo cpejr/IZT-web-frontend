@@ -11,10 +11,12 @@
   ],
   "plugins": ["react", "prettier"],
   "rules": {
+    "import/no-extraneous-dependencies": 0,
     "react/react-in-jsx-scope": 0
   },
   "overrides": [],
   "parserOptions": {
+    "ecmaFeatures": { "jsx": true },
     "ecmaVersion": "latest",
     "sourceType": "module"
   }
