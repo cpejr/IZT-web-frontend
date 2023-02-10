@@ -29,4 +29,11 @@ body,
 #root {
   height: 100%;
 }
+
+html {
+  scroll-behavior: smooth;
+  @media (prefers-reduced-motion: reduce) {
+	  scroll-behavior:auto;
+  }
+}
 `;
