@@ -4,7 +4,7 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import Catalog from './pages/Catalog/Catalog';
+import Catalog from './pages/Catalog';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
