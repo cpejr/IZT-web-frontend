@@ -1,10 +1,11 @@
 import React from 'react';
+import { Carousel } from '../../components/features';
 import { Container } from './Styles';
 
 function Home() {
   return (
     <Container>
-      <div>Carousel</div>
+      <Carousel />
       <div>Cards</div>
       <div>Contact inputs</div>
       <div>
