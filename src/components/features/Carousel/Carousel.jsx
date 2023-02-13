@@ -1,11 +1,14 @@
 import React from 'react';
-import { Container, Frame, Arrows } from './Styles';
+import { CarouselData } from './CarouselData';
 
-export default function Carousel() {
+const Carousel = () => {
   return (
-    <Container>
-      <Frame>OIIII</Frame>
-      <Arrows></Arrows>
-    </Container>
+    <>
+      {CarouselData.map((slide, index) => {
+        return <img src={slide.image} alt="travel image" />;
+      })}
+    </>
   );
-}
+};
+
+export default Carousel;
