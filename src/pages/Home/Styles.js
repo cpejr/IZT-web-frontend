@@ -1,8 +1,9 @@
-import styled from "styled-components";
-import { Colors, Fonts } from "../../variables";
+/* eslint-disable import/prefer-default-export */
+import styled from 'styled-components';
+import { Colors, Fonts } from '../../variables';
 
 export const Container = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
