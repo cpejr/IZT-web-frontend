@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Page,
   Container,
   Introduction,
   Title,
@@ -111,38 +112,40 @@ const products = [
 
 function Catalog() {
   return (
-    <Container>
-      <Introduction>
-        <Title>Tudo o que você precisa está aqui!</Title>
-        <Description>
-          Bem-vindo ao catálogo da IZT Core! Aqui você encontrará uma ampla
-          seleção de bocais de alta qualidade, projetados para atender a todas
-          as suas necessidades.Navegue em nosso catálogo de produtos e encontre
-          o bocal perfeito para sua aplicação.
-        </Description>
-      </Introduction>
-      <ButtonRow>
+    <Page>
+      <Container>
+        <Introduction>
+          <Title>Tudo o que você precisa está aqui!</Title>
+          <Description>
+            Bem-vindo ao catálogo da IZT Core! Aqui você encontrará uma ampla
+            seleção de bocais de alta qualidade, projetados para atender a todas
+            as suas necessidades.Navegue em nosso catálogo de produtos e
+            encontre o bocal perfeito para sua aplicação.
+          </Description>
+        </Introduction>
+        <ButtonRow>
+          {products.map((product) => (
+            <Anchor key={product.Category} href={`#${product.Category}`}>
+              <Button>{product.Category}</Button>
+            </Anchor>
+          ))}
+        </ButtonRow>
         {products.map((product) => (
-          <Anchor key={product.Category} href={`#${product.Category}`}>
-            <Button>{product.Category}</Button>
-          </Anchor>
+          <ProductCategory key={product.Category} id={product.Category}>
+            <Divider />
+            <CategoryName>{product.Category}</CategoryName>
+            <ProductRow>
+              {product.Bocals.map((bocal) => (
+                <Product key={bocal.Name}>
+                  <ProductImage src={bocal.image} />
+                  <ProductName>{bocal.Name}</ProductName>
+                </Product>
+              ))}
+            </ProductRow>
+          </ProductCategory>
         ))}
-      </ButtonRow>
-      {products.map((product) => (
-        <ProductCategory key={product.Category}>
-          <Divider />
-          <CategoryName id={product.Category}>{product.Category}</CategoryName>
-          <ProductRow>
-            {product.Bocals.map((bocal) => (
-              <Product key={bocal.Name}>
-                <ProductImage src={bocal.image} />
-                <ProductName>{bocal.Name}</ProductName>
-              </Product>
-            ))}
-          </ProductRow>
-        </ProductCategory>
-      ))}
-    </Container>
+      </Container>
+    </Page>
   );
 }
 
