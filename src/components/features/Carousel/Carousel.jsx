@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { Container, Frames, Arrows, Image } from './Styles';
+import { Container, Frames, Arrows, Image, Dot } from './Styles';
 
 function Carousel({ slides }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,6 +32,13 @@ function Carousel({ slides }) {
         <button type="button" onClick={prevSlide}>
           ESQUERDA
         </button>
+        {slides.map((slide, index) => (
+          <Dot
+            onClick={() => goToSlide(index)}
+            key={index}
+            backgroundColor={index === currentIndex}
+          />
+        ))}
         <button type="button" onClick={nextSlide}>
           DIREITA
         </button>

@@ -32,6 +32,14 @@ export const Arrows = styled.div`
   justify-content: center;
 `;
 
+export const Dot = styled.div`
+  height: 15px;
+  width: 15px;
+  border: 1px solid black;
+  background-color: ${(props) => (props.backgroundColor ? 'black' : 'none')};
+  border-radius: 50%;
+`;
+
 export const ButtonLeft = styled.button``;
 
 export const ButtonRight = styled.button``;
