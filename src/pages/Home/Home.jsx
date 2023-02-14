@@ -1,12 +1,16 @@
 import React from 'react';
 import { Carousel } from '../../components/features';
-import { Container } from './Styles';
+import { Cards, Container, MiddleCard, SideCard } from './Styles';
 
 function Home() {
   return (
     <Container>
       <Carousel />
-      <div>Cards</div>
+      <Cards>
+        <SideCard>Treinamento em Retificação Centerless</SideCard>
+        <MiddleCard>Catálogo de Produtos</MiddleCard>
+        <SideCard>Software de estabilidade</SideCard>
+      </Cards>
       <div>Contact inputs</div>
       <div>
         <h1>Conheça a nossa história</h1>
