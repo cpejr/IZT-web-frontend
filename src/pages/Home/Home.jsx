@@ -1,11 +1,12 @@
 import React from 'react';
 import { Carousel } from '../../components/features';
+import CarouselData from '../../components/features/Carousel/CarouselData';
 import { Container } from './Styles';
 
 function Home() {
   return (
     <Container>
-      <Carousel />
+      <Carousel slides={CarouselData} />
       <div>Cards</div>
       <div>Contact inputs</div>
       <div>

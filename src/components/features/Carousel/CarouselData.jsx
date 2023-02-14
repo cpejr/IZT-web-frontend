@@ -1,4 +1,4 @@
-export const CarouselData = [
+const CarouselData = [
   {
     image:
       'https://s3-alpha-sig.figma.com/img/15c4/bcb6/077c7f449228d8cd34b06f2433f09881?Expires=1677456000&Signature=kaa8qzJ2d7Q5qZF3uxs4sXbroYHYCcSzPuldYa4mlkLmBzCSevsBh9VDsmeB~69FApSCfTDUS-PI8~a9pAXevvEpup~d3kMexXrvgHzWY5LImmoeNUfUPDMOjr0akq6~ifb6wlGWECSGRWEA-pQDXF8mkUp05Jpw-STTjtLlgYZ12p0y2WEW8P5FXRWT33~wxIsiM65TWWtyy6ZRho74JumFwS401HzAx1clm32RZeetilIoHXHAWEjjveJbcTevTFlVqWcAqckXIvcSyVl56J4kxnO~69wgay14yKMkIF4TSBrLXkot6Irg~5ZHKMMsPHydsTynPI-xfib5kwspmA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
@@ -16,3 +16,5 @@ export const CarouselData = [
       'https://images.unsplash.com/photo-1519241047957-be31d7379a5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
   },
 ];
+
+export default CarouselData;

@@ -949,6 +949,13 @@ caniuse-lite@^1.0.30001449:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001451.tgz#2e197c698fc1373d63e1406d6607ea4617c613f1"
   integrity sha512-XY7UbUpGRatZzoRft//5xOa69/1iGJRBlrieH6QYrkKLIFn3m7OVEJ81dSrKoy2BnKsdbX5cLrOispZNYo9v2w==
 
+carousel@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/carousel/-/carousel-0.0.3.tgz#f83ca5583165bb98f174c01e67a1b54b902cc97f"
+  integrity sha512-7/6BwcKV4vepSCpurqJxTJlcigZAjU+RdhyRcye1RNEU/a8N8k7/jprMa7DGcVvP+A8xaHHvWqWq2qygJr1jcw==
+  dependencies:
+    domready "~0.2.12"
+
 chalk@^2.0.0:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
@@ -1217,6 +1224,11 @@ doctrine@^3.0.0:
   integrity sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==
   dependencies:
     esutils "^2.0.2"
+
+domready@~0.2.12:
+  version "0.2.13"
+  resolved "https://registry.yarnpkg.com/domready/-/domready-0.2.13.tgz#5ec8340b5ee5f76ad72fd32007cfb5d38a2cd361"
+  integrity sha512-32G1m2FCiSLdxRVnamVdMVpgpSyE4aesx8Bof8Usm6dGpq+19PAXFtrKWWRYJoaSIfwTVTHV5wlQyyZ4aHhauA==
 
 dot-prop@^5.1.0:
   version "5.3.0"
