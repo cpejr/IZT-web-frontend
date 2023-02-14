@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
-import { Colors, Fonts } from '../../variables';
+import { Fonts } from '../../variables';
 
 export const Container = styled.div`
   display: flex;
@@ -47,10 +47,12 @@ export const OurHistoryTitle = styled.h1`
 export const OurHistory = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   color: black;
   font-family: ${Fonts.montserrat};
   font-weight: 400;
   font-size: 20px;
+  line-height: 24px;
   margin-bottom: 3%;
 
   @media (max-width: 1100px) {
@@ -67,10 +69,15 @@ export const OurHistory = styled.div`
 `;
 
 export const Picture = styled.img`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 466px;
   height: 271px;
   left: 834px;
   top: 45px;
+  max-width: 100%;
   object-fit: scale-down;
-  margin-left: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
 `;
