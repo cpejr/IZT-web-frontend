@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel } from '../../components/features';
+import { Carousel, FormsContactUs } from '../../components/features';
 import CarouselData from '../../components/features/Carousel/CarouselData';
 import { Container } from './Styles';
 
@@ -8,6 +8,7 @@ function Home() {
     <Container>
       <Carousel slides={CarouselData} />
       <div>Cards</div>
+      <FormsContactUs />
       <div>Contact inputs</div>
       <div>
         <h1>Conheça a nossa história</h1>
