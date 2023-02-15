@@ -62,6 +62,8 @@ export const CardTitle = styled.div`
   font-family: ${Fonts.montserrat};
   font-size: 24px;
   font-weight: 700;
+
+  margin-bottom: 70%;
 `;
 
 export const CardText = styled.div`
@@ -70,7 +72,11 @@ export const CardText = styled.div`
   justify-content: center;
   align-items: center;
 
+  width: 77%;
+
   font-family: ${Fonts.montserrat};
   font-size: 18px;
   font-weight: 400;
+
+  margin-bottom: 80%;
 `;
