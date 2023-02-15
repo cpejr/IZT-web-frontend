@@ -1,13 +1,13 @@
 import React from 'react';
-import { Container, CardText, CardTitle } from './Styles';
+import { Container, CardText, CardTitle, Button } from './Styles';
 
-function Card({ title, image, imageAlt, text, isMiddle }) {
+function Card({ title, image, imageAlt, text, isMiddle, marginBottom }) {
   return (
-    <Container isMiddle={isMiddle}>
+    <Container isMiddle={isMiddle} marginBottom={marginBottom}>
       <CardTitle>{title}</CardTitle>
       <img src={image} alt={imageAlt} />
       <CardText>{text}</CardText>
-      <button type="button">Saiba mais</button>
+      <Button type="button">Saiba mais</Button>
     </Container>
   );
 }

@@ -8,7 +8,7 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const Cards = styled.div`
+export const CardsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

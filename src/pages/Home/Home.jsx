@@ -1,41 +1,41 @@
 import React from 'react';
 import { Carousel, Card } from '../../components/features';
-import {
-  Cards,
-  CardText,
-  CardTitle,
-  Container,
-  MiddleCard,
-  SideCard,
-} from './Styles';
+import { CardsContainer, Container } from './Styles';
 import Catalog from '../../assets/CatalogImg.png';
+import Software from '../../assets/SoftwareImg.png';
+import Training from '../../assets/TrainingImg.png';
 
 function Home() {
   return (
     <Container>
       <Carousel />
-      <Cards>
+      <CardsContainer>
         <Card
           title="Treinamento em Retificação Centerless"
           text="Venha aprender tudo sobre retificação centerless com o nosso curso
             intensivo!"
+          image={Training}
+          imageAlt="Training image"
+          marginBottom="70%"
+        />
+        <Card
+          isMiddle
+          title="Catálogo de Produtos"
+          text="Conheça nossos produtos em nossos catálogos!"
           image={Catalog}
           imageAlt="Catalog image"
           marginBottom="70%"
         />
-        <MiddleCard>
-          <CardTitle>Catálogo de Produtos</CardTitle>
-          <CardText>Conheça nossos produtos em nossos catálogos!</CardText>
-        </MiddleCard>
-        <SideCard>
-          <CardTitle>Software de estabilidade</CardTitle>
-          <CardText>
-            Com o nosso software de mapa de estabilidade centerless, você pode
-            ter acesso a análises precisas e confiáveis da estabilidade do
-            processo de retificação centerless em sua empresa.
-          </CardText>
-        </SideCard>
-      </Cards>
+        <Card
+          title="Software de estabilidade"
+          text="Com o nosso software de mapa de estabilidade centerless, você pode
+          ter acesso a análises precisas e confiáveis da estabilidade do
+          processo de retificação centerless em sua empresa."
+          image={Software}
+          imageAlt="Software image"
+          marginBottom="70%"
+        />
+      </CardsContainer>
       <div>Contact inputs</div>
       <div>
         <h1>Conheça a nossa história</h1>

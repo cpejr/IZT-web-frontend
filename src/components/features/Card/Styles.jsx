@@ -39,7 +39,7 @@ export const CardTitle = styled.div`
   font-size: 24px;
   font-weight: 700;
 
-  margin-bottom: ${(props) => props.marginBottom};
+  margin-bottom: 30%;
 `;
 
 export const CardText = styled.div`
@@ -54,5 +54,25 @@ export const CardText = styled.div`
   font-size: 18px;
   font-weight: 400;
 
-  margin-bottom: ${(props) => props.marginBottom};
+  margin-bottom: 1%;
+`;
+
+export const Button = styled.button`
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 2px;
+  width: 230px;
+  height: 55px;
+
+  transition-duration: 0.4s;
+
+  margin-bottom: 60%;
+  Button:hover {
+    background-color: black;
+    color: white;
+  }
 `;
