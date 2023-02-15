@@ -63,6 +63,8 @@ export const CardTitle = styled.div`
   font-size: 24px;
   font-weight: 700;
 
+  width: 77%;
+
   margin-bottom: 70%;
 `;
 

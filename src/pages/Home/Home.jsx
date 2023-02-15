@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel } from '../../components/features';
+import { Carousel, Card } from '../../components/features';
 import {
   Cards,
   CardText,
@@ -8,19 +8,21 @@ import {
   MiddleCard,
   SideCard,
 } from './Styles';
+import Catalog from '../../assets/CatalogImg.png';
 
 function Home() {
   return (
     <Container>
       <Carousel />
       <Cards>
-        <SideCard>
-          <CardTitle>Treinamento em Retificação Centerless</CardTitle>
-          <CardText>
-            Venha aprender tudo sobre retificação centerless com o nosso curso
-            intensivo!
-          </CardText>
-        </SideCard>
+        <Card
+          title="Treinamento em Retificação Centerless"
+          text="Venha aprender tudo sobre retificação centerless com o nosso curso
+            intensivo!"
+          image={Catalog}
+          imageAlt="Catalog image"
+          marginBottom="70%"
+        />
         <MiddleCard>
           <CardTitle>Catálogo de Produtos</CardTitle>
           <CardText>Conheça nossos produtos em nossos catálogos!</CardText>
