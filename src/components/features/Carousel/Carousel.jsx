@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { Container, Frames, Arrows, Image, Dot } from './Styles';
+import { Container, Frames, Arrows, Image, Dot, Left, Right } from './Styles';
 
 function Carousel({ slides }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,9 +29,16 @@ function Carousel({ slides }) {
       <Image backgroundImage={`url(${slides[currentIndex].image})`} />
 
       <Arrows>
-        <button type="button" onClick={prevSlide}>
-          ESQUERDA
-        </button>
+        <Left>
+          <button type="button" onClick={prevSlide}>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/271/271220.png"
+              alt="buttonpng"
+              border="0"
+              height={20}
+            />
+          </button>
+        </Left>
         {slides.map((slide, index) => (
           <Dot
             onClick={() => goToSlide(index)}
@@ -39,9 +46,16 @@ function Carousel({ slides }) {
             backgroundColor={index === currentIndex}
           />
         ))}
-        <button type="button" onClick={nextSlide}>
-          DIREITA
-        </button>
+        <Right>
+          <button type="button" onClick={nextSlide}>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/32/32213.png"
+              alt="buttonpng"
+              border="0"
+              height={20}
+            />
+          </button>
+        </Right>
       </Arrows>
     </Container>
   );
