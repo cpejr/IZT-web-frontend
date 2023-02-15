@@ -1,15 +1,38 @@
 import React from 'react';
 import { Carousel } from '../../components/features';
-import { Cards, Container, MiddleCard, SideCard } from './Styles';
+import {
+  Cards,
+  CardText,
+  CardTitle,
+  Container,
+  MiddleCard,
+  SideCard,
+} from './Styles';
 
 function Home() {
   return (
     <Container>
       <Carousel />
       <Cards>
-        <SideCard>Treinamento em Retificação Centerless</SideCard>
-        <MiddleCard>Catálogo de Produtos</MiddleCard>
-        <SideCard>Software de estabilidade</SideCard>
+        <SideCard>
+          <CardTitle>Treinamento em Retificação Centerless</CardTitle>
+          <CardText>
+            Venha aprender tudo sobre retificação centerless com o nosso curso
+            intensivo!
+          </CardText>
+        </SideCard>
+        <MiddleCard>
+          <CardTitle>Catálogo de Produtos</CardTitle>
+          <CardText>Conheça nossos produtos em nossos catálogos!</CardText>
+        </MiddleCard>
+        <SideCard>
+          <CardTitle>Software de estabilidade</CardTitle>
+          <CardText>
+            Com o nosso software de mapa de estabilidade centerless, você pode
+            ter acesso a análises precisas e confiáveis da estabilidade do
+            processo de retificação centerless em sua empresa.
+          </CardText>
+        </SideCard>
       </Cards>
       <div>Contact inputs</div>
       <div>

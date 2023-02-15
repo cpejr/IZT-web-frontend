@@ -30,7 +30,7 @@ export const SideCard = styled.div`
   width: 470px;
   height: 570px;
   background-color: white;
-  border-top: 230px ${Colors.gray[1]};
+  border-top: 230px solid ${Colors.gray[1]};
   box-shadow: 0 0 8px 8px ${Colors.gray[2]};
 `;
 
@@ -39,6 +39,8 @@ export const MiddleCard = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 2;
 
   font-family: ${Fonts.montserrat};
   font-size: 24px;
@@ -47,6 +49,28 @@ export const MiddleCard = styled.div`
   width: 460px;
   height: 580px;
   background-color: white;
-  border-top: 230px ${Colors.gray[1]};
+  border-top: 230px solid ${Colors.gray[1]};
   box-shadow: 0 0 8px 8px ${Colors.gray[2]};
+`;
+
+export const CardTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-family: ${Fonts.montserrat};
+  font-size: 24px;
+  font-weight: 700;
+`;
+
+export const CardText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-family: ${Fonts.montserrat};
+  font-size: 18px;
+  font-weight: 400;
 `;
