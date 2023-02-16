@@ -1,9 +1,9 @@
 import React from 'react';
 import { Carousel, Card } from '../../components/features';
 import { CardsContainer, Container } from './Styles';
-import Catalog from '../../assets/CatalogImg.png';
-import Software from '../../assets/SoftwareImg.png';
-import Training from '../../assets/TrainingImg.png';
+import Catalog from '../../assets/homeCards/catalog.png';
+import Software from '../../assets/homeCards/software.png';
+import Training from '../../assets/homeCards/training.png';
 
 function Home() {
   return (
@@ -16,7 +16,10 @@ function Home() {
             intensivo!"
           image={Training}
           imageAlt="Training image"
-          marginBottom="70%"
+          marginBottomTitle="13%"
+          marginTopText="13%"
+          marginBottomText="10%"
+          marginBottomButton="55%"
         />
         <Card
           isMiddle
@@ -24,7 +27,10 @@ function Home() {
           text="Conheça nossos produtos em nossos catálogos!"
           image={Catalog}
           imageAlt="Catalog image"
-          marginBottom="70%"
+          marginBottomTitle="13%"
+          marginTopText="13%"
+          marginBottomText="10%"
+          marginBottomButton="60%"
         />
         <Card
           title="Software de estabilidade"
@@ -33,7 +39,10 @@ function Home() {
           processo de retificação centerless em sua empresa."
           image={Software}
           imageAlt="Software image"
-          marginBottom="70%"
+          marginBottomTitle="7%"
+          marginTopText="8%"
+          marginBottomText="10%"
+          marginBottomButton="55%"
         />
       </CardsContainer>
       <div>Contact inputs</div>
