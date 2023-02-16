@@ -2,6 +2,8 @@
 import styled, { css } from 'styled-components';
 import { Colors, Fonts } from '../../../variables';
 
+// const breakpoint;
+
 const isMiddleStyle = css`
   position: relative;
   z-index: 2;
@@ -22,23 +24,35 @@ export const Container = styled.div`
 
   width: 470px;
   height: 570px;
-  background-color: white;
-  border-top: 230px solid ${Colors.gray[1]};
+  background: linear-gradient(
+    to top,
+    white 0%,
+    white 50%,
+    ${Colors.gray[1]} 50%,
+    ${Colors.gray[1]} 100%
+  );
   box-shadow: 0 0 8px 8px ${Colors.gray[2]};
 
-  ${({ isMiddle }) => (isMiddle ? isMiddleStyle : '')}
+  ${({ isMiddle }) => (isMiddle ? isMiddleStyle : '')};
+
+  /* @media screen (max-width: ;){
+
+  } */
 `;
 
 export const CardTitle = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
+  justify-content: space-around;
 
   font-family: ${Fonts.montserrat};
   font-size: 24px;
   font-weight: 700;
 
-  margin-bottom: ${({ marginBottomTitle }) => marginBottomTitle};
+  /* margin-bottom: ${({ marginBottomTitle }) => marginBottomTitle}; */
+  margin-top: 5%;
+  margin-bottom: 70%;
 `;
 
 export const CardText = styled.div`
@@ -54,8 +68,9 @@ export const CardText = styled.div`
   font-size: 18px;
   font-weight: 400;
 
-  margin-bottom: ${({ marginBottomText }) => marginBottomText};
-  margin-top: ${({ marginTopText }) => marginTopText};
+  /* margin-bottom: 5%; */
+  /* margin-top: ${({ marginTopText }) => marginTopText}; */
+  margin-top: 7%;
 `;
 
 export const Button = styled.button`
@@ -74,7 +89,7 @@ export const Button = styled.button`
   padding-top: 7px;
   padding-bottom: 7px;
 
-  transition-duration: 0.4s;
+  transition-duration: 0.3s;
 
   margin-bottom: ${({ marginBottomButton }) => marginBottomButton};
   :hover {
@@ -83,4 +98,7 @@ export const Button = styled.button`
   }
 `;
 
-export const Picture = styled.img``;
+export const Picture = styled.img`
+  object-fit: scale-down;
+  position: absolute;
+`;

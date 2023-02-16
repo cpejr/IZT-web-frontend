@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, CardText, CardTitle, Button } from './Styles';
+import { Container, CardText, CardTitle, Button, Picture } from './Styles';
 
 function Card({
   title,
@@ -15,7 +15,7 @@ function Card({
   return (
     <Container isMiddle={isMiddle}>
       <CardTitle marginBottomTitle={marginBottomTitle}>{title}</CardTitle>
-      <img src={image} alt={imageAlt} />
+      <Picture src={image} alt={imageAlt} />
       <CardText
         marginBottomText={marginBottomText}
         marginTopText={marginTopText}

@@ -16,10 +16,10 @@ function Home() {
             intensivo!"
           image={Training}
           imageAlt="Training image"
-          marginBottomTitle="13%"
-          marginTopText="13%"
-          marginBottomText="10%"
-          marginBottomButton="55%"
+          // marginBottomTitle="13%"
+          // marginTopText="13%"
+          // marginBottomText="13%"
+          // marginBottomButton="55%"
         />
         <Card
           isMiddle
@@ -27,10 +27,10 @@ function Home() {
           text="Conheça nossos produtos em nossos catálogos!"
           image={Catalog}
           imageAlt="Catalog image"
-          marginBottomTitle="13%"
-          marginTopText="13%"
-          marginBottomText="10%"
-          marginBottomButton="60%"
+          // marginBottomTitle="13%"
+          // marginTopText="13%"
+          // marginBottomText="13%"
+          // marginBottomButton="55%"
         />
         <Card
           title="Software de estabilidade"
@@ -39,10 +39,10 @@ function Home() {
           processo de retificação centerless em sua empresa."
           image={Software}
           imageAlt="Software image"
-          marginBottomTitle="7%"
-          marginTopText="8%"
-          marginBottomText="10%"
-          marginBottomButton="55%"
+          // marginBottomTitle="13%"
+          // marginTopText="13%"
+          // marginBottomText="13%"
+          // marginBottomButton="48%"
         />
       </CardsContainer>
       <div>Contact inputs</div>
