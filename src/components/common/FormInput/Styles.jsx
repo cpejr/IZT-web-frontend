@@ -21,8 +21,12 @@ export const Input = styled.input`
   font-size: 20px;
   padding: 8px 16px;
   border-radius: 4px;
+
+  border: ${(props) => (props.error ? '2px red solid' : 'none')};
+  background: ${(props) => (props.error ? 'rgba(239, 202, 202, 1)' : 'white')};
 `;
 
-export const ErrorMessage = styled.span`
+export const ErrorMessage = styled.p`
   font-size: 16px;
+  color: red;
 `;
