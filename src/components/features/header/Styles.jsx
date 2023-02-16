@@ -1,83 +1,91 @@
 import styled from 'styled-components';
 import { Colors, Fonts } from '../../../variables';
 
+const menuBreak = '800px';
+
 export const Content = styled.div`
-  padding: 0 10%;
   display: flex;
   align-items: center;
+  flex-direction: row;
   justify-content: space-between;
-  padding: 1.5rem 0;
-  background-color: #fff;
-  .shadow {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: #0000009e;
-    z-index: 1;
-    display: ${(props) => (props.bar ? 'block' : 'none')};
+  padding: 20px 10%;
+  background-color: white;
+  @media (max-width: 900px) {
+    padding: 18px 5%;
+  }
+  @media (max-width: ${menuBreak}) {
+    padding: 10px 5%;
   }
 `;
+
 export const Logo = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
-  span {
-    font-size: 1.8rem;
-    color: #01be96;
-  }
+  gap: 10px;
+  width: auto;
+  min-width: 179px;
   h1 {
-    font-weight: 600;
-    font-size: 1.2rem;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: ${Colors.blue};
+    @media (max-width: ${menuBreak}) {
+      font-size: 1rem;
+      font-weight: 600;
+    }
   }
 `;
+
+export const Image = styled.img`
+  width: auto;
+  height: 75px;
+  @media (max-width: ${menuBreak}) {
+    height: 40px;
+  }
+`;
+
+export const Menu = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  @media (max-width: 1100px) {
+    gap: 20px;
+  }
+`;
+
 export const Nav = styled.div`
   display: flex;
   align-items: center;
-  padding: 1em 2em;
+  justify-content: space-between;
   gap: 40px;
-  left: 732px;
-  margin-left: auto;
-  margin-right: 5%;
-  text-align: right;
+  text-align: center;
 
   a {
     font-size: 24px;
     font-family: ${Fonts.montserrat};
     margin-right: 20px;
     text-decoration: none;
-    color: #203699;
+    color: ${Colors.blue};
     font-weight: 500;
     position: relative;
     flex-direction: row;
-
-    :before {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      right: 0;
-      background-color: #fff;
-      height: 2px;
-      transform: scale(0);
-      transform-origin: right;
-      transition: transform 400ms ease-in-out;
-    }
+    text-align: center;
     :hover {
-      opacity: 0.6;
+      text-decoration: underline;
     }
-    :hover:before {
-      transform: scale(1);
-      transform-origin: left;
+    @media (max-width: 990px) {
+      font-size: 20px;
     }
   }
-  @media (max-width: 650px) {
+  @media (max-width: 1100px) {
+    gap: 20px;
+  }
+  @media (max-width: ${menuBreak}) {
     background-color: #123645;
     text-align: center;
     position: absolute;
     display: flex;
-    flex-direction: column;s
+    flex-direction: column;
     gap: 1rem;
     top: ${(props) => (props.bar ? '90px' : '-20rem')};
     padding: ${(props) => (props.bar ? '1rem 0' : '0')};
@@ -87,47 +95,26 @@ export const Nav = styled.div`
     a {
       color: #fff;
     }
-    .Login {
-      border: none;
-    }
   }
   z-index: 10000;
 `;
-export const Login = styled.a`
-  background-color: transparent;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  width: 140px;
-  text-align: center;
-  border: 1.5px solid #203699;
-  @media (max-width: 650px) {
-    border: none;
-  }
 
-  &:hover {
-    background-color: #203699;
-    color: #fff;
-    cursor: pointer;
-  }
-`;
-
-export const Language = styled.div`
+export const Language = styled.select`
   display: flex;
   align-items: center;
-  padding: 50px;
-  a {
-    margin-left: 10px;
+  border: none;
+  option {
     text-decoration: none;
     color: #000;
     font-size: 16px;
     font-weight: 700;
     transition: all 0.3s ease-in-out;
+    background-color: white;
   }
-  a:hover {
+  option:hover {
     color: #000;
   }
-  @media (max-width: 650px) {
+  @media (max-width: ${menuBreak}) {
     display: none;
   }
 `;
@@ -142,14 +129,15 @@ export const Bar = styled.div`
   position: relative;
   display: none;
   z-index: 100;
-  @media (max-width: 650px) {
+  @media (max-width: ${menuBreak}) {
     display: flex;
   }
   span {
     position: absolute;
-    width: 80%;
+    width: 100%;
     height: 2px;
-    background-color: ${(props) => (props.bar ? 'transparent' : `#1D4F69`)};
+    background-color: ${(props) =>
+      props.bar ? 'transparent' : Colors.darkGreenishBlue};
     border-radius: 5px;
     transition: all 400ms ease-in-out;
     :before,
@@ -172,10 +160,4 @@ export const Bar = styled.div`
       transition: all 400ms ease-in-out;
     }
   }
-`;
-export const Image = styled.img`
-  width: auto;
-  height: 81px;
-  left: 82px;
-  padding: 0 10%;
 `;

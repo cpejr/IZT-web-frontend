@@ -1,4 +1,3 @@
-
 import {
   RouterProvider,
   createBrowserRouter,
@@ -12,7 +11,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route index element={<h1>Hello World!</h1>} />
-      <Route path="test" element={<TestPage/>} />
+      <Route path="test" element={<TestPage />} />
     </Route>
   )
 );
@@ -20,11 +19,10 @@ const router = createBrowserRouter(
 function Routes() {
   return (
     <>
-      <Header /> 
+      <Header />
       <RouterProvider router={router} />
     </>
   );
 }
-
 
 export default Routes;

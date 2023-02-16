@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Content, Logo, Image, Nav, Language, Bar, Login } from './Styles';
+import { Content, Logo, Menu, Image, Nav, Language, Bar } from './Styles';
+import Button from '../../../styles/Button';
 
 function Header() {
   const [bar, setBar] = useState(false);
   const [language, setLanguage] = useState('EN'); // default language is EN
-
-  const handleLanguageChange = (newLanguage) => {
-    setLanguage(newLanguage);
-  };
 
   return (
     <Content bar={bar}>
@@ -16,28 +12,28 @@ function Header() {
         <Image src="../../../../public/LogoIZT.svg" alt="Logo" />
         <h1>iZT Core</h1>
       </Logo>
-      <Nav bar={bar}>
-        <a href="#produto">Produtos</a>
-        <a href="#servicos">Cursos</a>
-        <a href="#software">Software</a>
-        <Login href="#entar">Entrar</Login>
-      </Nav>
-      <Language>
-        <a href="#lg" onClick={() => handleLanguageChange('PT')}>
-          PT
-        </a>
-        <a href="#lg" onClick={() => handleLanguageChange('EN')}>
-          EN
-        </a>
-        <a href="#lg" onClick={() => handleLanguageChange('ES')}>
-          ES
-        </a>
-        <span>{language}</span>
-      </Language>
-      <div className="shadow" />
-      <Bar bar={bar} onClick={() => setBar(!bar)}>
-        <span className="active" />
-      </Bar>
+      <Menu>
+        <Nav bar={bar}>
+          <a href="#produto">Produtos</a>
+          <a href="#servicos">Cursos</a>
+          <a href="#software">Software</a>
+          <Button href="#login" fontSize="20px">
+            Entrar
+          </Button>
+          <Language
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+          >
+            <option value="DE">DE</option>
+            <option value="EN">EN</option>
+            <option value="PT">PT</option>
+          </Language>
+        </Nav>
+        <div className="shadow" />
+        <Bar bar={bar} onClick={() => setBar(!bar)}>
+          <span className="active" />
+        </Bar>
+      </Menu>
     </Content>
   );
 }
