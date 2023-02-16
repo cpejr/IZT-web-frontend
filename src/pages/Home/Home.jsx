@@ -12,7 +12,7 @@ function Home() {
       <div>Contact inputs</div>
       <div>
         <h1>Conheça a nossa história</h1>
-        <text>
+        <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec urna
           dolor, malesuada ac cursus a, porttitor a ligula. Etiam nec ipsum quis
           dui malesuada vehicula quis at diam. Nunc suscipit est eget orci
@@ -26,8 +26,8 @@ function Home() {
           diam, tempus aliquam erat. Mauris id risus at purus pharetra euismod
           id sed arcu. Duis nisl augue, mattis quis congue sed, scelerisque eu
           augue. Mauris ac elementum risus.
-        </text>
-        <text>
+        </p>
+        <p>
           Quisque id dui id felis lobortis luctus quis vitae turpis. Duis auctor
           congue urna, eu dictum urna laoreet in. Donec vitae nunc ac nibh
           finibus pellentesque a vitae purus. Proin fringilla ligula ac placerat
@@ -36,7 +36,7 @@ function Home() {
           Phasellus non enim metus. Sed eget gravida sapien. Nunc quis facilisis
           nunc. Morbi non placerat justo. Cras congue mi nisi, quis volutpat
           orci tincidunt iaculis.
-        </text>
+        </p>
       </div>
     </Container>
   );

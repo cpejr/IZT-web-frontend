@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import FormInput from '../../common/FormInput/FormIpunt';
 import {
   ContactUs,
   Form,
-  SectionOne,
-  SectionTwo,
+  Section,
   Title,
   Empresa,
   Representante,
@@ -18,11 +17,8 @@ function FormsContactUs() {
     <ContactUs>
       <Title>Entre em Contato Conosco</Title>
       <Form>
-        <SectionOne>
-          <Empresa>
-            Empresa:
-            <input />
-          </Empresa>
+        <Section>
+          <FormInput />
 
           <Representante>
             Representante:
@@ -38,15 +34,15 @@ function FormsContactUs() {
             Telefone:
             <input />
           </Telefone>
-        </SectionOne>
+        </Section>
 
-        <SectionTwo>
+        <Section>
           <Mensagem>
             Mensagem:
-            <input />
+            <textarea rows={12} />
             <BotaoEnviar>Enviar</BotaoEnviar>
           </Mensagem>
-        </SectionTwo>
+        </Section>
       </Form>
     </ContactUs>
   );

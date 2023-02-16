@@ -8,9 +8,13 @@ export const ContactUs = styled.div`
   width: 100%;
   height: 542px;
   background-color: rgba(18, 54, 69, 1);
+
+  @media (max-width: 700px) {
+    height: 650px;
+  }
 `;
 
-export const Title = styled.text`
+export const Title = styled.p`
   font-size: 40px;
   color: white;
   font-family: 'Montserrat', sans-serif;
@@ -31,11 +35,6 @@ export const Form = styled.div`
   @media (max-width: 700px) {
     flex-direction: column;
   }
-`;
-
-export const SectionOne = styled.div`
-  width: 50%;
-  height: 255px;
 `;
 
 export const Empresa = styled.div`
@@ -102,14 +101,10 @@ export const Telefone = styled.div`
   padding-bottom: 20px;
 `;
 
-export const SectionTwo = styled.div`
+export const Section = styled.div`
   width: 50%;
   height: 255px;
   padding-left: 105px;
-
-  @media (max-width: 700px) {
-    padding-left: 0px;
-  }
 `;
 
 export const Mensagem = styled.div`

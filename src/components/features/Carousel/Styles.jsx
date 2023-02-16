@@ -1,34 +1,21 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 100%;
   width: 100%;
-  height: 780px;
+  height: 473px;
   margin: auto;
   position: relative;
   padding-bottom: 64px;
 `;
 
-export const Frames = styled.div`
-  width: auto;
-  height: 420px;
-
-  @media (max-width: 700px) {
-    height: 200px;
-  }
-`;
-
-export const Image = styled.img`
+export const Image = styled.div`
   width: 100%;
-  height: 100%;
+  height: 420px;
+  min-height: 4px;
   background-position: center;
   background-size: cover;
   background-image: ${(props) => props.backgroundImage};
   transition-duration: 500ms;
-
-  @media (max-width: 700px) {
-    height: 50%;
-  }
 `;
 
 export const Arrows = styled.div`

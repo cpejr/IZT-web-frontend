@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { Container, Frames, Arrows, Image, Dot } from './Styles';
+import { Container, Arrows, Image, Dot } from './Styles';
 
 function Carousel({ slides }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,7 +26,10 @@ function Carousel({ slides }) {
 
   return (
     <Container>
-      <Image backgroundImage={`url(${slides[currentIndex].image})`} />
+      <Image
+        aria-label="Imagens do Carrossel"
+        backgroundImage={`url(${slides[currentIndex]})`}
+      />
 
       <Arrows>
         <button type="button" onClick={prevSlide}>
