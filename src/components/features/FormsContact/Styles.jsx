@@ -6,7 +6,7 @@ export const ContactUs = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  height: 542px;
+  height: 600px;
   background-color: rgba(18, 54, 69, 1);
 
   @media (max-width: 700px) {
@@ -30,7 +30,7 @@ export const Title = styled.p`
 export const Form = styled.div`
   display: flex;
   flex-direction: row;
-  width: 60%;
+  width: 80%;
 
   @media (max-width: 700px) {
     flex-direction: column;
@@ -127,4 +127,9 @@ export const BotaoEnviar = styled.button`
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+  height: 45px;
+  width: 200px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 4px;
 `;

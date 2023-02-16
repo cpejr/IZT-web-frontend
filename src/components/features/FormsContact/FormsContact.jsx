@@ -33,15 +33,33 @@ function FormsContactUs() {
       <Form>
         <Section>
           <FormInput
-            label="Empresa"
+            label="Empresa:"
             name="company"
             placeholder="Nome da empresa"
             errors={errors}
             register={register}
           />
-          {/* <FormInput />
-          <FormInput />
-          <FormInput /> */}
+          <FormInput
+            label="Representante:"
+            name="company"
+            placeholder="Nome do representante empresa"
+            errors={errors}
+            register={register}
+          />
+          <FormInput
+            label="E-mail:"
+            name="company"
+            placeholder="email@email.com"
+            errors={errors}
+            register={register}
+          />
+          <FormInput
+            label="Telefone:"
+            name="company"
+            placeholder="(XX) 9XXXX-XXXX"
+            errors={errors}
+            register={register}
+          />
         </Section>
 
         <Section>
