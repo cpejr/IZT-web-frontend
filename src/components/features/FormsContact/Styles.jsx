@@ -16,18 +16,26 @@ export const Title = styled.text`
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
 
+  @media (max-width: 700px) {
+    font-size: 32px;
+  }
+
   padding-bottom: 30px;
 `;
 
 export const Form = styled.div`
   display: flex;
   flex-direction: row;
+  width: 60%;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 export const SectionOne = styled.div`
-  width: 500px;
+  width: 50%;
   height: 255px;
-  background-color: black;
 `;
 
 export const Empresa = styled.div`
@@ -38,6 +46,10 @@ export const Empresa = styled.div`
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+
+  @media (max-width: 700px) {
+    font-size: 20px;
+  }
 
   padding-bottom: 20px;
 `;
@@ -51,6 +63,10 @@ export const Representante = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
 
+  @media (max-width: 700px) {
+    font-size: 20px;
+  }
+
   padding-bottom: 20px;
 `;
 
@@ -62,6 +78,10 @@ export const Email = styled.div`
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+
+  @media (max-width: 700px) {
+    font-size: 20px;
+  }
 
   padding-bottom: 20px;
 `;
@@ -75,14 +95,21 @@ export const Telefone = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
 
+  @media (max-width: 700px) {
+    font-size: 20px;
+  }
+
   padding-bottom: 20px;
 `;
 
 export const SectionTwo = styled.div`
-  width: 500px;
+  width: 50%;
   height: 255px;
-  background-color: blueviolet;
   padding-left: 105px;
+
+  @media (max-width: 700px) {
+    padding-left: 0px;
+  }
 `;
 
 export const Mensagem = styled.div`
@@ -93,6 +120,10 @@ export const Mensagem = styled.div`
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+
+  @media (max-width: 700px) {
+    font-size: 20px;
+  }
 `;
 
 export const BotaoEnviar = styled.button`

@@ -36,6 +36,11 @@ export const Arrows = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 15px;
+
+  button {
+    all: unset;
+    padding: 0px 50px;
+  }
 `;
 
 export const Dot = styled.div`
@@ -45,14 +50,4 @@ export const Dot = styled.div`
   border: 1px solid black;
   background-color: ${(props) => (props.backgroundColor ? 'black' : 'none')};
   border-radius: 50%;
-`;
-
-export const Left = styled.button`
-  margin-right: 50px;
-  border: 0;
-`;
-
-export const Right = styled.button`
-  margin-left: 44px;
-  border: 0;
 `;

@@ -44,9 +44,7 @@ function FormsContactUs() {
           <Mensagem>
             Mensagem:
             <input />
-            <BotaoEnviar>
-              <button>Enviar</button>
-            </BotaoEnviar>
+            <BotaoEnviar>Enviar</BotaoEnviar>
           </Mensagem>
         </SectionTwo>
       </Form>
