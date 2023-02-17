@@ -1,8 +1,6 @@
 import React from 'react';
-import { Carousel, FormsContactUs } from '../../components/features';
+import { Carousel, FormsContactUs, Card } from '../../components/features';
 import carouselImages from '../../components/features/Carousel/carouselImages';
-import { Carousel, Card } from '../../components/features';
-import { CardsContainer, Container } from './Styles';
 import Catalog from '../../assets/homeCards/catalog.png';
 import Software from '../../assets/homeCards/software.png';
 import Training from '../../assets/homeCards/training.png';
@@ -12,6 +10,7 @@ import {
   OurHistory,
   OurHistoryTitle,
   Picture,
+  CardsContainer,
 } from './Styles';
 import Image from '../../assets/imagemDaEmpresa.png';
 
@@ -19,12 +18,11 @@ function Home() {
   return (
     <Container>
       <Carousel slides={carouselImages} />
-      <FormsContactUs />
       <CardsContainer>
         <Card
           title="Treinamento em Retificação Centerless"
           text="Venha aprender tudo sobre retificação centerless com o nosso curso
-            intensivo!"
+          intensivo!"
           image={Training}
           imageAlt="Training image"
           // marginBottomTitle="13%"
@@ -56,7 +54,7 @@ function Home() {
           // marginBottomButton="48%"
         />
       </CardsContainer>
-      <div>Contact inputs</div>
+      <FormsContactUs />
       <AboutUs>
         <OurHistoryTitle>Conheça a nossa história</OurHistoryTitle>
         <OurHistory>

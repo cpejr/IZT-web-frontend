@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
-import { Fonts } from '../../variables';
+import { Fonts, Colors } from '../../variables';
 
 export const Container = styled.div`
   display: flex;
