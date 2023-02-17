@@ -7,7 +7,7 @@ export const Container = styled.div`
   font-style: normal;
   font-weight: 500;
   gap: 5px;
-  height: 100px;
+  height: auto;
   width: 100%;
 `;
 
@@ -21,6 +21,7 @@ export const Input = styled.input`
   font-size: 20px;
   padding: 8px 16px;
   border-radius: 4px;
+  margin-bottom: 20px;
 
   border: ${(props) => (props.error ? '2px red solid' : 'none')};
   background: ${(props) => (props.error ? 'rgba(239, 202, 202, 1)' : 'white')};

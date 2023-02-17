@@ -6,13 +6,11 @@ import {
   Form,
   Section,
   Title,
-  Empresa,
-  Representante,
-  Email,
-  Telefone,
   Mensagem,
   BotaoEnviar,
+  InputMessage,
 } from './Styles';
+import { useEffect, useState } from 'react';
 
 // name,
 // label,
@@ -27,9 +25,21 @@ function FormsContactUs() {
     formState: { errors },
   } = useForm();
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleWindowResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
+  const breakpoint = 700;
+
   return (
     <ContactUs>
-      <Title>Entre em Contato Conosco</Title>
+      <Title>{`Entre em Contato ${
+        windowWidth <= breakpoint ? '' : 'Conosco'
+      }`}</Title>
       <Form>
         <Section>
           <FormInput
@@ -63,11 +73,13 @@ function FormsContactUs() {
         </Section>
 
         <Section>
-          <Mensagem>
-            Mensagem:
-            <textarea rows={15} />
-            <BotaoEnviar>Enviar</BotaoEnviar>
-          </Mensagem>
+          <InputMessage>
+            <Mensagem>
+              Mensagem:
+              <textarea rows={17} />
+            </Mensagem>
+          </InputMessage>
+          <BotaoEnviar>Enviar</BotaoEnviar>
         </Section>
       </Form>
     </ContactUs>
