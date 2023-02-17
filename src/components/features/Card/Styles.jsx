@@ -90,6 +90,7 @@ export const Button = styled.button`
   padding-bottom: 7px;
 
   transition-duration: 0.3s;
+  cursor: pointer;
 
   margin-bottom: ${({ marginBottomButton }) => marginBottomButton};
   :hover {

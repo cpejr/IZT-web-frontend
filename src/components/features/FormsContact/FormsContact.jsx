@@ -12,11 +12,21 @@ import {
 } from './Styles';
 import { useEffect, useState } from 'react';
 
-// name,
-// label,
-// placeholder,
-// errors,
-// register,
+const validationSchema = z.object({
+  companyName: z.string().min(1, 'Company name is required'),
+  Representant: z.string().min(1, 'Representant is required'),
+  email: z
+    .string()
+    .min(1, { message: 'Email is required' })
+    .email({
+      message: 'Must be a valid email',
+    })
+    .trim(),
+  Telephone: z
+    .string()
+    .min(1, 'Password is required') // Provavelmente desnecessário
+    .min(6, { message: 'Password must be atleast 6 characters' }),
+});
 
 function FormsContactUs() {
   const {
