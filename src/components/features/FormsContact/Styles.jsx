@@ -6,8 +6,11 @@ export const ContactUs = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   height: 542px;
   background-color: rgba(18, 54, 69, 1);
+  padding-bottom: 5%;
+  padding-top: 1%;
 
   @media (max-width: 700px) {
     height: 700px;
@@ -81,6 +84,7 @@ export const BotaoEnviar = styled.button`
   width: 200px;
   border: none;
   border-radius: 4px;
+  margin-right: 5%;
 `;
 
 export const InputMessage = styled.div`
