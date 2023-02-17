@@ -44,6 +44,7 @@ export const Logo = styled.div`
     @media (max-width: 990px) {
       font-size: 18px;
       gap: 5px;
+      font-weight: 600;
     }
   }
   @media (max-width: 990px) {
@@ -115,6 +116,7 @@ export const Nav = styled.div`
     left: 0%;
     right: 0%;
     transition: all 400ms ease;
+    font-weight: 600;
     a {
       color: #fff;
       display: ${(props) => (props.bar ? 'flex' : 'none')};
@@ -123,6 +125,7 @@ export const Nav = styled.div`
     button {
       display: ${(props) => (props.bar ? 'flex' : 'none')};
       transition: all 700ms ease;
+      font-weight: 600;
     }
   }
   @media (max-width: 420px) {
