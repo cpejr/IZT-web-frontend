@@ -1,37 +1,44 @@
 import styled from 'styled-components';
 import { Colors, Fonts } from '../../../variables';
+import Button from '../../../styles/Button';
 
 const menuBreak = '800px';
 
 export const Content = styled.div`
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding: 0px 50px;
+  height: 100px;
+  width: 100%;
+  @media (max-width: 420px) {
+    padding: 0px 20px;
+    height: 80px;
+  }
+`;
+
+export const InternContainer = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: row;
   justify-content: space-between;
-  padding: 20px 10%;
-  background-color: white;
-  @media (max-width: 900px) {
-    padding: 18px 5%;
-  }
-  @media (max-width: ${menuBreak}) {
-    padding: 10px 5%;
-  }
+  flex-direction: row;
+  width: 100%;
+  max-width: 1400px;
 `;
 
 export const Logo = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   width: auto;
   min-width: 179px;
   h1 {
     font-weight: 500;
-    font-size: 1.5rem;
+    font-size: 22px;
     color: ${Colors.blue};
-    @media (max-width: ${menuBreak}) {
-      font-size: 1rem;
-      font-weight: 600;
+    @media (max-width: 320px) {
+      font-size: 18px;
     }
   }
 `;
@@ -39,8 +46,11 @@ export const Logo = styled.div`
 export const Image = styled.img`
   width: auto;
   height: 75px;
-  @media (max-width: ${menuBreak}) {
-    height: 40px;
+  @media (max-width: 990px) {
+    height: 60px;
+  }
+  @media (max-width: 320px) {
+    height: 50px;
   }
 `;
 
@@ -57,16 +67,15 @@ export const Nav = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
+  gap: 20px;
   text-align: center;
 
   a {
-    font-size: 24px;
+    font-size: 22px;
     font-family: ${Fonts.montserrat};
     margin-right: 20px;
     text-decoration: none;
     color: ${Colors.blue};
-    font-weight: 500;
     position: relative;
     flex-direction: row;
     text-align: center;
@@ -76,9 +85,15 @@ export const Nav = styled.div`
     @media (max-width: 990px) {
       font-size: 20px;
     }
+    @media (max-width: 900px) {
+      font-size: 18px;
+    }
+    @media (max-width: 800px) {
+      margin-right: 0px;
+    }
   }
-  @media (max-width: 1100px) {
-    gap: 20px;
+  @media (max-width: 990px) {
+    gap: 10px;
   }
   @media (max-width: ${menuBreak}) {
     background-color: #123645;
@@ -86,15 +101,20 @@ export const Nav = styled.div`
     position: absolute;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
-    top: ${(props) => (props.bar ? '90px' : '-20rem')};
+    top: ${(props) => (props.bar ? '100px' : '-20rem')};
     padding: ${(props) => (props.bar ? '1rem 0' : '0')};
-    left: 5%;
-    right: 5%;
-    transition: all 400ms ease-in-out;
+    left: 0%;
+    right: 0%;
+    transition: all 400ms ease-in-out, top 20ms ease-in-out;
     a {
       color: #fff;
     }
+  }
+  @media (max-width: 420px) {
+    top: ${(props) => (props.bar ? '80px' : '-20rem')};
   }
   z-index: 10000;
 `;
@@ -118,6 +138,7 @@ export const Language = styled.select`
     display: none;
   }
 `;
+
 export const Bar = styled.div`
   width: 26px;
   right: 4%;
@@ -128,6 +149,7 @@ export const Bar = styled.div`
   flex-direction: column;
   position: relative;
   display: none;
+  cursor: pointer;
   z-index: 100;
   @media (max-width: ${menuBreak}) {
     display: flex;
@@ -159,5 +181,14 @@ export const Bar = styled.div`
         props.bar ? `rotate(45deg)` : `translateY(-8px)`};
       transition: all 400ms ease-in-out;
     }
+  }
+`;
+
+export const ButtonEntrar = styled(Button)`
+  font-size: 20px;
+  width: 130px;
+  @media (max-width: 900px) {
+    font-size: 18px;
+    width: 120px;
   }
 `;
