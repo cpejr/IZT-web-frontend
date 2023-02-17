@@ -75,16 +75,24 @@ export const Mensagem = styled.div`
 
 export const BotaoEnviar = styled.button`
   align-self: flex-end;
-  background-color: #23a4a6;
-  font-size: 20px;
   color: white;
+  background-color: #23a4a6;
+
+  font-size: 20px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
-  height: 10%;
+
+  height: 45px;
+  margin-top: 20px;
   width: 200px;
   border: none;
   border-radius: 4px;
-  margin-right: 5%;
+
+  cursor: pointer;
+  transition-duration: 0.3s;
+  :hover {
+    background-color: rgba(35, 164, 166, 0.5);
+  }
 `;
 
 export const InputMessage = styled.div`

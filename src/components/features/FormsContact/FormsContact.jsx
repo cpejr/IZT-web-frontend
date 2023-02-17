@@ -77,9 +77,9 @@ function FormsContactUs() {
             <Mensagem>
               Mensagem:
               <textarea rows={17} />
+              <BotaoEnviar>Enviar</BotaoEnviar>
             </Mensagem>
           </InputMessage>
-          <BotaoEnviar>Enviar</BotaoEnviar>
         </Section>
       </Form>
     </ContactUs>
