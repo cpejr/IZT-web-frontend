@@ -4,7 +4,6 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import TestPage from './pages/TestPage/testPage';
 import Header from './components/features/header/header';
 import { Catalog } from './pages';
 
