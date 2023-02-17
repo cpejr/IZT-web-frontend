@@ -6,12 +6,13 @@ import {
 } from 'react-router-dom';
 import TestPage from './pages/TestPage/testPage';
 import Header from './components/features/header/header';
+import { Catalog } from './pages';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route index element={<h1>Hello World!</h1>} />
-      <Route path="test" element={<TestPage />} />
+      <Route path="catalogo" element={<Catalog />} />
     </Route>
   )
 );
