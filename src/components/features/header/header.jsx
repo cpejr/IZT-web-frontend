@@ -1,42 +1,75 @@
 import React, { useState } from 'react';
+import { IoIosArrowDown } from 'react-icons/all';
 import {
   Content,
   Logo,
   Menu,
   Image,
   Nav,
-  Language,
+  Select,
+  Selected,
+  LanguageSelector,
   Bar,
   ButtonEntrar,
   InternContainer,
+  InvertItems,
 } from './Styles';
+import { Colors } from '../../../variables';
 
 function Header() {
   const [bar, setBar] = useState(false);
+  const [collapse, setCollapse] = useState(false);
   const [language, setLanguage] = useState('EN'); // default language is EN
+  const availableLaguages = ['EN', 'PT', 'DE'];
 
   return (
-    <Content bar={bar}>
+    <Content>
       <InternContainer>
         <Logo id="home">
           <Image src="../../../../public/LogoIZT.svg" alt="Logo" />
           <h1>iZT Core</h1>
         </Logo>
         <Menu>
-          <Nav bar={bar}>
+          <Nav bar={bar} collapse={collapse}>
             <a href="#produto">Produtos</a>
             <a href="#servicos">Cursos</a>
             <a href="#software">Software</a>
-            <ButtonEntrar href="#login">Entrar</ButtonEntrar>
-            <Language
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-            >
-              <option value="DE">DE</option>
-              <option value="EN">EN</option>
-              <option value="PT">PT</option>
-            </Language>
+            <InvertItems>
+              <ButtonEntrar
+                href="#login"
+                backgroundColor800={Colors.greenishBlue}
+                color800="white"
+                borderColor800={Colors.greenishBlue}
+                hoverBackgroundColor800={Colors.greenishBlue}
+                hoverColor800="white"
+                hoverBorderColor800={Colors.greenishBlue}
+              >
+                Entrar
+              </ButtonEntrar>
+              <Select bar={bar}>
+                <Selected onClick={() => setCollapse(!collapse)}>
+                  <p>{language}</p>
+                  <IoIosArrowDown />
+                </Selected>
+                <LanguageSelector collapse={collapse}>
+                  {availableLaguages.map((lang) => (
+                    <button
+                      type="button"
+                      key={lang}
+                      onClick={() => {
+                        setLanguage(lang);
+                        setCollapse(!collapse);
+                      }}
+                      collapse={collapse}
+                    >
+                      {lang}
+                    </button>
+                  ))}
+                </LanguageSelector>
+              </Select>
+            </InvertItems>
           </Nav>
+
           <Bar bar={bar} onClick={() => setBar(!bar)}>
             <span className="active" />
           </Bar>

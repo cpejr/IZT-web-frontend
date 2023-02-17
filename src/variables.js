@@ -4,7 +4,7 @@ export const Colors = {
     2: '#D9D9D9',
   },
   greenishBlue: '#23A4A6',
-  darkGreenishBlue: '#1D4F69',
+  darkGreenishBlue: '#123645',
   blue: '#203699',
   darkBlue: '#123645',
 };

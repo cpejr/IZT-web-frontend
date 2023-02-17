@@ -40,6 +40,11 @@ const Button = styled.button`
     background-color: ${(props) => props.hoverBackgroundColor ?? Colors.blue};
     border-color: ${(props) => props.hoverBorderColor};
     color: ${(props) => props.hoverColor ?? 'white'};
+    @media (max-width: 990px) {
+      color: ${(props) => props.hoverColor990};
+      border-color: ${(props) => props.hoverBorderColor990};
+      background-color: ${(props) => props.hoverBackgroundColor990};
+    }
   }
 
   @media (max-width: 990px) {
@@ -48,6 +53,20 @@ const Button = styled.button`
     padding-left: ${(props) => props.paddingLeft990 ?? '20px'};
     padding-right: ${(props) => props.paddingRight990 ?? '20px'};
     padding-bottom: ${(props) => props.paddingBottom990 ?? '5px'};
+    border-color: ${(props) => props.borderColor990};
+    background-color: ${(props) => props.backgroundColor990};
+    color: ${(props) => props.color990};
+  }
+
+  @media (max-width: 800px) {
+    font-size: ${(props) => props.fontSize800 ?? '18px'};
+    padding-top: ${(props) => props.paddingTop800 ?? '5px'};
+    padding-left: ${(props) => props.paddingLeft800 ?? '20px'};
+    padding-right: ${(props) => props.paddingRight800 ?? '20px'};
+    padding-bottom: ${(props) => props.paddingBottom800 ?? '5px'};
+    border-color: ${(props) => props.borderColor800};
+    background-color: ${(props) => props.backgroundColor800};
+    color: ${(props) => props.color800};
   }
 `;
 
