@@ -17,92 +17,92 @@ import {
   ProductName,
 } from './Styles';
 
-const products = [
+const categories = [
   {
-    Category: 'Type 1',
-    Bocals: [
+    name: 'Type 1',
+    products: [
       {
-        Name: 'Product 1',
+        name: 'Product 1',
         image:
           'https://madmais.vteximg.com.br/arquivos/ids/159284-0-0/BOCAL-PARA-LAMPADA-2S-BRANCO--4-.jpg?v=637618856063500000',
       },
       {
-        Name: 'Product 2',
+        name: 'Product 2',
         image:
           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
       },
     ],
   },
   {
-    Category: 'Type 2',
-    Bocals: [
+    name: 'Type 2',
+    products: [
       {
-        Name: 'Product 1',
+        name: 'Product 1',
         image:
           'https://a-static.mlcdn.com.br/800x560/bocal-de-louca-porcelana-receptaculo-para-lampadas-e27-js-technology/thrjinformatica/11899658141/f1fad431169ad69f3347637ab71ec05c.jpg',
       },
       {
-        Name: 'Product 2',
+        name: 'Product 2',
         image:
           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
       },
       {
-        Name: 'Product 3',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-    ],
-  },
-  {
-    Category: 'Type 3',
-    Bocals: [
-      {
-        Name: 'Product 1',
+        name: 'Product 3',
         image:
           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
       },
     ],
   },
   {
-    Category: 'Type 4',
-    Bocals: [
+    name: 'Type 3',
+    products: [
       {
-        Name: 'Product 1',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        Name: 'Product 2',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        Name: 'Product 3',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        Name: 'Product 4',
+        name: 'Product 1',
         image:
           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
       },
     ],
   },
   {
-    Category: 'Type 5',
-    Bocals: [
+    name: 'Type 4',
+    products: [
       {
-        Name: 'Product 1',
+        name: 'Product 1',
         image:
           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
       },
       {
-        Name: 'Product 2',
+        name: 'Product 2',
         image:
           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
       },
       {
-        Name: 'Product 3',
+        name: 'Product 3',
+        image:
+          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+      },
+      {
+        name: 'Product 4',
+        image:
+          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+      },
+    ],
+  },
+  {
+    name: 'Type 5',
+    products: [
+      {
+        name: 'Product 1',
+        image:
+          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+      },
+      {
+        name: 'Product 2',
+        image:
+          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+      },
+      {
+        name: 'Product 3',
         image:
           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
       },
@@ -124,21 +124,21 @@ function Catalog() {
           </Description>
         </Introduction>
         <ButtonRow>
-          {products.map((product) => (
-            <Anchor key={product.Category} href={`#${product.Category}`}>
-              <Button>{product.Category}</Button>
+          {categories?.map((category) => (
+            <Anchor key={category.name} href={`#${category.name}`}>
+              <Button>{category.name}</Button>
             </Anchor>
           ))}
         </ButtonRow>
-        {products.map((product) => (
-          <ProductCategory key={product.Category} id={product.Category}>
+        {categories?.map((category) => (
+          <ProductCategory key={category.name} id={category.name}>
             <Divider />
-            <CategoryName>{product.Category}</CategoryName>
+            <CategoryName>{category.name}</CategoryName>
             <ProductRow>
-              {product.Bocals.map((bocal) => (
-                <Product key={bocal.Name}>
-                  <ProductImage src={bocal.image} />
-                  <ProductName>{bocal.Name}</ProductName>
+              {category.products.map((product) => (
+                <Product key={product.name}>
+                  <ProductImage src={product.image} />
+                  <ProductName>{product.name}</ProductName>
                 </Product>
               ))}
             </ProductRow>
