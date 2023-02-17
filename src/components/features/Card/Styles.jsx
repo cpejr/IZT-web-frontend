@@ -17,6 +17,8 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 1;
 
   font-family: ${Fonts.montserrat};
   font-size: 20px;
@@ -27,8 +29,8 @@ export const Container = styled.div`
   background: linear-gradient(
     to top,
     white 0%,
-    white 50%,
-    ${Colors.gray[1]} 50%,
+    white 57%,
+    ${Colors.gray[1]} 57%,
     ${Colors.gray[1]} 100%
   );
   box-shadow: 0 0 8px 8px ${Colors.gray[2]};
@@ -45,14 +47,12 @@ export const CardTitle = styled.div`
   flex-direction: column;
   text-align: center;
   justify-content: space-around;
+  position: absolute;
+  top: 7%;
 
   font-family: ${Fonts.montserrat};
   font-size: 24px;
   font-weight: 700;
-
-  /* margin-bottom: ${({ marginBottomTitle }) => marginBottomTitle}; */
-  margin-top: 5%;
-  margin-bottom: 70%;
 `;
 
 export const CardText = styled.div`
@@ -61,16 +61,14 @@ export const CardText = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
+  top: 25%;
 
   width: 77%;
 
   font-family: ${Fonts.montserrat};
   font-size: 18px;
   font-weight: 400;
-
-  /* margin-bottom: 5%; */
-  /* margin-top: ${({ marginTopText }) => marginTopText}; */
-  margin-top: 7%;
 `;
 
 export const Button = styled.button`
@@ -80,6 +78,8 @@ export const Button = styled.button`
   font-weight: 700;
   letter-spacing: 0.1em;
   line-height: 27px;
+  position: absolute;
+  bottom: 5%;
 
   background-color: white;
   border: 1px solid black;
@@ -101,4 +101,5 @@ export const Button = styled.button`
 export const Picture = styled.img`
   object-fit: scale-down;
   position: absolute;
+  top: 25%;
 `;
