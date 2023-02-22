@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Fonts, Colors } from '../../variables';
 
 const breakValue900 = '900px';
 const breakValue600 = '600px';
@@ -16,7 +15,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 50px;
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   background-color: white;
   font-size: 20px;
   align-items: stretch;
@@ -51,7 +50,7 @@ export const Title = styled.h1`
   text-align: center;
   font-size: 1.3em;
   font-weight: 700;
-  color: ${Colors.blue};
+  color: ${(props) => props.theme.colors.blue};
 `;
 
 export const Description = styled.p`
@@ -94,10 +93,10 @@ export const Button = styled.button`
   display: flex;
   flex-grow: 1;
   padding: 5px;
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 500;
   font-size: 1em;
-  background-color: ${Colors.darkGreenishBlue};
+  background-color: ${(props) => props.theme.colors.darkGreenishBlue};
   border-radius: 10px;
   border: none;
   color: white;
@@ -134,16 +133,16 @@ export const Divider = styled.div`
   height: 2px;
   width: 50%;
   max-width: 300px;
-  border: 1px solid ${Colors.blue};
-  background-color: ${Colors.blue};
+  border: 1px solid ${(props) => props.theme.colors.blue};
+  background-color: ${(props) => props.theme.colors.blue};
   margin-bottom: 50px;
 `;
 
 export const CategoryName = styled.h2`
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 600;
   font-size: 1.25em;
-  color: ${Colors.blue};
+  color: ${(props) => props.theme.colors.blue};
   margin-bottom: 30px;
 `;
 
@@ -182,7 +181,7 @@ export const Product = styled.div`
     }
     to {
       padding: 5px;
-      border: 2px solid ${Colors.blue};
+      border: 2px solid ${(props) => props.theme.colors.blue};
     }
   }
   :hover {
@@ -214,7 +213,7 @@ export const ProductImage = styled.img`
 `;
 
 export const ProductName = styled.h3`
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 500;
   font-size: 1em;
 `;
