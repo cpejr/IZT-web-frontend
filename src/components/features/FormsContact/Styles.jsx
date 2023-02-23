@@ -12,7 +12,9 @@ export const ContactUs = styled.div`
   padding-top: 1%;
 
   @media (max-width: 700px) {
-    height: 900px;
+    height: auto;
+    padding-bottom: 120px;
+    margin-bottom: 230px;
   }
 `;
 
@@ -74,6 +76,7 @@ export const Mensagem = styled.div`
 
   @media (max-width: 700px) {
     font-size: 20px;
+    margin-top: 20px;
   }
 `;
 
@@ -91,6 +94,10 @@ export const BotaoEnviar = styled.button`
   width: 200px;
   border: none;
   border-radius: 4px;
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 
   cursor: pointer;
   transition-duration: 0.3s;

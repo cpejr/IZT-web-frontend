@@ -25,10 +25,13 @@ export const Container = styled.div`
 export const Label = styled.label`
   color: #ffffff;
   font-size: 24px;
+
+  @media (max-width: 700px) {
+    font-size: 20px;
+  }
 `;
 
 export const ErrorMessage = styled.p`
   font-size: 16px;
   color: red;
-  font-weight: 700;
 `;
