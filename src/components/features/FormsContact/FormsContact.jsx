@@ -14,24 +14,26 @@ import {
 import { FormInput, FormMask } from '../../common';
 
 const validationSchema = z.object({
-  company: z.string().min(1, 'Company name is required'),
+  company: z.string().min(1, 'Favor digitar o nome da empresa'),
 
-  representative: z.string().min(1, 'Representative is required'),
+  representative: z.string().min(1, 'Favor digitar o nome do representante'),
 
   email: z
     .string()
-    .min(1, { message: 'Email is required' })
+    .min(1, { message: 'Favor digitar o email' })
     .email({
-      message: 'Must be a valid email',
+      message: 'Insira um email válido',
     })
     .trim(),
 
-  telephone: z.string().min(1, 'Telephone is required'),
+  telephone: z.string().min(1, 'Favor digitar o número do telefone'),
 
   message: z
-    .string({ required_error: 'Message is required' })
-    .max(1500, { message: 'Message must be a maximum of 1500 characters' })
-    .min(5, { message: 'Message must be atleast 5 characters' }),
+    .string({ required_error: 'Favor inserir uma mensagem' })
+    .max(1500, {
+      message: 'A mensagem deve conter até no máximo 1500 caracteres',
+    })
+    .min(5, { message: 'A mensagem deve conter no mínimo 5 caracteres' }),
 });
 
 function FormsContactUs() {
