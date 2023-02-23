@@ -35,9 +35,8 @@ function Home() {
         />
         <Card
           title="Software de estabilidade"
-          text="Com o nosso software de mapa de estabilidade centerless, você pode
-          ter acesso a análises precisas e confiáveis da estabilidade do
-          processo de retificação centerless em sua empresa."
+          text="O software de mapa de estabilidade centerless fornece análises precisas e 
+          confiáveis do processo de retificação em sua empresa."
           image={Software}
           imageAlt="Software image"
         />

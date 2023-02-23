@@ -17,7 +17,7 @@ export const AboutUs = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 90%;
-  height: 90%;
+  height: auto;
   margin-top: 2%;
   margin-left: 10%;
   margin-right: 10%;
@@ -89,8 +89,12 @@ export const CardsContainer = styled.div`
   align-items: center;
 
   width: 90%;
-  height: 100%;
+  height: auto;
 
   margin-bottom: 2%;
   margin-top: 2%;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
 `;

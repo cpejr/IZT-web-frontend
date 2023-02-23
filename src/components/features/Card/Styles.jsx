@@ -8,7 +8,7 @@ const isMiddleStyle = css`
   position: relative;
   z-index: 2;
   font-size: 24px;
-  width: 460px;
+  width: 470px;
   height: 580px;
 `;
 
@@ -37,9 +37,28 @@ export const Container = styled.div`
 
   ${({ isMiddle }) => (isMiddle ? isMiddleStyle : '')};
 
-  /* @media screen (max-width: ;){
+  @media (max-width: 1000px) {
+    background: fixed ${Colors.gray[1]};
+    box-shadow: 0 0 0 0 ${Colors.gray[2]};
+    margin: 2%;
+  }
 
-  } */
+  @media (max-width: 500px) {
+    width: 400px;
+    height: 485px;
+  }
+  @media (max-width: 429px) {
+    width: 350px;
+    height: 424px;
+  }
+  @media (max-width: 360px) {
+    width: 300px;
+    height: 363px;
+  }
+  @media (max-width: 310px) {
+    width: 270px;
+    height: 326px;
+  }
 `;
 
 export const CardTitle = styled.div`
@@ -53,6 +72,13 @@ export const CardTitle = styled.div`
   font-family: ${Fonts.montserrat};
   font-size: 24px;
   font-weight: 700;
+
+  @media (max-width: 360px) {
+    font-size: 20px;
+  }
+  @media (max-width: 310px) {
+    font-size: 18px;
+  }
 `;
 
 export const CardText = styled.div`
@@ -65,10 +91,16 @@ export const CardText = styled.div`
   top: 25%;
 
   width: 77%;
+  height: 30%;
 
   font-family: ${Fonts.montserrat};
   font-size: 18px;
   font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  :hover {
+    overflow: visible;
+  }
 `;
 
 export const Button = styled.button`
@@ -84,10 +116,10 @@ export const Button = styled.button`
   background-color: white;
   border: 1px solid black;
   border-radius: 3px;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
 
   transition-duration: 0.3s;
   cursor: pointer;
@@ -97,10 +129,23 @@ export const Button = styled.button`
     background-color: black;
     color: white;
   }
+
+  @media (max-width: 429px) {
+    font-size: 20px;
+  }
+  @media (max-width: 360px) {
+    font-size: 18px;
+  }
+  @media (max-width: 310px) {
+    font-size: 16px;
+  }
 `;
 
 export const Picture = styled.img`
-  object-fit: scale-down;
+  object-fit: inherit;
   position: absolute;
+
   top: 25%;
+  width: 50%;
+  height: auto;
 `;
