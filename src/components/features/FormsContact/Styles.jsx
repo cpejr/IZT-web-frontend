@@ -6,7 +6,7 @@ export const ContactUs = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  height: 542px;
+  height: 100%;
   background-color: rgba(18, 54, 69, 1);
   padding-bottom: 5%;
   padding-top: 1%;
@@ -31,7 +31,7 @@ export const Title = styled.p`
   }
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -46,11 +46,12 @@ export const Form = styled.div`
   }
 `;
 
-export const Section = styled.div`
+export const Section = styled.section`
   display: flex;
   flex-direction: column;
   width: 50%;
   height: 100%;
+  gap: 20px;
 
   @media (max-width: 700px) {
     width: 80%;
@@ -66,6 +67,10 @@ export const Mensagem = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   gap: 5px;
+
+  textarea {
+    resize: none;
+  }
 
   @media (max-width: 700px) {
     font-size: 20px;

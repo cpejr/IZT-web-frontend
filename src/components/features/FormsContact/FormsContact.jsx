@@ -1,6 +1,7 @@
-import FormInput from '../../common/FormInput/FormIpunt';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   ContactUs,
   Form,
@@ -10,11 +11,13 @@ import {
   BotaoEnviar,
   InputMessage,
 } from './Styles';
-import { useEffect, useState } from 'react';
+import { FormInput, FormMask } from '../../common';
 
 const validationSchema = z.object({
-  companyName: z.string().min(1, 'Company name is required'),
-  Representant: z.string().min(1, 'Representant is required'),
+  company: z.string().min(1, 'Company name is required'),
+
+  representative: z.string().min(1, 'Representative is required'),
+
   email: z
     .string()
     .min(1, { message: 'Email is required' })
@@ -22,10 +25,13 @@ const validationSchema = z.object({
       message: 'Must be a valid email',
     })
     .trim(),
-  Telephone: z
-    .string()
-    .min(1, 'Password is required') // Provavelmente desnecessário
-    .min(6, { message: 'Password must be atleast 6 characters' }),
+
+  telephone: z.string().min(1, 'Telephone is required'),
+
+  message: z
+    .string({ required_error: 'Message is required' })
+    .max(1500, { message: 'Message must be a maximum of 1500 characters' })
+    .min(5, { message: 'Message must be atleast 5 characters' }),
 });
 
 function FormsContactUs() {
@@ -33,7 +39,10 @@ function FormsContactUs() {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
+    control,
+  } = useForm({
+    resolver: zodResolver(validationSchema),
+  });
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   useEffect(() => {
@@ -45,12 +54,15 @@ function FormsContactUs() {
 
   const breakpoint = 700;
 
+  const onSubmit = (data) => console.log(data);
+
   return (
     <ContactUs>
       <Title>{`Entre em Contato ${
         windowWidth <= breakpoint ? '' : 'Conosco'
       }`}</Title>
-      <Form>
+
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Section>
           <FormInput
             label="Empresa:"
@@ -59,26 +71,31 @@ function FormsContactUs() {
             errors={errors}
             register={register}
           />
+
           <FormInput
             label="Representante:"
-            name="company"
+            name="representative"
             placeholder="Nome do representante empresa"
             errors={errors}
             register={register}
           />
+
           <FormInput
             label="E-mail:"
-            name="company"
+            name="email"
             placeholder="email@email.com"
             errors={errors}
             register={register}
           />
-          <FormInput
+
+          <FormMask
             label="Telefone:"
-            name="company"
-            placeholder="(XX) 9XXXX-XXXX"
+            name="telephone"
+            defaultValue=""
+            control={control}
+            placeholder="(99) 99999-9999"
+            mask="(99) 99999-9999"
             errors={errors}
-            register={register}
           />
         </Section>
 
