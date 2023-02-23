@@ -1,13 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-:root {
-  --primary: #d6ceaa;
-  --success: #79b5ac;
-  --reject: #c75233;
-  // Variáveis CSS aqui
-}
-
 
 * {
   margin: 0;
@@ -28,5 +21,12 @@ html,
 body,
 #root {
   height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  @media (prefers-reduced-motion: reduce) {
+	  scroll-behavior:auto;
+  }
 }
 `;
