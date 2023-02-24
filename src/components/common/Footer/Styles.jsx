@@ -5,6 +5,11 @@ export const BodyFooter = styled.div`
   flex-direction: row;
   height: 326px;
   width: 100%;
+
+  @media (max-width: 850px) {
+    flex-direction: column;
+    height: 500px;
+  }
 `;
 
 export const FirstDiv = styled.div`
@@ -15,9 +20,33 @@ export const FirstDiv = styled.div`
   justify-content: center;
   align-items: center;
   padding: 7%;
+
+  .ContactUsButton {
+    display: none;
+  }
+
+  @media (max-width: 850px) {
+    width: 100%;
+    height: auto;
+    padding: 3% 7%;
+
+    .ContactUsButton {
+      display: none;
+    }
+  }
 `;
 
-export const LogoIZT = styled.img``;
+export const LogoIZT = styled.img`
+  @media (max-width: 850px) {
+    margin-top: 15px;
+    width: 126px;
+    height: 50px;
+  }
+  @media (max-width: 1200px) {
+    width: 150px;
+    height: 60px;
+  }
+`;
 
 export const TextoIZT = styled.p`
   font-family: 'Montserrat';
@@ -28,6 +57,10 @@ export const TextoIZT = styled.p`
   text-align: center;
   color: #000000;
   padding-top: 16px;
+
+  @media (max-width: 850px) {
+    font-size: 14px;
+  }
 `;
 
 export const SecondDiv = styled.div`
@@ -38,6 +71,10 @@ export const SecondDiv = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0% 7%;
+
+  @media (max-width: 850px) {
+    display: none;
+  }
 `;
 
 export const TituloFooter = styled.p`
@@ -48,6 +85,10 @@ export const TituloFooter = styled.p`
   line-height: 22px;
 
   color: #203699;
+
+  @media (max-width: 850px) {
+    font-size: 16px;
+  }
 `;
 
 export const RedesSociais = styled.div`
@@ -59,6 +100,11 @@ export const RedesSociais = styled.div`
   gap: 10px;
   margin-bottom: 10px;
   margin-top: 15px;
+
+  @media (max-width: 850px) {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
 `;
 
 export const BotaoRedeSocial = styled.button`
@@ -67,11 +113,8 @@ export const BotaoRedeSocial = styled.button`
   width: 38px;
   height: 38px;
   border: none;
-`;
 
-export const BsInstagram = styled.image`
-  width: 30px;
-  height: 30px;
+  cursor: pointer;
 `;
 
 export const IrPara = styled.p`
@@ -83,4 +126,32 @@ export const IrPara = styled.p`
 
   color: #000000;
   padding-top: 13px;
+`;
+
+export const ButtonMobile = styled.div`
+  display: none;
+  width: 80%;
+  height: 80px;
+  font-size: 15px;
+  margin-bottom: 40px;
+
+  @media (max-width: 850px) {
+    display: flex;
+    height: auto;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    width: 70%;
+  }
+`;
+
+export const SectionIr = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 850px) {
+    padding-bottom: 20px;
+  }
 `;

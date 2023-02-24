@@ -14,14 +14,13 @@ import {
   RedesSociais,
   BotaoRedeSocial,
   IrPara,
+  ButtonMobile,
+  SectionIr,
 } from './Styles';
 import ImagemLogoIZT from '../../../assets/ImagemLogoIZT.png';
-import useWindowSize from '../../../hooks/useWindowSize';
 import ContactUsButton from '../ContactUsButton/ContactUsButton';
 
 export default function Footer() {
-  const { width } = useWindowSize();
-
   return (
     <BodyFooter>
       <FirstDiv>
@@ -72,10 +71,15 @@ export default function Footer() {
             <HiOutlineMail size={35} />
           </BotaoRedeSocial>
         </RedesSociais>
-        <TituloFooter>Ir para:</TituloFooter>
-        <IrPara>Produtos</IrPara>
-        <IrPara>Cursos</IrPara>
-        <IrPara>Software</IrPara>
+        <ButtonMobile>
+          <ContactUsButton />
+        </ButtonMobile>
+        <SectionIr>
+          <TituloFooter>Ir para:</TituloFooter>
+          <IrPara>Produtos</IrPara>
+          <IrPara>Cursos</IrPara>
+          <IrPara>Software</IrPara>
+        </SectionIr>
       </FirstDiv>
     </BodyFooter>
   );

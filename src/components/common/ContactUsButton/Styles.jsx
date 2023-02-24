@@ -12,7 +12,7 @@ export const Botao = styled.button`
   margin-top: 35px;
 
   background: #203699;
-  border: 1.5px solid #203699;
+  border: 0;
   border-radius: 4px;
 
   font-family: 'Montserrat';
@@ -24,4 +24,25 @@ export const Botao = styled.button`
   letter-spacing: 0.1em;
 
   color: #ffffff;
+
+  transition-duration: 0.3s;
+  cursor: pointer;
+  :hover {
+    background-color: rgba(32, 54, 153, 0.6);
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  @media (max-width: 700px) {
+    font-size: 15px;
+    height: 40px;
+    margin-top: 0px;
+    max-width: 80%;
+  }
+  @media (max-width: 1200px) {
+    font-size: 16px;
+    height: 45px;
+  }
+  @media (max-width: 320px) {
+    max-width: 95%;
+  }
 `;
