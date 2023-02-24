@@ -1,7 +1,16 @@
 import React from 'react';
 import { z } from 'zod';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Page, Container, Logo, Title, Form, dataEntry } from './Styles';
+import {
+  Page,
+  Container,
+  Logo,
+  Title,
+  Form,
+  DataEntry,
+  Button,
+} from './Styles';
 import { DataInput } from '../../components/common';
 
 const validationSchema = z.object({
@@ -25,6 +34,7 @@ function Login() {
   } = useForm({
     resolver: zodResolver(validationSchema),
   });
+  const onSubmit = (data) => console.log(data);
   return (
     <Page>
       <Container>
@@ -32,18 +42,28 @@ function Login() {
           src="/public/IZT.svg"
           alt="Logo da IZT: Um I atravessando um Z dentro de um circulo"
         />
-        <dataEntry>
+        <DataEntry>
           <Title>Entre na sua conta</Title>
-          <Form>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <DataInput
               label="Digite seu E-mail: "
               name="email"
-              placeholder="email"
+              placeholder="Email"
               register={register}
               errors={errors}
+              type="text"
             />
+            <DataInput
+              label="Digite sua senha: "
+              name="password"
+              placeholder="Senha"
+              register={register}
+              errors={errors}
+              type="password"
+            />
+            <Button type="submit">Entrar</Button>
           </Form>
-        </dataEntry>
+        </DataEntry>
       </Container>
     </Page>
   );
