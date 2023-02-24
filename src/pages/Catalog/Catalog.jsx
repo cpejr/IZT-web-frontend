@@ -1,4 +1,5 @@
 import React from 'react';
+import { Footer } from '../../components/common';
 import {
   Page,
   Container,
@@ -145,6 +146,7 @@ function Catalog() {
           </ProductCategory>
         ))}
       </Container>
+      <Footer />
     </Page>
   );
 }
