@@ -1,3 +1,8 @@
+import { BsInstagram } from 'react-icons/bs';
+import { AiOutlineLinkedin } from 'react-icons/ai';
+import { AiOutlineFacebook } from 'react-icons/ai';
+import { BsWhatsapp } from 'react-icons/bs';
+import { HiOutlineMail } from 'react-icons/hi';
 import React from 'react';
 import {
   BodyFooter,
@@ -11,9 +16,12 @@ import {
   IrPara,
 } from './Styles';
 import ImagemLogoIZT from '../../../assets/ImagemLogoIZT.png';
-import footerImages from './footerImages';
+import useWindowSize from '../../../hooks/useWindowSize';
+import ContactUsButton from '../ContactUsButton/ContactUsButton';
 
 export default function Footer() {
+  const { width } = useWindowSize();
+
   return (
     <BodyFooter>
       <FirstDiv>
@@ -33,54 +41,35 @@ export default function Footer() {
           risus ullamcorper, venenatis sem vulputate, dapibus lacus. Integer
           risus turpis.
         </TextoIZT>
+        <ContactUsButton />
       </SecondDiv>
 
       <FirstDiv>
         <TituloFooter>Nossas Redes:</TituloFooter>
         <RedesSociais>
+          {/* Botão Instagram */}
           <BotaoRedeSocial type="button">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/32/32213.png"
-              alt="buttonpng"
-              border="0"
-              height={20}
-            />
+            <BsInstagram size={30} />
           </BotaoRedeSocial>
 
+          {/* Botão LinkedIn */}
           <BotaoRedeSocial type="button">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/32/32213.png"
-              alt="buttonpng"
-              border="0"
-              height={20}
-            />
+            <AiOutlineLinkedin size={35} />
           </BotaoRedeSocial>
 
+          {/* Botão Facebook */}
           <BotaoRedeSocial type="button">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/32/32213.png"
-              alt="buttonpng"
-              border="0"
-              height={20}
-            />
+            <AiOutlineFacebook size={35} />
           </BotaoRedeSocial>
 
+          {/* Botão Whatsapp */}
           <BotaoRedeSocial type="button">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/32/32213.png"
-              alt="buttonpng"
-              border="0"
-              height={20}
-            />
+            <BsWhatsapp size={30} />
           </BotaoRedeSocial>
 
+          {/* Botão Email */}
           <BotaoRedeSocial type="button">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/32/32213.png"
-              alt="buttonpng"
-              border="0"
-              height={20}
-            />
+            <HiOutlineMail size={35} />
           </BotaoRedeSocial>
         </RedesSociais>
         <TituloFooter>Ir para:</TituloFooter>

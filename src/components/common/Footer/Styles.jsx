@@ -37,7 +37,7 @@ export const SecondDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 7%;
+  padding: 0% 7%;
 `;
 
 export const TituloFooter = styled.p`
@@ -48,7 +48,6 @@ export const TituloFooter = styled.p`
   line-height: 22px;
 
   color: #203699;
-  padding-bottom: 13px;
 `;
 
 export const RedesSociais = styled.div`
@@ -59,9 +58,21 @@ export const RedesSociais = styled.div`
   padding: 5px 0px;
   gap: 10px;
   margin-bottom: 10px;
+  margin-top: 15px;
 `;
 
-export const BotaoRedeSocial = styled.button``;
+export const BotaoRedeSocial = styled.button`
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+`;
+
+export const BsInstagram = styled.image`
+  width: 30px;
+  height: 30px;
+`;
 
 export const IrPara = styled.p`
   font-family: 'Montserrat';
@@ -71,5 +82,5 @@ export const IrPara = styled.p`
   line-height: 18px;
 
   color: #000000;
-  padding-bottom: 13px;
+  padding-top: 13px;
 `;
