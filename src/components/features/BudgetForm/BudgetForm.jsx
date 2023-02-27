@@ -1,38 +1,37 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  ContactUs,
+  Container,
   Form,
   Section,
+  Subsection,
   Title,
-  Mensagem,
-  BotaoEnviar,
-  InputMessage,
+  SendButton,
+  Information,
 } from './Styles';
 import { FormInput, FormMask } from '../../common';
 
 const validationSchema = z.object({
   body: z.object({
     name: z
-      .string({ required_error: 'Name is required' })
+      .string({ required_error: 'Favor digitar o seu nome completo' })
       .max(40, { message: 'Name must be a maximum of 40 characters' })
       .min(3, { message: 'Name must be atleast 3 characters' }),
 
-    company: z
-      .string({ required_error: 'Company name is required' })
-      .max(40, { message: 'Name must be a maximum of 40 characters' })
-      .min(3, { message: 'Name must be atleast 3 characters' }),
+    company: z.string().min(1, 'Favor digitar o nome da empresa'),
 
     email: z
-      .string({ required_error: 'Email is required' })
-      .email('Must be a valid email'),
+      .string()
+      .min(1, { message: 'Favor digitar o email' })
+      .email({
+        message: 'Insira um email válido',
+      })
+      .trim(),
 
-    telephone: z
-      .string({ required_error: 'Telephone is required' })
-      .max(15, { message: 'Telephone must be a maximum of 15 characters' })
-      .regex(/^\+(?:[0-9] ?){6,14}[0-9]$/, 'Telephone bad formatted'),
+    telephone: z.string().min(1, 'Favor digitar o número do telefone'),
 
     country: z
       .string({ required_error: 'Country is required' })
@@ -89,107 +88,98 @@ function BudgetForm() {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <ContactUs>
+    <Container>
       <Title>Requisite um Orçamento</Title>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Section>
-          <FormInput
-            label="Name:"
-            name="name"
-            placeholder="Nome completo"
-            errors={errors}
-            register={register}
-          />
+        <Information>
+          <Section>
+            <FormInput
+              label="Name:"
+              name="name"
+              placeholder="Nome completo"
+              errors={errors}
+              register={register}
+            />
 
-          <FormInput
-            label="Empresa:"
-            name="company"
-            placeholder="Nome da empresa"
-            errors={errors}
-            register={register}
-          />
+            <FormInput
+              label="Empresa:"
+              name="company"
+              placeholder="Nome da empresa"
+              errors={errors}
+              register={register}
+            />
 
-          <FormInput
-            label="E-mail:"
-            name="email"
-            placeholder="email@email.com"
-            errors={errors}
-            register={register}
-          />
+            <FormInput
+              label="E-mail:"
+              name="email"
+              placeholder="email@email.com"
+              errors={errors}
+              register={register}
+            />
 
-          <FormMask
-            label="Telefone:"
-            name="telephone"
-            defaultValue=""
-            control={control}
-            placeholder="(99) 99999-9999"
-            mask="(99) 99999-9999"
-            errors={errors}
-          />
+            <FormMask
+              label="Telefone:"
+              name="telephone"
+              defaultValue=""
+              control={control}
+              placeholder="(99) 99999-9999"
+              mask="(99) 99999-9999"
+              errors={errors}
+            />
+          </Section>
 
-          {/* PAÍS */}
-          <FormMask
-            label="Pais:"
-            name="country"
-            defaultValue=""
-            control={control}
-            placeholder="Brasil"
-            errors={errors}
-          />
+          <Section>
+            <FormMask
+              label="Pais:"
+              name="country"
+              defaultValue=""
+              control={control}
+              placeholder="Brasil"
+              errors={errors}
+            />
+            <Subsection>
+              <FormMask
+                label="Estado:"
+                name="state"
+                defaultValue=""
+                control={control}
+                placeholder="Minas Gerais"
+                errors={errors}
+              />
 
-          {/* ESTADO */}
-          <FormMask
-            label="Estado:"
-            name="state"
-            defaultValue=""
-            control={control}
-            placeholder="Minas Gerais"
-            errors={errors}
-          />
+              <FormMask
+                label="Cidade:"
+                name="city"
+                defaultValue=""
+                control={control}
+                placeholder="Belo Horizonte"
+                errors={errors}
+              />
+            </Subsection>
 
-          {/* CIDADE */}
-          <FormMask
-            label="Cidade:"
-            name="city"
-            defaultValue=""
-            control={control}
-            placeholder="Belo Horizonte"
-            errors={errors}
-          />
+            <FormMask
+              label="CEP:"
+              name="ZIPcode"
+              defaultValue=""
+              control={control}
+              placeholder="99999-999"
+              errors={errors}
+            />
 
-          {/* CEP */}
-          <FormMask
-            label="CEP:"
-            name="ZIPcode"
-            defaultValue=""
-            control={control}
-            placeholder="99999-999"
-            errors={errors}
-          />
-
-          {/* Endereço */}
-          <FormMask
-            label="Endereco:"
-            name="address"
-            defaultValue=""
-            control={control}
-            placeholder="Av. Maranhão, 54"
-            errors={errors}
-          />
-        </Section>
-
-        <Section>
-          <InputMessage>
-            <Mensagem>
-              Mensagem:
-              <textarea rows={17} />
-              <BotaoEnviar>Enviar</BotaoEnviar>
-            </Mensagem>
-          </InputMessage>
-        </Section>
+            <FormMask
+              label="Endereco:"
+              name="address"
+              defaultValue=""
+              control={control}
+              placeholder="Av. Maranhão, 54"
+              errors={errors}
+            />
+          </Section>
+        </Information>
+        <SendButton>Enviar</SendButton>
       </Form>
-    </ContactUs>
+    </Container>
   );
 }
 

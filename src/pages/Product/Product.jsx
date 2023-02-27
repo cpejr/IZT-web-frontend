@@ -1,17 +1,12 @@
 import React from 'react';
-
-import {
-  Container,
-  ProductDetails,
-  BudgetForm,
-  ProcessSteps,
-} from '../Product/Styles';
+import BudgetForm from '../../components/features';
+import { Container, ProductDetails, ProcessSteps } from '../Product/Styles';
 
 function Product() {
   return (
     <Container>
       <ProductDetails>Product Details</ProductDetails>
-      <BudgetForm>Budget Form</BudgetForm>
+      <BudgetForm />
       <ProcessSteps>Process Steps</ProcessSteps>
     </Container>
   );
