@@ -9,7 +9,12 @@ import {
   Title,
   Form,
   DataEntry,
+  SubmitSpace,
   Button,
+  RemeberMe,
+  SignUpLink,
+  Links,
+  ErrorMessage,
 } from './Styles';
 import { DataInput } from '../../components/common';
 
@@ -21,9 +26,7 @@ const validationSchema = z.object({
       message: 'Insira um email válido',
     })
     .trim(),
-  password: z
-    .string()
-    .min(8, { message: 'A senha deve ter no mínimo 8 caracteres' }),
+  password: z.string(),
 });
 
 function Login() {
@@ -35,6 +38,7 @@ function Login() {
     resolver: zodResolver(validationSchema),
   });
   const onSubmit = (data) => console.log(data);
+  const invalid = true;
   return (
     <Page>
       <Container>
@@ -61,9 +65,20 @@ function Login() {
               errors={errors}
               type="password"
             />
-            <Button type="submit">Entrar</Button>
+            <SubmitSpace>
+              <ErrorMessage failedToLog={invalid}>
+                Email e/ou senha inválidos
+              </ErrorMessage>
+              <Button type="submit">Entrar</Button>
+            </SubmitSpace>
           </Form>
         </DataEntry>
+        <Links>
+          <RemeberMe>Esqueceu a sua senha? Clique aqui!</RemeberMe>
+          <SignUpLink>
+            Ainda não tem uma conta? <a href="#SignUp">Cadastre-se aqui!</a>
+          </SignUpLink>
+        </Links>
       </Container>
     </Page>
   );

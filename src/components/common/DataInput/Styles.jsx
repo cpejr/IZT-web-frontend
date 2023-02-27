@@ -9,12 +9,12 @@ export const Container = styled.div`
   font-size: 20px;
   width: 100%;
   @media (max-width: ${breakValue}) {
-    font-size: 10px;
+    font-size: 15px;
   }
 `;
 
 export const Label = styled.label`
-  font-size: 1.6em;
+  font-size: 1em;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 600;
 `;
@@ -29,10 +29,13 @@ export const Input = styled.input`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 1em;
   font-weight: 600;
+  @media (max-width: ${breakValue}) {
+    height: 50px;
+  }
 `;
 
 export const ErrorMessage = styled.p`
-  font-size: 16px;
+  font-size: 0.8em;
   color: red;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 700;
