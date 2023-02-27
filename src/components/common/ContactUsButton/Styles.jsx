@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 // eslint-disable-next-line import/prefer-default-export
-export const Botao = styled.button`
+export const ContactButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,11 +11,11 @@ export const Botao = styled.button`
   height: 62px;
   margin-top: 35px;
 
-  background: #203699;
+  background: ${(props) => props.theme.colors.blue};
   border: 0;
   border-radius: 4px;
 
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -23,7 +23,7 @@ export const Botao = styled.button`
   text-align: center;
   letter-spacing: 0.1em;
 
-  color: #ffffff;
+  color: white;
 
   transition-duration: 0.3s;
   cursor: pointer;

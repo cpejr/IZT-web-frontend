@@ -1,6 +1,6 @@
 import React from 'react';
-import { Botao } from './Styles';
+import { ContactButton } from './Styles';
 
 export default function ContactUsButton() {
-  return <Botao>Fale Conosco</Botao>;
+  return <ContactButton>Fale Conosco</ContactButton>;
 }

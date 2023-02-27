@@ -15,7 +15,7 @@ export const BodyFooter = styled.div`
 export const FirstDiv = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #eeeeee;
+  background-color: ${(props) => props.theme.colors.gray.lightGrey};
   width: 33.33%;
   justify-content: center;
   align-items: center;
@@ -48,14 +48,14 @@ export const LogoIZT = styled.img`
   }
 `;
 
-export const TextoIZT = styled.p`
-  font-family: 'Montserrat';
+export const Text = styled.p`
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
   text-align: center;
-  color: #000000;
+  color: black;
   padding-top: 16px;
 
   @media (max-width: 850px) {
@@ -64,7 +64,7 @@ export const TextoIZT = styled.p`
 `;
 
 export const SecondDiv = styled.div`
-  background-color: #d9d9d9;
+  background-color: ${(props) => props.theme.colors.gray.mediumGrey};
   width: 33.33%;
   display: flex;
   flex-direction: column;
@@ -77,8 +77,8 @@ export const SecondDiv = styled.div`
   }
 `;
 
-export const TituloFooter = styled.p`
-  font-family: 'Montserrat';
+export const Tittle = styled.p`
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -91,7 +91,7 @@ export const TituloFooter = styled.p`
   }
 `;
 
-export const RedesSociais = styled.div`
+export const SocialMedias = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -107,7 +107,7 @@ export const RedesSociais = styled.div`
   }
 `;
 
-export const BotaoRedeSocial = styled.button`
+export const SocialMediaButton = styled.button`
   align-items: center;
   justify-content: center;
   width: 38px;
@@ -117,8 +117,8 @@ export const BotaoRedeSocial = styled.button`
   cursor: pointer;
 `;
 
-export const IrPara = styled.p`
-  font-family: 'Montserrat';
+export const GoTo = styled.p`
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 700;
   font-size: 15px;

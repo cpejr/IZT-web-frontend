@@ -9,11 +9,11 @@ import {
   FirstDiv,
   SecondDiv,
   LogoIZT,
-  TextoIZT,
-  TituloFooter,
-  RedesSociais,
-  BotaoRedeSocial,
-  IrPara,
+  Text,
+  Tittle,
+  SocialMedias,
+  SocialMediaButton,
+  GoTo,
   ButtonMobile,
   SectionIr,
 } from './Styles';
@@ -25,60 +25,60 @@ export default function Footer() {
     <BodyFooter>
       <FirstDiv>
         <LogoIZT src={ImagemLogoIZT} alt="ImagemLogoIZT" />
-        <TextoIZT>
+        <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
           aliquam blandit convallis. Proin luctus turpis vitae urna feugiat
           eleifend. Orci varius natoque penatibus et magnis dis parturient
           montes, nascetur ridiculus.
-        </TextoIZT>
+        </Text>
       </FirstDiv>
 
       <SecondDiv>
-        <TituloFooter>Contato:</TituloFooter>
-        <TextoIZT>
+        <Tittle>Contato:</Tittle>
+        <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in
           risus ullamcorper, venenatis sem vulputate, dapibus lacus. Integer
           risus turpis.
-        </TextoIZT>
+        </Text>
         <ContactUsButton />
       </SecondDiv>
 
       <FirstDiv>
-        <TituloFooter>Nossas Redes:</TituloFooter>
-        <RedesSociais>
+        <Tittle>Nossas Redes:</Tittle>
+        <SocialMedias>
           {/* Botão Instagram */}
-          <BotaoRedeSocial type="button">
+          <SocialMediaButton type="button">
             <BsInstagram size={30} />
-          </BotaoRedeSocial>
+          </SocialMediaButton>
 
           {/* Botão LinkedIn */}
-          <BotaoRedeSocial type="button">
+          <SocialMediaButton type="button">
             <AiOutlineLinkedin size={35} />
-          </BotaoRedeSocial>
+          </SocialMediaButton>
 
           {/* Botão Facebook */}
-          <BotaoRedeSocial type="button">
+          <SocialMediaButton type="button">
             <AiOutlineFacebook size={35} />
-          </BotaoRedeSocial>
+          </SocialMediaButton>
 
           {/* Botão Whatsapp */}
-          <BotaoRedeSocial type="button">
+          <SocialMediaButton type="button">
             <BsWhatsapp size={30} />
-          </BotaoRedeSocial>
+          </SocialMediaButton>
 
           {/* Botão Email */}
-          <BotaoRedeSocial type="button">
+          <SocialMediaButton type="button">
             <HiOutlineMail size={35} />
-          </BotaoRedeSocial>
-        </RedesSociais>
+          </SocialMediaButton>
+        </SocialMedias>
         <ButtonMobile>
           <ContactUsButton />
         </ButtonMobile>
         <SectionIr>
-          <TituloFooter>Ir para:</TituloFooter>
-          <IrPara>Produtos</IrPara>
-          <IrPara>Cursos</IrPara>
-          <IrPara>Software</IrPara>
+          <Tittle>Ir para:</Tittle>
+          <GoTo>Produtos</GoTo>
+          <GoTo>Cursos</GoTo>
+          <GoTo>Software</GoTo>
         </SectionIr>
       </FirstDiv>
     </BodyFooter>
