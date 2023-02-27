@@ -5,7 +5,7 @@ import carouselData from '../../assets/homeCarousel/data';
 export default function Home() {
   return (
     <Container>
-      <Carousel carouselData={carouselData} height="550px" />
+      <Carousel carouselData={carouselData} height="350px" />
     </Container>
   );
 }

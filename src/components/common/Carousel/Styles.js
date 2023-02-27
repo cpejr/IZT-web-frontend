@@ -1,48 +1,116 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
-  height: ${(props) => props.height};
-  padding: 0;
-  overflow: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-`;
-export const Data = styled.ul`
-  width: ${(props) => `calc(100% * ${props.slidesCount})`};
-  height: 100%;
   display: flex;
-`;
-export const ImageContainer = styled.li`
-  scroll-snap-align: start;
-  /* opacity: 0;
-  transition: opacity 300ms;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
 
-  &:target {
-    opacity: 1;
-  } */
+  height: ${(props) => props.height};
+  @media (max-width: 600px) {
+    height: 250px;
+  }
+
+  @media (max-width: 400px) {
+    height: 150px;
+  }
+`;
+
+export const ImagesContainer = styled.div`
+  height: 100%;
+  width: 100%;
+
+  overflow: hidden;
+`;
+export const Inner = styled.div`
+  height: 100%;
+  white-space: nowrap;
+
+  transform: translateX(
+    -${({ currentImageIndex }) => currentImageIndex * 100}%
+  );
+  transition: transform 0.3s;
+`;
+
+export const ImageContainer = styled.div`
+  display: inline-block;
+
+  width: 100%;
+  height: 100%;
+
+  /* opacity: ${({ active }) => (active ? 1 : 0)}; */
+  /* transition: opacity ease-in-out 0.8s; */
 
   img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
   }
 `;
 
-export const NavLinks = styled.nav`
-  text-align: center;
+export const NavButtons = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 `;
-export const Dots = styled.a`
-  text-decoration: none;
+
+export const Button = styled.button`
+  all: unset;
+  cursor: pointer;
+
+  padding: 2px 8px;
+  border: 1px solid black;
+
+  &:hover {
+    background: green;
+    color: white;
+  }
+`;
+
+export const Dots = styled.button`
+  all: unset;
+  cursor: pointer;
+
+  text-align: center;
 
   display: inline-block;
-  margin: 20px;
   color: black;
 
   width: 20px;
   height: 20px;
   border: 1px solid black;
   border-radius: 50%;
-  background: inherit;
+
+  ${({ active }) => active && 'background: green;'}
+
+  &:hover {
+    background: green;
+    color: white;
+    opacity: 0.5;
+  }
+`;
+
+export const MiniImageContainer = styled.button`
+  all: unset;
+  display: inline-block;
+
+  width: 50px;
+  height: 50px;
+
+  opacity: ${({ active }) => (active ? 1 : 0.7)};
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
 `;
