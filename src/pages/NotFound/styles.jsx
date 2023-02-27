@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 90px;
+  gap: 70px;
 
   position: absolute;
   width: 824px;
@@ -19,6 +19,10 @@ export const Container = styled.div`
     left: 0;
     top: 0;
     padding: 40px;
+  }
+  @media (max-width: 1024px) {
+    width: 100%;
+    gap: 30px;
   }
 `;
 
@@ -37,9 +41,10 @@ export const Title = styled.h1`
 
   color: #af0c0c;
 
-  @media (max-width: 768px) {
+  @media (max-width: 700px) {
     font-size: 120px;
     width: 100%;
+    text-align: center;
   }
 `;
 export const Subtitle = styled.h2`
@@ -61,9 +66,10 @@ export const Subtitle = styled.h2`
   flex-grow: 0;
   white-space: pre-wrap;
 
-  @media (max-width: 768px) {
+  @media (max-width: 700px) {
     font-size: 64px;
     width: 100%;
+    text-align: center;
   }
 `;
 export const Description = styled.h3`
@@ -86,7 +92,13 @@ export const Description = styled.h3`
   flex-grow: 0;
 
   @media (max-width: 890px) {
+    font-size: 27px;
+    width: 100%;
+  }
+
+  @media (max-width: 700px) {
     font-size: 24px;
     width: 100%;
+    text-align: center;
   }
 `;
