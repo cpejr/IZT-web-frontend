@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
-import { Fonts } from '../../variables';
 
 export const Container = styled.div`
   display: flex;
@@ -26,7 +25,7 @@ export const AboutUs = styled.div`
 
 export const OurHistoryTitle = styled.h1`
   color: black;
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 600;
   font-style: normal;
   font-size: 36px;
@@ -50,7 +49,7 @@ export const OurHistory = styled.div`
   flex-direction: row;
   justify-content: center;
   color: black;
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;

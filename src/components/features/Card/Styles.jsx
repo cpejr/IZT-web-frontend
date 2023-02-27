@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 import styled, { css } from 'styled-components';
-import { Colors, Fonts } from '../../../variables';
 
 // const breakpoint;
 
@@ -20,7 +19,7 @@ export const Container = styled.div`
   position: relative;
   z-index: 1;
 
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 20px;
   font-weight: 700;
 
@@ -30,16 +29,16 @@ export const Container = styled.div`
     to top,
     white 0%,
     white 57%,
-    ${Colors.gray[1]} 57%,
-    ${Colors.gray[1]} 100%
+    ${(props) => props.theme.colors.gray[1]} 57%,
+    ${(props) => props.theme.colors.gray[1]} 100%
   );
-  box-shadow: 0 0 8px 8px ${Colors.gray[2]};
+  box-shadow: 0 0 8px 8px ${(props) => props.theme.colors.gray[2]};
 
   ${({ isMiddle }) => (isMiddle ? isMiddleStyle : '')};
 
   @media (max-width: 1000px) {
-    background: fixed ${Colors.gray[1]};
-    box-shadow: 0 0 0 0 ${Colors.gray[2]};
+    background: fixed ${(props) => props.theme.colors.gray[1]};
+    box-shadow: 0 0 0 0 ${(props) => props.theme.colors.gray[2]};
     margin: 2%;
   }
 
@@ -69,7 +68,7 @@ export const CardTitle = styled.div`
   position: absolute;
   top: 7%;
 
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 24px;
   font-weight: 700;
 
@@ -93,7 +92,7 @@ export const CardText = styled.div`
   width: 77%;
   height: 30%;
 
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 18px;
   font-weight: 400;
   overflow: hidden;
@@ -105,7 +104,7 @@ export const CardText = styled.div`
 
 export const Button = styled.button`
   text-align: center;
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 0.1em;
