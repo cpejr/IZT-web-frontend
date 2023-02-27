@@ -20,7 +20,7 @@ const validationSchema = z.object({
     .string()
     .min(1, { message: 'Favor digitar o email' })
     .email({
-      message: 'Insira um email válido',
+      message: 'Insira um email no formato email@email.com',
     })
     .trim(),
   password: z.string().min(1, { message: 'Favor digitar uma senha' }),
