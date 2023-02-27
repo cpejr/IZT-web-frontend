@@ -99,7 +99,7 @@ export const RemeberMe = styled.a`
   font-size: 0.9em;
   font-family: ${(props) => props.theme.fonts.montserrat};
   color: #2b1212;
-  font-weight: 600;
+  font-weight: 500;
   :hover {
     text-decoration: underline;
   }
