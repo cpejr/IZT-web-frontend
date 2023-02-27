@@ -1,6 +1,6 @@
 import React from 'react';
-import BudgetForm from '../../components/features';
-import { Container, ProductDetails, ProcessSteps } from '../Product/Styles';
+import { BudgetForm } from '../../components/features';
+import { Container, ProductDetails, ProcessSteps } from './Styles';
 
 function Product() {
   return (
