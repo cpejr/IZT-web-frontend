@@ -9,14 +9,11 @@ import {
   Title,
   Form,
   DataEntry,
-  SubmitSpace,
-  Button,
   RemeberMe,
   SignUpLink,
   Links,
-  ErrorMessage,
 } from './Styles';
-import { DataInput } from '../../components/common';
+import { DataInput, SubmitButton } from '../../components/common';
 
 const validationSchema = z.object({
   email: z
@@ -38,7 +35,9 @@ function Login() {
     resolver: zodResolver(validationSchema),
   });
   const onSubmit = (data) => console.log(data);
-  const invalid = true;
+  const erroOnSubmit = {
+    message: 'Email e/ou senha são inválidos',
+  };
   return (
     <Page>
       <Container>
@@ -65,12 +64,11 @@ function Login() {
               errors={errors}
               type="password"
             />
-            <SubmitSpace>
-              <ErrorMessage failedToLog={invalid}>
-                Email e/ou senha inválidos
-              </ErrorMessage>
-              <Button type="submit">Entrar</Button>
-            </SubmitSpace>
+            <SubmitButton
+              name="Entrar"
+              errors={erroOnSubmit}
+              relativeWidth="70%"
+            />
           </Form>
         </DataEntry>
         <Links>
