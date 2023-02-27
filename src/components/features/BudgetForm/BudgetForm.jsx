@@ -95,7 +95,7 @@ function BudgetForm() {
         <Information>
           <Section>
             <FormInput
-              label="Name:"
+              label="Nome:"
               name="name"
               placeholder="Nome completo"
               errors={errors}
@@ -131,7 +131,7 @@ function BudgetForm() {
 
           <Section>
             <FormMask
-              label="Pais:"
+              label="País:"
               name="country"
               defaultValue=""
               control={control}
@@ -168,7 +168,7 @@ function BudgetForm() {
             />
 
             <FormMask
-              label="Endereco:"
+              label="Endereço:"
               name="address"
               defaultValue=""
               control={control}
