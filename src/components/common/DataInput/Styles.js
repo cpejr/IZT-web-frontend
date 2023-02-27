@@ -25,7 +25,7 @@ export const Input = styled.input`
   border-radius: 10px;
   background-color: ${(props) => props.theme.colors.gray[1]};
   border: ${(props) => (props.error ? '2px red solid' : 'none')};
-  padding: 0 10%;
+  padding: 0 5%;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 1em;
   font-weight: 600;

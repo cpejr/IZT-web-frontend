@@ -23,7 +23,7 @@ const validationSchema = z.object({
       message: 'Insira um email válido',
     })
     .trim(),
-  password: z.string(),
+  password: z.string().min(1, { message: 'Favor digitar uma senha' }),
 });
 
 function Login() {
@@ -35,9 +35,11 @@ function Login() {
     resolver: zodResolver(validationSchema),
   });
   const onSubmit = (data) => console.log(data);
+
   const erroOnSubmit = {
     message: 'Email e/ou senha incorretos',
   };
+
   return (
     <Page>
       <Container>
