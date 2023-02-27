@@ -36,7 +36,7 @@ function Login() {
   });
   const onSubmit = (data) => console.log(data);
   const erroOnSubmit = {
-    message: 'Email e/ou senha são inválidos',
+    message: 'Email e/ou senha incorretos',
   };
   return (
     <Page>
