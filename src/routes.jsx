@@ -4,12 +4,13 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
+import App from './App';
 import { Catalog } from './pages';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/">
-      <Route index element={<h1>Hello World!</h1>} />
+    <Route path="/" element={<App />}>
+      <Route index element={<h1>Home</h1>} />
       <Route path="catalogo" element={<Catalog />} />
     </Route>
   )

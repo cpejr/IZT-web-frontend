@@ -1,7 +1,16 @@
-import Routes from './routes';
+// import Routes from './routes';
+
+import { Outlet } from 'react-router-dom';
+import { Footer } from './components/common';
 
 function App() {
-  return <Routes />;
+  return (
+    <>
+      <h1>Header</h1>
+      <Outlet />
+      <Footer />
+    </>
+  );
 }
 
 export default App;
