@@ -7,14 +7,10 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 5px;
 
-  height: ${(props) => props.height};
-  @media (max-width: 600px) {
-    height: 250px;
-  }
-
-  @media (max-width: 400px) {
-    height: 150px;
-  }
+  width: 100%;
+  height: 100%;
+  max-height: ${(props) => props.maxHeight};
+  aspect-ratio: 16 / 9;
 `;
 
 export const ImagesContainer = styled.div`
@@ -30,7 +26,7 @@ export const Inner = styled.div`
   transform: translateX(
     -${({ currentImageIndex }) => currentImageIndex * 100}%
   );
-  transition: transform 0.3s;
+  transition: transform 0.8s ease-out;
 `;
 
 export const ImageContainer = styled.div`
@@ -38,9 +34,6 @@ export const ImageContainer = styled.div`
 
   width: 100%;
   height: 100%;
-
-  /* opacity: ${({ active }) => (active ? 1 : 0)}; */
-  /* transition: opacity ease-in-out 0.8s; */
 
   img {
     width: 100%;
@@ -67,6 +60,10 @@ export const Button = styled.button`
   &:hover {
     background: green;
     color: white;
+  }
+
+  @media (max-width: 450px) {
+    font-size: 10px;
   }
 `;
 
@@ -112,5 +109,10 @@ export const MiniImageContainer = styled.button`
     height: 100%;
 
     object-fit: cover;
+  }
+
+  @media (max-width: 450px) {
+    width: 30px;
+    height: 30px;
   }
 `;

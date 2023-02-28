@@ -11,9 +11,8 @@ import {
   NavButtons,
 } from './Styles';
 
-export default function Carousel({ carouselData = [], height }) {
+export default function Carousel({ carouselData = [], maxHeight }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [touchPosRelative, setTouchPosRelative] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
@@ -33,8 +32,6 @@ export default function Carousel({ carouselData = [], height }) {
 
   const onTouchMove = (e) => {
     const touchEndCurrentPos = e.targetTouches[0].clientX;
-    const positionRelative = (touchEndCurrentPos - touchStart) / touchStart;
-    setTouchPosRelative(positionRelative);
     setTouchEnd(touchEndCurrentPos);
   };
 
@@ -45,25 +42,21 @@ export default function Carousel({ carouselData = [], height }) {
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
 
-    console.log(`${isLeftSwipe ? 'Left' : 'Right'} swipe`);
     if (isLeftSwipe) updateImage(currentImageIndex + 1);
     else if (isRightSwipe) updateImage(currentImageIndex - 1);
-
-    // setCurrentImageIndex(Math.round(currentImageIndex + touchPosRelative));
-    // setTouchPosRelative(0);
   };
 
   return (
     <Container
-      height={height}
+      maxHeight={maxHeight}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
       <ImagesContainer>
         <Inner currentImageIndex={currentImageIndex}>
-          {carouselData.map(({ src, name, alt }, index) => (
-            <ImageContainer key={name} active={index === currentImageIndex}>
+          {carouselData.map(({ src, name, alt }) => (
+            <ImageContainer key={name}>
               <img src={src} alt={alt} />
             </ImageContainer>
           ))}
@@ -103,6 +96,6 @@ Carousel.defaultProps = {
 };
 
 Carousel.propTypes = {
-  height: PropTypes.string.isRequired,
+  maxHeight: PropTypes.string.isRequired,
   carouselData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };
