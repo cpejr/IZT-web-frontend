@@ -6,7 +6,7 @@ export const ContactUs = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: auto;
   background-color: rgba(18, 54, 69, 1);
   padding-bottom: 5%;
   padding-top: 1%;

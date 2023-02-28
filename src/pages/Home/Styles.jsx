@@ -106,7 +106,8 @@ export const CardsContainer = styled.div`
   }
 
   @media (min-width: 1440px) {
-    width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 `;
 
