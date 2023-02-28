@@ -4,7 +4,7 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import Header from './components/features/header/header';
+import Header from './components/features/header/Header';
 import { Catalog } from './pages';
 
 const router = createBrowserRouter(
