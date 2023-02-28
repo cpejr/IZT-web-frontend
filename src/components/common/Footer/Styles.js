@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const BodyFooter = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 326px;
@@ -12,7 +13,7 @@ export const BodyFooter = styled.div`
   }
 `;
 
-export const FirstDiv = styled.div`
+export const SideContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${(props) => props.theme.colors.gray.lightGrey};
@@ -21,18 +22,10 @@ export const FirstDiv = styled.div`
   align-items: center;
   padding: 7%;
 
-  .ContactUsButton {
-    display: none;
-  }
-
   @media (max-width: 850px) {
     width: 100%;
     height: auto;
     padding: 3% 7%;
-
-    .ContactUsButton {
-      display: none;
-    }
   }
 `;
 
@@ -63,7 +56,7 @@ export const Text = styled.p`
   }
 `;
 
-export const SecondDiv = styled.div`
+export const MiddleContainer = styled.div`
   background-color: ${(props) => props.theme.colors.gray.mediumGrey};
   width: 33.33%;
   display: flex;
@@ -107,17 +100,26 @@ export const SocialMedias = styled.div`
   }
 `;
 
-export const SocialMediaButton = styled.button`
+export const SocialMediaButton = styled.a`
+  all: unset;
+
   align-items: center;
   justify-content: center;
   width: 38px;
   height: 38px;
   border: none;
+  background: none;
 
   cursor: pointer;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.blue};
+  }
 `;
 
-export const GoTo = styled.p`
+export const GoTo = styled(Link)`
+  text-decoration: none;
+
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 700;
@@ -126,6 +128,10 @@ export const GoTo = styled.p`
 
   color: #000000;
   padding-top: 13px;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.blue};
+  }
 `;
 
 export const ButtonMobile = styled.div`
@@ -145,7 +151,7 @@ export const ButtonMobile = styled.div`
   }
 `;
 
-export const SectionIr = styled.section`
+export const SectionGoTo = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
