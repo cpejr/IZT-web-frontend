@@ -18,6 +18,9 @@ export const Label = styled.label`
   @media (max-width: 700px) {
     font-size: 20px;
   }
+  @media (max-width: 370px) {
+    font-size: 15px;
+  }
 `;
 
 export const Input = styled.input`
@@ -34,9 +37,25 @@ export const Input = styled.input`
     font-size: 16px;
     line-height: 20px;
   }
+  @media (max-width: 370px) {
+    font-size: 12px;
+  }
 `;
 
 export const ErrorMessage = styled.p`
+  font-style: normal;
+  font-weight: 600;
   font-size: 16px;
+  line-height: 20px;
   color: red;
+
+  @media (max-width: 700px) {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  @media (max-width: 370px) {
+    font-size: 12px;
+  }
 `;

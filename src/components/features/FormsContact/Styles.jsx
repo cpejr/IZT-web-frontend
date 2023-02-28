@@ -35,6 +35,10 @@ export const Title = styled.p`
     line-height: 39px;
     height: 39px;
   }
+
+  @media (max-width: 370px) {
+    font-size: 25px;
+  }
 `;
 
 export const Form = styled.form`
@@ -78,6 +82,14 @@ export const Mensagem = styled.div`
   font-weight: 500;
   gap: 5px;
 
+  @media (max-width: 700px) {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  @media (max-width: 370px) {
+    font-size: 15px;
+  }
+
   textarea {
     border-radius: 4px;
     font-family: 'Montserrat';
@@ -95,11 +107,9 @@ export const Mensagem = styled.div`
       font-size: 16px;
       line-height: 20px;
     }
-  }
-
-  @media (max-width: 700px) {
-    font-size: 20px;
-    margin-top: 20px;
+    @media (max-width: 370px) {
+      font-size: 12px;
+    }
   }
 `;
 
@@ -120,6 +130,11 @@ export const BotaoEnviar = styled.button`
 
   @media (max-width: 700px) {
     width: 100%;
+  }
+
+  @media (max-width: 370px) {
+    font-size: 12px;
+    height: 30px;
   }
 
   cursor: pointer;
