@@ -21,6 +21,14 @@ export const AboutUs = styled.div`
   margin-left: 10%;
   margin-right: 10%;
   margin-bottom: 1%;
+
+  @media (min-width: 1440px) {
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 `;
 
 export const OurHistoryTitle = styled.h1`
@@ -95,5 +103,15 @@ export const CardsContainer = styled.div`
 
   @media (max-width: 1000px) {
     flex-direction: column;
+  }
+
+  @media (min-width: 1440px) {
+    width: 100%;
+  }
+`;
+
+export const Page = styled.div`
+  @media (min-width: 1440px) {
+    max-width: 1440px;
   }
 `;

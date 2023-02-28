@@ -46,6 +46,10 @@ export const Form = styled.form`
     gap: 0px;
     width: 100%;
   }
+
+  @media (min-width: 1440px) {
+    max-width: 1440px;
+  }
 `;
 
 export const Section = styled.section`

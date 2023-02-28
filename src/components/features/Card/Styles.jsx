@@ -58,6 +58,13 @@ export const Container = styled.div`
     width: 270px;
     height: 326px;
   }
+  @media (min-width: 1440px) {
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 `;
 
 export const CardTitle = styled.div`
