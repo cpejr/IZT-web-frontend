@@ -71,7 +71,22 @@ export const Mensagem = styled.div`
   gap: 5px;
 
   textarea {
+    border-radius: 4px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    padding: 8px 16px;
+
+    color: #000000;
     resize: none;
+
+    @media (max-width: 700px) {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+    }
   }
 
   @media (max-width: 700px) {

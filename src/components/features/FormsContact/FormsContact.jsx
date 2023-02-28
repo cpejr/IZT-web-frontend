@@ -105,7 +105,7 @@ function FormsContactUs() {
           <InputMessage>
             <Mensagem>
               Mensagem:
-              <textarea rows={17} />
+              <textarea rows={13} placeholder="Escreva aqui sua mensagem" />
               <BotaoEnviar>Enviar</BotaoEnviar>
             </Mensagem>
           </InputMessage>

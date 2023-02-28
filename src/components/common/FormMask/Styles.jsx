@@ -19,6 +19,12 @@ export const Container = styled.div`
     border: ${(props) => (props.error ? '2px red solid' : 'none')};
     background: ${(props) =>
       props.error ? 'rgba(239, 202, 202, 1)' : 'white'};
+
+    @media (max-width: 700px) {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+    }
   }
 `;
 
