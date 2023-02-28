@@ -12,8 +12,9 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.label`
-  color: #ffffff;
+  color: white;
   font-size: 24px;
+
   @media (max-width: 700px) {
     font-size: 20px;
   }
@@ -26,6 +27,10 @@ export const Input = styled.input`
   border-radius: 4px;
   border: ${(props) => (props.error ? '2px red solid' : 'none')};
   background: ${(props) => (props.error ? 'rgba(239, 202, 202, 1)' : 'white')};
+
+  @media (max-width: 700px) {
+    font-size: 16px;
+  }
 `;
 
 export const ErrorMessage = styled.p`

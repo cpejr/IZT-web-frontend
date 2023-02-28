@@ -12,6 +12,12 @@ export const Container = styled.div`
   height: auto;
 
   background-color: ${(props) => props.theme.colors.darkBlue};
+
+  @media (max-width: 700px) {
+    height: 850px;
+    padding: 50px 0px;
+    gap: 0px;
+  }
 `;
 
 export const Title = styled.text`
@@ -21,6 +27,10 @@ export const Title = styled.text`
   font-size: 30px;
   line-height: 37px;
   color: white;
+
+  @media (max-width: 700px) {
+    font-size: 24px;
+  }
 `;
 
 export const Information = styled.div`
@@ -31,6 +41,11 @@ export const Information = styled.div`
 
   width: 80%;
   height: 326px;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    height: 590px;
+  }
 `;
 
 export const Form = styled.div`
@@ -48,6 +63,10 @@ export const Section = styled.div`
 
   width: 48%;
   height: 326px;
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 export const Subsection = styled.div`
@@ -57,6 +76,10 @@ export const Subsection = styled.div`
   gap: 20px;
   width: 100%;
   height: 74px;
+
+  @media (max-width: 700px) {
+    width: 46.5%;
+  }
 `;
 
 export const SendButton = styled.button`
@@ -72,7 +95,8 @@ export const SendButton = styled.button`
   border: none;
   border-radius: 4px;
   @media (max-width: 700px) {
-    width: 100%;
+    width: 60%;
+    margin-top: 60px;
   }
   cursor: pointer;
   transition-duration: 0.3s;
