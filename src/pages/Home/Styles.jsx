@@ -4,10 +4,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   background-color: white;
   width: 100%;
   height: 100%;
+  padding-top: 10px;
+  max-width: 1440px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const AboutUs = styled.div`
@@ -111,8 +114,9 @@ export const CardsContainer = styled.div`
   }
 `;
 
-export const Page = styled.div`
-  @media (min-width: 1440px) {
-    max-width: 1440px;
-  }
+export const OuterDiv = styled.div`
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

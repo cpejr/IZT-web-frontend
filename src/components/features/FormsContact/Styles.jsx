@@ -7,14 +7,14 @@ export const ContactUs = styled.div`
   flex-direction: column;
   width: 100%;
   height: auto;
+  padding-bottom: 40px;
   background-color: rgba(18, 54, 69, 1);
-  padding-bottom: 5%;
-  padding-top: 1%;
 
   @media (max-width: 700px) {
     height: auto;
-    padding-bottom: 120px;
-    margin-bottom: 230px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
   }
 `;
 
@@ -26,10 +26,14 @@ export const Title = styled.p`
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   height: 20%;
+  padding-bottom: 40px;
+  padding-top: 40px;
 
   @media (max-width: 700px) {
+    font-weight: 600;
     font-size: 32px;
-    height: 10%;
+    line-height: 39px;
+    height: 39px;
   }
 `;
 
@@ -39,7 +43,7 @@ export const Form = styled.form`
   flex-direction: row;
   width: 80%;
   gap: 105px;
-  height: 80%;
+  height: 100%;
 
   @media (max-width: 700px) {
     flex-direction: column;

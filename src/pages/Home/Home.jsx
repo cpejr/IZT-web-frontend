@@ -11,14 +11,14 @@ import {
   OurHistoryTitle,
   Picture,
   CardsContainer,
-  Page,
+  OuterDiv,
 } from './Styles';
 import Image from '../../assets/imagemDaEmpresa.png';
 
 function Home() {
   return (
-    <Container>
-      <Page>
+    <OuterDiv>
+      <Container>
         <Carousel slides={carouselImages} />
         <CardsContainer>
           <Card
@@ -43,9 +43,7 @@ function Home() {
             imageAlt="Software image"
           />
         </CardsContainer>
-      </Page>
-      <FormsContactUs />
-      <Page>
+        <FormsContactUs />
         <AboutUs>
           <OurHistoryTitle>Conheça a nossa história</OurHistoryTitle>
           <OurHistory>
@@ -75,8 +73,8 @@ function Home() {
             quis volutpat orci tincidunt iaculis.
           </OurHistory>
         </AboutUs>
-      </Page>
-    </Container>
+      </Container>
+    </OuterDiv>
   );
 }
 

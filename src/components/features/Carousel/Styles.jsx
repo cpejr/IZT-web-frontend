@@ -16,6 +16,10 @@ export const Image = styled.div`
   background-size: cover;
   background-image: ${(props) => props.backgroundImage};
   transition-duration: 500ms;
+
+  @media (min-width: 1440px) {
+    box-shadow: 0 0 5px 5px ${(props) => props.theme.colors.gray[2]};
+  }
 `;
 
 export const Arrows = styled.div`
