@@ -52,11 +52,11 @@ export const Container = styled.div`
   }
   @media (max-width: 429px) {
     width: 350px;
-    /* height: 424px; */
+    height: 470px;
   }
   @media (max-width: 360px) {
     width: 300px;
-    height: 450px;
+    height: 420px;
   }
   @media (max-width: 310px) {
     width: 270px;
@@ -77,7 +77,7 @@ export const CardTitle = styled.div`
   text-align: center;
   justify-content: space-around;
   position: absolute;
-  top: 7%;
+  top: 10%;
   max-width: 90%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
@@ -85,11 +85,15 @@ export const CardTitle = styled.div`
   font-weight: 700;
 
   @media (max-width: 1000px) {
-    top: 10%;
+    /* top: 10%; */
+    top: ${(props) => props.media1000Top ?? '13%'};
+  }
+  @media (max-width: 429px) {
+    top: ${(props) => props.media429Top ?? '12%'};
   }
   @media (max-width: 360px) {
     font-size: 20px;
-    top: 12%;
+    top: ${(props) => props.media360Top ?? '14%'};
   }
   @media (max-width: 310px) {
     font-size: 18px;
@@ -119,11 +123,10 @@ export const CardText = styled.div`
 
   @media (max-width: 429px) {
     top: 22%;
-    font-size: 16px;
+    font-size: 14px;
   }
   @media (max-width: 310px) {
     top: 20%;
-    font-size: 14px;
   }
 `;
 
@@ -148,7 +151,6 @@ export const Button = styled.button`
   transition-duration: 0.3s;
   cursor: pointer;
 
-  margin-bottom: ${({ marginBottomButton }) => marginBottomButton};
   :hover {
     background-color: black;
     color: white;

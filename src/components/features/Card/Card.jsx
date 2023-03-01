@@ -7,24 +7,22 @@ function Card({
   imageAlt,
   text,
   isMiddle,
-  marginBottomTitle,
-  marginBottomText,
-  marginTopText,
-  marginBottomButton,
+  media1000Top,
+  media429Top,
+  media360Top,
 }) {
   return (
     <Container isMiddle={isMiddle}>
-      <CardTitle marginBottomTitle={marginBottomTitle}>{title}</CardTitle>
-      <Picture src={image} alt={imageAlt} />
-      <CardText
-        marginBottomText={marginBottomText}
-        marginTopText={marginTopText}
+      <CardTitle
+        media1000Top={media1000Top}
+        media429Top={media429Top}
+        media360Top={media360Top}
       >
-        {text}
-      </CardText>
-      <Button type="button" marginBottomButton={marginBottomButton}>
-        Saiba mais
-      </Button>
+        {title}
+      </CardTitle>
+      <Picture src={image} alt={imageAlt} />
+      <CardText>{text}</CardText>
+      <Button type="button">Saiba mais</Button>
     </Container>
   );
 }
