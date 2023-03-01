@@ -1,14 +1,12 @@
 import React from 'react';
-// import BudgetForm from '../../components/features';
 import Img1 from '../../assets/Product/Group75.png';
 import Img2 from '../../assets/Product/Group76.png';
 import Img3 from '../../assets/Product/Group77.png';
 import Img4 from '../../assets/Product/Group78.png';
 import { BudgetForm } from '../../components/features';
-import { Container, ProductDetails, ProcessSteps } from './Styles';
 
 import {
-  Container,
+  Container1,
   Product,
   ProductName,
   Info,
@@ -46,7 +44,7 @@ const products = [
 
 function ProductPage() {
   return (
-    <Container>
+    <Container1>
       <Product>
         <ProductImage> </ProductImage>
         <ProductName>Nome do Produto</ProductName>
@@ -75,6 +73,7 @@ function ProductPage() {
           </ProductInfos>
         </Info>
       </Product>
+      <BudgetForm />
       <Title>Como processamos seu orcamento?</Title>
       <ProcessSteps>
         <Step1>
@@ -94,7 +93,7 @@ function ProductPage() {
           <h1>Enviamos para você</h1>
         </Step4>
       </ProcessSteps>
-    </Container>
+    </Container1>
   );
 }
 

@@ -190,12 +190,8 @@ export const Subsection = styled.div`
   flex-direction: row;
   padding: 0px;
   gap: 20px;
-  width: 100%;
+  flex-grow: 1;
   height: 74px;
-
-  @media (max-width: 700px) {
-    width: 46.5%;
-  }
 `;
 
 export const BotaoEnviar = styled.button`
@@ -229,4 +225,4 @@ export const BotaoEnviar = styled.button`
   :hover {
     background-color: rgba(35, 164, 166, 0.5);
   }
-`; */
+`;
