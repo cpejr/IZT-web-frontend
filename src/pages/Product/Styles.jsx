@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container1 = styled.div``;
+export const Container = styled.div``;
 export const Product = styled.div``;
 export const ProductImage = styled.div``;
 export const ProductName = styled.div`
@@ -26,16 +26,14 @@ export const Info = styled.div`
   height: 537.17px;
 `;
 export const ProductDescription = styled.div`
-  width: 269px;
-  height: 29px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;
 
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  color: #000000;
+  width: 606.25px;
+  height: 132px;
 `;
 export const DescriptionTitle = styled.div`
   width: 274px;
@@ -52,11 +50,13 @@ export const DescriptionTitle = styled.div`
 export const Description = styled.div`
   width: 606.25px;
   height: 88px;
+
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
+
   color: #000000;
 `;
 export const ProductBenefits = styled.div`
@@ -117,6 +117,16 @@ export const InfoTitle = styled.div`
 export const InfoDescription = styled.div``;
 export const ProcessSteps = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 30px;
+
+  width: 900px;
+  height: 279px;
+`;
+export const Steps = styled.div`
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -143,6 +153,7 @@ export const Step1 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   h1 {
     width: 180px;
     height: 66px;
@@ -164,6 +175,7 @@ export const Step2 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   h1 {
     width: 180px;
     height: 66px;
@@ -185,6 +197,7 @@ export const Step3 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   h1 {
     width: 180px;
     height: 66px;
@@ -206,6 +219,7 @@ export const Step4 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   h1 {
     width: 180px;
     height: 66px;
