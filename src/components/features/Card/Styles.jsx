@@ -7,8 +7,13 @@ const isMiddleStyle = css`
   position: relative;
   z-index: 2;
   font-size: 24px;
-  width: 470px;
-  height: 580px;
+  width: 510px;
+  height: 600px;
+
+  @media (max-width: 1000px) {
+    width: 470px;
+    height: 570px;
+  }
 `;
 
 export const Container = styled.div`
@@ -41,22 +46,21 @@ export const Container = styled.div`
     box-shadow: 0 0 0 0 ${(props) => props.theme.colors.gray[2]};
     margin: 2%;
   }
-
   @media (max-width: 500px) {
     width: 400px;
-    height: 485px;
+    height: 520px;
   }
   @media (max-width: 429px) {
     width: 350px;
-    height: 424px;
+    /* height: 424px; */
   }
   @media (max-width: 360px) {
     width: 300px;
-    height: 363px;
+    height: 450px;
   }
   @media (max-width: 310px) {
     width: 270px;
-    height: 326px;
+    height: 410px;
   }
   @media (min-width: 1440px) {
     margin-left: 0;
@@ -74,13 +78,18 @@ export const CardTitle = styled.div`
   justify-content: space-around;
   position: absolute;
   top: 7%;
+  max-width: 90%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 24px;
   font-weight: 700;
 
+  @media (max-width: 1000px) {
+    top: 10%;
+  }
   @media (max-width: 360px) {
     font-size: 20px;
+    top: 12%;
   }
   @media (max-width: 310px) {
     font-size: 18px;
@@ -106,6 +115,15 @@ export const CardText = styled.div`
   text-overflow: ellipsis;
   :hover {
     overflow: visible;
+  }
+
+  @media (max-width: 429px) {
+    top: 22%;
+    font-size: 16px;
+  }
+  @media (max-width: 310px) {
+    top: 20%;
+    font-size: 14px;
   }
 `;
 
@@ -136,6 +154,9 @@ export const Button = styled.button`
     color: white;
   }
 
+  @media (max-width: 1000px) {
+    background-color: ${(props) => props.theme.colors.gray[1]};
+  }
   @media (max-width: 429px) {
     font-size: 20px;
   }

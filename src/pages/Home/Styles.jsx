@@ -84,13 +84,18 @@ export const Picture = styled.img`
   justify-content: center;
   align-items: center;
   width: 466px;
-  height: 271px;
+  height: auto;
   left: 834px;
   top: 45px;
   max-width: 100%;
   object-fit: scale-down;
   margin-left: 1%;
   margin-right: 1%;
+
+  @media (max-width: 1100px) {
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
 `;
 
 export const CardsContainer = styled.div`
