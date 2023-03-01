@@ -51,17 +51,17 @@ function Login() {
           <Title>Entre na sua conta</Title>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <DataInput
-              label="Digite seu E-mail: "
+              label="E-mail: "
               name="email"
-              placeholder="Email"
+              placeholder="email@email.com"
               register={register}
               errors={errors}
               type="text"
             />
             <DataInput
-              label="Digite sua senha: "
+              label="Senha: "
               name="password"
-              placeholder="Senha"
+              placeholder="********"
               register={register}
               errors={errors}
               type="password"

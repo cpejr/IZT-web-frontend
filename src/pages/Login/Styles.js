@@ -5,13 +5,13 @@ const breakValue = '700px';
 export const Page = styled.div`
   background-color: ${(props) => props.theme.colors.gray[1]};
   width: 100%;
-  height: auto;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 45px;
-  padding-bottom: 60px;
-  font-size: 20px;
+  justify-content: center;
+  padding: 25px 0px;
+  font-size: 22px;
   @media (max-width: ${breakValue}) {
     font-size: 15px;
   }
@@ -20,18 +20,20 @@ export const Page = styled.div`
 export const Container = styled.div`
   width: 90%;
   height: auto;
-  max-width: 650px;
+  max-width: 600px;
   border-radius: 30px;
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 10px;
-  gap: 50px;
+  padding: 2em 0.5em;
+  gap: 1.4em;
   @media (max-width: ${breakValue}) {
     padding: 50px 10%;
-    gap: 40px;
+    @media (min-width: 550px) {
+      width: 70%;
+    }
   }
   @media (max-width: 390px) {
     padding: 50px 10px;
@@ -39,7 +41,7 @@ export const Container = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 5em;
+  width: 4em;
   max-height: 100px;
 `;
 
@@ -49,29 +51,30 @@ export const DataEntry = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.5em;
+  gap: 1.2em;
 `;
 
 export const Title = styled.h1`
   color: ${(props) => props.theme.colors.blue};
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 1.9em;
+  font-size: 1.5em;
   font-weight: 700;
+  text-align: center;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5em;
+  gap: 1em;
   width: 100%;
 `;
 
 export const RemeberMe = styled.a`
-  font-size: 0.9em;
+  font-size: 0.7em;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  color: black;
-  font-weight: 500;
+  color: ${(props) => props.theme.colors.gray[3]};
+  font-weight: 600;
   :hover {
     text-decoration: underline;
     cursor: pointer;
@@ -82,7 +85,7 @@ export const RemeberMe = styled.a`
 `;
 
 export const SignUpLink = styled.p`
-  font-size: 1em;
+  font-size: 0.7em;
   font-family: ${(props) => props.theme.fonts.montserrat};
   color: black;
   font-weight: 700;
@@ -98,12 +101,15 @@ export const SignUpLink = styled.p`
       cursor: pointer;
     }
   }
+  @media (max-width: 315px) {
+    width: 200px;
+  }
 `;
 
 export const Links = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0.5em;
   align-items: center;
   text-align: center;
 `;
