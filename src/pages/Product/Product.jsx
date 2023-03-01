@@ -4,6 +4,8 @@ import Img1 from '../../assets/Product/Group75.png';
 import Img2 from '../../assets/Product/Group76.png';
 import Img3 from '../../assets/Product/Group77.png';
 import Img4 from '../../assets/Product/Group78.png';
+import { BudgetForm } from '../../components/features';
+import { Container, ProductDetails, ProcessSteps } from './Styles';
 
 import {
   Container,

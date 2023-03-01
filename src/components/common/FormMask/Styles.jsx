@@ -17,18 +17,35 @@ export const Container = styled.div`
     border: ${(props) => (props.error ? '2px red solid' : 'none')};
     background: ${(props) =>
       props.error ? 'rgba(239, 202, 202, 1)' : 'white'};
+
+    @media (max-width: 700px) {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 20px;
+      height: 36px;
+    }
   }
 `;
 
 export const Label = styled.label`
   color: #ffffff;
   font-size: 24px;
+
   @media (max-width: 700px) {
+    font-weight: 500;
     font-size: 20px;
+    line-height: 24px;
   }
 `;
 
 export const ErrorMessage = styled.p`
   font-size: 16px;
   color: red;
+
+  @media (max-width: 700px) {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+  }
 `;

@@ -1,68 +1,194 @@
-/* import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+// import { useForm } from 'react-hook-form';
+// import { z } from 'zod';
+
+// import { zodResolver } from '@hookform/resolvers/zod';
+// import {
+//   Container,
+//   Form,
+//   Section,
+//   Subsection,
+//   Title,
+//   SendButton,
+//   Information,
+// } from './Styles';
+// import { FormInput, FormMask } from '../../common';
+
+// const validationSchema = z.object({
+//   name: z.string().min(1, 'Favor digitar o seu nome completo'),
+
+//   company: z.string().min(1, 'Favor digitar o nome da empresa'),
+
+//   email: z
+//     .string()
+//     .min(1, { message: 'Favor digitar o email' })
+//     .email({
+//       message: 'Insira um email válido',
+//     })
+//     .trim(),
+
+//   telephone: z.string().min(1, 'Favor digitar o seu número do telefone'),
+
+//   country: z.string().min(1, 'Favor digitar nome do seu país'),
+
+//   state: z.string().min(1, 'Favor digitar o nome do seu estado'),
+
+//   city: z.string().min(1, 'Favor digitar o nome da sua cidade'),
+
+//   ZIPcode: z
+//     .string()
+//     .min(1, 'Favor digitar o seu CEP')
+//     .regex(/^[0-9]{5}(?:-[0-9]{4})?$/, 'Digite um CEP válido'),
+
+//   address: z.string().min(1, 'Favor digitar o seu seu endereço'),
+// });
+
+// function BudgetForm() {
+//   const {
+//     handleSubmit,
+//     register,
+//     formState: { errors },
+//     control,
+//   } = useForm({
+//     resolver: zodResolver(validationSchema),
+//   });
+
+//   const onSubmit = (data) => console.log(data);
+
+//   return (
+//     <Container>
+//       <Title>Requisite um Orçamento</Title>
+
+//       <Form onSubmit={handleSubmit(onSubmit)}>
+//         <Information>
+//           <Section>
+//             <FormInput
+//               label="Nome:"
+//               name="name"
+//               placeholder="Nome completo"
+//               errors={errors}
+//               register={register}
+//             />
+
+//             <FormInput
+//               label="Empresa:"
+//               name="company"
+//               placeholder="Nome da empresa"
+//               errors={errors}
+//               register={register}
+//             />
+
+//             <FormInput
+//               label="E-mail:"
+//               name="email"
+//               placeholder="email@email.com"
+//               errors={errors}
+//               register={register}
+//             />
+
+//             <FormMask
+//               label="Telefone:"
+//               name="telephone"
+//               defaultValue=""
+//               control={control}
+//               placeholder="(99) 99999-9999"
+//               mask="(99) 99999-9999"
+//               errors={errors}
+//             />
+//           </Section>
+
+//           <Section>
+//             <FormInput
+//               label="País:"
+//               name="country"
+//               placeholder="Brasil"
+//               errors={errors}
+//               register={register}
+//             />
+//             <Subsection>
+//               <FormInput
+//                 label="Estado:"
+//                 name="state"
+//                 placeholder="Minas Gerais"
+//                 errors={errors}
+//                 register={register}
+//               />
+
+//               <FormInput
+//                 label="Cidade:"
+//                 name="city"
+//                 placeholder="Belo Horizonte"
+//                 errors={errors}
+//                 register={register}
+//               />
+//             </Subsection>
+
+//             <FormInput
+//               label="CEP:"
+//               name="ZIPcode"
+//               placeholder="99999-999"
+//               errors={errors}
+//               register={register}
+//             />
+
+//             <FormInput
+//               label="Endereço:"
+//               name="address"
+//               placeholder="Av. Maranhão, 54"
+//               errors={errors}
+//               register={register}
+//             />
+//           </Section>
+//         </Information>
+//         <SendButton>Enviar</SendButton>
+//       </Form>
+//     </Container>
+//   );
+// }
+
+// export default BudgetForm;
+
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  Container,
+  ContactUs,
   Form,
   Section,
-  Subsection,
   Title,
-  SendButton,
-  Information,
+  Subsection,
+  BotaoEnviar,
+  Container,
 } from './Styles';
 import { FormInput, FormMask } from '../../common';
 
 const validationSchema = z.object({
-  body: z.object({
-    name: z
-      .string({ required_error: 'Favor digitar o seu nome completo' })
-      .max(40, { message: 'Name must be a maximum of 40 characters' })
-      .min(3, { message: 'Name must be atleast 3 characters' }),
+  name: z.string().min(1, 'Digite o seu nome completo'),
 
-    company: z.string().min(1, 'Favor digitar o nome da empresa'),
+  company: z.string().min(1, 'Digite o nome da empresa'),
 
-    email: z
-      .string()
-      .min(1, { message: 'Favor digitar o email' })
-      .email({
-        message: 'Insira um email válido',
-      })
-      .trim(),
+  email: z
+    .string()
+    .min(1, { message: 'Digite o email' })
+    .email({
+      message: 'Insira um email válido',
+    })
+    .trim(),
 
-    telephone: z.string().min(1, 'Favor digitar o número do telefone'),
+  telephone: z.string().min(1, 'Digite o seu número do telefone'),
 
-    country: z
-      .string({ required_error: 'Country is required' })
-      .max(30, { message: 'Country must be a maximum of 30 characters' })
-      .min(4, { message: 'Country must be atleast 4 characters' }),
+  country: z.string().min(1, 'Digite nome do seu país'),
 
-    state: z
-      .string({ required_error: 'State is required' })
-      .max(30, { message: 'State must be a maximum of 30 characters' })
-      .min(4, { message: 'State must be atleast 4 characters' }),
+  state: z.string().min(1, 'Digite o estado'),
 
-    city: z
-      .string({ required_error: 'City is required' })
-      .max(30, { message: 'City must be a maximum of 30 characters' })
-      .min(4, { message: 'City must be atleast 4 characters' }),
+  city: z.string().min(1, 'Digite a cidade'),
 
-    ZIPcode: z
-      .string({ required_error: 'ZIPcode is required' })
-      .max(8, { message: 'ZIPcode must be a maximum of 8 characters' })
-      .min(5, { message: 'ZIPcode must be atleast 5 characters' })
-      .regex(/^[0-9]{5}(?:-[0-9]{4})?$/, 'Zip code bad formatted'),
+  ZIPcode: z
+    .string()
+    .min(1, 'Digite o seu CEP')
+    .regex(/^[0-9]{5}(?:-[0-9]{4})?$/, 'Digite um CEP válido'),
 
-    address: z
-      .string({ required_error: 'Adress is required' })
-      .max(50, { message: 'Adress must be a maximum of 50 characters' })
-      .min(5, { message: 'Adress must be atleast 5 characters' }),
-  }),
-
-  params: z.object({
-    id: z.string({ required_error: 'Product ID is required' }),
-  }),
+  address: z.string().min(1, 'Digite o seu seu endereço'),
 });
 
 function BudgetForm() {
@@ -75,27 +201,17 @@ function BudgetForm() {
     resolver: zodResolver(validationSchema),
   });
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleWindowResize = () => setWindowWidth(window.innerWidth);
-
-    window.addEventListener('resize', handleWindowResize);
-    return () => window.removeEventListener('resize', handleWindowResize);
-  }, []);
-
-  const breakpoint = 700;
-
   const onSubmit = (data) => console.log(data);
 
   return (
-    <Container>
-      <Title>Requisite um Orçamento</Title>
+    <ContactUs>
+      <Title>Requisite um orçamento</Title>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Information>
+        <Container>
           <Section>
             <FormInput
-              label="Name:"
+              label="Nome:"
               name="name"
               placeholder="Nome completo"
               errors={errors}
@@ -130,56 +246,51 @@ function BudgetForm() {
           </Section>
 
           <Section>
-            <FormMask
-              label="Pais:"
+            <FormInput
+              label="País:"
               name="country"
-              defaultValue=""
-              control={control}
               placeholder="Brasil"
               errors={errors}
+              register={register}
             />
             <Subsection>
-              <FormMask
+              <FormInput
                 label="Estado:"
                 name="state"
-                defaultValue=""
-                control={control}
                 placeholder="Minas Gerais"
                 errors={errors}
+                register={register}
               />
 
-              <FormMask
+              <FormInput
                 label="Cidade:"
                 name="city"
-                defaultValue=""
-                control={control}
                 placeholder="Belo Horizonte"
                 errors={errors}
+                register={register}
               />
             </Subsection>
 
-            <FormMask
+            <FormInput
               label="CEP:"
               name="ZIPcode"
-              defaultValue=""
-              control={control}
               placeholder="99999-999"
               errors={errors}
+              register={register}
             />
 
-            <FormMask
-              label="Endereco:"
+            <FormInput
+              label="Endereço:"
               name="address"
-              defaultValue=""
-              control={control}
               placeholder="Av. Maranhão, 54"
               errors={errors}
+              register={register}
             />
           </Section>
-        </Information>
-        <SendButton>Enviar</SendButton>
+        </Container>
+        <BotaoEnviar>Enviar</BotaoEnviar>
       </Form>
-    </Container>
+    </ContactUs>
   );
 }
 
