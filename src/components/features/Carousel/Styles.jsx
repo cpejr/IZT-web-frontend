@@ -15,7 +15,11 @@ export const Image = styled.div`
   background-position: center;
   background-size: cover;
   background-image: ${(props) => props.backgroundImage};
-  transition-duration: 500ms;
+
+  transform: translateX(
+    -${({ currentImageIndex }) => currentImageIndex * 100}%
+  );
+  transition: transform 1s ease-out;
 
   @media (min-width: 1440px) {
     box-shadow: 0 0 5px 5px ${(props) => props.theme.colors.gray[2]};
