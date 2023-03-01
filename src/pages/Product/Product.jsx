@@ -4,6 +4,8 @@ import Img2 from '../../assets/Product/Group76.png';
 import Img3 from '../../assets/Product/Group77.png';
 import Img4 from '../../assets/Product/Group78.png';
 import { BudgetForm } from '../../components/features';
+import Carousel from '../../components/features/Carousel/Carousel';
+import productData from '../../assets/Product/productCarousel/data';
 
 import {
   Container1,
@@ -46,7 +48,9 @@ function ProductPage() {
   return (
     <Container1>
       <Product>
-        <ProductImage> </ProductImage>
+        <ProductImage>
+          <Carousel productData={productData} maxHeight="100vh" />
+        </ProductImage>
         <ProductName>Nome do Produto</ProductName>
         <Info>
           <ProductDescription>
