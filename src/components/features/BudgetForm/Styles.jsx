@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+/* import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -78,4 +78,4 @@ export const SendButton = styled.button`
   :hover {
     background-color: rgba(35, 164, 166, 0.5);
   }
-`;
+`; */
