@@ -1,11 +1,29 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
-export const Product = styled.div``;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+`;
+export const Product = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+`;
 export const ProductImage = styled.div``;
+
+export const ProductContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const ProductName = styled.div`
   width: 328px;
   height: 44px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  align-self: center;
 
   font-family: 'Montserrat';
   font-style: normal;
@@ -121,10 +139,10 @@ export const InfoDescription = styled.div`
 `;
 export const ProcessSteps = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding: 0px;
-  gap: 30px;
+  gap: 40px;
 
   width: 100%;
   height: auto;
@@ -137,11 +155,10 @@ export const Steps = styled.div`
   padding: 0px;
   gap: 56px;
 
-  width: 100%;
-  height: auto;
+  width: 900px;
+  height: 220px;
 `;
 export const Title = styled.div`
-  width: 442px;
   height: 29px;
 
   font-family: 'Montserrat';

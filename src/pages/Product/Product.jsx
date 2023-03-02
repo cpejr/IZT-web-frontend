@@ -14,6 +14,7 @@ import {
   ProductName,
   Info,
   ProductDescription,
+  ProductContainer,
   DescriptionTitle,
   Description,
   ProductBenefits,
@@ -33,7 +34,6 @@ import {
   Image3,
   Step4,
   Image4,
-  ProductImage,
 } from './Styles';
 
 function ProductPage() {
