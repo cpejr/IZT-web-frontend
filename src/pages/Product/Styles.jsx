@@ -1,11 +1,27 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
-export const Product = styled.div``;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+`;
+export const Product = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 export const ProductImage = styled.div``;
+
+export const ProductContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const ProductName = styled.div`
   width: 328px;
   height: 44px;
+  padding-bottom: 35px;
+  align-self: center;
 
   font-family: 'Montserrat';
   font-style: normal;
@@ -135,6 +151,10 @@ export const Steps = styled.div`
 
   width: 900px;
   height: 220px;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 export const Title = styled.div`
   width: 442px;

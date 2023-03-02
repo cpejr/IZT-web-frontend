@@ -6,10 +6,16 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 5px;
-  width: 100%;
-  height: 100%;
+  width: 543.75px;
+  height: 537.17px;
+
   max-height: ${(props) => props.maxHeight};
   aspect-ratio: 16 / 9;
+
+  @media (max-width: 700px) {
+    width: 360px;
+    height: 323px;
+  }
 `;
 
 export const ImagesContainer = styled.div`
@@ -41,7 +47,7 @@ export const NavButtons = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 15px;
 `;
 
 export const Button = styled.button`

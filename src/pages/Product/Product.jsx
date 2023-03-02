@@ -4,12 +4,12 @@ import Img2 from '../../assets/Product/Group76.png';
 import Img3 from '../../assets/Product/Group77.png';
 import Img4 from '../../assets/Product/Group78.png';
 import { BudgetForm } from '../../components/features';
-<<<<<<< HEAD
+// <<<<<<< HEAD
 import file1 from '../../assets/Files/F1.pdf';
-=======
+// =======
 import Carousel from '../../components/features/Carousel/Carousel';
 import productData from '../../assets/Product/productCarousel/data';
->>>>>>> 9cfb1fff830396b5280acf6c5757d945a28d6cef
+// >>>>>>> 9cfb1fff830396b5280acf6c5757d945a28d6cef
 
 import {
   Container,
@@ -17,6 +17,7 @@ import {
   ProductName,
   Info,
   ProductDescription,
+  ProductContainer,
   DescriptionTitle,
   Description,
   ProductBenefits,
@@ -36,41 +37,40 @@ import {
   Image3,
   Step4,
   Image4,
-  ProductImage,
 } from './Styles';
 
 function ProductPage() {
   return (
     <Container>
       <Product>
-        <ProductImage>
-          <Carousel productData={productData} maxHeight="100vh" />
-        </ProductImage>
         <ProductName>Nome do Produto</ProductName>
-        <Info>
-          <ProductDescription>
-            <DescriptionTitle> Descrição do produto</DescriptionTitle>
-            <Description>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque sed odio eu enim gravida varius quis non orci.
-              Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
-              sapien.
-            </Description>
-          </ProductDescription>
-          <ProductBenefits>
-            <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-            <Benefits>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque sed odio eu enim gravida varius quis non orci.
-              Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
-              sapien.
-            </Benefits>
-          </ProductBenefits>
-          <ProductInfos>
-            <InfoTitle>Mais informações</InfoTitle>
-            <InfoDescription> </InfoDescription>
-          </ProductInfos>
-        </Info>
+        <ProductContainer>
+          <Carousel productData={productData} maxHeight="100vh" />
+          <Info>
+            <ProductDescription>
+              <DescriptionTitle> Descrição do produto</DescriptionTitle>
+              <Description>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Pellentesque sed odio eu enim gravida varius quis non orci.
+                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
+                sapien.
+              </Description>
+            </ProductDescription>
+            <ProductBenefits>
+              <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
+              <Benefits>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Pellentesque sed odio eu enim gravida varius quis non orci.
+                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
+                sapien.
+              </Benefits>
+            </ProductBenefits>
+            <ProductInfos>
+              <InfoTitle>Mais informações</InfoTitle>
+              <InfoDescription> </InfoDescription>
+            </ProductInfos>
+          </Info>
+        </ProductContainer>
       </Product>
       <BudgetForm />
       <ProcessSteps>
