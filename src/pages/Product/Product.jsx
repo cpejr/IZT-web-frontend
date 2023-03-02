@@ -26,14 +26,9 @@ import {
   ProcessSteps,
   Steps,
   Title,
-  Step1,
-  Image1,
-  Step2,
-  Image2,
-  Step3,
-  Image3,
-  Step4,
-  Image4,
+  Step,
+  Image,
+  StepsText,
 } from './Styles';
 
 function ProductPage() {
@@ -73,22 +68,25 @@ function ProductPage() {
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
-          <Step1>
-            <Image1 src={Img1} alt="1 Step" />
-            <h1>Entramos em contato para planejar o produto</h1>
-          </Step1>
-          <Step2>
-            <Image2 src={Img2} alt="2 Step" />
-            <h1>Produzimos a sua peça</h1>
-          </Step2>
-          <Step3>
-            <Image3 src={Img3} alt="3 Step" />
-            <h1>Realizamos a inspeção do produto</h1>
-          </Step3>
-          <Step4>
-            <Image4 src={Img4} alt="4 Step" />
-            <h1>Enviamos para você</h1>
-          </Step4>
+          <Step>
+            <Image src={Img1} alt="1 Step" />
+            <StepsText>Entramos em contato para planejar o produto</StepsText>
+          </Step>
+
+          <Step>
+            <Image src={Img2} alt="2 Step" />
+            <StepsText>Produzimos a sua peça</StepsText>
+          </Step>
+
+          <Step>
+            <Image src={Img3} alt="3 Step" />
+            <StepsText>Realizamos a inspeção do produto</StepsText>
+          </Step>
+
+          <Step>
+            <Image src={Img4} alt="4 Step" />
+            <StepsText>Enviamos para você</StepsText>
+          </Step>
         </Steps>
       </ProcessSteps>
     </Container>

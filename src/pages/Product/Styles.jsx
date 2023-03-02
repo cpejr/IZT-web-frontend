@@ -145,27 +145,39 @@ export const ProcessSteps = styled.div`
   align-items: center;
   padding: 0px;
   gap: 40px;
+  margin-top: 35px;
+  margin-bottom: 50px;
 
-  width: 900px;
-  height: 400px;
+  width: 100%;
+  height: auto;
+
+  @media (max-width: 700px) {
+    height: 950px;
+  }
 `;
 export const Steps = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0px;
-  gap: 56px;
+  gap: 50px;
 
-  width: 900px;
-  height: 220px;
+  width: 100%;
+  height: auto;
 
+  @media (max-width: 1000px) {
+    gap: 1%;
+  }
   @media (max-width: 700px) {
     flex-direction: column;
+    gap: 23px;
   }
 `;
 export const Title = styled.div`
-  height: 29px;
+  height: auto;
+  width: 100%;
+  text-align: center;
 
   font-family: 'Montserrat';
   font-style: normal;
@@ -174,92 +186,48 @@ export const Title = styled.div`
   line-height: 29px;
 
   color: #000000;
+
+  @media (max-width: 370px) {
+    font-size: 20px;
+  }
 `;
-export const Step1 = styled.div`
+export const Step = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  h1 {
-    width: 180px;
-    height: 66px;
+  gap: 20px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
+  @media (max-width: 700px) {
+    gap: 10px;
   }
 `;
-export const Image1 = styled.img`
+
+export const Image = styled.img`
   width: auto;
   height: 136px;
-`;
-export const Step2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  h1 {
-    width: 180px;
-    height: 66px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
+  @media (max-width: 1000px) {
+    height: 110px;
   }
 `;
-export const Image2 = styled.img`
-  width: auto;
-  height: 136px;
-`;
-export const Step3 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  h1 {
-    width: 180px;
-    height: 66px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-  }
-`;
-export const Image3 = styled.img`
-  width: auto;
-  height: 136px;
-`;
-export const Step4 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  h1 {
-    width: 180px;
-    height: 66px;
+export const StepsText = styled.p`
+  max-width: 180px;
+  height: 66px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+
+  @media (max-width: 1000px) {
+    font-size: 15px;
+    width: 80%;
   }
-`;
-export const Image4 = styled.img`
-  width: auto;
-  height: 136px;
+  @media (max-width: 700px) {
+    height: auto;
+  }
 `;
