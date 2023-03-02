@@ -132,7 +132,11 @@ export const InfoTitle = styled.div`
   text-align: center;
   color: #000000;
 `;
-export const InfoDescription = styled.div``;
+export const InfoDescription = styled.div`
+  flex-grow: 1;
+  max-height: 200px; /* set the maximum height of the file list */
+  overflow-y: auto; /* add a vertical scrollbar when the file list exceeds the maximum height */
+`;
 export const ProcessSteps = styled.div`
   display: flex;
   justify-content: center;

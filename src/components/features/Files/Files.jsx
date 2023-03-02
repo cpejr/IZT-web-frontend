@@ -1,31 +1,36 @@
 import React from 'react';
+import { FileListWrapper, FileItem } from './Styles';
+import File1 from '../../../assets/Files/F1.pdf';
+import File2 from '../../../assets/Files/F2.pdf';
+import File3 from '../../../assets/Files/F3.pdf';
 
 const files = [
   {
-    name: 'File 1',
-    route: '../../assets/Files/F1.pdf',
+    name: 'Documento 1',
+    route: File1,
   },
   {
-    name: 'File 2',
-    route: '../../assets/Files/F2.pdf',
+    name: 'Documento 2',
+    route: File2,
   },
   {
-    name: 'File 3',
-    route: '../../assets/Files/F3.pdf',
+    name: 'Documento 3',
+    route: File3,
   },
 ];
 
 function FileList() {
   return (
-    <Files>
+    <FileListWrapper>
       {files.map((file) => (
-        <div key={file.name}>
-          <a href={file.route} download>
+        <FileItem key={file.name}>
+          <a href={file.route} target="_blank" rel="noopener noreferrer">
             {file.name}
           </a>
-        </div>
+        </FileItem>
       ))}
-    </Files>
+    </FileListWrapper>
   );
 }
+
 export default FileList;
