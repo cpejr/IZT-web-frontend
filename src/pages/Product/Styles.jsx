@@ -126,8 +126,8 @@ export const ProcessSteps = styled.div`
   padding: 0px;
   gap: 30px;
 
-  width: 900px;
-  height: 279px;
+  width: 100%;
+  height: auto;
 `;
 export const Steps = styled.div`
   display: flex;
@@ -137,8 +137,8 @@ export const Steps = styled.div`
   padding: 0px;
   gap: 56px;
 
-  width: 900px;
-  height: 220px;
+  width: 100%;
+  height: auto;
 `;
 export const Title = styled.div`
   width: 442px;

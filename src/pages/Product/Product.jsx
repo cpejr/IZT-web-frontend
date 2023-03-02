@@ -40,9 +40,7 @@ function ProductPage() {
   return (
     <Container>
       <Product>
-        <ProductImage>
-          <Carousel productData={productData} maxHeight="100vh" />
-        </ProductImage>
+        <Carousel productData={productData} maxHeight="100vh" />
         <ProductName>Nome do Produto</ProductName>
         <Info>
           <ProductDescription>
