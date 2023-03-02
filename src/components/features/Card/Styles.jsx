@@ -77,7 +77,7 @@ export const CardTitle = styled.div`
   text-align: center;
   justify-content: space-around;
   position: absolute;
-  top: 10%;
+  top: ${(props) => props.mediaTopWeb ?? '13%'};
   max-width: 90%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};

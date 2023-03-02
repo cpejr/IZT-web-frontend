@@ -25,6 +25,7 @@ function Home() {
             title="Treinamento em Retificação Centerless"
             text="Venha aprender tudo sobre retificação centerless com o nosso curso
           intensivo!"
+            mediaTopWeb="10%"
             media1000Top="10%"
             media429Top="9%"
             media360Top="10%"

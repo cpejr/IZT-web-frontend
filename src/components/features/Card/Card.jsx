@@ -7,6 +7,7 @@ function Card({
   imageAlt,
   text,
   isMiddle,
+  mediaTopWeb,
   media1000Top,
   media429Top,
   media360Top,
@@ -14,6 +15,7 @@ function Card({
   return (
     <Container isMiddle={isMiddle}>
       <CardTitle
+        mediaTopWeb={mediaTopWeb}
         media1000Top={media1000Top}
         media429Top={media429Top}
         media360Top={media360Top}
