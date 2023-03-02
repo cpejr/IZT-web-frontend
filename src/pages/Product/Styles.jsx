@@ -9,6 +9,7 @@ export const Container = styled.div`
 export const Product = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 35px;
 `;
 export const ProductImage = styled.div``;
 
@@ -20,6 +21,7 @@ export const ProductContainer = styled.div`
 export const ProductName = styled.div`
   width: 328px;
   height: 44px;
+  padding-top: 35px;
   padding-bottom: 35px;
   align-self: center;
 
@@ -133,13 +135,14 @@ export const InfoTitle = styled.div`
 export const InfoDescription = styled.div``;
 export const ProcessSteps = styled.div`
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   padding: 0px;
-  gap: 30px;
+  gap: 40px;
 
   width: 900px;
-  height: 279px;
+  height: 400px;
 `;
 export const Steps = styled.div`
   display: flex;
@@ -157,7 +160,6 @@ export const Steps = styled.div`
   }
 `;
 export const Title = styled.div`
-  width: 442px;
   height: 29px;
 
   font-family: 'Montserrat';

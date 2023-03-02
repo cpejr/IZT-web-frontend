@@ -48,7 +48,7 @@ function ProductPage() {
           <Carousel productData={productData} maxHeight="100vh" />
           <Info>
             <ProductDescription>
-              <DescriptionTitle> Descrição do produto</DescriptionTitle>
+              <DescriptionTitle>Descrição do produto</DescriptionTitle>
               <Description>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Pellentesque sed odio eu enim gravida varius quis non orci.
