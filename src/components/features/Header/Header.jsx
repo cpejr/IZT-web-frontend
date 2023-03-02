@@ -1,57 +1,56 @@
-import React, { useState } from 'react';
-import { IoIosArrowDown } from 'react-icons/all';
+import { useState } from 'react';
+import { useTheme } from 'styled-components';
+import { Link, useNavigate } from 'react-router-dom';
+import { IoIosArrowDown } from 'react-icons/io';
+import { Logo } from '../../common';
 import {
   Content,
-  Logo,
   Menu,
-  Image,
   Nav,
   Select,
   Selected,
   LanguageSelector,
   Bar,
-  ButtonEntrar,
+  ButtonLogin,
   InternContainer,
   InvertItems,
 } from './Styles';
-import { Colors } from '../../../variables';
 
 function Header() {
+  const navigate = useNavigate();
   const [bar, setBar] = useState(false);
   const [collapse, setCollapse] = useState(false);
   const [language, setLanguage] = useState('EN'); // default language is EN
   const availableLaguages = ['EN', 'PT', 'DE'];
+  const theme = useTheme();
 
   return (
     <Content>
       <InternContainer>
-        <Logo id="home">
-          <Image src="../../../../public/LogoIZT.svg" alt="Logo" />
-          <h1>iZT Core</h1>
-        </Logo>
+        <Logo />
         <Menu>
           <Nav bar={bar} collapse={collapse}>
-            <a href="#produto">Produtos</a>
-            <a href="#servicos">Cursos</a>
-            <a href="#software">Software</a>
+            <Link to="/">Produtos</Link>
+            <Link to="/">Cursos</Link>
+            <Link to="/">Software</Link>
             <InvertItems>
-              <ButtonEntrar
-                href="#login"
-                backgroundColor800={Colors.greenishBlue}
+              <ButtonLogin
+                backgroundColor800={theme.colors.greenishBlue}
                 color800="white"
-                borderColor800={Colors.greenishBlue}
-                hoverBackgroundColor800={Colors.greenishBlue}
+                borderColor800={theme.colors.greenishBlue}
+                hoverBackgroundColor800={theme.colors.greenishBlue}
                 hoverColor800="white"
-                hoverBorderColor800={Colors.greenishBlue}
+                hoverBorderColor800={theme.colors.greenishBlue}
+                onClick={() => navigate('/')}
               >
                 Entrar
-              </ButtonEntrar>
+              </ButtonLogin>
               <Select bar={bar}>
                 <Selected onClick={() => setCollapse(!collapse)}>
                   <p>{language}</p>
                   <IoIosArrowDown />
                 </Selected>
-                <LanguageSelector collapse={collapse}>
+                <LanguageSelector collapse={+collapse}>
                   {availableLaguages.map((lang) => (
                     <button
                       type="button"
@@ -60,7 +59,7 @@ function Header() {
                         setLanguage(lang);
                         setCollapse(!collapse);
                       }}
-                      collapse={collapse}
+                      collapse={+collapse}
                     >
                       {lang}
                     </button>
@@ -71,7 +70,7 @@ function Header() {
           </Nav>
 
           <Bar bar={bar} onClick={() => setBar(!bar)}>
-            <span className="active" />
+            <span />
           </Bar>
         </Menu>
       </InternContainer>

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Fonts, Colors } from '../../variables';
 
 const Button = styled.button`
   /*Posição */
@@ -22,22 +21,23 @@ const Button = styled.button`
   gap: ${(props) => props.gap};
   width: ${(props) => props.width};
   /*cor e estilo do botão*/
-  color: ${(props) => props.color ?? Colors.blue};
+  color: ${(props) => props.color ?? props.theme.colors.blue};
   background-color: ${(props) => props.backgroundColor ?? 'white'};
   border-width: ${(props) => props.borderWidth ?? '1.5px'};
-  border-color: ${(props) => props.borderColor ?? Colors.blue};
+  border-color: ${(props) => props.borderColor ?? props.theme.colors.blue};
   border-style: solid;
   border-radius: ${(props) => props.borderRadius ?? '4px'};
   box-shadow: ${(props) => props.boxShadow ?? 'none'};
   cursor: pointer;
   /*características do texto*/
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: ${(props) => props.fontSize};
   text-decoration: ${(props) => props.textDecoration ?? 'none'};
   text-align: center;
   font-weight: ${(props) => props.fontWeight};
   :hover {
-    background-color: ${(props) => props.hoverBackgroundColor ?? Colors.blue};
+    background-color: ${(props) =>
+      props.hoverBackgroundColor ?? props.theme.colors.blue};
     border-color: ${(props) => props.hoverBorderColor};
     color: ${(props) => props.hoverColor ?? 'white'};
     @media (max-width: 990px) {

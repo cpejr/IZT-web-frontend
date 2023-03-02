@@ -1,12 +1,10 @@
 import { BsInstagram, BsWhatsapp } from 'react-icons/bs';
 import { AiOutlineLinkedin, AiOutlineFacebook } from 'react-icons/ai';
 import { HiOutlineMail } from 'react-icons/hi';
-import React from 'react';
 import {
   Container,
   SideContainer,
   MiddleContainer,
-  LogoIZT,
   Text,
   Tittle,
   SocialMedias,
@@ -14,15 +12,15 @@ import {
   GoTo,
   ButtonMobile,
   SectionGoTo,
+  ContactButton,
 } from './Styles';
-import ImagemLogoIZT from '../../../assets/ImagemLogoIZT.png';
-import ContactUsButton from '../ContactUsButton/ContactUsButton';
+import { Logo } from '../../common';
 
 export default function Footer() {
   return (
     <Container>
       <SideContainer>
-        <LogoIZT src={ImagemLogoIZT} alt="Imagem logo IZT" />
+        <Logo />
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
           aliquam blandit convallis. Proin luctus turpis vitae urna feugiat
@@ -38,14 +36,14 @@ export default function Footer() {
           risus ullamcorper, venenatis sem vulputate, dapibus lacus. Integer
           risus turpis.
         </Text>
-        <ContactUsButton />
+        <ContactButton>Fale Conosco</ContactButton>
       </MiddleContainer>
 
       <SideContainer>
-        <Tittle>Nossas Redes:</Tittle>
+        <Tittle>Nossas Redes</Tittle>
         <SocialMedias>
           <SocialMediaButton href="https://cpejr.com/">
-            <BsInstagram size={30} />
+            <BsInstagram size={35} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
             <AiOutlineLinkedin size={35} />
@@ -54,7 +52,7 @@ export default function Footer() {
             <AiOutlineFacebook size={35} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
-            <BsWhatsapp size={30} />
+            <BsWhatsapp size={35} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
             <HiOutlineMail size={35} />
@@ -62,11 +60,11 @@ export default function Footer() {
         </SocialMedias>
 
         <ButtonMobile>
-          <ContactUsButton />
+          <ContactButton>Fale Conosco</ContactButton>
         </ButtonMobile>
 
         <SectionGoTo>
-          <Tittle>Ir para:</Tittle>
+          <Tittle>Ir para</Tittle>
           <GoTo to="/">Produtos</GoTo>
           <GoTo to="/">Cursos</GoTo>
           <GoTo to="/">Software</GoTo>

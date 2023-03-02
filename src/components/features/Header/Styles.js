@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { Colors, Fonts } from '../../../variables';
-import Button from '../../../styles/Button';
+import { Button } from '../../common';
 
 const menuBreak = '800px';
 
@@ -26,43 +25,6 @@ export const InternContainer = styled.div`
   max-width: 1400px;
 `;
 
-export const Logo = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-  width: auto;
-  min-width: 179px;
-  h1 {
-    font-family: ${Fonts.montserrat};
-    font-weight: 500;
-    font-size: 22px;
-    color: ${Colors.blue};
-    @media (max-width: 320px) {
-      font-size: 18px;
-    }
-    @media (max-width: 990px) {
-      font-size: 18px;
-      gap: 5px;
-      font-weight: 600;
-    }
-  }
-  @media (max-width: 990px) {
-    gap: 5px;
-  }
-`;
-
-export const Image = styled.img`
-  width: auto;
-  height: 75px;
-  @media (max-width: 990px) {
-    height: 50px;
-  }
-  @media (max-width: 320px) {
-    height: 50px;
-  }
-`;
-
 export const Menu = styled.div`
   display: flex;
   flex-direction: row;
@@ -81,10 +43,10 @@ export const Nav = styled.div`
 
   a {
     font-size: 22px;
-    font-family: ${Fonts.montserrat};
+    font-family: ${(props) => props.theme.fonts.montserrat};
     margin-right: 20px;
     text-decoration: none;
-    color: ${Colors.blue};
+    color: ${(props) => props.theme.colors.blue};
     position: relative;
     flex-direction: row;
     text-align: center;
@@ -102,7 +64,7 @@ export const Nav = styled.div`
     gap: 10px;
   }
   @media (max-width: ${menuBreak}) {
-    background-color: ${Colors.darkGreenishBlue};
+    background-color: ${(props) => props.theme.colors.darkGreenishBlue};
     text-align: center;
     position: absolute;
     display: flex;
@@ -154,7 +116,7 @@ export const Bar = styled.div`
     width: 100%;
     height: 2px;
     background-color: ${(props) =>
-      props.bar ? 'transparent' : Colors.darkGreenishBlue};
+      props.bar ? 'transparent' : props.theme.colors.darkGreenishBlue};
     border-radius: 5px;
     transition: all 400ms ease-in-out;
     :before,
@@ -179,7 +141,7 @@ export const Bar = styled.div`
   }
 `;
 
-export const ButtonEntrar = styled(Button)`
+export const ButtonLogin = styled(Button)`
   font-size: 20px;
   width: 130px;
   @media (max-width: 990px) {
@@ -197,10 +159,10 @@ export const LanguageSelector = styled.div`
   transition: height 1s ease-in-out;
   height: ${(props) => (props.collapse ? 'auto' : '0px')};
   overflow-y: hidden;
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 700;
   background-color: white;
-  border: 1.5px solid ${Colors.blue};
+  border: 1.5px solid ${(props) => props.theme.colors.blue};
   border-radius: 5px;
   gap: 3px;
   button {
@@ -210,7 +172,7 @@ export const LanguageSelector = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: ${Fonts.montserrat};
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-weight: 700;
     :hover {
       cursor: pointer;
@@ -225,14 +187,14 @@ export const LanguageSelector = styled.div`
     display: ${(props) => (props.collapse ? 'flex' : 'none')};
     transition: display 500ms ease-in-out;
     margin-top: 0;
-    background-color: ${Colors.darkGreenishBlue};
+    background-color: ${(props) => props.theme.colors.darkGreenishBlue};
     left: 0;
     right: 0;
     text-align: center;
     justify-content: center;
     button {
       font-size: 15px;
-      background-color: ${Colors.darkGreenishBlue};
+      background-color: ${(props) => props.theme.colors.darkGreenishBlue};
       color: white;
       font-weight: 600;
     }
@@ -243,7 +205,7 @@ export const Select = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
-  font-family: ${Fonts.montserrat};
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 700;
   align-self: center;
   :hover {

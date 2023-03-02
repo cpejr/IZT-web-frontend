@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
-export { default as Footer } from './Footer/Footer';
+export { default as Logo } from './Logo/Logo';
+export { default as Button } from './Button/Button';
