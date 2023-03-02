@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import {
   Button,
   Container,
@@ -7,11 +8,18 @@ import {
   ImagesContainer,
   Inner,
   MiniImageContainer,
-  // Dots,
+  Dots,
   NavButtons,
 } from './Styles';
 
-export default function Carousel({ productData = [], maxHeight }) {
+export default function Carousel({
+  productData = [],
+  maxHeight = '500px',
+  maxWidth = '500px',
+  width = '100%',
+  hight = '100%',
+  miniImages = true,
+}) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -49,6 +57,9 @@ export default function Carousel({ productData = [], maxHeight }) {
   return (
     <Container
       maxHeight={maxHeight}
+      maxWidth={maxWidth}
+      width={width}
+      hight={hight}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
@@ -68,24 +79,31 @@ export default function Carousel({ productData = [], maxHeight }) {
           type="button"
           onClick={() => updateImage(currentImageIndex - 1)}
         >
-          Prev
+          <MdKeyboardArrowLeft />
         </Button>
-        {productData.map(({ src, name, alt }, index) => (
-          // <Dots
-          //   type="button"
-          //   key={name}
-          //   active={index === currentImageIndex}
-          //   onClick={() => updateImage(index)}
-          // />
-          <MiniImageContainer
-            key={name}
-            active={index === currentImageIndex}
-            onClick={() => updateImage(index)}
-          >
-            <img src={src} alt={alt} />
-          </MiniImageContainer>
-        ))}
-        <Button onClick={() => updateImage(currentImageIndex + 1)}>Next</Button>
+
+        {productData.map(({ src, name, alt }, index) =>
+          miniImages ? (
+            <MiniImageContainer
+              key={name}
+              active={index === currentImageIndex}
+              onClick={() => updateImage(index)}
+            >
+              <img src={src} alt={alt} />
+            </MiniImageContainer>
+          ) : (
+            <Dots
+              type="button"
+              key={name}
+              active={index === currentImageIndex}
+              onClick={() => updateImage(index)}
+            />
+          )
+        )}
+
+        <Button onClick={() => updateImage(currentImageIndex + 1)}>
+          <MdKeyboardArrowRight />
+        </Button>
       </NavButtons>
     </Container>
   );
@@ -93,9 +111,18 @@ export default function Carousel({ productData = [], maxHeight }) {
 
 Carousel.defaultProps = {
   productData: [],
+  maxHeight: 'none',
+  maxWidth: 'none',
+  width: '100%',
+  hight: '100%',
+  miniImages: false,
 };
 
 Carousel.propTypes = {
-  maxHeight: PropTypes.string.isRequired,
+  maxHeight: PropTypes.string,
+  maxWidth: PropTypes.string,
+  width: PropTypes.string,
+  hight: PropTypes.string,
+  miniImages: PropTypes.bool,
   productData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };

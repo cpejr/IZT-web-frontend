@@ -20,6 +20,9 @@ export const Label = styled.label`
     font-size: 20px;
     line-height: 24px;
   }
+  @media (max-width: 370px) {
+    font-size: 17px;
+  }
 `;
 
 export const Input = styled.input`
@@ -31,12 +34,16 @@ export const Input = styled.input`
   background: ${(props) => (props.error ? 'rgba(239, 202, 202, 1)' : 'white')};
   width: 100%;
 
-  @media (max-width: 700px) {
+  @media (max-width: 1070px) {
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
     height: 36px;
+  }
+
+  @media (max-width: 370px) {
+    height: 30px;
   }
 `;
 

@@ -1,4 +1,5 @@
 import React from 'react';
+// import { FaBeerAiOutlineVerticalAlignBottom } from 'react-icons/fa';
 import Img1 from '../../assets/Product/Group75.png';
 import Img2 from '../../assets/Product/Group76.png';
 import Img3 from '../../assets/Product/Group77.png';
@@ -26,66 +27,74 @@ import {
   ProcessSteps,
   Steps,
   Title,
-  Step1,
-  Image1,
-  Step2,
-  Image2,
-  Step3,
-  Image3,
-  Step4,
-  Image4,
+  Step,
+  Image,
+  StepsText,
 } from './Styles';
 
 function ProductPage() {
   return (
     <Container>
       <Product>
-        <Carousel productData={productData} maxHeight="100vh" />
         <ProductName>Nome do Produto</ProductName>
-        <Info>
-          <ProductDescription>
-            <DescriptionTitle> Descrição do produto</DescriptionTitle>
-            <Description>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque sed odio eu enim gravida varius quis non orci.
-              Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
-              sapien.
-            </Description>
-          </ProductDescription>
-          <ProductBenefits>
-            <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-            <Benefits>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque sed odio eu enim gravida varius quis non orci.
-              Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
-              sapien.
-            </Benefits>
-          </ProductBenefits>
-          <ProductInfos>
-            <InfoTitle>Mais informações</InfoTitle> <FileList />{' '}
-          </ProductInfos>
-        </Info>
+        <ProductContainer>
+          <Carousel
+            productData={productData}
+            height="537.17px"
+            width="543.75px"
+            miniImages
+          />
+          <Info>
+            <ProductDescription>
+              <DescriptionTitle>Descrição do produto</DescriptionTitle>
+              <Description>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Pellentesque sed odio eu enim gravida varius quis non orci.
+                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
+                sapien.
+              </Description>
+            </ProductDescription>
+            <ProductBenefits>
+              <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
+              <Benefits>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Pellentesque sed odio eu enim gravida varius quis non orci.
+                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
+                sapien.
+              </Benefits>
+            </ProductBenefits>
+            <ProductInfos>
+              <InfoTitle>Mais informações</InfoTitle>
+              <InfoDescription>
+                <FileList />{' '}
+              </InfoDescription>
+            </ProductInfos>
+          </Info>
+        </ProductContainer>
       </Product>
       <BudgetForm />
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
-          <Step1>
-            <Image1 src={Img1} alt="1 Step" />
-            <h1>Entramos em contato para planejar o produto</h1>
-          </Step1>
-          <Step2>
-            <Image2 src={Img2} alt="2 Step" />
-            <h1>Produzimos a sua peça</h1>
-          </Step2>
-          <Step3>
-            <Image3 src={Img3} alt="3 Step" />
-            <h1>Realizamos a inspeção do produto</h1>
-          </Step3>
-          <Step4>
-            <Image4 src={Img4} alt="4 Step" />
-            <h1>Enviamos para você</h1>
-          </Step4>
+          <Step>
+            <Image src={Img1} alt="1 Step" />
+            <StepsText>Entramos em contato para planejar o produto</StepsText>
+          </Step>
+
+          <Step>
+            <Image src={Img2} alt="2 Step" />
+            <StepsText>Produzimos a sua peça</StepsText>
+          </Step>
+
+          <Step>
+            <Image src={Img3} alt="3 Step" />
+            <StepsText>Realizamos a inspeção do produto</StepsText>
+          </Step>
+
+          <Step>
+            <Image src={Img4} alt="4 Step" />
+            <StepsText>Enviamos para você</StepsText>
+          </Step>
         </Steps>
       </ProcessSteps>
     </Container>
