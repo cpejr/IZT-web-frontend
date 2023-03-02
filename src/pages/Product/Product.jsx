@@ -37,7 +37,12 @@ function ProductPage() {
       <Product>
         <ProductName>Nome do Produto</ProductName>
         <ProductContainer>
-          <Carousel productData={productData} maxHeight="100vh" />
+          <Carousel
+            productData={productData}
+            height="537.17px"
+            width="543.75px"
+            miniImages
+          />
           <Info>
             <ProductDescription>
               <DescriptionTitle>Descrição do produto</DescriptionTitle>

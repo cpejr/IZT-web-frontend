@@ -15,6 +15,9 @@ import {
 export default function Carousel({
   productData = [],
   maxHeight = '500px',
+  maxWidth = '500px',
+  width = '100%',
+  hight = '100%',
   miniImages = true,
 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -54,6 +57,9 @@ export default function Carousel({
   return (
     <Container
       maxHeight={maxHeight}
+      maxWidth={maxWidth}
+      width={width}
+      hight={hight}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
@@ -105,9 +111,18 @@ export default function Carousel({
 
 Carousel.defaultProps = {
   productData: [],
+  maxHeight: 'none',
+  maxWidth: 'none',
+  width: '100%',
+  hight: '100%',
+  miniImages: false,
 };
 
 Carousel.propTypes = {
-  maxHeight: PropTypes.string.isRequired,
+  maxHeight: PropTypes.string,
+  maxWidth: PropTypes.string,
+  width: PropTypes.string,
+  hight: PropTypes.string,
+  miniImages: PropTypes.bool,
   productData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };

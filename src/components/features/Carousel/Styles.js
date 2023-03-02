@@ -6,10 +6,12 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 5px;
-  width: 543.75px;
-  height: 537.17px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
 
   max-height: ${(props) => props.maxHeight};
+  max-width: ${(props) => props.maxWidth};
+
   aspect-ratio: 16 / 9;
 `;
 
@@ -42,7 +44,7 @@ export const NavButtons = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 15px;
 `;
 
 export const Button = styled.button`
@@ -82,7 +84,9 @@ export const MiniImageContainer = styled.button`
   display: inline-block;
   width: 80px;
   height: 80px;
-  opacity: ${({ active }) => (active ? 1 : 0.7)};
+  opacity: ${({ active }) => (active ? 1 : 0.5)};
+  border: ${({ active, theme }) =>
+    active ? `2px solid ${theme.colors.darkBlue}` : 'none'};
   cursor: pointer;
   &:hover {
     opacity: 1;
