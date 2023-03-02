@@ -7,12 +7,13 @@ const isMiddleStyle = css`
   position: relative;
   z-index: 2;
   font-size: 24px;
-  width: 510px;
-  height: 600px;
+  width: 460px;
+  height: 580px;
+  /* aspect-ratio: 5/4; */
 
   @media (max-width: 1000px) {
-    width: 470px;
-    height: 570px;
+    width: 450px;
+    height: 550px;
   }
 `;
 
@@ -28,8 +29,9 @@ export const Container = styled.div`
   font-size: 20px;
   font-weight: 700;
 
-  width: 470px;
-  height: 570px;
+  width: 450px;
+  height: 550px;
+  /* aspect-ratio: 5/4; */
   background: linear-gradient(
     to top,
     white 0%,
@@ -41,6 +43,13 @@ export const Container = styled.div`
 
   ${({ isMiddle }) => (isMiddle ? isMiddleStyle : '')};
 
+  @media (min-width: 1440px) {
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
   @media (max-width: 1000px) {
     background: fixed ${(props) => props.theme.colors.gray[1]};
     box-shadow: 0 0 0 0 ${(props) => props.theme.colors.gray[2]};
@@ -62,13 +71,6 @@ export const Container = styled.div`
     width: 270px;
     height: 410px;
   }
-  @media (min-width: 1440px) {
-    margin-left: 0;
-    margin-right: 0;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
 `;
 
 export const CardTitle = styled.div`
@@ -77,7 +79,7 @@ export const CardTitle = styled.div`
   text-align: center;
   justify-content: space-around;
   position: absolute;
-  top: ${(props) => props.mediaTopWeb ?? '13%'};
+  top: ${(props) => props.mediaTopWeb ?? '10%'};
   max-width: 90%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
@@ -107,7 +109,7 @@ export const CardText = styled.div`
   align-items: center;
   text-align: center;
   position: relative;
-  top: 25%;
+  top: 26%;
 
   width: 77%;
   height: 30%;
@@ -122,8 +124,11 @@ export const CardText = styled.div`
   }
 
   @media (max-width: 429px) {
-    top: 22%;
+    top: 26%;
     font-size: 14px;
+  }
+  @media (max-width: 360px) {
+    top: 23%;
   }
   @media (max-width: 310px) {
     top: 20%;
@@ -174,7 +179,7 @@ export const Picture = styled.img`
   object-fit: inherit;
   position: absolute;
 
-  top: 25%;
-  width: 50%;
+  top: 23%;
+  width: 55%;
   height: auto;
 `;

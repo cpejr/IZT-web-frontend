@@ -112,7 +112,6 @@ export const CardsContainer = styled.div`
   @media (max-width: 1000px) {
     flex-direction: column;
   }
-
   @media (min-width: 1440px) {
     margin-left: 5%;
     margin-right: 5%;
