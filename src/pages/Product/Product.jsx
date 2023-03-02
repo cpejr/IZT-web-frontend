@@ -4,12 +4,9 @@ import Img2 from '../../assets/Product/Group76.png';
 import Img3 from '../../assets/Product/Group77.png';
 import Img4 from '../../assets/Product/Group78.png';
 import { BudgetForm } from '../../components/features';
-<<<<<<< HEAD
-import file1 from '../../assets/Files/F1.pdf';
-=======
+import FileList from '../../components/features/Files/Files';
 import Carousel from '../../components/features/Carousel/Carousel';
 import productData from '../../assets/Product/productCarousel/data';
->>>>>>> 9cfb1fff830396b5280acf6c5757d945a28d6cef
 
 import {
   Container,
@@ -67,8 +64,7 @@ function ProductPage() {
             </Benefits>
           </ProductBenefits>
           <ProductInfos>
-            <InfoTitle>Mais informações</InfoTitle>
-            <InfoDescription> </InfoDescription>
+            <InfoTitle>Mais informações</InfoTitle> <FileList />{' '}
           </ProductInfos>
         </Info>
       </Product>
