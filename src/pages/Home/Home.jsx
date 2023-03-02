@@ -1,6 +1,5 @@
 import React from 'react';
 import { Carousel, FormsContactUs, Card } from '../../components/features';
-import carouselImages from '../../components/features/Carousel/carouselImages';
 import Catalog from '../../assets/homeCards/catalog.png';
 import Software from '../../assets/homeCards/software.png';
 import Training from '../../assets/homeCards/training.png';
@@ -14,12 +13,13 @@ import {
   OuterDiv,
 } from './Styles';
 import Image from '../../assets/imagemDaEmpresa.png';
+import carouselData from '../../assets/homeCarousel/data';
 
 function Home() {
   return (
     <OuterDiv>
       <Container>
-        <Carousel slides={carouselImages} />
+        <Carousel carouselData={carouselData} />
         <CardsContainer>
           <Card
             title="Treinamento em Retificação Centerless"

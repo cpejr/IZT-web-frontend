@@ -1,64 +1,114 @@
-/* eslint-disable react/prop-types */
-import React, { useState } from 'react';
-import { Container, Arrows, Image, Dot } from './Styles';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
-function Carousel({ slides }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const { length } = slides;
+import {
+  Button,
+  Container,
+  ImageContainer,
+  ImagesContainer,
+  Inner,
+  MiniImageContainer,
+  Dots,
+  NavButtons,
+} from './Styles';
 
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
+export default function Carousel({
+  carouselData = [],
+  maxHeight = '500px',
+  miniImages = false,
+}) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const slidesCount = carouselData.length;
+  const minSwipeDistance = 50;
+
+  const updateImage = (newIndex) => {
+    if (newIndex < 0) setCurrentImageIndex(slidesCount - 1);
+    else if (newIndex >= slidesCount) setCurrentImageIndex(0);
+    else setCurrentImageIndex(newIndex);
   };
 
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
   };
 
-  const goToSlide = (slideIndex) => {
-    setCurrentIndex(slideIndex);
+  const onTouchMove = (e) => {
+    const touchEndCurrentPos = e.targetTouches[0].clientX;
+    setTouchEnd(touchEndCurrentPos);
   };
 
-  console.log(currentIndex);
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) updateImage(currentImageIndex + 1);
+    else if (isRightSwipe) updateImage(currentImageIndex - 1);
+  };
 
   return (
-    <Container>
-      <Image
-        aria-label="Imagens do Carrossel"
-        backgroundImage={`url(${slides[currentIndex]})`}
-      />
+    <Container
+      maxHeight={maxHeight}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
+      <ImagesContainer>
+        <Inner currentImageIndex={currentImageIndex}>
+          {carouselData.map(({ src, name, alt }) => (
+            <ImageContainer key={name}>
+              <img src={src} alt={alt} />
+            </ImageContainer>
+          ))}
+        </Inner>
+      </ImagesContainer>
 
-      <Arrows>
-        <button type="button" onClick={prevSlide}>
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/271/271220.png"
-            alt="buttonpng"
-            border="0"
-            height={20}
-          />
-        </button>
+      <NavButtons>
+        <Button
+          type="button"
+          onClick={() => updateImage(currentImageIndex - 1)}
+        >
+          <MdKeyboardArrowLeft />
+        </Button>
 
-        {slides.map((slide, index) => (
-          <Dot
-            onClick={() => goToSlide(index)}
-            key={index}
-            backgroundColor={index === currentIndex}
-          />
-        ))}
-        <button type="button" onClick={nextSlide}>
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/32/32213.png"
-            alt="buttonpng"
-            border="0"
-            height={20}
-          />
-        </button>
-      </Arrows>
+        {carouselData.map(({ src, name, alt }, index) =>
+          miniImages ? (
+            <MiniImageContainer
+              key={name}
+              active={index === currentImageIndex}
+              onClick={() => updateImage(index)}
+            >
+              <img src={src} alt={alt} />
+            </MiniImageContainer>
+          ) : (
+            <Dots
+              type="button"
+              key={name}
+              active={index === currentImageIndex}
+              onClick={() => updateImage(index)}
+            />
+          )
+        )}
+
+        <Button onClick={() => updateImage(currentImageIndex + 1)}>
+          <MdKeyboardArrowRight />
+        </Button>
+      </NavButtons>
     </Container>
   );
 }
 
-export default Carousel;
+Carousel.defaultProps = {
+  carouselData: [],
+};
+
+Carousel.propTypes = {
+  maxHeight: PropTypes.string.isRequired,
+  carouselData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+};
