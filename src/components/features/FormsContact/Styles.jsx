@@ -43,15 +43,14 @@ export const Title = styled.p`
 
 export const Form = styled.form`
   display: flex;
-  align-items: center;
   flex-direction: row;
   width: 80%;
-  gap: 105px;
+  gap: 8%;
   height: 100%;
 
   @media (max-width: 700px) {
+    align-items: center;
     flex-direction: column;
-    gap: 0px;
     width: 100%;
   }
 

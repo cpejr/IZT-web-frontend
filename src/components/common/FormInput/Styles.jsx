@@ -36,6 +36,7 @@ export const Input = styled.input`
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
+    height: 30px;
   }
   @media (max-width: 370px) {
     font-size: 12px;

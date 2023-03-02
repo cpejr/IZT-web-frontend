@@ -77,7 +77,7 @@ function FormsContactUs() {
           <FormInput
             label="Representante:"
             name="representative"
-            placeholder="Nome do representante empresa"
+            placeholder="Nome do representante"
             errors={errors}
             register={register}
           />

@@ -75,7 +75,7 @@ export const OurHistory = styled.div`
   }
 
   @media (max-width: 410px) {
-    font-size: 16px;
+    font-size: 14px;
   }
 `;
 
