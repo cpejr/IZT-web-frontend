@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-items: center;
+  width: 100%;
 `;
 export const Product = styled.div`
   display: flex;
@@ -16,6 +17,8 @@ export const ProductImage = styled.div``;
 export const ProductContainer = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 50px;
+  margin-bottom: 40px;
 `;
 
 export const ProductName = styled.div`
@@ -40,7 +43,6 @@ export const Info = styled.div`
   align-items: center;
   padding: 0px;
   gap: 40px;
-  width: 606.25px;
   height: 537.17px;
 `;
 export const ProductDescription = styled.div`
@@ -50,11 +52,10 @@ export const ProductDescription = styled.div`
   padding: 0px;
   gap: 15px;
 
-  width: 606.25px;
+  width: 100%;
   height: 132px;
 `;
 export const DescriptionTitle = styled.div`
-  width: 274px;
   height: 29px;
 
   font-family: 'Montserrat';
