@@ -45,6 +45,7 @@ function Home() {
           confiáveis do processo de retificação em sua empresa."
             image={Software}
             imageAlt="Software image"
+            pictureTopMedia1000="20%"
           />
         </CardsContainer>
         <FormsContactUs />

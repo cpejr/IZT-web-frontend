@@ -11,6 +11,7 @@ function Card({
   media1000Top,
   media429Top,
   media360Top,
+  pictureTopMedia1000,
 }) {
   return (
     <Container isMiddle={isMiddle}>
@@ -22,7 +23,11 @@ function Card({
       >
         {title}
       </CardTitle>
-      <Picture src={image} alt={imageAlt} />
+      <Picture
+        src={image}
+        alt={imageAlt}
+        pictureTopMedia1000={pictureTopMedia1000}
+      />
       <CardText>{text}</CardText>
       <Button type="button">Saiba mais</Button>
     </Container>

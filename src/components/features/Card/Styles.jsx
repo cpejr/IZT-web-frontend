@@ -9,8 +9,11 @@ const isMiddleStyle = css`
   font-size: 24px;
   width: 460px;
   height: 580px;
-  /* aspect-ratio: 5/4; */
 
+  /* @media (min-width: 1000px) and (max-width: 1300px) {
+    width: 414px;
+    height: 522px;
+  } */
   @media (max-width: 1000px) {
     width: 450px;
     height: 550px;
@@ -31,7 +34,6 @@ export const Container = styled.div`
 
   width: 450px;
   height: 550px;
-  /* aspect-ratio: 5/4; */
   background: linear-gradient(
     to top,
     white 0%,
@@ -50,6 +52,10 @@ export const Container = styled.div`
     align-items: center;
     width: 100%;
   }
+  @media (min-width: 1000px) and (max-width: 1300px) {
+    width: 405px;
+    height: 495px;
+  }
   @media (max-width: 1000px) {
     background: fixed ${(props) => props.theme.colors.gray[1]};
     box-shadow: 0 0 0 0 ${(props) => props.theme.colors.gray[2]};
@@ -57,19 +63,19 @@ export const Container = styled.div`
   }
   @media (max-width: 500px) {
     width: 400px;
-    height: 520px;
+    height: 500px;
   }
   @media (max-width: 429px) {
     width: 350px;
-    height: 470px;
+    height: 450px;
   }
   @media (max-width: 360px) {
     width: 300px;
-    height: 420px;
+    height: 400px;
   }
   @media (max-width: 310px) {
     width: 270px;
-    height: 410px;
+    height: 390px;
   }
 `;
 
@@ -86,19 +92,22 @@ export const CardTitle = styled.div`
   font-size: 24px;
   font-weight: 700;
 
+  @media (min-width: 1000px) and (max-width: 1300px) {
+    font-size: 22px;
+  }
   @media (max-width: 1000px) {
-    /* top: 10%; */
-    top: ${(props) => props.media1000Top ?? '13%'};
+    top: ${(props) => props.media1000Top ?? '10%'};
   }
   @media (max-width: 429px) {
-    top: ${(props) => props.media429Top ?? '12%'};
+    font-size: 20px;
+    top: ${(props) => props.media429Top ?? '9%'};
   }
   @media (max-width: 360px) {
-    font-size: 20px;
-    top: ${(props) => props.media360Top ?? '14%'};
+    font-size: 18px;
+    top: ${(props) => props.media360Top ?? '8%'};
   }
   @media (max-width: 310px) {
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
 
@@ -123,6 +132,13 @@ export const CardText = styled.div`
     overflow: visible;
   }
 
+  @media (min-width: 1000px) and (max-width: 1300px) {
+    font-size: 16px;
+    top: 24%;
+  }
+  @media (max-width: 1000px) {
+    font-size: 16px;
+  }
   @media (max-width: 429px) {
     top: 26%;
     font-size: 14px;
@@ -182,4 +198,11 @@ export const Picture = styled.img`
   top: 23%;
   width: 55%;
   height: auto;
+
+  @media (min-width: 1000px) and (max-width: 1300px) {
+    top: 25%;
+  }
+  @media (max-width: 1000px) {
+    top: ${(props) => props.pictureTopMedia1000 ?? '23%'};
+  }
 `;
