@@ -37,7 +37,7 @@ export const Title = styled.p`
     padding-top: 15px;
   }
   @media (max-width: 370px) {
-    font-size: 25px;
+    font-size: 18px;
   }
 `;
 
@@ -63,7 +63,11 @@ export const Container = styled.form`
   width: 100%;
 
   @media (max-width: 700px) {
+    gap: 20px;
     flex-direction: column;
+  }
+  @media (max-width: 700px) {
+    gap: 10px;
   }
 `;
 
@@ -75,6 +79,9 @@ export const Section = styled.div`
   gap: 20px;
   @media (max-width: 700px) {
     width: 80%;
+  }
+  @media (max-width: 700px) {
+    gap: 10px;
   }
 `;
 
@@ -112,6 +119,7 @@ export const BotaoEnviar = styled.button`
   @media (max-width: 370px) {
     font-size: 12px;
     height: 30px;
+    margin-top: 25px;
   }
   cursor: pointer;
   transition-duration: 0.3s;
