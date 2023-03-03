@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const breakValue = '700px';
 
 export const Page = styled.div`
-  background-color: ${(props) => props.theme.colors.gray[1]};
+  background-color: ${(props) => props.theme.colors.gray.mediumGray};
   width: 100%;
   min-height: 100%;
   display: flex;
@@ -76,7 +76,7 @@ export const RemeberMe = styled(Link)`
 
   font-size: 0.7em;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  color: ${(props) => props.theme.colors.gray[3]};
+  color: ${(props) => props.theme.colors.gray.darkGray};
   font-weight: 600;
   :hover {
     text-decoration: underline;

@@ -19,7 +19,7 @@ export const Input = styled.input`
   height: 3em;
   width: 100%;
   border-radius: 10px;
-  background-color: ${(props) => props.theme.colors.gray[1]};
+  background-color: ${(props) => props.theme.colors.gray.lightGrey};
   border: ${(props) => (props.error ? '2px red solid' : 'none')};
   padding: 0 5%;
   font-family: ${(props) => props.theme.fonts.montserrat};
