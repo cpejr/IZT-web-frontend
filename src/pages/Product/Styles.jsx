@@ -71,7 +71,7 @@ export const ProductDescription = styled.div`
   gap: 15px;
 
   width: 100%;
-  height: 132px;
+  height: auto;
 `;
 
 export const DescriptionTitle = styled.div`
