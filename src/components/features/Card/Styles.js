@@ -11,8 +11,8 @@ const isMiddleStyle = css`
     to top,
     white 0%,
     white 60%,
-    ${(props) => props.theme.colors.gray[1]} 60%,
-    ${(props) => props.theme.colors.gray[1]} 100%
+    ${(props) => props.theme.colors.gray.lightGrey} 60%,
+    ${(props) => props.theme.colors.gray.lightGrey} 100%
   );
 
   @media (max-width: 1200px) {
@@ -62,10 +62,10 @@ export const Container = styled.div`
     to top,
     white 0%,
     white 57%,
-    ${(props) => props.theme.colors.gray[1]} 57%,
-    ${(props) => props.theme.colors.gray[1]} 100%
+    ${(props) => props.theme.colors.gray.lightGrey} 57%,
+    ${(props) => props.theme.colors.gray.lightGrey} 100%
   );
-  box-shadow: 0 0 8px 8px ${(props) => props.theme.colors.gray[2]};
+  box-shadow: 0 0 8px 8px ${(props) => props.theme.colors.gray.mediumGrey};
 
   ${({ isMiddle }) => (isMiddle ? isMiddleStyle : '')};
 
@@ -74,8 +74,8 @@ export const Container = styled.div`
     height: 480px;
   }
   @media (max-width: 1000px) {
-    background: fixed ${(props) => props.theme.colors.gray[1]};
-    box-shadow: 0 0 0 0 ${(props) => props.theme.colors.gray[2]};
+    background: fixed ${(props) => props.theme.colors.gray.lightGrey};
+    box-shadow: 0 0 0 0 ${(props) => props.theme.colors.gray.mediumGrey};
     margin: 2%;
     width: 80%;
   }
@@ -230,7 +230,7 @@ export const Button = styled.button`
   ${({ isMiddle }) => (isMiddle ? isMiddleButStyle : '')};
 
   @media (max-width: 1000px) {
-    background-color: ${(props) => props.theme.colors.gray[1]};
+    background-color: ${(props) => props.theme.colors.gray.lightGrey};
     font-size: 22px;
     line-height: 27px;
     bottom: 5%;
