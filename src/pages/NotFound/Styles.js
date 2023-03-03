@@ -7,7 +7,6 @@ export const Container = styled.div`
   gap: 30%;
 
   width: 100vw;
-  heigth: 100vh;
 
   position: absolute;
   bottom: 10vh;
@@ -29,6 +28,7 @@ export const Container = styled.div`
 
     height: 100vh;
     width: 90vw;
+  }
 `;
 
 export const Title = styled.h1`

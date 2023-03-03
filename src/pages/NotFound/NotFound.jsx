@@ -1,4 +1,4 @@
-import { Container, Subtitle, Title, Description } from './styles';
+import { Container, Subtitle, Title, Description } from './Styles';
 
 function NotFound() {
   return (
