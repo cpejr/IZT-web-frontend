@@ -15,6 +15,7 @@ export const FileItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: center;
   padding: 0px;
   gap: 15px;
 
@@ -30,7 +31,10 @@ export const FileItem = styled.div`
     font-size: 20px;
     line-height: 24px;
     text-align: center;
-
+    text-decoration: none;
     color: #000000;
+  }
+  a:hover {
+    text-decoration: underline;
   }
 `;

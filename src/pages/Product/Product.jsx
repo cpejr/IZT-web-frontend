@@ -30,6 +30,7 @@ import {
   Step,
   Image,
   StepsText,
+  CarrosselContainer,
 } from './Styles';
 
 function ProductPage() {
@@ -38,38 +39,42 @@ function ProductPage() {
       <Product>
         <ProductName>Nome do Produto</ProductName>
         <ProductContainer>
-          <Carousel
-            productData={productData}
-            height="537.17px"
-            width="543.75px"
-            miniImages
-          />
-          <Info>
-            <ProductDescription>
-              <DescriptionTitle>Descrição do produto</DescriptionTitle>
-              <Description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque sed odio eu enim gravida varius quis non orci.
-                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
-                sapien.
-              </Description>
-            </ProductDescription>
-            <ProductBenefits>
-              <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-              <Benefits>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque sed odio eu enim gravida varius quis non orci.
-                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
-                sapien.
-              </Benefits>
-            </ProductBenefits>
-            <ProductInfos>
-              <InfoTitle>Mais informações</InfoTitle>
-              <InfoDescription>
-                <FileList />{' '}
-              </InfoDescription>
-            </ProductInfos>
-          </Info>
+          <CarrosselContainer>
+            <Carousel
+              productData={productData}
+              height="537.17px"
+              width="543.75px"
+              miniImages
+            />
+          </CarrosselContainer>
+          <CarrosselContainer>
+            <Info>
+              <ProductDescription>
+                <DescriptionTitle>Descrição do produto</DescriptionTitle>
+                <Description>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Pellentesque sed odio eu enim gravida varius quis non orci.
+                  Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla
+                  sed sapien.
+                </Description>
+              </ProductDescription>
+              <ProductBenefits>
+                <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
+                <Benefits>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Pellentesque sed odio eu enim gravida varius quis non orci.
+                  Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla
+                  sed sapien.
+                </Benefits>
+              </ProductBenefits>
+              <ProductInfos>
+                <InfoTitle>Mais informações</InfoTitle>
+                <InfoDescription>
+                  <FileList />
+                </InfoDescription>
+              </ProductInfos>
+            </Info>
+          </CarrosselContainer>
         </ProductContainer>
       </Product>
       <BudgetForm />

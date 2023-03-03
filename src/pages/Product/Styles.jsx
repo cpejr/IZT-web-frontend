@@ -5,26 +5,35 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-items: center;
-  width: 100%;
+  width: 100vw;
 `;
+
 export const Product = styled.div`
   display: flex;
-  width: 100%;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
   flex-direction: column;
   gap: 35px;
-  max-width: 1400px;
+  max-width: 1440px;
 `;
-export const ProductImage = styled.div``;
 
 export const ProductContainer = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
   gap: 50px;
   margin-bottom: 40px;
-  @media (max-width: 700px) {
+  @media (max-width: 1024px) {
     flex-direction: column;
-    gap: 23px;
   }
+`;
+
+export const CarrosselContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
 `;
 
 export const ProductName = styled.div`
@@ -33,7 +42,7 @@ export const ProductName = styled.div`
   padding-top: 35px;
   padding-bottom: 35px;
   align-self: center;
-
+  margin-bottom: 2%;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
@@ -42,15 +51,18 @@ export const ProductName = styled.div`
   text-align: center;
   color: #000000;
 `;
+
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   padding: 0px;
   gap: 40px;
-  height: 537.17px;
+  height: 30%;
 `;
+
 export const ProductDescription = styled.div`
   display: flex;
   flex-direction: column;
@@ -61,10 +73,10 @@ export const ProductDescription = styled.div`
   width: 100%;
   height: 132px;
 `;
+
 export const DescriptionTitle = styled.div`
   height: auto;
   width: 100%;
-
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
@@ -72,6 +84,7 @@ export const DescriptionTitle = styled.div`
   line-height: 29px;
   color: #000000;
 `;
+
 export const Description = styled.div`
   width: 100%;
   height: auto;
@@ -84,6 +97,7 @@ export const Description = styled.div`
 
   color: #000000;
 `;
+
 export const ProductBenefits = styled.div`
   display: flex;
   flex-direction: column;
@@ -94,6 +108,7 @@ export const ProductBenefits = styled.div`
   width: 100%;
   height: auto;
 `;
+
 export const BenefitsTitle = styled.div`
   width: 100%;
   height: auto;
@@ -106,6 +121,7 @@ export const BenefitsTitle = styled.div`
   text-align: left;
   color: #000000;
 `;
+
 export const Benefits = styled.div`
   width: 100%;
   height: auto;
@@ -116,6 +132,7 @@ export const Benefits = styled.div`
   line-height: 22px;
   color: #000000;
 `;
+
 export const ProductInfos = styled.div`
   display: flex;
   flex-direction: column;
@@ -126,6 +143,7 @@ export const ProductInfos = styled.div`
   height: auto;
   background: #eeeeee;
 `;
+
 export const InfoTitle = styled.div`
   width: 100%;
   height: auto;
@@ -138,14 +156,16 @@ export const InfoTitle = styled.div`
   text-align: left;
   color: #000000;
 `;
+
 export const InfoDescription = styled.div`
   width: 100%;
   height: auto;
 
   flex-grow: 1;
-  max-height: 200px; /* set the maximum height of the file list */
-  overflow-y: auto; /* add a vertical scrollbar when the file list exceeds the maximum height */
+  max-height: 200px;
+  overflow-y: auto;
 `;
+
 export const ProcessSteps = styled.div`
   display: flex;
   justify-content: center;
@@ -163,6 +183,7 @@ export const ProcessSteps = styled.div`
     height: 950px;
   }
 `;
+
 export const Steps = styled.div`
   display: flex;
   flex-direction: row;
@@ -182,6 +203,7 @@ export const Steps = styled.div`
     gap: 23px;
   }
 `;
+
 export const Title = styled.div`
   height: auto;
   width: 100%;
@@ -199,6 +221,7 @@ export const Title = styled.div`
     font-size: 20px;
   }
 `;
+
 export const Step = styled.div`
   display: flex;
   flex-direction: column;
