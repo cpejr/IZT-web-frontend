@@ -1,11 +1,13 @@
-import react from 'react';
 import { Container, Subtitle, Title, Description } from './styles';
 
 function NotFound() {
   return (
     <Container>
       <Title>404</Title>
-      <Subtitle>Página Não Encontrada</Subtitle>
+      <div>
+        <Subtitle>Página</Subtitle>
+        <Subtitle>Não Encontrada</Subtitle>
+      </div>
       <Description>
         Essa página não existe ou não está mais disponível
       </Description>
