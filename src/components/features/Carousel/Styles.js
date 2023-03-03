@@ -67,8 +67,8 @@ export const Dots = styled.button`
   text-align: center;
   display: inline-block;
   color: black;
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   border: 1px solid black;
   border-radius: 50%;
 

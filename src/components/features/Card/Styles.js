@@ -1,8 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import styled, { css } from 'styled-components';
 
-// const breakpoint;
-
 const isMiddleStyle = css`
   position: relative;
   z-index: 2;
@@ -109,10 +107,10 @@ export const CardTitle = styled.div`
   font-weight: 700;
   top: ${(props) => props.mediaTopWeb ?? '7%'};
 
-  ${({ isMiddleTitle }) => (isMiddleTitle ? isMiddleTitleStyle : '')};
+  ${({ isMiddle }) => (isMiddle ? isMiddleTitleStyle : '')};
 
   @media (min-width: 1000px) and (max-width: 1200px) {
-    ${({ isMiddleTitle }) => (isMiddleTitle ? isMiddleTitleStyle : '')};
+    ${({ isMiddle }) => (isMiddle ? isMiddleTitleStyle : '')};
     font-size: 18px;
   }
   @media (max-width: 1000px) {
@@ -145,10 +143,10 @@ export const Picture = styled.img`
   height: auto;
   margin-bottom: 15%;
 
-  ${({ isMiddleImg }) => (isMiddleImg ? isMiddleImgStyle : '')};
+  ${({ isMiddle }) => (isMiddle ? isMiddleImgStyle : '')};
 
   @media (min-width: 1000px) and (max-width: 1200px) {
-    ${({ isMiddleImg }) => (isMiddleImg ? isMiddleImgStyle : '')};
+    ${({ isMiddle }) => (isMiddle ? isMiddleImgStyle : '')};
     top: 23%;
     width: 160px;
   }
@@ -229,7 +227,7 @@ export const Button = styled.button`
     color: white;
   }
 
-  ${({ isMiddleBut }) => (isMiddleBut ? isMiddleButStyle : '')};
+  ${({ isMiddle }) => (isMiddle ? isMiddleButStyle : '')};
 
   @media (max-width: 1000px) {
     background-color: ${(props) => props.theme.colors.gray[1]};

@@ -4,9 +4,7 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import { Catalog } from './pages';
-
-import { Home } from './pages';
+import { Home, Catalog } from './pages';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

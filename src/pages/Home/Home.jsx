@@ -34,9 +34,6 @@ function Home() {
           />
           <Card
             isMiddle
-            isMiddleTitle
-            isMiddleImg
-            isMiddleBut
             title="Catálogo de Produtos"
             text="Conheça nossos produtos em nossos catálogos!"
             image={Catalog}
