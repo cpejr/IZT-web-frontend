@@ -5,7 +5,7 @@ export const ErrorMessage = styled.p`
   color: red;
   font-size: 0.7em;
   font-weight: 700;
-  display: ${(props) => (props.failedToLog ? 'flex' : 'none')};
+  display: ${(props) => (props.submitErrorMessage ? 'flex' : 'none')};
 `;
 
 export const SubmitSpace = styled.div`

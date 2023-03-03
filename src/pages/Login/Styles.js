@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const breakValue = '700px';
@@ -70,7 +71,9 @@ export const Form = styled.form`
   width: 100%;
 `;
 
-export const RemeberMe = styled.a`
+export const RemeberMe = styled(Link)`
+  all: unset;
+
   font-size: 0.7em;
   font-family: ${(props) => props.theme.fonts.montserrat};
   color: ${(props) => props.theme.colors.gray[3]};

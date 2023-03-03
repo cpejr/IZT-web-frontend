@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types';
 import { SubmitSpace, ErrorMessage, Button } from './Styles';
 
-export default function SubmitButton({ name, errors, relativeWidth }) {
-  const errorMessage = errors?.message;
+export default function SubmitButton({
+  name,
+  submitErrorMessage,
+  relativeWidth,
+}) {
   return (
     <SubmitSpace>
-      <ErrorMessage failedToLog={!!errorMessage}>{errorMessage}</ErrorMessage>
+      <ErrorMessage submitErrorMessage={!!submitErrorMessage}>
+        {submitErrorMessage}
+      </ErrorMessage>
       <Button type="submit" relativeWidth={relativeWidth}>
         {name}
       </Button>
@@ -13,13 +18,12 @@ export default function SubmitButton({ name, errors, relativeWidth }) {
   );
 }
 
-SubmitButton.propTypes = {
-  name: PropTypes.string.isRequired,
-  relativeWidth: PropTypes.string,
-  // eslint-disable-next-line react/forbid-prop-types
-  errors: PropTypes.object.isRequired,
-};
-
 SubmitButton.defaultProps = {
   relativeWidth: '100%',
+};
+
+SubmitButton.propTypes = {
+  relativeWidth: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  submitErrorMessage: PropTypes.string.isRequired,
 };
