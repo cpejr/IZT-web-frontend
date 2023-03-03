@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
 export { default as Home } from './Home/Home';
-// eslint-disable-next-line import/prefer-default-export
+export { default as Login } from './Login/Login';
 export { default as Catalog } from './Catalog/Catalog';
+export { default as NotFound } from './NotFound/NotFound';
