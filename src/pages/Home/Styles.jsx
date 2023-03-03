@@ -20,18 +20,10 @@ export const AboutUs = styled.div`
   align-items: flex-start;
   width: 90%;
   height: auto;
-  margin-top: 2%;
+  margin-top: 4%;
   margin-left: 10%;
   margin-right: 10%;
   margin-bottom: 1%;
-
-  @media (min-width: 1440px) {
-    margin-left: 0;
-    margin-right: 0;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
 `;
 
 export const OurHistoryTitle = styled.h1`
@@ -106,7 +98,7 @@ export const CardsContainer = styled.div`
   width: 90%;
   height: auto;
 
-  margin-bottom: 2%;
+  margin-bottom: 4%;
   margin-top: 2%;
 
   @media (max-width: 1000px) {

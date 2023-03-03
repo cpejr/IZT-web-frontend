@@ -146,3 +146,9 @@ export const BotaoEnviar = styled.button`
 export const InputMessage = styled.div`
   height: 72%;
 `;
+
+export const AreaText = styled.textarea`
+  @media (max-width: 700px) {
+    height: 160px;
+  }
+`;

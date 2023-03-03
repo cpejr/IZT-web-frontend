@@ -7,6 +7,9 @@ function Card({
   imageAlt,
   text,
   isMiddle,
+  isMiddleTitle,
+  isMiddleImg,
+  isMiddleBut,
   mediaTopWeb,
   media1000Top,
   media429Top,
@@ -16,6 +19,7 @@ function Card({
   return (
     <Container isMiddle={isMiddle}>
       <CardTitle
+        isMiddleTitle={isMiddleTitle}
         mediaTopWeb={mediaTopWeb}
         media1000Top={media1000Top}
         media429Top={media429Top}
@@ -24,12 +28,15 @@ function Card({
         {title}
       </CardTitle>
       <Picture
+        isMiddleImg={isMiddleImg}
         src={image}
         alt={imageAlt}
         pictureTopMedia1000={pictureTopMedia1000}
       />
       <CardText>{text}</CardText>
-      <Button type="button">Saiba mais</Button>
+      <Button type="button" isMiddleBut={isMiddleBut}>
+        Saiba mais
+      </Button>
     </Container>
   );
 }

@@ -10,6 +10,7 @@ import {
   Mensagem,
   BotaoEnviar,
   InputMessage,
+  AreaText,
 } from './Styles';
 import { FormInput, FormMask } from '../../common';
 
@@ -105,7 +106,7 @@ function FormsContactUs() {
           <InputMessage>
             <Mensagem>
               Mensagem:
-              <textarea rows={13} placeholder="Escreva aqui sua mensagem" />
+              <AreaText rows={13} placeholder="Escreva aqui sua mensagem" />
               <BotaoEnviar>Enviar</BotaoEnviar>
             </Mensagem>
           </InputMessage>

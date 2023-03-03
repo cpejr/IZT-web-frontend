@@ -25,15 +25,18 @@ function Home() {
             title="Treinamento em Retificação Centerless"
             text="Venha aprender tudo sobre retificação centerless com o nosso curso
           intensivo!"
-            mediaTopWeb="10%"
+            mediaTopWeb="5%"
             media1000Top="10%"
             media429Top="9%"
-            media360Top="10%"
+            media360Top="7%"
             image={Training}
             imageAlt="Training image"
           />
           <Card
             isMiddle
+            isMiddleTitle
+            isMiddleImg
+            isMiddleBut
             title="Catálogo de Produtos"
             text="Conheça nossos produtos em nossos catálogos!"
             image={Catalog}

@@ -7,17 +7,44 @@ const isMiddleStyle = css`
   position: relative;
   z-index: 2;
   font-size: 24px;
-  width: 460px;
-  height: 580px;
+  width: 35%;
+  height: 550px;
+  background: linear-gradient(
+    to top,
+    white 0%,
+    white 60%,
+    ${(props) => props.theme.colors.gray[1]} 60%,
+    ${(props) => props.theme.colors.gray[1]} 100%
+  );
 
-  /* @media (min-width: 1000px) and (max-width: 1300px) {
-    width: 414px;
-    height: 522px;
-  } */
-  @media (max-width: 1000px) {
-    width: 450px;
-    height: 550px;
+  @media (max-width: 1200px) {
+    height: 500px;
   }
+`;
+
+const isMiddleTitleStyle = css`
+  font-size: 24px;
+  top: ${(props) => props.mediaTopWeb ?? '5%'};
+  @media (max-width: 1200px) {
+    font-size: 22px;
+    top: ${(props) => props.mediaTopWeb ?? '5%'};
+  }
+`;
+
+const isMiddleImgStyle = css`
+  width: 230px;
+  top: 18%;
+
+  @media (max-width: 1200px) {
+    top: 19%;
+    width: 200px;
+  }
+`;
+
+const isMiddleButStyle = css`
+  font-size: 24px;
+  line-height: 34px;
+  bottom: 7%;
 `;
 
 export const Container = styled.div`
@@ -26,14 +53,13 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 1;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 20px;
   font-weight: 700;
 
-  width: 450px;
-  height: 550px;
+  width: 32.5%;
+  height: 530px;
   background: linear-gradient(
     to top,
     white 0%,
@@ -45,36 +71,27 @@ export const Container = styled.div`
 
   ${({ isMiddle }) => (isMiddle ? isMiddleStyle : '')};
 
-  @media (min-width: 1440px) {
-    margin-left: 0;
-    margin-right: 0;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-  @media (min-width: 1000px) and (max-width: 1300px) {
-    width: 405px;
-    height: 495px;
+  @media (max-width: 1200px) {
+    ${({ isMiddle }) => (isMiddle ? isMiddleStyle : '')};
+    height: 480px;
   }
   @media (max-width: 1000px) {
     background: fixed ${(props) => props.theme.colors.gray[1]};
     box-shadow: 0 0 0 0 ${(props) => props.theme.colors.gray[2]};
     margin: 2%;
+    width: 80%;
   }
   @media (max-width: 500px) {
-    width: 400px;
+    width: 97%;
     height: 500px;
   }
-  @media (max-width: 429px) {
-    width: 350px;
+  @media (max-width: 435px) {
     height: 450px;
   }
   @media (max-width: 360px) {
-    width: 300px;
     height: 400px;
   }
   @media (max-width: 310px) {
-    width: 270px;
     height: 390px;
   }
 `;
@@ -85,18 +102,22 @@ export const CardTitle = styled.div`
   text-align: center;
   justify-content: space-around;
   position: absolute;
-  top: ${(props) => props.mediaTopWeb ?? '10%'};
-  max-width: 90%;
-
+  top: 6%;
+  width: 85%;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
+  top: ${(props) => props.mediaTopWeb ?? '7%'};
 
-  @media (min-width: 1000px) and (max-width: 1300px) {
-    font-size: 22px;
+  ${({ isMiddleTitle }) => (isMiddleTitle ? isMiddleTitleStyle : '')};
+
+  @media (min-width: 1000px) and (max-width: 1200px) {
+    ${({ isMiddleTitle }) => (isMiddleTitle ? isMiddleTitleStyle : '')};
+    font-size: 18px;
   }
   @media (max-width: 1000px) {
     top: ${(props) => props.media1000Top ?? '10%'};
+    width: 90%;
   }
   @media (max-width: 429px) {
     font-size: 20px;
@@ -111,6 +132,39 @@ export const CardTitle = styled.div`
   }
 `;
 
+export const Picture = styled.img`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* object-fit: inherit; */
+  position: absolute;
+  /* margin-left: 1%;
+  margin-right: 1%; */
+  top: 23%;
+  width: 190px;
+  height: auto;
+  margin-bottom: 15%;
+
+  ${({ isMiddleImg }) => (isMiddleImg ? isMiddleImgStyle : '')};
+
+  @media (min-width: 1000px) and (max-width: 1200px) {
+    ${({ isMiddleImg }) => (isMiddleImg ? isMiddleImgStyle : '')};
+    top: 23%;
+    width: 160px;
+  }
+  @media (max-width: 1100px) {
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+  @media (max-width: 1000px) {
+    top: ${(props) => props.pictureTopMedia1000 ?? '23%'};
+    width: 200px;
+  }
+  @media (max-width: 540px) {
+    width: 45%;
+  }
+`;
+
 export const CardText = styled.div`
   display: flex;
   flex-direction: column;
@@ -118,11 +172,9 @@ export const CardText = styled.div`
   align-items: center;
   text-align: center;
   position: relative;
-  top: 26%;
-
+  top: 23%;
   width: 77%;
-  height: 30%;
-
+  height: auto;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 18px;
   font-weight: 400;
@@ -132,22 +184,22 @@ export const CardText = styled.div`
     overflow: visible;
   }
 
-  @media (min-width: 1000px) and (max-width: 1300px) {
+  @media (max-width: 1120px) {
     font-size: 16px;
-    top: 24%;
   }
   @media (max-width: 1000px) {
-    font-size: 16px;
+    top: 26%;
+    margin-bottom: 3%;
   }
   @media (max-width: 429px) {
-    top: 26%;
+    top: 23%;
     font-size: 14px;
   }
   @media (max-width: 360px) {
-    top: 23%;
+    top: 20%;
   }
   @media (max-width: 310px) {
-    top: 20%;
+    top: 17%;
   }
 `;
 
@@ -177,8 +229,13 @@ export const Button = styled.button`
     color: white;
   }
 
+  ${({ isMiddleBut }) => (isMiddleBut ? isMiddleButStyle : '')};
+
   @media (max-width: 1000px) {
     background-color: ${(props) => props.theme.colors.gray[1]};
+    font-size: 22px;
+    line-height: 27px;
+    bottom: 5%;
   }
   @media (max-width: 429px) {
     font-size: 20px;
@@ -188,21 +245,5 @@ export const Button = styled.button`
   }
   @media (max-width: 310px) {
     font-size: 16px;
-  }
-`;
-
-export const Picture = styled.img`
-  object-fit: inherit;
-  position: absolute;
-
-  top: 23%;
-  width: 55%;
-  height: auto;
-
-  @media (min-width: 1000px) and (max-width: 1300px) {
-    top: 25%;
-  }
-  @media (max-width: 1000px) {
-    top: ${(props) => props.pictureTopMedia1000 ?? '23%'};
   }
 `;
