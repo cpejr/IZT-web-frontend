@@ -5,13 +5,13 @@ import {
   Route,
 } from 'react-router-dom';
 import App from './App';
-import { Login, Catalog, NotFound } from './pages';
+import { Home, Login, Catalog, NotFound } from './pages';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<App />}>
-        <Route index element={<h1>Home</h1>} />
+        <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="catalogo" element={<Catalog />} />
       </Route>
