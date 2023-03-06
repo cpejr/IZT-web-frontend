@@ -8,7 +8,7 @@ import {
   BlackLine,
 } from './Styles';
 
-export default function AdministratorMenu() {
+export default function AdminMenu() {
   return (
     <Container>
       <MenuItens>
