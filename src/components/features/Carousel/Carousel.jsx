@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-
 import {
   Button,
   Container,
@@ -14,15 +13,18 @@ import {
 } from './Styles';
 
 export default function Carousel({
-  carouselData = [],
+  productData = [],
   maxHeight = '500px',
-  miniImages = false,
+  maxWidth = '500px',
+  width = '100%',
+  height = '100%',
+  miniImages = true,
 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
-  const slidesCount = carouselData.length;
+  const slidesCount = productData.length;
   const minSwipeDistance = 50;
 
   const updateImage = (newIndex) => {
@@ -55,13 +57,16 @@ export default function Carousel({
   return (
     <Container
       maxHeight={maxHeight}
+      maxWidth={maxWidth}
+      width={width}
+      hight={height}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
       <ImagesContainer>
         <Inner currentImageIndex={currentImageIndex}>
-          {carouselData.map(({ src, name, alt }) => (
+          {productData.map(({ src, name, alt }) => (
             <ImageContainer key={name}>
               <img src={src} alt={alt} />
             </ImageContainer>
@@ -77,7 +82,7 @@ export default function Carousel({
           <MdKeyboardArrowLeft />
         </Button>
 
-        {carouselData.map(({ src, name, alt }, index) =>
+        {productData.map(({ src, name, alt }, index) =>
           miniImages ? (
             <MiniImageContainer
               key={name}
@@ -105,10 +110,19 @@ export default function Carousel({
 }
 
 Carousel.defaultProps = {
-  carouselData: [],
+  productData: [],
+  maxHeight: 'none',
+  maxWidth: 'none',
+  width: '100%',
+  height: '100%',
+  miniImages: false,
 };
 
 Carousel.propTypes = {
-  maxHeight: PropTypes.string.isRequired,
-  carouselData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+  maxHeight: PropTypes.string,
+  maxWidth: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  miniImages: PropTypes.bool,
+  productData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };
