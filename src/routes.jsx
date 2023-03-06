@@ -4,15 +4,19 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import Catalog from './pages/Catalog/Catalog';
-import Product from './pages/Product/Product';
+import AppLayout from './layouts/AppLayout';
+import { Home, Login, Catalog, NotFound } from './pages';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/">
-      <Route index element={<h1>Hello World!</h1>} />
-      <Route path="catalogo" element={<Catalog />} />
-      <Route path="produto/:id" element={<Product />} />
+    <Route>
+      <Route path="/" element={<AppLayout />}>
+        <Route index element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="catalogo" element={<Catalog />} />
+        <Route path="produto/:id" element={<Product />} />
+      </Route>
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );

@@ -20,7 +20,6 @@
     "react-input-mask": "^2.0.4",
     "react-router-dom": "^6.8.1",
     "styled-components": "^5.3.6",
-    "z": "^1.0.9",
     "zod": "^3.20.6"
   },
   "devDependencies": {
