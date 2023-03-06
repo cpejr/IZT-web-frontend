@@ -106,9 +106,10 @@ export default function Carousel({
 
 Carousel.defaultProps = {
   carouselData: [],
+  maxHeight: '500px',
 };
 
 Carousel.propTypes = {
-  maxHeight: PropTypes.string.isRequired,
+  maxHeight: PropTypes.string,
   carouselData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };
