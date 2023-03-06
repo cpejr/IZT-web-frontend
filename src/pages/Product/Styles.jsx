@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-items: center;
-  width: 100vw;
+  width: 100%;
 `;
 
 export const Product = styled.div`
@@ -37,12 +37,10 @@ export const CarrosselContainer = styled.div`
 `;
 
 export const ProductName = styled.div`
-  width: 328px;
-  height: 44px;
-  padding-top: 35px;
-  padding-bottom: 35px;
-  align-self: center;
-  margin-bottom: 2%;
+  width: 100%;
+  max-width: 328px;
+  height: auto;
+  padding: 35px 0;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
@@ -50,6 +48,12 @@ export const ProductName = styled.div`
   line-height: 44px;
   text-align: center;
   color: #000000;
+
+  @media (min-width: 700px) {
+    width: auto;
+    padding: 0;
+    margin-right: 50px;
+  }
 `;
 
 export const Info = styled.div`
