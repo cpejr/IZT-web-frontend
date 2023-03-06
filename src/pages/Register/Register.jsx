@@ -58,7 +58,7 @@ const validationSchema = z.object({
     .min(1, { message: 'Favor digitar uma senha' })
     .min(6, 'A senha não pode ter menos de 6 caracteres')
     .max(16, 'A senha não pode ter mais de 16 caracteres'),
-});
+}); // all inputs validation schema
 
 function SignUp() {
   const {
@@ -68,14 +68,14 @@ function SignUp() {
   } = useForm({
     resolver: zodResolver(validationSchema),
   });
-  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
+  const [submitErrorMessage, setSubmitErrorMessage] = useState(''); // probably need to change this line
 
   const onSubmit = (data) => {
     console.log(data);
     setTimeout(() => {
       setSubmitErrorMessage('Email e/ou senha incorretos');
     }, 3000);
-  };
+  }; // also still necessary to change this function
 
   return (
     <Page>
@@ -191,4 +191,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUp; // user registration function
