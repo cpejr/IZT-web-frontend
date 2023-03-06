@@ -25,7 +25,7 @@ function FileList() {
     <FileListWrapper>
       {files.map((file) => (
         <FileItem key={file.name}>
-          <FaDownload color="AF0C0C" size="24px" />
+          <FaDownload color="#900603" size="24px" />
           <a href={file.route} target="_blank" rel="noopener noreferrer">
             {file.name}
           </a>
