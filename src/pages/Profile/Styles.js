@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Page = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,13 +18,40 @@ export const Title = styled.h2`
   color: #123645;
 `;
 
+export const Subtitle = styled.h3`
+  margin-bottom: 5%;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  width: 100%;
+  max-width: 1227px;
+  max-height: 560px;
+  margin-top: 50px;
+`;
+
+export const FirstColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  margin-right: 20%;
+`;
+
+export const SecondColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const PersonalData = styled.div`
   display: flex;
   flex-direction: column;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
+  margin-bottom: 25%;
   gap: 20px;
 
   width: 100%;
@@ -63,12 +90,14 @@ export const Info = styled.div`
   }
 `;
 
-export const Label = styled.p`
-  margin: 10px 0;
+export const Value = styled.p`
+  margin: 5%;
+  color: ${(props) => props.color ?? 'black'};
 `;
 
-export const Value = styled.p`
+export const Label = styled.p`
   font-weight: bold;
+  color: ${(props) => props.color ?? 'black'};
 `;
 export const Address = styled.p`
   display: flex;
@@ -109,10 +138,11 @@ export const Lessons = styled.p`
   justify-content: center;
   align-items: flex-start;
   padding: 50px;
-  gap: 40px;
+  /* gap: 40px; */
 
   width: 100%;
   height: auto;
+  max-height: 310px;
 
   background: #123645;
   border-radius: 15px 0px 0px 15px;
