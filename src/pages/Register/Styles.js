@@ -66,11 +66,24 @@ export const Title = styled.h1`
   text-align: center;
 `;
 
-export const Form = styled.form`
+export const FormColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   /* gap: 1em; */
   width: 100%;
   max-width: 350px;
+`;
+
+export const Form = styled.form`
+  max-width: 1190px;
+  width: 90%;
+  display: wrap;
+  justify-content: center;
+  gap: 1.2em;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
