@@ -7,13 +7,11 @@ import {
   Container,
   Title,
   CategoryFilterContainer,
-  Subsection,
-  TypeFilter,
   Text,
   SearchProduct,
   ProductList,
   Row,
-  Button,
+  EditButton,
   SearchIconButton,
   SearchSection,
 } from './Styles';
@@ -24,11 +22,6 @@ export default function AdminListCategory() {
       <Title>Lista de categorias</Title>
 
       <CategoryFilterContainer>
-        <Subsection>
-          <Text>Filtrar por categoria:</Text>
-          <TypeFilter>TypeFilter</TypeFilter>
-        </Subsection>
-
         <SearchSection>
           <SearchIconButton>
             <HiSearch size={25} />
@@ -39,11 +32,10 @@ export default function AdminListCategory() {
 
       <ProductList>
         <Row>
-          <Text>Produto 1</Text>
           <Text>Tipo 1</Text>
-          <Button>
-            <TbPencil size={25} />
-          </Button>
+          <EditButton>
+            <TbPencil size={30} />
+          </EditButton>
         </Row>
       </ProductList>
     </Container>

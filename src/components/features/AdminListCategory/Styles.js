@@ -4,12 +4,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 40px;
+  gap: 20px;
 
   width: 100%;
   height: 399px;
-  left: 338px;
-  top: 135px;
+  padding-left: 40px;
+  padding-right: 5%;
+  padding-top: 25px;
 
   font-family: 'Montserrat';
   font-style: normal;
@@ -23,16 +24,19 @@ export const Title = styled.p`
   font-weight: 600;
   font-size: 32px;
   line-height: 39px;
+  margin-bottom: 20px;
 `;
 
 export const CategoryFilterContainer = styled.div`
   display: flex;
+  justify-content: end;
   align-items: center;
   flex-direction: row;
-  justify-content: space-between;
 
   width: 100%;
   height: 50px;
+  padding-right: 10px;
+  padding-left: 10px;
 
   background: #eeeeee;
 `;
@@ -54,12 +58,17 @@ export const SearchProduct = styled.input`
 
   background: #ffffff;
   border-radius: 20px;
+  border: none;
 
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
+
+  @media (max-width: 990px) {
+    font-size: 14px;
+  }
 `;
 
 export const Row = styled.div`
@@ -68,18 +77,30 @@ export const Row = styled.div`
   justify-content: space-between;
 `;
 
-export const Button = styled.button`
-  background-color: none;
-  border-radius: none;
-
+export const EditButton = styled.button`
+  border: none;
+  background-color: transparent;
   cursor: pointer;
+
+  svg {
+    /* Alterar grossura da linha do ícone */
+  }
 `;
 
-export const ProductList = styled.div``;
+export const ProductList = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
 
-export const Subsection = styled.div``;
-
-export const TypeFilter = styled.div``;
+export const Subsection = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
 
 export const SearchSection = styled.div`
   display: flex;
@@ -88,6 +109,10 @@ export const SearchSection = styled.div`
   position: relative;
   max-height: 35px;
   height: 100%;
+
+  @media (max-width: 990px) {
+    width: 170px;
+  }
 `;
 
 export const SearchIconButton = styled.button`
@@ -97,7 +122,7 @@ export const SearchIconButton = styled.button`
   right: 0;
   z-index: 10;
   border: none;
-  background: transparent;
+  background: none;
   outline: none;
   height: auto;
   width: auto;

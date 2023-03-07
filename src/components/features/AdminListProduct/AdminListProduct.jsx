@@ -13,9 +13,9 @@ import {
   SearchProduct,
   ProductList,
   Row,
-  Button,
-  SearchIconButton,
   SearchSection,
+  EditButton,
+  SearchIconButton,
 } from './Styles';
 
 export default function AdminListProduct() {
@@ -41,9 +41,9 @@ export default function AdminListProduct() {
         <Row>
           <Text>Produto 1</Text>
           <Text>Tipo 1</Text>
-          <Button>
-            <TbPencil size={25} />
-          </Button>
+          <EditButton>
+            <TbPencil size={30} />
+          </EditButton>
         </Row>
       </ProductList>
     </Container>
