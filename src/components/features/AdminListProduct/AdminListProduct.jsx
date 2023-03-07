@@ -18,7 +18,7 @@ import {
   SearchSection,
 } from './Styles';
 
-export default function AdminList() {
+export default function AdminListProduct() {
   return (
     <Container>
       <Title>Lista de produtos</Title>

@@ -50,10 +50,16 @@ export const SearchProduct = styled.input`
   padding: 5px 10px;
 
   width: 100%;
-  height: 100%;
+  height: 35px;
 
   background: #ffffff;
   border-radius: 20px;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
 `;
 
 export const Row = styled.div`

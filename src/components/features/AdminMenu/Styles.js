@@ -54,4 +54,12 @@ export const BlackLine = styled.p`
 
 export const StyledLink = styled(Link)`
   all: unset;
+  cursor: pointer;
+
+  :hover {
+    width: 230px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgba(199, 199, 199, 1);
+  }
 `;
