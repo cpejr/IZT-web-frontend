@@ -27,6 +27,7 @@ export const Title = styled.p`
 
 export const CategoryFilterContainer = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: row;
   justify-content: space-between;
 
@@ -45,16 +46,11 @@ export const Text = styled.p`
 `;
 
 export const SearchProduct = styled.input`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  display: block;
   padding: 5px 10px;
-  gap: 10px;
 
-  width: 230px;
-  height: 35px;
-  left: 760px;
-  top: 8px;
+  width: 100%;
+  height: 100%;
 
   background: #ffffff;
   border-radius: 20px;
@@ -66,7 +62,39 @@ export const Row = styled.div`
   justify-content: space-between;
 `;
 
-export const EditButton = styled.button`
+export const Button = styled.button`
   background-color: none;
   border-radius: none;
+
+  cursor: pointer;
+`;
+
+export const ProductList = styled.div``;
+
+export const Subsection = styled.div``;
+
+export const TypeFilter = styled.div``;
+
+export const SearchSection = styled.div`
+  display: flex;
+  align-items: center;
+  width: 200px;
+  position: relative;
+  max-height: 35px;
+  height: 100%;
+`;
+
+export const SearchIconButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  z-index: 10;
+  border: none;
+  background: transparent;
+  outline: none;
+  height: auto;
+  width: auto;
+
+  cursor: pointer;
 `;

@@ -13,7 +13,9 @@ import {
   SearchProduct,
   ProductList,
   Row,
-  EditButton,
+  Button,
+  SearchIconButton,
+  SearchSection,
 } from './Styles';
 
 export default function AdminList() {
@@ -27,18 +29,21 @@ export default function AdminList() {
           <TypeFilter>TypeFilter</TypeFilter>
         </Subsection>
 
-        <SearchProduct type="SearchProduct" placeholder="Pesquisar produto">
-          <HiSearch size={25} />
-        </SearchProduct>
+        <SearchSection>
+          <SearchIconButton>
+            <HiSearch size={25} />
+          </SearchIconButton>
+          <SearchProduct type="SearchProduct" placeholder="Pesquisar produto" />
+        </SearchSection>
       </CategoryFilterContainer>
 
       <ProductList>
         <Row>
           <Text>Produto 1</Text>
           <Text>Tipo 1</Text>
-          <EditButton>
+          <Button>
             <TbPencil size={25} />
-          </EditButton>
+          </Button>
         </Row>
       </ProductList>
     </Container>

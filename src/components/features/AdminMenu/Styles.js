@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -49,4 +50,8 @@ export const Text = styled.p`
 export const BlackLine = styled.p`
   width: 249px;
   border: 1.9px solid #123645;
+`;
+
+export const StyledLink = styled(Link)`
+  all: unset;
 `;

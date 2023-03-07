@@ -6,6 +6,7 @@ import {
   Title,
   Text,
   BlackLine,
+  StyledLink,
 } from './Styles';
 
 export default function AdminMenu() {
@@ -20,13 +21,17 @@ export default function AdminMenu() {
         <Section>
           <Title>Produtos</Title>
           <Text>Adicionar produtos</Text>
-          <Text>Listar produtos</Text>
+          <StyledLink to="/administrador/editar-produtos">
+            Listar produtos
+          </StyledLink>
         </Section>
 
         <Section>
           <Title>Categorias</Title>
           <Text>Adicionar categoria</Text>
-          <Text>Listar categorias</Text>
+          <StyledLink to="/administrador/editar-categorias">
+            Listar categorias
+          </StyledLink>
           <BlackLine />
         </Section>
 

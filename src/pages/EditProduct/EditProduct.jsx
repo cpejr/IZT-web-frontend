@@ -1,7 +1,12 @@
+import { AdminList } from '../../components/features';
 import { Container } from './Styles';
 
 function EditProduct() {
-  return <Container>EditProduct</Container>;
+  return (
+    <Container>
+      <AdminList />
+    </Container>
+  );
 }
 
 export default EditProduct;
