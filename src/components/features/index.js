@@ -6,3 +6,4 @@ export { default as FormsContactUs } from './FormsContact/FormsContact';
 export { default as AdminMenu } from './AdminMenu/AdminMenu';
 export { default as AdminListCategory } from './AdminListCategory/AdminListCategory';
 export { default as AdminListProduct } from './AdminListProduct/AdminListProduct';
+export { default as ModalAddProduct } from './ModalAddProduct/ModalAddProduct';

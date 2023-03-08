@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
@@ -18,9 +18,23 @@ import {
   SearchIconButton,
 } from './Styles';
 
+import ModalAddProduct from '../ModalAddProduct/ModalAddProduct';
+
 export default function AdminListProduct() {
+  const [openModalAddProduct, setOpenModalAddProduct] = useState(false);
+
   return (
     <Container>
+      <EditButton onClick={() => setOpenModalAddProduct(1)}>
+        ABRIR MODAL
+      </EditButton>
+      <ModalAddProduct
+        isOppen={openModalAddProduct}
+        setModalAddProductOpen={() =>
+          setOpenModalAddProduct(!openModalAddProduct)
+        }
+      />
+
       <Title>Lista de produtos</Title>
 
       <CategoryFilterContainer>

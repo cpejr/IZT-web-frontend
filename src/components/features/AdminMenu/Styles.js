@@ -63,3 +63,15 @@ export const StyledLink = styled(Link)`
     background-color: rgba(199, 199, 199, 1);
   }
 `;
+
+export const ButtonTest = styled.button`
+  all: unset;
+  cursor: pointer;
+
+  :hover {
+    width: 230px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgba(199, 199, 199, 1);
+  }
+`;
