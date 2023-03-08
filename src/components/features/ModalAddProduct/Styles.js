@@ -66,6 +66,26 @@ export const Text = styled.p`
   color: white;
 `;
 
+export const AddButton = styled.button`
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 150px;
+  height: 30px;
+
+  background-color: black;
+  border: none;
+  color: white;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+`;
+
 export const MiniText = styled.p`
   font-family: 'Montserrat';
   font-style: normal;

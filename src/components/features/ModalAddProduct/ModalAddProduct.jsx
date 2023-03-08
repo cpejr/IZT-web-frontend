@@ -1,4 +1,5 @@
 import React from 'react';
+import { HiPlusSm } from 'react-icons/hi';
 import {
   Container,
   ModalContent,
@@ -7,6 +8,7 @@ import {
   Subsection,
   Text,
   MiniText,
+  AddButton,
   InputModal,
   InputModalName,
   ModalButton,
@@ -37,6 +39,10 @@ export default function ModalAddProduct() {
           <Subsection>
             <Text>Imagens:</Text>
             <MiniText>Anexe as imagens do produto</MiniText>
+            <AddButton>
+              <HiPlusSm size={20} />
+              Nova imagem
+            </AddButton>
           </Subsection>
 
           <Subsection>
