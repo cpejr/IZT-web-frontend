@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Modal } from 'antd';
 import {
   Container,
   MenuItens,
@@ -7,9 +8,24 @@ import {
   Text,
   BlackLine,
   StyledLink,
+  Button,
 } from './Styles';
 
+import ModalAddProduct from '../ModalAddProduct/ModalAddProduct';
+
 export default function AdminMenu() {
+  const [modalAddProduct, setModalAddProduct] = useState(false);
+
+  const openModalAddProduct = (e) => {
+    e.preventDefault();
+    setModalAddProduct(true);
+  };
+
+  const closeModalAddProduct = (e) => {
+    e.preventDefault();
+    setModalAddProduct(false);
+  };
+
   return (
     <Container>
       <MenuItens>
@@ -20,7 +36,7 @@ export default function AdminMenu() {
 
         <Section>
           <Title>Produtos</Title>
-          <Text>Adicionar produtos</Text>
+          <Button onClick={openModalAddProduct}>Adicionar produtos</Button>
           <StyledLink to="/administrador/editar-produtos">
             Listar produtos
           </StyledLink>
@@ -28,7 +44,7 @@ export default function AdminMenu() {
 
         <Section>
           <Title>Categorias</Title>
-          <Text>Adicionar categoria</Text>
+          <Button>Adicionar categoria</Button>
           <StyledLink to="/administrador/editar-categorias">
             Listar categorias
           </StyledLink>
@@ -41,6 +57,17 @@ export default function AdminMenu() {
           <Text>Liberação do software</Text>
         </Section>
       </MenuItens>
+
+      <Modal
+        open={modalAddProduct}
+        onCancel={closeModalAddProduct}
+        footer={null}
+        width="50%"
+        centered
+        destroyOnClose
+      >
+        <ModalAddProduct />
+      </Modal>
     </Container>
   );
 }
