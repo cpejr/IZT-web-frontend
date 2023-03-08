@@ -62,7 +62,7 @@ export default function AdminMenu() {
         open={modalAddProduct}
         onCancel={closeModalAddProduct}
         footer={null}
-        width="50%"
+        bodyStyle={{ padding: '1%' }}
         centered
         destroyOnClose
       >

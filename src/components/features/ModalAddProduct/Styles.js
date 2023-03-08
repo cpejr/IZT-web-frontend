@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  position: absolute;
   width: 1100px;
   height: 800px;
-  left: 158px;
-  top: 166px;
 
   background: #123645;
 `;
@@ -27,11 +24,8 @@ export const ModalContent = styled.div`
   padding: 0px;
   gap: 150px;
 
-  position: absolute;
   width: 950px;
   height: 702px;
-  left: 75px;
-  top: 46px;
 `;
 
 export const RightSection = styled.div`

@@ -1,8 +1,4 @@
-import React, { useState } from 'react';
-// import { toast } from 'react-toastify';
-// import { useHistory } from 'react-router-dom';
-// import { Spin } from 'antd';
-// import { GrFormClose } from 'react-icons/gr';
+import React from 'react';
 import {
   Container,
   ModalContent,
@@ -19,9 +15,6 @@ import {
 export default function ModalAddProduct() {
   return (
     <Container>
-      {/* <CloseButton onClick={closeModalAddProduct}>
-        <GrFormClose size={50} />
-      </CloseButton> */}
       <ModalContent>
         <LeftSection>
           <Subsection>
