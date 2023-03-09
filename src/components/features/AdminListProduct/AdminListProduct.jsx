@@ -2,6 +2,7 @@ import React from 'react';
 
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
+import { useGetProducts } from '../../../hooks/query/products';
 
 import {
   Container,
@@ -19,6 +20,8 @@ import {
 } from './Styles';
 
 export default function AdminListProduct() {
+  const { data: products } = useGetProducts();
+  console.log(products);
   return (
     <Container>
       <Title>Lista de produtos</Title>
@@ -38,13 +41,15 @@ export default function AdminListProduct() {
       </CategoryFilterContainer>
 
       <ProductList>
-        <Row>
-          <Text>Produto 1</Text>
-          <Text>Tipo 1</Text>
-          <EditButton>
-            <TbPencil size={30} />
-          </EditButton>
-        </Row>
+        {products?.map((product) => (
+          <Row key={product._id}>
+            <Text>{product.name}</Text>
+            <Text>{product.category.name}</Text>
+            <EditButton>
+              <TbPencil size={30} />
+            </EditButton>
+          </Row>
+        ))}
       </ProductList>
     </Container>
   );
