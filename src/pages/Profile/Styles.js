@@ -5,8 +5,17 @@ export const Page = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
+  width: 100%;
+  height: auto;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 20px;
+  }
 `;
-
+export const Border = styled.div``;
 export const Title = styled.h2`
   font-family: 'Montserrat';
   font-style: normal;
@@ -16,33 +25,65 @@ export const Title = styled.h2`
   text-align: center;
 
   color: #123645;
+  width: 100%;
+  height: auto;
+
+  @media (max-width: 700px) {
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+  }
 `;
 
 export const Subtitle = styled.h3`
   margin-bottom: 5%;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  white-space: nowrap;
+
+  color: #000000;
+  width: 100%;
+  height: auto;
+  @media (max-width: 700px) {
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+  }
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: end;
-  align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 1227px;
   max-height: 560px;
   margin-top: 50px;
+  gap: 30%;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
+  }
 `;
 
 export const FirstColumn = styled.div`
   display: flex;
   flex-direction: column;
-
-  margin-right: 20%;
+  gap: 20px;
 `;
 
 export const SecondColumn = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: auto;
 `;
 
 export const PersonalData = styled.div`
@@ -67,9 +108,19 @@ export const PersonalData = styled.div`
     color: #000000;
   }
 `;
+export const Infos = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+  width: 100;
+  height: auto;
+`;
+
 export const Info = styled.div`
   display: flex;
-  gap: 5px;
+  gap: 20px;
   h1 {
     font-family: 'Montserrat';
     font-style: normal;
@@ -90,16 +141,7 @@ export const Info = styled.div`
   }
 `;
 
-export const Value = styled.p`
-  margin: 5%;
-  color: ${(props) => props.color ?? 'black'};
-`;
-
-export const Label = styled.p`
-  font-weight: bold;
-  color: ${(props) => props.color ?? 'black'};
-`;
-export const Address = styled.p`
+export const Address = styled.div`
   display: flex;
   flex-direction: column;
   display: flex;
@@ -121,7 +163,31 @@ export const Address = styled.p`
     color: #000000;
   }
 `;
+export const ChangeInfo = styled.p`
+  padding: 10px;
+  gap: 10px;
+
+  width: 100%;
+  height: auto;
+
+  border: 1px solid #000000;
+  border-radius: 5px;
+  h3 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #203699;
+  }
+`;
 export const Contact = styled.p`
+  gap: 20px;
   h3 {
     font-family: 'Montserrat';
     font-style: normal;
@@ -132,30 +198,22 @@ export const Contact = styled.p`
     color: #000000;
   }
 `;
+
 export const Lessons = styled.p`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   padding: 50px;
-  /* gap: 40px; */
+  white-space: nowrap;
+  gap: 20px;
 
   width: 100%;
   height: auto;
   max-height: 310px;
 
   background: #123645;
-  border-radius: 15px 0px 0px 15px;
-  h2 {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 29px;
-
-    color: #ffff;
-  }
-
+  border-radius: 15px 15px 15px 15px;
   h3 {
     font-family: 'Montserrat';
     font-style: normal;
@@ -163,6 +221,28 @@ export const Lessons = styled.p`
     font-size: 24px;
     line-height: 29px;
 
-    color: #ffff;
+    color: #fff;
+  }
+`;
+export const Info2 = styled.div`
+  display: flex;
+  gap: 20px;
+  h1 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #fff;
+  }
+  h2 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #fff;
   }
 `;
