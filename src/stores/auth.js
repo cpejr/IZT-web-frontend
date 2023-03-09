@@ -6,9 +6,9 @@ const useAuthStore = create((set) => ({
   setAuth: (accessToken) => {
     const { user } = jwtDecode(accessToken);
 
-    set(({ oldAuth }) => ({
+    set((state) => ({
       auth: {
-        ...oldAuth,
+        ...state.auth,
         accessToken,
         user,
       },
