@@ -62,7 +62,7 @@ export const ModalButton = styled.button`
   flex-direction: row;
   align-items: center;
 
-  width: 192px;
+  width: 212px;
   height: 45px;
 
   background-color: transparent;

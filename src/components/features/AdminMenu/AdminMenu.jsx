@@ -90,9 +90,13 @@ export default function AdminMenu() {
         onCancel={closeModalCreateCategory}
         footer={null}
         bodyStyle={{
-          margin: '0px',
-          padding: '0px',
-          color: 'none',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#123645',
+          padding: 0,
+          width: '500px',
+          height: '250px',
+          borderRadius: 'none',
         }}
         centered
         destroyOnClose

@@ -2,7 +2,7 @@ import React from 'react';
 import { FiSave } from 'react-icons/fi';
 import { Container, Text, Input, ModalContent, ModalButton } from './Styles';
 
-export default function ModalCreateCategory() {
+export default function ModalEditCategory() {
   return (
     <Container>
       <ModalContent>
@@ -10,7 +10,7 @@ export default function ModalCreateCategory() {
         <Input />
         <ModalButton>
           <FiSave size={25} />
-          <p>Criar categoria</p>
+          <p>Salvar alterações</p>
         </ModalButton>
       </ModalContent>
     </Container>
