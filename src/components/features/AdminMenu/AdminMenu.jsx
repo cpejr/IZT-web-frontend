@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Modal } from 'antd';
 import {
   Container,
   MenuItens,
@@ -9,6 +8,7 @@ import {
   BlackLine,
   StyledLink,
   Button,
+  ModalStyle,
 } from './Styles';
 
 import ModalAddProduct from '../ModalAddProduct/ModalAddProduct';
@@ -70,9 +70,11 @@ export default function AdminMenu() {
         </Section>
       </MenuItens>
 
-      <Modal
+      <ModalStyle
         open={modalAddProduct}
         onCancel={closeModalAddProduct}
+        width={1100}
+        padding={null}
         footer={null}
         bodyStyle={{
           margin: '0px',
@@ -83,11 +85,13 @@ export default function AdminMenu() {
         destroyOnClose
       >
         <ModalAddProduct />
-      </Modal>
+      </ModalStyle>
 
-      <Modal
+      <ModalStyle
         open={modalCreateCategory}
         onCancel={closeModalCreateCategory}
+        width={1100}
+        padding={0}
         footer={null}
         bodyStyle={{
           alignItems: 'center',
@@ -102,7 +106,7 @@ export default function AdminMenu() {
         destroyOnClose
       >
         <ModalCreateCategory />
-      </Modal>
+      </ModalStyle>
     </Container>
   );
 }

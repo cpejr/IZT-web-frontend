@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Modal } from 'antd';
 
 // eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div`
@@ -73,5 +74,11 @@ export const Button = styled.button`
     padding: 5px;
     border-radius: 10px;
     background-color: rgba(199, 199, 199, 1);
+  }
+`;
+
+export const ModalStyle = styled(Modal)`
+  :where(.css-dev-only-do-not-override-1me4733).ant-modal .ant-modal-content {
+    background-color: #123645;
   }
 `;

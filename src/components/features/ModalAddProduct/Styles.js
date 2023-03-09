@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 1100px;
-  height: 800px;
-
-  background: #123645;
+  width: 60%;
+  height: 60%;
 `;
 
 export const CloseButton = styled.button`
