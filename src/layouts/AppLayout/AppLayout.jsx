@@ -3,9 +3,9 @@ import { Header, Footer } from '../../components/features';
 import { useRefreshToken } from '../../hooks/query/sessions';
 
 function App() {
-  const { isFetching } = useRefreshToken();
+  const { isInitialLoading } = useRefreshToken();
 
-  return isFetching ? (
+  return isInitialLoading ? (
     <h1>Carregando...</h1> // TODO: add a good looking loading state
   ) : (
     <>
