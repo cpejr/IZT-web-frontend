@@ -19,7 +19,7 @@ export function useGetUsers({
   });
 }
 
-export function UseCreateUser({
+export function useCreateUser({
   onSucess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
@@ -30,7 +30,7 @@ export function UseCreateUser({
   });
 }
 
-export function UseUpdateUser({
+export function useUpdateUser({
   onSucess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
@@ -41,7 +41,7 @@ export function UseUpdateUser({
   });
 }
 
-export function UseDeleteUser({
+export function useDeleteUser({
   onSucess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
