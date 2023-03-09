@@ -19,7 +19,6 @@ export const Body = styled.div`
   align-items: center;
   margin-top: 5%;
   margin-bottom: 10%;
-  padding-left: 7%;
   width: 100%;
   height: auto;
   @media (max-width: 700px) {
@@ -143,6 +142,7 @@ export const Infos = styled.div`
 
 export const Info = styled.div`
   display: flex;
+  justify-content: stretch;
   gap: 20px;
   h1 {
     font-family: 'Montserrat';
@@ -186,7 +186,9 @@ export const Address = styled.div`
     color: #000000;
   }
 `;
-export const ChangeInfo = styled.p`
+export const ChangeInfo = styled.button`
+  /* display: flex;
+  justify-content: stretch; */
   padding: 10px;
   gap: 10px;
 
@@ -195,19 +197,13 @@ export const ChangeInfo = styled.p`
 
   border: 1px solid #000000;
   border-radius: 5px;
-  h3 {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
+  background-color: transparent;
+  margin-top: 10%;
 
-    display: flex;
-    align-items: center;
-    text-align: center;
-
-    color: #203699;
-  }
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-size: 18px;
+  font-weight: 600;
+  color: ${(props) => props.theme.colors.blue};
 `;
 export const Contact = styled.p`
   gap: 20px;
@@ -231,7 +227,7 @@ export const Lessons = styled.p`
   white-space: nowrap;
   gap: 20px;
 
-  width: 639px;
+  max-width: 639px;
   height: auto;
   max-height: 310px;
 

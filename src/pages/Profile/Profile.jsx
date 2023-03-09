@@ -1,3 +1,5 @@
+import React from 'react';
+import { SettingOutlined } from '@ant-design/icons';
 import {
   Container,
   Page,
@@ -67,7 +69,10 @@ function Profile() {
                 </Info>
               </Infos>
             </Address>
-            <ChangeInfo>Alterar Informaçóes</ChangeInfo>
+            <ChangeInfo>
+              <SettingOutlined />
+              Alterar Informações
+            </ChangeInfo>
           </FirstColumn>
           <SecondColumn>
             <Contact>
