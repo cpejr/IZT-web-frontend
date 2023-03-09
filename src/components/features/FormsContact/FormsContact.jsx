@@ -37,7 +37,7 @@ const validationSchema = z.object({
     .min(5, { message: 'A mensagem deve conter no mínimo 5 caracteres' }),
 });
 
-function FormsContactUs() {
+function FormsContact() {
   const {
     handleSubmit,
     register,
@@ -116,4 +116,4 @@ function FormsContactUs() {
   );
 }
 
-export default FormsContactUs;
+export default FormsContact;

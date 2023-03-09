@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel, FormsContactUs, Card } from '../../components/features';
+import { Carousel, FormsContact, Card } from '../../components/features';
 import Catalog from '../../assets/homeCards/catalog.png';
 import Software from '../../assets/homeCards/software.png';
 import Training from '../../assets/homeCards/training.png';
@@ -48,7 +48,7 @@ function Home() {
             pictureTopMedia1000="20%"
           />
         </CardsContainer>
-        <FormsContactUs />
+        <FormsContact />
         <AboutUs>
           <OurHistoryTitle>Conheça a nossa história</OurHistoryTitle>
           <OurHistory>
