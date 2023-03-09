@@ -2,9 +2,24 @@ import styled from 'styled-components';
 
 export const Page = styled.div`
   display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  /* @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 20px;
+  } */
+`;
+export const Body = styled.div`
+  display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 5%;
+  margin-bottom: 10%;
+  padding-left: 7%;
   width: 100%;
   height: auto;
   @media (max-width: 700px) {
@@ -15,7 +30,12 @@ export const Page = styled.div`
     gap: 20px;
   }
 `;
-export const Border = styled.div``;
+export const Border = styled.div`
+  width: 8%;
+  max-width: 110px;
+  height: auto;
+  background-color: ${(props) => props.theme.colors.darkBlue};
+`;
 export const Title = styled.h2`
   font-family: 'Montserrat';
   font-style: normal;
@@ -23,6 +43,7 @@ export const Title = styled.h2`
   font-size: 32px;
   line-height: 39px;
   text-align: center;
+  position: relative;
 
   color: #123645;
   width: 100%;
@@ -36,7 +57,7 @@ export const Title = styled.h2`
 `;
 
 export const Subtitle = styled.h3`
-  margin-bottom: 5%;
+  margin-bottom: 2%;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
@@ -62,6 +83,7 @@ export const Container = styled.div`
   max-width: 1227px;
   max-height: 560px;
   margin-top: 50px;
+  padding-top: 10%;
   gap: 30%;
   @media (max-width: 700px) {
     display: flex;
@@ -76,6 +98,7 @@ export const FirstColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding-left: 10%;
 `;
 
 export const SecondColumn = styled.div`
@@ -208,7 +231,7 @@ export const Lessons = styled.p`
   white-space: nowrap;
   gap: 20px;
 
-  width: 100%;
+  width: 639px;
   height: auto;
   max-height: 310px;
 
