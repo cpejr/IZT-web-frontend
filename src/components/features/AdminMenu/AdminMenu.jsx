@@ -12,9 +12,11 @@ import {
 } from './Styles';
 
 import ModalAddProduct from '../ModalAddProduct/ModalAddProduct';
+import ModalCreateCategory from '../ModalCreateCategory/ModalCreateCategory';
 
 export default function AdminMenu() {
   const [modalAddProduct, setModalAddProduct] = useState(false);
+  const [modalCreateCategory, setModalCreateCategory] = useState(false);
 
   const openModalAddProduct = (e) => {
     e.preventDefault();
@@ -24,6 +26,16 @@ export default function AdminMenu() {
   const closeModalAddProduct = (e) => {
     e.preventDefault();
     setModalAddProduct(false);
+  };
+
+  const openModalCreateCategory = (e) => {
+    e.preventDefault();
+    setModalCreateCategory(true);
+  };
+
+  const closeModalCreateCategory = (e) => {
+    e.preventDefault();
+    setModalCreateCategory(false);
   };
 
   return (
@@ -44,7 +56,7 @@ export default function AdminMenu() {
 
         <Section>
           <Title>Categorias</Title>
-          <Button>Adicionar categoria</Button>
+          <Button onClick={openModalCreateCategory}>Adicionar categoria</Button>
           <StyledLink to="/administrador/editar-categorias">
             Listar categorias
           </StyledLink>
@@ -71,6 +83,21 @@ export default function AdminMenu() {
         destroyOnClose
       >
         <ModalAddProduct />
+      </Modal>
+
+      <Modal
+        open={modalCreateCategory}
+        onCancel={closeModalCreateCategory}
+        footer={null}
+        bodyStyle={{
+          margin: '0px',
+          padding: '0px',
+          color: 'none',
+        }}
+        centered
+        destroyOnClose
+      >
+        <ModalCreateCategory />
       </Modal>
     </Container>
   );
