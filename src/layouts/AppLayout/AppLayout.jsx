@@ -1,58 +1,47 @@
 import { Outlet } from 'react-router-dom';
 import { Header, Footer } from '../../components/features';
-import { useRefreshToken } from '../../hooks/query/sessions';
 import {
-  UseCreateUser,
-  UseDeleteUser,
-  useGetUsers,
-} from '../../hooks/query/users';
+  useLogin,
+  useLogout,
+  useRefreshToken,
+} from '../../hooks/query/sessions';
+import { useGetUsers } from '../../hooks/query/users';
 
 function App() {
-  const { isFetching } = useRefreshToken();
-  const { data: users } = useGetUsers();
-  const { mutateAsync: registerUser } = UseCreateUser();
-  const { mutateAsync: deleteUser } = UseDeleteUser();
+  const { isInitialLoading } = useRefreshToken();
+  const { data: users } = useGetUsers({
+    filters: {
+      name: 'João Lima Pirajá',
+    },
+  });
+  const { mutateAsync: login } = useLogin();
+  const { mutateAsync: logout } = useLogout();
 
-  // eslint-disable-next-line no-underscore-dangle
-  const userId = users?.[0]?._id;
-  console.log(userId);
-
-  const onClickCreate = async () => {
+  const onClickLogin = async () => {
     try {
-      await registerUser({
-        name: 'João Pedro Lima Pirajá',
-        email: 'jplp100@hotmail.com',
-        password: 'pamonha',
-        country: 'Brasil',
-        telephone: '+5571999258225',
-        state: 'Bahia',
-        city: 'Salvador',
-        address: 'Alameda dos Sombreiros',
-        number: '113',
-        complement: 'Ladeira',
-        zipCode: '41820-420',
-      });
-    } catch (registerError) {
-      console.error(registerError);
-    }
-  };
-  const onClickDelete = async () => {
-    try {
-      await deleteUser(userId);
-    } catch (deleterError) {
-      console.error(deleterError);
+      await login({ email: 'jplp100@hotmail.com', password: 'pamonha' });
+    } catch (error) {
+      console.error(error);
     }
   };
 
-  return isFetching ? (
+  const onClickLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  console.log(users);
+  return isInitialLoading ? (
     <h1>Carregando...</h1> // TODO: add a good looking loading state
   ) : (
     <>
-      <button type="button" onClick={onClickCreate}>
-        CRIAR
+      <button type="button" onClick={onClickLogin}>
+        Login
       </button>
-      <button type="button" onClick={onClickDelete}>
-        DELETAR
+      <button type="button" onClick={onClickLogout}>
+        Logout
       </button>
       <Header />
       <Outlet />
