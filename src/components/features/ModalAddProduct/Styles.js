@@ -23,18 +23,18 @@ export const ModalContent = styled.div`
   gap: 150px;
 
   width: 950px;
-  height: 800px;
+  height: auto;
 `;
 
 export const RightSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
   padding: 0px;
-  gap: 20px;
 
   width: 400px;
-  height: 800px;
+  height: 770px;
 `;
 
 export const LeftSection = styled.div`
@@ -45,7 +45,7 @@ export const LeftSection = styled.div`
   gap: 30px;
 
   width: 400px;
-  height: 800px;
+  height: 770px;
 `;
 
 export const Subsection = styled.div`
@@ -75,10 +75,10 @@ export const AddButton = styled.button`
   cursor: pointer;
 
   display: flex;
-  justify-content: center;
+  justify-content: baseline;
   align-items: center;
 
-  width: fit-content;
+  width: 180px;
   height: 30px;
   background-color: transparent;
   border: none;
@@ -93,8 +93,6 @@ export const AddButton = styled.button`
   svg {
     padding-right: 5px;
   }
-
-  padding-bottom: 200px;
 `;
 
 export const MiniText = styled.p`
@@ -141,6 +139,9 @@ export const InputModal = styled.input`
 `;
 
 export const ModalButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   align-self: flex-end;
   cursor: pointer;
 
@@ -166,5 +167,9 @@ export const ModalButton = styled.button`
     transition-duration: 0.5s;
     //colocar hover quando desclicar do botão
     background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  p {
+    padding-left: 5px;
   }
 `;

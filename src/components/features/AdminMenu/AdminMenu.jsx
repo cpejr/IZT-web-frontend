@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CloseOutlined } from '@ant-design/icons';
 import {
   Container,
   MenuItens,
@@ -15,6 +16,10 @@ import ModalAddProduct from '../ModalAddProduct/ModalAddProduct';
 import ModalCreateCategory from '../ModalCreateCategory/ModalCreateCategory';
 
 export default function AdminMenu() {
+  const modalButton = {
+    closeIcon: <CloseOutlined style={{ color: 'white' }} />,
+  };
+
   const [modalAddProduct, setModalAddProduct] = useState(false);
   const [modalCreateCategory, setModalCreateCategory] = useState(false);
 
@@ -90,16 +95,19 @@ export default function AdminMenu() {
       <ModalStyle
         open={modalCreateCategory}
         onCancel={closeModalCreateCategory}
-        width={1100}
+        width={500}
+        height={250}
         padding={0}
+        color="white"
         footer={null}
+        cancelButtonProps
+        closeIcon={modalButton.closeIcon}
         bodyStyle={{
           alignItems: 'center',
           justifyContent: 'center',
           background: '#123645',
+          color: 'white',
           padding: 0,
-          width: '500px',
-          height: '250px',
           borderRadius: 'none',
         }}
         centered

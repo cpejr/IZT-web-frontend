@@ -1,5 +1,6 @@
 import React from 'react';
 import { HiPlusSm } from 'react-icons/hi';
+import { FiSave } from 'react-icons/fi';
 import {
   Container,
   ModalContent,
@@ -48,9 +49,6 @@ export default function ModalAddProduct() {
 
           <Subsection>
             <Text>Documentos</Text>
-          </Subsection>
-
-          <Subsection>
             <AddButton>
               <HiPlusSm size={25} />
               Novo documento
@@ -62,7 +60,10 @@ export default function ModalAddProduct() {
             <p>SETLIST</p>
           </CategorySubsection>
 
-          <ModalButton>Criar produto</ModalButton>
+          <ModalButton>
+            <FiSave size={20} />
+            <p>Criar produto</p>
+          </ModalButton>
         </RightSection>
       </ModalContent>
     </Container>
