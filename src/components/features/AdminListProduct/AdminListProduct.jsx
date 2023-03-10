@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { CloseOutlined } from '@ant-design/icons';
 
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
@@ -17,11 +18,30 @@ import {
   SearchSection,
   EditButton,
   SearchIconButton,
+  ModalStyle,
 } from './Styles';
+
+import ModalEditProduct from '../ModalEditProduct/ModalEditProduct';
 
 export default function AdminListProduct() {
   const { data: products } = useGetProducts();
-  console.log(products);
+
+  const modalButton = {
+    closeIcon: <CloseOutlined style={{ color: 'white' }} />,
+  };
+
+  const [modalEditProduct, setModalEditProduct] = useState(false);
+
+  const openModalEditProduct = (e) => {
+    e.preventDefault();
+    setModalEditProduct(true);
+  };
+
+  const closeModalEditProduct = (e) => {
+    e.preventDefault();
+    setModalEditProduct(false);
+  };
+
   return (
     <Container>
       <Title>Lista de produtos</Title>
@@ -46,11 +66,32 @@ export default function AdminListProduct() {
             <Text>{product.name}</Text>
             <Text>{product.category.name}</Text>
             <EditButton>
-              <TbPencil size={30} />
+              <TbPencil onClick={openModalEditProduct} size={30} />
             </EditButton>
           </Row>
         ))}
       </ProductList>
+
+      <ModalStyle
+        open={modalEditProduct}
+        onCancel={closeModalEditProduct}
+        width={1100}
+        padding={0}
+        footer={null}
+        closeIcon={modalButton.closeIcon}
+        bodyStyle={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#123645',
+          color: 'white',
+          padding: 0,
+          borderRadius: 'none',
+        }}
+        centered
+        destroyOnClose
+      >
+        <ModalEditProduct />
+      </ModalStyle>
     </Container>
   );
 }

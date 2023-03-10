@@ -7,5 +7,6 @@ export { default as AdminMenu } from './AdminMenu/AdminMenu';
 export { default as AdminListCategory } from './AdminListCategory/AdminListCategory';
 export { default as AdminListProduct } from './AdminListProduct/AdminListProduct';
 export { default as ModalAddProduct } from './ModalAddProduct/ModalAddProduct';
+export { default as ModalEditProduct } from './ModalEditCategory/ModalEditCategory';
 export { default as ModalCreateCategory } from './ModalAddProduct/ModalAddProduct';
 export { default as ModalEditCategory } from './ModalEditCategory/ModalEditCategory';

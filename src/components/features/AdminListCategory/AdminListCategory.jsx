@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
@@ -15,11 +15,16 @@ import {
   EditButton,
   SearchIconButton,
   SearchSection,
+  ModalStyle,
 } from './Styles';
 
-import ModalEditCategory from '../ModalCreateCategory/ModalCreateCategory';
+import ModalEditCategory from '../ModalEditCategory/ModalEditCategory';
 
 export default function AdminListCategory() {
+  const modalButton = {
+    closeIcon: <CloseOutlined style={{ color: 'white' }} />,
+  };
+
   const [modalEditCategory, setModalEditCategory] = useState(false);
 
   const openModalEditCategory = (e) => {
@@ -54,24 +59,27 @@ export default function AdminListCategory() {
         </Row>
       </ProductList>
 
-      <Modal
+      <ModalStyle
         open={modalEditCategory}
         onCancel={closeModalEditCategory}
+        width={500}
+        height={250}
+        padding={0}
         footer={null}
+        closeIcon={modalButton.closeIcon}
         bodyStyle={{
           alignItems: 'center',
           justifyContent: 'center',
           background: '#123645',
+          color: 'white',
           padding: 0,
-          width: '500px',
-          height: '250px',
           borderRadius: 'none',
         }}
         centered
         destroyOnClose
       >
         <ModalEditCategory />
-      </Modal>
+      </ModalStyle>
     </Container>
   );
 }

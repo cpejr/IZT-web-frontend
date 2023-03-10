@@ -76,4 +76,10 @@ export const ModalButton = styled.button`
     font-weight: 600;
     font-size: 18px;
   }
+
+  :hover {
+    transition-duration: 0.5s;
+    //colocar hover quando desclicar do botão
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 `;

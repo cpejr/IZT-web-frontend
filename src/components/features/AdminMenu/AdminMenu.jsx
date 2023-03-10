@@ -81,6 +81,7 @@ export default function AdminMenu() {
         width={1100}
         padding={null}
         footer={null}
+        closeIcon={modalButton.closeIcon}
         bodyStyle={{
           margin: '0px',
           padding: '0px',
@@ -98,9 +99,7 @@ export default function AdminMenu() {
         width={500}
         height={250}
         padding={0}
-        color="white"
         footer={null}
-        cancelButtonProps
         closeIcon={modalButton.closeIcon}
         bodyStyle={{
           alignItems: 'center',

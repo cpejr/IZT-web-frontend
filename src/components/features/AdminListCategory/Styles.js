@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Modal } from 'antd';
 
 export const Container = styled.div`
   display: flex;
@@ -128,4 +129,10 @@ export const SearchIconButton = styled.button`
   width: auto;
 
   cursor: pointer;
+`;
+
+export const ModalStyle = styled(Modal)`
+  :where(.css-dev-only-do-not-override-1me4733).ant-modal .ant-modal-content {
+    background-color: #123645;
+  }
 `;
