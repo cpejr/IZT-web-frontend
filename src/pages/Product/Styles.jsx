@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   justify-items: center;
   width: 100%;
+  margin-top: 35px;
 `;
 
 export const Product = styled.div`

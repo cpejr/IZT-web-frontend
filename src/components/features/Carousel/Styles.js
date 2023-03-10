@@ -54,7 +54,7 @@ export const Button = styled.button`
   svg {
     height: 50px;
     width: 50px;
-    filter: drop-shadow(0px 4px 4px rgb(0 0 0 / 0.25));
+
     @media (max-width: 550px) {
       width: 30px;
       height: 30px;
