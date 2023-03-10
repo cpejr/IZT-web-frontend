@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  width: 60%;
-  height: 60%;
-`;
+export const Container = styled.div``;
 
 export const CloseButton = styled.button`
   background-color: transparent;
@@ -20,9 +17,9 @@ export const ModalContent = styled.div`
   flex-direction: row;
   align-items: flex-start;
   padding: 30px;
-  gap: 150px;
+  gap: 10%;
 
-  width: 950px;
+  width: 100%;
   height: auto;
 `;
 
@@ -53,6 +50,7 @@ export const Subsection = styled.div`
   flex-direction: column;
   gap: 15px;
   padding-top: 10px;
+  width: 100%;
 `;
 
 export const CategorySubsection = styled.div`
@@ -106,7 +104,7 @@ export const MiniText = styled.p`
 
 export const InputModalName = styled.input`
   padding: 8px 11px;
-  width: 400px;
+  width: 100%;
   top: 34px;
 
   background: #ffffff;
@@ -124,7 +122,7 @@ export const InputModalName = styled.input`
 export const InputModal = styled.input`
   display: flex;
   padding: 8px 11px;
-  width: 400px;
+  width: 100%;
   height: 250px;
 
   background: #ffffff;
