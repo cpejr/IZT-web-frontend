@@ -18,13 +18,10 @@ export const Body = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 5%;
-  margin-bottom: 10%;
-  width: 100%;
+  margin-bottom: 15%;
+  width: 98%;
   height: auto;
   @media (max-width: 700px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 0px;
     gap: 20px;
   }
@@ -33,6 +30,7 @@ export const Border = styled.div`
   width: 8%;
   max-width: 110px;
   height: auto;
+  margin-right: 5%;
   background-color: ${(props) => props.theme.colors.darkBlue};
 `;
 export const Title = styled.h2`
@@ -42,11 +40,10 @@ export const Title = styled.h2`
   font-size: 32px;
   line-height: 39px;
   text-align: center;
-  position: relative;
-
   color: #123645;
-  width: 100%;
+  width: 90%;
   height: auto;
+  margin-bottom: 5%;
 
   @media (max-width: 700px) {
     font-size: 24px;
@@ -77,13 +74,12 @@ export const Subtitle = styled.h3`
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
-  max-width: 1227px;
-  max-height: 560px;
+  /* max-width: 1227px;
+  max-height: 560px; */
   margin-top: 50px;
-  padding-top: 10%;
-  gap: 30%;
+
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
@@ -97,14 +93,14 @@ export const FirstColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding-left: 10%;
+  width: 50%;
 `;
 
 export const SecondColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 100%;
+  width: 50%;
   height: auto;
 `;
 
@@ -114,9 +110,8 @@ export const PersonalData = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 25%;
+  margin-bottom: 5%;
   gap: 20px;
-
   width: 100%;
   height: auto;
 
@@ -187,18 +182,16 @@ export const Address = styled.div`
   }
 `;
 export const ChangeInfo = styled.button`
-  /* display: flex;
-  justify-content: stretch; */
-  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
-
-  width: 100%;
-  height: auto;
-
+  width: 40%;
+  height: 45px;
   border: 1px solid #000000;
   border-radius: 5px;
   background-color: transparent;
-  margin-top: 10%;
+  margin-top: 4%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 18px;
