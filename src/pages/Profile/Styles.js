@@ -1,10 +1,18 @@
 import styled from 'styled-components';
 
-export const Page = styled.div`
+export const Background = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
+  justify-content: flex-end;
+  background-color: ${(props) => props.theme.colors.darkBlue};
+`;
+export const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 92%;
   height: auto;
+  background-color: #fff;
+  align-items: center;
   /* @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
@@ -26,13 +34,7 @@ export const Body = styled.div`
     gap: 20px;
   }
 `;
-export const Border = styled.div`
-  width: 8%;
-  max-width: 110px;
-  height: auto;
-  margin-right: 5%;
-  background-color: ${(props) => props.theme.colors.darkBlue};
-`;
+
 export const Title = styled.h2`
   font-family: 'Montserrat';
   font-style: normal;
@@ -73,13 +75,14 @@ export const Subtitle = styled.h3`
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  align-items: flex-start;
   /* max-width: 1227px;
   max-height: 560px; */
   margin-top: 50px;
-
+  padding-left: 10%;
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
@@ -88,7 +91,19 @@ export const Container = styled.div`
     gap: 20px;
   }
 `;
+export const DataContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    gap: 20px;
+  }
+`;
 export const FirstColumn = styled.div`
   display: flex;
   flex-direction: column;
@@ -187,6 +202,7 @@ export const ChangeInfo = styled.button`
   align-items: center;
   gap: 10px;
   width: 40%;
+  max-width: 239px;
   height: 45px;
   border: 1px solid #000000;
   border-radius: 5px;
@@ -217,15 +233,12 @@ export const Lessons = styled.p`
   justify-content: center;
   align-items: flex-start;
   padding: 50px;
-  white-space: nowrap;
   gap: 20px;
-
-  max-width: 639px;
+  width: 100%;
   height: auto;
-  max-height: 310px;
 
   background: #123645;
-  border-radius: 15px 15px 15px 15px;
+  border-radius: 15px 0px 0px 15px;
   h3 {
     font-family: 'Montserrat';
     font-style: normal;
