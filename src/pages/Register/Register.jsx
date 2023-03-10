@@ -1,6 +1,8 @@
-import { React, useState } from 'react';
+/* eslint-disable import/extensions */
+import { React } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Page,
@@ -13,6 +15,7 @@ import {
 } from './Styles';
 import IZTLogo from '../../assets/IZTLogo.svg';
 import { DataInput, SubmitButton } from '../../components/common';
+import { useCreateUser } from '../../hooks/query/users.js';
 
 const validationSchema = z.object({
   company: z.string().min(1, 'Favor digitar o nome da empresa'),
@@ -69,10 +72,11 @@ const validationSchema = z.object({
     .min(6, 'A senha não pode ter menos de 6 caracteres')
     .max(16, 'A senha não pode ter mais de 16 caracteres'),
 
-  confirmPassword: z.string().min(1, { message: 'Consirme sua senha' }),
+  confirmPassword: z.string().min(1, { message: 'Confirme sua senha' }),
 }); // all inputs validation schema
 
 function SignUp() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -81,14 +85,35 @@ function SignUp() {
     resolver: zodResolver(validationSchema),
   });
 
-  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
+  const { mutateAsync: createUser, isLoading } = useCreateUser({
+    onSucess: () => navigate('/login', { replace: true }),
+  });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    setTimeout(() => {
-      setSubmitErrorMessage('Email e/ou senha incorretos');
-    }, 3000);
-  }; // also still necessary to change this function
+  const onSubmit = async (data) => {
+    try {
+      await createUser(data);
+    } catch (error) {
+      let errorMessage;
+      console.log(error.response.status);
+      switch (error.response.status) {
+        case 400:
+          errorMessage = 'Dados Inválidos.';
+          break;
+        case 409:
+          errorMessage = 'O email já está sendo utilizado.';
+          break;
+        case 500:
+          errorMessage =
+            'Erro ao realizar o cadastro. Tente novamente mais tarde.';
+          break;
+        default:
+          break;
+      }
+      alert(errorMessage);
+    }
+  };
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <Page>
@@ -195,12 +220,7 @@ function SignUp() {
               />
             </FormColumn>
           </DataEntry>
-          <SubmitButton
-            type="submit"
-            submitErrorMessage={submitErrorMessage}
-            name="Criar conta"
-            relativeWidth="70%"
-          />
+          <SubmitButton type="submit" name="Criar conta" relativeWidth="70%" />
         </Form>
       </Container>
     </Page>
