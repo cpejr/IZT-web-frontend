@@ -19,11 +19,11 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 0px;
+  padding: 30px;
   gap: 150px;
 
   width: 950px;
-  height: 702px;
+  height: 800px;
 `;
 
 export const RightSection = styled.div`
@@ -34,7 +34,7 @@ export const RightSection = styled.div`
   gap: 20px;
 
   width: 400px;
-  height: 702px;
+  height: 800px;
 `;
 
 export const LeftSection = styled.div`
@@ -45,12 +45,19 @@ export const LeftSection = styled.div`
   gap: 30px;
 
   width: 400px;
-  height: 702px;
+  height: 800px;
 `;
 
 export const Subsection = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  padding-top: 10px;
+`;
+
+export const CategorySubsection = styled.div`
+  display: flex;
+  flex-direction: row;
   gap: 10px;
 `;
 
@@ -71,17 +78,23 @@ export const AddButton = styled.button`
   justify-content: center;
   align-items: center;
 
-  width: 150px;
+  width: fit-content;
   height: 30px;
-
-  background-color: black;
+  background-color: transparent;
   border: none;
+
   color: white;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
+
+  svg {
+    padding-right: 5px;
+  }
+
+  padding-bottom: 200px;
 `;
 
 export const MiniText = styled.p`
@@ -90,8 +103,6 @@ export const MiniText = styled.p`
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  padding-bottom: 250px;
-
   color: white;
 `;
 

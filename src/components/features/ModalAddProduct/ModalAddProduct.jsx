@@ -6,6 +6,7 @@ import {
   LeftSection,
   RightSection,
   Subsection,
+  CategorySubsection,
   Text,
   MiniText,
   AddButton,
@@ -40,18 +41,27 @@ export default function ModalAddProduct() {
             <Text>Imagens:</Text>
             <MiniText>Anexe as imagens do produto</MiniText>
             <AddButton>
-              <HiPlusSm size={20} />
+              <HiPlusSm size={25} />
               Nova imagem
             </AddButton>
           </Subsection>
 
           <Subsection>
-            <MiniText>Associar categoria</MiniText>
+            <Text>Documentos</Text>
           </Subsection>
 
           <Subsection>
-            <Text>Documentos</Text>
+            <AddButton>
+              <HiPlusSm size={25} />
+              Novo documento
+            </AddButton>
           </Subsection>
+
+          <CategorySubsection>
+            <Text>Categorias</Text>
+            <p>SETLIST</p>
+          </CategorySubsection>
+
           <ModalButton>Criar produto</ModalButton>
         </RightSection>
       </ModalContent>
