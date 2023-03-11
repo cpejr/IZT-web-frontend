@@ -21,6 +21,13 @@ export const Container = styled.div`
 
   background: #eeeeee;
   box-shadow: 3px 0px 4px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 700px) {
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    margin-bottom: 500px;
+  }
 `;
 
 export const MenuItens = styled.div`
@@ -30,6 +37,27 @@ export const MenuItens = styled.div`
   padding: 0px;
   gap: 40px;
   padding-top: 40px;
+
+  @media (max-width: 700px) {
+    gap: 30px;
+    padding-top: 15px;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+export const TitleDiv = styled.div`
+  @media (max-width: 700px) {
+    display: none;
+  }
+`;
+
+export const SectionMobile = styled.div`
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
 `;
 
 export const Section = styled.div`
@@ -38,6 +66,12 @@ export const Section = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 15px;
+
+  @media (max-width: 700px) {
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
 `;
 
 export const Title = styled.p`
@@ -46,11 +80,31 @@ export const Title = styled.p`
 
 export const Text = styled.p`
   font-weight: 400;
+
+  @media (max-width: 700px) {
+    font-size: 17px;
+  }
 `;
 
 export const BlackLine = styled.p`
-  width: 249px;
+  display: flex;
+  width: 250px;
   border: 1.9px solid #123645;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
+`;
+
+export const BlackLineMobile = styled.p`
+  display: none;
+  align-self: center;
+  width: 200px;
+  border: 1.9px solid #123645;
+
+  @media (max-width: 700px) {
+    display: flex;
+  }
 `;
 
 export const StyledLink = styled(Link)`
@@ -62,6 +116,10 @@ export const StyledLink = styled(Link)`
     padding: 5px;
     border-radius: 10px;
     background-color: rgba(199, 199, 199, 1);
+  }
+
+  @media (max-width: 700px) {
+    font-size: 17px;
   }
 `;
 
@@ -75,6 +133,18 @@ export const Button = styled.button`
     border-radius: 10px;
     background-color: rgba(199, 199, 199, 1);
   }
+
+  @media (max-width: 700px) {
+    font-size: 17px;
+  }
+`;
+
+export const MobileMenuButton = styled.button`
+  width: 100%;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const ModalStyle = styled(Modal)`

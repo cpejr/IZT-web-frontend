@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 import {
   Container,
   MenuItens,
+  TitleDiv,
   Section,
+  SectionMobile,
   Title,
   Text,
   BlackLine,
+  BlackLineMobile,
   StyledLink,
   Button,
   ModalStyle,
+  MobileMenuButton,
 } from './Styles';
 
 import ModalAddProduct from '../ModalAddProduct/ModalAddProduct';
@@ -46,33 +51,45 @@ export default function AdminMenu() {
   return (
     <Container>
       <MenuItens>
-        <Section>
-          <Title>Menu do Administrador</Title>
-          <BlackLine />
-        </Section>
+        <TitleDiv>
+          <Section>
+            <Title>Menu do Administrador</Title>
+            <BlackLine />
+          </Section>
+        </TitleDiv>
 
-        <Section>
-          <Title>Produtos</Title>
-          <Button onClick={openModalAddProduct}>Adicionar produtos</Button>
-          <StyledLink to="/administrador/editar-produtos">
-            Listar produtos
-          </StyledLink>
-        </Section>
+        <SectionMobile>
+          <Section>
+            <Title>Produtos</Title>
+            <Button onClick={openModalAddProduct}>Adicionar produtos</Button>
+            <StyledLink to="/administrador/editar-produtos">
+              Listar produtos
+            </StyledLink>
+          </Section>
 
-        <Section>
-          <Title>Categorias</Title>
-          <Button onClick={openModalCreateCategory}>Adicionar categoria</Button>
-          <StyledLink to="/administrador/editar-categorias">
-            Listar categorias
-          </StyledLink>
-          <BlackLine />
-        </Section>
+          <Section>
+            <Title>Categorias</Title>
+            <Button onClick={openModalCreateCategory}>
+              Adicionar categoria
+            </Button>
+            <StyledLink to="/administrador/editar-categorias">
+              Listar categorias
+            </StyledLink>
+            <BlackLine />
+          </Section>
+        </SectionMobile>
+
+        <BlackLineMobile />
 
         <Section>
           <Title>Definições de acesso</Title>
           <Text>Liberação do curso</Text>
           <Text>Liberação do software</Text>
         </Section>
+
+        <MobileMenuButton>
+          <MdKeyboardArrowDown size={25} />
+        </MobileMenuButton>
       </MenuItens>
 
       <ModalStyle
