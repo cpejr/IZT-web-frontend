@@ -26,7 +26,8 @@ export const Container = styled.div`
     width: 100%;
     height: auto;
     box-shadow: none;
-    margin-bottom: 500px;
+    align-items: normal;
+    margin-bottom: 30px;
   }
 `;
 
@@ -40,7 +41,7 @@ export const MenuItens = styled.div`
 
   @media (max-width: 700px) {
     gap: 30px;
-    padding-top: 15px;
+    padding-top: 20px;
     align-items: center;
     justify-content: center;
   }
@@ -53,6 +54,10 @@ export const TitleDiv = styled.div`
 `;
 
 export const SectionMobile = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
   @media (max-width: 700px) {
     display: flex;
     flex-direction: row;
@@ -76,6 +81,13 @@ export const Section = styled.div`
 
 export const Title = styled.p`
   font-weight: 700;
+
+  @media (max-width: 420px) {
+    font-size: 18px;
+  }
+  @media (max-width: 320px) {
+    font-size: 15px;
+  }
 `;
 
 export const Text = styled.p`
@@ -83,6 +95,12 @@ export const Text = styled.p`
 
   @media (max-width: 700px) {
     font-size: 17px;
+  }
+  @media (max-width: 420px) {
+    font-size: 14px;
+  }
+  @media (max-width: 320px) {
+    font-size: 12px;
   }
 `;
 
@@ -120,6 +138,19 @@ export const StyledLink = styled(Link)`
 
   @media (max-width: 700px) {
     font-size: 17px;
+
+    :hover {
+      width: auto;
+      border-radius: 10px;
+      background-color: rgba(199, 199, 199, 1);
+    }
+  }
+
+  @media (max-width: 420px) {
+    font-size: 14px;
+  }
+  @media (max-width: 320px) {
+    font-size: 12px;
   }
 `;
 
@@ -136,15 +167,36 @@ export const Button = styled.button`
 
   @media (max-width: 700px) {
     font-size: 17px;
+
+    :hover {
+      width: auto;
+      border-radius: 10px;
+      background-color: rgba(199, 199, 199, 1);
+    }
+  }
+
+  @media (max-width: 420px) {
+    font-size: 14px;
+  }
+  @media (max-width: 320px) {
+    font-size: 12px;
   }
 `;
 
 export const MobileMenuButton = styled.button`
-  width: 100%;
-  height: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
+
+  @media (max-width: 700px) {
+    display: flex;
+    width: 100%;
+    border-width: 1px;
+    border-left: none;
+    border-right: none;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const ModalStyle = styled(Modal)`

@@ -16,6 +16,14 @@ export const Container = styled.div`
   font-family: 'Montserrat';
   font-style: normal;
   color: #000000;
+
+  @media (max-width: 700px) {
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+  }
 `;
 
 export const Title = styled.p`
@@ -95,6 +103,11 @@ export const ProductList = styled.div`
   width: 100%;
   padding-left: 20px;
   padding-right: 20px;
+
+  @media (max-width: 700px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 `;
 
 export const Subsection = styled.div`

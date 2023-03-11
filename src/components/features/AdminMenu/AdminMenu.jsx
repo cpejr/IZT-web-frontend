@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+
 import {
   Container,
   MenuItens,
