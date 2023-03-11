@@ -81,13 +81,13 @@ export const Text = styled.p`
 
 export const SearchProduct = styled.input`
   display: block;
-  padding: 10px 10px;
-
+  width: 100%;
   height: 35px;
 
   background: #ffffff;
   border-radius: 20px;
   border: none;
+  padding-left: 10px;
 
   font-family: 'Montserrat';
   font-style: normal;
