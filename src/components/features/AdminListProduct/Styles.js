@@ -23,6 +23,9 @@ export const Container = styled.div`
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
+    height: auto;
+    margin-bottom: 50px;
+    gap: 10px;
   }
 `;
 
@@ -34,6 +37,11 @@ export const Title = styled.p`
   font-size: 32px;
   line-height: 39px;
   margin-bottom: 20px;
+
+  @media (max-width: 700px) {
+    font-size: 20px;
+    margin-bottom: 0px;
+  }
 `;
 
 export const CategoryFilterContainer = styled.div`
@@ -48,6 +56,14 @@ export const CategoryFilterContainer = styled.div`
   padding-left: 10px;
 
   background: #eeeeee;
+
+  @media (max-width: 700px) {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    height: 84px;
+    justify-content: center;
+    gap: 10px;
+  }
 `;
 
 export const Text = styled.p`
@@ -56,13 +72,17 @@ export const Text = styled.p`
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    font-size: 14px;
+  }
 `;
 
 export const SearchProduct = styled.input`
   display: block;
-  padding: 5px 10px;
+  padding: 10px 10px;
 
-  width: 100%;
   height: 35px;
 
   background: #ffffff;
@@ -76,6 +96,10 @@ export const SearchProduct = styled.input`
   line-height: 20px;
 
   @media (max-width: 990px) {
+    font-size: 14px;
+  }
+  @media (max-width: 700px) {
+    width: 100%;
     font-size: 14px;
   }
 `;
@@ -92,7 +116,10 @@ export const EditButton = styled.button`
   cursor: pointer;
 
   svg {
-    /* Alterar grossura da linha do ícone */
+    @media (max-width: 700px) {
+      height: 23px;
+      width: 23px;
+    }
   }
 `;
 
@@ -105,8 +132,6 @@ export const ProductList = styled.div`
   padding-right: 20px;
 
   @media (max-width: 700px) {
-    padding-left: 0;
-    padding-right: 0;
   }
 `;
 
@@ -128,6 +153,9 @@ export const SearchSection = styled.div`
 
   @media (max-width: 990px) {
     width: 170px;
+  }
+  @media (max-width: 700px) {
+    width: 100%;
   }
 `;
 

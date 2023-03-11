@@ -46,7 +46,10 @@ export default function AdminListCategory() {
           <SearchIconButton>
             <HiSearch size={25} />
           </SearchIconButton>
-          <SearchProduct type="SearchProduct" placeholder="Pesquisar produto" />
+          <SearchProduct
+            type="SearchProduct"
+            placeholder="Pesquisar categoria"
+          />
         </SearchSection>
       </CategoryFilterContainer>
 

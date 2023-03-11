@@ -8,7 +8,8 @@ export const Container = styled.div`
   gap: 20px;
 
   width: 100%;
-  height: 399px;
+  height: auto;
+  margin-bottom: 50px;
   padding-left: 40px;
   padding-right: 5%;
   padding-top: 25px;
@@ -16,6 +17,13 @@ export const Container = styled.div`
   font-family: 'Montserrat';
   font-style: normal;
   color: #000000;
+
+  @media (max-width: 700px) {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    gap: 20px;
+  }
 `;
 
 export const Title = styled.p`
@@ -26,6 +34,11 @@ export const Title = styled.p`
   font-size: 32px;
   line-height: 39px;
   margin-bottom: 20px;
+
+  @media (max-width: 700px) {
+    font-size: 20px;
+    margin-bottom: 0px;
+  }
 `;
 
 export const CategoryFilterContainer = styled.div`
@@ -37,9 +50,13 @@ export const CategoryFilterContainer = styled.div`
   width: 100%;
   height: 50px;
   padding-right: 10px;
-  padding-left: 10px;
 
   background: #eeeeee;
+
+  @media (max-width: 700px) {
+    justify-content: flex-start;
+    padding-left: 10px;
+  }
 `;
 
 export const Text = styled.p`
@@ -48,18 +65,21 @@ export const Text = styled.p`
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
+
+  @media (max-width: 700px) {
+    font-size: 14px;
+  }
 `;
 
 export const SearchProduct = styled.input`
   display: block;
-  padding: 5px 10px;
-
   width: 100%;
   height: 35px;
 
   background: #ffffff;
   border-radius: 20px;
   border: none;
+  padding-left: 10px;
 
   font-family: 'Montserrat';
   font-style: normal;
@@ -76,6 +96,7 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const EditButton = styled.button`
@@ -84,7 +105,10 @@ export const EditButton = styled.button`
   cursor: pointer;
 
   svg {
-    /* Alterar grossura da linha do ícone */
+    @media (max-width: 700px) {
+      height: 23px;
+      width: 23px;
+    }
   }
 `;
 
@@ -95,6 +119,11 @@ export const ProductList = styled.div`
   width: 100%;
   padding-left: 20px;
   padding-right: 20px;
+
+  @media (max-width: 700px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 `;
 
 export const Subsection = styled.div`
@@ -106,13 +135,13 @@ export const Subsection = styled.div`
 export const SearchSection = styled.div`
   display: flex;
   align-items: center;
-  width: 200px;
+  width: 230px;
   position: relative;
   max-height: 35px;
   height: 100%;
 
   @media (max-width: 990px) {
-    width: 170px;
+    width: 100%;
   }
 `;
 
@@ -129,6 +158,13 @@ export const SearchIconButton = styled.button`
   width: auto;
 
   cursor: pointer;
+
+  svg {
+    @media (max-width: 990px) {
+      height: 22px;
+      width: 22px;
+    }
+  }
 `;
 
 export const ModalStyle = styled(Modal)`
