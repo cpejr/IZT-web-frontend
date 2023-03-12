@@ -12,3 +12,5 @@ export { default as ModalCreateCategory } from './ModalAddProduct/ModalAddProduc
 export { default as ModalEditCategory } from './ModalEditCategory/ModalEditCategory';
 export { default as AdminEditProductMobile } from './AdminEditProductMobile/AdminEditProductMobile';
 export { default as AdminAddProductMobile } from './AdminAddProductMobile/AdminAddProductMobile';
+export { default as AdminEditCategoryMobile } from './AdminEditCategoryMobile/AdminEditCategoryMobile';
+export { default as AdminAddCategoryMobile } from './AdminAddCategoryMobile/AdminAddCategoryMobile';
