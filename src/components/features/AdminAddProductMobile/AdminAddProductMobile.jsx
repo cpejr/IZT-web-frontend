@@ -15,10 +15,10 @@ import {
   CancelButton,
 } from './Styles';
 
-export default function AdminEditProductMobile() {
+export default function AdminAddProductMobile() {
   return (
     <Container>
-      <Title>Editar produto</Title>
+      <Title>Adicionar produto</Title>
 
       <Subtitle>Nome do produto:</Subtitle>
       <SmallInput type="SearchProduct" placeholder="Pesquisar categoria" />
@@ -52,7 +52,7 @@ export default function AdminEditProductMobile() {
 
       <SaveButton>
         <FiSave size={20} />
-        <p>Salvar produto</p>
+        <p>Criar produto</p>
       </SaveButton>
 
       <CancelButton>

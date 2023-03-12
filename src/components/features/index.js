@@ -11,3 +11,4 @@ export { default as ModalEditProduct } from './ModalEditCategory/ModalEditCatego
 export { default as ModalCreateCategory } from './ModalAddProduct/ModalAddProduct';
 export { default as ModalEditCategory } from './ModalEditCategory/ModalEditCategory';
 export { default as AdminEditProductMobile } from './AdminEditProductMobile/AdminEditProductMobile';
+export { default as AdminAddProductMobile } from './AdminAddProductMobile/AdminAddProductMobile';
