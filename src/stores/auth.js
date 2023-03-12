@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import jwtDecode from 'jwt-decode';
 
 const useAuthStore = create((set) => ({
-  auth: {},
+  auth: null,
   setAuth: (accessToken) => {
     const { user } = jwtDecode(accessToken);
 
@@ -14,7 +14,7 @@ const useAuthStore = create((set) => ({
       },
     }));
   },
-  clearAuth: () => set({ auth: {} }),
+  clearAuth: () => set({ auth: null }),
 }));
 
 export default useAuthStore;

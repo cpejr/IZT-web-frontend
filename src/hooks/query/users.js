@@ -8,46 +8,46 @@ import {
 
 export function useGetUsers({
   filters,
-  onSucess = () => {},
+  onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
     queryKey: ['users', filters],
     queryFn: () => getUsers(filters),
-    onSucess,
+    onSuccess,
     onError,
   });
 }
 
 export function useCreateUser({
-  onSucess = () => {},
+  onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useMutation({
     mutationFn: createUser,
-    onSucess,
+    onSuccess,
     onError,
   });
 }
 
 export function useUpdateUser({
-  onSucess = () => {},
+  onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useMutation({
     mutationFn: updateUser,
-    onSucess,
+    onSuccess,
     onError,
   });
 }
 
 export function useDeleteUser({
-  onSucess = () => {},
+  onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useMutation({
     mutationFn: deleteUser,
-    onSucess,
+    onSuccess,
     onError,
   });
 }

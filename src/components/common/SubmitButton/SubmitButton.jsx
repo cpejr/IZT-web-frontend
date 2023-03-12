@@ -8,9 +8,9 @@ export default function SubmitButton({
 }) {
   return (
     <SubmitSpace>
-      <ErrorMessage submitErrorMessage={!!submitErrorMessage}>
-        {submitErrorMessage}
-      </ErrorMessage>
+      {!!submitErrorMessage && (
+        <ErrorMessage>{submitErrorMessage}</ErrorMessage>
+      )}
       <Button type="submit" relativeWidth={relativeWidth}>
         {name}
       </Button>

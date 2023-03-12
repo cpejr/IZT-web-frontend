@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { Header, Footer } from '../../components/features';
 import { useRefreshToken } from '../../hooks/query/sessions';
 
@@ -10,6 +11,11 @@ function App() {
   ) : (
     <>
       <Header />
+      <Toaster
+        containerStyle={{
+          top: 115,
+        }}
+      />
       <Outlet />
       <Footer />
     </>
