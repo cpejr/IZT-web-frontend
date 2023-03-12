@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
@@ -15,6 +16,7 @@ import {
   InternContainer,
   InvertItems,
 } from './Styles';
+import useAuthStore from '../../../stores/auth';
 
 function Header() {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ function Header() {
   const [language, setLanguage] = useState('EN'); // default language is EN
   const availableLaguages = ['EN', 'PT', 'DE'];
   const theme = useTheme();
+  const { auth } = useAuthStore();
 
   return (
     <Content>
@@ -34,17 +37,22 @@ function Header() {
             <Link to="/">Cursos</Link>
             <Link to="/">Software</Link>
             <InvertItems>
-              <ButtonLogin
-                backgroundColor800={theme.colors.greenishBlue}
-                color800="white"
-                borderColor800={theme.colors.greenishBlue}
-                hoverBackgroundColor800={theme.colors.greenishBlue}
-                hoverColor800="white"
-                hoverBorderColor800={theme.colors.greenishBlue}
-                onClick={() => navigate('/')}
-              >
-                Entrar
-              </ButtonLogin>
+              {!!auth?.user ? (
+                auth.user.name
+              ) : (
+                <ButtonLogin
+                  backgroundColor800={theme.colors.greenishBlue}
+                  color800="white"
+                  borderColor800={theme.colors.greenishBlue}
+                  hoverBackgroundColor800={theme.colors.greenishBlue}
+                  hoverColor800="white"
+                  hoverBorderColor800={theme.colors.greenishBlue}
+                  onClick={() => navigate('/')}
+                >
+                  Entrar
+                </ButtonLogin>
+              )}
+
               <Select bar={bar}>
                 <Selected onClick={() => setCollapse(!collapse)}>
                   <p>{language}</p>

@@ -9,11 +9,7 @@ import { useGetUsers } from '../../hooks/query/users';
 
 function App() {
   const { isInitialLoading } = useRefreshToken();
-  const { data: users } = useGetUsers({
-    filters: {
-      name: 'João Lima Pirajá',
-    },
-  });
+  const { data: users } = useGetUsers({});
   const { mutateAsync: login } = useLogin();
   const { mutateAsync: logout } = useLogout();
 
@@ -24,6 +20,7 @@ function App() {
       console.error(error);
     }
   };
+  console.log(users);
 
   const onClickLogout = async () => {
     try {
@@ -32,7 +29,6 @@ function App() {
       console.error(error);
     }
   };
-  console.log(users);
   return isInitialLoading ? (
     <h1>Carregando...</h1> // TODO: add a good looking loading state
   ) : (
