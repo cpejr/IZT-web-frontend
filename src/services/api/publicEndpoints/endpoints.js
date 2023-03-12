@@ -6,8 +6,6 @@ export const login = async (credentials) => {
   const { data } = await publicApi.post('/login', credentials);
 
   setAuth(data.accessToken);
-  localStorage.setItem('isLoggedIn', 'true');
-
   return data;
 };
 
@@ -16,7 +14,6 @@ export const logout = async () => {
   await publicApi.post('/logout');
 
   clearAuth();
-  localStorage.removeItem('isLoggedIn');
 };
 
 export async function refresh() {
