@@ -5,6 +5,7 @@ export const login = async (credentials) => {
   const { setAuth } = useAuthStore.getState();
   const { data } = await publicApi.post('/login', credentials);
 
+  localStorage.setItem('isLoggedIn', 'true');
   setAuth(data.accessToken);
   return data;
 };
@@ -13,6 +14,7 @@ export const logout = async () => {
   const { clearAuth } = useAuthStore.getState();
   await publicApi.post('/logout');
 
+  localStorage.removeItem('isLoggedIn');
   clearAuth();
 };
 

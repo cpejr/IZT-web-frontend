@@ -45,6 +45,7 @@ function Header() {
               >
                 Entrar
               </ButtonLogin>
+
               <Select bar={bar}>
                 <Selected onClick={() => setCollapse(!collapse)}>
                   <p>{language}</p>
