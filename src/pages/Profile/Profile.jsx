@@ -1,5 +1,6 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { SettingOutlined } from '@ant-design/icons';
+import { Modal } from 'antd';
 import {
   Container,
   Page,
@@ -19,11 +20,21 @@ import {
   Body,
   DataContainer,
 } from './Styles';
+import ChangeUserDataModal from '../../components/features/ChangeUserDataModal/ChangeUserDataModal';
 import useAuthStore from '../../stores/auth';
 
 function Profile() {
+  const [changeUserDataModal, setChangeUserDataModal] = useState(false);
   const { auth } = useAuthStore();
   console.log(auth);
+
+  async function openchangeUserDataModal() {
+    setChangeUserDataModal(true);
+  }
+
+  async function closechangeUserDataModal() {
+    setChangeUserDataModal(false);
+  }
   if (!auth) return <h1>Proibido</h1>;
   return (
     <Background>
@@ -112,13 +123,22 @@ function Profile() {
                 </Lessons>
               </SecondColumn>
             </DataContainer>
-            <ChangeInfo>
+            <ChangeInfo onClick={() => openchangeUserDataModal}>
               <SettingOutlined />
               Alterar Informações
             </ChangeInfo>
           </Container>
         </Body>
       </Page>
+      <Modal
+        visible={changeUserDataModal}
+        onCancel={() => closechangeUserDataModal()}
+        footer={null}
+        width="50%"
+        centered={true}
+      >
+        <ChangeUserDataModal />
+      </Modal>
     </Background>
   );
 }
