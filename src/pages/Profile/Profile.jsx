@@ -135,7 +135,6 @@ function Profile() {
         onCancel={() => closechangeUserDataModal()}
         footer={null}
         width="50%"
-        centered={true}
       >
         <ChangeUserDataModal />
       </Modal>
