@@ -112,7 +112,7 @@ export const EditButton = styled.button`
   }
 `;
 
-export const ProductList = styled.div`
+export const CategoryList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

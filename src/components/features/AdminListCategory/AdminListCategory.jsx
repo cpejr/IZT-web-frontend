@@ -3,6 +3,7 @@ import { CloseOutlined } from '@ant-design/icons';
 
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
+import { useGetCategories } from '../../../hooks/query/categories';
 
 import {
   Container,
@@ -10,7 +11,7 @@ import {
   CategoryFilterContainer,
   Text,
   SearchProduct,
-  ProductList,
+  CategoryList,
   Row,
   EditButton,
   SearchIconButton,
@@ -21,6 +22,8 @@ import {
 import ModalEditCategory from '../ModalEditCategory/ModalEditCategory';
 
 export default function AdminListCategory() {
+  const { data: categories } = useGetCategories();
+
   const modalButton = {
     closeIcon: <CloseOutlined style={{ color: 'white' }} />,
   };
@@ -53,14 +56,16 @@ export default function AdminListCategory() {
         </SearchSection>
       </CategoryFilterContainer>
 
-      <ProductList>
-        <Row>
-          <Text>Tipo 1</Text>
-          <EditButton onClick={openModalEditCategory}>
-            <TbPencil size={30} />
-          </EditButton>
-        </Row>
-      </ProductList>
+      <CategoryList>
+        {categories?.map((category) => (
+          <Row key={category._id}>
+            <Text>{category.name}</Text>
+            <EditButton>
+              <TbPencil onClick={openModalEditCategory} size={30} />
+            </EditButton>
+          </Row>
+        ))}
+      </CategoryList>
 
       <ModalStyle
         open={modalEditCategory}
