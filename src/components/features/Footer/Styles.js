@@ -4,12 +4,11 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
-  height: 326px;
+  height: 300px;
   width: 100%;
 
   @media (max-width: 850px) {
     flex-direction: column;
-    height: 500px;
   }
 `;
 
@@ -20,7 +19,7 @@ export const SideContainer = styled.div`
   width: 33.33%;
   justify-content: center;
   align-items: center;
-  padding: 7%;
+  padding: 0% 7%;
 
   @media (max-width: 850px) {
     width: 100%;
@@ -93,8 +92,9 @@ export const SocialMediaButton = styled.a`
 
   align-items: center;
   justify-content: center;
+  text-align: center;
   width: 38px;
-  height: 38px;
+  height: auto;
   border: none;
   background: none;
 

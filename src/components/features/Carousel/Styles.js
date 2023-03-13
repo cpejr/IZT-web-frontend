@@ -9,7 +9,7 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   max-height: ${(props) => props.maxHeight};
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 24 / 7;
 `;
 
 export const ImagesContainer = styled.div`

@@ -141,6 +141,7 @@ export const Picture = styled.img`
   top: 23%;
   width: 190px;
   height: auto;
+  border-radius: 95px;
   margin-bottom: 15%;
 
   ${({ isMiddle }) => (isMiddle ? isMiddleImgStyle : '')};

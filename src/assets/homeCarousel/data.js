@@ -1,7 +1,6 @@
-import image1 from './image1.jpg';
-import image2 from './image2.jpg';
-import image3 from './image3.jpg';
-import image4 from './image4.jpg';
+import image1 from './carrossel1.png';
+import image2 from './carrossel2.png';
+import image3 from './carrossel3.png';
 
 export default [
   {
@@ -18,10 +17,5 @@ export default [
     src: image3,
     name: 'image3',
     alt: 'Carousel Imagem 3',
-  },
-  {
-    src: image4,
-    name: 'image4',
-    alt: 'Carousel Imagem 4',
   },
 ];
