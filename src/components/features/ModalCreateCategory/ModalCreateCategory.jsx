@@ -1,18 +1,49 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { FiSave } from 'react-icons/fi';
-import { Container, Text, Input, ModalContent, ModalButton } from './Styles';
+import { useCreateCategory } from '../../../hooks/query/categories';
+import {
+  Container,
+  Form,
+  Label,
+  Input,
+  ModalContent,
+  ModalButton,
+} from './Styles';
+
+const validationSchema = z.object({
+  name: z
+    .string()
+    .min(1, 'Category name is required')
+    .min(3, 'Category name must be atleast 3 characters')
+    .max(40, 'Category name must be a maximum of 40 characters'),
+  description: z.string().optional(),
+});
 
 export default function ModalCreateCategory() {
+  const { handleSubmit, register, watch } = useForm({
+    resolver: zodResolver(validationSchema),
+  });
+
+  const { mutate: createCategory } = useCreateCategory();
+  const onSubmit = (data) => createCategory(data);
+  console.log(watch());
+
   return (
     <Container>
-      <ModalContent>
-        <Text>Nome da categoria:</Text>
-        <Input />
-        <ModalButton>
-          <FiSave size={25} />
-          <p>Criar categoria</p>
-        </ModalButton>
-      </ModalContent>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <ModalContent>
+          <Label>Nome da categoria:</Label>
+          <Input id="name" name="name" type="name" {...register('name')} />
+          <ModalButton type="submit">
+            <FiSave size={25} />
+            <p>Criar Categoria</p>
+          </ModalButton>
+        </ModalContent>
+      </Form>
     </Container>
   );
 }

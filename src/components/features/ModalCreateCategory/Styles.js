@@ -10,13 +10,15 @@ export const Container = styled.div`
   padding: 20px 24px;
 `;
 
+export const Form = styled.form``;
+
 export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: baseline;
 `;
 
-export const Text = styled.p`
+export const Label = styled.label`
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
@@ -62,7 +64,7 @@ export const ModalButton = styled.button`
   flex-direction: row;
   align-items: center;
 
-  width: 192px;
+  width: 212px;
   height: 45px;
 
   background-color: transparent;
@@ -75,11 +77,5 @@ export const ModalButton = styled.button`
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
-  }
-
-  :hover {
-    transition-duration: 0.5s;
-    //colocar hover quando desclicar do botão
-    background-color: rgba(255, 255, 255, 0.2);
   }
 `;
