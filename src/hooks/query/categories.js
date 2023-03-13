@@ -1,15 +1,15 @@
 /* eslint-disable import/prefer-default-export */
 import { useQuery } from '@tanstack/react-query';
-import { getProducts } from '../../services/api';
+import { getCategories } from '../../services/api';
 
-export function useGetProducts({
+export function useGetCategories({
   filters,
   onSucess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
-    queryKey: ['products', filters],
-    queryFn: () => getProducts(filters),
+    queryKey: ['categories', filters],
+    queryFn: () => getCategories(filters),
     onSucess,
     onError,
   });

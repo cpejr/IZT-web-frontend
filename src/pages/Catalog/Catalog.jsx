@@ -16,100 +16,104 @@ import {
   ProductName,
 } from './Styles';
 
-const categories = [
-  {
-    name: 'Type 1',
-    products: [
-      {
-        name: 'Product 1',
-        image:
-          'https://madmais.vteximg.com.br/arquivos/ids/159284-0-0/BOCAL-PARA-LAMPADA-2S-BRANCO--4-.jpg?v=637618856063500000',
-      },
-      {
-        name: 'Product 2',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-    ],
-  },
-  {
-    name: 'Type 2',
-    products: [
-      {
-        name: 'Product 1',
-        image:
-          'https://a-static.mlcdn.com.br/800x560/bocal-de-louca-porcelana-receptaculo-para-lampadas-e27-js-technology/thrjinformatica/11899658141/f1fad431169ad69f3347637ab71ec05c.jpg',
-      },
-      {
-        name: 'Product 2',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 3',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-    ],
-  },
-  {
-    name: 'Type 3',
-    products: [
-      {
-        name: 'Product 1',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-    ],
-  },
-  {
-    name: 'Type 4',
-    products: [
-      {
-        name: 'Product 1',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 2',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 3',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 4',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-    ],
-  },
-  {
-    name: 'Type 5',
-    products: [
-      {
-        name: 'Product 1',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 2',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 3',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-    ],
-  },
-];
+// const categories = [
+//   {
+//     name: 'Type 1',
+//     products: [
+//       {
+//         name: 'Product 1',
+//         image:
+//           'https://madmais.vteximg.com.br/arquivos/ids/159284-0-0/BOCAL-PARA-LAMPADA-2S-BRANCO--4-.jpg?v=637618856063500000',
+//       },
+//       {
+//         name: 'Product 2',
+//         image:
+//           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+//       },
+//     ],
+//   },
+//   {
+//     name: 'Type 2',
+//     products: [
+//       {
+//         name: 'Product 1',
+//         image:
+//           'https://a-static.mlcdn.com.br/800x560/bocal-de-louca-porcelana-receptaculo-para-lampadas-e27-js-technology/thrjinformatica/11899658141/f1fad431169ad69f3347637ab71ec05c.jpg',
+//       },
+//       {
+//         name: 'Product 2',
+//         image:
+//           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+//       },
+//       {
+//         name: 'Product 3',
+//         image:
+//           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+//       },
+//     ],
+//   },
+//   {
+//     name: 'Type 3',
+//     products: [
+//       {
+//         name: 'Product 1',
+//         image:
+//           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+//       },
+//     ],
+//   },
+//   {
+//     name: 'Type 4',
+//     products: [
+//       {
+//         name: 'Product 1',
+//         image:
+//           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+//       },
+//       {
+//         name: 'Product 2',
+//         image:
+//           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+//       },
+//       {
+//         name: 'Product 3',
+//         image:
+//           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+//       },
+//       {
+//         name: 'Product 4',
+//         image:
+//           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+//       },
+//     ],
+//   },
+//   {
+//     name: 'Type 5',
+//     products: [
+//       {
+//         name: 'Product 1',
+//         image:
+//           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+//       },
+//       {
+//         name: 'Product 2',
+//         image:
+//           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+//       },
+//       {
+//         name: 'Product 3',
+//         image:
+//           'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
+//       },
+//     ],
+//   },
+// ];
 
 function Catalog() {
+  const { query: getProducts, error, isLoading } = useGetProducts();
+  const onLoad = (data) => getProducts(data);
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>{error.message}</p>;
   return (
     <Page>
       <Container>
