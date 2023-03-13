@@ -13,7 +13,7 @@ export const Container = styled.div`
   padding-right: 5%;
   padding-top: 25px;
 
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   color: #000000;
 
@@ -80,27 +80,21 @@ export const Text = styled.p`
 `;
 
 export const SearchProduct = styled.input`
-  display: block;
+  display: flex;
   width: 100%;
   height: 35px;
-
-  background: #ffffff;
-  border-radius: 20px;
+  flex-grow: 1;
+  background-color: transparent;
   border: none;
-  padding-left: 10px;
 
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
+  font-weight: 700;
   line-height: 20px;
+  font-size: 1em;
 
-  @media (max-width: 990px) {
-    font-size: 14px;
-  }
   @media (max-width: 700px) {
     width: 100%;
-    font-size: 14px;
   }
 `;
 
@@ -145,14 +139,20 @@ export const TypeFilter = styled.div``;
 
 export const SearchSection = styled.div`
   display: flex;
-  align-items: center;
-  width: 200px;
+  flex-direction: row;
+  align-items: space-between;
+  width: 220px;
   position: relative;
   max-height: 35px;
   height: 100%;
-
+  background-color: white;
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-right: 5px;
+  font-size: 16px;
   @media (max-width: 990px) {
     width: 170px;
+    font-size: 14px;
   }
   @media (max-width: 700px) {
     width: 100%;
@@ -160,11 +160,7 @@ export const SearchSection = styled.div`
 `;
 
 export const SearchIconButton = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   right: 0;
-  z-index: 10;
   border: none;
   background: none;
   outline: none;
