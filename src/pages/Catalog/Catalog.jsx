@@ -1,3 +1,4 @@
+import { useGetCategories } from '../../hooks/query/categories';
 import {
   Page,
   Container,
@@ -110,8 +111,8 @@ import {
 // ];
 
 function Catalog() {
-  const { query: getProducts, error, isLoading } = useGetProducts();
-  const onLoad = (data) => getProducts(data);
+  const { query: getCategories, error, isLoading } = useGetCategories();
+  const categories = (data) => getCategories(data);
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;
   return (
@@ -138,7 +139,7 @@ function Catalog() {
             <Divider />
             <CategoryName>{category.name}</CategoryName>
             <ProductRow>
-              {category.products.map((product) => (
+              {categories.products.map((product) => (
                 <Product key={product.name}>
                   <ProductImage src={product.image} />
                   <ProductName>{product.name}</ProductName>
