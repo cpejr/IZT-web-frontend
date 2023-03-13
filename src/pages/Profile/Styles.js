@@ -87,7 +87,6 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
     gap: 20px;
   }
 `;
@@ -99,8 +98,6 @@ export const DataContainer = styled.div`
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
-    align-items: center;
-
     gap: 20px;
   }
 `;
@@ -109,6 +106,13 @@ export const FirstColumn = styled.div`
   flex-direction: column;
   gap: 20px;
   width: 50%;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
+  }
 `;
 
 export const SecondColumn = styled.div`
@@ -117,6 +121,13 @@ export const SecondColumn = styled.div`
   gap: 20px;
   width: 50%;
   height: auto;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 20px;
+  }
 `;
 
 export const PersonalData = styled.div`
@@ -213,6 +224,11 @@ export const ChangeInfo = styled.button`
   font-size: 18px;
   font-weight: 600;
   color: ${(props) => props.theme.colors.blue};
+  @media (max-width: 700px) {
+    align-items: center;
+    justify-content: center;
+    width: 218px;
+  }
 `;
 export const Contact = styled.p`
   gap: 20px;
@@ -248,6 +264,16 @@ export const Lessons = styled.p`
 
     color: #fff;
   }
+  @media (max-width: 700px) {
+    border-radius: 10px;
+    justify-content: center;
+    align-items: flex-start;
+    h3 {
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+    }
+  }
 `;
 export const Info2 = styled.div`
   display: flex;
@@ -256,8 +282,9 @@ export const Info2 = styled.div`
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 29px;
+    text-align: left;
 
     color: #fff;
   }
@@ -265,9 +292,22 @@ export const Info2 = styled.div`
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 29px;
+    text-align: left;
 
     color: #fff;
+  }
+  @media (max-width: 700px) {
+    h1 {
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 14px;
+      line-height: 17px;
+      text-align: left;
+    }
   }
 `;

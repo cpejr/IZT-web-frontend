@@ -101,7 +101,7 @@ function Profile() {
                   <Subtitle>Software</Subtitle>
                   <Infos>
                     <Info2>
-                      <h1>Validade e acesso: </h1>
+                      <h1>Validade de acesso: </h1>
                       <h2>21/06/2025</h2>
                     </Info2>
                   </Infos>
