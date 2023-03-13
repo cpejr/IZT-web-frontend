@@ -1,9 +1,7 @@
-import React from "react";
+import React from 'react';
 
-function ChangeUserDataModal(){
-  return(
-    // create modal
-  );  
+function ChangeUserDataModal() {
+  return <Container></Container>;
 }
 
 export default ChangeUserDataModal;
