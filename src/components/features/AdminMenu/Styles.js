@@ -190,7 +190,9 @@ export const MenuMobile = styled.div`
   overflow-y: hidden;
   gap: 40px;
   transition: all 700ms ease-in-out 1s;
-  max-height: ${(props) => (props.opened ? 'none' : '0')};
+  @media (max-width: 700px) {
+    max-height: ${(props) => (props.opened ? 'none' : '0')};
+  }
 `;
 
 export const MobileMenuButton = styled.button`
