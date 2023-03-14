@@ -17,9 +17,9 @@ import {
 const validationSchema = z.object({
   name: z
     .string()
-    .min(1, 'Category name is required')
-    .min(3, 'Category name must be atleast 3 characters')
-    .max(40, 'Category name must be a maximum of 40 characters'),
+    .min(1, 'Favor inserir o nome da categoria')
+    .min(3, 'O nome da categoria deve ter pelo menos 3 caracteres')
+    .max(40, 'O nome da categoria deve ter no máximo 40 caracteres'),
   description: z.string().optional(),
 });
 
