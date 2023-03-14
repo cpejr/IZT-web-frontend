@@ -4,6 +4,8 @@ export const Container = styled.div`
   z-index: 1000;
 `;
 
+export const Form = styled.form``;
+
 export const CloseButton = styled.button`
   background-color: transparent;
   border: none;
@@ -104,7 +106,7 @@ export const MiniText = styled.p`
   color: white;
 `;
 
-export const InputModalName = styled.input`
+export const Input = styled.input`
   padding: 8px 11px;
   width: 100%;
   top: 34px;
@@ -121,7 +123,7 @@ export const InputModalName = styled.input`
   color: #000000;
 `;
 
-export const InputModal = styled.input`
+export const TextAreaModal = styled.textarea`
   display: flex;
   padding: 8px 11px;
   width: 100%;

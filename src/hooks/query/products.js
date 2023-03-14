@@ -1,10 +1,7 @@
-import {
-  // useMutation,
-  useQuery,
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   getProducts,
-  // createProducts,
+  createProduct,
   // deleteProducts,
   // updateProducts,
 } from '../../services/api';
@@ -23,16 +20,16 @@ export function useGetProducts({
   });
 }
 
-// export function useCreateProducts({
-//   onSucess = () => {},
-//   onError = (err) => console.log(err),
-// } = {}) {
-//   return useMutation({
-//     mutationFn: createProducts,
-//     onSucess,
-//     onError,
-//   });
-// }
+export function useCreateProduct({
+  onSucess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: createProduct,
+    onSucess,
+    onError,
+  });
+}
 
 // export function useUpdateProducts({
 //   onSucess = () => {},
