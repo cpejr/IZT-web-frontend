@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable no-underscore-dangle */
+import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
-
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
-import { useGetCategories } from '../../../hooks/query/categories';
+import { useSearchByNameCategories } from '../../../hooks/query/categories';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 import {
   Container,
@@ -21,9 +22,14 @@ import {
 } from './Styles';
 
 import ModalEditCategory from '../ModalEditCategory/ModalEditCategory';
+import useDebounce from '../../../hooks/useDebounce';
 
 export default function AdminListCategory() {
-  const { data: categories } = useGetCategories();
+  const [name, setName] = useState('');
+  const debouncedName = useDebounce(name);
+  const { data: categories } = useSearchByNameCategories({
+    name: debouncedName,
+  });
 
   const modalButton = {
     closeIcon: <CloseOutlined style={{ color: 'white' }} />,
@@ -41,14 +47,7 @@ export default function AdminListCategory() {
     setModalEditCategory(false);
   };
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleWindowResize = () => setWindowWidth(window.innerWidth);
-
-    window.addEventListener('resize', handleWindowResize);
-    return () => window.removeEventListener('resize', handleWindowResize);
-  }, []);
-
+  const { width: windowWidth } = useWindowSize();
   const breakpoint = 700;
 
   return (
@@ -61,8 +60,8 @@ export default function AdminListCategory() {
             <HiSearch size={25} />
           </SearchIconButton>
           <SearchProduct
-            type="SearchProduct"
             placeholder="Pesquisar categoria"
+            onChange={(e) => setName(e.target.value)}
           />
         </SearchSection>
       </CategoryFilterContainer>

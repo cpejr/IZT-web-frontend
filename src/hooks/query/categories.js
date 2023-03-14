@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   getCategories,
   createCategory,
+  searchByNameCategories,
   // deleteProducts,
   // updateProducts,
 } from '../../services/api';
@@ -16,6 +17,19 @@ export function useGetCategories({
   return useQuery({
     queryKey: ['categories', filters],
     queryFn: () => getCategories(filters),
+    onSucess,
+    onError,
+  });
+}
+
+export function useSearchByNameCategories({
+  name,
+  onSucess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['categories', 'searchByName', name],
+    queryFn: () => searchByNameCategories(name),
     onSucess,
     onError,
   });
