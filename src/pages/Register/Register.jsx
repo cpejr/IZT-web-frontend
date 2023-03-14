@@ -12,9 +12,10 @@ import {
   FormColumn,
   DataEntry,
   Form,
+  Subtitle,
 } from './Styles';
 import IZTLogo from '../../assets/IZTLogo.svg';
-import { DataInput, SubmitButton } from '../../components/common';
+import { RegisterInput, SubmitButton } from '../../components/common';
 import { useCreateUser } from '../../hooks/query/users.js';
 
 const validationSchema = z.object({
@@ -36,7 +37,7 @@ const validationSchema = z.object({
 
   country: z
     .string()
-    .min(1, 'Informe um telefone')
+    .min(1, 'Informe um país')
     .min(3, 'User country must be atleast 3 characters')
     .max(30, 'User country must be a maximum of 30 characters'),
 
@@ -126,7 +127,8 @@ function SignUp() {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <DataEntry>
             <FormColumn>
-              <DataInput
+              <Subtitle>Informações pessoais</Subtitle>
+              <RegisterInput
                 label="Empresa: "
                 name="company"
                 placeholder="Nome da empresa"
@@ -134,7 +136,7 @@ function SignUp() {
                 errors={errors}
                 type="text"
               />
-              <DataInput
+              <RegisterInput
                 label="Nome: "
                 name="name"
                 placeholder="Nome"
@@ -142,7 +144,7 @@ function SignUp() {
                 errors={errors}
                 type="text"
               />
-              <DataInput
+              <RegisterInput
                 label="Sobrenome: "
                 name="surname"
                 placeholder="Sobrenome"
@@ -150,7 +152,7 @@ function SignUp() {
                 errors={errors}
                 type="text"
               />
-              <DataInput
+              <RegisterInput
                 label="Cargo: "
                 name="role"
                 placeholder="Nome do cargo"
@@ -160,7 +162,8 @@ function SignUp() {
               />
             </FormColumn>
             <FormColumn>
-              <DataInput
+              <Subtitle>Endereço</Subtitle>
+              <RegisterInput
                 label="País: "
                 name="country"
                 placeholder="Nome do país"
@@ -168,7 +171,7 @@ function SignUp() {
                 errors={errors}
                 type="text"
               />
-              <DataInput
+              <RegisterInput
                 label="Estado: "
                 name="state"
                 placeholder="Nome do estado"
@@ -176,7 +179,7 @@ function SignUp() {
                 errors={errors}
                 type="text"
               />
-              <DataInput
+              <RegisterInput
                 label="Cidade: "
                 name="city"
                 placeholder="Nome da cidade"
@@ -184,7 +187,7 @@ function SignUp() {
                 errors={errors}
                 type="text"
               />
-              <DataInput
+              <RegisterInput
                 label="Endereço: "
                 name="address"
                 placeholder="Endereço"
@@ -194,7 +197,8 @@ function SignUp() {
               />
             </FormColumn>
             <FormColumn>
-              <DataInput
+              <Subtitle>Credenciais</Subtitle>
+              <RegisterInput
                 label="E-mail: "
                 name="email"
                 placeholder="email@email.com"
@@ -202,7 +206,7 @@ function SignUp() {
                 errors={errors}
                 type="text"
               />
-              <DataInput
+              <RegisterInput
                 label="Senha: "
                 name="password"
                 placeholder="********"
@@ -210,7 +214,7 @@ function SignUp() {
                 errors={errors}
                 type="password"
               />
-              <DataInput
+              <RegisterInput
                 label="Confirme sua senha: "
                 name="confirmPassword"
                 placeholder="********"

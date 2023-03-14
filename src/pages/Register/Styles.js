@@ -47,10 +47,10 @@ export const Logo = styled.img`
 
 export const DataEntry = styled.div`
   max-width: 1190px;
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: center;
-  gap: 1.2em;
+  gap: 2.5em;
 
   @media (max-width: 800px) {
     flex-direction: column;
@@ -66,10 +66,22 @@ export const Title = styled.h1`
   text-align: center;
 `;
 
+export const Subtitle = styled.h1`
+  color: black;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-size: 1em;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 5%;
+  @media (min-width: 800px) and (max-width: 1030px) {
+    font-size: 0.7em;
+  }
+`;
+
 export const FormColumn = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   /* gap: 1em; */
   width: 100%;
   max-width: 350px;
