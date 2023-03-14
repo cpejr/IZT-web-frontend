@@ -13,13 +13,9 @@ export const Page = styled.div`
   height: auto;
   background-color: #fff;
   align-items: center;
-  /* @media (max-width: 700px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px;
-    gap: 20px;
-  } */
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 export const Body = styled.div`
   display: flex;
@@ -27,11 +23,12 @@ export const Body = styled.div`
   align-items: center;
   margin-top: 5%;
   margin-bottom: 15%;
-  width: 98%;
+  width: 100%;
   height: auto;
   @media (max-width: 700px) {
     padding: 0px;
     gap: 20px;
+    width: 90%;
   }
 `;
 
@@ -79,8 +76,6 @@ export const Container = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: flex-start;
-  /* max-width: 1227px;
-  max-height: 560px; */
   margin-top: 20px;
   padding-left: 10%;
   @media (max-width: 700px) {
@@ -88,6 +83,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    padding-left: 0px;
   }
 `;
 export const DataContainer = styled.div`
@@ -101,6 +97,7 @@ export const DataContainer = styled.div`
     gap: 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 `;
 export const FirstColumn = styled.div`
@@ -111,8 +108,8 @@ export const FirstColumn = styled.div`
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-
+    align-items: center;
+    width: 90%;
     gap: 20px;
   }
 `;
@@ -127,8 +124,8 @@ export const SecondColumn = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center
-
+    text-align: center;
+    width: 100%;
     gap: 20px;
   }
 `;
@@ -148,15 +145,15 @@ export const PersonalData = styled.div`
     font-weight: 600;
     font-size: 24px;
     line-height: 29px;
-
     color: #000000;
   }
   @media (max-width: 700px) {
-    text-align: left;
-    align-items: left;
+    text-align: center;
+    align-items: flex-start;
     h3 {
       font-size: 18px;
       line-height: 22px;
+      text-align: start;
     }
   }
 `;
@@ -166,14 +163,18 @@ export const Infos = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 10px;
-  width: 100;
+  width: 100%;
   height: auto;
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 export const Info = styled.div`
   display: flex;
   justify-content: stretch;
   gap: 20px;
+  width: 100%;
 
   h1 {
     font-family: 'Montserrat';
@@ -181,7 +182,7 @@ export const Info = styled.div`
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
-
+    text-align: center;
     color: #000000;
   }
   h2 {
@@ -247,9 +248,11 @@ export const Address = styled.div`
     color: #000000;
   }
   @media (max-width: 700px) {
+    align-items: flex-start;
     h3 {
       font-size: 18px;
       line-height: 22px;
+      text-align: start;
     }
   }
 `;
@@ -296,9 +299,12 @@ export const Contact = styled.p`
     color: #000000;
   }
   @media (max-width: 700px) {
+    align-items: flex-start;
+    width: 90%;
     h3 {
       font-size: 18px;
       line-height: 22px;
+      text-align: start;
     }
   }
 `;
@@ -330,7 +336,7 @@ export const Lessons = styled.p`
     align-items: center;
     text-align: center;
     width: 100%;
-    max-width: 351px;
+    max-width: 500px;
     h3 {
       font-size: 16px;
       line-height: 20px;

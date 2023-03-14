@@ -123,7 +123,7 @@ function Profile() {
                 </Lessons>
               </SecondColumn>
             </DataContainer>
-            <ChangeInfo onClick={() => openchangeUserDataModal}>
+            <ChangeInfo onClick={() => openchangeUserDataModal()}>
               <SettingOutlined />
               Alterar Informações
             </ChangeInfo>
