@@ -193,6 +193,16 @@ export const Info = styled.div`
 
     color: #000000;
   }
+  @media (max-width: 800px) {
+    h1 {
+      font-size: 17px;
+      line-height: 23px;
+    }
+    h2 {
+      font-size: 17px;
+      line-height: 23px;
+    }
+  }
 
   @media (max-width: 700px) {
     h1 {
