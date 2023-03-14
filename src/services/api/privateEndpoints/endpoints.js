@@ -23,3 +23,9 @@ export const createCategory = async (newCategory) => {
 
   return data;
 };
+
+export const createProduct = async (newProduct) => {
+  const { data } = await privateApi.post('/products', newProduct);
+
+  return data;
+};

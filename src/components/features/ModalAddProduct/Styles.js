@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  z-index: 1000;
+`;
 
 export const CloseButton = styled.button`
   background-color: transparent;

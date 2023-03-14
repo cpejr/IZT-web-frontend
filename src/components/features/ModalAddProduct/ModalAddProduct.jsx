@@ -1,6 +1,11 @@
 import React from 'react';
+// import { useForm } from 'react-hook-form';
+// import { zodResolver } from '@hookform/resolvers/zod';
+// import { useCreateCategory } from '../../../hooks/query/categories';
 import { HiPlusSm } from 'react-icons/hi';
 import { FiSave } from 'react-icons/fi';
+// import { z } from 'zod';
+
 import {
   Container,
   ModalContent,
@@ -15,6 +20,29 @@ import {
   InputModalName,
   ModalButton,
 } from './Styles';
+
+// const validationSchema = z.object({
+//   name: z
+//     .string()
+//     .min(1, 'Favor digitar o nome do produto')
+//     .max(20, 'Product name must be a maximum of 20 characters'),
+//   category: z.string({ required_error: 'Product category ID is required' }), // Here we need to pass the category id only
+//   description: z
+//     .string()
+//     .min(1, 'Favor inserir uma descrição')
+//     .max(150, 'Product description must be a maximum of 150 characters'),
+//   advantages: z
+//     .string()
+//     .min(1, 'Favor inserir as vantagens')
+//     .max(150, 'Product advantages must be a maximum of 150 characters'),
+
+//   pictures: z
+//     .array({
+//       required_error: 'Product pictures are required',
+//     })
+//     .nonempty('Product pictures array cannot be empty'),
+//   documents: z.array(documentSchema).default([]),
+// });
 
 export default function ModalAddProduct() {
   return (
