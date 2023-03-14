@@ -10,6 +10,10 @@ import {
   Login,
   Catalog,
   NotFound,
+  ListProduct,
+  ListCategory,
+  CreateCategory,
+  AddProduct,
   EditProduct,
   EditCategory,
 } from './pages';
@@ -22,8 +26,12 @@ const router = createBrowserRouter(
         <Route path="login" element={<Login />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="administrador" element={<AdminLayout />}>
-          <Route path="editar-produtos" element={<EditProduct />} />
-          <Route path="editar-categorias" element={<EditCategory />} />
+          <Route path="listar-produtos" element={<ListProduct />} />
+          <Route path="listar-categorias" element={<ListCategory />} />
+          <Route path="criar-categoria" element={<CreateCategory />} />
+          <Route path="adicionar-produto" element={<AddProduct />} />
+          <Route path="editar-produto" element={<EditProduct />} />
+          <Route path="editar-categoria" element={<EditCategory />} />
         </Route>
       </Route>
       <Route path="*" element={<NotFound />} />

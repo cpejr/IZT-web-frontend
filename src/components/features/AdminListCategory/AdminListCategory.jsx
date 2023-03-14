@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 
 import { HiSearch } from 'react-icons/hi';
@@ -12,6 +12,7 @@ import {
   Text,
   SearchProduct,
   CategoryList,
+  StyledLink,
   Row,
   EditButton,
   SearchIconButton,
@@ -40,6 +41,16 @@ export default function AdminListCategory() {
     setModalEditCategory(false);
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleWindowResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
+  const breakpoint = 700;
+
   return (
     <Container>
       <Title>Lista de categorias</Title>
@@ -60,9 +71,16 @@ export default function AdminListCategory() {
         {categories?.map((category) => (
           <Row key={category._id}>
             <Text>{category.name}</Text>
-            <EditButton>
-              <TbPencil onClick={openModalEditCategory} size={30} />
-            </EditButton>
+
+            {windowWidth <= breakpoint ? (
+              <StyledLink to="/administrador/editar-categoria">
+                <TbPencil size={30} />
+              </StyledLink>
+            ) : (
+              <EditButton>
+                <TbPencil onClick={openModalEditCategory} size={30} />
+              </EditButton>
+            )}
           </Row>
         ))}
       </CategoryList>

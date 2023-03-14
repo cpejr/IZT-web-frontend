@@ -55,7 +55,7 @@ export const SaveButton = styled.button`
   padding: 10px;
   gap: 10px;
 
-  width: 191px;
+  width: auto;
   height: 45px;
 
   border: 1px solid black;

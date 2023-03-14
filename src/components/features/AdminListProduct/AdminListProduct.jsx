@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 
 import { HiSearch } from 'react-icons/hi';
@@ -14,6 +14,7 @@ import {
   Text,
   SearchProduct,
   ProductList,
+  StyledLink,
   Row,
   SearchSection,
   EditButton,
@@ -42,6 +43,16 @@ export default function AdminListProduct() {
     setModalEditProduct(false);
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleWindowResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
+  const breakpoint = 700;
+
   return (
     <Container>
       <Title>Lista de produtos</Title>
@@ -65,9 +76,16 @@ export default function AdminListProduct() {
           <Row key={product._id}>
             <Text>{product.name}</Text>
             <Text>{product.category.name}</Text>
-            <EditButton>
-              <TbPencil onClick={openModalEditProduct} size={30} />
-            </EditButton>
+
+            {windowWidth <= breakpoint ? (
+              <StyledLink to="/administrador/editar-produto">
+                <TbPencil size={30} />
+              </StyledLink>
+            ) : (
+              <EditButton>
+                <TbPencil onClick={openModalEditProduct} size={30} />
+              </EditButton>
+            )}
           </Row>
         ))}
       </ProductList>

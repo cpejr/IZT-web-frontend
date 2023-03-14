@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
@@ -50,6 +50,16 @@ export default function AdminMenu() {
     setModalCreateCategory(false);
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleWindowResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
+  const breakpoint = 700;
+
   return (
     <Container>
       <MenuItens>
@@ -63,18 +73,34 @@ export default function AdminMenu() {
         <SectionMobile>
           <Section>
             <Title>Produtos</Title>
-            <Button onClick={openModalAddProduct}>Adicionar produtos</Button>
-            <StyledLink to="/administrador/editar-produtos">
+
+            {windowWidth <= breakpoint ? (
+              <StyledLink to="/administrador/adicionar-produto">
+                Adicionar produtos
+              </StyledLink>
+            ) : (
+              <Button onClick={openModalAddProduct}>Adicionar produtos</Button>
+            )}
+
+            <StyledLink to="/administrador/listar-produtos">
               Listar produtos
             </StyledLink>
           </Section>
 
           <Section>
             <Title>Categorias</Title>
-            <Button onClick={openModalCreateCategory}>
-              Adicionar categoria
-            </Button>
-            <StyledLink to="/administrador/editar-categorias">
+
+            {windowWidth <= breakpoint ? (
+              <StyledLink to="/administrador/criar-categoria">
+                Adicionar categoria
+              </StyledLink>
+            ) : (
+              <Button onClick={openModalCreateCategory}>
+                Adicionar categoria
+              </Button>
+            )}
+
+            <StyledLink to="/administrador/listar-categorias">
               Listar categorias
             </StyledLink>
             <BlackLine />

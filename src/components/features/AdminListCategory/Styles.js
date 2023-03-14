@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Modal } from 'antd';
 
 export const Container = styled.div`
@@ -124,6 +125,11 @@ export const CategoryList = styled.div`
     padding-left: 10px;
     padding-right: 10px;
   }
+`;
+
+export const StyledLink = styled(Link)`
+  all: unset;
+  cursor: pointer;
 `;
 
 export const Subsection = styled.div`

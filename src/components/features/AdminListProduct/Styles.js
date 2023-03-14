@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Modal } from 'antd';
 
 export const Container = styled.div`
@@ -127,6 +128,11 @@ export const ProductList = styled.div`
 
   @media (max-width: 700px) {
   }
+`;
+
+export const StyledLink = styled(Link)`
+  all: unset;
+  cursor: pointer;
 `;
 
 export const Subsection = styled.div`
