@@ -66,7 +66,7 @@ function Profile() {
                   </Infos>
                 </PersonalData>
                 <Address>
-                  <Subtitle>Endereco</Subtitle>
+                  <Subtitle>Endereço</Subtitle>
                   <Infos>
                     <Info>
                       <h1>Pais: </h1>
