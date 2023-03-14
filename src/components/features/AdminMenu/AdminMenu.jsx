@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
-import { MdKeyboardArrowDown } from 'react-icons/md';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import {
+  MdKeyboardArrowDown,
+  MdOutlineKeyboardArrowDown,
+} from 'react-icons/md';
 
 import {
   Container,
@@ -16,6 +18,7 @@ import {
   StyledLink,
   Button,
   ModalStyle,
+  MenuMobile,
   MobileMenuButton,
 } from './Styles';
 
@@ -58,64 +61,70 @@ export default function AdminMenu() {
     return () => window.removeEventListener('resize', handleWindowResize);
   }, []);
 
+  const [openMenuMobile, setOpenMenuMobile] = useState(false);
   const breakpoint = 700;
 
   return (
     <Container>
-      <MenuItens>
-        <TitleDiv>
-          <Section>
-            <Title>Menu do Administrador</Title>
-            <BlackLine />
-          </Section>
-        </TitleDiv>
+      <MenuItens opened={openMenuMobile}>
+        <MenuMobile id="collapse" opened={openMenuMobile}>
+          <TitleDiv>
+            <Section>
+              <Title>Menu do Administrador</Title>
+              <BlackLine />
+            </Section>
+          </TitleDiv>
+          <SectionMobile>
+            <Section>
+              <Title>Produtos</Title>
 
-        <SectionMobile>
-          <Section>
-            <Title>Produtos</Title>
+              {windowWidth <= breakpoint ? (
+                <StyledLink to="/administrador/adicionar-produto">
+                  Adicionar produtos
+                </StyledLink>
+              ) : (
+                <Button onClick={openModalAddProduct}>
+                  Adicionar produtos
+                </Button>
+              )}
 
-            {windowWidth <= breakpoint ? (
-              <StyledLink to="/administrador/adicionar-produto">
-                Adicionar produtos
+              <StyledLink to="/administrador/listar-produtos">
+                Listar produtos
               </StyledLink>
-            ) : (
-              <Button onClick={openModalAddProduct}>Adicionar produtos</Button>
-            )}
+            </Section>
 
-            <StyledLink to="/administrador/listar-produtos">
-              Listar produtos
-            </StyledLink>
-          </Section>
+            <Section>
+              <Title>Categorias</Title>
+
+              {windowWidth <= breakpoint ? (
+                <StyledLink to="/administrador/criar-categoria">
+                  Adicionar categoria
+                </StyledLink>
+              ) : (
+                <Button onClick={openModalCreateCategory}>
+                  Adicionar categoria
+                </Button>
+              )}
+
+              <StyledLink to="/administrador/listar-categorias">
+                Listar categorias
+              </StyledLink>
+              <BlackLine />
+            </Section>
+          </SectionMobile>
+
+          <BlackLineMobile />
 
           <Section>
-            <Title>Categorias</Title>
-
-            {windowWidth <= breakpoint ? (
-              <StyledLink to="/administrador/criar-categoria">
-                Adicionar categoria
-              </StyledLink>
-            ) : (
-              <Button onClick={openModalCreateCategory}>
-                Adicionar categoria
-              </Button>
-            )}
-
-            <StyledLink to="/administrador/listar-categorias">
-              Listar categorias
-            </StyledLink>
-            <BlackLine />
+            <Title>Definições de acesso</Title>
+            <Text>Liberação do curso</Text>
+            <Text>Liberação do software</Text>
           </Section>
-        </SectionMobile>
-
-        <BlackLineMobile />
-
-        <Section>
-          <Title>Definições de acesso</Title>
-          <Text>Liberação do curso</Text>
-          <Text>Liberação do software</Text>
-        </Section>
-
-        <MobileMenuButton>
+        </MenuMobile>
+        <MobileMenuButton
+          opened={openMenuMobile}
+          onClick={() => setOpenMenuMobile(!openMenuMobile)}
+        >
           <MdKeyboardArrowDown size={25} />
         </MobileMenuButton>
       </MenuItens>

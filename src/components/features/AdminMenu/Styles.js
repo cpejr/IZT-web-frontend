@@ -40,8 +40,8 @@ export const MenuItens = styled.div`
   padding-top: 40px;
 
   @media (max-width: 700px) {
-    gap: 30px;
-    padding-top: 20px;
+    gap: ${(props) => (props.opened ? '30px' : '0px')};
+    padding-top: ${(props) => (props.opened ? '20px' : '0px')};
     align-items: center;
     justify-content: center;
   }
@@ -183,6 +183,16 @@ export const Button = styled.button`
   }
 `;
 
+export const MenuMobile = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  overflow-y: hidden;
+  gap: 40px;
+  transition: all 700ms ease-in-out 1s;
+  max-height: ${(props) => (props.opened ? 'none' : '0')};
+`;
+
 export const MobileMenuButton = styled.button`
   display: none;
 
@@ -196,6 +206,10 @@ export const MobileMenuButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    svg {
+      transform: ${(props) =>
+        props.opened ? 'rotate(180deg)' : 'rotate(0deg)'};
+    }
   }
 `;
 
