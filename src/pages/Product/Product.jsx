@@ -2,7 +2,7 @@ import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
 import step4 from '../../assets/productPage/steps/Group78.png';
-import productData from '../../assets/productPage/carousel/data';
+import carouselData from '../../assets/productPage/carousel/data';
 import { BudgetForm, FilesList, Carousel } from '../../components/features';
 import {
   Container,
@@ -36,7 +36,7 @@ function ProductPage() {
         <ProductInfo>
           <DataContainer>
             <Carousel
-              productData={productData}
+              carouselData={carouselData}
               height="537.17px"
               width="543.75px"
               aspectRatio="12 / 9"

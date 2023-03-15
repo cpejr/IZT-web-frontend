@@ -13,7 +13,7 @@ import {
 } from './Styles';
 
 export default function Carousel({
-  productData = [],
+  carouselData = [],
   maxHeight = '500px',
   maxWidth = '500px',
   width = '100%',
@@ -25,7 +25,7 @@ export default function Carousel({
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
-  const slidesCount = productData.length;
+  const slidesCount = carouselData.length;
   const minSwipeDistance = 50;
 
   const updateImage = (newIndex) => {
@@ -54,7 +54,7 @@ export default function Carousel({
     if (isLeftSwipe) updateImage(currentImageIndex + 1);
     else if (isRightSwipe) updateImage(currentImageIndex - 1);
   };
-
+  console.log(carouselData);
   return (
     <Container
       maxHeight={maxHeight}
@@ -68,7 +68,7 @@ export default function Carousel({
     >
       <ImagesContainer>
         <Inner currentImageIndex={currentImageIndex}>
-          {productData.map(({ src, name, alt }) => (
+          {carouselData.map(({ src, name, alt }) => (
             <ImageContainer key={name}>
               <img src={src} alt={alt} />
             </ImageContainer>
@@ -84,7 +84,7 @@ export default function Carousel({
           <MdKeyboardArrowLeft />
         </Button>
 
-        {productData.map(({ src, name, alt }, index) =>
+        {carouselData.map(({ src, name, alt }, index) =>
           miniImages ? (
             <MiniImageContainer
               key={name}
@@ -112,7 +112,7 @@ export default function Carousel({
 }
 
 Carousel.defaultProps = {
-  productData: [],
+  carouselData: [],
   maxHeight: 'none',
   maxWidth: 'none',
   width: '100%',
@@ -122,11 +122,11 @@ Carousel.defaultProps = {
 };
 
 Carousel.propTypes = {
+  carouselData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
   maxHeight: PropTypes.string,
   maxWidth: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string,
   miniImages: PropTypes.bool,
   aspectRatio: PropTypes.string,
-  productData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };
