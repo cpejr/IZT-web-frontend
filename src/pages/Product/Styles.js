@@ -22,28 +22,13 @@ export const ProductData = styled.div`
 
   width: 90%;
   max-width: 1440px;
-`;
 
-export const ProductInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 50px;
-  margin-bottom: 40px;
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
+  @media (max-width: 700px) {
+    gap: 0;
   }
 `;
 
-export const DataContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  width: 100%;
-`;
-
-export const ProductName = styled.div`
+export const ProductName = styled.p`
   width: 100%;
   max-width: 328px;
 
@@ -54,13 +39,36 @@ export const ProductName = styled.div`
   text-align: center;
   color: #000000;
 
-  @media (min-width: 700px) {
-    padding: 0;
-    margin-right: 50px;
+  @media (max-width: 500px) {
+    font-size: 26px;
+  }
+
+  @media (max-width: 700px) {
+    padding: 10px 0;
   }
 `;
 
-export const TextInfo = styled.div`
+export const ProductInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 50px;
+  margin-bottom: 40px;
+
+  @media (max-width: 1080px) {
+    flex-direction: column;
+  }
+`;
+
+export const CarouselContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  width: 100%;
+`;
+
+export const TextInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -68,7 +76,6 @@ export const TextInfo = styled.div`
   gap: 40px;
 
   width: 100%;
-  height: 30%;
 
   padding: 0px;
 `;
@@ -151,7 +158,6 @@ export const InfoTitle = styled.div`
 export const InfoDescription = styled.div`
   width: 100%;
 
-  flex-grow: 1;
   max-height: 200px;
   overflow-y: auto;
 `;

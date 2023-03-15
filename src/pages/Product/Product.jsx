@@ -8,8 +8,8 @@ import {
   Container,
   ProductData,
   ProductName,
-  DataContainer,
-  TextInfo,
+  CarouselContainer,
+  TextInfoContainer,
   ProductDescription,
   ProductInfo,
   DescriptionTitle,
@@ -34,43 +34,41 @@ function ProductPage() {
       <ProductData>
         <ProductName>Nome do Produto</ProductName>
         <ProductInfo>
-          <DataContainer>
+          <CarouselContainer>
             <Carousel
               carouselData={carouselData}
-              height="537.17px"
-              width="543.75px"
+              maxHeight="537.17px"
+              maxWidth="543.75px"
               aspectRatio="12 / 9"
               miniImages
             />
-          </DataContainer>
-          <DataContainer>
-            <TextInfo>
-              <ProductDescription>
-                <DescriptionTitle>Descrição do produto</DescriptionTitle>
-                <Description>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Pellentesque sed odio eu enim gravida varius quis non orci.
-                  Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla
-                  sed sapien.
-                </Description>
-              </ProductDescription>
-              <ProductBenefits>
-                <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-                <Benefits>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Pellentesque sed odio eu enim gravida varius quis non orci.
-                  Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla
-                  sed sapien.
-                </Benefits>
-              </ProductBenefits>
-              <ProductInfos>
-                <InfoTitle>Mais informações</InfoTitle>
-                <InfoDescription>
-                  <FilesList />
-                </InfoDescription>
-              </ProductInfos>
-            </TextInfo>
-          </DataContainer>
+          </CarouselContainer>
+          <TextInfoContainer>
+            <ProductDescription>
+              <DescriptionTitle>Descrição do produto</DescriptionTitle>
+              <Description>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Pellentesque sed odio eu enim gravida varius quis non orci.
+                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
+                sapien.
+              </Description>
+            </ProductDescription>
+            <ProductBenefits>
+              <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
+              <Benefits>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Pellentesque sed odio eu enim gravida varius quis non orci.
+                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
+                sapien.
+              </Benefits>
+            </ProductBenefits>
+            <ProductInfos>
+              <InfoTitle>Mais informações</InfoTitle>
+              <InfoDescription>
+                <FilesList />
+              </InfoDescription>
+            </ProductInfos>
+          </TextInfoContainer>
         </ProductInfo>
       </ProductData>
       <BudgetForm />
