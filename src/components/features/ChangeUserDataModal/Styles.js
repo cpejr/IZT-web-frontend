@@ -61,6 +61,14 @@ export const SaveChanges = styled.button`
   font-size: 18px;
   font-weight: 600;
   color: ${(props) => props.theme.colors.blue};
+
+  cursor: pointer;
+  transition-duration: 0.3s;
+  :hover {
+    background-color: ${(props) => props.theme.colors.blue};
+    color: white;
+  }
+
   @media (max-width: 700px) {
     align-items: center;
     justify-content: center;

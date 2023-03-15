@@ -55,14 +55,6 @@ const validationSchema = z.object({
     .min(1, 'Informe um endereço')
     .min(3, 'User address must be atleast 3 characters')
     .max(50, 'User address must be a maximum of 50 characters'),
-
-  email: z
-    .string()
-    .min(1, { message: 'Favor digitar o email' })
-    .email({
-      message: 'Insira um email no formato email@email.com',
-    })
-    .trim(),
 }); // all inputs validation schema
 
 function ChangeUserDataModal() {
@@ -148,17 +140,6 @@ function ChangeUserDataModal() {
               label="Endereço: "
               name="address"
               placeholder="Endereço"
-              register={register}
-              errors={errors}
-              type="text"
-            />
-          </FormColumn>
-          <FormColumn>
-            <Subtitle>Credenciais</Subtitle>
-            <RegisterInput
-              label="E-mail: "
-              name="email"
-              placeholder="email@email.com"
               register={register}
               errors={errors}
               type="text"
