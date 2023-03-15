@@ -67,3 +67,9 @@ export const SaveChanges = styled.button`
     width: 218px;
   }
 `;
+
+export const Subtitle = styled.form`
+  font-size: 1em;
+  font-weight: 600;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+`;

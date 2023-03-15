@@ -4,8 +4,15 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SaveOutlined } from '@ant-design/icons';
-import { DataInput } from '../../common';
-import { Container, Form, DataEntry, FormColumn, SaveChanges } from './Styles';
+import { RegisterInput } from '../../common';
+import {
+  Container,
+  Form,
+  DataEntry,
+  FormColumn,
+  SaveChanges,
+  Subtitle,
+} from './Styles';
 import { useUpdateUser } from '../../../hooks/query/users.js';
 
 const validationSchema = z.object({
@@ -77,7 +84,8 @@ function ChangeUserDataModal() {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <DataEntry>
           <FormColumn>
-            <DataInput
+            <Subtitle>Informações pessoais</Subtitle>
+            <RegisterInput
               label="Empresa: "
               name="company"
               placeholder="Nome da empresa"
@@ -85,7 +93,7 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
             />
-            <DataInput
+            <RegisterInput
               label="Nome: "
               name="name"
               placeholder="Nome"
@@ -93,7 +101,7 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
             />
-            <DataInput
+            <RegisterInput
               label="Sobrenome: "
               name="surname"
               placeholder="Sobrenome"
@@ -101,7 +109,7 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
             />
-            <DataInput
+            <RegisterInput
               label="Cargo: "
               name="role"
               placeholder="Nome do cargo"
@@ -111,7 +119,8 @@ function ChangeUserDataModal() {
             />
           </FormColumn>
           <FormColumn>
-            <DataInput
+            <Subtitle>Endereço</Subtitle>
+            <RegisterInput
               label="País: "
               name="country"
               placeholder="Nome do país"
@@ -119,7 +128,7 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
             />
-            <DataInput
+            <RegisterInput
               label="Estado: "
               name="state"
               placeholder="Nome do estado"
@@ -127,7 +136,7 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
             />
-            <DataInput
+            <RegisterInput
               label="Cidade: "
               name="city"
               placeholder="Nome da cidade"
@@ -135,7 +144,7 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
             />
-            <DataInput
+            <RegisterInput
               label="Endereço: "
               name="address"
               placeholder="Endereço"
@@ -145,7 +154,8 @@ function ChangeUserDataModal() {
             />
           </FormColumn>
           <FormColumn>
-            <DataInput
+            <Subtitle>Credenciais</Subtitle>
+            <RegisterInput
               label="E-mail: "
               name="email"
               placeholder="email@email.com"
