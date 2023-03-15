@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Modal } from 'antd';
 
 export const Background = styled.div`
   display: flex;
@@ -396,5 +397,11 @@ export const Info2 = styled.div`
       font-size: 12px;
       line-height: 17px;
     }
+  }
+`;
+
+export const ModalStyle = styled(Modal)`
+  :where(.css-dev-only-do-not-override-1me4733).ant-modal .ant-modal-content {
+    background-color: white;
   }
 `;

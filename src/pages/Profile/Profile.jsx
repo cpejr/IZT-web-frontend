@@ -1,6 +1,5 @@
 import { React, useState } from 'react';
 import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
-import { Modal } from 'antd';
 import {
   Container,
   Page,
@@ -19,6 +18,7 @@ import {
   ChangeInfo,
   Body,
   DataContainer,
+  ModalStyle,
 } from './Styles';
 import ChangeUserDataModal from '../../components/features/ChangeUserDataModal/ChangeUserDataModal';
 import useAuthStore from '../../stores/auth';
@@ -130,15 +130,16 @@ function Profile() {
           </Container>
         </Body>
       </Page>
-      <Modal
+      <ModalStyle
         visible={changeUserDataModal}
         onCancel={() => closechangeUserDataModal()}
         footer={null}
         width="90%"
         closeIcon={<CloseOutlined />}
+        bodyStyle={{ alignItems: 'center', borderRadius: 'none' }}
       >
         <ChangeUserDataModal />
-      </Modal>
+      </ModalStyle>
     </Background>
   );
 }
