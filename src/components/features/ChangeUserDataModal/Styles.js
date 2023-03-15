@@ -49,7 +49,7 @@ export const SaveChanges = styled.button`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  width: 212px;
+  width: 50%;
   max-width: 212px;
   height: 2.5em;
   border: 1px solid #000000;
@@ -72,7 +72,7 @@ export const SaveChanges = styled.button`
   @media (max-width: 700px) {
     align-items: center;
     justify-content: center;
-    width: 218px;
+    width: 90%;
   }
 `;
 

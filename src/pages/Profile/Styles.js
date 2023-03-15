@@ -321,7 +321,7 @@ export const Contact = styled.p`
 export const Lessons = styled.p`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   padding: 50px;
   gap: 20px;
@@ -336,12 +336,13 @@ export const Lessons = styled.p`
     font-weight: 600;
     font-size: 24px;
     line-height: 29px;
+    text-align: start;
 
     color: #fff;
   }
   @media (max-width: 700px) {
     border-radius: 10px;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     text-align: center;
     width: 100%;
@@ -349,7 +350,7 @@ export const Lessons = styled.p`
     h3 {
       font-size: 16px;
       line-height: 20px;
-      text-align: center;
+      text-align: start;
     }
   }
 `;
@@ -362,7 +363,7 @@ export const Info2 = styled.div`
     font-weight: 700;
     font-size: 18px;
     line-height: 29px;
-    text-align: left;
+    text-align: start;
 
     color: #fff;
   }
@@ -372,7 +373,7 @@ export const Info2 = styled.div`
     font-weight: 500;
     font-size: 18px;
     line-height: 29px;
-    text-align: left;
+    text-align: right;
 
     color: #fff;
   }
@@ -380,12 +381,12 @@ export const Info2 = styled.div`
     h1 {
       font-size: 14px;
       line-height: 17px;
-      text-align: center;
+      text-align: start;
     }
     h2 {
       font-size: 14px;
       line-height: 17px;
-      text-align: left;
+      text-align: end;
     }
   }
   @media (max-width: 320px) {
@@ -401,7 +402,11 @@ export const Info2 = styled.div`
 `;
 
 export const ModalStyle = styled(Modal)`
-  :where(.css-dev-only-do-not-override-1me4733).ant-modal .ant-modal-content {
+  :where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-content {
     background-color: white;
+    border-radius: 0px;
+    height: 100%;
+    width: 100%;
+    align-items: center;
   }
 `;
