@@ -4,44 +4,55 @@ import {
   getCategories,
   createCategory,
   searchByNameCategories,
+  updateCategory,
   // deleteProducts,
-  // updateProducts,
 } from '../../services/api';
 
 // eslint-disable-next-line import/prefer-default-export
 export function useGetCategories({
   filters,
-  onSucess = () => {},
+  onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
     queryKey: ['categories', filters],
     queryFn: () => getCategories(filters),
-    onSucess,
+    onSuccess,
     onError,
   });
 }
 
 export function useSearchByNameCategories({
   name,
-  onSucess = () => {},
+  onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
     queryKey: ['categories', 'searchByName', name],
     queryFn: () => searchByNameCategories(name),
-    onSucess,
+    onSuccess,
     onError,
   });
 }
 
 export function useCreateCategory({
-  onSucess = () => {},
+  onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useMutation({
     mutationFn: createCategory,
-    onSucess,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useUpdateCategory({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: updateCategory,
+    onSuccess,
     onError,
   });
 }

@@ -30,6 +30,10 @@ export default function AdminListCategory() {
   const { data: categories } = useSearchByNameCategories({
     name: debouncedName,
   });
+  const [data, setData] = useState({
+    id: '',
+    name: '',
+  });
 
   const modalButton = {
     closeIcon: <CloseOutlined style={{ color: 'white' }} />,
@@ -37,18 +41,17 @@ export default function AdminListCategory() {
 
   const [modalEditCategory, setModalEditCategory] = useState(false);
 
-  const openModalEditCategory = (e) => {
-    e.preventDefault();
-    setModalEditCategory(true);
-  };
-
-  const closeModalEditCategory = (e) => {
-    e.preventDefault();
+  const closeModalEditCategory = () => {
     setModalEditCategory(false);
   };
 
   const { width: windowWidth } = useWindowSize();
   const breakpoint = 700;
+
+  async function handleOpenModal(categoryId, categoryName) {
+    setData({ id: categoryId, name: categoryName });
+    setModalEditCategory(true);
+  }
 
   return (
     <Container>
@@ -77,7 +80,10 @@ export default function AdminListCategory() {
               </StyledLink>
             ) : (
               <EditButton>
-                <TbPencil onClick={openModalEditCategory} size={30} />
+                <TbPencil
+                  onClick={() => handleOpenModal(category._id, category.name)}
+                  size={30}
+                />
               </EditButton>
             )}
           </Row>
@@ -103,7 +109,11 @@ export default function AdminListCategory() {
         centered
         destroyOnClose
       >
-        <ModalEditCategory />
+        <ModalEditCategory
+          categoryId={data.id}
+          categoryName={data.name}
+          close={closeModalEditCategory}
+        />
       </ModalStyle>
     </Container>
   );

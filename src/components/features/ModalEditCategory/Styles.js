@@ -10,7 +10,11 @@ export const Container = styled.div`
   padding: 20px 24px;
 `;
 
-export const Form = styled.form``;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+`;
 
 export const ModalContent = styled.div`
   display: flex;

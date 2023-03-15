@@ -29,3 +29,9 @@ export const createProduct = async (newProduct) => {
 
   return data;
 };
+
+export const updateCategory = async ({ id, newCategoryData }) => {
+  const data = await privateApi.put(`/categories/${id}`, newCategoryData);
+
+  return data;
+};

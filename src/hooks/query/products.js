@@ -9,46 +9,46 @@ import {
 // eslint-disable-next-line import/prefer-default-export
 export function useGetProducts({
   filters,
-  onSucess = () => {},
+  onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
     queryKey: ['products', filters],
     queryFn: () => getProducts(filters),
-    onSucess,
+    onSuccess,
     onError,
   });
 }
 
 export function useCreateProduct({
-  onSucess = () => {},
+  onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useMutation({
     mutationFn: createProduct,
-    onSucess,
+    onSuccess,
     onError,
   });
 }
 
 // export function useUpdateProducts({
-//   onSucess = () => {},
+//   onSuccess = () => {},
 //   onError = (err) => console.log(err),
 // } = {}) {
 //   return useMutation({
 //     mutationFn: updateProducts,
-//     onSucess,
+//     onSuccess,
 //     onError,
 //   });
 // }
 
 // export function useDeleteProducts({
-//   onSucess = () => {},
+//   onSuccess = () => {},
 //   onError = (err) => console.log(err),
 // } = {}) {
 //   return useMutation({
 //     mutationFn: deleteProducts,
-//     onSucess,
+//     onSuccess,
 //     onError,
 //   });
 // }
