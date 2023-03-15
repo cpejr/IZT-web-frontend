@@ -28,7 +28,7 @@ import {
   StepsText,
 } from './Styles';
 
-function ProductPage() {
+export default function ProductPage() {
   return (
     <Container>
       <ProductData>
@@ -99,5 +99,3 @@ function ProductPage() {
     </Container>
   );
 }
-
-export default ProductPage;

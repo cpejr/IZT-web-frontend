@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaDownload } from 'react-icons/fa';
 import { FileListWrapper, FileItem } from './Styles';
 import File1 from '../../../assets/productPage/files/F1.pdf';
