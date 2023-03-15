@@ -14,9 +14,7 @@ import { FormInput, FormMask } from '../../common';
 
 const validationSchema = z.object({
   name: z.string().min(1, 'Digite o seu nome completo'),
-
   company: z.string().min(1, 'Digite o nome da empresa'),
-
   email: z
     .string()
     .min(1, { message: 'Digite o email' })
@@ -24,24 +22,18 @@ const validationSchema = z.object({
       message: 'Insira um email válido',
     })
     .trim(),
-
   telephone: z.string().min(1, 'Digite o seu número do telefone'),
-
   country: z.string().min(1, 'Digite nome do seu país'),
-
   state: z.string().min(1, 'Digite o estado'),
-
   city: z.string().min(1, 'Digite a cidade'),
-
   ZIPcode: z
     .string()
     .min(1, 'Digite o seu CEP')
     .regex(/^[0-9]{5}(?:-[0-9]{4})?$/, 'Digite um CEP válido'),
-
   address: z.string().min(1, 'Digite o seu seu endereço'),
 });
 
-function BudgetForm() {
+export default function BudgetForm() {
   const {
     handleSubmit,
     register,
@@ -142,5 +134,3 @@ function BudgetForm() {
     </ContactUs>
   );
 }
-
-export default BudgetForm;

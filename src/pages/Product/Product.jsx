@@ -1,21 +1,17 @@
-import React from 'react';
-// import { FaBeerAiOutlineVerticalAlignBottom } from 'react-icons/fa';
-import Img1 from '../../assets/Product/Group75.png';
-import Img2 from '../../assets/Product/Group76.png';
-import Img3 from '../../assets/Product/Group77.png';
-import Img4 from '../../assets/Product/Group78.png';
-import { BudgetForm } from '../../components/features';
-import FileList from '../../components/features/Files/Files';
-import Carousel from '../../components/features/Carousel/Carousel';
-import productData from '../../assets/Product/productCarousel/data';
-
+import step1 from '../../assets/productPage/steps/Group75.png';
+import step2 from '../../assets/productPage/steps/Group76.png';
+import step3 from '../../assets/productPage/steps/Group77.png';
+import step4 from '../../assets/productPage/steps/Group78.png';
+import productData from '../../assets/productPage/carousel/data';
+import { BudgetForm, FilesList, Carousel } from '../../components/features';
 import {
   Container,
-  Product,
+  ProductData,
   ProductName,
-  Info,
+  DataContainer,
+  TextInfo,
   ProductDescription,
-  ProductContainer,
+  ProductInfo,
   DescriptionTitle,
   Description,
   ProductBenefits,
@@ -30,25 +26,25 @@ import {
   Step,
   Image,
   StepsText,
-  CarrosselContainer,
 } from './Styles';
 
 function ProductPage() {
   return (
     <Container>
-      <Product>
+      <ProductData>
         <ProductName>Nome do Produto</ProductName>
-        <ProductContainer>
-          <CarrosselContainer>
+        <ProductInfo>
+          <DataContainer>
             <Carousel
               productData={productData}
               height="537.17px"
               width="543.75px"
+              aspectRatio="12 / 9"
               miniImages
             />
-          </CarrosselContainer>
-          <CarrosselContainer>
-            <Info>
+          </DataContainer>
+          <DataContainer>
+            <TextInfo>
               <ProductDescription>
                 <DescriptionTitle>Descrição do produto</DescriptionTitle>
                 <Description>
@@ -70,34 +66,34 @@ function ProductPage() {
               <ProductInfos>
                 <InfoTitle>Mais informações</InfoTitle>
                 <InfoDescription>
-                  <FileList />
+                  <FilesList />
                 </InfoDescription>
               </ProductInfos>
-            </Info>
-          </CarrosselContainer>
-        </ProductContainer>
-      </Product>
+            </TextInfo>
+          </DataContainer>
+        </ProductInfo>
+      </ProductData>
       <BudgetForm />
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
           <Step>
-            <Image src={Img1} alt="1 Step" />
+            <Image src={step1} alt="1 Step" />
             <StepsText>Entramos em contato para planejar o produto</StepsText>
           </Step>
 
           <Step>
-            <Image src={Img2} alt="2 Step" />
+            <Image src={step2} alt="2 Step" />
             <StepsText>Produzimos a sua peça</StepsText>
           </Step>
 
           <Step>
-            <Image src={Img3} alt="3 Step" />
+            <Image src={step3} alt="3 Step" />
             <StepsText>Realizamos a inspeção do produto</StepsText>
           </Step>
 
           <Step>
-            <Image src={Img4} alt="4 Step" />
+            <Image src={step4} alt="4 Step" />
             <StepsText>Enviamos para você</StepsText>
           </Step>
         </Steps>

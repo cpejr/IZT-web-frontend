@@ -12,7 +12,7 @@ export const Container = styled.div`
   max-height: ${(props) => props.maxHeight};
   max-width: ${(props) => props.maxWidth};
 
-  aspect-ratio: 16 / 9;
+  aspect-ratio: ${(props) => props.aspectRatio};
 `;
 
 export const ImagesContainer = styled.div`

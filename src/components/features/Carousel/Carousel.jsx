@@ -18,6 +18,7 @@ export default function Carousel({
   maxWidth = '500px',
   width = '100%',
   height = '100%',
+  aspectRatio = '16 / 9',
   miniImages = true,
 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -60,6 +61,7 @@ export default function Carousel({
       maxWidth={maxWidth}
       width={width}
       hight={height}
+      aspectRatio={aspectRatio}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
@@ -115,6 +117,7 @@ Carousel.defaultProps = {
   maxWidth: 'none',
   width: '100%',
   height: '100%',
+  aspectRatio: '16 / 9',
   miniImages: false,
 };
 
@@ -124,5 +127,6 @@ Carousel.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   miniImages: PropTypes.bool,
+  aspectRatio: PropTypes.string,
   productData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };

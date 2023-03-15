@@ -1,9 +1,9 @@
 import React from 'react';
 import { FaDownload } from 'react-icons/fa';
 import { FileListWrapper, FileItem } from './Styles';
-import File1 from '../../../assets/Files/F1.pdf';
-import File2 from '../../../assets/Files/F2.pdf';
-import File3 from '../../../assets/Files/F3.pdf';
+import File1 from '../../../assets/productPage/files/F1.pdf';
+import File2 from '../../../assets/productPage/files/F2.pdf';
+import File3 from '../../../assets/productPage/files/F3.pdf';
 
 const files = [
   {
@@ -20,7 +20,7 @@ const files = [
   },
 ];
 
-function FileList() {
+export default function FilesList() {
   return (
     <FileListWrapper>
       {files.map((file) => (
@@ -34,5 +34,3 @@ function FileList() {
     </FileListWrapper>
   );
 }
-
-export default FileList;
