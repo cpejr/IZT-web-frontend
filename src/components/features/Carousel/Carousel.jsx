@@ -14,8 +14,8 @@ import {
 
 export default function Carousel({
   carouselData = [],
-  maxHeight = '500px',
-  maxWidth = '500px',
+  maxHeight = 'none',
+  maxWidth = 'none',
   width = '100%',
   height = '100%',
   aspectRatio = '16 / 9',

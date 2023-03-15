@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <OuterDiv>
       <Container>
-        <Carousel carouselData={carouselData} />
+        <Carousel maxHeight="500px" carouselData={carouselData} />
         <CardsContainer>
           <Card
             title="Treinamento em Retificação Centerless"
