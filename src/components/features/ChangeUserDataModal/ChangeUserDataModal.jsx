@@ -3,6 +3,7 @@ import React from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { SaveOutlined } from '@ant-design/icons';
 import { DataInput } from '../../common';
 import { Container, Form, DataEntry, FormColumn, SaveChanges } from './Styles';
 import { useUpdateUser } from '../../../hooks/query/users.js';
@@ -55,14 +56,6 @@ const validationSchema = z.object({
       message: 'Insira um email no formato email@email.com',
     })
     .trim(),
-
-  password: z
-    .string()
-    .min(1, { message: 'Favor digitar uma senha' })
-    .min(6, 'A senha não pode ter menos de 6 caracteres')
-    .max(16, 'A senha não pode ter mais de 16 caracteres'),
-
-  confirmPassword: z.string().min(1, { message: 'Confirme sua senha' }),
 }); // all inputs validation schema
 
 function ChangeUserDataModal() {
@@ -160,25 +153,12 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
             />
-            <DataInput
-              label="Senha: "
-              name="password"
-              placeholder="********"
-              register={register}
-              errors={errors}
-              type="password"
-            />
-            <DataInput
-              label="Confirme sua senha: "
-              name="confirmPassword"
-              placeholder="********"
-              register={register}
-              errors={errors}
-              type="password"
-            />
           </FormColumn>
         </DataEntry>
-        <SaveChanges type="submit" name="Criar conta" relativeWidth="70%" />
+        <SaveChanges type="submit" name="Salvar Alterações" relativeWidth="70%">
+          <SaveOutlined />
+          Salvar Alterações
+        </SaveChanges>
       </Form>
     </Container>
   );

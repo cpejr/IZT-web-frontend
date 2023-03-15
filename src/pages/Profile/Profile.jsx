@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import { SettingOutlined } from '@ant-design/icons';
+import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
 import {
   Container,
@@ -134,7 +134,7 @@ function Profile() {
         visible={changeUserDataModal}
         onCancel={() => closechangeUserDataModal()}
         footer={null}
-        width="50%"
+        closeIcon={<CloseOutlined />}
       >
         <ChangeUserDataModal />
       </Modal>

@@ -2,8 +2,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 1330px;
-  max-height: 610px;
+  /* max-height: 610px; */
 `;
 
 export const DataEntry = styled.div`
@@ -46,9 +49,9 @@ export const SaveChanges = styled.button`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  width: 40%;
-  max-width: 239px;
-  height: 45px;
+  width: 212px;
+  max-width: 212px;
+  height: 2.5em;
   border: 1px solid #000000;
   border-radius: 5px;
   background-color: transparent;
