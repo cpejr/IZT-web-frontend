@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+const firstBreakPoint = '700px';
+const secondBreakPoint = '370px';
+
 export const ContactUs = styled.div`
   display: flex;
   flex-direction: column;
@@ -8,35 +11,32 @@ export const ContactUs = styled.div`
   padding: 50px 0px;
 
   width: 100%;
-  height: auto;
 
   background-color: ${(props) => props.theme.colors.darkBlue};
 
-  @media (max-width: 700px) {
-    padding: 50px 0px;
+  @media (max-width: ${firstBreakPoint}) {
+    padding: 30px 0px;
     gap: 0px;
   }
 `;
 
 export const Title = styled.p`
-  display: flex;
-  align-items: center;
-  font-size: 30px;
   color: white;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  height: 20%;
-  padding-bottom: 40px;
-  padding-top: 40px;
 
-  @media (max-width: 700px) {
-    font-weight: 600;
+  font-size: 30px;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-weight: 600;
+
+  padding-bottom: 40px;
+
+  @media (max-width: ${firstBreakPoint}) {
     font-size: 24px;
     line-height: 39px;
     height: 39px;
-    padding-top: 15px;
+
+    padding-bottom: 60px;
   }
-  @media (max-width: 370px) {
+  @media (max-width: ${secondBreakPoint}) {
     font-size: 18px;
   }
 `;
@@ -46,12 +46,13 @@ export const Form = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
   height: 100%;
-  width: 70%;
+  width: 80%;
   max-width: 1440px;
 
-  @media (max-width: 700px) {
-    width: 95%;
+  @media (max-width: ${firstBreakPoint}) {
+    width: 85%;
   }
 `;
 
@@ -63,36 +64,36 @@ export const Container = styled.div`
   gap: 3%;
   width: 100%;
 
-  @media (max-width: 700px) {
-    gap: 20px;
-    flex-direction: column;
-  }
-  @media (max-width: 700px) {
+  @media (max-width: ${firstBreakPoint}) {
     gap: 10px;
+    flex-direction: column;
   }
 `;
 
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 20px;
+
   width: 48.5%;
   height: 100%;
-  gap: 20px;
-  @media (max-width: 700px) {
-    width: 80%;
-  }
-  @media (max-width: 700px) {
-    gap: 10px;
+
+  @media (max-width: ${firstBreakPoint}) {
+    width: 100%;
   }
 `;
 
 export const Subsection = styled.div`
   display: flex;
-  flex-direction: row;
-  padding: 0px;
   gap: 20px;
-  height: auto;
+
+  padding: 0px;
+
   width: 100%;
+
+  > div {
+    width: calc(50% - 20px / 2);
+  }
 `;
 
 export const BotaoEnviar = styled.button`
@@ -101,7 +102,7 @@ export const BotaoEnviar = styled.button`
   background-color: #23a4a6;
 
   font-size: 24px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 700;
 
   width: 500px;
@@ -112,12 +113,12 @@ export const BotaoEnviar = styled.button`
   border: none;
   border-radius: 4px;
 
-  @media (max-width: 700px) {
+  @media (max-width: ${firstBreakPoint}) {
     width: 50%;
     font-size: 18px;
     height: 44px;
   }
-  @media (max-width: 370px) {
+  @media (max-width: ${secondBreakPoint}) {
     font-size: 12px;
     height: 30px;
     margin-top: 25px;

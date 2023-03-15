@@ -101,6 +101,7 @@ export default function BudgetForm() {
                 placeholder="Minas Gerais"
                 errors={errors}
                 register={register}
+                width="50%"
               />
 
               <FormInput
@@ -109,6 +110,7 @@ export default function BudgetForm() {
                 placeholder="Belo Horizonte"
                 errors={errors}
                 register={register}
+                width="50%"
               />
             </Subsection>
 
