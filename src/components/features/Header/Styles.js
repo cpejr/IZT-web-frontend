@@ -98,7 +98,6 @@ export const Nav = styled.div`
   @media (max-width: 420px) {
     top: 80px;
   }
-  z-index: 10000;
 `;
 
 export const Bar = styled.div`
