@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-
 import {
   Button,
   Container,
@@ -15,8 +14,12 @@ import {
 
 export default function Carousel({
   carouselData = [],
-  maxHeight = '500px',
-  miniImages = false,
+  maxHeight = 'none',
+  maxWidth = 'none',
+  width = '100%',
+  height = '100%',
+  aspectRatio = '16 / 9',
+  miniImages = true,
 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
@@ -51,10 +54,14 @@ export default function Carousel({
     if (isLeftSwipe) updateImage(currentImageIndex + 1);
     else if (isRightSwipe) updateImage(currentImageIndex - 1);
   };
-
+  console.log(carouselData);
   return (
     <Container
       maxHeight={maxHeight}
+      maxWidth={maxWidth}
+      width={width}
+      hight={height}
+      aspectRatio={aspectRatio}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
@@ -106,10 +113,20 @@ export default function Carousel({
 
 Carousel.defaultProps = {
   carouselData: [],
-  maxHeight: '500px',
+  maxHeight: 'none',
+  maxWidth: 'none',
+  width: '100%',
+  height: '100%',
+  aspectRatio: '16 / 9',
+  miniImages: false,
 };
 
 Carousel.propTypes = {
-  maxHeight: PropTypes.string,
   carouselData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+  maxHeight: PropTypes.string,
+  maxWidth: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  miniImages: PropTypes.bool,
+  aspectRatio: PropTypes.string,
 };
