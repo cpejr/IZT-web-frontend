@@ -100,8 +100,8 @@ export const SearchProduct = styled.input`
 `;
 
 export const Row = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr 30px;
   justify-content: space-between;
 `;
 
