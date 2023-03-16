@@ -14,6 +14,7 @@ import {
   Subtitle,
 } from './Styles';
 import { useUpdateUser } from '../../../hooks/query/users.js';
+import useAuthStore from '../../../stores/auth';
 
 const validationSchema = z.object({
   company: z.string().min(1, 'Favor digitar o nome da empresa'),
@@ -66,6 +67,7 @@ function ChangeUserDataModal() {
     resolver: zodResolver(validationSchema),
   });
 
+  const { auth } = useAuthStore();
   const { mutateAsync: updateUser, isLoading } = useUpdateUser();
 
   const onSubmit = async (data) => updateUser(data);
@@ -84,6 +86,7 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
+              value={auth.user.company}
             />
             <RegisterInput
               label="Nome: "
@@ -92,6 +95,7 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
+              value={auth.user.name}
             />
             <RegisterInput
               label="Sobrenome: "
@@ -100,6 +104,7 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
+              value={auth.user.surname}
             />
             <RegisterInput
               label="Cargo: "
@@ -108,6 +113,7 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
+              value={auth.user.role}
             />
           </FormColumn>
           <FormColumn>
@@ -119,6 +125,7 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
+              value={auth.user.country}
             />
             <RegisterInput
               label="Estado: "
@@ -127,6 +134,7 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
+              value={auth.user.state}
             />
             <RegisterInput
               label="Cidade: "
@@ -135,6 +143,7 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
+              value={auth.user.city}
             />
             <RegisterInput
               label="Endereço: "
@@ -143,6 +152,7 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
+              value={auth.user.address}
             />
           </FormColumn>
         </DataEntry>
