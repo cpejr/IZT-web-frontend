@@ -79,7 +79,7 @@ export const Container = styled.div`
   align-items: flex-start;
   margin-top: 20px;
   padding-left: 10%;
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -92,7 +92,8 @@ export const DataContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  @media (max-width: 700px) {
+  gap: 5%;
+  @media (max-width: 900px) {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -340,13 +341,13 @@ export const Lessons = styled.p`
 
     color: #fff;
   }
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
     border-radius: 10px;
     justify-content: flex-start;
     align-items: flex-start;
     text-align: center;
     width: 100%;
-    max-width: 500px;
+    /* max-width: 500px; */
     h3 {
       font-size: 16px;
       line-height: 20px;
@@ -405,8 +406,5 @@ export const ModalStyle = styled(Modal)`
   :where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-content {
     background-color: white;
     border-radius: 0px;
-    height: 100%;
-    width: 100%;
-    align-items: center;
   }
 `;

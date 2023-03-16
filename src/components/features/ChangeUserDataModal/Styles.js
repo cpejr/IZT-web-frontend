@@ -4,9 +4,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+
+  width: 100%;
   max-width: 1330px;
-  /* max-height: 610px; */
+  height: 100%;
 `;
 
 export const DataEntry = styled.div`
@@ -16,7 +19,7 @@ export const DataEntry = styled.div`
   justify-content: center;
   gap: 1.2em;
 
-  @media (max-width: 800px) {
+  @media (max-width: 730px) {
     flex-direction: column;
     align-items: center;
   }
@@ -34,11 +37,13 @@ export const FormColumn = styled.div`
 export const Form = styled.form`
   max-width: 1190px;
   width: 90%;
-  display: wrap;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 1.2em;
 
-  @media (max-width: 800px) {
+  @media (max-width: 750px) {
     flex-direction: column;
     align-items: center;
   }
@@ -55,7 +60,7 @@ export const SaveChanges = styled.button`
   border: 1px solid #000000;
   border-radius: 5px;
   background-color: transparent;
-  margin-top: 4%;
+  margin-top: 2%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 18px;
@@ -77,7 +82,8 @@ export const SaveChanges = styled.button`
 `;
 
 export const Subtitle = styled.form`
-  font-size: 1em;
+  font-size: 1.5em;
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
+  margin-bottom: 8%;
 `;

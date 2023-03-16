@@ -134,6 +134,7 @@ function Profile() {
         visible={changeUserDataModal}
         onCancel={() => closechangeUserDataModal()}
         footer={null}
+        width={800}
         closeIcon={<CloseOutlined />}
         centered
         destroyOnClose
