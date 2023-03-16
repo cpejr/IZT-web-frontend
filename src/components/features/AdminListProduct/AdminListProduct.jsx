@@ -64,10 +64,10 @@ export default function AdminListProduct() {
         </Subsection>
 
         <SearchSection>
-          <SearchProduct type="SearchProduct" placeholder="Pesquisar produto" />
           <SearchIconButton>
             <HiSearch size={25} />
           </SearchIconButton>
+          <SearchProduct type="SearchProduct" placeholder="Pesquisar produto" />
         </SearchSection>
       </CategoryFilterContainer>
 

@@ -74,7 +74,7 @@ export const Text = styled.p`
   font-size: 16px;
   line-height: 20px;
 
-  @media (max-width: 700px) {
+  @media (max-width: 790px) {
     width: 100%;
     font-size: 14px;
   }
@@ -90,7 +90,7 @@ export const SearchProduct = styled.input`
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 20px;
   font-size: 1em;
 
@@ -144,6 +144,7 @@ export const Subsection = styled.div`
 export const TypeFilter = styled.div``;
 
 export const SearchSection = styled.div`
+  gap: 10px;
   display: flex;
   flex-direction: row;
   align-items: space-between;
@@ -157,11 +158,13 @@ export const SearchSection = styled.div`
   padding-right: 5px;
   font-size: 16px;
   @media (max-width: 990px) {
-    width: 170px;
+    width: 190px;
+    gap: 5px;
     font-size: 14px;
   }
   @media (max-width: 700px) {
     width: 100%;
+    gap: 10px;
   }
 `;
 
