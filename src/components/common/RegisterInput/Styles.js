@@ -14,7 +14,7 @@ export const Label = styled.label`
   font-size: 0.8em;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 400;
-  @media (min-width: 800px) and (max-width: 1030px) {
+  @media (min-width: 801px) and (max-width: 1030px) {
     font-size: 0.7em;
   }
 `;
