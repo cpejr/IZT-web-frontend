@@ -84,6 +84,7 @@ export const Nav = styled.div`
     right: 0%;
     transition: all 400ms ease;
     font-weight: 600;
+    z-index: 10000;
     a {
       color: #fff;
       display: ${(props) => (props.bar ? 'flex' : 'none')};
