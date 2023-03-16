@@ -73,7 +73,6 @@ export const Text = styled.p`
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-
   @media (max-width: 790px) {
     width: 100%;
     font-size: 14px;
@@ -103,6 +102,7 @@ export const Row = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 30px;
   justify-content: space-between;
+  gap: 10px;
 `;
 
 export const EditButton = styled.button`

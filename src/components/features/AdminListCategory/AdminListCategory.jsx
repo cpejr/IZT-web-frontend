@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
+import { useNavigate } from 'react-router-dom';
 import { useSearchByNameCategories } from '../../../hooks/query/categories';
 import useWindowSize from '../../../hooks/useWindowSize';
 
@@ -52,6 +53,15 @@ export default function AdminListCategory() {
     setData({ id: categoryId, name: categoryName });
     setModalEditCategory(true);
   }
+  const navigate = useNavigate();
+  async function openEditCategoryPage(categoryId, categoryName) {
+    navigate('/administrador/editar-categoria', {
+      state: {
+        id: categoryId,
+        name: categoryName,
+      },
+    });
+  }
 
   return (
     <Container>
@@ -75,7 +85,11 @@ export default function AdminListCategory() {
             <Text>{category.name}</Text>
 
             {windowWidth <= breakpoint ? (
-              <StyledLink to="/administrador/editar-categoria">
+              <StyledLink
+                onClick={() =>
+                  openEditCategoryPage(category._id, category.name)
+                }
+              >
                 <TbPencil size={30} />
               </StyledLink>
             ) : (

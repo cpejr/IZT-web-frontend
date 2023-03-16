@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { Modal } from 'antd';
 
 export const Container = styled.div`
@@ -125,7 +124,7 @@ export const CategoryList = styled.div`
   }
 `;
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled.button`
   all: unset;
   cursor: pointer;
 `;
