@@ -24,12 +24,12 @@ export const Input = styled.input`
   width: 100%;
   border-radius: 4px;
   background-color: transparent;
-  border: 1px black solid;
   padding: 0 5%;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 0.8em;
   font-weight: 600;
   margin-top: 0.4em;
+  border: ${(props) => (props.error ? '2px red solid' : '1px black solid')};
   ::placeholder {
     color: black;
     font-weight: 400;
@@ -41,7 +41,7 @@ export const Input = styled.input`
 
 export const ErrorMessage = styled.p`
   font-size: 0.7em;
-  color: #af0c0c;
+  color: red;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 600;
 `;
