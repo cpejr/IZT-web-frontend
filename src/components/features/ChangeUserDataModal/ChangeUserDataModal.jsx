@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import React from 'react';
+import { React, useState } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -67,10 +67,28 @@ function ChangeUserDataModal() {
     resolver: zodResolver(validationSchema),
   });
 
+  const [InputFields, setInputFields] = useState({
+    company: '',
+    name: '',
+    surname: '',
+    role: '',
+    country: '',
+    state: '',
+    city: '',
+    address: '',
+  });
+
+  const changeHandler = (e) => {
+    setInputFields({
+      ...InputFields,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const { auth } = useAuthStore();
   const { mutateAsync: updateUser, isLoading } = useUpdateUser();
 
-  const onSubmit = async (data) => updateUser(data);
+  const onSubmit = async (data) => updateUser(auth.user._id, data);
   if (isLoading) return <p>Loading...</p>;
 
   return (
@@ -86,7 +104,9 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
-              value={auth.user.company}
+              defaultValue={auth.user.company}
+              value={InputFields.company}
+              onChange={changeHandler()}
             />
             <RegisterInput
               label="Nome: "
@@ -95,7 +115,9 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
-              value={auth.user.name}
+              defaultValue={auth.user.name}
+              value={InputFields.name}
+              onChange={changeHandler()}
             />
             <RegisterInput
               label="Sobrenome: "
@@ -104,7 +126,9 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
-              value={auth.user.surname}
+              defaultValue={auth.user.surname}
+              value={InputFields.surname}
+              onChange={changeHandler()}
             />
             <RegisterInput
               label="Cargo: "
@@ -113,7 +137,9 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
-              value={auth.user.role}
+              defaultValue={auth.user.role}
+              value={InputFields.role}
+              onChange={changeHandler()}
             />
           </FormColumn>
           <FormColumn>
@@ -125,7 +151,9 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
-              value={auth.user.country}
+              defaultValue={auth.user.country}
+              value={InputFields.country}
+              onChange={changeHandler()}
             />
             <RegisterInput
               label="Estado: "
@@ -134,7 +162,9 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
-              value={auth.user.state}
+              defaultValue={auth.user.state}
+              value={InputFields.state}
+              onChange={changeHandler()}
             />
             <RegisterInput
               label="Cidade: "
@@ -143,7 +173,9 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
-              value={auth.user.city}
+              defaultValue={auth.user.city}
+              value={InputFields.city}
+              onChange={changeHandler()}
             />
             <RegisterInput
               label="Endereço: "
@@ -152,7 +184,9 @@ function ChangeUserDataModal() {
               register={register}
               errors={errors}
               type="text"
-              value={auth.user.address}
+              defaultValue={auth.user.address}
+              value={InputFields.address}
+              onChange={changeHandler()}
             />
           </FormColumn>
         </DataEntry>
