@@ -73,23 +73,21 @@ export const Text = styled.p`
 `;
 
 export const SearchProduct = styled.input`
-  display: block;
+  display: flex;
   width: 100%;
   height: 35px;
-
-  background: #ffffff;
-  border-radius: 20px;
+  flex-grow: 1;
+  background-color: transparent;
   border: none;
-  padding-left: 10px;
 
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
   line-height: 20px;
+  font-size: 1em;
 
-  @media (max-width: 990px) {
-    font-size: 14px;
+  @media (max-width: 700px) {
+    width: 100%;
   }
 `;
 
@@ -139,24 +137,31 @@ export const Subsection = styled.div`
 `;
 
 export const SearchSection = styled.div`
+  gap: 10px;
   display: flex;
-  align-items: center;
-  width: 230px;
+  flex-direction: row;
+  align-items: space-between;
+  width: 220px;
   position: relative;
   max-height: 35px;
   height: 100%;
-
+  background-color: white;
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-right: 5px;
+  font-size: 16px;
   @media (max-width: 990px) {
+    width: 190px;
+    gap: 5px;
+    font-size: 14px;
+  }
+  @media (max-width: 700px) {
     width: 100%;
+    gap: 10px;
   }
 `;
-
 export const SearchIconButton = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   right: 0;
-  z-index: 10;
   border: none;
   background: none;
   outline: none;
@@ -164,13 +169,6 @@ export const SearchIconButton = styled.button`
   width: auto;
 
   cursor: pointer;
-
-  svg {
-    @media (max-width: 990px) {
-      height: 22px;
-      width: 22px;
-    }
-  }
 `;
 
 export const ModalStyle = styled(Modal)`

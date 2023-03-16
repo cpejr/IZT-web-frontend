@@ -63,8 +63,8 @@ export default function AdminListCategory() {
             <HiSearch size={25} />
           </SearchIconButton>
           <SearchProduct
-            placeholder="Pesquisar categoria"
             onChange={(e) => setName(e.target.value)}
+            placeholder="Pesquisar categoria"
           />
         </SearchSection>
       </CategoryFilterContainer>
