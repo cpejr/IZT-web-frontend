@@ -52,6 +52,7 @@ export const Form = styled.form`
     align-items: center;
     flex-direction: column;
     width: 100%;
+    gap: 0%;
   }
 
   @media (min-width: 1440px) {

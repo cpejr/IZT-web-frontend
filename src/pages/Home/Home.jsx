@@ -43,7 +43,7 @@ function Home() {
             text="Otimize o seu processo de retificação centerless utilizando o nosso software de simulação."
             image={Software}
             imageAlt="Software image"
-            pictureTopMedia1000="20%"
+            pictureTopMedia1000="22%"
           />
         </CardsContainer>
         <FormsContactUs />
