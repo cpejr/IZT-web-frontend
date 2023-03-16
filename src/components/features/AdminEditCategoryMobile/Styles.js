@@ -11,6 +11,9 @@ export const Container = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  max-width: 390px;
+  width: 100%;
+  align-self: center;
   gap: 20px;
 `;
 
@@ -41,7 +44,8 @@ export const SmallInput = styled.input`
   padding: 8px 11px;
   gap: 10px;
 
-  width: 370px;
+  max-width: 370px;
+  width: 100%;
   height: 36px;
 
   border: 1px solid black;
@@ -62,7 +66,8 @@ export const SaveButton = styled.button`
   padding: 10px;
   gap: 10px;
 
-  width: 191px;
+  max-width: 250px;
+  width: 100%;
   height: 45px;
 
   border: 1px solid black;

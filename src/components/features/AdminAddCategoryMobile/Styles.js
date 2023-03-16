@@ -4,6 +4,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  max-width: 390px;
+  width: 100%;
+  align-self: center;
   margin-bottom: 50px;
 `;
 
@@ -34,7 +37,8 @@ export const SmallInput = styled.input`
   padding: 8px 11px;
   gap: 10px;
 
-  width: 370px;
+  max-width: 370px;
+  width: 100%;
   height: 36px;
 
   border: 1px solid black;
