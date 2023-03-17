@@ -12,6 +12,7 @@ import {
   CategoryFilterContainer,
   Subsection,
   Text,
+  CategoryText,
   SearchProduct,
   ProductList,
   StyledLink,
@@ -73,12 +74,12 @@ export default function AdminListProduct() {
 
       <CategoryFilterContainer>
         <Subsection>
-          <Text>Filtrar por categoria:</Text>
+          <CategoryText>Filtrar por categoria:</CategoryText>
           <Select
             standart="Categoria"
             data={categories}
             getValue={setSelectedCategory}
-            maxWidth="100%"
+            maxWidth="250px"
           />
         </Subsection>
 

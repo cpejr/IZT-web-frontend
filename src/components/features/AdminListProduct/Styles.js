@@ -68,16 +68,29 @@ export const CategoryFilterContainer = styled.div`
   }
 `;
 
-export const Text = styled.p`
+export const CategoryText = styled.p`
   height: 20px;
-
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
+  min-width: 170px;
   @media (max-width: 790px) {
     width: 100%;
     font-size: 14px;
+    min-width: 150px;
   }
+  @media (max-width: 350px) {
+    gap: 5px;
+    min-width: 0px;
+    height: auto;
+  }
+`;
+
+export const Text = styled.p`
+  height: 20px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
 `;
 
 export const SearchProduct = styled.input`
@@ -104,6 +117,7 @@ export const Row = styled.div`
   grid-template-columns: 1fr 1fr 30px;
   justify-content: space-between;
   gap: 10px;
+  width: 100%;
 `;
 
 export const EditButton = styled.button`
@@ -126,9 +140,6 @@ export const ProductList = styled.div`
   width: 100%;
   padding-left: 20px;
   padding-right: 20px;
-
-  @media (max-width: 700px) {
-  }
 `;
 
 export const StyledLink = styled(Link)`
@@ -142,9 +153,10 @@ export const Subsection = styled.div`
   gap: 10px;
   width: 100%;
   align-items: center;
+  @media (max-width: 350px) {
+    gap: 5px;
+  }
 `;
-
-export const TypeFilter = styled.div``;
 
 export const SearchSection = styled.div`
   gap: 10px;
