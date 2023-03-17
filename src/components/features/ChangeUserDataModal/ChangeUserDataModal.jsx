@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable import/extensions */
 import { React, useState } from 'react';
 import { z } from 'zod';
@@ -15,6 +16,7 @@ import {
 } from './Styles';
 import { useUpdateUser } from '../../../hooks/query/users.js';
 import useAuthStore from '../../../stores/auth';
+import { ERROR_CODES } from '../../../utils/constants';
 
 const validationSchema = z.object({
   company: z.string().min(1, 'Favor digitar o nome da empresa'),
@@ -58,7 +60,8 @@ const validationSchema = z.object({
     .max(50, 'User address must be a maximum of 50 characters'),
 }); // all inputs validation schema
 
-function ChangeUserDataModal() {
+function ChangeUserDataModal({ close }) {
+  const [errorMessage, setSubmitErrorMessage] = useState('');
   const {
     register,
     handleSubmit,
@@ -67,29 +70,40 @@ function ChangeUserDataModal() {
     resolver: zodResolver(validationSchema),
   });
 
-  const [InputFields, setInputFields] = useState({
-    company: '',
-    name: '',
-    surname: '',
-    role: '',
-    country: '',
-    state: '',
-    city: '',
-    address: '',
-  });
+  const { auth, setUser } = useAuthStore();
 
-  const changeHandler = (e) => {
-    setInputFields({
-      ...InputFields,
-      [e.target.name]: e.target.value,
-    });
+  const onSuccess = (data) => {
+    setUser(data);
+    close();
+  };
+  const onError = (error) => {
+    switch (error.response.status) {
+      case ERROR_CODES.UNAUTHORIZED:
+        setSubmitErrorMessage('Usuário não autorizado');
+        break;
+      case ERROR_CODES.NOT_FOUND:
+        setSubmitErrorMessage('Usuário não encontrado');
+        break;
+      case ERROR_CODES.INTERNAL_SERVER:
+        setSubmitErrorMessage(
+          'Erro ao editar os dados cadastrais. Tente novamente mais tarde'
+        );
+        break;
+      default:
+        break;
+    }
   };
 
-  const { auth } = useAuthStore();
-  const { mutateAsync: updateUser, isLoading } = useUpdateUser();
+  const { mutate: updateUser, isLoading } = useUpdateUser({
+    onSuccess,
+    onError,
+  });
 
-  const onSubmit = async (data) => updateUser(auth.user._id, data);
+  const onSubmit = async (data) =>
+    updateUser({ id: auth.user._id, newUserData: data });
+
   if (isLoading) return <p>Loading...</p>;
+  if (errorMessage) return <p>{errorMessage}</p>;
 
   return (
     <Container>
@@ -105,8 +119,6 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
               defaultValue={auth.user.company}
-              value={InputFields.company}
-              onChange={changeHandler()}
             />
             <RegisterInput
               label="Nome: "
@@ -116,8 +128,6 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
               defaultValue={auth.user.name}
-              value={InputFields.name}
-              onChange={changeHandler()}
             />
             <RegisterInput
               label="Sobrenome: "
@@ -127,8 +137,6 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
               defaultValue={auth.user.surname}
-              value={InputFields.surname}
-              onChange={changeHandler()}
             />
             <RegisterInput
               label="Cargo: "
@@ -138,8 +146,6 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
               defaultValue={auth.user.role}
-              value={InputFields.role}
-              onChange={changeHandler()}
             />
           </FormColumn>
           <FormColumn>
@@ -152,8 +158,6 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
               defaultValue={auth.user.country}
-              value={InputFields.country}
-              onChange={changeHandler()}
             />
             <RegisterInput
               label="Estado: "
@@ -163,8 +167,6 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
               defaultValue={auth.user.state}
-              value={InputFields.state}
-              onChange={changeHandler()}
             />
             <RegisterInput
               label="Cidade: "
@@ -174,8 +176,6 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
               defaultValue={auth.user.city}
-              value={InputFields.city}
-              onChange={changeHandler()}
             />
             <RegisterInput
               label="Endereço: "
@@ -185,8 +185,6 @@ function ChangeUserDataModal() {
               errors={errors}
               type="text"
               defaultValue={auth.user.address}
-              value={InputFields.address}
-              onChange={changeHandler()}
             />
           </FormColumn>
         </DataEntry>

@@ -34,7 +34,7 @@ export const Body = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
@@ -54,7 +54,7 @@ export const Title = styled.h2`
 
 export const Subtitle = styled.h3`
   margin-bottom: 2%;
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -142,7 +142,7 @@ export const PersonalData = styled.div`
   height: auto;
 
   h3 {
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
@@ -179,7 +179,7 @@ export const Info = styled.div`
   width: 100%;
 
   h1 {
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -188,7 +188,7 @@ export const Info = styled.div`
     color: #000000;
   }
   h2 {
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
@@ -241,7 +241,7 @@ export const Address = styled.div`
   height: auto;
 
   h3 {
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
@@ -289,9 +289,7 @@ export const ChangeInfo = styled.button`
     width: 218px;
   }
 `;
-export const Contact = styled.p`
-  display: flex;
-  flex-direction: column;
+export const Contact = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -300,7 +298,7 @@ export const Contact = styled.p`
   width: 100%;
   height: auto;
   h3 {
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
@@ -319,7 +317,7 @@ export const Contact = styled.p`
   }
 `;
 
-export const Lessons = styled.p`
+export const Lessons = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -332,7 +330,7 @@ export const Lessons = styled.p`
   background: #123645;
   border-radius: 15px 0px 0px 15px;
   h3 {
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
@@ -349,7 +347,14 @@ export const Lessons = styled.p`
     width: 100%;
     /* max-width: 500px; */
     h3 {
-      font-size: 16px;
+      font-size: 20px;
+      line-height: 20px;
+      text-align: start;
+    }
+  }
+  @media (max-width: 320px) {
+    h3 {
+      font-size: 18px;
       line-height: 20px;
       text-align: start;
     }
@@ -359,7 +364,7 @@ export const Info2 = styled.div`
   display: flex;
   gap: 20px;
   h1 {
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -369,7 +374,7 @@ export const Info2 = styled.div`
     color: #fff;
   }
   h2 {
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -392,11 +397,11 @@ export const Info2 = styled.div`
   }
   @media (max-width: 320px) {
     h1 {
-      font-size: 12px;
+      font-size: 11px;
       line-height: 17px;
     }
     h2 {
-      font-size: 12px;
+      font-size: 11px;
       line-height: 17px;
     }
   }

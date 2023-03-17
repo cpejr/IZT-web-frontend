@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import { React, useState } from 'react';
 import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
 import {
@@ -26,13 +27,12 @@ import useAuthStore from '../../stores/auth';
 function Profile() {
   const [changeUserDataModal, setChangeUserDataModal] = useState(false);
   const { auth } = useAuthStore();
-  console.log(auth);
 
-  async function openchangeUserDataModal() {
+  async function openChangeUserDataModal() {
     setChangeUserDataModal(true);
   }
 
-  async function closechangeUserDataModal() {
+  async function closeChangeUserDataModal() {
     setChangeUserDataModal(false);
   }
   if (!auth) return <h1>Proibido</h1>;
@@ -123,7 +123,7 @@ function Profile() {
                 </Lessons>
               </SecondColumn>
             </DataContainer>
-            <ChangeInfo onClick={() => openchangeUserDataModal()}>
+            <ChangeInfo onClick={openChangeUserDataModal}>
               <SettingOutlined />
               Alterar Informações
             </ChangeInfo>
@@ -131,15 +131,14 @@ function Profile() {
         </Body>
       </Page>
       <ModalStyle
-        visible={changeUserDataModal}
-        onCancel={() => closechangeUserDataModal()}
+        open={changeUserDataModal}
+        onCancel={closeChangeUserDataModal}
         footer={null}
-        width={800}
+        width={1000}
         closeIcon={<CloseOutlined />}
         centered
-        destroyOnClose
       >
-        <ChangeUserDataModal />
+        <ChangeUserDataModal close={closeChangeUserDataModal} />
       </ModalStyle>
     </Background>
   );

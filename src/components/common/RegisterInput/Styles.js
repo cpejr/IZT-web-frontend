@@ -20,7 +20,7 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-  height: 3em;
+  height: 4em;
   width: 100%;
   border-radius: 4px;
   background-color: transparent;

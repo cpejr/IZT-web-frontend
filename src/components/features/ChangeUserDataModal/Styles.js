@@ -63,7 +63,7 @@ export const SaveChanges = styled.button`
   margin-top: 2%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 18px;
+  font-size: 1.4em;
   font-weight: 600;
   color: ${(props) => props.theme.colors.blue};
 
@@ -78,10 +78,11 @@ export const SaveChanges = styled.button`
     align-items: center;
     justify-content: center;
     width: 90%;
+    font-size: 1em;
   }
 `;
 
-export const Subtitle = styled.form`
+export const Subtitle = styled.p`
   font-size: 1.5em;
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
