@@ -23,12 +23,13 @@ export function useGetProducts({
 
 export function useSearchProductByName({
   name,
+  category,
   onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
-    queryKey: ['products', 'searchProductByName', name],
-    queryFn: () => searchProductByName(name),
+    queryKey: ['products', 'searchProductByName', name, category],
+    queryFn: () => searchProductByName(name, category),
     onSuccess,
     onError,
   });

@@ -53,17 +53,18 @@ export const CategoryFilterContainer = styled.div`
 
   width: 100%;
   height: 50px;
-  padding-right: 10px;
-  padding-left: 10px;
-
+  padding: 5px 10px;
+  gap: 20px;
   background: #eeeeee;
 
   @media (max-width: 700px) {
     flex-direction: column-reverse;
     align-items: flex-start;
-    height: 84px;
     justify-content: center;
     gap: 10px;
+    padding: 10px 10px;
+    border-radius: 4px;
+    height: auto;
   }
 `;
 
@@ -139,6 +140,8 @@ export const Subsection = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
+  width: 100%;
+  align-items: center;
 `;
 
 export const TypeFilter = styled.div``;

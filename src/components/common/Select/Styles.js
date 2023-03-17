@@ -7,8 +7,12 @@ export const Container = styled.div`
   font-size: 16px;
   font-weight: 600;
   position: relative;
-  flex-grow: 1;
   height: 100%;
+  max-width: ${(props) => props.maxWidth};
+  width: 100%;
+  @media (max-width: 700) {
+    font-size: 14px;
+  }
 `;
 
 export const Selected = styled.div`
@@ -16,12 +20,12 @@ export const Selected = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   gap: 5px;
   padding: 10px;
   max-height: 40px;
   background-color: white;
   max-width: ${(props) => props.maxWidth};
+  width: 100%;
   svg {
     font-weight: 600;
   }
@@ -30,9 +34,11 @@ export const Selected = styled.div`
     text-decoration-color: ${(props) => props.theme.colors.blue};
     text-decoration-thickness: 2px;
     white-space: nowrap;
-    max-width: 200px;
+    max-width: 100%;
     max-height: 40px;
     overflow: hidden;
+    text-overflow: hidden;
+    max-width: 70%;
   }
   :hover {
     cursor: pointer;

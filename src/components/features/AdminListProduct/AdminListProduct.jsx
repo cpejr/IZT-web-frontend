@@ -4,10 +4,7 @@ import { CloseOutlined } from '@ant-design/icons';
 
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
-import {
-  useGetProducts,
-  useSearchProductByName,
-} from '../../../hooks/query/products';
+import { useSearchProductByName } from '../../../hooks/query/products';
 import { useGetCategories } from '../../../hooks/query/categories';
 import {
   Container,
@@ -32,15 +29,19 @@ import { Select } from '../../common';
 export default function AdminListProduct() {
   const [name, setName] = useState('');
   const { data: categories } = useGetCategories();
-  const { selectedCategory, setSelectedCategory } = useState();
+
+  const { selectedCategory, setSelectedCategory } = useState({});
 
   const debouncedName = useDebounce(name);
 
   const { data: products } = useSearchProductByName({
     name: debouncedName,
+    category: selectedCategory?._id,
   });
 
-  // const { data: products } = useGetProducts();
+  const getValue = (item) => {
+    setSelectedCategory(item);
+  };
 
   const modalButton = {
     closeIcon: <CloseOutlined style={{ color: 'white' }} />,
@@ -78,7 +79,8 @@ export default function AdminListProduct() {
           <Select
             standart="Categoria"
             data={categories}
-            getValue={setSelectedCategory}
+            getValue={getValue}
+            maxWidth="100%"
           />
         </Subsection>
 
