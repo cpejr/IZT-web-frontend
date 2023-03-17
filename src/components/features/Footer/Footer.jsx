@@ -4,6 +4,7 @@ import { HiOutlineMail } from 'react-icons/hi';
 import {
   Container,
   SideContainer,
+  LogoSection,
   MiddleContainer,
   Text,
   Tittle,
@@ -20,7 +21,9 @@ export default function Footer() {
   return (
     <Container>
       <SideContainer>
-        <Logo />
+        <LogoSection>
+          <Logo />
+        </LogoSection>
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
           aliquam blandit convallis. Proin luctus turpis vitae urna feugiat
@@ -43,7 +46,7 @@ export default function Footer() {
         <Tittle>Nossas Redes</Tittle>
         <SocialMedias>
           <SocialMediaButton href="https://cpejr.com/">
-            <BsInstagram size={35} />
+            <BsInstagram size={30} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
             <AiOutlineLinkedin size={35} />
@@ -52,7 +55,7 @@ export default function Footer() {
             <AiOutlineFacebook size={35} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
-            <BsWhatsapp size={35} />
+            <BsWhatsapp size={30} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
             <HiOutlineMail size={35} />

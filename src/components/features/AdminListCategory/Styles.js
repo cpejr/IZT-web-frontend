@@ -22,7 +22,7 @@ export const Container = styled.div`
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-    gap: 20px;
+    gap: 10px;
   }
 `;
 

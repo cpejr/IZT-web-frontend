@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 50px;
 `;
 
@@ -13,6 +13,7 @@ export const Title = styled.p`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  padding-bottom: 10px;
 
   color: black;
 `;
@@ -34,7 +35,7 @@ export const SmallInput = styled.input`
   padding: 8px 11px;
   gap: 10px;
 
-  max-width: 370px;
+  max-width: 100%;
   width: 100%;
   height: 36px;
 
@@ -47,14 +48,14 @@ export const SmallInput = styled.input`
   font-size: 16px;
 `;
 
-export const BigInput = styled.input`
+export const BigInput = styled.textarea`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 8px 11px;
   gap: 10px;
 
-  max-width: 370px;
+  max-width: 100%;
   width: 100%;
   height: 250px;
 
@@ -119,6 +120,7 @@ export const SaveButton = styled.button`
   justify-content: center;
   padding: 10px;
   gap: 10px;
+  margin-top: 10px;
 
   width: 191px;
   height: 45px;

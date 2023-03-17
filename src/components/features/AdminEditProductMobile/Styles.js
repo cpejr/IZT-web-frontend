@@ -27,14 +27,14 @@ export const Subtitle = styled.p`
   color: black;
 `;
 
-export const SmallInput = styled.input`
+export const SmallInput = styled.textarea`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 8px 11px;
   gap: 10px;
 
-  width: 370px;
+  width: 100%;
   height: 36px;
 
   border: 1px solid black;
@@ -46,14 +46,14 @@ export const SmallInput = styled.input`
   font-size: 16px;
 `;
 
-export const BigInput = styled.input`
+export const BigInput = styled.textarea`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 8px 11px;
   gap: 10px;
 
-  width: 370px;
+  width: 100%;
   height: 250px;
 
   border: 1px solid black;

@@ -41,7 +41,7 @@ export const SmallInput = styled.input`
   gap: 10px;
   margin-bottom: 15px;
 
-  max-width: 370px;
+  max-width: 100%;
   width: 100%;
   height: 36px;
 

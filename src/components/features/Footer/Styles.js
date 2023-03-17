@@ -26,6 +26,11 @@ export const SideContainer = styled.div`
     width: 100%;
     height: auto;
     padding: 3% 7%;
+`;
+
+export const LogoSection = styled.div`
+  @media (max-width: 850px) {
+    padding-top: 30px;
   }
 `;
 
@@ -93,8 +98,8 @@ export const SocialMediaButton = styled.a`
 
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: auto;
+  height: auto;
   border: none;
   background: none;
 

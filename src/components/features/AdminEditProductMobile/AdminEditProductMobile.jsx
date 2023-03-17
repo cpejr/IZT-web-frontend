@@ -21,13 +21,13 @@ export default function AdminEditProductMobile() {
       <Title>Editar produto</Title>
 
       <Subtitle>Nome do produto:</Subtitle>
-      <SmallInput type="SearchProduct" placeholder="Pesquisar categoria" />
+      <SmallInput />
 
       <Subtitle>Descrição:</Subtitle>
-      <BigInput type="SearchProduct" placeholder="Pesquisar categoria" />
+      <BigInput />
 
       <Subtitle>Vantagens:</Subtitle>
-      <BigInput type="SearchProduct" placeholder="Pesquisar categoria" />
+      <BigInput />
 
       <div>
         <Subtitle>Imagens:</Subtitle>
