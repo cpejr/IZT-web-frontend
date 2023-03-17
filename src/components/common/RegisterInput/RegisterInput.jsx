@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import PropTypes from 'prop-types';
 import { Container, Label, Input, ErrorMessage } from './Styles';
 
@@ -23,7 +22,6 @@ export default function RegisterInput({
 RegisterInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   errors: PropTypes.object.isRequired,
   register: PropTypes.func.isRequired,
 };

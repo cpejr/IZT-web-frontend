@@ -1,5 +1,4 @@
-/* eslint-disable import/extensions */
-import { React } from 'react';
+import { useState } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -15,66 +14,63 @@ import {
   Subtitle,
 } from './Styles';
 import IZTLogo from '../../assets/IZTLogo.svg';
+import { useCreateUser } from '../../hooks/query/users';
 import { RegisterInput, SubmitButton } from '../../components/common';
-import { useCreateUser } from '../../hooks/query/users.js';
+import { ERROR_CODES } from '../../utils/constants';
 
-const validationSchema = z.object({
-  company: z.string().min(1, 'Favor digitar o nome da empresa'),
+const validationSchema = z
+  .object({
+    company: z.string().min(1, 'Favor digitar o nome da empresa'),
+    name: z
+      .string()
+      .min(1, 'Informe um nome')
+      .min(3, 'O nome não pode ter menos de 3 caracteres')
+      .max(40, 'O nome não pode ter mais de 40 caracteres'),
+    surname: z
+      .string()
+      .min(1, 'Informe um sobrenome')
+      .min(2, 'O sobrenome não pode ter menos de 2 caracteres')
+      .max(40, 'O sobrenome não pode ter mais de 40 caracteres'),
+    role: z.string().min(1, 'Informe um cargo'),
+    country: z
+      .string()
+      .min(1, 'Informe um país')
+      .min(3, 'User country must be atleast 3 characters')
+      .max(30, 'User country must be a maximum of 30 characters'),
+    state: z
+      .string()
+      .min(1, 'Informe um estado')
+      .min(3, 'User state must be atleast 3 characters')
+      .max(30, 'User state must be a maximum of 30 characters'),
+    city: z
+      .string()
+      .min(1, 'Informe uma cidade')
+      .min(3, 'User city must be atleast 3 characters')
+      .max(30, 'User city must be a maximum of 30 characters'),
+    address: z
+      .string()
+      .min(1, 'Informe um endereço')
+      .min(3, 'User address must be atleast 3 characters')
+      .max(50, 'User address must be a maximum of 50 characters'),
+    email: z
+      .string()
+      .min(1, { message: 'Favor digitar o email' })
+      .email({
+        message: 'Insira um email no formato email@email.com',
+      })
+      .trim(),
+    password: z
+      .string()
+      .min(1, { message: 'Favor digitar uma senha' })
+      .min(6, 'A senha não pode ter menos de 6 caracteres')
+      .max(16, 'A senha não pode ter mais de 16 caracteres'),
 
-  name: z
-    .string()
-    .min(1, 'Informe um nome')
-    .min(3, 'O nome não pode ter menos de 3 caracteres')
-    .max(40, 'O nome não pode ter mais de 40 caracteres'),
-
-  surname: z
-    .string()
-    .min(1, 'Informe um sobrenome')
-    .min(2, 'O sobrenome não pode ter menos de 2 caracteres')
-    .max(40, 'O sobrenome não pode ter mais de 40 caracteres'),
-
-  role: z.string().min(1, 'Informe um cargo'),
-
-  country: z
-    .string()
-    .min(1, 'Informe um país')
-    .min(3, 'User country must be atleast 3 characters')
-    .max(30, 'User country must be a maximum of 30 characters'),
-
-  state: z
-    .string()
-    .min(1, 'Informe um estado')
-    .min(3, 'User state must be atleast 3 characters')
-    .max(30, 'User state must be a maximum of 30 characters'),
-
-  city: z
-    .string()
-    .min(1, 'Informe uma cidade')
-    .min(3, 'User city must be atleast 3 characters')
-    .max(30, 'User city must be a maximum of 30 characters'),
-
-  address: z
-    .string()
-    .min(1, 'Informe um endereço')
-    .min(3, 'User address must be atleast 3 characters')
-    .max(50, 'User address must be a maximum of 50 characters'),
-
-  email: z
-    .string()
-    .min(1, { message: 'Favor digitar o email' })
-    .email({
-      message: 'Insira um email no formato email@email.com',
-    })
-    .trim(),
-
-  password: z
-    .string()
-    .min(1, { message: 'Favor digitar uma senha' })
-    .min(6, 'A senha não pode ter menos de 6 caracteres')
-    .max(16, 'A senha não pode ter mais de 16 caracteres'),
-
-  confirmPassword: z.string().min(1, { message: 'Confirme sua senha' }),
-}); // all inputs validation schema
+    confirmPassword: z.string().min(1, { message: 'Confirme sua senha' }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ['confirmPassword'],
+    message: 'Senhas não coincidem',
+  });
 
 function SignUp() {
   const navigate = useNavigate();
@@ -86,36 +82,33 @@ function SignUp() {
     resolver: zodResolver(validationSchema),
   });
 
-  const { mutateAsync: createUser, isLoading } = useCreateUser({
-    onSucess: () => navigate('/login', { replace: true }),
-  });
-
-  const onSubmit = async (data) => {
-    try {
-      await createUser(data);
-    } catch (error) {
-      let errorMessage;
-      console.log(error.response.status);
-      switch (error.response.status) {
-        case 400:
-          errorMessage = 'Dados Inválidos.';
-          break;
-        case 409:
-          errorMessage = 'O email já está sendo utilizado.';
-          break;
-        case 500:
-          errorMessage =
-            'Erro ao realizar o cadastro. Tente novamente mais tarde.';
-          break;
-        default:
-          break;
-      }
-      alert(errorMessage);
+  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
+  const onSuccess = () => navigate('/login');
+  const onError = (err) => {
+    switch (err.response.status) {
+      case ERROR_CODES.NOT_FOUND:
+        setSubmitErrorMessage('Dados inválidos');
+        break;
+      case ERROR_CODES.CONFLICT:
+        setSubmitErrorMessage('O email já está sendo utilizado');
+        break;
+      case ERROR_CODES.INTERNAL_SERVER:
+        setSubmitErrorMessage(
+          'Erro ao realizar o cadastro. Tente novamente mais tarde'
+        );
+        break;
+      default:
+        break;
     }
   };
+  const { mutate: createUser, isLoading } = useCreateUser({
+    onSuccess,
+    onError,
+  });
 
-  if (isLoading) return <p>Loading...</p>;
+  const onSubmit = async (data) => createUser(data);
 
+  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <Page>
       <Container>
@@ -224,7 +217,11 @@ function SignUp() {
               />
             </FormColumn>
           </DataEntry>
-          <SubmitButton type="submit" name="Criar conta" relativeWidth="70%" />
+          <SubmitButton
+            submitErrorMessage={submitErrorMessage}
+            name="Criar conta"
+            relativeWidth="70%"
+          />
         </Form>
       </Container>
     </Page>

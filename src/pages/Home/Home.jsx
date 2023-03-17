@@ -25,10 +25,10 @@ function Home() {
             title="Treinamento em Retificação Centerless"
             text="Venha aprender tudo sobre retificação centerless com o nosso curso
           intensivo!"
-            mediaTopWeb="5%"
-            media1000Top="10%"
-            media429Top="9%"
-            media360Top="7%"
+            mediaTopWeb
+            media1000Top
+            media429Top
+            media360Top
             image={Training}
             imageAlt="Training image"
           />
@@ -45,7 +45,7 @@ function Home() {
           confiáveis do processo de retificação em sua empresa."
             image={Software}
             imageAlt="Software image"
-            pictureTopMedia1000="20%"
+            pictureTopMedia1000
           />
         </CardsContainer>
         <FormsContactUs />
