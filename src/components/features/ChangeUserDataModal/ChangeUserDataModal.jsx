@@ -1,6 +1,5 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable import/extensions */
-import { React, useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,39 +13,33 @@ import {
   SaveChanges,
   Subtitle,
 } from './Styles';
-import { useUpdateUser } from '../../../hooks/query/users.js';
+import { useUpdateUser } from '../../../hooks/query/users';
 import useAuthStore from '../../../stores/auth';
 import { ERROR_CODES } from '../../../utils/constants';
 
 const validationSchema = z.object({
   company: z.string().min(1, 'Favor digitar o nome da empresa'),
-
   name: z
     .string()
     .min(1, 'Informe um nome')
     .min(3, 'O nome não pode ter menos de 3 caracteres')
     .max(40, 'O nome não pode ter mais de 40 caracteres'),
-
   surname: z
     .string()
     .min(1, 'Informe um sobrenome')
     .min(2, 'O sobrenome não pode ter menos de 2 caracteres')
     .max(40, 'O sobrenome não pode ter mais de 40 caracteres'),
-
   role: z.string().min(1, 'Informe um cargo'),
-
   country: z
     .string()
     .min(1, 'Informe um telefone')
     .min(3, 'User country must be atleast 3 characters')
     .max(30, 'User country must be a maximum of 30 characters'),
-
   state: z
     .string()
     .min(1, 'Informe um estado')
     .min(3, 'User state must be atleast 3 characters')
     .max(30, 'User state must be a maximum of 30 characters'),
-
   city: z
     .string()
     .min(1, 'Informe uma cidade')
@@ -58,9 +51,9 @@ const validationSchema = z.object({
     .min(1, 'Informe um endereço')
     .min(3, 'User address must be atleast 3 characters')
     .max(50, 'User address must be a maximum of 50 characters'),
-}); // all inputs validation schema
+});
 
-function ChangeUserDataModal({ close }) {
+export default function ChangeUserDataModal({ close }) {
   const [errorMessage, setSubmitErrorMessage] = useState('');
   const {
     register,
@@ -70,7 +63,10 @@ function ChangeUserDataModal({ close }) {
     resolver: zodResolver(validationSchema),
   });
 
-  const { auth, setUser } = useAuthStore();
+  const {
+    auth: { user },
+    setUser,
+  } = useAuthStore();
 
   const onSuccess = (data) => {
     setUser(data);
@@ -94,17 +90,14 @@ function ChangeUserDataModal({ close }) {
     }
   };
 
-  const { mutate: updateUser, isLoading } = useUpdateUser({
+  const { mutate: updateUser } = useUpdateUser({
     onSuccess,
     onError,
   });
 
-  const onSubmit = async (data) =>
-    updateUser({ id: auth.user._id, newUserData: data });
+  const onSubmit = (data) => updateUser({ id: user._id, newUserData: data });
 
-  if (isLoading) return <p>Loading...</p>;
   if (errorMessage) return <p>{errorMessage}</p>;
-
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -118,7 +111,7 @@ function ChangeUserDataModal({ close }) {
               register={register}
               errors={errors}
               type="text"
-              defaultValue={auth.user.company}
+              defaultValue={user.company}
             />
             <RegisterInput
               label="Nome: "
@@ -127,7 +120,7 @@ function ChangeUserDataModal({ close }) {
               register={register}
               errors={errors}
               type="text"
-              defaultValue={auth.user.name}
+              defaultValue={user.name}
             />
             <RegisterInput
               label="Sobrenome: "
@@ -136,7 +129,7 @@ function ChangeUserDataModal({ close }) {
               register={register}
               errors={errors}
               type="text"
-              defaultValue={auth.user.surname}
+              defaultValue={user.surname}
             />
             <RegisterInput
               label="Cargo: "
@@ -145,7 +138,7 @@ function ChangeUserDataModal({ close }) {
               register={register}
               errors={errors}
               type="text"
-              defaultValue={auth.user.role}
+              defaultValue={user.role}
             />
           </FormColumn>
           <FormColumn>
@@ -157,7 +150,7 @@ function ChangeUserDataModal({ close }) {
               register={register}
               errors={errors}
               type="text"
-              defaultValue={auth.user.country}
+              defaultValue={user.country}
             />
             <RegisterInput
               label="Estado: "
@@ -166,7 +159,7 @@ function ChangeUserDataModal({ close }) {
               register={register}
               errors={errors}
               type="text"
-              defaultValue={auth.user.state}
+              defaultValue={user.state}
             />
             <RegisterInput
               label="Cidade: "
@@ -175,7 +168,7 @@ function ChangeUserDataModal({ close }) {
               register={register}
               errors={errors}
               type="text"
-              defaultValue={auth.user.city}
+              defaultValue={user.city}
             />
             <RegisterInput
               label="Endereço: "
@@ -184,7 +177,7 @@ function ChangeUserDataModal({ close }) {
               register={register}
               errors={errors}
               type="text"
-              defaultValue={auth.user.address}
+              defaultValue={user.address}
             />
           </FormColumn>
         </DataEntry>
@@ -197,4 +190,6 @@ function ChangeUserDataModal({ close }) {
   );
 }
 
-export default ChangeUserDataModal;
+ChangeUserDataModal.propTypes = {
+  close: PropTypes.func.isRequired,
+};

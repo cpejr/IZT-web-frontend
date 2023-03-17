@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-no-bind */
-import { React, useState } from 'react';
+import { useState } from 'react';
 import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
 import {
   Container,
@@ -21,20 +20,16 @@ import {
   DataContainer,
   ModalStyle,
 } from './Styles';
-import ChangeUserDataModal from '../../components/features/ChangeUserDataModal/ChangeUserDataModal';
+import { ChangeUserDataModal } from '../../components/features';
 import useAuthStore from '../../stores/auth';
 
 function Profile() {
   const [changeUserDataModal, setChangeUserDataModal] = useState(false);
   const { auth } = useAuthStore();
 
-  async function openChangeUserDataModal() {
-    setChangeUserDataModal(true);
-  }
+  const openChangeUserDataModal = () => setChangeUserDataModal(true);
+  const closeChangeUserDataModal = () => setChangeUserDataModal(false);
 
-  async function closeChangeUserDataModal() {
-    setChangeUserDataModal(false);
-  }
   if (!auth) return <h1>Proibido</h1>;
   return (
     <Background>
@@ -57,7 +52,7 @@ function Profile() {
                     </Info>
                     <Info>
                       <h1>Sobrenome: </h1>
-                      <h2>{auth.user.name}</h2>
+                      <h2>{auth.user.surname}</h2>
                     </Info>
                     <Info>
                       <h1>Cargo: </h1>

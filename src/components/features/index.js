@@ -5,3 +5,4 @@ export { default as Carousel } from './Carousel/Carousel';
 export { default as BudgetForm } from './BudgetForm/BudgetForm';
 export { default as FormsContact } from './FormsContact/FormsContact';
 export { default as FilesList } from './FilesList/FilesList';
+export { default as ChangeUserDataModal } from './ChangeUserDataModal/ChangeUserDataModal';
