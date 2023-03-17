@@ -54,7 +54,7 @@ export default function Carousel({
     if (isLeftSwipe) updateImage(currentImageIndex + 1);
     else if (isRightSwipe) updateImage(currentImageIndex - 1);
   };
-  console.log(carouselData);
+
   return (
     <Container
       maxHeight={maxHeight}

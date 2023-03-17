@@ -1,10 +1,10 @@
+import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetProducts } from '../../hooks/query/products';
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
 import step4 from '../../assets/productPage/steps/Group78.png';
-import carouselData from '../../assets/productPage/carousel/data';
 import { BudgetForm, FilesList, Carousel } from '../../components/features';
 import {
   Container,
@@ -37,9 +37,30 @@ function ProductPage() {
     isLoading,
     error,
   } = useGetProducts({ filters: { _id } });
+
+  const pictures = useMemo(
+    () =>
+      product?.[0]?.pictures.map((picture) => ({
+        src: picture.url,
+        name: picture.name,
+        alt: picture.mimeType,
+      })),
+    [product]
+  );
+
+  const documents = useMemo(
+    () =>
+      product?.[0]?.documents.map((document, index) => ({
+        name: `Documento ${index + 1}`,
+        url: document.url,
+      })),
+    [product]
+  );
+
+  console.log(documents);
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;
-  console.log(product);
 
   return (
     <Container>
@@ -48,7 +69,7 @@ function ProductPage() {
         <ProductInfo>
           <CarouselContainer>
             <Carousel
-              carouselData={carouselData}
+              carouselData={pictures}
               maxHeight="537.17px"
               maxWidth="543.75px"
               aspectRatio="12 / 9"
@@ -67,7 +88,7 @@ function ProductPage() {
             <ProductInfos>
               <InfoTitle>Mais informações</InfoTitle>
               <InfoDescription>
-                <FilesList />
+                <FilesList files={documents} />
               </InfoDescription>
             </ProductInfos>
           </TextInfoContainer>
