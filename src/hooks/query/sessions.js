@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { login, logout, refresh } from '../../services/api';
 import useAuthStore from '../../stores/auth';
+import { getIsLoggedIn, removeIsLoggedIn } from '../../utils/isLoggedIn';
 
 export function useLogin({
   onSuccess = () => {},
@@ -26,16 +27,18 @@ export function useLogout({
 
 export function useRefreshToken({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = (err) => {
+    removeIsLoggedIn(); // In case the user did not logout and the cookie expire
+    console.error(err);
+  },
 } = {}) {
   const { auth } = useAuthStore();
-  const isLoggedIn = !!localStorage.getItem('isLoggedIn');
 
   return useQuery({
     queryKey: ['refresh'],
     queryFn: refresh,
     onError,
     onSuccess,
-    enabled: isLoggedIn && !auth?.accessToken,
+    enabled: !!getIsLoggedIn() && !auth,
   });
 }
