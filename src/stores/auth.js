@@ -6,7 +6,21 @@ const useAuthStore = create((set) => ({
   setAuth: (accessToken) => {
     const { user } = jwtDecode(accessToken);
 
-    set({ auth: { accessToken, user } });
+    set((state) => ({
+      auth: {
+        ...state.auth,
+        accessToken,
+        user,
+      },
+    }));
+  },
+  setUser: (user) => {
+    set((state) => ({
+      auth: {
+        ...state.auth,
+        user,
+      },
+    }));
   },
   clearAuth: () => set({ auth: null }),
 }));

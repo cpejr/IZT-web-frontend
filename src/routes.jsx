@@ -5,7 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 import { AppLayout } from './layouts';
-import { Home, Login, Catalog, NotFound, Product } from './pages';
+import { Home, Login, Catalog, NotFound, Product, Profile } from './pages';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +15,7 @@ const router = createBrowserRouter(
         <Route path="login" element={<Login />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
+        <Route path="perfil" element={<Profile />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Route>
