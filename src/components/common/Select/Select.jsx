@@ -9,6 +9,7 @@ export default function Select({ data, getValue, maxWidth, standart }) {
   const [openOptions, setOpenOptions] = useState(false);
 
   async function handleSelection(item) {
+    console.log(item);
     setSelected(item.name);
     setOpenOptions(false);
     getValue(item);

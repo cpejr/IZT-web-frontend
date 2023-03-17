@@ -29,7 +29,7 @@ export function useSearchProductByName({
 } = {}) {
   return useQuery({
     queryKey: ['products', 'searchProductByName', name, category],
-    queryFn: () => searchProductByName(name, category),
+    queryFn: () => searchProductByName({ name, category }),
     onSuccess,
     onError,
   });

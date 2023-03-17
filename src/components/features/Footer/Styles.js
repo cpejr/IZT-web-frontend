@@ -26,6 +26,7 @@ export const SideContainer = styled.div`
     width: 100%;
     height: auto;
     padding: 3% 7%;
+  }
 `;
 
 export const LogoSection = styled.div`

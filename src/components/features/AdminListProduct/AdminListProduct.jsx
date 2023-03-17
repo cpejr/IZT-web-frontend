@@ -30,7 +30,9 @@ export default function AdminListProduct() {
   const [name, setName] = useState('');
   const { data: categories } = useGetCategories();
 
-  const { selectedCategory, setSelectedCategory } = useState({});
+  const [selectedCategory, setSelectedCategory] = useState({});
+
+  console.log(selectedCategory);
 
   const debouncedName = useDebounce(name);
 
@@ -38,10 +40,6 @@ export default function AdminListProduct() {
     name: debouncedName,
     category: selectedCategory?._id,
   });
-
-  const getValue = (item) => {
-    setSelectedCategory(item);
-  };
 
   const modalButton = {
     closeIcon: <CloseOutlined style={{ color: 'white' }} />,
@@ -79,7 +77,7 @@ export default function AdminListProduct() {
           <Select
             standart="Categoria"
             data={categories}
-            getValue={getValue}
+            getValue={setSelectedCategory}
             maxWidth="100%"
           />
         </Subsection>
