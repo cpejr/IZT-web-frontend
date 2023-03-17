@@ -12,7 +12,9 @@
   "plugins": ["react", "prettier"],
   "rules": {
     "import/no-extraneous-dependencies": 0,
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "react/forbid-prop-types": 0,
+    "react/jsx-props-no-spreading": 0
   },
   "overrides": [],
   "parserOptions": {

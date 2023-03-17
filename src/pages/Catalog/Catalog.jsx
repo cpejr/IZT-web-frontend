@@ -109,7 +109,7 @@ const categories = [
   },
 ];
 
-function Catalog() {
+export default function Catalog() {
   return (
     <Page>
       <Container>
@@ -147,5 +147,3 @@ function Catalog() {
     </Page>
   );
 }
-
-export default Catalog;

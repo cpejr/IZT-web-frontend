@@ -4,12 +4,17 @@ import { Button } from '../../common';
 const menuBreak = '800px';
 
 export const Content = styled.div`
-  background-color: white;
   display: flex;
   justify-content: center;
+
   padding: 0px 50px;
+
   height: 100px;
   width: 100%;
+
+  background-color: white;
+  border-bottom: 2px solid ${(props) => props.theme.colors.blue};
+
   @media (max-width: 420px) {
     padding: 0px 20px;
     height: 80px;
