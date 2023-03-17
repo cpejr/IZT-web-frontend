@@ -6,9 +6,10 @@ export const Container = styled.div`
   gap: 20px;
   max-width: 390px;
   width: 100%;
-  align-self: center;
   margin-bottom: 50px;
 `;
+
+export const Form = styled.form``;
 
 export const Title = styled.p`
   font-family: 'Montserrat';
@@ -16,6 +17,7 @@ export const Title = styled.p`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  padding-bottom: 20px;
 
   color: black;
 `;
@@ -26,6 +28,7 @@ export const Subtitle = styled.p`
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
+  padding-bottom: 10px;
 
   color: black;
 `;
@@ -36,6 +39,7 @@ export const SmallInput = styled.input`
   align-items: flex-start;
   padding: 8px 11px;
   gap: 10px;
+  margin-bottom: 15px;
 
   max-width: 370px;
   width: 100%;
@@ -50,6 +54,12 @@ export const SmallInput = styled.input`
   font-size: 16px;
 `;
 
+export const ButtonsDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const SaveButton = styled.button`
   display: flex;
   flex-direction: row;
@@ -58,6 +68,7 @@ export const SaveButton = styled.button`
   justify-content: center;
   padding: 10px;
   gap: 10px;
+  margin-bottom: 10px;
 
   width: auto;
   height: 45px;
@@ -97,6 +108,7 @@ export const CancelButton = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
+  align-self: center;
   justify-content: center;
   align-self: center;
   padding: 5px 10px;
