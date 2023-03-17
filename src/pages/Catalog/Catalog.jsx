@@ -19,7 +19,7 @@ import {
   ProductName,
 } from './Styles';
 
-function Catalog() {
+export default function Catalog() {
   const navigate = useNavigate();
   const { data: categories, error, isLoading } = useGetCategories();
   if (isLoading) return <p>Loading...</p>;

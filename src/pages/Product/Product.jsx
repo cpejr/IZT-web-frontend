@@ -31,7 +31,7 @@ import {
   StepsText,
 } from './Styles';
 
-function ProductPage() {
+export default function ProductPage() {
   const onError = (error) => {
     switch (error.response.status) {
       case ERROR_CODES.BAD_REQUEST:

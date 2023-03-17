@@ -72,7 +72,7 @@ const validationSchema = z
     message: 'Senhas não coincidem',
   });
 
-function SignUp() {
+export default function SignUp() {
   const navigate = useNavigate();
   const {
     register,
@@ -227,5 +227,3 @@ function SignUp() {
     </Page>
   );
 }
-
-export default SignUp; // user registration function

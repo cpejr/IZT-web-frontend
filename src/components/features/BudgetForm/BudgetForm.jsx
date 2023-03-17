@@ -11,6 +11,8 @@ import {
   Container,
 } from './Styles';
 import { FormInput, FormMask } from '../../common';
+import { useCreateBudgetEmail } from '../../../hooks/query/formBudget';
+import { ERROR_CODES } from '../../../utils/constants';
 
 const validationSchema = z.object({
   name: z.string().min(1, 'Digite o seu nome completo'),
@@ -42,8 +44,20 @@ export default function BudgetForm() {
   } = useForm({
     resolver: zodResolver(validationSchema),
   });
+  const onError = (error) => {
+    switch (error.response.status) {
+      case ERROR_CODES.BAD_REQUEST:
+        throw new Error('Não foi possível enviar o formulário');
+      default:
+        throw new Error('Erro desconhecido');
+    }
+  };
 
-  const onSubmit = (data) => console.log(data);
+  const { mutate: createBudgetEmail, Loading } = useCreateBudgetEmail(onError);
+
+  const onSubmit = async (data) => createBudgetEmail(data);
+
+  if (Loading) return <p style={{ height: '100vh' }}>Loading...</p>;
 
   return (
     <ContactUs>
