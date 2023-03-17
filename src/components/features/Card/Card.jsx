@@ -1,25 +1,21 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import { Container, CardText, CardTitle, Button, Picture } from './Styles';
 
-function Card({
+export default function Card({
   title,
   image,
   imageAlt,
   text,
-  isMiddle,
-  isMiddleTitle,
-  isMiddleImg,
-  isMiddleBut,
-  mediaTopWeb,
-  media1000Top,
-  media429Top,
-  media360Top,
-  pictureTopMedia1000,
+  isMiddle = false,
+  mediaTopWeb = false,
+  media1000Top = false,
+  media429Top = false,
+  media360Top = false,
+  pictureTopMedia1000 = false,
 }) {
   return (
     <Container isMiddle={isMiddle}>
       <CardTitle
-        isMiddleTitle={isMiddleTitle}
         mediaTopWeb={mediaTopWeb}
         media1000Top={media1000Top}
         media429Top={media429Top}
@@ -28,17 +24,34 @@ function Card({
         {title}
       </CardTitle>
       <Picture
-        isMiddleImg={isMiddleImg}
         src={image}
         alt={imageAlt}
         pictureTopMedia1000={pictureTopMedia1000}
       />
       <CardText>{text}</CardText>
-      <Button type="button" isMiddleBut={isMiddleBut}>
-        Saiba mais
-      </Button>
+      <Button type="button">Saiba mais</Button>
     </Container>
   );
 }
 
-export default Card;
+Card.defaultProps = {
+  isMiddle: false,
+  mediaTopWeb: false,
+  media1000Top: false,
+  media429Top: false,
+  media360Top: false,
+  pictureTopMedia1000: false,
+};
+
+Card.propTypes = {
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  imageAlt: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  isMiddle: PropTypes.bool,
+  mediaTopWeb: PropTypes.bool,
+  media1000Top: PropTypes.bool,
+  media429Top: PropTypes.bool,
+  media360Top: PropTypes.bool,
+  pictureTopMedia1000: PropTypes.bool,
+};

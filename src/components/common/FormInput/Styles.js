@@ -7,7 +7,7 @@ export const Container = styled.div`
   font-style: normal;
   font-weight: 500;
   gap: 5px;
-  height: auto;
+
   width: 100%;
 `;
 

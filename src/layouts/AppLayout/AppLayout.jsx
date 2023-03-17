@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { Header, Footer } from '../../components/features';
 import { useRefreshToken } from '../../hooks/query/sessions';
 
-function App() {
+export default function AppLayout() {
   const { isInitialLoading } = useRefreshToken();
 
   return isInitialLoading ? (
@@ -15,5 +15,3 @@ function App() {
     </>
   );
 }
-
-export default App;
