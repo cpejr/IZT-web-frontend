@@ -1,3 +1,5 @@
+import { useParams } from 'react-router-dom';
+import { useGetProducts } from '../../hooks/query/products';
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
@@ -29,10 +31,20 @@ import {
 } from './Styles';
 
 function ProductPage() {
+  const { _id } = useParams();
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useGetProducts({ filters: { _id } });
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>{error.message}</p>;
+  console.log(product);
+
   return (
     <Container>
       <ProductData>
-        <ProductName>Nome do Produto</ProductName>
+        <ProductName>{product[0].name}</ProductName>
         <ProductInfo>
           <CarouselContainer>
             <Carousel
@@ -46,21 +58,11 @@ function ProductPage() {
           <TextInfoContainer>
             <ProductDescription>
               <DescriptionTitle>Descrição do produto</DescriptionTitle>
-              <Description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque sed odio eu enim gravida varius quis non orci.
-                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
-                sapien.
-              </Description>
+              <Description>{product[0].description}</Description>
             </ProductDescription>
             <ProductBenefits>
               <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-              <Benefits>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque sed odio eu enim gravida varius quis non orci.
-                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
-                sapien.
-              </Benefits>
+              <Benefits>{product[0].advantages}</Benefits>
             </ProductBenefits>
             <ProductInfos>
               <InfoTitle>Mais informações</InfoTitle>

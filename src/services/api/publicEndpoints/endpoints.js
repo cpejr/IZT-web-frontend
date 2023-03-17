@@ -44,3 +44,8 @@ export const createUser = async (newUser) => {
 
   return data;
 };
+export const getFiles = async (filters = {}) => {
+  const { data } = await publicApi.get('/files', { params: filters });
+
+  return data;
+};

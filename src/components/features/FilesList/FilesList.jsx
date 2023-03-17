@@ -1,26 +1,12 @@
 import React from 'react';
 import { FaDownload } from 'react-icons/fa';
+import { useGetFiles } from '../../../hooks/query/files';
 import { FileListWrapper, FileItem } from './Styles';
-import File1 from '../../../assets/productPage/files/F1.pdf';
-import File2 from '../../../assets/productPage/files/F2.pdf';
-import File3 from '../../../assets/productPage/files/F3.pdf';
-
-const files = [
-  {
-    name: 'Documento 1',
-    route: File1,
-  },
-  {
-    name: 'Documento 2',
-    route: File2,
-  },
-  {
-    name: 'Documento 3',
-    route: File3,
-  },
-];
 
 export default function FilesList() {
+  const { data: files, error, isLoading } = useGetFiles();
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>{error.message}</p>;
   return (
     <FileListWrapper>
       {files.map((file) => (
