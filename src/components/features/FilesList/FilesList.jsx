@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { FaDownload } from 'react-icons/fa';
 import { FileListWrapper, FileItem } from './Styles';
 

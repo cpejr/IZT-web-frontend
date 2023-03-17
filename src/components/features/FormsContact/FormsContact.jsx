@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,6 +11,7 @@ import {
   InputMessage,
   AreaText,
 } from './Styles';
+import useWindowSize from '../../../hooks/useWindowSize';
 import { FormInput, FormMask } from '../../common';
 
 const validationSchema = z.object({
@@ -43,22 +43,15 @@ export default function FormsContact() {
     resolver: zodResolver(validationSchema),
   });
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleWindowResize = () => setWindowWidth(window.innerWidth);
-
-    window.addEventListener('resize', handleWindowResize);
-    return () => window.removeEventListener('resize', handleWindowResize);
-  }, []);
-
-  const breakpoint = 700;
-
   const onSubmit = (data) => console.log(data);
+
+  const mobileBreakpoint = 700;
+  const { width: windowWidth } = useWindowSize();
 
   return (
     <ContactUs>
       <Title>{`Entre em Contato ${
-        windowWidth <= breakpoint ? '' : 'Conosco'
+        windowWidth <= mobileBreakpoint ? '' : 'Conosco'
       }`}</Title>
 
       <Form onSubmit={handleSubmit(onSubmit)}>

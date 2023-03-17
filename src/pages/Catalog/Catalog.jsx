@@ -65,5 +65,3 @@ function Catalog() {
     </Page>
   );
 }
-
-export default Catalog;

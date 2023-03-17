@@ -1,11 +1,12 @@
 import useAuthStore from '../../../stores/auth';
+import { removeIsLoggedIn, setIsLoggedIn } from '../../../utils/isLoggedIn';
 import publicApi from './instance';
 
 export const login = async (credentials) => {
   const { setAuth } = useAuthStore.getState();
   const { data } = await publicApi.post('/login', credentials);
 
-  localStorage.setItem('isLoggedIn', 'true');
+  setIsLoggedIn();
   setAuth(data.accessToken);
   return data;
 };
@@ -14,7 +15,7 @@ export const logout = async () => {
   const { clearAuth } = useAuthStore.getState();
   await publicApi.post('/logout');
 
-  localStorage.removeItem('isLoggedIn');
+  removeIsLoggedIn();
   clearAuth();
 };
 

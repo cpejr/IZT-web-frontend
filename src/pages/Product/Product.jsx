@@ -135,5 +135,3 @@ function ProductPage() {
     </Container>
   );
 }
-
-export default ProductPage;

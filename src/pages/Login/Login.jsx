@@ -32,7 +32,7 @@ const validationSchema = z.object({
     .max(16, 'A senha não pode ter mais de 16 caracteres'),
 });
 
-function Login() {
+export default function Login() {
   const {
     handleSubmit,
     register,
@@ -92,5 +92,3 @@ function Login() {
     </Page>
   );
 }
-
-export default Login;
