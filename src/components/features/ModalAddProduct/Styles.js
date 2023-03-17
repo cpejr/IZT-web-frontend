@@ -61,6 +61,7 @@ export const CategorySubsection = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
+  width: 100%;
 `;
 
 export const Text = styled.p`

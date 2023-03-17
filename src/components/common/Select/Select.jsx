@@ -4,18 +4,29 @@ import { useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { Container, Selected, Options, Option } from './Styles';
 
-export default function Select({ data, standart }) {
+export default function Select({ data, getValue, maxWidth, standart }) {
   const [selected, setSelected] = useState(standart);
   const [openOptions, setOpenOptions] = useState(false);
+
+  async function handleSelection(item) {
+    setSelected(item.name);
+    setOpenOptions(false);
+    getValue(item);
+  }
+
   return (
-    <Container>
+    <Container maxWidth={maxWidth}>
       <Selected onClick={() => setOpenOptions(!openOptions)}>
         <p>{selected}</p>
         <MdKeyboardArrowDown size={25} />
       </Selected>
       <Options show={openOptions}>
         {data?.map((item) => (
-          <Option key={item._id} onClick={() => setSelected(item.name)}>
+          <Option
+            key={item._id}
+            onClick={() => handleSelection(item)}
+            isSelected={selected === item.name}
+          >
             <p>{item.name}</p>
           </Option>
         ))}
@@ -26,10 +37,13 @@ export default function Select({ data, standart }) {
 
 Select.defaultProps = {
   data: [],
+  maxWidth: '250px',
 };
 
 Select.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.array,
   standart: PropTypes.string.isRequired,
+  getValue: PropTypes.func.isRequired,
+  maxWidth: PropTypes.string,
 };

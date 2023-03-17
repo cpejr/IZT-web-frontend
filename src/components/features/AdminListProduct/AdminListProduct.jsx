@@ -8,13 +8,12 @@ import {
   useGetProducts,
   useSearchProductByName,
 } from '../../../hooks/query/products';
-
+import { useGetCategories } from '../../../hooks/query/categories';
 import {
   Container,
   Title,
   CategoryFilterContainer,
   Subsection,
-  TypeFilter,
   Text,
   SearchProduct,
   ProductList,
@@ -28,9 +27,12 @@ import {
 
 import ModalEditProduct from '../ModalEditProduct/ModalEditProduct';
 import useDebounce from '../../../hooks/useDebounce';
+import { Select } from '../../common';
 
 export default function AdminListProduct() {
   const [name, setName] = useState('');
+  const { data: categories } = useGetCategories();
+  const { selectedCategory, setSelectedCategory } = useState();
 
   const debouncedName = useDebounce(name);
 
@@ -73,7 +75,11 @@ export default function AdminListProduct() {
       <CategoryFilterContainer>
         <Subsection>
           <Text>Filtrar por categoria:</Text>
-          <TypeFilter>TypeFilter</TypeFilter>
+          <Select
+            standart="Categoria"
+            data={categories}
+            getValue={setSelectedCategory}
+          />
         </Subsection>
 
         <SearchSection>
