@@ -4,7 +4,10 @@ import { CloseOutlined } from '@ant-design/icons';
 
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
-import { useGetProducts } from '../../../hooks/query/products';
+import {
+  useGetProducts,
+  useSearchProductByName,
+} from '../../../hooks/query/products';
 
 import {
   Container,
@@ -24,9 +27,18 @@ import {
 } from './Styles';
 
 import ModalEditProduct from '../ModalEditProduct/ModalEditProduct';
+import useDebounce from '../../../hooks/useDebounce';
 
 export default function AdminListProduct() {
-  const { data: products } = useGetProducts();
+  const [name, setName] = useState('');
+
+  const debouncedName = useDebounce(name);
+
+  const { data: products } = useSearchProductByName({
+    name: debouncedName,
+  });
+
+  // const { data: products } = useGetProducts();
 
   const modalButton = {
     closeIcon: <CloseOutlined style={{ color: 'white' }} />,
@@ -68,7 +80,10 @@ export default function AdminListProduct() {
           <SearchIconButton>
             <HiSearch size={25} />
           </SearchIconButton>
-          <SearchProduct type="SearchProduct" placeholder="Pesquisar produto" />
+          <SearchProduct
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Pesquisar produto"
+          />
         </SearchSection>
       </CategoryFilterContainer>
 

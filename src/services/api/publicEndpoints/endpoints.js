@@ -49,6 +49,15 @@ export const getProducts = async (filters = {}) => {
   return data;
 };
 
+export const searchProductByName = async (name = '') => {
+  console.log(name);
+  const { data } = await publicApi.get('/products/searchProductByName', {
+    params: { name },
+  });
+
+  return data;
+};
+
 export const createUser = async (newUser) => {
   const { data } = await publicApi.post('/users', newUser);
 
