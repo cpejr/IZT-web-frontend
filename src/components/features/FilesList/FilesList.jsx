@@ -1,8 +1,8 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import { FaDownload } from 'react-icons/fa';
 import { FileListWrapper, FileItem } from './Styles';
 
-export default function FilesList({ files }) {
+export default function FilesList({ files = [] }) {
   return (
     <FileListWrapper>
       {files?.map((file) => (
@@ -16,3 +16,11 @@ export default function FilesList({ files }) {
     </FileListWrapper>
   );
 }
+
+FilesList.defaultProps = {
+  files: [],
+};
+
+FilesList.propTypes = {
+  files: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+};

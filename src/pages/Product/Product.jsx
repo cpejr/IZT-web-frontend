@@ -57,8 +57,6 @@ function ProductPage() {
     [product]
   );
 
-  console.log(documents);
-
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;
 
