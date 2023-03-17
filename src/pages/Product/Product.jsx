@@ -6,6 +6,7 @@ import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
 import step4 from '../../assets/productPage/steps/Group78.png';
 import { BudgetForm, FilesList, Carousel } from '../../components/features';
+import { ERROR_CODES } from '../../utils/constants';
 import {
   Container,
   ProductData,
@@ -59,6 +60,30 @@ function ProductPage() {
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;
+
+  /* const onError = (error) => {
+    switch (error.response.status) {
+      case ERROR_CODES.BAD_REQUEST:
+        throw new Error('O servidor não conseguiu atender a requisição');
+      case ERROR_CODES.NOT_FOUND:
+        throw new Error('Produto não encontrado');
+      case ERROR_CODES.INTERNAL_SERVER:
+        throw new Error(
+          'Erro ao editar a página de produtos. Tente novamente mais tarde'
+        );
+      default:
+        throw new Error('Erro desconhecido');
+    }
+  };
+  const { mutate: product } = useLogin({ onSuccess, onError });
+ 
+   const handleSubmit = async (data) => {
+    try {
+      await product(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }; */
 
   return (
     <Container>
