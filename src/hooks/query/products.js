@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   getProducts,
   createProduct,
+  searchProductByName,
   // deleteProducts,
   // updateProducts,
 } from '../../services/api';
@@ -15,6 +16,19 @@ export function useGetProducts({
   return useQuery({
     queryKey: ['products', filters],
     queryFn: () => getProducts(filters),
+    onSuccess,
+    onError,
+  });
+}
+
+export function useSearchProductByName({
+  name,
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['products', 'searchProductByName', name],
+    queryFn: () => searchProductByName(name),
     onSuccess,
     onError,
   });
