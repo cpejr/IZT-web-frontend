@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+import { Modal } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -87,4 +87,11 @@ export const Subtitle = styled.p`
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
   margin-bottom: 8%;
+`;
+
+export const ModalStyle = styled(Modal)`
+  :where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-content {
+    background-color: white;
+    border-radius: 0px;
+  }
 `;

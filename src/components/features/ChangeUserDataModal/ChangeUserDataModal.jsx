@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { z } from 'zod';
+import { Modal } from 'antd';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SaveOutlined } from '@ant-design/icons';
+import { SaveOutlined, CloseOutlined } from '@ant-design/icons';
 import { RegisterInput } from '../../common';
 import {
   Container,
@@ -14,8 +15,8 @@ import {
   Subtitle,
 } from './Styles';
 import { useUpdateUser } from '../../../hooks/query/users';
-import useAuthStore from '../../../stores/auth';
 import { ERROR_CODES } from '../../../utils/constants';
+import useAuthStore from '../../../stores/auth';
 
 const validationSchema = z.object({
   company: z.string().min(1, 'Favor digitar o nome da empresa'),
@@ -29,7 +30,10 @@ const validationSchema = z.object({
     .min(1, 'Informe um sobrenome')
     .min(2, 'O sobrenome não pode ter menos de 2 caracteres')
     .max(40, 'O sobrenome não pode ter mais de 40 caracteres'),
-  role: z.string().min(1, 'Informe um cargo'),
+  role: z
+    .string()
+    .min(1, 'Informe um cargo')
+    .min(3, 'O cargo não pode ter menos de 3 caracteres'),
   country: z
     .string()
     .min(1, 'Informe um telefone')
@@ -53,8 +57,34 @@ const validationSchema = z.object({
     .max(50, 'User address must be a maximum of 50 characters'),
 });
 
-export default function ChangeUserDataModal({ close }) {
-  const [errorMessage, setSubmitErrorMessage] = useState('');
+const errorMessages = {
+  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
+  [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autorizado',
+  [ERROR_CODES.NOT_FOUND]: 'Usuário não encontrado',
+};
+const defaultErrorMessage =
+  'Erro ao editar os dados cadastrais. Tente novamente mais tarde';
+
+export default function ChangeUserDataModal({ openState, close }) {
+  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
+  const user = useAuthStore((state) => state.auth.user);
+  const setUser = useAuthStore((state) => state.setUser);
+
+  const onSuccess = (data) => {
+    setUser(data);
+    close();
+  };
+  const onError = (error) => {
+    const code = error.response.status;
+    const message = errorMessages[code] || defaultErrorMessage;
+
+    setSubmitErrorMessage(message);
+  };
+  const { mutate: updateUser } = useUpdateUser({
+    onSuccess,
+    onError,
+  });
+
   const {
     register,
     handleSubmit,
@@ -62,134 +92,116 @@ export default function ChangeUserDataModal({ close }) {
   } = useForm({
     resolver: zodResolver(validationSchema),
   });
-
-  const {
-    auth: { user },
-    setUser,
-  } = useAuthStore();
-
-  const onSuccess = (data) => {
-    setUser(data);
-    close();
-  };
-  const onError = (error) => {
-    switch (error.response.status) {
-      case ERROR_CODES.UNAUTHORIZED:
-        setSubmitErrorMessage('Usuário não autorizado');
-        break;
-      case ERROR_CODES.NOT_FOUND:
-        setSubmitErrorMessage('Usuário não encontrado');
-        break;
-      case ERROR_CODES.INTERNAL_SERVER:
-        setSubmitErrorMessage(
-          'Erro ao editar os dados cadastrais. Tente novamente mais tarde'
-        );
-        break;
-      default:
-        break;
-    }
-  };
-
-  const { mutate: updateUser } = useUpdateUser({
-    onSuccess,
-    onError,
-  });
-
   const onSubmit = (data) => updateUser({ id: user._id, newUserData: data });
 
-  if (errorMessage) return <p>{errorMessage}</p>;
+  if (submitErrorMessage) return <p>{submitErrorMessage}</p>;
   return (
-    <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <DataEntry>
-          <FormColumn>
-            <Subtitle>Informações pessoais</Subtitle>
-            <RegisterInput
-              label="Empresa: "
-              name="company"
-              placeholder="Nome da empresa"
-              register={register}
-              errors={errors}
-              type="text"
-              defaultValue={user.company}
-            />
-            <RegisterInput
-              label="Nome: "
-              name="name"
-              placeholder="Nome"
-              register={register}
-              errors={errors}
-              type="text"
-              defaultValue={user.name}
-            />
-            <RegisterInput
-              label="Sobrenome: "
-              name="surname"
-              placeholder="Sobrenome"
-              register={register}
-              errors={errors}
-              type="text"
-              defaultValue={user.surname}
-            />
-            <RegisterInput
-              label="Cargo: "
-              name="role"
-              placeholder="Nome do cargo"
-              register={register}
-              errors={errors}
-              type="text"
-              defaultValue={user.role}
-            />
-          </FormColumn>
-          <FormColumn>
-            <Subtitle>Endereço</Subtitle>
-            <RegisterInput
-              label="País: "
-              name="country"
-              placeholder="Nome do país"
-              register={register}
-              errors={errors}
-              type="text"
-              defaultValue={user.country}
-            />
-            <RegisterInput
-              label="Estado: "
-              name="state"
-              placeholder="Nome do estado"
-              register={register}
-              errors={errors}
-              type="text"
-              defaultValue={user.state}
-            />
-            <RegisterInput
-              label="Cidade: "
-              name="city"
-              placeholder="Nome da cidade"
-              register={register}
-              errors={errors}
-              type="text"
-              defaultValue={user.city}
-            />
-            <RegisterInput
-              label="Endereço: "
-              name="address"
-              placeholder="Endereço"
-              register={register}
-              errors={errors}
-              type="text"
-              defaultValue={user.address}
-            />
-          </FormColumn>
-        </DataEntry>
-        <SaveChanges type="submit" name="Salvar Alterações" relativeWidth="70%">
-          <SaveOutlined />
-          Salvar Alterações
-        </SaveChanges>
-      </Form>
-    </Container>
+    <Modal
+      open={openState}
+      onCancel={close}
+      footer={null}
+      width={1000}
+      closeIcon={<CloseOutlined />}
+      destroyOnClose
+      centered
+    >
+      <Container>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <DataEntry>
+            <FormColumn>
+              <Subtitle>Informações pessoais</Subtitle>
+              <RegisterInput
+                label="Empresa: "
+                name="company"
+                placeholder="Nome da empresa"
+                register={register}
+                errors={errors}
+                type="text"
+                defaultValue={user.company}
+              />
+              <RegisterInput
+                label="Nome: "
+                name="name"
+                placeholder="Nome"
+                register={register}
+                errors={errors}
+                type="text"
+                defaultValue={user.name}
+              />
+              <RegisterInput
+                label="Sobrenome: "
+                name="surname"
+                placeholder="Sobrenome"
+                register={register}
+                errors={errors}
+                type="text"
+                defaultValue={user.surname}
+              />
+              <RegisterInput
+                label="Cargo: "
+                name="role"
+                placeholder="Nome do cargo"
+                register={register}
+                errors={errors}
+                type="text"
+                defaultValue={user.role}
+              />
+            </FormColumn>
+            <FormColumn>
+              <Subtitle>Endereço</Subtitle>
+              <RegisterInput
+                label="País: "
+                name="country"
+                placeholder="Nome do país"
+                register={register}
+                errors={errors}
+                type="text"
+                defaultValue={user.country}
+              />
+              <RegisterInput
+                label="Estado: "
+                name="state"
+                placeholder="Nome do estado"
+                register={register}
+                errors={errors}
+                type="text"
+                defaultValue={user.state}
+              />
+              <RegisterInput
+                label="Cidade: "
+                name="city"
+                placeholder="Nome da cidade"
+                register={register}
+                errors={errors}
+                type="text"
+                defaultValue={user.city}
+              />
+              <RegisterInput
+                label="Endereço: "
+                name="address"
+                placeholder="Endereço"
+                register={register}
+                errors={errors}
+                type="text"
+                defaultValue={user.address}
+              />
+            </FormColumn>
+          </DataEntry>
+          <SaveChanges
+            type="submit"
+            name="Salvar Alterações"
+            relativeWidth="70%"
+          >
+            <SaveOutlined />
+            Salvar Alterações
+          </SaveChanges>
+        </Form>
+      </Container>
+    </Modal>
   );
 }
 
 ChangeUserDataModal.propTypes = {
+  openState: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
 };

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
+import { SettingOutlined } from '@ant-design/icons';
 import {
   Container,
   Page,
@@ -18,17 +18,16 @@ import {
   ChangeInfo,
   Body,
   DataContainer,
-  ModalStyle,
 } from './Styles';
 import { ChangeUserDataModal } from '../../components/features';
 import useAuthStore from '../../stores/auth';
 
 function Profile() {
-  const [changeUserDataModal, setChangeUserDataModal] = useState(false);
+  const [updateUserModalState, setUpdateUserModalState] = useState(false);
   const { auth } = useAuthStore();
 
-  const openChangeUserDataModal = () => setChangeUserDataModal(true);
-  const closeChangeUserDataModal = () => setChangeUserDataModal(false);
+  const openChangeUserDataModal = () => setUpdateUserModalState(true);
+  const closeChangeUserDataModal = () => setUpdateUserModalState(false);
 
   if (!auth) return <h1>Proibido</h1>;
   return (
@@ -125,16 +124,10 @@ function Profile() {
           </Container>
         </Body>
       </Page>
-      <ModalStyle
-        open={changeUserDataModal}
-        onCancel={closeChangeUserDataModal}
-        footer={null}
-        width={1000}
-        closeIcon={<CloseOutlined />}
-        centered
-      >
-        <ChangeUserDataModal close={closeChangeUserDataModal} />
-      </ModalStyle>
+      <ChangeUserDataModal
+        openState={updateUserModalState}
+        close={closeChangeUserDataModal}
+      />
     </Background>
   );
 }
