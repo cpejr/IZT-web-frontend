@@ -13,23 +13,23 @@ import {
   SecondColumn,
   Subtitle,
   Background,
-  Info2,
+  LessonInfo,
   Infos,
   ChangeInfo,
   Body,
   DataContainer,
 } from './Styles';
-import { ChangeUserDataModal } from '../../components/features';
+import { ModalChangeUserData } from '../../components/features';
 import useAuthStore from '../../stores/auth';
 
 function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
-  const { auth } = useAuthStore();
+  const user = useAuthStore((state) => state.auth.user);
 
-  const openChangeUserDataModal = () => setUpdateUserModalState(true);
-  const closeChangeUserDataModal = () => setUpdateUserModalState(false);
+  const openModalChangeUserData = () => setUpdateUserModalState(true);
+  const closeModalChangeUserData = () => setUpdateUserModalState(false);
 
-  if (!auth) return <h1>Proibido</h1>;
+  if (!user) return <h1>Proibido</h1>;
   return (
     <Background>
       <Page>
@@ -43,19 +43,19 @@ function Profile() {
                   <Infos>
                     <Info>
                       <h1>Empresa: </h1>
-                      <h2>{auth.user.company}</h2>
+                      <h2>{user.company}</h2>
                     </Info>
                     <Info>
                       <h1>Nome: </h1>
-                      <h2>{auth.user.name}</h2>
+                      <h2>{user.name}</h2>
                     </Info>
                     <Info>
                       <h1>Sobrenome: </h1>
-                      <h2>{auth.user.surname}</h2>
+                      <h2>{user.surname}</h2>
                     </Info>
                     <Info>
                       <h1>Cargo: </h1>
-                      <h2>{auth.user.role}</h2>
+                      <h2>{user.role}</h2>
                     </Info>
                   </Infos>
                 </PersonalData>
@@ -64,19 +64,19 @@ function Profile() {
                   <Infos>
                     <Info>
                       <h1>Pais: </h1>
-                      <h2>{auth.user.country}</h2>
+                      <h2>{user.country}</h2>
                     </Info>
                     <Info>
                       <h1>Estado: </h1>
-                      <h2>{auth.user.state}</h2>
+                      <h2>{user.state}</h2>
                     </Info>
                     <Info>
                       <h1>Cidade: </h1>
-                      <h2>{auth.user.city}</h2>
+                      <h2>{user.city}</h2>
                     </Info>
                     <Info>
                       <h1>Endereco: </h1>
-                      <h2>{auth.user.address}</h2>
+                      <h2>{user.address}</h2>
                     </Info>
                   </Infos>
                 </Address>
@@ -87,46 +87,46 @@ function Profile() {
                   <Infos>
                     <Info>
                       <h1>Email: </h1>
-                      <h2>{auth.user.email}</h2>
+                      <h2>{user.email}</h2>
                     </Info>
                     <Info>
                       <h1>Telefone: </h1>
-                      <h2>{auth.user.email}</h2>
+                      <h2>{user.email}</h2>
                     </Info>
                   </Infos>
                 </Contact>
                 <Lessons>
                   <Subtitle>Lições</Subtitle>
                   <Infos>
-                    <Info2>
+                    <LessonInfo>
                       <h1>Curso: </h1>
                       <h2>Ratificação 3D</h2>
-                    </Info2>
-                    <Info2>
+                    </LessonInfo>
+                    <LessonInfo>
                       <h1>Validade de acesso: </h1>
                       <h2>07/03/2025</h2>
-                    </Info2>
+                    </LessonInfo>
                   </Infos>
                   <Subtitle>Software</Subtitle>
                   <Infos>
-                    <Info2>
+                    <LessonInfo>
                       <h1>Validade de acesso: </h1>
                       <h2>21/06/2025</h2>
-                    </Info2>
+                    </LessonInfo>
                   </Infos>
                 </Lessons>
               </SecondColumn>
             </DataContainer>
-            <ChangeInfo onClick={openChangeUserDataModal}>
+            <ChangeInfo onClick={openModalChangeUserData}>
               <SettingOutlined />
               Alterar Informações
             </ChangeInfo>
           </Container>
         </Body>
       </Page>
-      <ChangeUserDataModal
+      <ModalChangeUserData
         openState={updateUserModalState}
-        close={closeChangeUserDataModal}
+        close={closeModalChangeUserData}
       />
     </Background>
   );

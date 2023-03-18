@@ -54,12 +54,16 @@ export const SaveChanges = styled.button`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  width: 50%;
-  max-width: 212px;
+
+  width: 100%;
+  max-width: 250px;
   height: 2.5em;
+
   border: 1px solid #000000;
   border-radius: 5px;
   background-color: transparent;
+
+  padding: 0 0.5em;
   margin-top: 2%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
@@ -79,6 +83,8 @@ export const SaveChanges = styled.button`
     justify-content: center;
     width: 90%;
     font-size: 1em;
+
+    max-width: 200px;
   }
 `;
 

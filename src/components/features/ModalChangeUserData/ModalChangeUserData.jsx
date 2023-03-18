@@ -65,7 +65,7 @@ const errorMessages = {
 const defaultErrorMessage =
   'Erro ao editar os dados cadastrais. Tente novamente mais tarde';
 
-export default function ChangeUserDataModal({ openState, close }) {
+export default function ModalChangeUserData({ openState, close }) {
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const user = useAuthStore((state) => state.auth.user);
   const setUser = useAuthStore((state) => state.setUser);
@@ -201,7 +201,7 @@ export default function ChangeUserDataModal({ openState, close }) {
   );
 }
 
-ChangeUserDataModal.propTypes = {
+ModalChangeUserData.propTypes = {
   openState: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
 };

@@ -262,9 +262,10 @@ export const ChangeInfo = styled.button`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  width: 40%;
-  max-width: 239px;
+
+  width: 240px;
   height: 45px;
+
   border: 1px solid #000000;
   border-radius: 5px;
   background-color: transparent;
@@ -281,13 +282,8 @@ export const ChangeInfo = styled.button`
     background-color: ${(props) => props.theme.colors.blue};
     color: white;
   }
-
-  @media (max-width: 700px) {
-    align-items: center;
-    justify-content: center;
-    width: 218px;
-  }
 `;
+
 export const Contact = styled.div`
   display: flex;
   flex-direction: column;
@@ -359,7 +355,7 @@ export const Lessons = styled.div`
     }
   }
 `;
-export const Info2 = styled.div`
+export const LessonInfo = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;

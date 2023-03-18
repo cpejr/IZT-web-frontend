@@ -12,7 +12,7 @@ export default function RegisterInput({
   return (
     <Container>
       <Label htmlFor={name}>{label}</Label>
-      <Input id={name} error={errorMessage} {...register(name)} {...props} />
+      <Input id={name} error={!!errorMessage} {...register(name)} {...props} />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Container>
   );
