@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import { useParams, Navigate } from 'react-router-dom';
 import { useGetProducts } from '../../hooks/query/products';
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
@@ -31,23 +31,23 @@ import {
   StepsText,
 } from './Styles';
 
+const errorMessages = {
+  [ERROR_CODES.NOT_FOUND]: 'Produto não encontrado',
+};
+const defaultErrorMessage =
+  'Erro ao solicitar os dados do produto. Tente novamente mais tarde';
+
 export default function ProductPage() {
-  const onError = (error) => {
-    switch (error.response.status) {
-      case ERROR_CODES.BAD_REQUEST:
-        throw new Error('O servidor não conseguiu atender a requisição');
-      case ERROR_CODES.NOT_FOUND:
-        throw new Error('Produto não encontrado');
-      case ERROR_CODES.INTERNAL_SERVER:
-        throw new Error(
-          'Erro ao editar a página de produtos. Tente novamente mais tarde'
-        );
-      default:
-        throw new Error('Erro desconhecido');
-    }
-  };
+  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const { _id } = useParams();
-  const { data, isLoading, error } = useGetProducts({
+
+  const onError = (error) => {
+    const code = error.response.status;
+    const message = errorMessages[code] || defaultErrorMessage;
+
+    setSubmitErrorMessage(message);
+  };
+  const { data, isLoading } = useGetProducts({
     filters: { _id },
     onError,
   });
@@ -58,7 +58,7 @@ export default function ProductPage() {
       product?.pictures?.map((picture) => ({
         src: picture.url,
         name: picture.name,
-        alt: picture.mimeType,
+        alt: `Imagem de nome ${picture.name}`,
       })),
     [product]
   );
@@ -72,12 +72,13 @@ export default function ProductPage() {
   );
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>{error.message}</p>;
+  if (submitErrorMessage) return <p>{submitErrorMessage}</p>;
+  if (!product) return <Navigate to="*" />;
 
   return (
     <Container>
       <ProductData>
-        <ProductName>{product.name}</ProductName>
+        <ProductName>{product?.name}</ProductName>
         <ProductInfo>
           <CarouselContainer>
             <Carousel
@@ -91,11 +92,11 @@ export default function ProductPage() {
           <TextInfoContainer>
             <ProductDescription>
               <DescriptionTitle>Descrição do produto</DescriptionTitle>
-              <Description>{product.description}</Description>
+              <Description>{product?.description}</Description>
             </ProductDescription>
             <ProductBenefits>
               <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-              <Benefits>{product.advantages}</Benefits>
+              <Benefits>{product?.advantages}</Benefits>
             </ProductBenefits>
             <ProductInfos>
               <InfoTitle>Mais informações</InfoTitle>
@@ -106,7 +107,7 @@ export default function ProductPage() {
           </TextInfoContainer>
         </ProductInfo>
       </ProductData>
-      <BudgetForm />
+      <BudgetForm productId={_id} />
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>

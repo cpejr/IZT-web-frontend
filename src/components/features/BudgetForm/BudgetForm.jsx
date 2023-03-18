@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -11,7 +13,7 @@ import {
   Container,
 } from './Styles';
 import { FormInput, FormMask } from '../../common';
-import { useCreateBudgetEmail } from '../../../hooks/query/formBudget';
+import { useSendProductBudget } from '../../../hooks/query/products';
 import { ERROR_CODES } from '../../../utils/constants';
 
 const validationSchema = z.object({
@@ -24,18 +26,40 @@ const validationSchema = z.object({
       message: 'Insira um email válido',
     })
     .trim(),
-  telephone: z.string().min(1, 'Digite o seu número do telefone'),
+  telephone: z
+    .string()
+    .min(1, 'Digite o seu número do telefone')
+    .transform((value) => value.replace(/[\s()-]*/g, '')), // Taking off mask chars
   country: z.string().min(1, 'Digite nome do seu país'),
   state: z.string().min(1, 'Digite o estado'),
   city: z.string().min(1, 'Digite a cidade'),
   ZIPcode: z
     .string()
     .min(1, 'Digite o seu CEP')
-    .regex(/^[0-9]{5}(?:-[0-9]{4})?$/, 'Digite um CEP válido'),
+    .length(9, 'Digite um CEP válido')
+    .transform((value) => value.replace(/-/g, '')), // Taking off mask chars,
   address: z.string().min(1, 'Digite o seu seu endereço'),
 });
 
-export default function BudgetForm() {
+const errorMessages = {
+  [ERROR_CODES.NOT_FOUND]: 'Produto não encontrado',
+};
+const defaultErrorMessage =
+  'Erro ao solicitar os dados do produto. Tente novamente mais tarde';
+
+export default function BudgetForm({ productId }) {
+  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
+
+  const onError = (error) => {
+    const code = error.response.status;
+    const message = errorMessages[code] || defaultErrorMessage;
+
+    setSubmitErrorMessage(message);
+  };
+  const { mutate: sendProductBudget, isLoading } = useSendProductBudget({
+    onError,
+  });
+
   const {
     handleSubmit,
     register,
@@ -44,20 +68,9 @@ export default function BudgetForm() {
   } = useForm({
     resolver: zodResolver(validationSchema),
   });
-  const onError = (error) => {
-    switch (error.response.status) {
-      case ERROR_CODES.BAD_REQUEST:
-        throw new Error('Não foi possível enviar o formulário');
-      default:
-        throw new Error('Erro desconhecido');
-    }
-  };
-
-  const { mutate: createBudgetEmail, Loading } = useCreateBudgetEmail(onError);
-
-  const onSubmit = async (data) => createBudgetEmail(data);
-
-  if (Loading) return <p style={{ height: '100vh' }}>Loading...</p>;
+  const onSubmit = (formInput) => sendProductBudget({ productId, formInput });
+  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
+  if (submitErrorMessage) return <p>{submitErrorMessage}</p>;
 
   return (
     <ContactUs>
@@ -72,7 +85,6 @@ export default function BudgetForm() {
               errors={errors}
               register={register}
             />
-
             <FormInput
               label="Empresa:"
               name="company"
@@ -80,7 +92,6 @@ export default function BudgetForm() {
               errors={errors}
               register={register}
             />
-
             <FormInput
               label="E-mail:"
               name="email"
@@ -88,14 +99,13 @@ export default function BudgetForm() {
               errors={errors}
               register={register}
             />
-
             <FormMask
               label="Telefone:"
               name="telephone"
               defaultValue=""
               control={control}
               placeholder="(99) 99999-9999"
-              mask="(99) 99999-9999"
+              mask="+99 (99) 99999-9999"
               errors={errors}
             />
           </Section>
@@ -127,15 +137,15 @@ export default function BudgetForm() {
                 width="50%"
               />
             </Subsection>
-
-            <FormInput
+            <FormMask
               label="CEP:"
               name="ZIPcode"
               placeholder="99999-999"
+              defaultValue=""
+              control={control}
+              mask="99999-999"
               errors={errors}
-              register={register}
             />
-
             <FormInput
               label="Endereço:"
               name="address"
@@ -150,3 +160,7 @@ export default function BudgetForm() {
     </ContactUs>
   );
 }
+
+BudgetForm.propTypes = {
+  productId: PropTypes.string.isRequired,
+};

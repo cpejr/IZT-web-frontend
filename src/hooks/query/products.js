@@ -1,6 +1,5 @@
-/* eslint-disable import/prefer-default-export */
-import { useQuery } from '@tanstack/react-query';
-import { getProducts } from '../../services/api';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { getProducts, sendProductBudget } from '../../services/api';
 
 export function useGetProducts({
   filters,
@@ -11,6 +10,17 @@ export function useGetProducts({
     queryKey: ['products', filters],
     queryFn: () => getProducts(filters),
     onSucess,
+    onError,
+  });
+}
+
+export function useSendProductBudget({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: sendProductBudget,
+    onSuccess,
     onError,
   });
 }

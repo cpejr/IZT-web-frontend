@@ -6,14 +6,14 @@ export const getUsers = async (filters = {}) => {
   return data;
 };
 
-export const updateUser = async ({ id, newUserData }) => {
-  const { data } = await privateApi.put(`/users/${id}`, newUserData);
+export const updateUser = async ({ userId, newUserData }) => {
+  const { data } = await privateApi.put(`/users/${userId}`, newUserData);
 
   return data;
 };
 
-export const deleteUser = async (id) => {
-  const { data } = await privateApi.delete(`/users/${id}`);
+export const deleteUser = async (userId) => {
+  const { data } = await privateApi.delete(`/users/${userId}`);
 
   return data;
 };

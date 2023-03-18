@@ -51,8 +51,11 @@ export const getFiles = async (filters = {}) => {
   return data;
 };
 
-export const createBudgetEmail = async (formInput) => {
-  const { data } = await publicApi.post('/forms-budget', formInput);
+export const sendProductBudget = async ({ productId, formInput }) => {
+  const { data } = await publicApi.post(
+    `/products/formBudget/${productId}`,
+    formInput
+  );
 
   return data;
 };
