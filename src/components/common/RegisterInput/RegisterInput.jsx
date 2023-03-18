@@ -9,11 +9,10 @@ export default function RegisterInput({
   ...props
 }) {
   const errorMessage = errors?.[name]?.message;
-
   return (
     <Container>
       <Label htmlFor={name}>{label}</Label>
-      <Input id={name} error={errorMessage} {...register(name)} {...props} />
+      <Input id={name} error={!!errorMessage} {...register(name)} {...props} />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Container>
   );

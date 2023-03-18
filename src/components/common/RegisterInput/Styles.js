@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const breakValue = '700px';
+const mobileBreakpoint = '700px';
 
 export const Container = styled.div`
   display: flex;
@@ -34,7 +34,7 @@ export const Input = styled.input`
     color: black;
     font-weight: 400;
   }
-  @media (max-width: ${breakValue}) {
+  @media (max-width: ${mobileBreakpoint}) {
     height: 50px;
   }
 `;
