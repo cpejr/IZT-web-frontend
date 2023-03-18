@@ -22,10 +22,10 @@ const isMiddleStyle = css`
 
 const isMiddleTitleStyle = css`
   font-size: 24px;
-  top: ${(props) => props.mediaTopWeb ?? '5%'};
+  top: ${(props) => (props.mediaTopWeb ? '5%' : 'none')};
   @media (max-width: 1200px) {
     font-size: 22px;
-    top: ${(props) => props.mediaTopWeb ?? '5%'};
+    top: ${(props) => (props.mediaTopWeb ? '5%' : 'none')};
   }
 `;
 
@@ -105,7 +105,7 @@ export const CardTitle = styled.div`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 20px;
   font-weight: 700;
-  top: ${(props) => props.mediaTopWeb ?? '7%'};
+  top: ${(props) => (props.mediaTopWeb ? '7%' : 'none')};
 
   ${({ isMiddle }) => (isMiddle ? isMiddleTitleStyle : '')};
 
@@ -114,16 +114,16 @@ export const CardTitle = styled.div`
     font-size: 18px;
   }
   @media (max-width: 1000px) {
-    top: ${(props) => props.media1000Top ?? '10%'};
+    top: ${(props) => (props.media1000Top ? '10%' : 'none')};
     width: 90%;
   }
   @media (max-width: 429px) {
     font-size: 20px;
-    top: ${(props) => props.media429Top ?? '9%'};
+    top: ${(props) => (props.media429Top ? '9%' : 'none')};
   }
   @media (max-width: 360px) {
     font-size: 18px;
-    top: ${(props) => props.media360Top ?? '8%'};
+    top: ${(props) => (props.media360Top ? '8%' : 'none')};
   }
   @media (max-width: 310px) {
     font-size: 16px;
@@ -156,7 +156,7 @@ export const Picture = styled.img`
     margin-bottom: 2%;
   }
   @media (max-width: 1000px) {
-    top: ${(props) => props.pictureTopMedia1000 ?? '23%'};
+    top: ${(props) => (props.pictureTopMedia1000 ? '23%' : 'none')};
     width: 200px;
   }
   @media (max-width: 540px) {

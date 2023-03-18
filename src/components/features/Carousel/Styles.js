@@ -8,8 +8,13 @@ export const Container = styled.div`
   gap: 5px;
   width: 100%;
   height: 100%;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+
   max-height: ${(props) => props.maxHeight};
-  aspect-ratio: 24 / 7;
+  max-width: ${(props) => props.maxWidth};
+
+  aspect-ratio: ${(props) => props.aspectRatio};
 `;
 
 export const ImagesContainer = styled.div`
@@ -96,7 +101,7 @@ export const MiniImageContainer = styled.button`
     object-fit: cover;
   }
   @media (max-width: 450px) {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
   }
 `;

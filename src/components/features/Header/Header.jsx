@@ -16,7 +16,7 @@ import {
   InvertItems,
 } from './Styles';
 
-function Header() {
+export default function Header() {
   const navigate = useNavigate();
   const [bar, setBar] = useState(false);
   const [collapse, setCollapse] = useState(false);
@@ -78,5 +78,3 @@ function Header() {
     </Content>
   );
 }
-
-export default Header;

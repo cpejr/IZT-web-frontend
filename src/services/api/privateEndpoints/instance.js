@@ -1,5 +1,7 @@
 import axios from 'axios';
 import useAuthStore from '../../../stores/auth';
+import { ERROR_CODES, ERROR_NAMES } from '../../../utils/constants';
+import { refresh } from '../publicEndpoints/endpoints';
 
 const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
@@ -25,13 +27,12 @@ privateApi.interceptors.response.use(
   async (error) => {
     const prevRequest = error?.config;
     const isForbiddenError =
-      error?.response?.data?.httpCode === 403 &&
-      error?.response?.data?.name === 'Forbidden';
+      error?.response?.data?.httpCode === ERROR_CODES.FORBIDDEN &&
+      error?.response?.data?.name === ERROR_NAMES.FORBIDDEN;
 
     // If is not a forbidden error or if the request was already sended
     if (!isForbiddenError || prevRequest?.sent) return Promise.reject(error);
 
-    const { refresh } = useAuthStore.getState();
     const newAccessToken = await refresh();
 
     prevRequest.sent = true;
