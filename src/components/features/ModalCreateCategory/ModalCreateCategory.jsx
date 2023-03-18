@@ -37,7 +37,13 @@ export default function ModalCreateCategory() {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
           <Label>Nome da categoria:</Label>
-          <Input id="name" name="name" type="name" {...register('name')} />
+          <Input
+            id="name"
+            name="name"
+            type="name"
+            {...register('name')}
+            placeholder="Digite aqui o nome da categoria"
+          />
           <ModalButton type="submit">
             <FiSave size={25} />
             <p>Criar Categoria</p>
