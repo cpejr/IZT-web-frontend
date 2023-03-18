@@ -16,9 +16,9 @@ import {
   AddProduct,
   EditProduct,
   Product,
-  SignUp
-} from './pages';
+  SignUp,
   EditCategory,
+} from './pages';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
