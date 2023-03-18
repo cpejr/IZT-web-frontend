@@ -45,7 +45,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: row;
   width: 80%;
-  gap: 8%;
+  gap: 20px;
   height: 100%;
 
   @media (max-width: 700px) {

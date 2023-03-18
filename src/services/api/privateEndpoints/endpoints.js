@@ -6,7 +6,7 @@ export const getUsers = async (filters = {}) => {
   return data;
 };
 
-export const updateUser = async (id, newUserData) => {
+export const updateUser = async ({ id, newUserData }) => {
   const { data } = await privateApi.put(`/users/${id}`, newUserData);
 
   return data;

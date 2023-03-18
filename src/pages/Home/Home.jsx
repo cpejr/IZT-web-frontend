@@ -1,8 +1,7 @@
-import React from 'react';
-import { Carousel, FormsContactUs, Card } from '../../components/features';
-import Catalog from '../../assets/homeCards/catalog.png';
-import Software from '../../assets/homeCards/software.png';
-import Training from '../../assets/homeCards/training.png';
+import { Carousel, FormsContact, Card } from '../../components/features';
+import Catalog from '../../assets/homePage/cards/catalog.png';
+import Software from '../../assets/homePage/cards/software.png';
+import Training from '../../assets/homePage/cards/training.png';
 import {
   AboutUs,
   Container,
@@ -12,23 +11,23 @@ import {
   CardsContainer,
   OuterDiv,
 } from './Styles';
-import Image from '../../assets/imagemDaEmpresa.png';
-import carouselData from '../../assets/homeCarousel/data';
+import Image from '../../assets/homePage/imagemDaEmpresa.png';
+import carouselData from '../../assets/homePage/carousel/data';
 
-function Home() {
+export default function Home() {
   return (
     <OuterDiv>
       <Container>
-        <Carousel carouselData={carouselData} />
+        <Carousel maxHeight="500px" carouselData={carouselData} />
         <CardsContainer>
           <Card
             title="Treinamento em Retificação Centerless"
             text="Venha aprender tudo sobre retificação centerless com o nosso curso
           intensivo!"
-            mediaTopWeb="5%"
-            media1000Top="10%"
-            media429Top="9%"
-            media360Top="7%"
+            mediaTopWeb
+            media1000Top
+            media429Top
+            media360Top
             image={Training}
             imageAlt="Training image"
           />
@@ -45,10 +44,10 @@ function Home() {
           confiáveis do processo de retificação em sua empresa."
             image={Software}
             imageAlt="Software image"
-            pictureTopMedia1000="20%"
+            pictureTopMedia1000
           />
         </CardsContainer>
-        <FormsContactUs />
+        <FormsContact />
         <AboutUs>
           <OurHistoryTitle>Conheça a nossa história</OurHistoryTitle>
           <OurHistory>
@@ -82,5 +81,3 @@ function Home() {
     </OuterDiv>
   );
 }
-
-export default Home;

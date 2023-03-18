@@ -14,3 +14,6 @@ export { default as AdminEditProductMobile } from './AdminEditProductMobile/Admi
 export { default as AdminAddProductMobile } from './AdminAddProductMobile/AdminAddProductMobile';
 export { default as AdminEditCategoryMobile } from './AdminEditCategoryMobile/AdminEditCategoryMobile';
 export { default as AdminAddCategoryMobile } from './AdminAddCategoryMobile/AdminAddCategoryMobile';
+export { default as BudgetForm } from './BudgetForm/BudgetForm';
+export { default as FormsContact } from './FormsContact/FormsContact';
+export { default as FilesList } from './FilesList/FilesList';

@@ -8,3 +8,5 @@ export { default as CreateCategory } from './CreateCategory/CreateCategory';
 export { default as AddProduct } from './AddProduct/AddProduct';
 export { default as EditProduct } from './EditProduct/EditProduct';
 export { default as EditCategory } from './EditCategory/EditCategory';
+export { default as Product } from './Product/Product';
+export { default as SignUp } from './Register/Register';

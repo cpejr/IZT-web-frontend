@@ -1,6 +1,6 @@
 import { Container, Subtitle, Title, Description } from './Styles';
 
-function NotFound() {
+export default function NotFound() {
   return (
     <Container>
       <Title>404</Title>
@@ -14,5 +14,3 @@ function NotFound() {
     </Container>
   );
 }
-
-export default NotFound;

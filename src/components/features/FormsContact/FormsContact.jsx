@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,13 +11,12 @@ import {
   InputMessage,
   AreaText,
 } from './Styles';
+import useWindowSize from '../../../hooks/useWindowSize';
 import { FormInput, FormMask } from '../../common';
 
 const validationSchema = z.object({
   company: z.string().min(1, 'Favor digitar o nome da empresa'),
-
   representative: z.string().min(1, 'Favor digitar o nome do representante'),
-
   email: z
     .string()
     .min(1, { message: 'Favor digitar o email' })
@@ -26,9 +24,7 @@ const validationSchema = z.object({
       message: 'Insira um email válido',
     })
     .trim(),
-
   telephone: z.string().min(1, 'Favor digitar o número do telefone'),
-
   message: z
     .string({ required_error: 'Favor inserir uma mensagem' })
     .max(1500, {
@@ -37,7 +33,7 @@ const validationSchema = z.object({
     .min(5, { message: 'A mensagem deve conter no mínimo 5 caracteres' }),
 });
 
-function FormsContactUs() {
+export default function FormsContact() {
   const {
     handleSubmit,
     register,
@@ -47,22 +43,15 @@ function FormsContactUs() {
     resolver: zodResolver(validationSchema),
   });
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleWindowResize = () => setWindowWidth(window.innerWidth);
-
-    window.addEventListener('resize', handleWindowResize);
-    return () => window.removeEventListener('resize', handleWindowResize);
-  }, []);
-
-  const breakpoint = 700;
-
   const onSubmit = (data) => console.log(data);
+
+  const mobileBreakpoint = 700;
+  const { width: windowWidth } = useWindowSize();
 
   return (
     <ContactUs>
       <Title>{`Entre em Contato ${
-        windowWidth <= breakpoint ? '' : 'Conosco'
+        windowWidth <= mobileBreakpoint ? '' : 'Conosco'
       }`}</Title>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -115,5 +104,3 @@ function FormsContactUs() {
     </ContactUs>
   );
 }
-
-export default FormsContactUs;

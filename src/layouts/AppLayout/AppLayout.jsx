@@ -2,10 +2,10 @@ import { Outlet } from 'react-router-dom';
 import { Header, Footer } from '../../components/features';
 import { useRefreshToken } from '../../hooks/query/sessions';
 
-function App() {
-  const { isFetching } = useRefreshToken();
+export default function AppLayout() {
+  const { isInitialLoading } = useRefreshToken();
 
-  return isFetching ? (
+  return isInitialLoading ? (
     <h1>Carregando...</h1> // TODO: add a good looking loading state
   ) : (
     <>
@@ -15,5 +15,3 @@ function App() {
     </>
   );
 }
-
-export default App;

@@ -15,8 +15,10 @@ import {
   CreateCategory,
   AddProduct,
   EditProduct,
-  EditCategory,
+  Product,
+  SignUp
 } from './pages';
+  EditCategory,
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,14 +35,14 @@ const router = createBrowserRouter(
           <Route path="editar-produto" element={<EditProduct />} />
           <Route path="editar-categoria" element={<EditCategory />} />
         </Route>
+        <Route path="cadastro" element={<SignUp />} />
+        <Route path="produto/:_id" element={<Product />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
 
-function Routes() {
+export default function Routes() {
   return <RouterProvider router={router} />;
 }
-
-export default Routes;

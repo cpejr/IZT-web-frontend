@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
+import PropTypes from 'prop-types';
 import { Container, Label, Input, ErrorMessage } from './Styles';
 
 export default function FormInput({
@@ -22,3 +22,11 @@ export default function FormInput({
     </Container>
   );
 }
+
+FormInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  errors: PropTypes.object.isRequired,
+  register: PropTypes.func.isRequired,
+};

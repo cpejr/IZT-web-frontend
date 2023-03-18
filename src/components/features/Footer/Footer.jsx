@@ -1,5 +1,9 @@
-import { BsInstagram, BsWhatsapp } from 'react-icons/bs';
-import { AiOutlineLinkedin, AiOutlineFacebook } from 'react-icons/ai';
+import {
+  AiOutlineLinkedin,
+  AiOutlineFacebook,
+  AiOutlineWhatsApp,
+  AiOutlineInstagram,
+} from 'react-icons/ai';
 import { HiOutlineMail } from 'react-icons/hi';
 import {
   Container,
