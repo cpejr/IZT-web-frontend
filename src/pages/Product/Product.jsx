@@ -47,25 +47,24 @@ export default function ProductPage() {
     }
   };
   const { _id } = useParams();
-  const {
-    data: product,
-    isLoading,
-    error,
-  } = useGetProducts({ filters: { _id }, onError });
+  const { data, isLoading, error } = useGetProducts({
+    filters: { _id },
+    onError,
+  });
 
+  const product = data?.[0];
   const pictures = useMemo(
     () =>
-      product?.[0]?.pictures.map((picture) => ({
+      product?.pictures?.map((picture) => ({
         src: picture.url,
         name: picture.name,
         alt: picture.mimeType,
       })),
     [product]
   );
-
   const documents = useMemo(
     () =>
-      product?.[0]?.documents.map((document, index) => ({
+      product?.documents?.map((document, index) => ({
         name: `Documento ${index + 1}`,
         url: document.url,
       })),
