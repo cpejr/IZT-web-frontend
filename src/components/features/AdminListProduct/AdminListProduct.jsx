@@ -33,15 +33,12 @@ export default function AdminListProduct() {
 
   const [selectedCategory, setSelectedCategory] = useState({});
 
-  console.log(selectedCategory);
-
   const debouncedName = useDebounce(name);
 
   const { data: products } = useSearchProductByName({
     name: debouncedName,
     category: selectedCategory?._id,
   });
-
   const modalButton = {
     closeIcon: <CloseOutlined style={{ color: 'white' }} />,
   };
@@ -76,7 +73,7 @@ export default function AdminListProduct() {
         <Subsection>
           <CategoryText>Filtrar por categoria:</CategoryText>
           <Select
-            standart="Categoria"
+            standart="Categorias "
             data={categories}
             getValue={setSelectedCategory}
             maxWidth="250px"
@@ -89,7 +86,7 @@ export default function AdminListProduct() {
           </SearchIconButton>
           <SearchProduct
             onChange={(e) => setName(e.target.value)}
-            placeholder="Pesquisar produto"
+            placeholder="Procurar"
           />
         </SearchSection>
       </CategoryFilterContainer>

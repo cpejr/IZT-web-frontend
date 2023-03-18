@@ -9,8 +9,7 @@ export default function Select({ data, getValue, maxWidth, standart }) {
   const [openOptions, setOpenOptions] = useState(false);
 
   async function handleSelection(item) {
-    console.log(item);
-    setSelected(item.name);
+    setSelected(Object.keys(item).length ? item.name : standart);
     setOpenOptions(false);
     getValue(item);
   }
@@ -22,6 +21,13 @@ export default function Select({ data, getValue, maxWidth, standart }) {
         <MdKeyboardArrowDown size={25} />
       </Selected>
       <Options show={openOptions}>
+        <Option
+          key="001"
+          onClick={() => handleSelection({})}
+          isSelected={selected === standart}
+        >
+          <p>{standart}</p>
+        </Option>
         {data?.map((item) => (
           <Option
             key={item._id}

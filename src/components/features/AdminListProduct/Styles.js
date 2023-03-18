@@ -17,7 +17,6 @@ export const Container = styled.div`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   color: #000000;
-
   @media (max-width: 700px) {
     align-items: center;
     justify-content: center;
@@ -57,7 +56,7 @@ export const CategoryFilterContainer = styled.div`
   gap: 20px;
   background: #eeeeee;
 
-  @media (max-width: 700px) {
+  @media (max-width: 810px) {
     flex-direction: column-reverse;
     align-items: flex-start;
     justify-content: center;
@@ -91,6 +90,7 @@ export const Text = styled.p`
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
+  text-overflow: hidden;
 `;
 
 export const SearchProduct = styled.input`
@@ -107,7 +107,7 @@ export const SearchProduct = styled.input`
   line-height: 20px;
   font-size: 1em;
 
-  @media (max-width: 700px) {
+  @media (max-width: 810px) {
     width: 100%;
   }
 `;
@@ -177,7 +177,7 @@ export const SearchSection = styled.div`
     gap: 5px;
     font-size: 14px;
   }
-  @media (max-width: 700px) {
+  @media (max-width: 810px) {
     width: 100%;
     gap: 10px;
   }

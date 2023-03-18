@@ -30,9 +30,6 @@ export const Selected = styled.div`
     font-weight: 600;
   }
   p {
-    text-decoration: underline;
-    text-decoration-color: ${(props) => props.theme.colors.blue};
-    text-decoration-thickness: 2px;
     white-space: nowrap;
     max-width: 100%;
     max-height: 40px;
