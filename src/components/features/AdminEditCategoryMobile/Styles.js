@@ -93,7 +93,7 @@ export const SaveButton = styled.button`
   }
   :hover {
     transition: 1s;
-    background-color: #203699;
+    background-color: ${(props) => props.theme.colors.blue};
     color: white;
     border: white;
     cursor: pointer;

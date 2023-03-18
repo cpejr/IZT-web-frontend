@@ -133,7 +133,7 @@ export const StyledLink = styled(Link)`
     width: 230px;
     padding: 5px;
     border-radius: 10px;
-    background-color: rgba(199, 199, 199, 1);
+    background-color: ${(props) => props.theme.colors.gray.mediumGrey};
   }
 
   @media (max-width: 700px) {
@@ -142,7 +142,7 @@ export const StyledLink = styled(Link)`
     :hover {
       width: auto;
       border-radius: 10px;
-      background-color: rgba(199, 199, 199, 1);
+      background-color: ${(props) => props.theme.colors.gray.mediumGrey};
     }
   }
 
@@ -162,7 +162,7 @@ export const Button = styled.button`
     width: 230px;
     padding: 5px;
     border-radius: 10px;
-    background-color: rgba(199, 199, 199, 1);
+    background-color: ${(props) => props.theme.colors.gray.mediumGrey};
   }
 
   @media (max-width: 700px) {
@@ -171,7 +171,7 @@ export const Button = styled.button`
     :hover {
       width: auto;
       border-radius: 10px;
-      background-color: rgba(199, 199, 199, 1);
+      background-color: ${(props) => props.theme.colors.gray.mediumGrey};
     }
   }
 
@@ -217,6 +217,6 @@ export const MobileMenuButton = styled.button`
 
 export const ModalStyle = styled(Modal)`
   :where(.css-dev-only-do-not-override-1me4733).ant-modal .ant-modal-content {
-    background-color: #123645;
+    background-color: ${(props) => props.theme.colors.darkBlue};
   }
 `;
