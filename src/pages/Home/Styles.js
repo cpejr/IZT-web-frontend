@@ -23,7 +23,7 @@ export const AboutUs = styled.div`
   margin-top: 4%;
   margin-left: 10%;
   margin-right: 10%;
-  margin-bottom: 1%;
+  margin-bottom: 4%;
 `;
 
 export const OurHistoryTitle = styled.h1`
@@ -32,7 +32,7 @@ export const OurHistoryTitle = styled.h1`
   font-weight: 600;
   font-style: normal;
   font-size: 36px;
-  margin-bottom: 2%;
+  margin-bottom: 3%;
 
   @media (max-width: 485px) {
     font-size: 30px;
@@ -81,12 +81,10 @@ export const Picture = styled.img`
   top: 45px;
   max-width: 100%;
   object-fit: scale-down;
-  margin-left: 1%;
-  margin-right: 1%;
+  margin-left: 3%;
 
   @media (max-width: 1100px) {
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 3%;
   }
 `;
 
