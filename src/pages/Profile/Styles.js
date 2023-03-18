@@ -22,7 +22,7 @@ export const Body = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 5%;
-  margin-bottom: 15%;
+  margin-bottom: 10%;
   width: 100%;
   height: auto;
   @media (max-width: 700px) {
@@ -362,6 +362,7 @@ export const Lessons = styled.div`
 export const Info2 = styled.div`
   display: flex;
   gap: 20px;
+  align-items: center;
   h1 {
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
