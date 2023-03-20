@@ -52,7 +52,7 @@ export const LeftSection = styled.div`
 export const Subsection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 5px;
   padding-top: 10px;
   width: 100%;
 `;
@@ -138,6 +138,7 @@ export const TextAreaModal = styled.textarea`
   font-weight: 400;
   font-size: 20px;
 
+  resize: none;
   color: #000000;
 `;
 

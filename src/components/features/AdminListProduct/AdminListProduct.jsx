@@ -73,7 +73,7 @@ export default function AdminListProduct() {
         <Subsection>
           <CategoryText>Filtrar por categoria:</CategoryText>
           <Select
-            standart="Categorias "
+            standart="Selecionar"
             data={categories}
             getValue={setSelectedCategory}
             maxWidth="250px"
@@ -86,7 +86,7 @@ export default function AdminListProduct() {
           </SearchIconButton>
           <SearchProduct
             onChange={(e) => setName(e.target.value)}
-            placeholder="Procurar"
+            placeholder="Pesquisar Produto"
           />
         </SearchSection>
       </CategoryFilterContainer>

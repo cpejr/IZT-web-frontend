@@ -81,7 +81,13 @@ export default function ModalAddProduct() {
           <LeftSection>
             <Subsection>
               <Text>Nome do produto:</Text>
-              <Input id="name" name="name" type="name" {...register('name')} />
+              <Input
+                id="name"
+                name="name"
+                type="name"
+                placeholder="Digite o nome do produto"
+                {...register('name')}
+              />
             </Subsection>
 
             <Subsection>
@@ -90,6 +96,7 @@ export default function ModalAddProduct() {
                 id="description"
                 name="description"
                 type="description"
+                placeholder="Descreva o produto"
                 {...register('description')}
               />
             </Subsection>
@@ -100,6 +107,7 @@ export default function ModalAddProduct() {
                 id="advantages"
                 name="advantages"
                 type="advantages"
+                placeholder="Descreva as vantagens do produto"
                 {...register('advantages')}
               />
             </Subsection>

@@ -119,7 +119,7 @@ export const InputModalName = styled.input`
   color: #000000;
 `;
 
-export const InputModal = styled.input`
+export const InputModal = styled.textarea`
   display: flex;
   padding: 8px 11px;
   width: 100%;
@@ -133,6 +133,7 @@ export const InputModal = styled.input`
   font-weight: 400;
   font-size: 20px;
 
+  resize: none;
   color: #000000;
 `;
 
