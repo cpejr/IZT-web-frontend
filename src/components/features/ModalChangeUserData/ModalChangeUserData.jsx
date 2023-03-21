@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { z } from 'zod';
 import { Modal } from 'antd';
@@ -6,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SaveOutlined, CloseOutlined } from '@ant-design/icons';
 import { toast } from 'react-toastify';
-import { RegisterInput } from '../../common';
+import { AddToast, RegisterInput } from '../../common';
 import {
   Container,
   Form,
@@ -67,28 +66,20 @@ const defaultErrorMessage =
   'Erro ao editar os dados cadastrais. Tente novamente mais tarde';
 
 export default function ModalChangeUserData({ openState, close }) {
-  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const user = useAuthStore((state) => state.auth.user);
   const setUser = useAuthStore((state) => state.setUser);
 
-  const handleSuccess = () => {
-    toast.success('Dados modificados com sucesso!');
-  };
-  const handleError = () => {
-    toast.error(submitErrorMessage);
-  };
-
   const onSuccess = (data) => {
     setUser(data);
-    handleSuccess();
+    toast.success('Dados modificados com sucesso!');
     close();
   };
   const onError = (error) => {
     const code = error.response.status;
     const message = errorMessages[code] || defaultErrorMessage;
 
-    setSubmitErrorMessage(message);
-    handleError();
+    toast.error(message);
+    close();
   };
   const { mutate: updateUser } = useUpdateUser({
     onSuccess,
@@ -104,7 +95,6 @@ export default function ModalChangeUserData({ openState, close }) {
   });
   const onSubmit = (data) => updateUser({ id: user._id, newUserData: data });
 
-  if (submitErrorMessage) return <p>{submitErrorMessage}</p>;
   return (
     <Modal
       open={openState}
@@ -206,6 +196,7 @@ export default function ModalChangeUserData({ openState, close }) {
             Salvar Alterações
           </SaveChanges>
         </Form>
+        <AddToast />
       </Container>
     </Modal>
   );

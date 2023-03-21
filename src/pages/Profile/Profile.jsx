@@ -24,7 +24,7 @@ import { ModalChangeUserData } from '../../components/features';
 import useAuthStore from '../../stores/auth';
 import { AddToast } from '../../components/common';
 
-function Profile() {
+export default function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
   const user = useAuthStore((state) => state.auth.user);
 
@@ -134,5 +134,3 @@ function Profile() {
     </Background>
   );
 }
-
-export default Profile;

@@ -47,38 +47,33 @@ export default function Login() {
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSuccess = () => {
-    toast.success('Usuário logado com sucesso!');
-  };
-  const handleError = () => {
-    toast.error(submitErrorMessage);
-  };
-
   const onSuccess = () => {
-    handleSuccess();
     navigate('/');
+    toast.success('Usuário logado com sucesso!');
   };
   const onError = (error) => {
     switch (error.response.status) {
       case ERROR_CODES.BAD_REQUEST:
         setSubmitErrorMessage('Dados inválidos');
-        handleError();
+        toast.error('Dados inválidos');
         break;
       case ERROR_CODES.UNAUTHORIZED:
         setSubmitErrorMessage('E-mail ou senha incorretos');
-        handleError();
+        toast.error('E-mail ou senha incorretos');
         break;
       case ERROR_CODES.FORBIDDEN:
         setSubmitErrorMessage(
           'A sua conta ainda não foi ativada. Por favor verifique o e-mail'
         );
-        handleError();
+        toast.error(
+          'A sua conta ainda não foi ativada. Por favor verifique o e-mail'
+        );
         break;
       case ERROR_CODES.INTERNAL_SERVER:
         setSubmitErrorMessage(
           'Erro ao realizar o login. Tente novamente mais tarde'
         );
-        handleError();
+        toast.error('Erro ao realizar o login. Tente novamente mais tarde');
         break;
       default:
         break;

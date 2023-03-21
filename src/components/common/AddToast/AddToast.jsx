@@ -1,19 +1,16 @@
 import React from 'react';
-import { ToastContainer } from 'react-toastify';
+import { StyledContainer } from './Styles';
 
 export default function AddToast() {
   return (
-    <ToastContainer
+    <StyledContainer
       position="bottom-right"
       autoClose={5000}
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick
       rtl={false}
-      pauseOnFocusLoss
       draggable
-      pauseOnHover
-      font-size="14px"
       theme="light"
     />
   );

@@ -74,7 +74,7 @@ const validationSchema = z
     message: 'Senhas não coincidem',
   });
 
-function SignUp() {
+export default function SignUp() {
   const navigate = useNavigate();
   const {
     register,
@@ -87,8 +87,8 @@ function SignUp() {
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
 
   const onSuccess = () => {
-    navigate('/login');
     toast.success('Usuário logado com sucesso!');
+    navigate('/login');
   };
 
   const onError = (err) => {
@@ -238,5 +238,3 @@ function SignUp() {
     </Page>
   );
 }
-
-export default SignUp; // user registration function

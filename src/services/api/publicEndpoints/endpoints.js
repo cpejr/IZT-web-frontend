@@ -45,3 +45,9 @@ export const createUser = async (newUser) => {
 
   return data;
 };
+
+export const sendFormContact = async (formInput) => {
+  const { data } = await publicApi.post(`/forms-contact`, formInput);
+
+  return data;
+};
