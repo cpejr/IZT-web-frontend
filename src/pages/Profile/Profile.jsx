@@ -24,7 +24,7 @@ import useAuthStore from '../../stores/auth';
 
 function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
-  const user = useAuthStore((state) => state.auth.user);
+  const user = useAuthStore((state) => state?.auth?.user);
 
   const openModalChangeUserData = () => setUpdateUserModalState(true);
   const closeModalChangeUserData = () => setUpdateUserModalState(false);
