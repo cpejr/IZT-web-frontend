@@ -24,12 +24,11 @@ import useAuthStore from '../../stores/auth';
 
 function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
-  const user = useAuthStore((state) => state?.auth?.user);
+  const user = useAuthStore((state) => state.auth.user);
 
   const openModalChangeUserData = () => setUpdateUserModalState(true);
   const closeModalChangeUserData = () => setUpdateUserModalState(false);
 
-  if (!user) return <h1>Proibido</h1>;
   return (
     <Background>
       <Page>

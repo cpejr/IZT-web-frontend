@@ -11,10 +11,8 @@ export const Container = styled.div`
   /* position: absolute;
   bottom: 10vh;
   left: 10vw; */
-  margin: 5em auto;
 
-  margin-right: auto;
-  margin-left: auto;
+  margin: 5em auto;
 
   @media screen and (min-width: 1440px) {
     width: 1440px;
