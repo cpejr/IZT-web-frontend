@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { SettingOutlined } from '@ant-design/icons';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Container,
   Page,
@@ -21,6 +22,7 @@ import {
 } from './Styles';
 import { ModalChangeUserData } from '../../components/features';
 import useAuthStore from '../../stores/auth';
+import { AddToast } from '../../components/common';
 
 function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
@@ -123,6 +125,7 @@ function Profile() {
             </ChangeInfo>
           </Container>
         </Body>
+        <AddToast />
       </Page>
       <ModalChangeUserData
         openState={updateUserModalState}

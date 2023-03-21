@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Page,
   Container,
@@ -15,7 +17,7 @@ import {
   Links,
 } from './Styles';
 import IZTLogo from '../../assets/IZTLogo.svg';
-import { DataInput, SubmitButton } from '../../components/common';
+import { AddToast, DataInput, SubmitButton } from '../../components/common';
 import { useLogin } from '../../hooks/query/sessions';
 import { ERROR_CODES } from '../../utils/constants';
 
@@ -44,24 +46,39 @@ export default function Login() {
   });
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const navigate = useNavigate();
-  const onSuccess = () => navigate('/');
+
+  const handleSuccess = () => {
+    toast.success('Usuário logado com sucesso!');
+  };
+  const handleError = () => {
+    toast.error(submitErrorMessage);
+  };
+
+  const onSuccess = () => {
+    handleSuccess();
+    navigate('/');
+  };
   const onError = (error) => {
     switch (error.response.status) {
       case ERROR_CODES.BAD_REQUEST:
         setSubmitErrorMessage('Dados inválidos');
+        handleError();
         break;
       case ERROR_CODES.UNAUTHORIZED:
         setSubmitErrorMessage('E-mail ou senha incorretos');
+        handleError();
         break;
       case ERROR_CODES.FORBIDDEN:
         setSubmitErrorMessage(
           'A sua conta ainda não foi ativada. Por favor verifique o e-mail'
         );
+        handleError();
         break;
       case ERROR_CODES.INTERNAL_SERVER:
         setSubmitErrorMessage(
           'Erro ao realizar o login. Tente novamente mais tarde'
         );
+        handleError();
         break;
       default:
         break;
@@ -110,6 +127,7 @@ export default function Login() {
           </SignUpLink>
         </Links>
       </Container>
+      <AddToast />
     </Page>
   );
 }

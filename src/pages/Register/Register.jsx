@@ -3,6 +3,8 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Page,
   Container,
@@ -15,7 +17,7 @@ import {
 } from './Styles';
 import IZTLogo from '../../assets/IZTLogo.svg';
 import { useCreateUser } from '../../hooks/query/users';
-import { RegisterInput, SubmitButton } from '../../components/common';
+import { AddToast, RegisterInput, SubmitButton } from '../../components/common';
 import { ERROR_CODES } from '../../utils/constants';
 
 const validationSchema = z
@@ -83,19 +85,27 @@ function SignUp() {
   });
 
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
-  const onSuccess = () => navigate('/login');
+
+  const onSuccess = () => {
+    navigate('/login');
+    toast.success('Usuário logado com sucesso!');
+  };
+
   const onError = (err) => {
     switch (err.response.status) {
       case ERROR_CODES.NOT_FOUND:
         setSubmitErrorMessage('Dados inválidos');
+        toast.error('Dados inválidos');
         break;
       case ERROR_CODES.CONFLICT:
         setSubmitErrorMessage('O email já está sendo utilizado');
+        toast.error('O email já está sendo utilizado');
         break;
       case ERROR_CODES.INTERNAL_SERVER:
         setSubmitErrorMessage(
           'Erro ao realizar o cadastro. Tente novamente mais tarde'
         );
+        toast.error('Erro ao realizar o cadastro. Tente novamente mais tarde');
         break;
       default:
         break;
@@ -224,6 +234,7 @@ function SignUp() {
           />
         </Form>
       </Container>
+      <AddToast />
     </Page>
   );
 }

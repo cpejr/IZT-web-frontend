@@ -5,6 +5,7 @@ import { Modal } from 'antd';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SaveOutlined, CloseOutlined } from '@ant-design/icons';
+import { toast } from 'react-toastify';
 import { RegisterInput } from '../../common';
 import {
   Container,
@@ -70,8 +71,16 @@ export default function ModalChangeUserData({ openState, close }) {
   const user = useAuthStore((state) => state.auth.user);
   const setUser = useAuthStore((state) => state.setUser);
 
+  const handleSuccess = () => {
+    toast.success('Dados modificados com sucesso!');
+  };
+  const handleError = () => {
+    toast.error(submitErrorMessage);
+  };
+
   const onSuccess = (data) => {
     setUser(data);
+    handleSuccess();
     close();
   };
   const onError = (error) => {
@@ -79,6 +88,7 @@ export default function ModalChangeUserData({ openState, close }) {
     const message = errorMessages[code] || defaultErrorMessage;
 
     setSubmitErrorMessage(message);
+    handleError();
   };
   const { mutate: updateUser } = useUpdateUser({
     onSuccess,

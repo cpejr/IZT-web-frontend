@@ -13,7 +13,7 @@ import {
 } from './Styles';
 import Image from '../../assets/homePage/imagemDaEmpresa.png';
 import carouselData from '../../assets/homePage/carousel/data';
-import { AddToast } from '../../components/common';
+// import { AddToast } from '../../components/common';
 
 export default function Home() {
   return (
@@ -89,7 +89,7 @@ export default function Home() {
           </OurHistory>
         </AboutUs>
       </Container>
-      <AddToast />
+      {/* <AddToast /> */}
     </OuterDiv>
   );
 }
