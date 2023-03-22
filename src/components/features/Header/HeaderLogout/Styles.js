@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../../common';
+import { Button } from '../../../common';
 
 const menuBreak = '800px';
 

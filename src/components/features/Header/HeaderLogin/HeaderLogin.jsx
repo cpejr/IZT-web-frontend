@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
-import { Logo } from '../../common';
+import { Logo } from '../../../common';
 import {
   Content,
   Menu,
@@ -11,7 +11,7 @@ import {
   Selected,
   LanguageSelector,
   Bar,
-  ButtonLogin,
+  Welcome,
   InternContainer,
   InvertItems,
 } from './Styles';
@@ -30,21 +30,18 @@ export default function Header() {
         <Logo />
         <Menu>
           <Nav bar={bar} collapse={collapse}>
-            <Link to="/">Produtos</Link>
+            <Link to="/catalogo">Produtos</Link>
             <Link to="/">Cursos</Link>
             <Link to="/">Software</Link>
             <InvertItems>
-              <ButtonLogin
-                backgroundColor800={theme.colors.greenishBlue}
-                color800="white"
-                borderColor800={theme.colors.greenishBlue}
-                hoverBackgroundColor800={theme.colors.greenishBlue}
-                hoverColor800="white"
-                hoverBorderColor800={theme.colors.greenishBlue}
-                onClick={() => navigate('/')}
-              >
-                Entrar
-              </ButtonLogin>
+              <Welcome>
+                <h1>
+                  <Link to="/perfil">Bem vindo, user!</Link>
+                </h1>
+                <h2>
+                  <Link to="/">| Deslogar</Link>
+                </h2>
+              </Welcome>
 
               <Select bar={bar}>
                 <Selected onClick={() => setCollapse(!collapse)}>
