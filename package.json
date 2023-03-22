@@ -26,6 +26,7 @@
     "react-hook-form": "^7.43.2",
     "react-icons": "^4.7.1",
     "react-input-mask": "^2.0.4",
+    "react-lottie": "^1.2.3",
     "react-router-dom": "^6.8.1",
     "styled-components": "^5.3.6",
     "zod": "^3.20.6",

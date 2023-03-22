@@ -15,11 +15,3 @@ export const Text = styled.p`
   font-weight: bold;
   font-family: ${(props) => props.theme.fonts.montserrat};
 `;
-
-export const LoadingGif = styled.div`
-  width: 500px;
-  height: 500px;
-  align-self: center;
-  width: fit-content;
-  height: fit-content;
-`;

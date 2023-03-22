@@ -1,3 +1,4 @@
+import Lottie from 'react-lottie';
 import {
   RouterProvider,
   createBrowserRouter,
