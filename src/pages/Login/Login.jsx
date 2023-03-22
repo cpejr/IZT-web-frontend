@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -17,59 +15,33 @@ import {
 import IZTLogo from '../../assets/IZTLogo.svg';
 import { DataInput, SubmitButton } from '../../components/common';
 import { useLogin } from '../../hooks/query/sessions';
-import { ERROR_CODES } from '../../utils/constants';
-
-const validationSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: 'Favor digitar o email' })
-    .email({
-      message: 'Insira um email no formato email@email.com',
-    })
-    .trim(),
-  password: z
-    .string()
-    .min(1, { message: 'Favor digitar uma senha' })
-    .min(6, 'A senha não pode ter menos de 6 caracteres')
-    .max(16, 'A senha não pode ter mais de 16 caracteres'),
-});
+import { buildLoginErrorMessage, loginValidationSchema } from './utils';
 
 export default function Login() {
+  const navigate = useNavigate();
+  const loginOnSuccess = () => navigate('/');
+  const loginOnError = (err) => {
+    const code = err?.response?.data?.httpCode;
+    const errorMessage = buildLoginErrorMessage(code);
+
+    // Do something to the errorMessage
+    alert(errorMessage);
+  };
+  const { mutate: login, isLoading } = useLogin({
+    onSuccess: loginOnSuccess,
+    onError: loginOnError,
+  });
+
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(loginValidationSchema),
   });
-  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
-  const navigate = useNavigate();
-  const onSuccess = () => navigate('/');
-  const onError = (error) => {
-    switch (error.response.status) {
-      case ERROR_CODES.BAD_REQUEST:
-        setSubmitErrorMessage('Dados inválidos');
-        break;
-      case ERROR_CODES.UNAUTHORIZED:
-        setSubmitErrorMessage('E-mail ou senha incorretos');
-        break;
-      case ERROR_CODES.FORBIDDEN:
-        setSubmitErrorMessage(
-          'A sua conta ainda não foi ativada. Por favor verifique o e-mail'
-        );
-        break;
-      case ERROR_CODES.INTERNAL_SERVER:
-        setSubmitErrorMessage(
-          'Erro ao realizar o login. Tente novamente mais tarde'
-        );
-        break;
-      default:
-        break;
-    }
-  };
-  const { mutate: login } = useLogin({ onSuccess, onError });
-
   const onSubmit = (data) => login(data);
+
+  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <Page>
       <Container>
@@ -98,7 +70,7 @@ export default function Login() {
             />
             <SubmitButton
               name="Entrar"
-              submitErrorMessage={submitErrorMessage}
+              // submitErrorMessage={submitErrorMessage}
               relativeWidth="70%"
             />
           </Form>
