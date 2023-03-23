@@ -1,6 +1,5 @@
 // export { default as Header } from './Header/Header';
-export { default as HeaderLogin } from './Header/HeaderLogin/HeaderLogin';
-export { default as HeaderLogout } from './Header/HeaderLogout/HeaderLogout';
+export { default as Header } from './Header/Header';
 export { default as Footer } from './Footer/Footer';
 export { default as Card } from './Card/Card';
 export { default as Carousel } from './Carousel/Carousel';
