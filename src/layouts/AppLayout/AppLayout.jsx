@@ -5,13 +5,14 @@ import HeaderLogin from '../../components/features/Header/HeaderLogin/HeaderLogi
 import useAuthStore from '../../stores/auth';
 
 export default function AppLayout() {
-  const { isAuthenticated, isInitialLoading } = useAuthStore();
+  const { isInitialLoading } = useAuthStore();
+  const { auth } = useAuthStore();
 
   return isInitialLoading ? (
     <h1 style={{ height: '100vh' }}>Carregando...</h1> // TODO: add a good looking loading state
   ) : (
     <>
-      {isAuthenticated ? <HeaderLogout /> : <HeaderLogin />}
+      {auth ? <HeaderLogin /> : <HeaderLogout />}
       <Outlet />
       <Footer />
     </>

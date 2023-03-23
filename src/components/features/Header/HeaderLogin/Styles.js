@@ -57,6 +57,9 @@ export const Nav = styled.div`
     :hover {
       text-decoration: underline;
     }
+    @media (max-width: 1080px) {
+      font-size: 18px;
+    }
     @media (max-width: 990px) {
       font-size: 18px;
     }
@@ -148,13 +151,14 @@ export const Bar = styled.div`
 export const Welcome = styled.div`
   display: flex;
   padding: 0px;
-  gap: 5px;
+  gap: px;
   h1 {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
+    margin-right: 0px;
   }
 
   h2 {
@@ -163,15 +167,12 @@ export const Welcome = styled.div`
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
+    margin-left: 0px;
   }
-  @media (max-width: 990px) {
-    font-size: 18px;
-    width: 120px;
+  @media (max-width: 800px) {
+    text-align: center;
     h1 {
-      content: 'Meu perfil';
-    }
-    h2 {
-      content: '';
+      font-weight: 500;
     }
   }
 `;

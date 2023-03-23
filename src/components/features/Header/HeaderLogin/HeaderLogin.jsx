@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
+import { useMediaQuery } from 'react-responsive';
 import { Logo } from '../../../common';
+import useAuthStore from '../../../../stores/auth';
 import {
   Content,
   Menu,
@@ -23,6 +25,8 @@ export default function Header() {
   const [language, setLanguage] = useState('EN'); // default language is EN
   const availableLaguages = ['EN', 'PT', 'DE'];
   const theme = useTheme();
+  const user = useAuthStore((state) => state.auth.user);
+  const isSmallScreen = useMediaQuery({ maxWidth: 800 });
 
   return (
     <Content>
@@ -36,11 +40,17 @@ export default function Header() {
             <InvertItems>
               <Welcome>
                 <h1>
-                  <Link to="/perfil">Bem vindo, user!</Link>
+                  {isSmallScreen ? (
+                    <Link to="/perfil">Meu Perfil</Link>
+                  ) : (
+                    <Link to="/perfil">Olá, {user.name.split(' ')[0]}!</Link>
+                  )}
                 </h1>
-                <h2>
-                  <Link to="/">| Deslogar</Link>
-                </h2>
+                {!isSmallScreen && (
+                  <h2>
+                    <Link to="/">| Deslogar</Link>
+                  </h2>
+                )}
               </Welcome>
 
               <Select bar={bar}>

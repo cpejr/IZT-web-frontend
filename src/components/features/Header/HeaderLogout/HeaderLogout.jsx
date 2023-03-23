@@ -41,7 +41,7 @@ export default function Header() {
                 hoverBackgroundColor800={theme.colors.greenishBlue}
                 hoverColor800="white"
                 hoverBorderColor800={theme.colors.greenishBlue}
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/login')}
               >
                 Entrar
               </ButtonLogin>
