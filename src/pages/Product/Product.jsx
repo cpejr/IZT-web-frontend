@@ -1,3 +1,4 @@
+import { AiOutlineRight } from 'react-icons/ai';
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
@@ -77,19 +78,20 @@ export default function ProductPage() {
         <Steps>
           <Step>
             <Image src={step1} alt="1 Step" />
-            <StepsText>Entramos em contato para planejar o produto</StepsText>
+            <StepsText>Entramos em contato para planejar o produto </StepsText>
           </Step>
+          <AiOutlineRight color="#000000" size="24px" />
 
           <Step>
             <Image src={step2} alt="2 Step" />
             <StepsText>Produzimos a sua peça</StepsText>
           </Step>
-
+          <AiOutlineRight color="#000000" size="24px" />
           <Step>
             <Image src={step3} alt="3 Step" />
             <StepsText>Realizamos a inspeção do produto</StepsText>
           </Step>
-
+          <AiOutlineRight color="#000000" size="24px" />
           <Step>
             <Image src={step4} alt="4 Step" />
             <StepsText>Enviamos para você</StepsText>
