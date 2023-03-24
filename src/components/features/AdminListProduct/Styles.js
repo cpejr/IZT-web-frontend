@@ -163,7 +163,7 @@ export const SearchSection = styled.div`
   display: flex;
   flex-direction: row;
   align-items: space-between;
-  width: 220px;
+  width: 270px;
   position: relative;
   max-height: 35px;
   height: 100%;

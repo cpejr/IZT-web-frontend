@@ -46,7 +46,7 @@ export default function AdminAddCategoryMobile() {
             <p>Adicionar categoria</p>
           </SaveButton>
 
-          <CancelButton>
+          <CancelButton to="/administrador/listar-categorias">
             <p>Cancelar</p>
           </CancelButton>
         </ButtonsDiv>

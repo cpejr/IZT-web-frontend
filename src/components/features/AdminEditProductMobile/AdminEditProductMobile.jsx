@@ -55,7 +55,7 @@ export default function AdminEditProductMobile() {
         <p>Salvar produto</p>
       </SaveButton>
 
-      <CancelButton>
+      <CancelButton to="/administrador">
         <p>Cancelar</p>
       </CancelButton>
     </Container>

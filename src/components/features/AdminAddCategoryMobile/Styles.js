@@ -1,15 +1,21 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 390px;
   width: 100%;
   margin-bottom: 50px;
+  align-items: center;
 `;
 
-export const Form = styled.form``;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+`;
 
 export const Title = styled.p`
   font-family: 'Montserrat';
@@ -103,17 +109,16 @@ export const SaveButton = styled.button`
   }
 `;
 
-export const CancelButton = styled.button`
+export const CancelButton = styled(Link)`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   align-items: center;
-  align-self: center;
   justify-content: center;
   align-self: center;
   padding: 5px 10px;
   gap: 10px;
-
+  text-decoration: none;
   width: 84px;
   height: 27px;
 

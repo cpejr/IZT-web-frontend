@@ -128,20 +128,18 @@ export const BlackLineMobile = styled.p`
 export const StyledLink = styled(Link)`
   all: unset;
   cursor: pointer;
-
+  width: 230px;
+  padding: 5px;
+  border-radius: 10px;
   :hover {
-    width: 230px;
-    padding: 5px;
-    border-radius: 10px;
     background-color: ${(props) => props.theme.colors.gray.mediumGrey};
   }
 
   @media (max-width: 700px) {
     font-size: 17px;
-
+    width: auto;
+    border-radius: 10px;
     :hover {
-      width: auto;
-      border-radius: 10px;
       background-color: ${(props) => props.theme.colors.gray.mediumGrey};
     }
   }
@@ -157,20 +155,18 @@ export const StyledLink = styled(Link)`
 export const Button = styled.button`
   all: unset;
   cursor: pointer;
-
+  width: 230px;
+  padding: 5px;
+  border-radius: 10px;
   :hover {
-    width: 230px;
-    padding: 5px;
-    border-radius: 10px;
     background-color: ${(props) => props.theme.colors.gray.mediumGrey};
   }
 
   @media (max-width: 700px) {
     font-size: 17px;
-
+    width: auto;
+    border-radius: 10px;
     :hover {
-      width: auto;
-      border-radius: 10px;
       background-color: ${(props) => props.theme.colors.gray.mediumGrey};
     }
   }
