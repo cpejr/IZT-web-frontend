@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { TailSpin } from 'react-loader-spinner';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -34,6 +36,7 @@ const validationSchema = z.object({
 });
 
 export default function BudgetForm() {
+  const [isLoading, setIsLoading] = useState(false); // Important for modals usage
   const {
     handleSubmit,
     register,
@@ -131,7 +134,29 @@ export default function BudgetForm() {
             />
           </Section>
         </Container>
-        <BotaoEnviar>Enviar</BotaoEnviar>
+        <BotaoEnviar
+          isLoading={isLoading}
+          disabled={isLoading}
+          type="submit"
+          name="Enviar"
+        >
+          {isLoading ? (
+            <>
+              <TailSpin
+                height="15"
+                width="15"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="5"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+              Carregando
+            </>
+          ) : (
+            <>Enviar</>
+          )}
+        </BotaoEnviar>
       </Form>
     </ContactUs>
   );

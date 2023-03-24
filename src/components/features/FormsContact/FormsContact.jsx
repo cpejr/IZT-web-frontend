@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import {
   ContactUs,
   Form,
@@ -34,6 +36,7 @@ const validationSchema = z.object({
 });
 
 export default function FormsContact() {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     handleSubmit,
     register,
@@ -96,7 +99,29 @@ export default function FormsContact() {
             <Mensagem>
               Mensagem:
               <AreaText rows={13} placeholder="Escreva aqui sua mensagem" />
-              <BotaoEnviar>Enviar</BotaoEnviar>
+              <BotaoEnviar
+                isLoading={isLoading}
+                disabled={isLoading}
+                type="submit"
+                name="Enviar"
+              >
+                {isLoading ? (
+                  <>
+                    <TailSpin
+                      height="15"
+                      width="15"
+                      color="white"
+                      ariaLabel="tail-spin-loading"
+                      radius="5"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                    />
+                    Carregando
+                  </>
+                ) : (
+                  <>Enviar</>
+                )}
+              </BotaoEnviar>
             </Mensagem>
           </InputMessage>
         </Section>
