@@ -22,6 +22,7 @@ import {
 } from './Styles';
 import useAuthStore from '../../../stores/auth';
 import { useLogout } from '../../../hooks/query/sessions';
+import { ERROR_CODES } from '../../../utils/constants';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -33,12 +34,23 @@ export default function Header() {
   const theme = useTheme();
   const { auth } = useAuthStore();
   const isSmallScreen = useMediaQuery({ maxWidth: 800 });
-  const { mutate: logout } = useLogout();
+  const onSuccess = () => {
+    if (isSmallScreen || location.pathname === '/perfil') navigate('/');
+    setBar(false);
+  };
+  const onError = (error) => {
+    switch (error.response.status) {
+      case ERROR_CODES.BAD_REQUEST:
+        console.log('Não há usuário logado'); // usar o toast
+        break;
+      default:
+        break;
+    }
+  };
+  const { mutate: logout } = useLogout({ onSuccess, onError });
 
   async function HandleLogout() {
     logout();
-    if (isSmallScreen || location.pathname === '/perfil') navigate('/');
-    setBar(false);
   }
 
   async function OnPressLogin() {
