@@ -34,8 +34,8 @@ export const getCategories = async (filters = {}) => {
   return data;
 };
 
-export const searchByNameCategories = async (name = '') => {
-  const { data } = await publicApi.get('/categories/searchByName', {
+export const searchByNameCategories = async (name) => {
+  const { data } = await publicApi.get('/categories/search/by-name', {
     params: { name },
   });
 
@@ -48,8 +48,8 @@ export const getProducts = async (filters = {}) => {
   return data;
 };
 
-export const searchProductByName = async ({ name = '', category = '' }) => {
-  const { data } = await publicApi.get('/products/searchByName', {
+export const searchProductByName = async ({ name, category }) => {
+  const { data } = await publicApi.get('/products/search/by-name', {
     params: { name, category },
   });
 
