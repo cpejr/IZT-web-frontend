@@ -34,14 +34,35 @@ export const getCategories = async (filters = {}) => {
   return data;
 };
 
+export const getCategoryById = async (_id) => {
+  const { data } = await publicApi.get(`/categories/${_id}`);
+
+  return data;
+};
+
 export const getProducts = async (filters = {}) => {
   const { data } = await publicApi.get('/products', { params: filters });
 
   return data;
 };
 
+export const getProductById = async (_id) => {
+  const { data } = await publicApi.get(`/products/${_id}`);
+
+  return data;
+};
+
 export const createUser = async (newUser) => {
   const { data } = await publicApi.post('/users', newUser);
+
+  return data;
+};
+
+export const sendProductBudget = async ({ productId, formInput }) => {
+  const { data } = await publicApi.post(
+    `/products/form-budget/${productId}`,
+    formInput
+  );
 
   return data;
 };

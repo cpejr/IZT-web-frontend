@@ -1,9 +1,13 @@
-import carouselData from '../../assets/productPage/carousel/data';
+import { useMemo } from 'react';
+
+import { useParams, useNavigate } from 'react-router-dom';
+
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
 import step4 from '../../assets/productPage/steps/Group78.png';
 import { BudgetForm, FilesList, Carousel } from '../../components/features';
+import { useGetProductById } from '../../hooks/query/products';
 import {
   Container,
   ProductData,
@@ -27,16 +31,52 @@ import {
   Image,
   StepsText,
 } from './Styles';
+import buildGetProducErrorMessage from './utils';
 
-export default function ProductPage() {
+export default function Product() {
+  const { _id } = useParams();
+  const navigate = useNavigate();
+
+  const { data: product, isLoading } = useGetProductById({
+    _id,
+    onError: (err) => {
+      const code = err?.response?.data?.httpCode;
+      const message = buildGetProducErrorMessage(code);
+
+      // Do something with the error message
+      alert(message);
+
+      navigate('*'); // Go to NotFound page
+    },
+  });
+
+  const pictures = useMemo(
+    () =>
+      product?.pictures?.map((picture) => ({
+        src: picture.url,
+        name: picture.name,
+        alt: `Imagem de nome ${picture.name}`,
+      })),
+    [product]
+  );
+  const documents = useMemo(
+    () =>
+      product?.documents?.map((document, index) => ({
+        name: `Documento ${index + 1}`,
+        url: document.url,
+      })),
+    [product]
+  );
+
+  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <Container>
       <ProductData>
-        <ProductName>Nome do Produto</ProductName>
+        <ProductName>{product.name}</ProductName>
         <ProductInfo>
           <CarouselContainer>
             <Carousel
-              carouselData={carouselData}
+              carouselData={pictures}
               maxHeight="537.17px"
               maxWidth="543.75px"
               aspectRatio="12 / 9"
@@ -46,32 +86,22 @@ export default function ProductPage() {
           <TextInfoContainer>
             <ProductDescription>
               <DescriptionTitle>Descrição do produto</DescriptionTitle>
-              <Description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque sed odio eu enim gravida varius quis non orci.
-                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
-                sapien.
-              </Description>
+              <Description>{product.description}</Description>
             </ProductDescription>
             <ProductBenefits>
               <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-              <Benefits>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque sed odio eu enim gravida varius quis non orci.
-                Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed
-                sapien.
-              </Benefits>
+              <Benefits>{product.advantages}</Benefits>
             </ProductBenefits>
             <ProductInfos>
               <InfoTitle>Mais informações</InfoTitle>
               <InfoDescription>
-                <FilesList />
+                <FilesList files={documents} />
               </InfoDescription>
             </ProductInfos>
           </TextInfoContainer>
         </ProductInfo>
       </ProductData>
-      <BudgetForm />
+      <BudgetForm productId={_id} />
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>

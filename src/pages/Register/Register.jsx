@@ -17,7 +17,7 @@ import {
 } from './Styles';
 import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
 
-function SignUp() {
+export default function Register() {
   const navigate = useNavigate();
   const { mutate: createUser, isLoading } = useCreateUser({
     onSuccess: () => navigate('/login'),
@@ -157,5 +157,3 @@ function SignUp() {
     </Page>
   );
 }
-
-export default SignUp; // user registration function

@@ -13,7 +13,7 @@ import {
   Login,
   Catalog,
   Product,
-  SignUp,
+  Register,
   Profile,
   NotFound,
   Unauthorized,
@@ -39,7 +39,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<AppLayout />}>
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
-        <Route path="cadastro" element={<SignUp />} />
+        <Route path="cadastro" element={<Register />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
         <Route element={<PrivateRoutes />}>
