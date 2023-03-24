@@ -1,4 +1,5 @@
 import { FaDownload } from 'react-icons/fa';
+
 import File1 from '../../../assets/productPage/files/F1.pdf';
 import File2 from '../../../assets/productPage/files/F2.pdf';
 import File3 from '../../../assets/productPage/files/F3.pdf';

@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import PropTypes from 'prop-types';
+
 import { Container, Label, Input, ErrorMessage } from './Styles';
 
 export default function DataInput({ name, label, errors, register, ...props }) {

@@ -6,6 +6,7 @@ import {
   Navigate,
   Outlet,
 } from 'react-router-dom';
+
 import { AppLayout } from './layouts';
 import {
   Home,

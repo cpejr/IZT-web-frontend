@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactDOM from 'react-dom/client';
+
 import Routes from './routes';
 import GlobalStyles from './styles/GlobalStyles';
 import Theme from './styles/Theme';
