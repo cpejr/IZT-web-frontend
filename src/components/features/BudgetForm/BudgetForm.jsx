@@ -1,8 +1,11 @@
 import { useState } from 'react';
+
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { useSendProductBudget } from '../../../hooks/query/products';
+import { ERROR_CODES } from '../../../utils/constants';
 import { FormInput, FormMask } from '../../common';
 import {
   ContactUs,
@@ -13,9 +16,6 @@ import {
   BotaoEnviar,
   Container,
 } from './Styles';
-import { FormInput, FormMask } from '../../common';
-import { useSendProductBudget } from '../../../hooks/query/products';
-import { ERROR_CODES } from '../../../utils/constants';
 
 const validationSchema = z.object({
   name: z.string().min(1, 'Digite o seu nome completo'),
