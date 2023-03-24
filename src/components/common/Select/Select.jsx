@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
@@ -48,7 +47,6 @@ Select.defaultProps = {
 };
 
 Select.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.array,
   standart: PropTypes.string.isRequired,
   getValue: PropTypes.func.isRequired,
