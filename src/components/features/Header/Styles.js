@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../../../common';
+import { Button } from '../../common';
 
 const menuBreak = '800px';
 
@@ -58,7 +58,7 @@ export const Nav = styled.div`
     :hover {
       text-decoration: underline;
     }
-    @media (max-width: 990px) {
+    @media (max-width: 1080px) {
       font-size: 18px;
     }
     @media (max-width: ${menuBreak}) {
@@ -254,4 +254,93 @@ export const InvertItems = styled.div`
     justify-content: center;
     gap: 1rem;
   }
+`;
+
+export const Welcome = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: px;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-size: 1em;
+  font-weight: 700;
+  @media (max-width: ${menuBreak}) {
+    text-align: center;
+    font-weight: 600;
+  }
+`;
+
+export const Divider = styled.div`
+  background-color: white;
+  height: 2px;
+  display: flex;
+  align-self: stretch;
+  transition: all 0.5s ease-in-out 0.5s;
+`;
+
+export const MenuProfile = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  button {
+    max-height: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  div {
+    display: none;
+    height: 0;
+    position: relative;
+  }
+  :hover {
+    div {
+      display: flex;
+      height: 2px;
+    }
+    button {
+      max-height: none;
+    }
+    a {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  transition: all 0.5s ease-in-out 0.5s;
+`;
+
+export const LogoutBtn = styled.button`
+  border: none;
+  border-left: 2px solid ${(props) => props.theme.colors.blue};
+  padding-left: 5px;
+  color: ${(props) => props.theme.colors.blue};
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-weight: 500;
+  text-decoration: none;
+  background-color: transparent;
+
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  :hover {
+    text-decoration: underline solid ${(props) => props.theme.colors.blue} 2px;
+    cursor: pointer;
+  }
+  @media (max-width: ${menuBreak}) {
+    border-left: none;
+    color: white;
+    font-weight: 500;
+    :hover {
+      text-decoration-color: white;
+      text-decoration-thickness: 1px;
+    }
+  }
+  @media (max-width: 1080px) {
+    font-size: 18px;
+  }
+  transition: all 0.5s ease-in-out 0.5s;
 `;
