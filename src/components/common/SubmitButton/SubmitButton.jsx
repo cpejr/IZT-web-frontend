@@ -1,18 +1,22 @@
 import PropTypes from 'prop-types';
-import { SubmitSpace, ErrorMessage, Button } from './Styles';
+import {
+  SubmitSpace,
+  // ErrorMessage,
+  Button,
+} from './Styles';
 
 export default function SubmitButton({
   name = '100%',
-  submitErrorMessage = '',
+  // submitErrorMessage = '',
   relativeWidth,
 }) {
   return (
     <SubmitSpace>
-      {!!submitErrorMessage && (
+      {/* {!!submitErrorMessage && (
         <ErrorMessage submitErrorMessage={!!submitErrorMessage}>
           {submitErrorMessage}
         </ErrorMessage>
-      )}
+      )} */}
       <Button type="submit" relativeWidth={relativeWidth}>
         {name}
       </Button>
@@ -22,11 +26,11 @@ export default function SubmitButton({
 
 SubmitButton.defaultProps = {
   relativeWidth: '100%',
-  submitErrorMessage: '',
+  // submitErrorMessage: '',
 };
 
 SubmitButton.propTypes = {
   name: PropTypes.string.isRequired,
   relativeWidth: PropTypes.string,
-  submitErrorMessage: PropTypes.string,
+  // submitErrorMessage: PropTypes.string,
 };

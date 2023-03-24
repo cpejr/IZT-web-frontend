@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { SettingOutlined } from '@ant-design/icons';
+import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
 import {
+  ModalStyle,
   Container,
   Page,
   Title,
@@ -29,7 +30,6 @@ function Profile() {
   const openModalChangeUserData = () => setUpdateUserModalState(true);
   const closeModalChangeUserData = () => setUpdateUserModalState(false);
 
-  if (!user) return <h1>Proibido</h1>;
   return (
     <Background>
       <Page>
@@ -124,10 +124,17 @@ function Profile() {
           </Container>
         </Body>
       </Page>
-      <ModalChangeUserData
-        openState={updateUserModalState}
-        close={closeModalChangeUserData}
-      />
+      <ModalStyle
+        open={updateUserModalState}
+        onCancel={closeModalChangeUserData}
+        footer={null}
+        width={1000}
+        closeIcon={<CloseOutlined />}
+        destroyOnClose
+        centered
+      >
+        <ModalChangeUserData close={closeModalChangeUserData} />
+      </ModalStyle>
     </Background>
   );
 }

@@ -8,9 +8,10 @@ export const Container = styled.div`
 
   width: 100vw;
 
-  position: absolute;
+  /* position: absolute;
   bottom: 10vh;
-  left: 10vw;
+  left: 10vw; */
+  margin: 5em auto;
 
   margin-right: auto;
   margin-left: auto;
