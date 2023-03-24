@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import useAuthStore from '../../../stores/auth';
 import { ERROR_CODES, ERROR_NAMES } from '../../../utils/constants';
 import { refresh } from '../publicEndpoints/endpoints';

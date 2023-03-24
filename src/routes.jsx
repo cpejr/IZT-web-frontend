@@ -6,7 +6,7 @@ import {
   Navigate,
   Outlet,
 } from 'react-router-dom';
-import useAuthStore from './stores/auth';
+
 import { AppLayout } from './layouts';
 import {
   Home,
@@ -19,6 +19,7 @@ import {
   Unauthorized,
   Forbidden,
 } from './pages';
+import useAuthStore from './stores/auth';
 
 function AdminRoutes() {
   const user = useAuthStore((state) => state?.auth?.user);

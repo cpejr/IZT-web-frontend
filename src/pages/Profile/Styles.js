@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Modal } from 'antd';
+import styled from 'styled-components';
 
 export const ModalStyle = styled(Modal)`
   :where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-content {

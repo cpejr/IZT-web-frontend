@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import { Container, CardText, CardTitle, Button, Picture } from './Styles';
 
 export default function Card({
