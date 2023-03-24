@@ -116,3 +116,36 @@ export const Links = styled.div`
   align-items: center;
   text-align: center;
 `;
+
+export const LoadingButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  max-width: 300px;
+  height: 53px;
+
+  border: 1px solid #000000;
+  border-radius: 10px;
+  background-color: ${(props) => props.theme.colors.blue};
+
+  /* padding: 0 0.5em; */
+  margin-top: 20px;
+
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-size: 1em;
+  font-weight: 600;
+  color: white;
+
+  cursor: pointer;
+
+  @media (max-width: 700px) {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1em;
+    height: 38px;
+  }
+`;

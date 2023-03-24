@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { TailSpin } from 'react-loader-spinner';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -11,6 +12,7 @@ import {
   RemeberMe,
   SignUpLink,
   Links,
+  LoadingButton,
 } from './Styles';
 import IZTLogo from '../../assets/IZTLogo.svg';
 import { DataInput, SubmitButton } from '../../components/common';
@@ -41,7 +43,7 @@ export default function Login() {
   });
   const onSubmit = (data) => login(data);
 
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
+  // if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <Page>
       <Container>
@@ -68,11 +70,29 @@ export default function Login() {
               errors={errors}
               type="password"
             />
-            <SubmitButton
-              name="Entrar"
-              // submitErrorMessage={submitErrorMessage}
-              relativeWidth="70%"
-            />
+
+            {isLoading ? (
+              <LoadingButton>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+                Carregando
+              </LoadingButton>
+            ) : (
+              <SubmitButton
+                isLoading={isLoading}
+                disabled={isLoading}
+                type="submit"
+                name="Entrar"
+                relativeWidth="100%"
+              />
+            )}
           </Form>
         </DataEntry>
         <Links>
