@@ -44,7 +44,7 @@ export default function ProductPage() {
       // Do something with the error message
       alert(message);
 
-      navigate('*'); // Go to NotFOund page
+      navigate('*'); // Go to NotFound page
     },
   });
 
