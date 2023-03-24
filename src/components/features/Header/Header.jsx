@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -33,7 +34,7 @@ export default function Header() {
   const availableLaguages = ['EN', 'PT', 'DE'];
   const theme = useTheme();
   const { auth } = useAuthStore();
-  const isSmallScreen = useMediaQuery({ maxWidth: 800 });
+  const isSmallScreen = useMediaQuery({ maxWidth: 900 });
   const onSuccess = () => {
     if (isSmallScreen || location.pathname === '/perfil') navigate('/');
     setBar(false);
@@ -84,9 +85,15 @@ export default function Header() {
                       <Divider />
                       <LogoutBtn onClick={HandleLogout}>Deslogar</LogoutBtn>
                     </MenuProfile>
-                  ) : (
+                  ) : auth.user?.name.split(' ')[0].length <= 10 ? (
                     <Link to="/perfil" onClick={() => setBar(false)}>
                       Olá, {auth.user?.name.split(' ')[0]}!
+                    </Link>
+                  ) : (
+                    // se o nome da pessoa for maior do que 7 caracteres aparecerá 'Meu perfil'
+                    // para impedir quebra da responsividade
+                    <Link to="/perfil" onClick={() => setBar(false)}>
+                      Meu Perfil
                     </Link>
                   )}
                   {!isSmallScreen && (

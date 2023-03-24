@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Button } from '../../common';
 
-const menuBreak = '800px';
+const menuBreak = '900px';
 
 export const Content = styled.div`
   display: flex;
@@ -43,18 +43,16 @@ export const Nav = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-align: justify;
   gap: 20px;
-  text-align: center;
-
   a {
     font-size: 22px;
     font-family: ${(props) => props.theme.fonts.montserrat};
-    margin-right: 20px;
     text-decoration: none;
     color: ${(props) => props.theme.colors.blue};
     position: relative;
     flex-direction: row;
-    text-align: center;
+    flex-grow: 1;
     :hover {
       text-decoration: underline;
     }
@@ -261,10 +259,12 @@ export const Welcome = styled.div`
   flex-direction: row;
   align-items: center;
   padding: 0px;
-  gap: px;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 1em;
   font-weight: 700;
+  a {
+    margin-right: 5px;
+  }
   @media (max-width: ${menuBreak}) {
     text-align: center;
     font-weight: 600;
@@ -316,13 +316,12 @@ export const MenuProfile = styled.div`
 export const LogoutBtn = styled.button`
   border: none;
   border-left: 2px solid ${(props) => props.theme.colors.blue};
-  padding-left: 5px;
   color: ${(props) => props.theme.colors.blue};
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 500;
   text-decoration: none;
   background-color: transparent;
-
+  padding-left: 5px;
   display: flex;
   align-items: center;
   font-size: 22px;
@@ -334,6 +333,7 @@ export const LogoutBtn = styled.button`
     border-left: none;
     color: white;
     font-weight: 500;
+    padding-left: 0px;
     :hover {
       text-decoration-color: white;
       text-decoration-thickness: 1px;
