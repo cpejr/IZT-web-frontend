@@ -1,5 +1,9 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { getProducts, sendProductBudget } from '../../services/api';
+import {
+  getProductById,
+  getProducts,
+  sendProductBudget,
+} from '../../services/api';
 
 export function useGetProducts({
   filters,
@@ -9,6 +13,19 @@ export function useGetProducts({
   return useQuery({
     queryKey: ['products', filters],
     queryFn: () => getProducts(filters),
+    onSucess,
+    onError,
+  });
+}
+
+export function useGetProductById({
+  _id,
+  onSucess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['product', _id],
+    queryFn: () => getProductById(_id),
     onSucess,
     onError,
   });

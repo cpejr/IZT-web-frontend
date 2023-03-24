@@ -1,12 +1,11 @@
-import { useMemo, useState } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
-import { useGetProducts } from '../../hooks/query/products';
+import { useMemo } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
 import step4 from '../../assets/productPage/steps/Group78.png';
 import { BudgetForm, FilesList, Carousel } from '../../components/features';
-import { ERROR_CODES } from '../../utils/constants';
+import { useGetProductById } from '../../hooks/query/products';
 import {
   Container,
   ProductData,
@@ -30,29 +29,25 @@ import {
   Image,
   StepsText,
 } from './Styles';
-
-const errorMessages = {
-  [ERROR_CODES.NOT_FOUND]: 'Produto não encontrado',
-};
-const defaultErrorMessage =
-  'Erro ao solicitar os dados do produto. Tente novamente mais tarde';
+import buildGetProducErrorMessage from './utils';
 
 export default function ProductPage() {
-  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const { _id } = useParams();
+  const navigate = useNavigate();
 
-  const onError = (error) => {
-    const code = error.response.status;
-    const message = errorMessages[code] || defaultErrorMessage;
+  const { data: product, isLoading } = useGetProductById({
+    _id,
+    onError: (err) => {
+      const code = err?.response?.data?.httpCode;
+      const message = buildGetProducErrorMessage(code);
 
-    setSubmitErrorMessage(message);
-  };
-  const { data, isLoading } = useGetProducts({
-    filters: { _id },
-    onError,
+      // Do something with the error message
+      alert(message);
+
+      navigate('*'); // Go to NotFOund page
+    },
   });
 
-  const product = data?.[0];
   const pictures = useMemo(
     () =>
       product?.pictures?.map((picture) => ({
@@ -71,14 +66,11 @@ export default function ProductPage() {
     [product]
   );
 
-  if (isLoading) return <p>Loading...</p>;
-  if (submitErrorMessage) return <p>{submitErrorMessage}</p>;
-  if (!product) return <Navigate to="*" />;
-
+  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <Container>
       <ProductData>
-        <ProductName>{product?.name}</ProductName>
+        <ProductName>{product.name}</ProductName>
         <ProductInfo>
           <CarouselContainer>
             <Carousel
@@ -92,11 +84,11 @@ export default function ProductPage() {
           <TextInfoContainer>
             <ProductDescription>
               <DescriptionTitle>Descrição do produto</DescriptionTitle>
-              <Description>{product?.description}</Description>
+              <Description>{product.description}</Description>
             </ProductDescription>
             <ProductBenefits>
               <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-              <Benefits>{product?.advantages}</Benefits>
+              <Benefits>{product.advantages}</Benefits>
             </ProductBenefits>
             <ProductInfos>
               <InfoTitle>Mais informações</InfoTitle>

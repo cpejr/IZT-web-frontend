@@ -34,8 +34,21 @@ export const getCategories = async (filters = {}) => {
   return data;
 };
 
+export const getCategoryById = async (_id) => {
+  const { data } = await publicApi.get(`/categories/${_id}`);
+
+  return data;
+};
+
 export const getProducts = async (filters = {}) => {
   const { data } = await publicApi.get('/products', { params: filters });
+
+  return data;
+};
+
+export const getProductById = async (_id) => {
+  console.log(`/products/${_id}`);
+  const { data } = await publicApi.get(`/products/${_id}`);
 
   return data;
 };
