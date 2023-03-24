@@ -1,5 +1,5 @@
-import { create } from 'zustand';
 import jwtDecode from 'jwt-decode';
+import { create } from 'zustand';
 
 const useAuthStore = create((set) => ({
   auth: null,
@@ -8,6 +8,7 @@ const useAuthStore = create((set) => ({
 
     set({ auth: { accessToken, user } });
   },
+  setUser: (user) => set((state) => ({ auth: { ...state?.auth, user } })),
   clearAuth: () => set({ auth: null }),
 }));
 

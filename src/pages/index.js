@@ -1,6 +1,9 @@
 export { default as Home } from './Home/Home';
 export { default as Login } from './Login/Login';
 export { default as Catalog } from './Catalog/Catalog';
+export { default as Profile } from './Profile/Profile';
+export { default as Product } from './Product/Product';
+export { default as Register } from './Register/Register';
 export { default as NotFound } from './NotFound/NotFound';
 export { default as ListCategory } from './ListCategory/ListCategory';
 export { default as ListProduct } from './ListProduct/ListProduct';
@@ -8,5 +11,5 @@ export { default as CreateCategory } from './CreateCategory/CreateCategory';
 export { default as AddProduct } from './AddProduct/AddProduct';
 export { default as EditProduct } from './EditProduct/EditProduct';
 export { default as EditCategory } from './EditCategory/EditCategory';
-export { default as Product } from './Product/Product';
-export { default as SignUp } from './Register/Register';
+export { default as Forbidden } from './Forbidden/Forbidden';
+export { default as Unauthorized } from './Unauthorized/Unauthorized';

@@ -1,13 +1,15 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
+
 import {
   getProducts,
+  getProductById,
   createProduct,
   searchProductByName,
-  // deleteProducts,
   // updateProducts,
+  // deleteProducts,
+  sendProductBudget,
 } from '../../services/api';
 
-// eslint-disable-next-line import/prefer-default-export
 export function useGetProducts({
   filters,
   onSuccess = () => {},
@@ -21,6 +23,19 @@ export function useGetProducts({
   });
 }
 
+export function useGetProductById({
+  _id,
+  onSucess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['product', _id],
+    queryFn: () => getProductById(_id),
+    onSucess,
+    onError,
+  });
+}
+
 export function useSearchProductByName({
   name,
   category,
@@ -28,7 +43,7 @@ export function useSearchProductByName({
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
-    queryKey: ['products', 'searchProductByName', name, category],
+    queryKey: ['products', 'searchProductByName', { name, category }],
     queryFn: () => searchProductByName({ name, category }),
     onSuccess,
     onError,
@@ -67,3 +82,14 @@ export function useCreateProduct({
 //     onError,
 //   });
 // }
+
+export function useSendProductBudget({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: sendProductBudget,
+    onSuccess,
+    onError,
+  });
+}

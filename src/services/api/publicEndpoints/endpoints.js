@@ -34,6 +34,12 @@ export const getCategories = async (filters = {}) => {
   return data;
 };
 
+export const getCategoryById = async (_id) => {
+  const { data } = await publicApi.get(`/categories/${_id}`);
+
+  return data;
+};
+
 export const searchByNameCategories = async (name) => {
   const { data } = await publicApi.get('/categories/search/by-name', {
     params: { name },
@@ -48,6 +54,12 @@ export const getProducts = async (filters = {}) => {
   return data;
 };
 
+export const getProductById = async (_id) => {
+  const { data } = await publicApi.get(`/products/${_id}`);
+
+  return data;
+};
+
 export const searchProductByName = async ({ name, category }) => {
   const { data } = await publicApi.get('/products/search/by-name', {
     params: { name, category },
@@ -58,6 +70,15 @@ export const searchProductByName = async ({ name, category }) => {
 
 export const createUser = async (newUser) => {
   const { data } = await publicApi.post('/users', newUser);
+
+  return data;
+};
+
+export const sendProductBudget = async ({ productId, formInput }) => {
+  const { data } = await publicApi.post(
+    `/products/form-budget/${productId}`,
+    formInput
+  );
 
   return data;
 };

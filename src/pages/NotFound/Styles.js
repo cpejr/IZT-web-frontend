@@ -7,10 +7,7 @@ export const Container = styled.div`
   gap: 30%;
 
   width: 100vw;
-
-  position: absolute;
-  bottom: 10vh;
-  left: 10vw;
+  margin: 5em auto;
 
   margin-right: auto;
   margin-left: auto;

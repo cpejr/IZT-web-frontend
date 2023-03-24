@@ -1,6 +1,8 @@
 import { AiOutlineLinkedin, AiOutlineFacebook } from 'react-icons/ai';
 import { BsInstagram, BsWhatsapp } from 'react-icons/bs';
 import { HiOutlineMail } from 'react-icons/hi';
+
+import { Logo } from '../../common';
 import {
   Container,
   SideContainer,
@@ -15,7 +17,6 @@ import {
   SectionGoTo,
   ContactButton,
 } from './Styles';
-import { Logo } from '../../common';
 
 export default function Footer() {
   return (
@@ -25,19 +26,15 @@ export default function Footer() {
           <Logo />
         </LogoSection>
         <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-          aliquam blandit convallis. Proin luctus turpis vitae urna feugiat
-          eleifend. Orci varius natoque penatibus et magnis dis parturient
-          montes, nascetur ridiculus.
+          Inovação, tecnologia, precisão, qualidade e sustentabilidade.
         </Text>
       </SideContainer>
 
       <MiddleContainer>
         <Tittle>Contato</Tittle>
         <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in
-          risus ullamcorper, venenatis sem vulputate, dapibus lacus. Integer
-          risus turpis.
+          Entre em contato agora para sanar todas dúvidas sobre nossos produtos,
+          nossos softwares ou nossos cursos.
         </Text>
         <ContactButton>Fale Conosco</ContactButton>
       </MiddleContainer>
@@ -49,16 +46,16 @@ export default function Footer() {
             <BsInstagram size={30} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
-            <AiOutlineLinkedin size={35} />
+            <AiOutlineLinkedin size={40} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
-            <AiOutlineFacebook size={35} />
+            <AiOutlineFacebook size={40} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
             <BsWhatsapp size={30} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
-            <HiOutlineMail size={35} />
+            <HiOutlineMail size={40} />
           </SocialMediaButton>
         </SocialMedias>
 
