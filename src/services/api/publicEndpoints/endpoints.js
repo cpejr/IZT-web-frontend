@@ -66,7 +66,7 @@ export const getFiles = async (filters = {}) => {
 
 export const sendProductBudget = async ({ productId, formInput }) => {
   const { data } = await publicApi.post(
-    `/products/formBudget/${productId}`,
+    `/products/form-budget/${productId}`,
     formInput
   );
 

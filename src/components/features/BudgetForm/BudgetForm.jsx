@@ -1,11 +1,8 @@
-import { useState } from 'react';
-
+import { zodResolver } from '@hookform/resolvers/zod';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { useSendProductBudget } from '../../../hooks/query/products';
-import { ERROR_CODES } from '../../../utils/constants';
 import { FormInput, FormMask } from '../../common';
 import {
   ContactUs,
@@ -16,49 +13,16 @@ import {
   BotaoEnviar,
   Container,
 } from './Styles';
-
-const validationSchema = z.object({
-  name: z.string().min(1, 'Digite o seu nome completo'),
-  company: z.string().min(1, 'Digite o nome da empresa'),
-  email: z
-    .string()
-    .min(1, { message: 'Digite o email' })
-    .email({
-      message: 'Insira um email válido',
-    })
-    .trim(),
-  telephone: z
-    .string()
-    .min(1, 'Digite o seu número do telefone')
-    .transform((value) => value.replace(/[\s()-]*/g, '')), // Taking off mask chars
-  country: z.string().min(1, 'Digite nome do seu país'),
-  state: z.string().min(1, 'Digite o estado'),
-  city: z.string().min(1, 'Digite a cidade'),
-  ZIPcode: z
-    .string()
-    .min(1, 'Digite o seu CEP')
-    .length(9, 'Digite um CEP válido')
-    .transform((value) => value.replace(/-/g, '')), // Taking off mask chars,
-  address: z.string().min(1, 'Digite o seu seu endereço'),
-});
-
-const errorMessages = {
-  [ERROR_CODES.NOT_FOUND]: 'Produto não encontrado',
-};
-const defaultErrorMessage =
-  'Erro ao solicitar os dados do produto. Tente novamente mais tarde';
+import { budgetEmailSchema, buildBudgetEmailErrorMessage } from './utils';
 
 export default function BudgetForm({ productId }) {
-  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
-
-  const onError = (error) => {
-    const code = error.response.status;
-    const message = errorMessages[code] || defaultErrorMessage;
-
-    setSubmitErrorMessage(message);
-  };
   const { mutate: sendProductBudget, isLoading } = useSendProductBudget({
-    onError,
+    onError: (err) => {
+      const errorMessage = buildBudgetEmailErrorMessage(err);
+
+      // Do something to the errorMessage
+      alert(errorMessage);
+    },
   });
 
   const {
@@ -67,12 +31,11 @@ export default function BudgetForm({ productId }) {
     formState: { errors },
     control,
   } = useForm({
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(budgetEmailSchema),
   });
   const onSubmit = (formInput) => sendProductBudget({ productId, formInput });
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
-  if (submitErrorMessage) return <p>{submitErrorMessage}</p>;
 
+  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <ContactUs>
       <Title>Requisite um orçamento</Title>
