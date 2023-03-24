@@ -249,3 +249,16 @@ export const StepsText = styled.p`
     height: auto;
   }
 `;
+export const Pic = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 40px;
+`;
+export const All = styled.div`
+  display: flex;
+  align-items: center;
+`;
+export const Block = styled.div`
+  display: flex;
+  align-items: center;
+`;

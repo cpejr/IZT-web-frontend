@@ -21,6 +21,8 @@ import {
   ProductInfos,
   InfoTitle,
   InfoDescription,
+  Pic,
+  Block,
   ProcessSteps,
   Steps,
   Title,
@@ -76,22 +78,42 @@ export default function ProductPage() {
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
-          <Step>
-            <Image src={step1} alt="1 Step" />
-            <StepsText>Entramos em contato para planejar o produto </StepsText>
-          </Step>
-          <AiOutlineRight color="#000000" size="24px" />
-
-          <Step>
-            <Image src={step2} alt="2 Step" />
-            <StepsText>Produzimos a sua peça</StepsText>
-          </Step>
-          <AiOutlineRight color="#000000" size="24px" />
-          <Step>
-            <Image src={step3} alt="3 Step" />
-            <StepsText>Realizamos a inspeção do produto</StepsText>
-          </Step>
-          <AiOutlineRight color="#000000" size="24px" />
+          <Block>
+            <Step>
+              <Image src={step1} alt="1 Step" />
+              <StepsText>Entramos em contato para planejar o produto</StepsText>
+            </Step>
+          </Block>
+          <AiOutlineRight
+            style={{ marginBottom: '80px' }}
+            color="#123645"
+            size="40px"
+            strokeWidth={4}
+          />
+          <Block>
+            <Step>
+              <Image src={step2} alt="2 Step" />
+              <StepsText>Produzimos a sua peça</StepsText>
+            </Step>
+            <AiOutlineRight
+              style={{ marginBottom: '80px' }}
+              color="#123645"
+              size="40px"
+              strokeWidth={4}
+            />
+          </Block>
+          <Block>
+            <Step>
+              <Image src={step3} alt="3 Step" />
+              <StepsText>Realizamos a inspeção do produto</StepsText>
+            </Step>
+            <AiOutlineRight
+              style={{ marginBottom: '80px' }}
+              color="#123645"
+              size="40px"
+              strokeWidth={4}
+            />
+          </Block>
           <Step>
             <Image src={step4} alt="4 Step" />
             <StepsText>Enviamos para você</StepsText>
