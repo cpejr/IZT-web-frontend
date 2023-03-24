@@ -1,6 +1,9 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { zodResolver } from '@hookform/resolvers/zod';
+import IZTLogo from '../../assets/IZTLogo.svg';
+import { RegisterInput, SubmitButton } from '../../components/common';
+import { useCreateUser } from '../../hooks/query/users';
 import {
   Page,
   Container,
@@ -11,24 +14,18 @@ import {
   Form,
   Subtitle,
 } from './Styles';
-import IZTLogo from '../../assets/IZTLogo.svg';
-import { useCreateUser } from '../../hooks/query/users';
-import { RegisterInput, SubmitButton } from '../../components/common';
 import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
 
 function SignUp() {
   const navigate = useNavigate();
-  const registerOnSuccess = () => navigate('/login');
-  const registerOnError = (err) => {
-    const code = err?.response?.data?.httpCode;
-    const errorMessage = buildRegisterErrorMessage(code);
-
-    // Do something to the errorMessage
-    alert(errorMessage);
-  };
   const { mutate: createUser, isLoading } = useCreateUser({
-    onSuccess: registerOnSuccess,
-    onError: registerOnError,
+    onSuccess: () => navigate('/login'),
+    onError: (err) => {
+      const errorMessage = buildRegisterErrorMessage(err);
+
+      // Do something to the errorMessage
+      alert(errorMessage);
+    },
   });
 
   const {

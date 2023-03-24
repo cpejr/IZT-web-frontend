@@ -5,6 +5,7 @@ import {
   AiOutlineInstagram,
 } from 'react-icons/ai';
 import { HiOutlineMail } from 'react-icons/hi';
+import { Logo } from '../../common';
 import {
   Container,
   SideContainer,
@@ -18,7 +19,6 @@ import {
   SectionGoTo,
   ContactButton,
 } from './Styles';
-import { Logo } from '../../common';
 
 export default function Footer() {
   return (

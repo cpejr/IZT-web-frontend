@@ -1,6 +1,7 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { FormInput, FormMask } from '../../common';
 import {
   ContactUs,
   Form,
@@ -10,7 +11,6 @@ import {
   BotaoEnviar,
   Container,
 } from './Styles';
-import { FormInput, FormMask } from '../../common';
 
 const validationSchema = z.object({
   name: z.string().min(1, 'Digite o seu nome completo'),

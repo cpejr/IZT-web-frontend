@@ -64,6 +64,7 @@ const registerErrorMessages = {
 const registerDefaultErrorMessage =
   'Erro ao realizar o cadastro. Tente novamente mais tarde';
 
-export function buildRegisterErrorMessage(code) {
+export function buildRegisterErrorMessage(err) {
+  const code = err?.response?.data?.httpCode;
   return registerErrorMessages[code] || registerDefaultErrorMessage;
 }

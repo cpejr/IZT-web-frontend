@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
+import { ModalChangeUserData } from '../../components/features';
+import useAuthStore from '../../stores/auth';
 import {
   ModalStyle,
   Container,
@@ -20,8 +22,6 @@ import {
   Body,
   DataContainer,
 } from './Styles';
-import { ModalChangeUserData } from '../../components/features';
-import useAuthStore from '../../stores/auth';
 
 function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);

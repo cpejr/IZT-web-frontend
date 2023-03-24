@@ -50,6 +50,7 @@ const updateUserErrorMessages = {
 const updateUserDefaultErrorMessage =
   'Erro ao editar os dados cadastrais. Tente novamente mais tarde';
 
-export function buildUpdateUserErrorMessage(code) {
+export function buildUpdateUserErrorMessage(err) {
+  const code = err?.response?.data?.httpCode;
   return updateUserErrorMessages[code] || updateUserDefaultErrorMessage;
 }
