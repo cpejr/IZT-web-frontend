@@ -1,6 +1,6 @@
+import { Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Modal } from 'antd';
 
 // eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div`
@@ -13,7 +13,7 @@ export const Container = styled.div`
   left: 0px;
   top: 110px;
 
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   color: #000000;
   font-size: 20px;
@@ -182,12 +182,14 @@ export const Button = styled.button`
 export const MenuMobile = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 40px;
+
   padding: 0px;
   overflow-y: hidden;
-  gap: 40px;
-  transition: all 700ms ease-in-out 1s;
+
+  transition: height 700ms ease-in-out 5s;
   @media (max-width: 700px) {
-    max-height: ${(props) => (props.opened ? 'none' : '0')};
+    height: ${(props) => (props.opened ? 'auto' : '0')};
   }
 `;
 

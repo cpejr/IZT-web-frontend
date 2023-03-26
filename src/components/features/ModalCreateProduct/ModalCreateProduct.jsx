@@ -1,12 +1,10 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { HiPlusSm } from 'react-icons/hi';
+import { useForm, useFieldArray } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { HiPlusSm } from 'react-icons/hi';
 import { z } from 'zod';
-import { useCreateProduct } from '../../../hooks/query/products';
 
+import { useCreateProduct } from '../../../hooks/query/products';
 import {
   Container,
   Form,
@@ -47,14 +45,13 @@ const validationSchema = z.object({
   documents: z.array(z.instanceof(FileList)).default([]),
 });
 
-export default function ModalAddProduct() {
-  const { handleSubmit, register, watch, control } = useForm({
+export default function ModalCreateProduct() {
+  const { handleSubmit, register, control } = useForm({
     resolver: zodResolver(validationSchema),
   });
 
   const { mutate: createProduct } = useCreateProduct();
   const onSubmit = (data) => createProduct(data);
-  console.log(watch());
 
   const {
     fields: fieldsPictures,
@@ -124,7 +121,7 @@ export default function ModalAddProduct() {
                   {...register(`pictures.${index}.value`)}
                 />
               ))}
-              <AddButton type="button" onClick={() => appendPicture}>
+              <AddButton type="button" onClick={() => {}}>
                 <HiPlusSm size={25} />
                 Nova imagem
               </AddButton>

@@ -19,7 +19,7 @@ export const ModalContent = styled.div`
 `;
 
 export const Label = styled.label`
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -38,7 +38,7 @@ export const Input = styled.input`
   border: none;
   color: black;
 
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -73,7 +73,7 @@ export const ModalButton = styled.button`
   color: white;
 
   p {
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
     font-size: 18px;

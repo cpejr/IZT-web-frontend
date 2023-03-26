@@ -1,15 +1,17 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  width: 95%;
   margin-bottom: 50px;
 `;
 
 export const Title = styled.p`
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -20,7 +22,7 @@ export const Title = styled.p`
 `;
 
 export const Subtitle = styled.p`
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
@@ -43,7 +45,7 @@ export const SmallInput = styled.input`
   border: 1px solid black;
   border-radius: 4px;
 
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -63,7 +65,7 @@ export const BigInput = styled.textarea`
   border: 1px solid black;
   border-radius: 4px;
 
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -71,12 +73,12 @@ export const BigInput = styled.textarea`
 `;
 
 export const MiniText = styled.p`
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 
   color: black;
 `;
@@ -100,7 +102,7 @@ export const AddButton = styled.button`
 `;
 
 export const AddButtonText = styled.p`
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -132,7 +134,7 @@ export const SaveButton = styled.button`
   background-color: transparent;
 
   p {
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
@@ -175,7 +177,7 @@ export const CancelButton = styled(Link)`
   background-color: transparent;
 
   p {
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
     font-size: 14px;

@@ -7,7 +7,7 @@ import {
   Outlet,
 } from 'react-router-dom';
 
-import { AppLayout, AdminLayout } from './layouts';
+import { AppLayout, AdminStoreLayout } from './layouts';
 import {
   Home,
   Login,
@@ -16,7 +16,7 @@ import {
   Product,
   Profile,
   ListProduct,
-  AddProduct,
+  CreateProduct,
   EditProduct,
   ListCategory,
   CreateCategory,
@@ -51,9 +51,9 @@ const router = createBrowserRouter(
         <Route element={<PrivateRoutes />}>
           <Route path="perfil" element={<Profile />} />
           <Route path="administrador" element={<AdminRoutes />}>
-            <Route path="loja" element={<AdminLayout />}>
+            <Route path="loja" element={<AdminStoreLayout />}>
               <Route index element={<ListProduct />} />
-              <Route path="adicionar-produto" element={<AddProduct />} />
+              <Route path="adicionar-produto" element={<CreateProduct />} />
               <Route path="editar-produto" element={<EditProduct />} />
               <Route path="listar-categorias" element={<ListCategory />} />
               <Route path="criar-categoria" element={<CreateCategory />} />

@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+
 import { CloseOutlined } from '@ant-design/icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
+import useWindowSize from '../../../hooks/useWindowSize';
+import ModalCreateCategory from '../ModalCreateCategory/ModalCreateCategory';
+import ModalCreateProduct from '../ModalCreateProduct/ModalCreateProduct';
 import {
   Container,
   MenuItens,
@@ -19,48 +23,21 @@ import {
   MobileMenuButton,
 } from './Styles';
 
-import ModalAddProduct from '../ModalAddProduct/ModalAddProduct';
-import ModalCreateCategory from '../ModalCreateCategory/ModalCreateCategory';
-
 export default function AdminMenu() {
-  const modalButton = {
-    closeIcon: <CloseOutlined style={{ color: 'white' }} />,
-  };
-
+  const [openMenuMobile, setOpenMenuMobile] = useState(false);
   const [modalAddProduct, setModalAddProduct] = useState(false);
   const [modalCreateCategory, setModalCreateCategory] = useState(false);
 
-  const openModalAddProduct = (e) => {
-    e.preventDefault();
-    setModalAddProduct(true);
-  };
+  const openModalAddProduct = () => setModalAddProduct(true);
+  const closeModalAddProduct = () => setModalAddProduct(false);
 
-  const closeModalAddProduct = (e) => {
-    e.preventDefault();
-    setModalAddProduct(false);
-  };
+  const openModalCreateCategory = () => setModalCreateCategory(true);
+  const closeModalCreateCategory = () => setModalCreateCategory(false);
 
-  const openModalCreateCategory = (e) => {
-    e.preventDefault();
-    setModalCreateCategory(true);
-  };
+  const mobileBreakpoint = 700;
+  const { width: windowWidth } = useWindowSize();
 
-  const closeModalCreateCategory = (e) => {
-    e.preventDefault();
-    setModalCreateCategory(false);
-  };
-
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleWindowResize = () => setWindowWidth(window.innerWidth);
-
-    window.addEventListener('resize', handleWindowResize);
-    return () => window.removeEventListener('resize', handleWindowResize);
-  }, []);
-
-  const [openMenuMobile, setOpenMenuMobile] = useState(false);
-  const breakpoint = 700;
-
+  const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
       <MenuItens opened={openMenuMobile}>
@@ -75,8 +52,8 @@ export default function AdminMenu() {
             <Section>
               <Title>Produtos</Title>
 
-              {windowWidth <= breakpoint ? (
-                <StyledLink to="/administrador/adicionar-produto">
+              {windowWidth <= mobileBreakpoint ? (
+                <StyledLink to="/administrador/loja/adicionar-produto">
                   Adicionar produtos
                 </StyledLink>
               ) : (
@@ -85,16 +62,14 @@ export default function AdminMenu() {
                 </Button>
               )}
 
-              <StyledLink to="/administrador">
-                Listar produtos
-              </StyledLink>
+              <StyledLink to="/administrador/loja">Listar produtos</StyledLink>
             </Section>
 
             <Section>
               <Title>Categorias</Title>
 
-              {windowWidth <= breakpoint ? (
-                <StyledLink to="/administrador/criar-categoria">
+              {windowWidth <= mobileBreakpoint ? (
+                <StyledLink to="/administrador/loja/criar-categoria">
                   Adicionar categoria
                 </StyledLink>
               ) : (
@@ -103,7 +78,7 @@ export default function AdminMenu() {
                 </Button>
               )}
 
-              <StyledLink to="/administrador/listar-categorias">
+              <StyledLink to="/administrador/loja/listar-categorias">
                 Listar categorias
               </StyledLink>
               <BlackLine />
@@ -132,7 +107,7 @@ export default function AdminMenu() {
         width={1100}
         padding={null}
         footer={null}
-        closeIcon={modalButton.closeIcon}
+        closeIcon={modalCloseButton}
         bodyStyle={{
           margin: '0px',
           padding: '0px',
@@ -141,7 +116,7 @@ export default function AdminMenu() {
         centered
         destroyOnClose
       >
-        <ModalAddProduct />
+        <ModalCreateProduct />
       </ModalStyle>
 
       <ModalStyle
@@ -151,7 +126,7 @@ export default function AdminMenu() {
         height={250}
         padding={0}
         footer={null}
-        closeIcon={modalButton.closeIcon}
+        closeIcon={modalCloseButton}
         bodyStyle={{
           alignItems: 'center',
           justifyContent: 'center',
@@ -163,7 +138,7 @@ export default function AdminMenu() {
         centered
         destroyOnClose
       >
-        <ModalCreateCategory />
+        <ModalCreateCategory close={closeModalCreateCategory} />
       </ModalStyle>
     </Container>
   );

@@ -1,9 +1,11 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { useState } from 'react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
+import PropTypes from 'prop-types';
+import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+
 import { useCreateCategory } from '../../../hooks/query/categories';
 import {
   Container,
@@ -13,24 +15,42 @@ import {
   ModalContent,
   ModalButton,
 } from './Styles';
+import {
+  buildCreateCategoryErrorMessage,
+  createCategoryValidationSchema,
+} from './utils';
 
-const validationSchema = z.object({
-  name: z
-    .string()
-    .min(1, 'Favor inserir o nome da categoria')
-    .min(3, 'O nome da categoria deve ter pelo menos 3 caracteres')
-    .max(40, 'O nome da categoria deve ter no máximo 40 caracteres'),
-  description: z.string().optional(),
-});
+export default function ModalCreateCategory({ close }) {
+  const [isPending, setIsPending] = useState(false); // Important for modal loading
 
-export default function ModalCreateCategory() {
-  const { handleSubmit, register, watch } = useForm({
-    resolver: zodResolver(validationSchema),
+  const queryClient = useQueryClient();
+  const { mutate: createCategory } = useCreateCategory({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['categories', 'searchByName'],
+      });
+      close();
+    },
+    onError: (err) => {
+      const errorMessage = buildCreateCategoryErrorMessage(err);
+
+      // Do something to the errorMessage
+      alert(errorMessage);
+      setIsPending(false);
+    },
   });
 
-  const { mutate: createCategory } = useCreateCategory();
-  const onSubmit = (data) => createCategory(data);
-  console.log(watch());
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(createCategoryValidationSchema),
+  });
+  const onSubmit = (data) => {
+    createCategory(data);
+    setIsPending(true);
+  };
 
   return (
     <Container>
@@ -44,12 +64,17 @@ export default function ModalCreateCategory() {
             {...register('name')}
             placeholder="Digite aqui o nome da categoria"
           />
-          <ModalButton type="submit">
+          {errors?.name?.message && <p>{errors?.name?.message}</p>}
+          <ModalButton disabled={isPending} type="submit">
             <FiSave size={25} />
-            <p>Criar Categoria</p>
+            <p>{isPending ? 'Carregando...' : 'Criar Categoria'}</p>
           </ModalButton>
         </ModalContent>
       </Form>
     </Container>
   );
 }
+
+ModalCreateCategory.propTypes = {
+  close: PropTypes.func.isRequired,
+};

@@ -52,7 +52,7 @@ export default function Catalog() {
           ))}
         </ButtonRow>
         {categories?.map((category) => (
-          <ProductCategory key={category.name} id={category.name}>
+          <ProductCategory key={category.name}>
             <Divider />
             <CategoryName>{category.name}</CategoryName>
             <ProductRow>

@@ -1,6 +1,6 @@
-import React from 'react';
-import { HiPlusSm } from 'react-icons/hi';
 import { FiSave } from 'react-icons/fi';
+import { HiPlusSm } from 'react-icons/hi';
+
 import {
   Container,
   Title,
@@ -15,10 +15,10 @@ import {
   CancelButton,
 } from './Styles';
 
-export default function AdminEditProductMobile() {
+export default function CreateProduct() {
   return (
     <Container>
-      <Title>Editar produto</Title>
+      <Title>Adicionar produto</Title>
 
       <Subtitle>Nome do produto:</Subtitle>
       <SmallInput />
@@ -30,7 +30,7 @@ export default function AdminEditProductMobile() {
       <BigInput />
 
       <div>
-        <Subtitle>Imagens:</Subtitle>
+        <Title>Imagens:</Title>
         <MiniText>Anexe as imagens do produto</MiniText>
       </div>
 
@@ -52,10 +52,10 @@ export default function AdminEditProductMobile() {
 
       <SaveButton>
         <FiSave size={20} />
-        <p>Salvar produto</p>
+        <p>Criar produto</p>
       </SaveButton>
 
-      <CancelButton to="/administrador">
+      <CancelButton to="/administrador/loja">
         <p>Cancelar</p>
       </CancelButton>
     </Container>

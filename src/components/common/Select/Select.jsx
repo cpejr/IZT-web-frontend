@@ -1,6 +1,8 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
+
+import PropTypes from 'prop-types';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+
 import { Container, Selected, Options, Option } from './Styles';
 
 export default function Select({ data, getValue, maxWidth, standart }) {

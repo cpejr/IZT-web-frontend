@@ -8,7 +8,7 @@ export { default as NotFound } from './NotFound/NotFound';
 export { default as ListCategory } from './ListCategory/ListCategory';
 export { default as ListProduct } from './ListProduct/ListProduct';
 export { default as CreateCategory } from './CreateCategory/CreateCategory';
-export { default as AddProduct } from './AddProduct/AddProduct';
+export { default as CreateProduct } from './CreateProduct/CreateProduct';
 export { default as EditProduct } from './EditProduct/EditProduct';
 export { default as EditCategory } from './EditCategory/EditCategory';
 export { default as Forbidden } from './Forbidden/Forbidden';

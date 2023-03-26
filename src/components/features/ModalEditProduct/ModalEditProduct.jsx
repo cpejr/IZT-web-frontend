@@ -1,6 +1,8 @@
 import React from 'react';
-import { HiPlusSm } from 'react-icons/hi';
+
 import { FiSave } from 'react-icons/fi';
+import { HiPlusSm } from 'react-icons/hi';
+
 import {
   Container,
   ModalContent,

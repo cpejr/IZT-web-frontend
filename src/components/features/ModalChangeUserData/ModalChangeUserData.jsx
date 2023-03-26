@@ -48,7 +48,7 @@ export default function ModalChangeUserData({ close }) {
   });
   const onSubmit = (data) => {
     setIsPending(true);
-    updateUser({ id: user._id, newUserData: data });
+    updateUser({ _id: user._id, newUserData: data });
   };
 
   return (

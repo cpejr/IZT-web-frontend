@@ -65,7 +65,7 @@ export const CategorySubsection = styled.div`
 `;
 
 export const Text = styled.p`
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -87,7 +87,7 @@ export const AddButton = styled.button`
   border: none;
 
   color: white;
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -99,7 +99,7 @@ export const AddButton = styled.button`
 `;
 
 export const MiniText = styled.p`
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -115,7 +115,7 @@ export const Input = styled.input`
   background: #ffffff;
   border-radius: 4px;
 
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -133,7 +133,7 @@ export const TextAreaModal = styled.textarea`
   background: #ffffff;
   border-radius: 4px;
 
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -159,7 +159,7 @@ export const ModalButton = styled.button`
   top: 703px;
   padding: 10px;
 
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
