@@ -51,6 +51,7 @@ const router = createBrowserRouter(
         <Route element={<PrivateRoutes />}>
           <Route path="perfil" element={<Profile />} />
           <Route path="administrador" element={<AdminRoutes />}>
+            <Route index element={<h1>Dashboard do admnistrador</h1>} />
             <Route path="loja" element={<AdminStoreLayout />}>
               <Route index element={<ListProduct />} />
               <Route path="criar-produto" element={<CreateProduct />} />
