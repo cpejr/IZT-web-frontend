@@ -2,10 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { RegisterInput } from '../../components/common';
 import { useCreateCategory } from '../../hooks/query/categories';
+import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
   Form,
@@ -22,6 +23,7 @@ import {
 export default function CreateCategory() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
   const { mutate: createCategory, isLoading } = useCreateCategory({
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -46,6 +48,11 @@ export default function CreateCategory() {
   });
   const onSubmit = (data) => createCategory(data);
 
+  const { width: windowWidth } = useWindowSize();
+  const mobileBreakpoint = 700;
+
+  if (windowWidth > mobileBreakpoint)
+    return <Navigate to="/administrador/loja/listar-categorias" />;
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>

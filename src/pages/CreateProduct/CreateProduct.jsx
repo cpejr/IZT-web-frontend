@@ -1,6 +1,8 @@
 import { FiSave } from 'react-icons/fi';
 import { HiPlusSm } from 'react-icons/hi';
+import { Navigate } from 'react-router-dom';
 
+import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
   Title,
@@ -16,6 +18,11 @@ import {
 } from './Styles';
 
 export default function CreateProduct() {
+  const { width: windowWidth } = useWindowSize();
+  const mobileBreakpoint = 700;
+
+  if (windowWidth > mobileBreakpoint)
+    return <Navigate to="/administrador/loja" />;
   return (
     <Container>
       <Title>Adicionar produto</Title>

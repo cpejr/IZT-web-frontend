@@ -53,7 +53,7 @@ export default function AdminMenu() {
               <Title>Produtos</Title>
 
               {windowWidth <= mobileBreakpoint ? (
-                <StyledLink to="/administrador/loja/adicionar-produto">
+                <StyledLink to="/administrador/loja/criar-produto">
                   Adicionar produtos
                 </StyledLink>
               ) : (

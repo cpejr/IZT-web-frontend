@@ -2,10 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 
 import { RegisterInput } from '../../components/common';
 import { useUpdateCategory } from '../../hooks/query/categories';
+import useWindowSize from '../../hooks/useWindowSize';
 import { Container, Title, SaveButton, CancelButton, Form } from './Styles';
 import {
   buildupdateCategoryErrorMessage,
@@ -14,9 +15,9 @@ import {
 
 export default function EditCategory() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const currentCategory = useLocation().state;
 
-  const queryClient = useQueryClient();
   const { mutate: updateCategory, isLoading } = useUpdateCategory({
     onSuccess: () => {
       Promise.all([
@@ -47,6 +48,11 @@ export default function EditCategory() {
   const onSubmit = (data) =>
     updateCategory({ _id: currentCategory?._id, newCategoryData: data });
 
+  const { width: windowWidth } = useWindowSize();
+  const mobileBreakpoint = 700;
+
+  if (windowWidth > mobileBreakpoint)
+    return <Navigate to="/administrador/loja/listar-categorias" />;
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>

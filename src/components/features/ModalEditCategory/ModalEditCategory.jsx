@@ -22,8 +22,8 @@ import {
 
 export default function ModalEditCategory({ category, close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
-
   const queryClient = useQueryClient();
+
   const { mutate: updateCategory } = useUpdateCategory({
     onSuccess: () => {
       Promise.all([

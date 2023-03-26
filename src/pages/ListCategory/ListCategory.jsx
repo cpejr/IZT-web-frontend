@@ -54,7 +54,7 @@ export default function ListCategory() {
   const closeModalEditCategory = () => setModalEditCategory(false);
 
   const { width: windowWidth } = useWindowSize();
-  const breakpoint = 700;
+  const mobileBreakpoint = 700;
 
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
@@ -78,7 +78,7 @@ export default function ListCategory() {
           <Row key={category._id}>
             <Text>{category.name}</Text>
 
-            {windowWidth <= breakpoint ? (
+            {windowWidth <= mobileBreakpoint ? (
               <StyledLink onClick={() => goToEditCategoryPage(category)}>
                 <TbPencil size={30} />
               </StyledLink>

@@ -22,8 +22,8 @@ import {
 
 export default function ModalCreateCategory({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
-
   const queryClient = useQueryClient();
+
   const { mutate: createCategory } = useCreateCategory({
     onSuccess: () => {
       queryClient.invalidateQueries({
