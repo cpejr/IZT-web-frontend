@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
 
+import { AddToast } from '../../components/common';
 import { ModalChangeUserData } from '../../components/features';
 import useAuthStore from '../../stores/auth';
 import {
@@ -24,9 +25,6 @@ import {
   Body,
   DataContainer,
 } from './Styles';
-import { ModalChangeUserData } from '../../components/features';
-import useAuthStore from '../../stores/auth';
-import { AddToast } from '../../components/common';
 
 export default function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);

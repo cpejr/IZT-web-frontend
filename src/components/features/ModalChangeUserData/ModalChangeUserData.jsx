@@ -1,16 +1,13 @@
-<<<<<<<
-
-=======
 import { useState } from 'react';
 
 import { SaveOutlined } from '@ant-design/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
->>>>>>>
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SaveOutlined, CloseOutlined } from '@ant-design/icons';
 import { toast } from 'react-toastify';
+
+import { useUpdateUser } from '../../../hooks/query/users';
+import useAuthStore from '../../../stores/auth';
 import { AddToast, RegisterInput } from '../../common';
 import {
   Container,
@@ -24,52 +21,21 @@ import { buildUpdateUserErrorMessage, updateUserSchema } from './utils';
 
 export default function ModalChangeUserData({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modals usage
-  const {
-    auth: { user },
-    setUser,
-  } = useAuthStore();
 
-  address: z
-    .string()
-    .min(1, 'Informe um endereço')
-    .min(3, 'User address must be atleast 3 characters')
-    .max(50, 'User address must be a maximum of 50 characters'),
-});
-
-const errorMessages = {
-  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
-  [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autorizado',
-  [ERROR_CODES.NOT_FOUND]: 'Usuário não encontrado',
-};
-const defaultErrorMessage =
-  'Erro ao editar os dados cadastrais. Tente novamente mais tarde';
-
-export default function ModalChangeUserData({ openState, close }) {
   const user = useAuthStore((state) => state.auth.user);
   const setUser = useAuthStore((state) => state.setUser);
 
-  const onSuccess = (data) => {
-    setUser(data);
-    toast.success('Dados modificados com sucesso!');
-    close();
-  };
-  const onError = (error) => {
-    const code = error.response.status;
-    const message = errorMessages[code] || defaultErrorMessage;
-
-    toast.error(message);
-    close();
-  };
   const { mutate: updateUser } = useUpdateUser({
     onSuccess: (data) => {
       setUser(data);
+      toast.success('Dados modificados com sucesso!');
       close();
     },
     onError: (err) => {
       const errorMessage = buildUpdateUserErrorMessage(err);
 
       // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
       setIsPending(false);
     },
   });

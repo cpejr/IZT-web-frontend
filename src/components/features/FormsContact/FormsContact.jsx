@@ -1,8 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
+import { z } from 'zod';
+
+import { useSendFormContact } from '../../../hooks/query/contact';
+import useWindowSize from '../../../hooks/useWindowSize';
+import { ERROR_CODES } from '../../../utils/constants';
+import { AddToast, FormInput, FormMask } from '../../common';
 import {
   ContactUs,
   Form,
@@ -13,10 +17,6 @@ import {
   InputMessage,
   AreaText,
 } from './Styles';
-import useWindowSize from '../../../hooks/useWindowSize';
-import { AddToast, FormInput, FormMask } from '../../common';
-import { ERROR_CODES } from '../../../utils/constants';
-import { useSendFormContact } from '../../../hooks/query/contact';
 
 const validationSchema = z.object({
   company: z.string().min(1, 'Favor digitar o nome da empresa'),

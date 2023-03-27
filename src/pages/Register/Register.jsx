@@ -1,9 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
+import IZTLogo from '../../assets/IZTLogo.svg';
+import { AddToast, RegisterInput, SubmitButton } from '../../components/common';
+import { useCreateUser } from '../../hooks/query/users';
 import {
   Page,
   Container,
@@ -15,21 +18,19 @@ import {
   Subtitle,
 } from './Styles';
 import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
-import IZTLogo from '../../assets/IZTLogo.svg';
-import { useCreateUser } from '../../hooks/query/users';
-import { AddToast, RegisterInput, SubmitButton } from '../../components/common';
-import { ERROR_CODES } from '../../utils/constants';
-import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
 
 export default function Register() {
   const navigate = useNavigate();
   const { mutate: createUser, isLoading } = useCreateUser({
-    onSuccess: () => navigate('/login'),
+    onSuccess: () => {
+      navigate('/login');
+      toast.success('Usuário cadastrado com sucesso!');
+    },
     onError: (err) => {
       const errorMessage = buildRegisterErrorMessage(err);
 
       // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 
