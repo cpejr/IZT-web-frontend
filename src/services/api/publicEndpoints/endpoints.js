@@ -41,7 +41,7 @@ export const getCategoryById = async (_id) => {
 };
 
 export const searchByNameCategories = async (name) => {
-  const { data } = await publicApi.get('/categories/search/by-name', {
+  const { data } = await publicApi.get('/categories/search-by-name', {
     params: { name },
   });
 
@@ -61,7 +61,7 @@ export const getProductById = async (_id) => {
 };
 
 export const searchProductByName = async ({ name, category }) => {
-  const { data } = await publicApi.get('/products/search/by-name', {
+  const { data } = await publicApi.get('/products/search-by-name', {
     params: { name, category },
   });
 
