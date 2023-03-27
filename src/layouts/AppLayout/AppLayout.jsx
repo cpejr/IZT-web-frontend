@@ -7,7 +7,7 @@ export default function AppLayout() {
   const { isInitialLoading } = useRefreshToken();
 
   return isInitialLoading ? (
-    <h1>Carregando...</h1> // TODO: add a good looking loading state
+    <h1 style={{ height: '100vh' }}>Carregando...</h1> // TODO: add a good looking loading state
   ) : (
     <>
       <Header />

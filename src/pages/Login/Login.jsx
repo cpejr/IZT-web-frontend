@@ -1,7 +1,3 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,33 +12,30 @@ import {
   SignUpLink,
   Links,
 } from './Styles';
+import { buildLoginErrorMessage, loginValidationSchema } from './utils';
 import IZTLogo from '../../assets/IZTLogo.svg';
 import { AddToast, DataInput, SubmitButton } from '../../components/common';
 import { useLogin } from '../../hooks/query/sessions';
 import { ERROR_CODES } from '../../utils/constants';
 
-const validationSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: 'Favor digitar o email' })
-    .email({
-      message: 'Insira um email no formato email@email.com',
-    })
-    .trim(),
-  password: z
-    .string()
-    .min(1, { message: 'Favor digitar uma senha' })
-    .min(6, 'A senha não pode ter menos de 6 caracteres')
-    .max(16, 'A senha não pode ter mais de 16 caracteres'),
-});
-
 export default function Login() {
+  const navigate = useNavigate();
+  const { mutate: login, isLoading } = useLogin({
+    onSuccess: () => navigate('/'),
+    onError: (err) => {
+      const errorMessage = buildLoginErrorMessage(err);
+
+      // Do something to the errorMessage
+      alert(errorMessage);
+    },
+  });
+
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(loginValidationSchema),
   });
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const navigate = useNavigate();
@@ -82,6 +75,8 @@ export default function Login() {
   const { mutate: login } = useLogin({ onSuccess, onError });
 
   const onSubmit = (data) => login(data);
+
+  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <Page>
       <Container>
@@ -110,7 +105,7 @@ export default function Login() {
             />
             <SubmitButton
               name="Entrar"
-              submitErrorMessage={submitErrorMessage}
+              // submitErrorMessage={submitErrorMessage}
               relativeWidth="70%"
             />
           </Form>

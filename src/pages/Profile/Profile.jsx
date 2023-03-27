@@ -1,7 +1,11 @@
 import { useState } from 'react';
-import { SettingOutlined } from '@ant-design/icons';
-import 'react-toastify/dist/ReactToastify.css';
+
+import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
+
+import { ModalChangeUserData } from '../../components/features';
+import useAuthStore from '../../stores/auth';
 import {
+  ModalStyle,
   Container,
   Page,
   Title,
@@ -31,7 +35,6 @@ export default function Profile() {
   const openModalChangeUserData = () => setUpdateUserModalState(true);
   const closeModalChangeUserData = () => setUpdateUserModalState(false);
 
-  if (!user) return <h1>Proibido</h1>;
   return (
     <Background>
       <Page>
@@ -127,10 +130,17 @@ export default function Profile() {
         </Body>
         <AddToast />
       </Page>
-      <ModalChangeUserData
-        openState={updateUserModalState}
-        close={closeModalChangeUserData}
-      />
+      <ModalStyle
+        open={updateUserModalState}
+        onCancel={closeModalChangeUserData}
+        footer={null}
+        width={1000}
+        closeIcon={<CloseOutlined />}
+        destroyOnClose
+        centered
+      >
+        <ModalChangeUserData close={closeModalChangeUserData} />
+      </ModalStyle>
     </Background>
   );
 }
