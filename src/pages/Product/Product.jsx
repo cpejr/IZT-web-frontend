@@ -1,4 +1,5 @@
-import { AiOutlineRight } from 'react-icons/ai';
+import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
+import { useState, useEffect } from 'react';
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
@@ -21,7 +22,7 @@ import {
   ProductInfos,
   InfoTitle,
   InfoDescription,
-  Pic,
+  Arrow,
   Block,
   ProcessSteps,
   Steps,
@@ -32,6 +33,18 @@ import {
 } from './Styles';
 
 export default function ProductPage() {
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
     <Container>
       <ProductData>
@@ -78,45 +91,84 @@ export default function ProductPage() {
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
-          <Block>
-            <Step>
+          <Step>
+            <Block>
               <Image src={step1} alt="1 Step" />
               <StepsText>Entramos em contato para planejar o produto</StepsText>
-            </Step>
-          </Block>
-          <AiOutlineRight
-            style={{ marginBottom: '80px' }}
-            color="#123645"
-            size="40px"
-            strokeWidth={4}
-          />
-          <Block>
-            <Step>
+            </Block>
+            <Arrow>
+              {windowWidth > 700 ? (
+                <AiOutlineRight
+                  style={{ marginBottom: '80px' }}
+                  color="#123645"
+                  size="40px"
+                  strokeWidth={4}
+                />
+              ) : (
+                <AiOutlineDown
+                  style={{ marginBottom: '80px' }}
+                  color="#123645"
+                  size="40px"
+                  strokeWidth={4}
+                />
+              )}
+            </Arrow>
+          </Step>
+
+          <Step>
+            <Block>
               <Image src={step2} alt="2 Step" />
               <StepsText>Produzimos a sua peça</StepsText>
-            </Step>
-            <AiOutlineRight
-              style={{ marginBottom: '80px' }}
-              color="#123645"
-              size="40px"
-              strokeWidth={4}
-            />
-          </Block>
-          <Block>
-            <Step>
+            </Block>
+            <Arrow>
+              {' '}
+              {windowWidth > 700 ? (
+                <AiOutlineRight
+                  style={{ marginBottom: '80px' }}
+                  color="#123645"
+                  size="40px"
+                  strokeWidth={4}
+                />
+              ) : (
+                <AiOutlineDown
+                  style={{ marginBottom: '80px' }}
+                  color="#123645"
+                  size="40px"
+                  strokeWidth={4}
+                />
+              )}
+            </Arrow>
+          </Step>
+
+          <Step>
+            <Block>
               <Image src={step3} alt="3 Step" />
               <StepsText>Realizamos a inspeção do produto</StepsText>
-            </Step>
-            <AiOutlineRight
-              style={{ marginBottom: '80px' }}
-              color="#123645"
-              size="40px"
-              strokeWidth={4}
-            />
-          </Block>
+            </Block>
+            <Arrow>
+              {' '}
+              {windowWidth > 700 ? (
+                <AiOutlineRight
+                  style={{ marginBottom: '80px' }}
+                  color="#123645"
+                  size="40px"
+                  strokeWidth={4}
+                />
+              ) : (
+                <AiOutlineDown
+                  style={{ marginBottom: '80px' }}
+                  color="#123645"
+                  size="40px"
+                  strokeWidth={4}
+                />
+              )}
+            </Arrow>
+          </Step>
           <Step>
-            <Image src={step4} alt="4 Step" />
-            <StepsText>Enviamos para você</StepsText>
+            <Block>
+              <Image src={step4} alt="4 Step" />
+              <StepsText>Enviamos para você</StepsText>
+            </Block>
           </Step>
         </Steps>
       </ProcessSteps>

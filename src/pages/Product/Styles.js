@@ -194,7 +194,7 @@ export const Steps = styled.div`
   }
   @media (max-width: 700px) {
     flex-direction: column;
-    gap: 23px;
+    gap: 0px;
   }
 `;
 
@@ -215,13 +215,16 @@ export const Title = styled.div`
 
 export const Step = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 20px;
 
   @media (max-width: 700px) {
     gap: 10px;
+    flex-direction: column;
+    align-items: left;
+    justify-content: flex-start;
   }
 `;
 
@@ -247,6 +250,7 @@ export const StepsText = styled.p`
   }
   @media (max-width: 700px) {
     height: auto;
+    font-size: 18px;
   }
 `;
 export const Pic = styled.div`
@@ -261,4 +265,17 @@ export const All = styled.div`
 export const Block = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
+  @media (max-width: 700px) {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+`;
+export const Arrow = styled.div`
+  //position: absolute;
+  left: 10px;
+  @media (max-width: 700px) {
+  }
 `;
