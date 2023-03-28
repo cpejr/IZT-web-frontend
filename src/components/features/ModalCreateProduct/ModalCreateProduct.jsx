@@ -1,9 +1,14 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/jsx-props-no-spreading */
+import { useRef } from 'react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { HiPlusSm } from 'react-icons/hi';
 import { z } from 'zod';
 
+import { AdminShowFiles, AdminShowPictures } from '..';
 import { useCreateProduct } from '../../../hooks/query/products';
 import {
   Container,
@@ -15,10 +20,10 @@ import {
   CategorySubsection,
   Text,
   MiniText,
-  AddButton,
   TextAreaModal,
   Input,
   ModalButton,
+  AddButton,
 } from './Styles';
 
 const validationSchema = z.object({
@@ -39,37 +44,36 @@ const validationSchema = z.object({
     .max(150, 'Vantagens do produto devem ter no máximo 150 caracteres'),
 
   pictures: z
-    .array(z.instanceof(FileList))
+    .array(z.instanceof(File))
     .nonempty('Você deve inserir ao menos uma foto'),
 
-  documents: z.array(z.instanceof(FileList)).default([]),
+  documents: z.array(z.instanceof(File)).default([]),
 });
 
-export default function ModalCreateProduct() {
-  const { handleSubmit, register, control } = useForm({
+export default function ModalAddProduct() {
+  const documentInputRef = useRef(null);
+  const pictureInputRef = useRef(null);
+  const {
+    handleSubmit,
+    register,
+    control,
+    formState: { errors },
+  } = useForm({
     resolver: zodResolver(validationSchema),
   });
 
-  const { mutate: createProduct } = useCreateProduct();
-  const onSubmit = (data) => createProduct(data);
+  const documentsFieldArray = useFieldArray({
+    control,
+    name: 'documents',
+  });
 
-  const {
-    fields: fieldsPictures,
-    append: appendPicture,
-    remove: removePicture,
-  } = useFieldArray({
+  const picturesFieldArray = useFieldArray({
     control,
     name: 'pictures',
   });
 
-  const {
-    fields: fieldsDocuments,
-    append: appendDocument,
-    remove: removeDocument,
-  } = useFieldArray({
-    control,
-    name: 'documents',
-  });
+  const { mutate: createProduct } = useCreateProduct();
+  const onSubmit = (data) => createProduct(data);
 
   return (
     <Container>
@@ -114,14 +118,27 @@ export default function ModalCreateProduct() {
             <Subsection>
               <Text>Imagens:</Text>
               <MiniText>Anexe as imagens do produto</MiniText>
-              {fieldsPictures.map((field, index) => (
+              <AdminShowPictures
+                register={register}
+                control={control}
+                errors={errors}
+                picturesFieldArray={picturesFieldArray}
+                buttonColor="white"
+              />{' '}
+              <AddButton
+                type="button"
+                onClick={() => pictureInputRef.current.click()}
+              >
                 <input
+                  accept="image/jpeg, image/pjpeg, image/png, image/gif"
                   type="file"
-                  key={field.id} // important to include key with field's id
-                  {...register(`pictures.${index}.value`)}
+                  style={{ display: 'none' }}
+                  ref={pictureInputRef}
+                  onChange={(e) => {
+                    const file = e.target.files;
+                    picturesFieldArray.append({ file });
+                  }}
                 />
-              ))}
-              <AddButton type="button" onClick={() => {}}>
                 <HiPlusSm size={25} />
                 Nova imagem
               </AddButton>
@@ -129,7 +146,23 @@ export default function ModalCreateProduct() {
 
             <Subsection>
               <Text>Documentos</Text>
-              <AddButton>
+              <AdminShowFiles
+                register={register}
+                control={control}
+                errors={errors}
+                documentsFieldArray={documentsFieldArray}
+                buttonColor="white"
+              />
+              <AddButton onClick={() => documentInputRef.current.click()}>
+                <input
+                  type="file"
+                  style={{ display: 'none' }}
+                  ref={documentInputRef}
+                  onChange={(e) => {
+                    const file = e.target.files;
+                    documentsFieldArray.append({ file });
+                  }}
+                />
                 <HiPlusSm size={25} />
                 Novo documento
               </AddButton>
