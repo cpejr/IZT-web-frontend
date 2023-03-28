@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { useState } from 'react';
 
 import { IoIosArrowDown } from 'react-icons/io';
@@ -8,7 +7,6 @@ import { useTheme } from 'styled-components';
 
 import { useLogout } from '../../../hooks/query/sessions';
 import useAuthStore from '../../../stores/auth';
-import { ERROR_CODES } from '../../../utils/constants';
 import { Logo } from '../../common';
 import {
   Content,
@@ -28,38 +26,56 @@ import {
 } from './Styles';
 
 export default function Header() {
+  const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
+  const isSmallScreen = useMediaQuery({ maxWidth: 900 });
+  const { auth } = useAuthStore();
+
   const [bar, setBar] = useState(false);
   const [collapse, setCollapse] = useState(false);
   const [language, setLanguage] = useState('EN'); // default language is EN
   const availableLaguages = ['EN', 'PT', 'DE'];
-  const theme = useTheme();
-  const { auth } = useAuthStore();
-  const isSmallScreen = useMediaQuery({ maxWidth: 900 });
-  const onSuccess = () => {
-    if (isSmallScreen || location.pathname === '/perfil') navigate('/');
-    setBar(false);
-  };
-  const onError = (error) => {
-    switch (error.response.status) {
-      case ERROR_CODES.BAD_REQUEST:
-        console.log('Não há usuário logado'); // usar o toast
-        break;
-      default:
-        break;
-    }
-  };
-  const { mutate: logout } = useLogout({ onSuccess, onError });
 
-  async function HandleLogout() {
-    logout();
-  }
+  const { mutate: logout } = useLogout({
+    onSuccess: () => {
+      setBar(false);
+      if (isSmallScreen || location.pathname === '/perfil') navigate('/');
+    },
+    onError: () => {
+      const errorMessage =
+        'Ocorreu um erro ao realizar o logout. Tente novamente mais tarde';
 
-  async function OnPressLogin() {
-    navigate('/login');
-    setBar(false);
-  }
+      // Do something to the errorMessage
+      alert(errorMessage);
+    },
+  });
+
+  const welcomeSection = () => {
+    if (isSmallScreen)
+      return (
+        <MenuProfile>
+          <Link to="/perfil" onClick={() => setBar(false)}>
+            Meu Perfil <IoIosArrowDown />
+          </Link>
+          <Divider />
+          <LogoutBtn onClick={logout}>Deslogar</LogoutBtn>
+        </MenuProfile>
+      );
+
+    const firstName = auth?.user?.name?.split(' ')?.[0];
+    const nameLengthLimit = 10;
+
+    const isLessThanEqualLimit = firstName.length <= nameLengthLimit;
+    return (
+      <>
+        <Link to="/perfil" onClick={() => setBar(false)}>
+          {isLessThanEqualLimit ? `Olá, ${firstName}!` : 'Meu Perfil'}
+        </Link>
+        <LogoutBtn onClick={logout}>Deslogar</LogoutBtn>
+      </>
+    );
+  };
 
   return (
     <Content>
@@ -78,30 +94,7 @@ export default function Header() {
             </Link>
             <InvertItems>
               {auth ? (
-                <Welcome>
-                  {isSmallScreen ? (
-                    <MenuProfile>
-                      <Link to="/perfil" onClick={() => setBar(false)}>
-                        Meu Perfil <IoIosArrowDown />
-                      </Link>
-                      <Divider />
-                      <LogoutBtn onClick={HandleLogout}>Deslogar</LogoutBtn>
-                    </MenuProfile>
-                  ) : auth.user?.name.split(' ')[0].length <= 10 ? (
-                    <Link to="/perfil" onClick={() => setBar(false)}>
-                      Olá, {auth.user?.name.split(' ')[0]}!
-                    </Link>
-                  ) : (
-                    // se o nome da pessoa for maior do que 7 caracteres aparecerá 'Meu perfil'
-                    // para impedir quebra da responsividade
-                    <Link to="/perfil" onClick={() => setBar(false)}>
-                      Meu Perfil
-                    </Link>
-                  )}
-                  {!isSmallScreen && (
-                    <LogoutBtn onClick={HandleLogout}>Deslogar</LogoutBtn>
-                  )}
-                </Welcome>
+                <Welcome>{welcomeSection()}</Welcome>
               ) : (
                 <ButtonLogin
                   backgroundColor800={theme.colors.greenishBlue}
@@ -110,7 +103,10 @@ export default function Header() {
                   hoverBackgroundColor800={theme.colors.greenishBlue}
                   hoverColor800="white"
                   hoverBorderColor800={theme.colors.greenishBlue}
-                  onClick={OnPressLogin}
+                  onClick={() => {
+                    setBar(false);
+                    navigate('/login');
+                  }}
                 >
                   Entrar
                 </ButtonLogin>
