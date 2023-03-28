@@ -1,8 +1,8 @@
 import { FiSave } from 'react-icons/fi';
 import { HiPlusSm } from 'react-icons/hi';
+import { useMediaQuery } from 'react-responsive';
 import { Navigate } from 'react-router-dom';
 
-import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
   Title,
@@ -18,11 +18,9 @@ import {
 } from './Styles';
 
 export default function EditProduct() {
-  const { width: windowWidth } = useWindowSize();
-  const mobileBreakpoint = 700;
+  const isMediumScreen = useMediaQuery({ minWidth: 700 });
 
-  if (windowWidth > mobileBreakpoint)
-    return <Navigate to="/administrador/loja" />;
+  if (isMediumScreen) return <Navigate to="/administrador/loja" />;
   return (
     <Container>
       <Title>Editar produto</Title>
