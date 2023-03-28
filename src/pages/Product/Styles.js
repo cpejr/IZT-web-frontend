@@ -175,7 +175,7 @@ export const ProcessSteps = styled.div`
   width: 100%;
 
   @media (max-width: 700px) {
-    height: 950px;
+    height: auto;
   }
 `;
 
@@ -225,6 +225,7 @@ export const Step = styled.div`
     flex-direction: column;
     align-items: left;
     justify-content: flex-start;
+    height: auto;
   }
 `;
 
@@ -274,8 +275,9 @@ export const Block = styled.div`
   }
 `;
 export const Arrow = styled.div`
-  //position: absolute;
-  left: 10px;
   @media (max-width: 700px) {
+    display: flex;
+    align-self: flex-start;
+    margin-left: 35px;
   }
 `;
