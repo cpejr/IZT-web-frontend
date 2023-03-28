@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { Button } from '../../common';
 
 const menuBreak = '900px';
@@ -82,6 +83,7 @@ export const Nav = styled.div`
     right: 0%;
     transition: all 400ms ease;
     font-weight: 600;
+    z-index: 10000;
     a {
       color: #fff;
       display: ${(props) => (props.bar ? 'flex' : 'none')};
@@ -96,7 +98,6 @@ export const Nav = styled.div`
   @media (max-width: 420px) {
     top: 80px;
   }
-  z-index: 10000;
 `;
 
 export const Bar = styled.div`

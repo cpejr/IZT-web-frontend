@@ -1,6 +1,8 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
+
+import PropTypes from 'prop-types';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+
 import {
   Button,
   Container,

@@ -1,9 +1,14 @@
 /* eslint-disable no-nested-ternary */
 import { useState } from 'react';
-import { useTheme } from 'styled-components';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+
 import { IoIosArrowDown } from 'react-icons/io';
 import { useMediaQuery } from 'react-responsive';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useTheme } from 'styled-components';
+
+import { useLogout } from '../../../hooks/query/sessions';
+import useAuthStore from '../../../stores/auth';
+import { ERROR_CODES } from '../../../utils/constants';
 import { Logo } from '../../common';
 import {
   Content,
@@ -21,9 +26,6 @@ import {
   MenuProfile,
   Divider,
 } from './Styles';
-import useAuthStore from '../../../stores/auth';
-import { useLogout } from '../../../hooks/query/sessions';
-import { ERROR_CODES } from '../../../utils/constants';
 
 export default function Header() {
   const navigate = useNavigate();
