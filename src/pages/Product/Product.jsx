@@ -102,14 +102,14 @@ export default function ProductPage() {
                   style={{ marginBottom: '80px' }}
                   color="#123645"
                   size="40px"
-                  strokeWidth={4}
+                  strokeWidth={20}
                 />
               ) : (
                 <AiOutlineDown
-                  style={{ marginBottom: '80px' }}
+                  // style={{ marginBottom: '80px' }}
                   color="#123645"
                   size="40px"
-                  strokeWidth={4}
+                  strokeWidth={20}
                 />
               )}
             </Arrow>
@@ -127,14 +127,14 @@ export default function ProductPage() {
                   style={{ marginBottom: '80px' }}
                   color="#123645"
                   size="40px"
-                  strokeWidth={4}
+                  strokeWidth={20}
                 />
               ) : (
                 <AiOutlineDown
-                  style={{ marginBottom: '80px' }}
+                  // style={{ marginBottom: '80px' }}
                   color="#123645"
                   size="40px"
-                  strokeWidth={4}
+                  strokeWidth={20}
                 />
               )}
             </Arrow>
@@ -152,14 +152,14 @@ export default function ProductPage() {
                   style={{ marginBottom: '80px' }}
                   color="#123645"
                   size="40px"
-                  strokeWidth={4}
+                  strokeWidth={20}
                 />
               ) : (
                 <AiOutlineDown
-                  style={{ marginBottom: '80px' }}
+                  // style={{ marginBottom: '80px' }}
                   color="#123645"
                   size="40px"
-                  strokeWidth={4}
+                  strokeWidth={20}
                 />
               )}
             </Arrow>

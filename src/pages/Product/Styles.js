@@ -194,7 +194,6 @@ export const Steps = styled.div`
   }
   @media (max-width: 700px) {
     flex-direction: column;
-    gap: 0px;
   }
 `;
 
@@ -221,11 +220,12 @@ export const Step = styled.div`
   gap: 20px;
 
   @media (max-width: 700px) {
-    gap: 10px;
+    //gap: 75px;
     flex-direction: column;
     align-items: left;
     justify-content: flex-start;
     height: auto;
+    margin-bottom: 0px;
   }
 `;
 
@@ -279,5 +279,6 @@ export const Arrow = styled.div`
     display: flex;
     align-self: flex-start;
     margin-left: 35px;
+    height: 100%;
   }
 `;
