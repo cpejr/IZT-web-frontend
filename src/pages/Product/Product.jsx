@@ -1,9 +1,8 @@
-import { useMemo } from 'react';
-
-import { useParams, useNavigate } from 'react-router-dom';
+import { useMemo, useState, useEffect } from 'react';
 
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
-import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
