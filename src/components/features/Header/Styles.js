@@ -90,7 +90,6 @@ export const Nav = styled.div`
       transition: all 700ms ease;
     }
     button {
-      display: ${(props) => (props.bar ? 'flex' : 'none')};
       transition: all 700ms ease;
       font-weight: 600;
     }
@@ -151,6 +150,9 @@ export const ButtonLogin = styled(Button)`
   @media (max-width: 990px) {
     font-size: 18px;
     width: 120px;
+  }
+  @media (max-width: ${menuBreak}) {
+    display: ${(props) => (props.collapse ? 'flex' : 'none')};
   }
 `;
 
@@ -275,43 +277,42 @@ export const Welcome = styled.div`
 export const Divider = styled.div`
   background-color: white;
   height: 2px;
-  display: flex;
+  display: ${(props) => (props.collapse ? 'flex' : 'none')};
+  max-height: ${(props) => (props.collapse ? 'none' : '0px')};
   align-self: stretch;
   transition: all 0.5s ease-in-out 0.5s;
 `;
 
 export const MenuProfile = styled.div`
-  display: flex;
+  display: ${(props) => (props.bar ? 'flex' : 'none')};
   width: 100%;
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  button {
-    max-height: 0;
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-  }
-  div {
-    display: none;
-    height: 0;
-    position: relative;
-  }
-  :hover {
-    div {
-      display: flex;
-      height: 2px;
-    }
-    button {
-      max-height: none;
-    }
-    a {
-      svg {
-        transform: rotate(180deg);
-      }
-    }
-  }
   transition: all 0.5s ease-in-out 0.5s;
+  div {
+    svg {
+      transform: ${(props) =>
+        props.collapse ? 'rotate(180deg)' : 'rotate(0deg)'};
+      transition: all 0.2s ease-in-out;
+    }
+  }
+`;
+
+export const MyProfile = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+
+  button {
+    background-color: transparent;
+    border: none;
+    max-height: none;
+    color: white;
+    font-family: ${(props) => props.theme.fonts.montserrat};
+    font-size: 18px;
+  }
 `;
 
 export const LogoutBtn = styled.button`
@@ -330,11 +331,14 @@ export const LogoutBtn = styled.button`
     text-decoration: underline solid ${(props) => props.theme.colors.blue} 2px;
     cursor: pointer;
   }
+
   @media (max-width: ${menuBreak}) {
     border-left: none;
     color: white;
     font-weight: 500;
     padding-left: 0px;
+    display: ${(props) => (props.collapse ? 'flex' : 'none')};
+    max-height: ${(props) => (props.collapse ? 'none' : '0px')};
     :hover {
       text-decoration-color: white;
       text-decoration-thickness: 1px;

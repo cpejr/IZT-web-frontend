@@ -23,6 +23,7 @@ import {
   LogoutBtn,
   MenuProfile,
   Divider,
+  MyProfile,
 } from './Styles';
 
 export default function Header() {
@@ -34,12 +35,14 @@ export default function Header() {
 
   const [bar, setBar] = useState(false);
   const [collapse, setCollapse] = useState(false);
+  const [collapseLogout, setCollapseLogout] = useState(false);
   const [language, setLanguage] = useState('EN'); // default language is EN
   const availableLaguages = ['EN', 'PT', 'DE'];
 
   const { mutate: logout } = useLogout({
     onSuccess: () => {
       setBar(false);
+      setCollapseLogout(false);
       if (isSmallScreen || location.pathname === '/perfil') navigate('/');
     },
     onError: () => {
@@ -51,15 +54,29 @@ export default function Header() {
     },
   });
 
+  const handleProfileBtn = () => {
+    setBar(false);
+    setCollapseLogout(false);
+    navigate('/perfil');
+  };
+
   const welcomeSection = () => {
     if (isSmallScreen)
       return (
-        <MenuProfile>
-          <Link to="/perfil" onClick={() => setBar(false)}>
-            Meu Perfil <IoIosArrowDown />
-          </Link>
-          <Divider />
-          <LogoutBtn onClick={logout}>Deslogar</LogoutBtn>
+        <MenuProfile collapse={collapseLogout} bar={bar}>
+          <MyProfile>
+            <button type="button" onClick={handleProfileBtn}>
+              Meu Perfil
+            </button>{' '}
+            <IoIosArrowDown
+              color="white"
+              onClick={() => setCollapseLogout(!collapseLogout)}
+            />
+          </MyProfile>
+          <Divider collapse={collapseLogout && bar} />
+          <LogoutBtn onClick={logout} collapse={collapseLogout && bar}>
+            Deslogar
+          </LogoutBtn>
         </MenuProfile>
       );
 
@@ -72,7 +89,9 @@ export default function Header() {
         <Link to="/perfil" onClick={() => setBar(false)}>
           {isLessThanEqualLimit ? `Olá, ${firstName}!` : 'Meu Perfil'}
         </Link>
-        <LogoutBtn onClick={logout}>Deslogar</LogoutBtn>
+        <LogoutBtn onClick={logout} collapse={collapseLogout}>
+          Deslogar
+        </LogoutBtn>
       </>
     );
   };
@@ -83,13 +102,31 @@ export default function Header() {
         <Logo />
         <Menu>
           <Nav bar={bar} collapse={collapse}>
-            <Link to="/catalogo" onClick={() => setBar(false)}>
+            <Link
+              to="/catalogo"
+              onClick={() => {
+                setBar(false);
+                setCollapseLogout(false);
+              }}
+            >
               Produtos
             </Link>
-            <Link to="/" onClick={() => setBar(false)}>
+            <Link
+              to="/"
+              onClick={() => {
+                setBar(false);
+                setCollapseLogout(false);
+              }}
+            >
               Cursos
             </Link>
-            <Link to="/" onClick={() => setBar(false)}>
+            <Link
+              to="/"
+              onClick={() => {
+                setBar(false);
+                setCollapseLogout(false);
+              }}
+            >
               Software
             </Link>
             <InvertItems>
@@ -103,8 +140,10 @@ export default function Header() {
                   hoverBackgroundColor800={theme.colors.greenishBlue}
                   hoverColor800="white"
                   hoverBorderColor800={theme.colors.greenishBlue}
+                  collapse={bar}
                   onClick={() => {
                     setBar(false);
+                    setCollapseLogout(false);
                     navigate('/login');
                   }}
                 >
@@ -126,7 +165,7 @@ export default function Header() {
                         setLanguage(lang);
                         setCollapse(!collapse);
                       }}
-                      collapse={+collapse}
+                      style={{ display: collapse ? 'flex' : 'none' }}
                     >
                       {lang}
                     </button>
