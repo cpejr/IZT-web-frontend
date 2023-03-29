@@ -112,6 +112,7 @@ export default function AdminMenu() {
           margin: '0px',
           padding: '0px',
           color: 'none',
+          background: '#123645',
         }}
         centered
         destroyOnClose

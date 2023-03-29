@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { HiPlusSm } from 'react-icons/hi';
-import { z } from 'zod';
 
 import { AdminShowFiles, AdminShowPictures } from '..';
 import { useCreateProduct } from '../../../hooks/query/products';
@@ -25,30 +24,10 @@ import {
   ModalButton,
   AddButton,
 } from './Styles';
-
-const validationSchema = z.object({
-  name: z
-    .string()
-    .min(1, 'Favor digitar o nome do produto')
-    .max(20, 'Nome do produto deve ter no máximo 20 caracteres'),
-  category: z.string({ required_error: 'Product category ID is required' }), // Here we need to pass the category id only
-
-  description: z
-    .string()
-    .min(1, 'Favor inserir uma descrição do produto')
-    .max(150, 'Descrição do produto deve ter no máximo 150 caracteres'),
-
-  advantages: z
-    .string()
-    .min(1, 'Favor inserir as vantagens do produto')
-    .max(150, 'Vantagens do produto devem ter no máximo 150 caracteres'),
-
-  pictures: z
-    .array(z.instanceof(File))
-    .nonempty('Você deve inserir ao menos uma foto'),
-
-  documents: z.array(z.instanceof(File)).default([]),
-});
+import {
+  buildCreateProductErrorMessage,
+  createProductValidationSchema,
+} from './utils';
 
 export default function ModalAddProduct() {
   const documentInputRef = useRef(null);
@@ -59,7 +38,7 @@ export default function ModalAddProduct() {
     control,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(createProductValidationSchema),
   });
 
   const documentsFieldArray = useFieldArray({
@@ -72,7 +51,15 @@ export default function ModalAddProduct() {
     name: 'pictures',
   });
 
-  const { mutate: createProduct } = useCreateProduct();
+  const { mutate: createProduct } = useCreateProduct({
+    onSuccess: () => alert('produto criado com sucesso!'), // insert toast
+    onError: (err) => {
+      const errorMessage = buildCreateProductErrorMessage(err);
+
+      // Do something to the errorMessage(toast)
+      alert(errorMessage);
+    },
+  });
   const onSubmit = (data) => createProduct(data);
 
   return (

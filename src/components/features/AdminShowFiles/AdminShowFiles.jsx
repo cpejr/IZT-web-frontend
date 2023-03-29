@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 
-import { Container, File } from './Styles';
+import { Arrows, Container, File } from './Styles';
 
 export default function AdminShowFiles({
   register,
@@ -28,14 +28,14 @@ export default function AdminShowFiles({
         const url = URL.createObjectURL(document);
         return (
           <Container key={id}>
-            <div>
+            <Arrows>
               <button type="button">
-                <CaretUpOutlined style={{ backgroundColor: 'transparent' }} />
+                <CaretUpOutlined />
               </button>
               <button type="button">
                 <CaretDownOutlined />
               </button>
-            </div>
+            </Arrows>
             <File href={url} target="_blank" rel="noopener noreferrer">
               {document.name}
             </File>
