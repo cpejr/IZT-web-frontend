@@ -166,34 +166,24 @@ export const ProcessSteps = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px;
+  padding: 0px 5px;
   gap: 40px;
   margin-top: 35px;
   margin-bottom: 50px;
   flex-direction: column;
 
   width: 100%;
-
-  @media (max-width: 700px) {
-    height: auto;
-  }
 `;
 
 export const Steps = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  gap: 50px;
-
+  flex-direction: column;
+  gap: 10px;
   width: 100%;
 
-  @media (max-width: 1000px) {
-    gap: 1%;
-  }
   @media (max-width: 700px) {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
   }
 `;
 
@@ -212,46 +202,30 @@ export const Title = styled.div`
   }
 `;
 
-export const Step = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-
-  @media (max-width: 700px) {
-    //gap: 75px;
-    flex-direction: column;
-    align-items: left;
-    justify-content: flex-start;
-    height: auto;
-    margin-bottom: 0px;
-  }
-`;
-
 export const Image = styled.img`
   height: 136px;
 
   @media (max-width: 1000px) {
-    height: 110px;
+    height: 100px;
   }
 `;
 
 export const StepsText = styled.p`
-  max-width: 180px;
-  height: 66px;
-
   font-size: 18px;
   line-height: 22px;
   text-align: center;
 
   @media (max-width: 1000px) {
     font-size: 15px;
-    width: 80%;
   }
   @media (max-width: 700px) {
     height: auto;
     font-size: 18px;
+    margin-bottom: 5px;
+  }
+  @media (max-width: 350px) {
+    font-size: 14px;
+    font-weight: 600;
   }
 `;
 export const Pic = styled.div`
@@ -275,10 +249,62 @@ export const Block = styled.div`
   }
 `;
 export const Arrow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
   @media (max-width: 700px) {
     display: flex;
-    align-self: flex-start;
-    margin-left: 35px;
-    height: 100%;
+    align-self: center;
+    height: auto;
+    width: auto;
+  }
+`;
+
+export const EmptyCell = styled.div`
+  width: 40px;
+  height: 40px;
+`;
+
+export const StepsImages = styled.div`
+  display: grid;
+  grid-template-columns: 135px 40px 135px 40px 135px 40px 135px;
+  justify-content: center;
+  justify-items: center;
+  column-gap: 25px;
+  width: 100%;
+
+  @media (max-width: 1000px) {
+    column-gap: 5px;
+  }
+  @media (max-width: 700px) {
+    grid-template-rows: 110px 40px 110px 40px 110px 40px 110px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: 5px;
+    max-width: 100px;
+    align-content: center;
+  }
+`;
+
+export const StepsDescription = styled.div`
+  display: grid;
+  grid-template-columns: 135px 40px 135px 40px 135px 40px 135px;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-start;
+  justify-items: center;
+  column-gap: 25px;
+  width: 100%;
+  @media (max-width: 1000px) {
+    column-gap: 5px;
+  }
+
+  @media (max-width: 700px) {
+    grid-template-rows: 110px 40px 110px 40px 110px 40px 110px;
+    grid-template-columns: 1fr;
+    row-gap: 5px;
+    max-width: 200px;
+    align-items: center;
   }
 `;

@@ -23,13 +23,14 @@ import {
   InfoTitle,
   InfoDescription,
   Arrow,
-  Block,
   ProcessSteps,
   Steps,
   Title,
-  Step,
   Image,
   StepsText,
+  EmptyCell,
+  StepsDescription,
+  StepsImages,
 } from './Styles';
 
 export default function ProductPage() {
@@ -91,85 +92,50 @@ export default function ProductPage() {
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
-          <Step>
-            <Block>
-              <Image src={step1} alt="1 Step" />
-              <StepsText>Entramos em contato para planejar o produto</StepsText>
-            </Block>
+          <StepsImages>
+            <Image src={step1} alt="1 Step" />
+
             <Arrow>
               {windowWidth > 700 ? (
-                <AiOutlineRight
-                  style={{ marginBottom: '80px' }}
-                  color="#123645"
-                  size="40px"
-                  strokeWidth={20}
-                />
+                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
               ) : (
-                <AiOutlineDown
-                  // style={{ marginBottom: '80px' }}
-                  color="#123645"
-                  size="40px"
-                  strokeWidth={20}
-                />
+                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
               )}
             </Arrow>
-          </Step>
 
-          <Step>
-            <Block>
-              <Image src={step2} alt="2 Step" />
-              <StepsText>Produzimos a sua peça</StepsText>
-            </Block>
+            <Image src={step2} alt="2 Step" />
+
             <Arrow>
               {' '}
               {windowWidth > 700 ? (
-                <AiOutlineRight
-                  style={{ marginBottom: '80px' }}
-                  color="#123645"
-                  size="40px"
-                  strokeWidth={20}
-                />
+                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
               ) : (
-                <AiOutlineDown
-                  // style={{ marginBottom: '80px' }}
-                  color="#123645"
-                  size="40px"
-                  strokeWidth={20}
-                />
+                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
               )}
             </Arrow>
-          </Step>
 
-          <Step>
-            <Block>
-              <Image src={step3} alt="3 Step" />
-              <StepsText>Realizamos a inspeção do produto</StepsText>
-            </Block>
+            <Image src={step3} alt="3 Step" />
+
             <Arrow>
               {' '}
               {windowWidth > 700 ? (
-                <AiOutlineRight
-                  style={{ marginBottom: '80px' }}
-                  color="#123645"
-                  size="40px"
-                  strokeWidth={20}
-                />
+                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
               ) : (
-                <AiOutlineDown
-                  // style={{ marginBottom: '80px' }}
-                  color="#123645"
-                  size="40px"
-                  strokeWidth={20}
-                />
+                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
               )}
             </Arrow>
-          </Step>
-          <Step>
-            <Block>
-              <Image src={step4} alt="4 Step" />
-              <StepsText>Enviamos para você</StepsText>
-            </Block>
-          </Step>
+
+            <Image src={step4} alt="4 Step" />
+          </StepsImages>
+          <StepsDescription>
+            <StepsText>Entramos em contato para planejar o produto</StepsText>
+            <EmptyCell />
+            <StepsText>Produzimos a sua peça</StepsText>
+            <EmptyCell />
+            <StepsText>Realizamos a inspeção do produto</StepsText>
+            <EmptyCell />
+            <StepsText>Enviamos para você</StepsText>
+          </StepsDescription>
         </Steps>
       </ProcessSteps>
     </Container>
