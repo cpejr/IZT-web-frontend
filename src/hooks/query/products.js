@@ -5,9 +5,9 @@ import {
   getProductById,
   createProduct,
   searchProductByName,
-  // updateProducts,
   // deleteProducts,
   sendProductBudget,
+  updateProduct,
 } from '../../services/api';
 
 export function useGetProducts({
@@ -61,16 +61,16 @@ export function useCreateProduct({
   });
 }
 
-// export function useUpdateProducts({
-//   onSuccess = () => {},
-//   onError = (err) => console.log(err),
-// } = {}) {
-//   return useMutation({
-//     mutationFn: updateProducts,
-//     onSuccess,
-//     onError,
-//   });
-// }
+export function useUpdateProducts({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: updateProduct,
+    onSuccess,
+    onError,
+  });
+}
 
 // export function useDeleteProducts({
 //   onSuccess = () => {},

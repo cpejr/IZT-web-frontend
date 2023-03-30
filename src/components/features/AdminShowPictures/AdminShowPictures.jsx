@@ -23,10 +23,12 @@ export default function AdminShowPictures({
 
   return (
     <Container>
-      {fieldsPictures?.map(({ file: [picture], id }, index) => {
+      {fieldsPictures?.map(({ file, id }, index) => {
         const name = `pictures.${index}.file`;
         const { onChange, ref } = register(name);
-        const url = URL.createObjectURL(picture);
+        const picture = file?.[0];
+        console.log(picture);
+        const url = picture?.url || URL.createObjectURL(picture);
         return (
           <PictureContainer key={id}>
             <Image src={url} alt="carousel" />

@@ -6,6 +6,8 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { HiPlusSm } from 'react-icons/hi';
 
+import { useUpdateProducts } from '../../../hooks/query/products';
+import AdminShowFiles from '../AdminShowFiles/AdminShowFiles';
 import AdminShowPictures from '../AdminShowPictures/AdminShowPictures';
 import {
   Container,
@@ -21,14 +23,14 @@ import {
   InputModalName,
   ModalButton,
 } from './Styles';
-import { editProductValidationSchema } from './utils';
+import {
+  // buildEditProductErrorMessage,
+  editProductValidationSchema,
+} from './utils';
 
-export default function ModalEditProduct({
-  productName,
-  productDescription,
-  productAdvantages,
-}) {
+export default function ModalEditProduct({ product }) {
   const pictureInputRef = useRef(null);
+  const documentInputRef = useRef(null);
 
   const {
     handleSubmit,
@@ -37,9 +39,38 @@ export default function ModalEditProduct({
     formState: { errors },
   } = useForm({
     resolver: zodResolver(editProductValidationSchema),
+    defaultValues: {
+      name: product.name,
+      description: product.description,
+      advantages: product.advantages,
+      pictures: product.pictures?.map((picture) => ({
+        file: [
+          {
+            url: picture.url,
+          },
+        ],
+      })),
+    },
   });
+  console.log(product.pictures?.map((picture) => [{ url: picture.url }]));
+
+  // const { mutate: updateProduct } = useUpdateProducts({
+  //   onSuccess: () => alert('produto modificado com sucesso!'), // insert toast
+  //   onError: (err) => {
+  //     const errorMessage = buildEditProductErrorMessage(err);
+
+  //     // Do something to the errorMessage(toast)
+  //     alert(errorMessage);
+  //   },
+  // });
+  // const onSubmit = (data) => updateProduct(data);
 
   const picturesFieldArray = useFieldArray({
+    control,
+    name: 'pictures',
+  });
+
+  const documentsFieldArray = useFieldArray({
     control,
     name: 'pictures',
   });
@@ -50,17 +81,17 @@ export default function ModalEditProduct({
         <LeftSection>
           <Subsection>
             <Text>Nome do produto:</Text>
-            <InputModalName defaultValue={productName} />
+            <InputModalName {...register('name')} />
           </Subsection>
 
           <Subsection>
             <Text>Descrição:</Text>
-            <InputModal defaultValue={productDescription} />
+            <InputModal {...register('description')} />
           </Subsection>
 
           <Subsection>
             <Text>Vantagens:</Text>
-            <InputModal defaultValue={productAdvantages} />
+            <InputModal {...register('advantages')} />
           </Subsection>
         </LeftSection>
 
@@ -96,9 +127,25 @@ export default function ModalEditProduct({
 
           <Subsection>
             <Text>Documentos</Text>
-            <AddButton>
+            <AdminShowFiles
+              register={register}
+              control={control}
+              errors={errors}
+              documentsFieldArray={documentsFieldArray}
+              buttonColor="black"
+            />
+            <AddButton onClick={() => documentInputRef.current.click()}>
+              <input
+                type="file"
+                style={{ display: 'none' }}
+                ref={documentInputRef}
+                onChange={(e) => {
+                  const file = e.target.files;
+                  documentsFieldArray.append({ file });
+                }}
+              />
               <HiPlusSm size={25} />
-              Novo documento
+              Novo Documento
             </AddButton>
           </Subsection>
 
@@ -118,7 +165,5 @@ export default function ModalEditProduct({
 }
 
 ModalEditProduct.propTypes = {
-  productName: PropTypes.func.isRequired,
-  productDescription: PropTypes.object.isRequired,
-  productAdvantages: PropTypes.object.isRequired,
+  product: PropTypes.object.isRequired,
 };

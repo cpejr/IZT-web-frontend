@@ -30,6 +30,7 @@ import {
 export default function ListProduct() {
   const [selectedCategory, setSelectedCategory] = useState({});
   const [modalEditProduct, setModalEditProduct] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({});
   const [name, setName] = useState('');
   const debouncedName = useDebounce(name);
 
@@ -40,7 +41,10 @@ export default function ListProduct() {
     category: selectedCategory?._id,
   });
 
-  const openModalEditProduct = () => setModalEditProduct(true);
+  const openModalEditProduct = (product) => {
+    setSelectedProduct(product);
+    setModalEditProduct(true);
+  };
   const closeModalEditProduct = () => setModalEditProduct(false);
 
   const mobileBreakpoint = 700;
@@ -85,7 +89,10 @@ export default function ListProduct() {
               </StyledLink>
             ) : (
               <EditButton>
-                <TbPencil onClick={openModalEditProduct} size={30} />
+                <TbPencil
+                  onClick={() => openModalEditProduct(product)}
+                  size={30}
+                />
               </EditButton>
             )}
           </Row>
@@ -110,7 +117,7 @@ export default function ListProduct() {
         centered
         destroyOnClose
       >
-        <ModalEditProduct />
+        <ModalEditProduct product={selectedProduct} />
       </ModalStyle>
     </Container>
   );
