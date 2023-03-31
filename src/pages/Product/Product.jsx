@@ -1,6 +1,7 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo } from 'react';
 
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
+import { useMediaQuery } from 'react-responsive';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import step1 from '../../assets/productPage/steps/Group75.png';
@@ -40,6 +41,7 @@ import buildGetProducErrorMessage from './utils';
 export default function Product() {
   const { _id } = useParams();
   const navigate = useNavigate();
+  const isMediumScreen = useMediaQuery({ minWidth: 700 });
 
   const { data: product, isLoading } = useGetProductById({
     _id,
@@ -73,18 +75,7 @@ export default function Product() {
   );
 
   if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
-  const [windowWidth, setWindowWidth] = useState(0);
 
-  useEffect(() => {
-    function handleResize() {
-      setWindowWidth(window.innerWidth);
-    }
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
   return (
     <Container>
       <ProductData>
@@ -125,7 +116,7 @@ export default function Product() {
             <Image src={step1} alt="1 Step" />
 
             <Arrow>
-              {windowWidth > 700 ? (
+              {isMediumScreen ? (
                 <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
               ) : (
                 <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
@@ -136,7 +127,7 @@ export default function Product() {
 
             <Arrow>
               {' '}
-              {windowWidth > 700 ? (
+              {isMediumScreen ? (
                 <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
               ) : (
                 <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
@@ -147,7 +138,7 @@ export default function Product() {
 
             <Arrow>
               {' '}
-              {windowWidth > 700 ? (
+              {isMediumScreen ? (
                 <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
               ) : (
                 <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
