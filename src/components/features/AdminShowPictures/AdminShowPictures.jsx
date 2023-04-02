@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import { CloseCircleOutlined, EditOutlined } from '@ant-design/icons';
+import PropTypes from 'prop-types';
+
 import {
   Buttons,
   Container,
@@ -23,12 +24,9 @@ export default function AdminShowPictures({
 
   return (
     <Container>
-      {fieldsPictures?.map(({ file, id }, index) => {
+      {fieldsPictures?.map(({ file: picture, id }, index) => {
         const name = `pictures.${index}.file`;
-        const { onChange, ref } = register(name);
-        const picture = file?.[0];
-        console.log(picture);
-        const url = picture?.url || URL.createObjectURL(picture);
+        const url = URL.createObjectURL(picture);
         return (
           <PictureContainer key={id}>
             <Image src={url} alt="carousel" />
@@ -48,10 +46,9 @@ export default function AdminShowPictures({
                   type="file"
                   style={{ display: 'none' }}
                   name={name}
-                  ref={ref}
                   onChange={(e) => {
-                    updatePicture(index, { file: e.target.files });
-                    onChange(e);
+                    const file = e.target.files[0];
+                    updatePicture(index, { file });
                   }}
                 />
               </label>

@@ -1,14 +1,19 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/jsx-props-no-spreading */
-import { useRef } from 'react';
+import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
+import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
-import { HiPlusSm } from 'react-icons/hi';
 
-import { AdminShowFiles, AdminShowPictures } from '..';
+import { useGetCategories } from '../../../hooks/query/categories';
 import { useCreateProduct } from '../../../hooks/query/products';
+import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../../utils/constants';
+import objectToFormData from '../../../utils/objToFormData';
+import { FormSelect } from '../../common';
+import AddFileButton from '../AddFileButton/AddFileButton';
+import DocumentFile from '../DocumentFile/DocumentFile';
+import PictureFile from '../PictureFile/PictureFile';
 import {
   Container,
   Form,
@@ -22,16 +27,51 @@ import {
   TextAreaModal,
   Input,
   ModalButton,
-  AddButton,
+  DocumentsContainer,
+  PicturesContainer,
 } from './Styles';
 import {
   buildCreateProductErrorMessage,
+  buildGetCategoriesErrorMessage,
   createProductValidationSchema,
 } from './utils';
 
-export default function ModalAddProduct() {
-  const documentInputRef = useRef(null);
-  const pictureInputRef = useRef(null);
+export default function ModalCreateProduct({ close }) {
+  // Variables
+  const [isPending, setIsPending] = useState(false); // Important for modal loading
+  const queryClient = useQueryClient();
+  const documentsLimit = 3;
+  const picturesLimit = 4;
+
+  // Backend calls
+  const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
+    {
+      onError: (err) => {
+        const errorMessage = buildGetCategoriesErrorMessage(err);
+
+        // Do something to the errorMessage
+        alert(errorMessage);
+      },
+    }
+  );
+  const { mutate: createProduct } = useCreateProduct({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['products', 'searchByName'],
+      });
+
+      close();
+    }, // insert toast
+    onError: (err) => {
+      const errorMessage = buildCreateProductErrorMessage(err);
+
+      // Do something to the errorMessage(toast)
+      alert(errorMessage);
+      setIsPending(false);
+    },
+  });
+
+  // Form handlers
   const {
     handleSubmit,
     register,
@@ -40,27 +80,31 @@ export default function ModalAddProduct() {
   } = useForm({
     resolver: zodResolver(createProductValidationSchema),
   });
-
-  const documentsFieldArray = useFieldArray({
+  const {
+    fields: fieldsDocuments,
+    append: appendDocument,
+    move: moveDocument,
+    update: updateDocument,
+    remove: removeDocument,
+  } = useFieldArray({
     control,
     name: 'documents',
   });
-
-  const picturesFieldArray = useFieldArray({
+  const {
+    fields: fieldsPictures,
+    append: appendPicture,
+    update: updatePicture,
+    remove: removePicture,
+  } = useFieldArray({
     control,
     name: 'pictures',
   });
+  const onSubmit = (data) => {
+    setIsPending(true);
+    const formData = objectToFormData(data);
 
-  const { mutate: createProduct } = useCreateProduct({
-    onSuccess: () => alert('produto criado com sucesso!'), // insert toast
-    onError: (err) => {
-      const errorMessage = buildCreateProductErrorMessage(err);
-
-      // Do something to the errorMessage(toast)
-      alert(errorMessage);
-    },
-  });
-  const onSubmit = (data) => createProduct(data);
+    createProduct(formData);
+  };
 
   return (
     <Container>
@@ -105,64 +149,79 @@ export default function ModalAddProduct() {
             <Subsection>
               <Text>Imagens:</Text>
               <MiniText>Anexe as imagens do produto</MiniText>
-              <AdminShowPictures
-                register={register}
-                control={control}
-                errors={errors}
-                picturesFieldArray={picturesFieldArray}
-                buttonColor="white"
-              />{' '}
-              <AddButton
-                type="button"
-                onClick={() => pictureInputRef.current.click()}
-              >
-                <input
-                  accept="image/jpeg, image/pjpeg, image/png, image/gif"
-                  type="file"
-                  style={{ display: 'none' }}
-                  ref={pictureInputRef}
-                  onChange={(e) => {
-                    const file = e.target.files;
-                    picturesFieldArray.append({ file });
-                  }}
+              <PicturesContainer>
+                {fieldsPictures.map(({ id, file: picture }, index) => (
+                  <PictureFile
+                    key={id}
+                    index={index}
+                    picture={picture}
+                    control={control}
+                    buttonColor="white"
+                    updatePicture={updatePicture}
+                    removePicture={removePicture}
+                  />
+                ))}
+              </PicturesContainer>
+              {fieldsPictures.length < picturesLimit && (
+                <AddFileButton
+                  label="Novo imagem"
+                  appendFn={appendPicture}
+                  allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
+                  sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
                 />
-                <HiPlusSm size={25} />
-                Nova imagem
-              </AddButton>
+              )}
             </Subsection>
 
             <Subsection>
-              <Text>Documentos</Text>
-              <AdminShowFiles
-                register={register}
-                control={control}
-                errors={errors}
-                documentsFieldArray={documentsFieldArray}
-                buttonColor="white"
-              />
-              <AddButton onClick={() => documentInputRef.current.click()}>
-                <input
-                  type="file"
-                  style={{ display: 'none' }}
-                  ref={documentInputRef}
-                  onChange={(e) => {
-                    const file = e.target.files;
-                    documentsFieldArray.append({ file });
-                  }}
+              <Text>Documentos:</Text>
+              <DocumentsContainer>
+                {fieldsDocuments.map(({ id, file: document }, index) => (
+                  <DocumentFile
+                    key={id}
+                    index={index}
+                    isLast={index === fieldsDocuments.length - 1}
+                    document={document}
+                    control={control}
+                    buttonColor="white"
+                    moveDocument={moveDocument}
+                    updateDocument={updateDocument}
+                    removeDocument={removeDocument}
+                  />
+                ))}
+              </DocumentsContainer>
+              {fieldsDocuments.length < documentsLimit && (
+                <AddFileButton
+                  label="Novo documento"
+                  appendFn={appendDocument}
+                  allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(
+                    ', '
+                  )}
+                  sizeLimitInMB={DOCUMENTS_CONFIG.sizeLimitInMB}
                 />
-                <HiPlusSm size={25} />
-                Novo documento
-              </AddButton>
+              )}
             </Subsection>
 
             <CategorySubsection>
-              <Text>Categorias</Text>
-              <p>SETLIST</p>
+              <Text>Categoria:</Text>
+              {isLoadingCategories ? (
+                <p>Carregando...</p>
+              ) : (
+                <FormSelect
+                  name="category"
+                  control={control}
+                  errors={errors}
+                  data={categories.map(({ _id, name }) => ({
+                    label: name,
+                    value: _id,
+                  }))}
+                  placeholder="Selecione a categoria"
+                />
+              )}
             </CategorySubsection>
 
             <ModalButton type="submit">
               <FiSave size={20} />
-              <p>Criar produto</p>
+              <p>{isPending ? 'Carregando...' : 'Criar produto'}</p>
             </ModalButton>
           </RightSection>
         </ModalContent>
@@ -170,3 +229,7 @@ export default function ModalAddProduct() {
     </Container>
   );
 }
+
+ModalCreateProduct.propTypes = {
+  close: PropTypes.func.isRequired,
+};

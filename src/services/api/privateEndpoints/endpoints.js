@@ -41,3 +41,20 @@ export const updateProduct = async ({ _id, newProductData }) => {
 
   return data;
 };
+
+export const getFiles = async (fileIds) => {
+  const responses = await Promise.all(
+    fileIds.map((fileId) =>
+      privateApi.get(`/files/${fileId}`, { responseType: 'blob' })
+    )
+  );
+  const data = responses.map((res) => {
+    const blob = res.data;
+    const fileName = res.headers['content-disposition'].match(/"(.*?)"/)[0];
+
+    const file = new File([blob], fileName, { type: blob.type });
+    return file;
+  });
+
+  return data;
+};

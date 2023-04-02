@@ -43,7 +43,7 @@ export function useSearchProductByName({
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
-    queryKey: ['products', 'searchProductByName', { name, category }],
+    queryKey: ['products', 'searchByName', { name, category }],
     queryFn: () => searchProductByName({ name, category }),
     onSuccess,
     onError,

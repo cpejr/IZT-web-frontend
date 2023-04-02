@@ -25,11 +25,11 @@ import {
 
 export default function AdminMenu() {
   const [openMenuMobile, setOpenMenuMobile] = useState(false);
-  const [modalAddProduct, setModalAddProduct] = useState(false);
+  const [modalCreateProduct, setModalCreateProduct] = useState(false);
   const [modalCreateCategory, setModalCreateCategory] = useState(false);
 
-  const openModalAddProduct = () => setModalAddProduct(true);
-  const closeModalAddProduct = () => setModalAddProduct(false);
+  const openModalCreateProduct = () => setModalCreateProduct(true);
+  const closeModalCreateProduct = () => setModalCreateProduct(false);
 
   const openModalCreateCategory = () => setModalCreateCategory(true);
   const closeModalCreateCategory = () => setModalCreateCategory(false);
@@ -57,7 +57,7 @@ export default function AdminMenu() {
                   Adicionar produtos
                 </StyledLink>
               ) : (
-                <Button onClick={openModalAddProduct}>
+                <Button onClick={openModalCreateProduct}>
                   Adicionar produtos
                 </Button>
               )}
@@ -102,8 +102,8 @@ export default function AdminMenu() {
       </MenuItens>
 
       <ModalStyle
-        open={modalAddProduct}
-        onCancel={closeModalAddProduct}
+        open={modalCreateProduct}
+        onCancel={closeModalCreateProduct}
         width={1100}
         padding={null}
         footer={null}
@@ -117,7 +117,7 @@ export default function AdminMenu() {
         centered
         destroyOnClose
       >
-        <ModalCreateProduct />
+        <ModalCreateProduct close={closeModalCreateProduct} />
       </ModalStyle>
 
       <ModalStyle

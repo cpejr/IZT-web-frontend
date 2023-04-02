@@ -5,4 +5,5 @@ export { default as SubmitButton } from './SubmitButton/SubmitButton';
 export { default as FormInput } from './FormInput/FormInput';
 export { default as FormMask } from './FormMask/FormMask';
 export { default as Select } from './Select/Select';
+export { default as FormSelect } from './FormSelect/FormSelect';
 export { default as RegisterInput } from './RegisterInput/RegisterInput';

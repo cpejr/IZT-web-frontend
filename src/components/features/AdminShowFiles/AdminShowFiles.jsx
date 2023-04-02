@@ -22,7 +22,7 @@ export default function AdminShowFiles({
 
   return (
     <div>
-      {fieldsDocuments?.map(({ file: [document], id }, index) => {
+      {fieldsDocuments?.map(({ file: document, id }, index) => {
         const name = `documents.${index}.file`;
         const { onChange, ref } = register(name);
         const url = URL.createObjectURL(document);
@@ -56,8 +56,8 @@ export default function AdminShowFiles({
                 name={name}
                 ref={ref}
                 onChange={(e) => {
-                  updateDocument(index, { file: e.target.files });
-                  onChange(e);
+                  // console.log(e.target.files[0]);
+                  updateDocument(index, { file: e.target.files[0] });
                 }}
               />
             </label>

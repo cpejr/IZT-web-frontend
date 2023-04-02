@@ -117,7 +117,10 @@ export default function ListProduct() {
         centered
         destroyOnClose
       >
-        <ModalEditProduct product={selectedProduct} />
+        <ModalEditProduct
+          product={selectedProduct}
+          close={closeModalEditProduct}
+        />
       </ModalStyle>
     </Container>
   );

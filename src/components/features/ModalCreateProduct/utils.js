@@ -8,23 +8,23 @@ export const createProductValidationSchema = z.object({
     .string()
     .min(1, 'Favor digitar o nome do produto')
     .max(20, 'Nome do produto deve ter no máximo 20 caracteres'),
-  category: z.string({ required_error: 'Product category ID is required' }), // Here we need to pass the category id only
-
+  category: z.string({ required_error: 'Favor selecionar uma categoria' }), // Here we need to pass the category id only
   description: z
     .string()
     .min(1, 'Favor inserir uma descrição do produto')
     .max(150, 'Descrição do produto deve ter no máximo 150 caracteres'),
-
   advantages: z
     .string()
     .min(1, 'Favor inserir as vantagens do produto')
     .max(150, 'Vantagens do produto devem ter no máximo 150 caracteres'),
-
   pictures: z
-    .array(z.instanceof(File))
-    .nonempty('Você deve inserir ao menos uma foto'),
-
-  documents: z.array(z.instanceof(File)).default([]),
+    .array(z.object({ file: z.instanceof(File) }))
+    .nonempty('Você deve inserir ao menos uma foto')
+    .transform((pictures) => pictures.map(({ file }) => file)),
+  documents: z
+    .array(z.object({ file: z.instanceof(File) }))
+    .default([])
+    .transform((documents) => documents.map(({ file }) => file)),
 });
 
 // Error Handling
@@ -40,4 +40,14 @@ const createProductDefaultErrorMessage =
 export function buildCreateProductErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
   return createProductErrorMessages[code] || createProductDefaultErrorMessage;
+}
+
+const getCategoriesErrorMessages = {
+  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
+};
+const getCategoriesIdDefaultErrorMessage =
+  'Ocorreu um erro na listagem das categorias. Tente novamente mais tarde';
+export function buildGetCategoriesErrorMessage(err) {
+  const code = err?.response?.data?.httpCode;
+  return getCategoriesErrorMessages[code] || getCategoriesIdDefaultErrorMessage;
 }
