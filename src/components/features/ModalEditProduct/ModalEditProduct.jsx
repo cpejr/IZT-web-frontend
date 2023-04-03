@@ -117,11 +117,35 @@ export default function ModalEditProduct({ product, close }) {
     setIsPending(true);
     const { pictures, documents, ...formatedData } = data;
 
-    formatedData.existingPictures = pictures.filter(({ _id }) => !!_id);
-    formatedData.newPictures = pictures.filter(({ _id }) => !_id);
+    formatedData.picturesIndexes = pictures.reduce((acc, picture, index) => {
+      if (picture instanceof File)
+        acc.newPictures = [...(acc.newPictures || []), index];
+      else acc.existingPictures = [...(acc.existingPictures || []), index];
 
-    formatedData.existingDocuments = documents.filter(({ _id }) => !!_id);
-    formatedData.newDocuments = documents.filter(({ _id }) => !_id);
+      return acc;
+    }, {});
+
+    formatedData.documentsIndexes = documents.reduce((acc, document, index) => {
+      if (document instanceof File)
+        acc.newDocuments = [...(acc.newDocuments || []), index];
+      else acc.existingDocuments = [...(acc.existingDocuments || []), index];
+
+      return acc;
+    }, {});
+
+    formatedData.newPictures = pictures.filter(
+      (picture) => picture instanceof File
+    );
+    formatedData.existingPictures = pictures.filter(
+      (picture) => !(picture instanceof File)
+    );
+
+    formatedData.newDocuments = documents.filter(
+      (document) => document instanceof File
+    );
+    formatedData.existingDocuments = documents.filter(
+      (document) => !(document instanceof File)
+    );
 
     const formData = serialize(formatedData, {
       allowEmptyArrays: true,
