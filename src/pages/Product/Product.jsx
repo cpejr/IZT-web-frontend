@@ -44,7 +44,6 @@ export default function Product() {
       const code = err?.response?.data?.httpCode;
       const message = buildGetProducErrorMessage(code);
 
-      // Do something with the error message
       toast.error(message);
 
       navigate('*'); // Go to NotFound page

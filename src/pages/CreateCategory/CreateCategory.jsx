@@ -3,6 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { RegisterInput } from '../../components/common';
 import { useCreateCategory } from '../../hooks/query/categories';
@@ -30,12 +31,12 @@ export default function CreateCategory() {
         queryKey: ['categories', 'searchByName'],
       });
       navigate('/administrador/loja/listar-categorias');
+      toast.success('Categoria criada com sucesso!');
     },
     onError: (err) => {
       const errorMessage = buildCreateCategoryErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 

@@ -27,7 +27,6 @@ export default function Catalog() {
     onError: (err) => {
       const errorMessage = buildGetCategoriesErrorMessage(err);
 
-      // Do something to the errorMessage
       toast.error(errorMessage);
     },
   });

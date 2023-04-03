@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 import { useCreateCategory } from '../../../hooks/query/categories';
 import {
@@ -30,12 +31,12 @@ export default function ModalCreateCategory({ close }) {
         queryKey: ['categories', 'searchByName'],
       });
       close();
+      toast.success('Categoria criada com sucesso!');
     },
     onError: (err) => {
       const errorMessage = buildCreateCategoryErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
       setIsPending(false);
     },
   });

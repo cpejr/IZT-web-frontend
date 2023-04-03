@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 import { useUpdateCategory } from '../../../hooks/query/categories';
 import {
@@ -34,13 +35,13 @@ export default function ModalEditCategory({ category, close }) {
           queryKey: ['category'],
         }),
       ]);
+      toast.success('Categoria alterada com sucesso!');
       close();
     },
     onError: (err) => {
       const errorMessage = buildUpdateCategoryErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
       setIsPending(false);
     },
   });
