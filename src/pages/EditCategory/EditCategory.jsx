@@ -22,7 +22,7 @@ export default function EditCategory() {
     onSuccess: () => {
       Promise.all([
         queryClient.invalidateQueries({
-          queryKey: ['categories', 'searchByName'],
+          queryKey: ['categories'],
         }),
         queryClient.invalidateQueries({
           queryKey: ['category'],

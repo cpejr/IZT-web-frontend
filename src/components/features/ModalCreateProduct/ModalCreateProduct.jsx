@@ -101,8 +101,8 @@ export default function ModalCreateProduct({ close }) {
   });
   const onSubmit = (data) => {
     setIsPending(true);
-    const formData = objectToFormData(data);
 
+    const formData = objectToFormData(data);
     createProduct(formData);
   };
 

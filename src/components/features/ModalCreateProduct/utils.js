@@ -16,6 +16,7 @@ export const createProductValidationSchema = z.object({
   advantages: z
     .string()
     .min(1, 'Favor inserir as vantagens do produto')
+    .min(5, 'Mínimo de 5 caracteres')
     .max(150, 'Vantagens do produto devem ter no máximo 150 caracteres'),
   pictures: z
     .array(z.object({ file: z.instanceof(File) }))

@@ -27,7 +27,7 @@ export default function CreateCategory() {
   const { mutate: createCategory, isLoading } = useCreateCategory({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['categories', 'searchByName'],
+        queryKey: ['categories'],
       });
       navigate('/administrador/loja/listar-categorias');
     },
