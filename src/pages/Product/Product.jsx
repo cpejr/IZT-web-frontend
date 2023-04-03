@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
@@ -44,7 +45,7 @@ export default function Product() {
       const message = buildGetProducErrorMessage(code);
 
       // Do something with the error message
-      alert(message);
+      toast.error(message);
 
       navigate('*'); // Go to NotFound page
     },

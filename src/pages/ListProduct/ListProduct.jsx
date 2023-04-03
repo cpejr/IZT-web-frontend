@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
+import { toast } from 'react-toastify';
 
 import { Select } from '../../components/common';
 import { ModalEditProduct } from '../../components/features';
@@ -26,6 +27,7 @@ import {
   SearchIconButton,
   ModalStyle,
 } from './Styles';
+import { buildGetProductsErrorMessage } from './utils';
 
 export default function ListProduct() {
   const [selectedCategory, setSelectedCategory] = useState({});
@@ -38,6 +40,11 @@ export default function ListProduct() {
   const { data: products } = useSearchProductByName({
     name: debouncedName,
     category: selectedCategory?._id,
+    onError: (err) => {
+      const errorMessage = buildGetProductsErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
   });
 
   const openModalEditProduct = () => setModalEditProduct(true);

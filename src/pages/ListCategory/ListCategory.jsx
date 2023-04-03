@@ -4,6 +4,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { ModalEditCategory } from '../../components/features';
 import { useSearchByNameCategories } from '../../hooks/query/categories';
@@ -37,8 +38,7 @@ export default function ListCategory() {
     onError: (err) => {
       const errorMessage = buildGetCategoriesErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 

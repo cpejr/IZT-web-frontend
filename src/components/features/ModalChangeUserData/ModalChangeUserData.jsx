@@ -34,7 +34,6 @@ export default function ModalChangeUserData({ close }) {
     onError: (err) => {
       const errorMessage = buildUpdateUserErrorMessage(err);
 
-      // Do something to the errorMessage
       toast.error(errorMessage);
       setIsPending(false);
     },

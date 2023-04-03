@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../hooks/query/categories';
 import {
@@ -27,7 +28,7 @@ export default function Catalog() {
       const errorMessage = buildGetCategoriesErrorMessage(err);
 
       // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 

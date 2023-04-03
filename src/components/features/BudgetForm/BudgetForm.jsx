@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import { useSendProductBudget } from '../../../hooks/query/products';
 import { FormInput, FormMask } from '../../common';
@@ -21,7 +22,7 @@ export default function BudgetForm({ productId }) {
       const errorMessage = buildBudgetEmailErrorMessage(err);
 
       // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 
