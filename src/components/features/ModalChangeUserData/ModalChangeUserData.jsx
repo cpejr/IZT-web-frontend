@@ -34,8 +34,8 @@ export default function ModalChangeUserData({ close }) {
       const errorMessage = buildUpdateUserErrorMessage(err);
 
       // Do something to the errorMessage
-      alert(errorMessage);
       setIsPending(false);
+      alert(errorMessage);
     },
   });
 

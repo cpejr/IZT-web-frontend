@@ -77,7 +77,7 @@ function Profile() {
                       <h2>{user.city}</h2>
                     </Info>
                     <Info>
-                      <h1>Endereco: </h1>
+                      <h1>Rua: </h1>
                       <h2>{user.address}</h2>
                     </Info>
                   </Infos>

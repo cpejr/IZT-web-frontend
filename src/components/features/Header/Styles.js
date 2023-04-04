@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Button } from '../../common';
 
-const menuBreak = '800px';
+const menuBreak = '900px';
 
 export const Content = styled.div`
   display: flex;
@@ -44,22 +44,20 @@ export const Nav = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-align: justify;
   gap: 20px;
-  text-align: center;
-
   a {
     font-size: 22px;
     font-family: ${(props) => props.theme.fonts.montserrat};
-    margin-right: 20px;
     text-decoration: none;
     color: ${(props) => props.theme.colors.blue};
     position: relative;
     flex-direction: row;
-    text-align: center;
+    flex-grow: 1;
     :hover {
       text-decoration: underline;
     }
-    @media (max-width: 990px) {
+    @media (max-width: 1080px) {
       font-size: 18px;
     }
     @media (max-width: ${menuBreak}) {
@@ -92,7 +90,6 @@ export const Nav = styled.div`
       transition: all 700ms ease;
     }
     button {
-      display: ${(props) => (props.bar ? 'flex' : 'none')};
       transition: all 700ms ease;
       font-weight: 600;
     }
@@ -153,6 +150,9 @@ export const ButtonLogin = styled(Button)`
   @media (max-width: 990px) {
     font-size: 18px;
     width: 120px;
+  }
+  @media (max-width: ${menuBreak}) {
+    display: ${(props) => (props.collapse ? 'flex' : 'none')};
   }
 `;
 
@@ -255,4 +255,97 @@ export const InvertItems = styled.div`
     justify-content: center;
     gap: 1rem;
   }
+`;
+
+export const Welcome = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-size: 1em;
+  font-weight: 700;
+  a {
+    margin-right: 5px;
+  }
+  @media (max-width: ${menuBreak}) {
+    text-align: center;
+    font-weight: 600;
+  }
+`;
+
+export const Divider = styled.div`
+  background-color: white;
+  height: 2px;
+  display: ${(props) => (props.collapse ? 'flex' : 'none')};
+  max-height: ${(props) => (props.collapse ? 'none' : '0px')};
+  align-self: stretch;
+  transition: all 0.5s ease-in-out 0.5s;
+`;
+
+export const MenuProfile = styled.div`
+  display: ${(props) => (props.bar ? 'flex' : 'none')};
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.5s ease-in-out 0.5s;
+  div {
+    svg {
+      transform: ${(props) =>
+        props.collapse ? 'rotate(180deg)' : 'rotate(0deg)'};
+      transition: all 0.2s ease-in-out;
+    }
+  }
+`;
+
+export const MyProfile = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+
+  button {
+    background-color: transparent;
+    border: none;
+    max-height: none;
+    color: white;
+    font-family: ${(props) => props.theme.fonts.montserrat};
+    font-size: 18px;
+  }
+`;
+
+export const LogoutBtn = styled.button`
+  border: none;
+  border-left: 2px solid ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.blue};
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-weight: 500;
+  text-decoration: none;
+  background-color: transparent;
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  :hover {
+    text-decoration: underline solid ${(props) => props.theme.colors.blue} 2px;
+    cursor: pointer;
+  }
+
+  @media (max-width: ${menuBreak}) {
+    border-left: none;
+    color: white;
+    font-weight: 500;
+    padding-left: 0px;
+    display: ${(props) => (props.collapse ? 'flex' : 'none')};
+    max-height: ${(props) => (props.collapse ? 'none' : '0px')};
+    :hover {
+      text-decoration-color: white;
+      text-decoration-thickness: 1px;
+    }
+  }
+  @media (max-width: 1080px) {
+    font-size: 18px;
+  }
+  transition: all 0.5s ease-in-out 0.5s;
 `;
