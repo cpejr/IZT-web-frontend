@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   RouterProvider,
   createBrowserRouter,
@@ -24,6 +25,7 @@ import {
   NotFound,
   Unauthorized,
   Forbidden,
+  CourseAuthorization,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -59,6 +61,7 @@ const router = createBrowserRouter(
               <Route path="listar-categorias" element={<ListCategory />} />
               <Route path="criar-categoria" element={<CreateCategory />} />
               <Route path="editar-categoria" element={<EditCategory />} />
+              <Route path="liberacao-cursos" element={<CourseAuthorization />} />
             </Route>
           </Route>
         </Route>

@@ -89,7 +89,9 @@ export default function AdminMenu() {
 
           <Section>
             <Title>Definições de acesso</Title>
-            <Text>Liberação do curso</Text>
+            <StyledLink to="/administrador/loja/liberacao-cursos">
+              Liberação do curso
+            </StyledLink>
             <Text>Liberação do software</Text>
           </Section>
         </MenuMobile>
