@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { IoIosArrowDown } from 'react-icons/io';
 import { useMediaQuery } from 'react-responsive';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
 import { useLogout } from '../../../hooks/query/sessions';
@@ -29,7 +29,6 @@ import {
 export default function Header() {
   const theme = useTheme();
   const navigate = useNavigate();
-  const location = useLocation();
   const isSmallScreen = useMediaQuery({ maxWidth: 900 });
   const { auth } = useAuthStore();
 
@@ -43,7 +42,7 @@ export default function Header() {
     onSuccess: () => {
       setBar(false);
       setCollapseLogout(false);
-      if (isSmallScreen || location.pathname === '/perfil') navigate('/');
+      navigate('/');
     },
     onError: () => {
       const errorMessage =
@@ -67,7 +66,7 @@ export default function Header() {
           <MyProfile>
             <button type="button" onClick={handleProfileBtn}>
               Meu Perfil
-            </button>{' '}
+            </button>
             <IoIosArrowDown
               color="white"
               onClick={() => setCollapseLogout(!collapseLogout)}
