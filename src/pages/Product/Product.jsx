@@ -126,7 +126,6 @@ export default function Product() {
             <Image src={step2} alt="2 Step" />
 
             <Arrow>
-              {' '}
               {isMediumScreen ? (
                 <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
               ) : (
@@ -137,7 +136,6 @@ export default function Product() {
             <Image src={step3} alt="3 Step" />
 
             <Arrow>
-              {' '}
               {isMediumScreen ? (
                 <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
               ) : (
