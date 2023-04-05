@@ -43,9 +43,6 @@ export default function CourseAuthorization() {
   const [modalCourseAuthorization, setModalCourseAuthorization] =
     useState(false);
 
-  const goToAuthorizeAccessPage = () =>
-    navigate('/administrador/loja/liberacao-cursos');
-
   const { width: windowWidth } = useWindowSize();
   const mobileBreakpoint = 700;
 
@@ -55,7 +52,7 @@ export default function CourseAuthorization() {
       <PageTitle>Liberação do curso</PageTitle>
       <AuthorizationDiv>
         {windowWidth <= mobileBreakpoint ? (
-          <StyledLink onClick={() => goToAuthorizeAccessPage()}>
+          <StyledLink to="/administrador/loja/autorizar-acesso">
             <PlusOutlined size="20px" />
             {'   '}
             Autorizar acesso

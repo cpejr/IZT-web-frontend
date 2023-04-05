@@ -1,4 +1,5 @@
 import { Modal } from 'antd';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -35,7 +36,7 @@ export const AuthorizationDiv = styled.div`
   gap: 1em;
 `;
 
-export const StyledLink = styled.button`
+export const StyledLink = styled(Link)`
   all: unset;
   cursor: pointer;
 

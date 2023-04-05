@@ -22,6 +22,7 @@ import {
   ListCategory,
   CreateCategory,
   EditCategory,
+  AuthorizeAccess,
   NotFound,
   Unauthorized,
   Forbidden,
@@ -61,7 +62,11 @@ const router = createBrowserRouter(
               <Route path="listar-categorias" element={<ListCategory />} />
               <Route path="criar-categoria" element={<CreateCategory />} />
               <Route path="editar-categoria" element={<EditCategory />} />
-              <Route path="liberacao-cursos" element={<CourseAuthorization />} />
+              <Route path="autorizar-acesso" element={<AuthorizeAccess />} />
+              <Route
+                path="liberacao-cursos"
+                element={<CourseAuthorization />}
+              />
             </Route>
           </Route>
         </Route>

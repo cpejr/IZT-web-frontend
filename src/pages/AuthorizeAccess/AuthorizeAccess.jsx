@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { RegisterInput } from '../../components/common';
 import useWindowSize from '../../hooks/useWindowSize';
@@ -15,9 +15,9 @@ import {
   CancelButton,
 } from './Styles';
 import { authorizeAccessValidationSchema } from './utils';
+import { useState } from 'react';
 
 export default function AuthorizeAccess() {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const [isLoading, setIsLoading] = useState(false); // Important for modal loading
