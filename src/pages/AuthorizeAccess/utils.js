@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { ERROR_CODES } from '../../utils/constants';
 
 // Form Validation
-export const modalAuthorizeAccessValidationSchema = z.object({
+export const authorizeAccessValidationSchema = z.object({
   email: z
     .string()
     .min(1, { message: 'Favor digitar o email' })
@@ -27,16 +27,15 @@ export const modalAuthorizeAccessValidationSchema = z.object({
 });
 
 // Error Handling
-const modalAuthorizeAccessErrorMessages = {
+const authorizeAccessErrorMessages = {
   [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
 };
-const modalAuthorizeAccessDefaultErrorMessage =
+const authorizeAccessDefaultErrorMessage =
   'Ocorreu um erro na liberação do curso. Tente novamente mais tarde';
 
-export function buildModalAuthorizeAccessErrorMessage(err) {
+export function buildAuthorizeAccessErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
   return (
-    modalAuthorizeAccessErrorMessages[code] ||
-    modalAuthorizeAccessDefaultErrorMessage
+    authorizeAccessErrorMessages[code] || authorizeAccessDefaultErrorMessage
   );
 }

@@ -35,6 +35,19 @@ export const AuthorizationDiv = styled.div`
   gap: 1em;
 `;
 
+export const StyledLink = styled.button`
+  all: unset;
+  cursor: pointer;
+
+  background-color: ${(props) => props.theme.colors.darkGreenishBlue};
+  padding: 5px 10px;
+  border: none;
+  font-size: 0.8em;
+  font-weight: 500;
+  color: white;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+`;
+
 export const AuthorizeButton = styled.button`
   background-color: ${(props) => props.theme.colors.darkGreenishBlue};
   padding: 5px 10px;

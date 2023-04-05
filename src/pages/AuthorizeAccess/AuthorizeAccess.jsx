@@ -5,7 +5,6 @@ import { FiSave } from 'react-icons/fi';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import { RegisterInput } from '../../components/common';
-import { useCreateCategory } from '../../hooks/query/categories';
 import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
@@ -15,35 +14,26 @@ import {
   SaveButton,
   CancelButton,
 } from './Styles';
-import { modalAuthorizeAccessValidationSchema } from './utils';
+import { authorizeAccessValidationSchema } from './utils';
 
-export default function CreateCategory() {
+export default function AuthorizeAccess() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { mutate: createCategory, isLoading } = useCreateCategory({
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['categories', 'searchByName'],
-      });
-      navigate('/administrador/loja/listar-categorias');
-    },
-    onError: (err) => {
-      const errorMessage = buildCreateCategoryErrorMessage(err);
-
-      // Do something to the errorMessage
-      alert(errorMessage);
-    },
-  });
+  const [isLoading, setIsLoading] = useState(false); // Important for modal loading
 
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(createCategoryValidationSchema),
+    resolver: zodResolver(authorizeAccessValidationSchema),
   });
-  const onSubmit = (data) => createCategory(data);
+
+  const onSubmit = (authorizedUser) => {
+    setIsLoading(true);
+    console.log(authorizedUser);
+  };
 
   const { width: windowWidth } = useWindowSize();
   const mobileBreakpoint = 700;
@@ -53,7 +43,7 @@ export default function CreateCategory() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Adicionar Categoria</Title>
+        <Title>Autorizar Acesso</Title>
 
         <RegisterInput
           label="Email:"
@@ -67,7 +57,7 @@ export default function CreateCategory() {
         <ButtonsDiv>
           <SaveButton disabled={isLoading} type="submit">
             <FiSave size={20} />
-            <p>{isLoading ? 'Carregando...' : '+ Autorizar Acesso'}</p>
+            <p>{isLoading ? 'Carregando...' : '+ Autorizar'}</p>
           </SaveButton>
 
           <CancelButton to="/administrador/loja/liberacao-cursos">

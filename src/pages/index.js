@@ -14,3 +14,4 @@ export { default as EditCategory } from './EditCategory/EditCategory';
 export { default as Forbidden } from './Forbidden/Forbidden';
 export { default as Unauthorized } from './Unauthorized/Unauthorized';
 export { default as CourseAuthorization } from './CourseAuthorization/CourseAuthorization';
+export { default as AuthorizeAccess } from './AuthorizeAccess/AuthorizeAccess';

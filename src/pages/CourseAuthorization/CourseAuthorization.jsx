@@ -3,12 +3,15 @@ import { useState } from 'react';
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
+import { useNavigate } from 'react-router-dom';
 
 import { ModalAuthorizeAccess } from '../../components/features';
+import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
   PageTitle,
   AuthorizationDiv,
+  StyledLink,
   AuthorizeButton,
   Table,
   TableHeader,
@@ -35,19 +38,36 @@ const data = [
 ];
 
 export default function CourseAuthorization() {
+  const navigate = useNavigate();
+
   const [modalCourseAuthorization, setModalCourseAuthorization] =
     useState(false);
+
+  const goToAuthorizeAccessPage = () =>
+    navigate('/administrador/loja/liberacao-cursos');
+
+  const { width: windowWidth } = useWindowSize();
+  const mobileBreakpoint = 700;
 
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
       <PageTitle>Liberação do curso</PageTitle>
       <AuthorizationDiv>
-        <AuthorizeButton onClick={() => setModalCourseAuthorization(true)}>
-          <PlusOutlined size="20px" />
-          {'   '}
-          Autorizar acesso
-        </AuthorizeButton>
+        {windowWidth <= mobileBreakpoint ? (
+          <StyledLink onClick={() => goToAuthorizeAccessPage()}>
+            <PlusOutlined size="20px" />
+            {'   '}
+            Autorizar acesso
+          </StyledLink>
+        ) : (
+          <AuthorizeButton onClick={() => setModalCourseAuthorization(true)}>
+            <PlusOutlined size="20px" />
+            {'   '}
+            Autorizar acesso
+          </AuthorizeButton>
+        )}
+
         <Table>
           <TableHeader>
             <h2>Email</h2>
