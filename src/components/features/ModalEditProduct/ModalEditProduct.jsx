@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { serialize } from 'object-to-formdata';
+import objToFormData from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
@@ -10,6 +10,7 @@ import { FiSave } from 'react-icons/fi';
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useUpdateProducts } from '../../../hooks/query/products';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../../utils/constants';
+import putIndexIntoFiles from '../../../utils/putIndexIntoFiles';
 import { FormSelect } from '../../common';
 import AddFileButton from '../AddFileButton/AddFileButton';
 import DocumentFile from '../DocumentFile/DocumentFile';
@@ -75,7 +76,6 @@ export default function ModalEditProduct({ product, close }) {
     handleSubmit,
     register,
     control,
-    // reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(editProductValidationSchema),
@@ -84,14 +84,18 @@ export default function ModalEditProduct({ product, close }) {
       description: product.description,
       advantages: product.advantages,
       category: product.category._id,
-      pictures: product.pictures.map((picture) => ({
-        id: picture._id,
-        file: picture,
-      })),
-      documents: product.documents.map((document) => ({
-        id: document._id,
-        file: document,
-      })),
+      pictures: product.pictures
+        .sort((pic1, pic2) => pic1.orderPosition - pic2.orderPosition)
+        .map((pic) => ({
+          id: pic.key,
+          file: pic,
+        })),
+      documents: product.documents
+        .sort((doc1, doc2) => doc1.orderPosition - doc2.orderPosition)
+        .map((doc) => ({
+          id: doc.key,
+          file: doc,
+        })),
     },
   });
   const {
@@ -113,41 +117,22 @@ export default function ModalEditProduct({ product, close }) {
     control,
     name: 'pictures',
   });
-  const onSubmit = (data) => {
+  const onSubmit = (inputData) => {
     setIsPending(true);
-    const { pictures, documents, ...formatedData } = data;
+    const { pictures, documents, ...data } = inputData;
 
-    formatedData.picturesIndexes = pictures.reduce((acc, picture, index) => {
-      if (picture instanceof File)
-        acc.newPictures = [...(acc.newPictures || []), index];
-      else acc.existingPictures = [...(acc.existingPictures || []), index];
+    const [newPictures, savedPictures] = putIndexIntoFiles(pictures);
+    const [newDocuments, savedDocuments] = putIndexIntoFiles(documents);
 
-      return acc;
-    }, {});
+    const dataObject = {
+      ...data,
+      newPictures,
+      savedPictures,
+      newDocuments,
+      savedDocuments,
+    };
 
-    formatedData.documentsIndexes = documents.reduce((acc, document, index) => {
-      if (document instanceof File)
-        acc.newDocuments = [...(acc.newDocuments || []), index];
-      else acc.existingDocuments = [...(acc.existingDocuments || []), index];
-
-      return acc;
-    }, {});
-
-    formatedData.newPictures = pictures.filter(
-      (picture) => picture instanceof File
-    );
-    formatedData.existingPictures = pictures.filter(
-      (picture) => !(picture instanceof File)
-    );
-
-    formatedData.newDocuments = documents.filter(
-      (document) => document instanceof File
-    );
-    formatedData.existingDocuments = documents.filter(
-      (document) => !(document instanceof File)
-    );
-
-    const formData = serialize(formatedData, {
+    const formData = objToFormData.serialize(dataObject, {
       allowEmptyArrays: true,
       noFilesWithArrayNotation: true,
       indices: true,
@@ -155,7 +140,6 @@ export default function ModalEditProduct({ product, close }) {
 
     updateProduct({ _id: product._id, newProductData: formData });
   };
-
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -166,7 +150,7 @@ export default function ModalEditProduct({ product, close }) {
               <Input
                 id="name"
                 name="name"
-                type="name"
+                type="text"
                 placeholder="Digite o nome do produto"
                 {...register('name')}
               />
@@ -177,7 +161,6 @@ export default function ModalEditProduct({ product, close }) {
               <TextAreaModal
                 id="description"
                 name="description"
-                type="description"
                 placeholder="Descreva o produto"
                 {...register('description')}
               />
@@ -188,7 +171,6 @@ export default function ModalEditProduct({ product, close }) {
               <TextAreaModal
                 id="advantages"
                 name="advantages"
-                type="advantages"
                 placeholder="Descreva as vantagens do produto"
                 {...register('advantages')}
               />

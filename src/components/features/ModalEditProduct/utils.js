@@ -20,9 +20,16 @@ export const editProductValidationSchema = z.object({
   pictures: z
     .array(
       z.object({
-        file: z
-          .instanceof(File)
-          .or(z.object({ _id: z.string(), url: z.string(), name: z.string() })),
+        file: z.instanceof(File).or(
+          z.object({
+            name: z.string(),
+            mimeType: z.string(),
+            url: z.string(),
+            key: z.string(),
+            size: z.number(),
+            orderPosition: z.number(),
+          })
+        ),
       })
     )
     .nonempty('Você deve inserir ao menos uma foto')
@@ -30,9 +37,16 @@ export const editProductValidationSchema = z.object({
   documents: z
     .array(
       z.object({
-        file: z
-          .instanceof(File)
-          .or(z.object({ _id: z.string(), url: z.string(), name: z.string() })),
+        file: z.instanceof(File).or(
+          z.object({
+            name: z.string(),
+            mimeType: z.string(),
+            url: z.string(),
+            key: z.string(),
+            size: z.number(),
+            orderPosition: z.number(),
+          })
+        ),
       })
     )
     .default([])

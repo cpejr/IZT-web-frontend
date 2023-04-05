@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
+import objToFormData from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
@@ -9,7 +10,6 @@ import { FiSave } from 'react-icons/fi';
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useCreateProduct } from '../../../hooks/query/products';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../../utils/constants';
-import objectToFormData from '../../../utils/objToFormData';
 import { FormSelect } from '../../common';
 import AddFileButton from '../AddFileButton/AddFileButton';
 import DocumentFile from '../DocumentFile/DocumentFile';
@@ -102,7 +102,11 @@ export default function ModalCreateProduct({ close }) {
   const onSubmit = (data) => {
     setIsPending(true);
 
-    const formData = objectToFormData(data);
+    const formData = objToFormData.serialize(data, {
+      allowEmptyArrays: true,
+      noFilesWithArrayNotation: true,
+      indices: true,
+    });
     createProduct(formData);
   };
 
@@ -116,7 +120,7 @@ export default function ModalCreateProduct({ close }) {
               <Input
                 id="name"
                 name="name"
-                type="name"
+                type="text"
                 placeholder="Digite o nome do produto"
                 {...register('name')}
               />
@@ -127,7 +131,6 @@ export default function ModalCreateProduct({ close }) {
               <TextAreaModal
                 id="description"
                 name="description"
-                type="description"
                 placeholder="Descreva o produto"
                 {...register('description')}
               />
@@ -137,7 +140,6 @@ export default function ModalCreateProduct({ close }) {
               <Text>Vantagens:</Text>
               <TextAreaModal
                 id="advantages"
-                name="advantages"
                 type="advantages"
                 placeholder="Descreva as vantagens do produto"
                 {...register('advantages')}
