@@ -11,11 +11,9 @@ import {
   Input,
   ModalContent,
   ModalButton,
+  ErrorMessage,
 } from './Styles';
-import {
-  // buildModalAuthorizeAccessErrorMessage,
-  modalAuthorizeAccessValidationSchema,
-} from './utils';
+import { modalAuthorizeAccessValidationSchema } from './utils';
 
 export default function ModalAuthorizeAccess({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
@@ -39,29 +37,39 @@ export default function ModalAuthorizeAccess({ close }) {
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
-          <Label>Email:</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Digite aqui o seu email"
-            errors={errors}
-            register={register}
-          />
-          {errors?.email?.message && <p>{errors?.email?.message}</p>}
-          <Label>Validade do acesso:</Label>
-          <Input
-            id="accessExpiration"
-            name="accessExpiration"
-            type="accessExpiration"
-            placeholder="DD/MM/YYYY"
-            control={control}
-            errors={errors}
-            register={register}
-          />
-          {errors?.accessExpiration?.message && (
-            <p>{errors?.accessExpiration?.message}</p>
-          )}
+          <div>
+            <Label>Email:</Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Digite aqui o seu email"
+              errors={errors}
+              register={register}
+            />
+            {errors?.email?.message && (
+              <ErrorMessage>{errors?.email?.message}</ErrorMessage>
+            )}
+          </div>
+
+          <div>
+            <Label>Validade do acesso:</Label>
+            <Input
+              id="accessExpiration"
+              name="accessExpiration"
+              type="accessExpiration"
+              placeholder="DD/MM/YYYY"
+              control={control}
+              errors={errors}
+              register={register}
+            />
+            {errors?.accessExpiration?.message && (
+              <ErrorMessage>
+                {errors?.accessExErrorMessageiration?.message}
+              </ErrorMessage>
+            )}
+          </div>
+
           <ModalButton disabled={isPending} type="submit">
             <p>{isPending ? 'Carregando...' : '+ Autorizar'}</p>
           </ModalButton>

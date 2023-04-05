@@ -16,6 +16,10 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: baseline;
+
+  div {
+    margin-bottom: 20px;
+  }
 `;
 
 export const Label = styled.label`
@@ -46,7 +50,6 @@ export const Input = styled.input`
 
   width: 400px;
   height: 40px;
-  margin-bottom: 20px;
 
   border-radius: 4px;
 `;
@@ -78,4 +81,13 @@ export const ModalButton = styled.button`
     font-weight: 600;
     font-size: 18px;
   }
+`;
+
+export const ErrorMessage = styled.p`
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: red;
+  margin-top: 10px;
 `;
