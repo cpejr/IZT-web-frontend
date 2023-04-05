@@ -84,18 +84,14 @@ export default function ModalEditProduct({ product, close }) {
       description: product.description,
       advantages: product.advantages,
       category: product.category._id,
-      pictures: product.pictures
-        .sort((pic1, pic2) => pic1.orderPosition - pic2.orderPosition)
-        .map((pic) => ({
-          id: pic.key,
-          file: pic,
-        })),
-      documents: product.documents
-        .sort((doc1, doc2) => doc1.orderPosition - doc2.orderPosition)
-        .map((doc) => ({
-          id: doc.key,
-          file: doc,
-        })),
+      pictures: product.pictures.map((pic) => ({
+        id: pic.key,
+        file: pic,
+      })),
+      documents: product.documents.map((doc) => ({
+        id: doc.key,
+        file: doc,
+      })),
     },
   });
   const {
