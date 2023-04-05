@@ -1,7 +1,8 @@
+import { useState } from 'react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import {
   Container,
@@ -11,29 +12,13 @@ import {
   ModalContent,
   ModalButton,
 } from './Styles';
+import {
+  // buildModalAuthorizeAccessErrorMessage,
+  modalAuthorizeAccessValidationSchema,
+} from './utils';
 
 export default function ModalAuthorizeAccess({ close }) {
-  const dateRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
-  const validationSchema = z.object({
-    email: z
-      .string()
-      .min(1, { message: 'Favor digitar o email' })
-      .email({
-        message: 'Insira um email válido',
-      })
-      .trim(),
-
-    accessExpiration: z
-      .date()
-      .refine((val) => dateRegex.test(val), {
-        message: 'Data inválida. O formato deve ser DD/MM/YY',
-      })
-      .transform((val) => {
-        // eslint-disable-next-line no-unused-vars
-        const [_, day, month, year] = val.match(dateRegex);
-        return new Date(`${year}-${month}-${day}`);
-      }),
-  });
+  const [isPending, setIsPending] = useState(false); // Important for modal loading
 
   const {
     handleSubmit,
@@ -41,10 +26,11 @@ export default function ModalAuthorizeAccess({ close }) {
     formState: { errors },
     control,
   } = useForm({
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(modalAuthorizeAccessValidationSchema),
   });
 
   const onSubmit = (authorizedUser) => {
+    setIsPending(true);
     console.log(authorizedUser);
     close();
   };
@@ -62,6 +48,7 @@ export default function ModalAuthorizeAccess({ close }) {
             errors={errors}
             register={register}
           />
+          {errors?.email?.message && <p>{errors?.email?.message}</p>}
           <Label>Validade do acesso:</Label>
           <Input
             id="accessExpiration"
@@ -72,8 +59,11 @@ export default function ModalAuthorizeAccess({ close }) {
             errors={errors}
             register={register}
           />
-          <ModalButton type="submit">
-            <p>+ Autorizar</p>
+          {errors?.accessExpiration?.message && (
+            <p>{errors?.accessExpiration?.message}</p>
+          )}
+          <ModalButton disabled={isPending} type="submit">
+            <p>{isPending ? 'Carregando...' : '+ Autorizar'}</p>
           </ModalButton>
         </ModalContent>
       </Form>
