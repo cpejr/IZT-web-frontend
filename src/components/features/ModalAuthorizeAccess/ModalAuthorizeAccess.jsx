@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import {
   Container,
@@ -32,6 +32,7 @@ export default function ModalAuthorizeAccess({ close }) {
     register,
     formState: { errors },
     control,
+    watch,
   } = useForm({
     resolver: zodResolver(modalAuthorizeAccessValidationSchema),
   });
@@ -41,6 +42,8 @@ export default function ModalAuthorizeAccess({ close }) {
     console.log(authorizedUser);
     close();
   };
+  console.log(watch());
+  console.log(errors);
 
   return (
     <Container>
@@ -52,7 +55,7 @@ export default function ModalAuthorizeAccess({ close }) {
               id="email"
               name="email"
               type="email"
-              placeholder="Digite aqui o seu email"
+              placeholder="email@email.com"
               {...register('email')}
             />
             {errors?.email?.message && (
@@ -63,14 +66,21 @@ export default function ModalAuthorizeAccess({ close }) {
             <Label>Validade do acesso:</Label>
             <AccessExpirationContainer>
               <ThemeProvider theme={darkTheme}>
-                <Date
-                  id="accessExpiration"
-                  name="accessExpiration"
-                  type="accessExpiration"
-                  placeholder="DD/MM/YYYY"
+                <Controller
                   control={control}
-                  errors={errors}
-                  register={register}
+                  name="accessExpiration"
+                  format="DD/MM/YYYY"
+                  render={({ field: { onChange, onBlur } }) => (
+                    <Date
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      slotProps={{
+                        textField: {
+                          helperText: errors?.accessExpiration?.message,
+                        },
+                      }}
+                    />
+                  )}
                 />
               </ThemeProvider>
             </AccessExpirationContainer>
