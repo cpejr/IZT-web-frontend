@@ -41,7 +41,7 @@ export default function ModalEditProduct({ product, close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const queryClient = useQueryClient();
   const documentsLimit = 3;
-  const picturesLimit = 4;
+  const picturesLimit = 5;
 
   // Backend calls
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
@@ -199,6 +199,7 @@ export default function ModalEditProduct({ product, close }) {
                   sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
                 />
               )}
+              <p>{errors?.pictures?.message}</p>
             </Subsection>
 
             <Subsection>
