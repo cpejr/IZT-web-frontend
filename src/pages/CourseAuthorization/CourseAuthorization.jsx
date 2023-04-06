@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
-import { Navigate, useNavigate } from 'react-router-dom';
 
 import { ModalAuthorizeAccess } from '../../components/features';
 import useWindowSize from '../../hooks/useWindowSize';
@@ -38,8 +37,6 @@ const data = [
 ];
 
 export default function CourseAuthorization() {
-  const navigate = useNavigate();
-
   const [modalCourseAuthorization, setModalCourseAuthorization] =
     useState(false);
 
@@ -102,7 +99,9 @@ export default function CourseAuthorization() {
         centered
         destroyOnClose
       >
-        <ModalAuthorizeAccess />
+        <ModalAuthorizeAccess
+          close={() => setModalCourseAuthorization(false)}
+        />
       </ModalStyle>
     </Container>
   );

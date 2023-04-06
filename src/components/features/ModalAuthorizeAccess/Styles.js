@@ -1,3 +1,4 @@
+import { DatePicker } from '@mui/x-date-pickers';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -16,10 +17,7 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: baseline;
-
-  div {
-    margin-bottom: 20px;
-  }
+  gap: 20px;
 `;
 
 export const Label = styled.label`
@@ -36,23 +34,11 @@ export const Label = styled.label`
 export const AccessExpirationContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-
   border-radius: 4px;
+`;
 
-  width: 400px;
-  height: 40px;
-
-  background-color: white;
-  padding: 0px 10px;
-
-  overflow-x: hidden;
-
-  button {
-    cursor: pointer;
-    border: 0px;
-  }
+export const Date = styled(DatePicker)`
+  border-color: white;
 `;
 
 export const Input = styled.input`

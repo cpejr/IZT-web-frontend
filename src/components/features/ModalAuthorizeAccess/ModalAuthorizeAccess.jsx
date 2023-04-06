@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 
@@ -11,17 +11,21 @@ import {
   Label,
   AccessExpirationContainer,
   Input,
-  Picture,
   ModalContent,
   ModalButton,
   ErrorMessage,
+  Date,
 } from './Styles';
 import { modalAuthorizeAccessValidationSchema } from './utils';
-import Calendar from '../../../assets/administratorPage/calendarIcon.png';
 
 export default function ModalAuthorizeAccess({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
-  const queryClient = useQueryClient();
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
 
   const {
     handleSubmit,
@@ -55,22 +59,20 @@ export default function ModalAuthorizeAccess({ close }) {
               <ErrorMessage>{errors?.email?.message}</ErrorMessage>
             )}
           </div>
-
           <div>
             <Label>Validade do acesso:</Label>
             <AccessExpirationContainer>
-              <Input
-                id="accessExpiration"
-                name="accessExpiration"
-                type="accessExpiration"
-                placeholder="DD/MM/YYYY"
-                control={control}
-                errors={errors}
-                register={register}
-              />
-              <button>
-                <Picture src={Calendar} alt="calendarIcon" />
-              </button>
+              <ThemeProvider theme={darkTheme}>
+                <Date
+                  id="accessExpiration"
+                  name="accessExpiration"
+                  type="accessExpiration"
+                  placeholder="DD/MM/YYYY"
+                  control={control}
+                  errors={errors}
+                  register={register}
+                />
+              </ThemeProvider>
             </AccessExpirationContainer>
             {errors?.accessExpiration?.message && (
               <ErrorMessage>
