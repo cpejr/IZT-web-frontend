@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 
@@ -8,15 +9,19 @@ import {
   Container,
   Form,
   Label,
+  AccessExpirationContainer,
   Input,
+  Picture,
   ModalContent,
   ModalButton,
   ErrorMessage,
 } from './Styles';
 import { modalAuthorizeAccessValidationSchema } from './utils';
+import Calendar from '../../../assets/administratorPage/calendarIcon.png';
 
 export default function ModalAuthorizeAccess({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
+  const queryClient = useQueryClient();
 
   const {
     handleSubmit,
@@ -44,8 +49,7 @@ export default function ModalAuthorizeAccess({ close }) {
               name="email"
               type="email"
               placeholder="Digite aqui o seu email"
-              errors={errors}
-              register={register}
+              {...register('email')}
             />
             {errors?.email?.message && (
               <ErrorMessage>{errors?.email?.message}</ErrorMessage>
@@ -54,15 +58,20 @@ export default function ModalAuthorizeAccess({ close }) {
 
           <div>
             <Label>Validade do acesso:</Label>
-            <Input
-              id="accessExpiration"
-              name="accessExpiration"
-              type="accessExpiration"
-              placeholder="DD/MM/YYYY"
-              control={control}
-              errors={errors}
-              register={register}
-            />
+            <AccessExpirationContainer>
+              <Input
+                id="accessExpiration"
+                name="accessExpiration"
+                type="accessExpiration"
+                placeholder="DD/MM/YYYY"
+                control={control}
+                errors={errors}
+                register={register}
+              />
+              <button>
+                <Picture src={Calendar} alt="calendarIcon" />
+              </button>
+            </AccessExpirationContainer>
             {errors?.accessExpiration?.message && (
               <ErrorMessage>
                 {errors?.accessExErrorMessageiration?.message}

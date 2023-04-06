@@ -1,7 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import { FiSave } from 'react-icons/fi';
 import { Navigate } from 'react-router-dom';
 
 import { RegisterInput } from '../../components/common';
@@ -18,8 +16,6 @@ import { authorizeAccessValidationSchema } from './utils';
 import { useState } from 'react';
 
 export default function AuthorizeAccess() {
-  const queryClient = useQueryClient();
-
   const [isLoading, setIsLoading] = useState(false); // Important for modal loading
 
   const {
@@ -52,11 +48,21 @@ export default function AuthorizeAccess() {
           name="email"
           register={register}
           errors={errors}
+          placeholder="email@email.com"
+        />
+
+        <RegisterInput
+          label="Validade do acesso:"
+          labelStyle={{ fontSize: '1.5em' }}
+          errorStyle={{ fontSize: '1em' }}
+          name="accessExpiration"
+          register={register}
+          errors={authorizeAccessValidationSchema}
+          placeholder="DD/MM/AAAA"
         />
 
         <ButtonsDiv>
           <SaveButton disabled={isLoading} type="submit">
-            <FiSave size={20} />
             <p>{isLoading ? 'Carregando...' : '+ Autorizar'}</p>
           </SaveButton>
 

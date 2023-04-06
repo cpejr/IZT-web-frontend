@@ -33,6 +33,28 @@ export const Label = styled.label`
   padding-bottom: 5px;
 `;
 
+export const AccessExpirationContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  border-radius: 4px;
+
+  width: 400px;
+  height: 40px;
+
+  background-color: white;
+  padding: 0px 10px;
+
+  overflow-x: hidden;
+
+  button {
+    cursor: pointer;
+    border: 0px;
+  }
+`;
+
 export const Input = styled.input`
   display: flex;
   flex-direction: row;
@@ -52,6 +74,14 @@ export const Input = styled.input`
   height: 40px;
 
   border-radius: 4px;
+`;
+
+export const Picture = styled.img`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
 `;
 
 export const ModalButton = styled.button`

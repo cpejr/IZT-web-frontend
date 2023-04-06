@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { ModalAuthorizeAccess } from '../../components/features';
 import useWindowSize from '../../hooks/useWindowSize';

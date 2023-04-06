@@ -16,6 +16,7 @@ export const Form = styled.form`
   flex-direction: column;
   width: 100%;
   max-width: 400px;
+  gap: 5px;
 `;
 
 export const Title = styled.p`
