@@ -3138,7 +3138,7 @@ progress@^2.0.0:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-prop-types@^15.6.1, prop-types@^15.7.2:
+prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.7.2:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -3300,18 +3300,6 @@ rc-mentions@~2.2.0:
     rc-util "^5.22.5"
 
 rc-menu@~9.8.0, rc-menu@~9.8.3:
-  version "9.8.3"
-  resolved "https://registry.yarnpkg.com/rc-menu/-/rc-menu-9.8.3.tgz#8ba1d0825612e641c9f2fe7cbdc83a63236bfb76"
-  integrity sha512-KCwiF+Z1hpf4c9Ww9P6J/tDnmk83x9zYKHkVmXrXiZlQP7RnMTJskQSUJa27CaQYDEwwfDqpek8+rBU8P79AxA==
-  dependencies:
-    "@babel/runtime" "^7.10.1"
-    classnames "2.x"
-    rc-motion "^2.4.3"
-    rc-overflow "^1.2.8"
-    rc-trigger "^5.1.2"
-    rc-util "^5.27.0"
-
-rc-menu@~9.8.3:
   version "9.8.3"
   resolved "https://registry.yarnpkg.com/rc-menu/-/rc-menu-9.8.3.tgz#8ba1d0825612e641c9f2fe7cbdc83a63236bfb76"
   integrity sha512-KCwiF+Z1hpf4c9Ww9P6J/tDnmk83x9zYKHkVmXrXiZlQP7RnMTJskQSUJa27CaQYDEwwfDqpek8+rBU8P79AxA==
@@ -3917,6 +3905,11 @@ split2@^3.0.0:
   dependencies:
     readable-stream "^3.0.0"
 
+ssr-window@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-4.0.2.tgz#dc6b3ee37be86ac0e3ddc60030f7b3bc9b8553be"
+  integrity sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ==
+
 string-argv@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/string-argv/-/string-argv-0.3.1.tgz#95e2fbec0427ae19184935f816d74aaa4c5c19da"
@@ -4080,6 +4073,13 @@ supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
+
+swiper@^9.2.0:
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-9.2.0.tgz#40e950b1c0d516403b3bf7083560ebac22a6f325"
+  integrity sha512-lWK9toYumUQss+YuTL+Mt0+8twiMJEyzioER4bbS4rrGHlkeLrDM8uhtAmnpdijELrNscuNUujDgKoMQZfQGlQ==
+  dependencies:
+    ssr-window "^4.0.2"
 
 text-extensions@^1.0.0:
   version "1.9.0"
