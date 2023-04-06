@@ -4,11 +4,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { HiPlusSm } from 'react-icons/hi';
+import { useMediaQuery } from 'react-responsive';
 import { Navigate } from 'react-router-dom';
 
 import { AdminShowFiles, AdminShowPictures } from '../../components/features';
 import { useCreateProduct } from '../../hooks/query/products';
-import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
   Title,
@@ -25,9 +25,7 @@ import {
 import { createProductValidationSchema } from './utils';
 
 export default function CreateProduct() {
-  const { width: windowWidth } = useWindowSize();
-  const mobileBreakpoint = 700;
-
+  const isMediumScreen = useMediaQuery({ minWidth: 700 });
   const documentInputRef = useRef(null);
   const pictureInputRef = useRef(null);
   const {
@@ -52,8 +50,7 @@ export default function CreateProduct() {
   const { mutate: createProduct } = useCreateProduct();
   const onSubmit = (data) => createProduct(data);
 
-  if (windowWidth > mobileBreakpoint)
-    return <Navigate to="/administrador/loja" />;
+  if (isMediumScreen) return <Navigate to="/administrador/loja" />;
   return (
     <Container>
       <Title>Adicionar produto</Title>

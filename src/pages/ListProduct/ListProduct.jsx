@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
+import { useMediaQuery } from 'react-responsive';
 
 import { Select } from '../../components/common';
 import { ModalEditProduct } from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
 import { useSearchProductByName } from '../../hooks/query/products';
 import useDebounce from '../../hooks/useDebounce';
-import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
   Title,
@@ -28,6 +28,7 @@ import {
 } from './Styles';
 
 export default function ListProduct() {
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const [selectedCategory, setSelectedCategory] = useState({});
   const [modalEditProduct, setModalEditProduct] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
@@ -46,9 +47,6 @@ export default function ListProduct() {
     setModalEditProduct(true);
   };
   const closeModalEditProduct = () => setModalEditProduct(false);
-
-  const mobileBreakpoint = 700;
-  const { width: windowWidth } = useWindowSize();
 
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
@@ -83,7 +81,7 @@ export default function ListProduct() {
             <Text>{product.name}</Text>
             <Text>{product.category.name}</Text>
 
-            {windowWidth <= mobileBreakpoint ? (
+            {isSmallScreen ? (
               <StyledLink to="/administrador/loja/editar-produto">
                 <TbPencil size={30} />
               </StyledLink>
