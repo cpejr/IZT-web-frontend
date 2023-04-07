@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -32,7 +34,6 @@ export default function ModalAuthorizeAccess({ close }) {
     register,
     formState: { errors },
     control,
-    watch,
   } = useForm({
     resolver: zodResolver(modalAuthorizeAccessValidationSchema),
   });
@@ -42,8 +43,6 @@ export default function ModalAuthorizeAccess({ close }) {
     console.log(authorizedUser);
     close();
   };
-  console.log(watch());
-  console.log(errors);
 
   return (
     <Container>
@@ -69,17 +68,31 @@ export default function ModalAuthorizeAccess({ close }) {
                 <Controller
                   control={control}
                   name="accessExpiration"
-                  format="DD/MM/YYYY"
-                  render={({ field: { onChange, onBlur } }) => (
-                    <Date
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      slotProps={{
-                        textField: {
-                          helperText: errors?.accessExpiration?.message,
-                        },
-                      }}
-                    />
+                  render={({
+                    field: { onChange, onBlur },
+                    formState: { error },
+                  }) => (
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Date
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        format="DD/MM/YYYY"
+                        disablePast
+                        slotProps={{
+                          textField: {
+                            // error: !!error,
+                            helperText: errors?.accessExpiration?.message,
+                          },
+                        }}
+                        // renderInput={(params) => (
+                        //   <TextField
+                        //     {...params}
+                        //     error={!!error}
+                        //     helperText={errors?.message}
+                        //   />
+                        // )}
+                      />
+                    </LocalizationProvider>
                   )}
                 />
               </ThemeProvider>
