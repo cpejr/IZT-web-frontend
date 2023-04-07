@@ -1,6 +1,7 @@
-import FinishedVideo from '../../assets/coursesPage/finishedVideo.png';
-import UnfinishedVideo from '../../assets/coursesPage/unfinishedVideo.png';
+import { useState } from 'react';
+
 import Image from '../../assets/coursesPage/womanStudying.png';
+import { CoursesScroll } from '../../components/features';
 import {
   Container,
   MainDiv,
@@ -8,18 +9,35 @@ import {
   Title,
   Text,
   MainSection,
-  CoursesScroll,
-  SubtitleScroll,
-  GreyLine,
-  TopicDiv,
-  ScrollIcon,
-  Topics,
-  VideoTime,
   VideoSectionDiv,
-  Picture,
+  Video,
+  GreyLine,
 } from './Styles';
 
 export default function Courses() {
+  const [video, setVideo] = useState('');
+
+  const availableVideos = [
+    {
+      id: 1,
+      alt: '4:44 by Jay Z',
+      src: 'https://www.youtube.com/watch?v=8pIhrMIsPAE&list=PL_QxeANzQhstL3mA0hoyFV7HsbA7yx6ie&index=2',
+    },
+    {
+      id: 2,
+      alt: 'PRIDE. by Kendrick Lamar',
+      src: 'https://www.youtube.com/watch?v=Iy-dJwHVX84',
+    },
+    {
+      id: 3,
+      alt: 'Money trees by Kendrick Lamar',
+      src: 'https://www.youtube.com/watch?v=pRGmFiEyr0A',
+    },
+  ];
+
+  const changeVideo = (videoName) => {
+    setVideo(videoName);
+  };
   return (
     <Container>
       <MainDiv>
@@ -32,123 +50,14 @@ export default function Courses() {
             sapien.
           </Text>
         </IntroductionDiv>
+        <GreyLine />
 
         <MainSection>
-          <CoursesScroll>
-            <SubtitleScroll>Introdução</SubtitleScroll>
-            <GreyLine />
-            <div>
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={FinishedVideo} alt="finishedVideo" />
-                  <Topics>Introdução</Topics>
-                </div>
-                <VideoTime>15:23</VideoTime>
-              </TopicDiv>
+          <CoursesScroll />
 
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={FinishedVideo} alt="finishedVideo" />
-                  <Topics>Vídeo 1</Topics>
-                </div>
-                <VideoTime>09:10</VideoTime>
-              </TopicDiv>
-
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-                  <Topics>Vídeo 2</Topics>
-                </div>
-                <VideoTime>05:43</VideoTime>
-              </TopicDiv>
-
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-                  <Topics>Vídeo 3</Topics>
-                </div>
-                <VideoTime>03:25</VideoTime>
-              </TopicDiv>
-            </div>
-
-            <SubtitleScroll>Capítulo 1</SubtitleScroll>
-            <GreyLine />
-            <div>
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={FinishedVideo} alt="finishedVideo" />
-                  <Topics>Introdução</Topics>
-                </div>
-                <VideoTime>15:23</VideoTime>
-              </TopicDiv>
-
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={FinishedVideo} alt="finishedVideo" />
-                  <Topics>Vídeo 1</Topics>
-                </div>
-                <VideoTime>09:10</VideoTime>
-              </TopicDiv>
-
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-                  <Topics>Vídeo 2</Topics>
-                </div>
-                <VideoTime>05:43</VideoTime>
-              </TopicDiv>
-
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-                  <Topics>Vídeo 3</Topics>
-                </div>
-                <VideoTime>03:25</VideoTime>
-              </TopicDiv>
-            </div>
-
-            <SubtitleScroll>Capítulo 2</SubtitleScroll>
-            <GreyLine />
-            <div>
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={FinishedVideo} alt="finishedVideo" />
-                  <Topics>Introdução</Topics>
-                </div>
-                <VideoTime>15:23</VideoTime>
-              </TopicDiv>
-
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={FinishedVideo} alt="finishedVideo" />
-                  <Topics>Vídeo 1</Topics>
-                </div>
-                <VideoTime>09:10</VideoTime>
-              </TopicDiv>
-
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-                  <Topics>Vídeo 2</Topics>
-                </div>
-                <VideoTime>05:43</VideoTime>
-              </TopicDiv>
-
-              <TopicDiv>
-                <div>
-                  <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-                  <Topics>Vídeo 3</Topics>
-                </div>
-                <VideoTime>03:25</VideoTime>
-              </TopicDiv>
-            </div>
-
-            <SubtitleScroll>Capítulo 3</SubtitleScroll>
-          </CoursesScroll>
-
-          <VideoSectionDiv>
+          <VideoSectionDiv id="videoSection">
             <Title>Vídeo 2</Title>
-            <Picture src={Image} alt="WomanStudyingImage" />
+            <Video src={Image} alt="CourseVideo" allowfullscreen />
             <Text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               augue felis, eleifend at nibh a, fringilla iaculis augue. Vivamus

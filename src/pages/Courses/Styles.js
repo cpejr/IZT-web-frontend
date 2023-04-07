@@ -24,6 +24,7 @@ export const MainDiv = styled.div`
 export const IntroductionDiv = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 1275px;
   width: 100%;
 `;
 
@@ -47,10 +48,8 @@ export const Text = styled.p`
 
 export const MainSection = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   gap: 2em;
-
+  max-width: 1282px;
   p {
     margin-top: 0px;
   }
@@ -58,84 +57,41 @@ export const MainSection = styled.div`
   div {
     gap: 15px;
   }
-  @media (max-width: 1000px) {
-    flex-direction: column;
+  @media (max-width: 800px) {
+    flex-wrap: wrap-reverse;
+    align-items: center;
   }
-`;
-
-export const CoursesScroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  max-width: 250px;
-  width: 100%;
-  height: 100%;
-`;
-
-export const SubtitleScroll = styled.p`
-  font-weight: 600;
-  font-size: 1.6rem;
-  line-height: 30px;
-
-  color: ${(props) => props.theme.colors.blue};
 `;
 
 export const GreyLine = styled.div`
-  width: 100%;
+  width: 85%;
   height: 2px;
 
   background: #d9d9d9;
-`;
 
-export const TopicDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  margin: 1em;
 
-  div {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
+  @media (min-width: 800px) {
+    display: none;
   }
-`;
-
-export const ScrollIcon = styled.img`
-  width: 1.2rem;
-  height: 1.2rem;
-`;
-
-export const Topics = styled.p`
-  font-weight: 500;
-  font-size: 1.2rem;
-  line-height: 24px;
-
-  color: #202020;
-`;
-
-export const VideoTime = styled.p`
-  font-weight: 400;
-  font-size: 1rem;
-
-  color: #a5a5a5;
 `;
 
 export const VideoSectionDiv = styled.div`
   width: 100%;
+  height: auto;
   max-width: 982px;
-  height: 735.25px;
+  max-height: 735.25px;
 `;
 
-export const Picture = styled.img`
+export const Video = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
 
   width: 100%;
-  max-width: 980px;
+  /* max-width: 980px; */
   height: auto;
+  /* max-height: 552px */
 
-  margin-bottom: 25px;
-  max-width: 100%;
+  margin-bottom: 1.8em;
 `;
