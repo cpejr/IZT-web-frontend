@@ -58,7 +58,7 @@ const editProductErrorMessages = {
   [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',
   [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',
   [ERROR_CODES.FORBIDDEN]: 'Usuário não autorizado',
-  [ERROR_CODES.CONFLICT]: 'O produto já foi criado',
+  [ERROR_CODES.CONFLICT]: 'O produto já existe',
 };
 const editProductDefaultErrorMessage =
   'Erro ao criar o produto. Tente novamente mais tarde';
