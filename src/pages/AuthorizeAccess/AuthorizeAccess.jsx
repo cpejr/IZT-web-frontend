@@ -27,18 +27,27 @@ export default function AuthorizeAccess() {
   const [isLoading, setIsLoading] = useState(false); // Important for modal loading
   const [dateError, setDateError] = useState(null);
 
-  const darkTheme = createTheme({
+  const theme = createTheme({
     palette: {
+      primary: {
+        main: '#000000',
+        light: '#000000',
+      },
       text: {
-        primary: '#000',
+        primary: '#000000',
         secondary: '#000000',
-        disabled: '#404040',
+        disabled: '#000000',
       },
       action: {
         active: '#000000',
         hover: '#203699',
         selected: '#203699',
+        disabled: '#000000',
       },
+      background: {
+        default: '#fff',
+      },
+      divider: '#000000',
     },
   });
 
@@ -93,7 +102,7 @@ export default function AuthorizeAccess() {
         <div>
           <Label>Validade do acesso:</Label>
           <AccessExpirationContainer>
-            <ThemeProvider theme={darkTheme}>
+            <ThemeProvider theme={theme}>
               <Controller
                 control={control}
                 name="accessExpiration"
