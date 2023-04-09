@@ -57,6 +57,9 @@ export const AuthorizeButton = styled.button`
   font-weight: 500;
   color: white;
   font-family: ${(props) => props.theme.fonts.montserrat};
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const Table = styled.div`
