@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -22,6 +22,7 @@ import { modalAuthorizeAccessValidationSchema } from './utils';
 
 export default function ModalAuthorizeAccess({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
+  const [dateError, setDateError] = useState(null);
 
   const darkTheme = createTheme({
     palette: {
@@ -43,6 +44,20 @@ export default function ModalAuthorizeAccess({ close }) {
     console.log(authorizedUser);
     close();
   };
+
+  const errorMessage = useMemo(() => {
+    switch (dateError) {
+      case 'invalidDate': {
+        return 'Data inválida';
+      }
+      case 'disablePast': {
+        return 'Insira uma data futura';
+      }
+      default: {
+        return '';
+      }
+    }
+  }, [dateError]);
 
   return (
     <Container>
@@ -68,20 +83,18 @@ export default function ModalAuthorizeAccess({ close }) {
                 <Controller
                   control={control}
                   name="accessExpiration"
-                  render={({
-                    field: { onChange, onBlur },
-                    formState: { error },
-                  }) => (
+                  render={({ field: { onChange, onBlur } }) => (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <Date
                         onChange={onChange}
                         onBlur={onBlur}
                         format="DD/MM/YYYY"
+                        onError={(newError) => setDateError(newError)}
                         disablePast
                         slotProps={{
                           textField: {
                             // error: !!error,
-                            helperText: errors?.accessExpiration?.message,
+                            helperText: errorMessage,
                           },
                         }}
                         // renderInput={(params) => (
@@ -104,7 +117,7 @@ export default function ModalAuthorizeAccess({ close }) {
             )}
           </div>
 
-          <ModalButton disabled={isPending} type="submit">
+          <ModalButton disabled={isPending || dateError} type="submit">
             <p>{isPending ? 'Carregando...' : '+ Autorizar'}</p>
           </ModalButton>
         </ModalContent>

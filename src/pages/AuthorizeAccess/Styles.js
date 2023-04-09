@@ -1,3 +1,4 @@
+import { DatePicker } from '@mui/x-date-pickers';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -121,4 +122,32 @@ export const CancelButton = styled(Link)`
     border: white;
     cursor: pointer;
   }
+`;
+
+export const AccessExpirationContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+`;
+
+export const Date = styled(DatePicker)``;
+
+export const Label = styled.label`
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  align-self: baseline;
+
+  color: white;
+  padding-bottom: 5px;
+`;
+
+export const ErrorMessage = styled.p`
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: red;
+  margin-top: 10px;
 `;

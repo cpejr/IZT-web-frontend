@@ -37,9 +37,7 @@ export const AccessExpirationContainer = styled.div`
   border-radius: 4px;
 `;
 
-export const Date = styled(DatePicker)`
-  border-color: white;
-`;
+export const Date = styled(DatePicker)``;
 
 export const Input = styled.input`
   display: flex;
