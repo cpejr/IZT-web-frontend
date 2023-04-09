@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { CloseOutlined } from '@ant-design/icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { useMediaQuery } from 'react-responsive';
 
-import useWindowSize from '../../../hooks/useWindowSize';
 import ModalCreateCategory from '../ModalCreateCategory/ModalCreateCategory';
 import ModalCreateProduct from '../ModalCreateProduct/ModalCreateProduct';
 import {
@@ -27,15 +27,13 @@ export default function AdminMenu() {
   const [openMenuMobile, setOpenMenuMobile] = useState(false);
   const [modalAddProduct, setModalAddProduct] = useState(false);
   const [modalCreateCategory, setModalCreateCategory] = useState(false);
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
   const openModalAddProduct = () => setModalAddProduct(true);
   const closeModalAddProduct = () => setModalAddProduct(false);
 
   const openModalCreateCategory = () => setModalCreateCategory(true);
   const closeModalCreateCategory = () => setModalCreateCategory(false);
-
-  const mobileBreakpoint = 700;
-  const { width: windowWidth } = useWindowSize();
 
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
@@ -52,7 +50,7 @@ export default function AdminMenu() {
             <Section>
               <Title>Produtos</Title>
 
-              {windowWidth <= mobileBreakpoint ? (
+              {isSmallScreen ? (
                 <StyledLink to="/administrador/loja/criar-produto">
                   Adicionar produtos
                 </StyledLink>
@@ -68,7 +66,7 @@ export default function AdminMenu() {
             <Section>
               <Title>Categorias</Title>
 
-              {windowWidth <= mobileBreakpoint ? (
+              {isSmallScreen ? (
                 <StyledLink to="/administrador/loja/criar-categoria">
                   Adicionar categoria
                 </StyledLink>

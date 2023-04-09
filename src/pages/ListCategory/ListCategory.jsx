@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
+import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
 
 import { ModalEditCategory } from '../../components/features';
 import { useSearchByNameCategories } from '../../hooks/query/categories';
 import useDebounce from '../../hooks/useDebounce';
-import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
   Title,
@@ -27,6 +27,7 @@ import { buildGetCategoriesErrorMessage } from './utils';
 
 export default function ListCategory() {
   const navigate = useNavigate();
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const [modalEditCategory, setModalEditCategory] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState({});
   const [name, setName] = useState('');
@@ -53,9 +54,6 @@ export default function ListCategory() {
   };
   const closeModalEditCategory = () => setModalEditCategory(false);
 
-  const { width: windowWidth } = useWindowSize();
-  const mobileBreakpoint = 700;
-
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
@@ -78,7 +76,7 @@ export default function ListCategory() {
           <Row key={category._id}>
             <Text>{category.name}</Text>
 
-            {windowWidth <= mobileBreakpoint ? (
+            {isSmallScreen ? (
               <StyledLink onClick={() => goToEditCategoryPage(category)}>
                 <TbPencil size={30} />
               </StyledLink>
