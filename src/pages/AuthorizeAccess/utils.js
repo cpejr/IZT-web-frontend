@@ -13,14 +13,9 @@ export const authorizeAccessValidationSchema = z.object({
     })
     .trim(),
 
-  accessExpiration: z
-    .date()
-    .refine((val) => dateRegex.test(val), {
-      message: 'Data inválida. O formato deve ser DD/MM/YY',
-    })
-    .transform((val) => {
-      // eslint-disable-next-line no-unused-vars
-      const [_, day, month, year] = val.match(dateRegex);
-      return new Date(`${year}-${month}-${day}`);
+  accessExpiration: z.coerce.date({
+    errorMap: () => ({
+      message: 'Favor inserir uma data',
     }),
+  }),
 });

@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Controller, useForm } from 'react-hook-form';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { RegisterInput } from '../../components/common';
 import useWindowSize from '../../hooks/useWindowSize';
@@ -24,6 +24,7 @@ import {
 import { authorizeAccessValidationSchema } from './utils';
 
 export default function AuthorizeAccess() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false); // Important for modal loading
   const [dateError, setDateError] = useState(null);
 
@@ -77,6 +78,7 @@ export default function AuthorizeAccess() {
   const onSubmit = (authorizedUser) => {
     setIsLoading(true);
     console.log(authorizedUser);
+    navigate('/administrador/loja/liberacao-cursos');
   };
 
   const { width: windowWidth } = useWindowSize();

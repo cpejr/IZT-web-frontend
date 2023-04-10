@@ -138,7 +138,6 @@ export const Label = styled.label`
   align-self: baseline;
 
   font-size: 1.5em;
-  font-family: Montserrat, sans-serif;
   font-weight: 400;
 
   padding-bottom: 5px;
