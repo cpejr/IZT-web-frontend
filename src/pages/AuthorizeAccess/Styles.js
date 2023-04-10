@@ -135,11 +135,12 @@ export const Date = styled(DatePicker)``;
 export const Label = styled.label`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
   align-self: baseline;
 
-  color: white;
+  font-size: 1.5em;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+
   padding-bottom: 5px;
 `;
 
