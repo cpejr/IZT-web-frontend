@@ -26,7 +26,7 @@ export default function ModalAuthorizeAccess({ close }) {
 
   const darkTheme = createTheme({
     palette: {
-      mode: 'dark',
+      mode: 'light',
     },
   });
 
