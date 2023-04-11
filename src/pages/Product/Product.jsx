@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
+import { useMediaQuery } from 'react-responsive';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -25,18 +27,22 @@ import {
   ProductInfos,
   InfoTitle,
   InfoDescription,
+  Arrow,
   ProcessSteps,
   Steps,
   Title,
-  Step,
   Image,
   StepsText,
+  EmptyCell,
+  StepsDescription,
+  StepsImages,
 } from './Styles';
 import buildGetProducErrorMessage from './utils';
 
 export default function Product() {
   const { _id } = useParams();
   const navigate = useNavigate();
+  const isMediumScreen = useMediaQuery({ minWidth: 700 });
 
   const { data: product, isLoading } = useGetProductById({
     _id,
@@ -69,6 +75,7 @@ export default function Product() {
   );
 
   if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
+
   return (
     <Container>
       <ProductData>
@@ -105,25 +112,48 @@ export default function Product() {
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
-          <Step>
+          <StepsImages>
             <Image src={step1} alt="1 Step" />
-            <StepsText>Entramos em contato para planejar o produto</StepsText>
-          </Step>
 
-          <Step>
+            <Arrow>
+              {isMediumScreen ? (
+                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
+              ) : (
+                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
+              )}
+            </Arrow>
+
             <Image src={step2} alt="2 Step" />
-            <StepsText>Produzimos a sua peça</StepsText>
-          </Step>
 
-          <Step>
+            <Arrow>
+              {isMediumScreen ? (
+                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
+              ) : (
+                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
+              )}
+            </Arrow>
+
             <Image src={step3} alt="3 Step" />
-            <StepsText>Realizamos a inspeção do produto</StepsText>
-          </Step>
 
-          <Step>
+            <Arrow>
+              {isMediumScreen ? (
+                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
+              ) : (
+                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
+              )}
+            </Arrow>
+
             <Image src={step4} alt="4 Step" />
+          </StepsImages>
+          <StepsDescription>
+            <StepsText>Entramos em contato para planejar o produto</StepsText>
+            <EmptyCell />
+            <StepsText>Produzimos a sua peça</StepsText>
+            <EmptyCell />
+            <StepsText>Realizamos a inspeção do produto</StepsText>
+            <EmptyCell />
             <StepsText>Enviamos para você</StepsText>
-          </Step>
+          </StepsDescription>
         </Steps>
       </ProcessSteps>
     </Container>

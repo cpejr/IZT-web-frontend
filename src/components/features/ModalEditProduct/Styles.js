@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  z-index: 1000;
+`;
+
+export const Form = styled.form``;
 
 export const CloseButton = styled.button`
   background-color: transparent;
@@ -48,7 +52,7 @@ export const LeftSection = styled.div`
 export const Subsection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 5px;
   padding-top: 10px;
   width: 100%;
 `;
@@ -56,7 +60,8 @@ export const Subsection = styled.div`
 export const CategorySubsection = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 25px;
+  width: 100%;
 `;
 
 export const Text = styled.p`
@@ -69,28 +74,24 @@ export const Text = styled.p`
   color: white;
 `;
 
-export const AddButton = styled.button`
-  cursor: pointer;
-
+export const PicturesContainer = styled.div`
   display: flex;
-  justify-content: baseline;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
+  width: 100%;
+  gap: 1em;
+`;
 
-  width: 180px;
-  height: 30px;
-  background-color: transparent;
-  border: none;
+export const DocumentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
 
-  color: white;
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-
-  svg {
-    padding-right: 5px;
-  }
+  width: 100%;
+  max-width: 350px;
 `;
 
 export const MiniText = styled.p`
@@ -102,7 +103,7 @@ export const MiniText = styled.p`
   color: white;
 `;
 
-export const InputModalName = styled.input`
+export const Input = styled.input`
   padding: 8px 11px;
   width: 100%;
   top: 34px;
@@ -119,7 +120,7 @@ export const InputModalName = styled.input`
   color: #000000;
 `;
 
-export const InputModal = styled.textarea`
+export const TextAreaModal = styled.textarea`
   display: flex;
   padding: 8px 11px;
   width: 100%;
@@ -148,7 +149,7 @@ export const ModalButton = styled.button`
   border-radius: 5px;
   background-color: transparent;
 
-  width: auto;
+  width: 180px;
   height: 45px;
   left: 813px;
   top: 703px;

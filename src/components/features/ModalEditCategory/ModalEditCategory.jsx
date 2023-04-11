@@ -29,7 +29,7 @@ export default function ModalEditCategory({ category, close }) {
     onSuccess: () => {
       Promise.all([
         queryClient.invalidateQueries({
-          queryKey: ['categories', 'searchByName'],
+          queryKey: ['categories'],
         }),
         queryClient.invalidateQueries({
           queryKey: ['category'],

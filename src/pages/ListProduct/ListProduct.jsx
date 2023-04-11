@@ -4,13 +4,13 @@ import { CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
 import { toast } from 'react-toastify';
+import { useMediaQuery } from 'react-responsive';
 
 import { Select } from '../../components/common';
 import { ModalEditProduct } from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
 import { useSearchProductByName } from '../../hooks/query/products';
 import useDebounce from '../../hooks/useDebounce';
-import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
   Title,
@@ -30,8 +30,10 @@ import {
 import { buildGetProductsErrorMessage } from './utils';
 
 export default function ListProduct() {
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const [selectedCategory, setSelectedCategory] = useState({});
   const [modalEditProduct, setModalEditProduct] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({});
   const [name, setName] = useState('');
   const debouncedName = useDebounce(name);
 
@@ -47,11 +49,11 @@ export default function ListProduct() {
     },
   });
 
-  const openModalEditProduct = () => setModalEditProduct(true);
+  const openModalEditProduct = (product) => {
+    setSelectedProduct(product);
+    setModalEditProduct(true);
+  };
   const closeModalEditProduct = () => setModalEditProduct(false);
-
-  const mobileBreakpoint = 700;
-  const { width: windowWidth } = useWindowSize();
 
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
@@ -86,13 +88,16 @@ export default function ListProduct() {
             <Text>{product.name}</Text>
             <Text>{product.category.name}</Text>
 
-            {windowWidth <= mobileBreakpoint ? (
-              <StyledLink to="/administrador/loja/editar-produto">
+            {isSmallScreen ? (
+              <StyledLink to="/administrador/editar-produto" state={product}>
                 <TbPencil size={30} />
               </StyledLink>
             ) : (
               <EditButton>
-                <TbPencil onClick={openModalEditProduct} size={30} />
+                <TbPencil
+                  onClick={() => openModalEditProduct(product)}
+                  size={30}
+                />
               </EditButton>
             )}
           </Row>
@@ -117,7 +122,10 @@ export default function ListProduct() {
         centered
         destroyOnClose
       >
-        <ModalEditProduct />
+        <ModalEditProduct
+          product={selectedProduct}
+          close={closeModalEditProduct}
+        />
       </ModalStyle>
     </Container>
   );

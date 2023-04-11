@@ -4,8 +4,6 @@ export const Container = styled.div`
   z-index: 1000;
 `;
 
-export const Form = styled.form``;
-
 export const CloseButton = styled.button`
   background-color: transparent;
   border: none;
@@ -60,7 +58,7 @@ export const Subsection = styled.div`
 export const CategorySubsection = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 25px;
   width: 100%;
 `;
 
@@ -74,28 +72,24 @@ export const Text = styled.p`
   color: white;
 `;
 
-export const AddButton = styled.button`
-  cursor: pointer;
-
+export const PicturesContainer = styled.div`
   display: flex;
-  justify-content: baseline;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
+  width: 100%;
+  gap: 1em;
+`;
 
-  width: 180px;
-  height: 30px;
-  background-color: transparent;
-  border: none;
+export const DocumentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
 
-  color: white;
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-
-  svg {
-    padding-right: 5px;
-  }
+  width: 100%;
+  max-width: 350px;
 `;
 
 export const MiniText = styled.p`

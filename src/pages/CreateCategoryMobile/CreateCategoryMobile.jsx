@@ -2,12 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { useMediaQuery } from 'react-responsive';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import { RegisterInput } from '../../components/common';
 import { useCreateCategory } from '../../hooks/query/categories';
-import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
   Form,
@@ -21,22 +20,23 @@ import {
   createCategoryValidationSchema,
 } from './utils';
 
-export default function CreateCategory() {
+export default function CreateCategoryMobile() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const isMediumScreen = useMediaQuery({ minWidth: 700 });
 
   const { mutate: createCategory, isLoading } = useCreateCategory({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['categories', 'searchByName'],
+        queryKey: ['categories'],
       });
-      navigate('/administrador/loja/listar-categorias');
-      toast.success('Categoria criada com sucesso!');
+      navigate('/administrador/listar-categorias');
     },
     onError: (err) => {
       const errorMessage = buildCreateCategoryErrorMessage(err);
 
-      toast.error(errorMessage);
+      // Do something to the errorMessage
+      alert(errorMessage);
     },
   });
 
@@ -49,11 +49,7 @@ export default function CreateCategory() {
   });
   const onSubmit = (data) => createCategory(data);
 
-  const { width: windowWidth } = useWindowSize();
-  const mobileBreakpoint = 700;
-
-  if (windowWidth > mobileBreakpoint)
-    return <Navigate to="/administrador/loja/listar-categorias" />;
+  if (isMediumScreen) return <Navigate to="/administrador/listar-categorias" />;
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -74,7 +70,7 @@ export default function CreateCategory() {
             <p>{isLoading ? 'Carregando...' : 'Adicionar categoria'}</p>
           </SaveButton>
 
-          <CancelButton to="/administrador/loja/listar-categorias">
+          <CancelButton to="/administrador/listar-categorias">
             <p>Cancelar</p>
           </CancelButton>
         </ButtonsDiv>

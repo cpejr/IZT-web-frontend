@@ -187,9 +187,9 @@ export const MenuMobile = styled.div`
   padding: 0px;
   overflow-y: hidden;
 
-  transition: height 700ms ease-in-out 5s;
   @media (max-width: 700px) {
     height: ${(props) => (props.opened ? 'auto' : '0')};
+    /* transition: height 700ms ease-in-out 5s; */
   }
 `;
 

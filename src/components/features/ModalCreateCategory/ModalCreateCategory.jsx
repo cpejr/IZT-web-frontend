@@ -28,7 +28,7 @@ export default function ModalCreateCategory({ close }) {
   const { mutate: createCategory } = useCreateCategory({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['categories', 'searchByName'],
+        queryKey: ['categories'],
       });
       close();
       toast.success('Categoria criada com sucesso!');
