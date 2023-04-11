@@ -50,21 +50,24 @@ export default function AuthorizeAccess() {
       },
       divider: '#000000',
     },
+    typography: {
+      fontFamily: 'Montserrat',
+    },
   });
 
-  const errorMessage = useMemo(() => {
-    switch (dateError) {
-      case 'invalidDate': {
-        return 'Data inválida';
-      }
-      case 'disablePast': {
-        return 'Insira uma data futura';
-      }
-      default: {
-        return '';
-      }
-    }
-  }, [dateError]);
+  // const errorMessage = useMemo(() => {
+  //   switch (dateError) {
+  //     case 'invalidDate': {
+  //       return 'Data inválida';
+  //     }
+  //     case 'disablePast': {
+  //       return 'Insira uma data futura';
+  //     }
+  //     default: {
+  //       return '';
+  //     }
+  //   }
+  // }, [dateError]);
 
   const {
     handleSubmit,
@@ -119,7 +122,11 @@ export default function AuthorizeAccess() {
                       slotProps={{
                         textField: {
                           // error: !!error,
-                          helperText: errorMessage,
+                          helperText: (
+                            <ErrorMessage>
+                              {errors?.accessExpiration?.message}
+                            </ErrorMessage>
+                          ),
                         },
                       }}
                       // renderInput={(params) => (

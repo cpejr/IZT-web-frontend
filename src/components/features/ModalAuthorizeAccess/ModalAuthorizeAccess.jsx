@@ -24,9 +24,12 @@ export default function ModalAuthorizeAccess({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const [dateError, setDateError] = useState(null);
 
-  const darkTheme = createTheme({
+  const customTheme = createTheme({
+    typography: {
+      fontFamily: 'Montserrat',
+    },
     palette: {
-      mode: 'light',
+      mode: 'dark',
     },
   });
 
@@ -45,25 +48,19 @@ export default function ModalAuthorizeAccess({ close }) {
     close();
   };
 
-  const errorMessage = useMemo(() => {
-    switch (dateError) {
-      case 'invalidDate': {
-        return 'Data inválida';
-      }
-      case 'disablePast': {
-        return 'Insira uma data futura';
-      }
-      default: {
-        return '';
-      }
-    }
-  }, [dateError]);
-
-  const customTheme = createTheme({
-    typography: {
-      fontFamily: 'Montserrat',
-    },
-  });
+  // const errorMessage = useMemo(() => {
+  //   switch (dateError) {
+  //     case 'invalidDate': {
+  //       return 'Data inválida';
+  //     }
+  //     case 'disablePast': {
+  //       return 'Insira uma data futura';
+  //     }
+  //     default: {
+  //       return '';
+  //     }
+  //   }
+  // }, [dateError]);
 
   return (
     <Container>
@@ -100,7 +97,11 @@ export default function ModalAuthorizeAccess({ close }) {
                         slotProps={{
                           textField: {
                             // error: !!error,
-                            helperText: errorMessage,
+                            helperText: (
+                              <ErrorMessage>
+                                {errors?.accessExpiration?.message}
+                              </ErrorMessage>
+                            ),
                           },
                         }}
                         // renderInput={(params) => (

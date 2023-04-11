@@ -149,5 +149,5 @@ export const ErrorMessage = styled.p`
   font-weight: 600;
   font-size: 14px;
   color: red;
-  margin-top: 10px;
+  margin-left: 0px;
 `;
