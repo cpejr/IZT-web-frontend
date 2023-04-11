@@ -1,11 +1,8 @@
+import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useMediaQuery } from 'react-responsive';
-
-import { FormInput, FormMask } from '../../common';
 import {
   ContactUs,
   Form,
@@ -16,11 +13,29 @@ import {
   InputMessage,
   AreaText,
 } from './Styles';
-import { formsValidationSchema } from './utils';
+import useWindowSize from '../../../hooks/useWindowSize';
+import { FormInput, FormMask } from '../../common';
+
+const validationSchema = z.object({
+  company: z.string().min(1, 'Favor digitar o nome da empresa'),
+  representative: z.string().min(1, 'Favor digitar o nome do representante'),
+  email: z
+    .string()
+    .min(1, { message: 'Favor digitar o email' })
+    .email({
+      message: 'Insira um email válido',
+    })
+    .trim(),
+  telephone: z.string().min(1, 'Favor digitar o número do telefone'),
+  message: z
+    .string({ required_error: 'Favor inserir uma mensagem' })
+    .max(1500, {
+      message: 'A mensagem deve conter até no máximo 1500 caracteres',
+    })
+    .min(5, { message: 'A mensagem deve conter no mínimo 5 caracteres' }),
+});
 
 export default function FormsContact() {
-  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
-
   const [isLoading, setIsLoading] = useState(false);
   const {
     handleSubmit,
@@ -28,13 +43,19 @@ export default function FormsContact() {
     formState: { errors },
     control,
   } = useForm({
-    resolver: zodResolver(formsValidationSchema),
+    resolver: zodResolver(validationSchema),
   });
+
   const onSubmit = (data) => console.log(data);
+
+  const mobileBreakpoint = 700;
+  const { width: windowWidth } = useWindowSize();
 
   return (
     <ContactUs>
-      <Title>{`Entre em Contato ${isSmallScreen ? '' : 'Conosco'}`}</Title>
+      <Title>{`Entre em Contato ${
+        windowWidth <= mobileBreakpoint ? '' : 'Conosco'
+      }`}</Title>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Section>

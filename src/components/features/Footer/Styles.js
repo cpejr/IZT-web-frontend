@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const mobileBreakPoint = '850px';
-
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 300px;
   width: 100%;
 
-  @media (max-width: ${mobileBreakPoint}) {
+  @media (max-width: 850px) {
     flex-direction: column;
   }
 `;
@@ -23,16 +21,10 @@ export const SideContainer = styled.div`
   align-items: center;
   padding: 0% 7%;
 
-  @media (max-width: ${mobileBreakPoint}) {
+  @media (max-width: 850px) {
     width: 100%;
     height: auto;
     padding: 3% 7%;
-  }
-`;
-
-export const LogoSection = styled.div`
-  @media (max-width: ${mobileBreakPoint}) {
-    padding-top: 30px;
   }
 `;
 
@@ -46,7 +38,7 @@ export const Text = styled.p`
   color: black;
   padding-top: 16px;
 
-  @media (max-width: ${mobileBreakPoint}) {
+  @media (max-width: 850px) {
     font-size: 14px;
   }
 `;
@@ -60,7 +52,7 @@ export const MiddleContainer = styled.div`
   align-items: center;
   padding: 0% 7%;
 
-  @media (max-width: ${mobileBreakPoint}) {
+  @media (max-width: 850px) {
     display: none;
   }
 `;
@@ -74,7 +66,7 @@ export const Tittle = styled.p`
 
   color: #203699;
 
-  @media (max-width: ${mobileBreakPoint}) {
+  @media (max-width: 850px) {
     font-size: 16px;
   }
 `;
@@ -89,7 +81,7 @@ export const SocialMedias = styled.div`
   margin-bottom: 10px;
   margin-top: 15px;
 
-  @media (max-width: ${mobileBreakPoint}) {
+  @media (max-width: 850px) {
     margin-bottom: 20px;
     margin-top: 20px;
   }
@@ -137,7 +129,7 @@ export const ButtonMobile = styled.div`
   font-size: 15px;
   margin-bottom: 40px;
 
-  @media (max-width: ${mobileBreakPoint}) {
+  @media (max-width: 850px) {
     display: flex;
     height: auto;
     justify-content: center;
@@ -153,9 +145,8 @@ export const SectionGoTo = styled.section`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: ${mobileBreakPoint}) {
+  @media (max-width: 850px) {
     padding-bottom: 20px;
-    /* display: none; */
   }
 `;
 

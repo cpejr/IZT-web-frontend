@@ -1,12 +1,13 @@
-import { AiOutlineLinkedin, AiOutlineFacebook } from 'react-icons/ai';
-import { BsInstagram, BsWhatsapp } from 'react-icons/bs';
+import {
+  AiOutlineLinkedin,
+  AiOutlineFacebook,
+  AiOutlineWhatsApp,
+  AiOutlineInstagram,
+} from 'react-icons/ai';
 import { HiOutlineMail } from 'react-icons/hi';
-
-import { Logo } from '../../common';
 import {
   Container,
   SideContainer,
-  LogoSection,
   MiddleContainer,
   Text,
   Tittle,
@@ -17,14 +18,13 @@ import {
   SectionGoTo,
   ContactButton,
 } from './Styles';
+import { Logo } from '../../common';
 
 export default function Footer() {
   return (
     <Container>
       <SideContainer>
-        <LogoSection>
-          <Logo />
-        </LogoSection>
+        <Logo />
         <Text>
           Inovação, tecnologia, precisão, qualidade e sustentabilidade.
         </Text>
@@ -43,7 +43,7 @@ export default function Footer() {
         <Tittle>Nossas Redes</Tittle>
         <SocialMedias>
           <SocialMediaButton href="https://cpejr.com/">
-            <BsInstagram size={30} />
+            <AiOutlineInstagram size={35} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
             <AiOutlineLinkedin size={40} />
@@ -52,7 +52,7 @@ export default function Footer() {
             <AiOutlineFacebook size={40} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
-            <BsWhatsapp size={30} />
+            <AiOutlineWhatsApp size={35} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
             <HiOutlineMail size={40} />

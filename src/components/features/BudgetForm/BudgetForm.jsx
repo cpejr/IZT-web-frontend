@@ -1,12 +1,8 @@
+import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import PropTypes from 'prop-types';
-import { useForm } from 'react-hook-form';
-
-import { useSendProductBudget } from '../../../hooks/query/products';
-import { FormInput, FormMask } from '../../common';
 import {
   ContactUs,
   Form,
@@ -16,29 +12,42 @@ import {
   BotaoEnviar,
   Container,
 } from './Styles';
-import { budgetEmailSchema, buildBudgetEmailErrorMessage } from './utils';
+import { FormInput, FormMask } from '../../common';
 
-export default function BudgetForm({ productId }) {
-  const { mutate: sendProductBudget, isLoading } = useSendProductBudget({
-    onError: (err) => {
-      const errorMessage = buildBudgetEmailErrorMessage(err);
+const validationSchema = z.object({
+  name: z.string().min(1, 'Digite o seu nome completo'),
+  company: z.string().min(1, 'Digite o nome da empresa'),
+  email: z
+    .string()
+    .min(1, { message: 'Digite o email' })
+    .email({
+      message: 'Insira um email válido',
+    })
+    .trim(),
+  telephone: z.string().min(1, 'Digite o seu número do telefone'),
+  country: z.string().min(1, 'Digite nome do seu país'),
+  state: z.string().min(1, 'Digite o estado'),
+  city: z.string().min(1, 'Digite a cidade'),
+  ZIPcode: z
+    .string()
+    .min(1, 'Digite o seu CEP')
+    .regex(/^[0-9]{5}(?:-[0-9]{4})?$/, 'Digite um CEP válido'),
+  address: z.string().min(1, 'Digite o seu seu endereço'),
+});
 
-      // Do something to the errorMessage
-      alert(errorMessage);
-    },
-  });
-
+export default function BudgetForm() {
+  const [isLoading, setIsLoading] = useState(false); // Important for modals usage
   const {
     handleSubmit,
     register,
     formState: { errors },
     control,
   } = useForm({
-    resolver: zodResolver(budgetEmailSchema),
+    resolver: zodResolver(validationSchema),
   });
-  const onSubmit = (formInput) => sendProductBudget({ productId, formInput });
 
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
+  const onSubmit = (data) => console.log(data);
+
   return (
     <ContactUs>
       <Title>Requisite um orçamento</Title>
@@ -52,6 +61,7 @@ export default function BudgetForm({ productId }) {
               errors={errors}
               register={register}
             />
+
             <FormInput
               label="Empresa:"
               name="company"
@@ -59,6 +69,7 @@ export default function BudgetForm({ productId }) {
               errors={errors}
               register={register}
             />
+
             <FormInput
               label="E-mail:"
               name="email"
@@ -66,13 +77,14 @@ export default function BudgetForm({ productId }) {
               errors={errors}
               register={register}
             />
+
             <FormMask
               label="Telefone:"
               name="telephone"
               defaultValue=""
               control={control}
               placeholder="(99) 99999-9999"
-              mask="+99 (99) 99999-9999"
+              mask="(99) 99999-9999"
               errors={errors}
             />
           </Section>
@@ -104,15 +116,15 @@ export default function BudgetForm({ productId }) {
                 width="50%"
               />
             </Subsection>
-            <FormMask
+
+            <FormInput
               label="CEP:"
               name="ZIPcode"
               placeholder="99999-999"
-              defaultValue=""
-              control={control}
-              mask="99999-999"
               errors={errors}
+              register={register}
             />
+
             <FormInput
               label="Endereço:"
               name="address"
@@ -149,7 +161,3 @@ export default function BudgetForm({ productId }) {
     </ContactUs>
   );
 }
-
-BudgetForm.propTypes = {
-  productId: PropTypes.string.isRequired,
-};

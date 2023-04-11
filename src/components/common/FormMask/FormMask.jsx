@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 import InputMask from 'react-input-mask';
-
 import { Container, Label, ErrorMessage } from './Styles';
 
 export default function FormMask({

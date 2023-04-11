@@ -25,6 +25,10 @@ export const LinkContainer = styled(Link)`
       font-size: 18px;
     }
   }
+
+  @media (max-width: 990px) {
+    gap: 5px;
+  }
 `;
 export const Image = styled.img`
   width: auto;

@@ -1,5 +1,4 @@
 import { z } from 'zod';
-
 import { ERROR_CODES } from '../../../utils/constants';
 
 // Form Validation
@@ -51,7 +50,6 @@ const updateUserErrorMessages = {
 const updateUserDefaultErrorMessage =
   'Erro ao editar os dados cadastrais. Tente novamente mais tarde';
 
-export function buildUpdateUserErrorMessage(err) {
-  const code = err?.response?.data?.httpCode;
+export function buildUpdateUserErrorMessage(code) {
   return updateUserErrorMessages[code] || updateUserDefaultErrorMessage;
 }

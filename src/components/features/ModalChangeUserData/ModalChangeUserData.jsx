@@ -1,13 +1,9 @@
 import { useState } from 'react';
-
-import { SaveOutlined } from '@ant-design/icons';
-import { zodResolver } from '@hookform/resolvers/zod';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SaveOutlined } from '@ant-design/icons';
 import { TailSpin } from 'react-loader-spinner';
-
-import { useUpdateUser } from '../../../hooks/query/users';
-import useAuthStore from '../../../stores/auth';
 import { RegisterInput } from '../../common';
 import {
   Container,
@@ -17,6 +13,8 @@ import {
   SaveChanges,
   Subtitle,
 } from './Styles';
+import { useUpdateUser } from '../../../hooks/query/users';
+import useAuthStore from '../../../stores/auth';
 import { buildUpdateUserErrorMessage, updateUserSchema } from './utils';
 
 export default function ModalChangeUserData({ close }) {
@@ -26,18 +24,22 @@ export default function ModalChangeUserData({ close }) {
     setUser,
   } = useAuthStore();
 
-  const { mutate: updateUser } = useUpdateUser({
-    onSuccess: (data) => {
-      setUser(data);
-      close();
-    },
-    onError: (err) => {
-      const errorMessage = buildUpdateUserErrorMessage(err);
+  const updateUserOnSuccess = (data) => {
+    setUser(data);
+    close();
+  };
+  const updateUserOnError = (err) => {
+    const code = err?.response?.data?.httpCode;
+    const errorMessage = buildUpdateUserErrorMessage(code);
 
-      // Do something to the errorMessage
-      setIsPending(false);
-      alert(errorMessage);
-    },
+    // Do something to the errorMessage
+    alert(errorMessage);
+
+    setIsPending(false);
+  };
+  const { mutate: updateUser } = useUpdateUser({
+    onSuccess: updateUserOnSuccess,
+    onError: updateUserOnError,
   });
 
   const {
@@ -49,7 +51,7 @@ export default function ModalChangeUserData({ close }) {
   });
   const onSubmit = (data) => {
     setIsPending(true);
-    updateUser({ _id: user._id, newUserData: data });
+    updateUser({ id: user._id, newUserData: data });
   };
 
   return (

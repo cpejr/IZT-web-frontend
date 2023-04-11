@@ -23,7 +23,7 @@ export const Title = styled.p`
   align-items: center;
   font-size: 40px;
   color: white;
-  font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   height: 20%;
   padding-bottom: 40px;
@@ -78,7 +78,7 @@ export const Mensagem = styled.div`
 
   font-size: 24px;
   color: white;
-  font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   gap: 5px;
 
@@ -92,7 +92,7 @@ export const Mensagem = styled.div`
 
   textarea {
     border-radius: 4px;
-    font-family: ${(props) => props.theme.fonts.montserrat};
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -119,7 +119,7 @@ export const BotaoEnviar = styled.button`
   background-color: #23a4a6;
 
   font-size: 20px;
-  font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
 
   height: 45px;

@@ -6,37 +6,30 @@ import {
   Navigate,
   Outlet,
 } from 'react-router-dom';
-
-import { AppLayout, AdminStoreLayout } from './layouts';
+import useAuthStore from './stores/auth';
+import { AppLayout } from './layouts';
 import {
   Home,
   Login,
-  Register,
   Catalog,
   Product,
+  SignUp,
   Profile,
-  ListProduct,
-  CreateProduct,
-  EditProduct,
-  ListCategory,
-  CreateCategory,
-  EditCategory,
   NotFound,
   Unauthorized,
   Forbidden,
 } from './pages';
-import useAuthStore from './stores/auth';
-
-function PrivateRoutes() {
-  const auth = useAuthStore((state) => state?.auth);
-
-  return !auth ? <Navigate to="unauthorized" /> : <Outlet />;
-}
 
 function AdminRoutes() {
   const user = useAuthStore((state) => state?.auth?.user);
 
   return !user.isAdmin ? <Navigate to="forbidden" /> : <Outlet />;
+}
+
+function PrivateRoutes() {
+  const auth = useAuthStore((state) => state?.auth);
+
+  return !auth ? <Navigate to="unauthorized" /> : <Outlet />;
 }
 
 const router = createBrowserRouter(
@@ -45,21 +38,13 @@ const router = createBrowserRouter(
       <Route path="/" element={<AppLayout />}>
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
-        <Route path="cadastro" element={<Register />} />
+        <Route path="cadastro" element={<SignUp />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
         <Route element={<PrivateRoutes />}>
           <Route path="perfil" element={<Profile />} />
-          <Route path="administrador" element={<AdminRoutes />}>
-            <Route index element={<h1>Dashboard do admnistrador</h1>} />
-            <Route path="loja" element={<AdminStoreLayout />}>
-              <Route index element={<ListProduct />} />
-              <Route path="criar-produto" element={<CreateProduct />} />
-              <Route path="editar-produto" element={<EditProduct />} />
-              <Route path="listar-categorias" element={<ListCategory />} />
-              <Route path="criar-categoria" element={<CreateCategory />} />
-              <Route path="editar-categoria" element={<EditCategory />} />
-            </Route>
+          <Route element={<AdminRoutes />}>
+            <Route path="teste" element={<h1>Aqui só admin entra</h1>} />
           </Route>
         </Route>
         <Route path="/unauthorized" element={<Unauthorized />} />

@@ -1,5 +1,4 @@
 import { z } from 'zod';
-
 import { ERROR_CODES } from '../../utils/constants';
 
 // Form Validation
@@ -29,7 +28,6 @@ const loginErrorMessages = {
 const loginDefaultErrorMessage =
   'Erro ao realizar o login. Tente novamente mais tarde';
 
-export function buildLoginErrorMessage(err) {
-  const code = err?.response?.data?.httpCode;
+export function buildLoginErrorMessage(code) {
   return loginErrorMessages[code] || loginDefaultErrorMessage;
 }

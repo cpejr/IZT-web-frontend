@@ -25,7 +25,7 @@ export const FileItem = styled.div`
     width: 139px;
     height: 24px;
 
-    font-family: ${(props) => props.theme.fonts.montserrat};
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
     font-size: 20px;

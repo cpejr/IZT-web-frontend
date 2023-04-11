@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
   gap: 5px;

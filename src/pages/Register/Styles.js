@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const mobileBreakpoint = '600px';
+const breakValue = '600px';
 
 export const Page = styled.div`
   background-color: ${(props) => props.theme.colors.gray.mediumGray};
@@ -12,6 +12,9 @@ export const Page = styled.div`
   justify-content: center;
   padding: 25px 0px;
   font-size: 22px;
+  @media (max-width: ${breakValue}) {
+    font-size: 15px;
+  }
 `;
 
 export const Container = styled.div`
@@ -27,7 +30,11 @@ export const Container = styled.div`
   padding: 2em 0.5em;
   gap: 1.4em;
   margin: 5% 0;
-
+  /* @media (max-width: ${breakValue}) {
+    @media (min-width: 550px) {
+      width: 70%;
+    }
+  } */
   @media (max-width: 390px) {
     padding: 50px 10px;
   }
@@ -42,10 +49,14 @@ export const DataEntry = styled.div`
   max-width: 1190px;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: 2.5em;
   margin-bottom: 35px;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.7em;
+  }
 `;
 
 export const Title = styled.h1`
@@ -54,10 +65,6 @@ export const Title = styled.h1`
   font-size: 1.5em;
   font-weight: 700;
   text-align: center;
-
-  @media (max-width: ${mobileBreakpoint}) {
-    font-size: 1.2em;
-  }
 `;
 
 export const Subtitle = styled.h1`
@@ -67,6 +74,9 @@ export const Subtitle = styled.h1`
   font-weight: 600;
   text-align: center;
   margin-bottom: 5%;
+  @media (min-width: 801px) and (max-width: 1030px) {
+    font-size: 0.7em;
+  }
 `;
 
 export const FormColumn = styled.div`
