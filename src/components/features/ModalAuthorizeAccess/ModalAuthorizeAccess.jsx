@@ -59,6 +59,12 @@ export default function ModalAuthorizeAccess({ close }) {
     }
   }, [dateError]);
 
+  const customTheme = createTheme({
+    typography: {
+      fontFamily: 'Montserrat',
+    },
+  });
+
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -79,7 +85,7 @@ export default function ModalAuthorizeAccess({ close }) {
           <div>
             <Label>Validade do acesso:</Label>
             <AccessExpirationContainer>
-              <ThemeProvider theme={darkTheme}>
+              <ThemeProvider theme={customTheme}>
                 <Controller
                   control={control}
                   name="accessExpiration"
