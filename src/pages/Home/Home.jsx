@@ -1,7 +1,9 @@
-import { Carousel, FormsContact, Card } from '../../components/features';
 import Catalog from '../../assets/homePage/cards/catalog.png';
 import Software from '../../assets/homePage/cards/software.png';
 import Training from '../../assets/homePage/cards/training.png';
+import carouselData from '../../assets/homePage/carousel/data';
+import Image from '../../assets/homePage/imagemDaEmpresa.png';
+import { Carousel, FormsContact, Card } from '../../components/features';
 import {
   AboutUs,
   Container,
@@ -11,8 +13,6 @@ import {
   CardsContainer,
   OuterDiv,
 } from './Styles';
-import Image from '../../assets/homePage/imagemDaEmpresa.png';
-import carouselData from '../../assets/homePage/carousel/data';
 
 export default function Home() {
   return (

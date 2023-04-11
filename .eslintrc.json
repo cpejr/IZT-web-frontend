@@ -16,7 +16,26 @@
     "react/forbid-prop-types": 0,
     "no-underscore-dangle": 0,
     "react/jsx-props-no-spreading": 0,
-    "react/jsx-no-bind": 0
+    "react/jsx-no-bind": 0,
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
   },
   "overrides": [],
   "parserOptions": {

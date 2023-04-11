@@ -1,7 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom';
 import { TailSpin } from 'react-loader-spinner';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+
+import IZTLogo from '../../assets/IZTLogo.svg';
+import { DataInput, SubmitButton } from '../../components/common';
+import { useLogin } from '../../hooks/query/sessions';
 import {
   Page,
   Container,
@@ -14,24 +18,18 @@ import {
   Links,
   LoadingButton,
 } from './Styles';
-import IZTLogo from '../../assets/IZTLogo.svg';
-import { DataInput, SubmitButton } from '../../components/common';
-import { useLogin } from '../../hooks/query/sessions';
 import { buildLoginErrorMessage, loginValidationSchema } from './utils';
 
 export default function Login() {
   const navigate = useNavigate();
-  const loginOnSuccess = () => navigate('/');
-  const loginOnError = (err) => {
-    const code = err?.response?.data?.httpCode;
-    const errorMessage = buildLoginErrorMessage(code);
-
-    // Do something to the errorMessage
-    alert(errorMessage);
-  };
   const { mutate: login, isLoading } = useLogin({
-    onSuccess: loginOnSuccess,
-    onError: loginOnError,
+    onSuccess: () => navigate('/'),
+    onError: (err) => {
+      const errorMessage = buildLoginErrorMessage(err);
+
+      // Do something to the errorMessage
+      alert(errorMessage);
+    },
   });
 
   const {

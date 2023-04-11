@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router-dom';
+
+import { useGetCategories } from '../../hooks/query/categories';
 import {
   Page,
   Container,
@@ -15,101 +18,20 @@ import {
   ProductImage,
   ProductName,
 } from './Styles';
-
-const categories = [
-  {
-    name: 'Type 1',
-    products: [
-      {
-        name: 'Product 1',
-        image:
-          'https://madmais.vteximg.com.br/arquivos/ids/159284-0-0/BOCAL-PARA-LAMPADA-2S-BRANCO--4-.jpg?v=637618856063500000',
-      },
-      {
-        name: 'Product 2',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-    ],
-  },
-  {
-    name: 'Type 2',
-    products: [
-      {
-        name: 'Product 1',
-        image:
-          'https://a-static.mlcdn.com.br/800x560/bocal-de-louca-porcelana-receptaculo-para-lampadas-e27-js-technology/thrjinformatica/11899658141/f1fad431169ad69f3347637ab71ec05c.jpg',
-      },
-      {
-        name: 'Product 2',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 3',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-    ],
-  },
-  {
-    name: 'Type 3',
-    products: [
-      {
-        name: 'Product 1',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-    ],
-  },
-  {
-    name: 'Type 4',
-    products: [
-      {
-        name: 'Product 1',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 2',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 3',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 4',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-    ],
-  },
-  {
-    name: 'Type 5',
-    products: [
-      {
-        name: 'Product 1',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 2',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-      {
-        name: 'Product 3',
-        image:
-          'https://www.decorlux.com.br/site2019/wp-content/uploads/2020/07/ddd.jpg',
-      },
-    ],
-  },
-];
+import buildGetCategoriesErrorMessage from './utils';
 
 export default function Catalog() {
+  const navigate = useNavigate();
+  const { data: categories, isLoading } = useGetCategories({
+    onError: (err) => {
+      const errorMessage = buildGetCategoriesErrorMessage(err);
+
+      // Do something to the errorMessage
+      alert(errorMessage);
+    },
+  });
+
+  if (isLoading) return <p>Loading...</p>;
   return (
     <Page>
       <Container>
@@ -130,13 +52,16 @@ export default function Catalog() {
           ))}
         </ButtonRow>
         {categories?.map((category) => (
-          <ProductCategory key={category.name} id={category.name}>
+          <ProductCategory key={category.name}>
             <Divider />
             <CategoryName>{category.name}</CategoryName>
             <ProductRow>
-              {category.products.map((product) => (
-                <Product key={product.name}>
-                  <ProductImage src={product.image} />
+              {category?.products?.map((product) => (
+                <Product
+                  onClick={() => navigate(`/produto/${product._id}`)}
+                  key={product.name}
+                >
+                  <ProductImage src={product.pictures[0].url} />
                   <ProductName>{product.name}</ProductName>
                 </Product>
               ))}
