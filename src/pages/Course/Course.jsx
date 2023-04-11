@@ -14,7 +14,7 @@ import {
   GreyLine,
 } from './Styles';
 
-export default function Courses() {
+export default function Course() {
   const [video, setVideo] = useState('');
 
   const availableVideos = [
@@ -34,10 +34,6 @@ export default function Courses() {
       src: 'https://www.youtube.com/watch?v=pRGmFiEyr0A',
     },
   ];
-
-  const changeVideo = (videoName) => {
-    setVideo(videoName);
-  };
   return (
     <Container>
       <MainDiv>
@@ -53,11 +49,14 @@ export default function Courses() {
         <GreyLine />
 
         <MainSection>
-          <CoursesScroll />
+          <CoursesScroll availableVideos={availableVideos} />
 
           <VideoSectionDiv id="videoSection">
             <Title>Vídeo 2</Title>
             <Video src={Image} alt="CourseVideo" allowfullscreen />
+            <a href={availableVideos[0].src} style={{ fontSize: '20px' }}>
+              video
+            </a>
             <Text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               augue felis, eleifend at nibh a, fringilla iaculis augue. Vivamus

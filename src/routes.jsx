@@ -21,7 +21,7 @@ import {
   ListCategory,
   CreateCategory,
   EditCategory,
-  Courses,
+  Course,
   NotFound,
   Unauthorized,
   Forbidden,
@@ -50,7 +50,7 @@ const router = createBrowserRouter(
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
         <Route element={<PrivateRoutes />}>
-          <Route path="cursos" element={<Courses />} />
+          <Route path="curso" element={<Course />} />
           <Route path="perfil" element={<Profile />} />
           <Route path="administrador" element={<AdminRoutes />}>
             <Route index element={<h1>Dashboard do admnistrador</h1>} />

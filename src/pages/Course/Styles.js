@@ -34,6 +34,13 @@ export const Title = styled.p`
   margin-bottom: 1rem;
 
   color: ${(props) => props.theme.colors.blue};
+
+  @media (max-width: 475px) {
+    font-size: 1.5rem;
+  }
+  @media (max-width: 380px) {
+    font-size: 1.3rem;
+  }
 `;
 
 export const Text = styled.p`
@@ -44,6 +51,10 @@ export const Text = styled.p`
   width: 100%;
 
   color: black;
+
+  @media (max-width: 475px) {
+    font-size: 0.9rem;
+  }
 `;
 
 export const MainSection = styled.div`

@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 export const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
 
   width: 25%;
   height: 100%;
@@ -61,8 +59,15 @@ export const Topics = styled.p`
 
   color: #202020;
 
+  :hover {
+    cursor: pointer;
+  }
+
   @media (max-width: 800px) {
     color: #595959;
+  }
+  @media (max-width: 475px) {
+    font-size: 1.1rem;
   }
 `;
 
