@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import styled from 'styled-components';
 import { ToastContainer } from 'react-toastify';
+import styled from 'styled-components';
 
 export const StyledContainer = styled(ToastContainer)`
   // https://styled-components.com/docs/faqs#how-can-i-override-styles-with-higher-specificity

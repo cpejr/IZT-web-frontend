@@ -44,7 +44,7 @@ const errorMessages = {
   [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
 };
 const defaultErrorMessage =
-  'Erro ao solicitar contato. Tente novamente mais tarde';
+  'Erro ao enviar a mensagem. Tente novamente mais tarde';
 
 export default function FormsContact() {
   const onError = (error) => {
@@ -65,7 +65,6 @@ export default function FormsContact() {
 
   const {
     handleSubmit,
-    watch,
     register,
     formState: { errors },
     control,
@@ -75,13 +74,10 @@ export default function FormsContact() {
   const mobileBreakpoint = 700;
   const { width: windowWidth } = useWindowSize();
 
-  const onSubmit = (formInput) => {
-    sendFormContact(formInput);
-    console.log(formInput);
-  };
+  const onSubmit = (formInput) => sendFormContact(formInput);
+
   if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
-  console.log(watch());
-  console.log(errors);
+
   return (
     <ContactUs>
       <Title>{`Entre em Contato ${
