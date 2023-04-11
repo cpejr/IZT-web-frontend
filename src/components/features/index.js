@@ -17,5 +17,3 @@ export { default as PictureFile } from './PictureFile/PictureFile';
 export { default as AddFileButton } from './AddFileButton/AddFileButton';
 export { default as UpdateFileButton } from './UpdateFileButton/UpdateFileButton';
 export { default as ModalChangeUserData } from './ModalChangeUserData/ModalChangeUserData';
-export { default as AdminShowFiles } from './AdminShowFiles/AdminShowFiles';
-export { default as AdminShowPictures } from './AdminShowPictures/AdminShowPictures';

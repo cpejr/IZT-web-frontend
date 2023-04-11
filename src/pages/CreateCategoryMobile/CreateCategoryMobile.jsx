@@ -20,7 +20,7 @@ import {
   createCategoryValidationSchema,
 } from './utils';
 
-export default function CreateCategory() {
+export default function CreateCategoryMobile() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const isMediumScreen = useMediaQuery({ minWidth: 700 });
@@ -30,7 +30,7 @@ export default function CreateCategory() {
       queryClient.invalidateQueries({
         queryKey: ['categories'],
       });
-      navigate('/administrador/loja/listar-categorias');
+      navigate('/administrador/listar-categorias');
     },
     onError: (err) => {
       const errorMessage = buildCreateCategoryErrorMessage(err);
@@ -49,8 +49,7 @@ export default function CreateCategory() {
   });
   const onSubmit = (data) => createCategory(data);
 
-  if (isMediumScreen)
-    return <Navigate to="/administrador/loja/listar-categorias" />;
+  if (isMediumScreen) return <Navigate to="/administrador/listar-categorias" />;
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -71,7 +70,7 @@ export default function CreateCategory() {
             <p>{isLoading ? 'Carregando...' : 'Adicionar categoria'}</p>
           </SaveButton>
 
-          <CancelButton to="/administrador/loja/listar-categorias">
+          <CancelButton to="/administrador/listar-categorias">
             <p>Cancelar</p>
           </CancelButton>
         </ButtonsDiv>

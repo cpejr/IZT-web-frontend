@@ -4,8 +4,6 @@ export const Container = styled.div`
   z-index: 1000;
 `;
 
-export const Form = styled.form``;
-
 export const CloseButton = styled.button`
   background-color: transparent;
   border: none;

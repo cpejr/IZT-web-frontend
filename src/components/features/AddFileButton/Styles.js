@@ -13,7 +13,7 @@ export const AddButton = styled.button`
   background-color: transparent;
   border: none;
 
-  color: white;
+  color: ${({ color }) => color};
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;

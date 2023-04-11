@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 
-import { StyledSelect } from './Styles';
+import { Container, StyledSelect } from './Styles';
 
 export default function FormSelect({ data, name, control, errors, ...props }) {
   return (
-    <div>
+    <Container>
       <Controller
         control={control}
         name={name}
@@ -26,7 +26,7 @@ export default function FormSelect({ data, name, control, errors, ...props }) {
         )}
       />
       <p>{errors?.category?.message}</p>
-    </div>
+    </Container>
   );
 }
 

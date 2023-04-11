@@ -16,7 +16,6 @@ import DocumentFile from '../DocumentFile/DocumentFile';
 import PictureFile from '../PictureFile/PictureFile';
 import {
   Container,
-  Form,
   ModalContent,
   LeftSection,
   RightSection,
@@ -112,7 +111,7 @@ export default function ModalCreateProduct({ close }) {
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
           <LeftSection>
             <Subsection>
@@ -166,7 +165,7 @@ export default function ModalCreateProduct({ close }) {
               </PicturesContainer>
               {fieldsPictures.length < picturesLimit && (
                 <AddFileButton
-                  label="Novo imagem"
+                  label="Novo Imagem"
                   appendFn={appendPicture}
                   allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
                   sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
@@ -193,7 +192,7 @@ export default function ModalCreateProduct({ close }) {
               </DocumentsContainer>
               {fieldsDocuments.length < documentsLimit && (
                 <AddFileButton
-                  label="Novo documento"
+                  label="Novo Documento"
                   appendFn={appendDocument}
                   allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(
                     ', '
@@ -227,7 +226,7 @@ export default function ModalCreateProduct({ close }) {
             </ModalButton>
           </RightSection>
         </ModalContent>
-      </Form>
+      </form>
     </Container>
   );
 }

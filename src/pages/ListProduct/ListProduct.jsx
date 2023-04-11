@@ -82,7 +82,7 @@ export default function ListProduct() {
             <Text>{product.category.name}</Text>
 
             {isSmallScreen ? (
-              <StyledLink to="/administrador/loja/editar-produto">
+              <StyledLink to="/administrador/editar-produto" state={product}>
                 <TbPencil size={30} />
               </StyledLink>
             ) : (

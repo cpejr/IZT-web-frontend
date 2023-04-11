@@ -51,7 +51,7 @@ export default function AdminMenu() {
               <Title>Produtos</Title>
 
               {isSmallScreen ? (
-                <StyledLink to="/administrador/loja/criar-produto">
+                <StyledLink to="/administrador/criar-produto">
                   Adicionar produtos
                 </StyledLink>
               ) : (
@@ -60,14 +60,14 @@ export default function AdminMenu() {
                 </Button>
               )}
 
-              <StyledLink to="/administrador/loja">Listar produtos</StyledLink>
+              <StyledLink to="/administrador">Listar produtos</StyledLink>
             </Section>
 
             <Section>
               <Title>Categorias</Title>
 
               {isSmallScreen ? (
-                <StyledLink to="/administrador/loja/criar-categoria">
+                <StyledLink to="/administrador/criar-categoria">
                   Adicionar categoria
                 </StyledLink>
               ) : (
@@ -76,7 +76,7 @@ export default function AdminMenu() {
                 </Button>
               )}
 
-              <StyledLink to="/administrador/loja/listar-categorias">
+              <StyledLink to="/administrador/listar-categorias">
                 Listar categorias
               </StyledLink>
               <BlackLine />

@@ -11,6 +11,7 @@ export default function AddFileButton({
   appendFn,
   allowedMimeTypes,
   sizeLimitInMB,
+  color = 'white',
   ...props
 }) {
   const fileInputRef = useRef(null);
@@ -19,6 +20,7 @@ export default function AddFileButton({
     <AddButton
       type="button"
       onClick={() => fileInputRef.current.click()}
+      color={color}
       {...props}
     >
       <input
@@ -31,7 +33,7 @@ export default function AddFileButton({
           const sizeLimit = numToMegaBytes(sizeLimitInMB);
 
           if (file.size > sizeLimit) {
-            alert('Limite excedido');
+            alert('Limite excedido'); // Toast
           } else {
             appendFn({ file });
           }
@@ -43,7 +45,12 @@ export default function AddFileButton({
   );
 }
 
+AddFileButton.defaultProps = {
+  color: 'white',
+};
+
 AddFileButton.propTypes = {
+  color: PropTypes.string,
   label: PropTypes.string.isRequired,
   appendFn: PropTypes.func.isRequired,
   allowedMimeTypes: PropTypes.string.isRequired,

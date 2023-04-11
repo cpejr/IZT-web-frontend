@@ -8,6 +8,10 @@ export const Container = styled.div`
   align-items: flex-start;
   gap: 20px;
 
+  .ant-modal .ant-modal-content {
+    background-color: ${(props) => props.theme.colors.darkBlue};
+  }
+
   width: 95%;
   height: 400px;
   padding-left: 40px;

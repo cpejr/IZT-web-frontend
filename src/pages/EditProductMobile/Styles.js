@@ -3,10 +3,19 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  justify-content: center;
+  align-items: center;
 
   width: 95%;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  width: 100%;
+
   margin-bottom: 50px;
 `;
 
@@ -16,6 +25,7 @@ export const Title = styled.p`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  padding-bottom: 10px;
 
   color: black;
 `;
@@ -30,13 +40,14 @@ export const Subtitle = styled.p`
   color: black;
 `;
 
-export const SmallInput = styled.textarea`
+export const Input = styled.input`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 8px 11px;
   gap: 10px;
 
+  max-width: 100%;
   width: 100%;
   height: 36px;
 
@@ -49,13 +60,14 @@ export const SmallInput = styled.textarea`
   font-size: 16px;
 `;
 
-export const BigInput = styled.textarea`
+export const TextArea = styled.textarea`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 8px 11px;
   gap: 10px;
 
+  max-width: 100%;
   width: 100%;
   height: 250px;
 
@@ -69,48 +81,51 @@ export const BigInput = styled.textarea`
   resize: none;
 `;
 
+export const Section = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 10px;
+  width: 100%;
+`;
+
 export const MiniText = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
-  padding-top: 5px;
+
+  padding-bottom: 6px;
 
   color: black;
 `;
 
-export const AddButton = styled.button`
-  cursor: pointer;
-
+export const PicturesContainer = styled.div`
   display: flex;
-  justify-content: baseline;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
-
-  width: 180px;
-  height: 30px;
-  background-color: transparent;
-  border: none;
-
-  svg {
-    color: black;
-    padding-right: 5px;
-  }
+  width: 100%;
+  gap: 1em;
 `;
 
-export const AddButtonText = styled.p`
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
+export const DocumentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
 
-  color: black;
+  width: 100%;
+  max-width: 350px;
 `;
 
 export const CategorySection = styled.div`
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+
+  gap: 25px;
+  width: 100%;
 `;
 
 export const SaveButton = styled.button`
@@ -121,6 +136,7 @@ export const SaveButton = styled.button`
   justify-content: center;
   padding: 10px;
   gap: 10px;
+  margin-top: 10px;
 
   width: 191px;
   height: 45px;
