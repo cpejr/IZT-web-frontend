@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
 import { useSendFormContact } from '../../../hooks/query/contact';
-import { AddToast, FormInput, FormMask } from '../../common';
+import { FormInput, FormMask } from '../../common';
 import {
   ContactUs,
   Form,
@@ -95,7 +95,6 @@ export default function FormsContact() {
           </InputMessage>
         </Section>
       </Form>
-      <AddToast />
     </ContactUs>
   );
 }

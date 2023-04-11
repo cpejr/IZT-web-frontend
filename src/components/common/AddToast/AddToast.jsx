@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyledContainer } from './Styles';
 
 export default function AddToast() {

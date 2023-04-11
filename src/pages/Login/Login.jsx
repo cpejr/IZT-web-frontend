@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import IZTLogo from '../../assets/IZTLogo.svg';
-import { AddToast, DataInput, SubmitButton } from '../../components/common';
+import { DataInput, SubmitButton } from '../../components/common';
 import { useLogin } from '../../hooks/query/sessions';
 import {
   Page,
@@ -86,7 +86,6 @@ export default function Login() {
           </SignUpLink>
         </Links>
       </Container>
-      <AddToast />
     </Page>
   );
 }

@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import { useUpdateUser } from '../../../hooks/query/users';
 import useAuthStore from '../../../stores/auth';
-import { AddToast, RegisterInput } from '../../common';
+import { RegisterInput } from '../../common';
 import {
   Container,
   Form,
@@ -28,7 +28,8 @@ export default function ModalChangeUserData({ close }) {
   const { mutate: updateUser } = useUpdateUser({
     onSuccess: (data) => {
       setUser(data);
-      toast.success('Dados modificados com sucesso!');
+      console.log('ueeee');
+      toast?.success('Dados modificados com sucesso!');
       close();
     },
     onError: (err) => {
@@ -145,7 +146,6 @@ export default function ModalChangeUserData({ close }) {
           {isPending ? 'Carregando...' : 'Salvar Alterações'}
         </SaveChanges>
       </Form>
-      <AddToast />
     </Container>
   );
 }

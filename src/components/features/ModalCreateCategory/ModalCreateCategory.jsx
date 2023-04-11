@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
 import { useCreateCategory } from '../../../hooks/query/categories';
@@ -23,6 +24,7 @@ import {
 
 export default function ModalCreateCategory({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const queryClient = useQueryClient();
 
   const { mutate: createCategory } = useCreateCategory({
@@ -52,6 +54,8 @@ export default function ModalCreateCategory({ close }) {
     createCategory(data);
     setIsPending(true);
   };
+
+  if (isSmallScreen) close();
 
   return (
     <Container>

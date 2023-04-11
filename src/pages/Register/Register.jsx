@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import IZTLogo from '../../assets/IZTLogo.svg';
-import { AddToast, RegisterInput, SubmitButton } from '../../components/common';
+import { RegisterInput, SubmitButton } from '../../components/common';
 import { useCreateUser } from '../../hooks/query/users';
 import {
   Page,
@@ -159,7 +159,6 @@ export default function Register() {
           />
         </Form>
       </Container>
-      <AddToast />
     </Page>
   );
 }

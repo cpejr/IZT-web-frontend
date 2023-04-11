@@ -6,6 +6,7 @@ import objToFormData from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { useMediaQuery } from 'react-responsive';
 
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useCreateProduct } from '../../../hooks/query/products';
@@ -38,6 +39,7 @@ import {
 export default function ModalCreateProduct({ close }) {
   // Variables
   const [isPending, setIsPending] = useState(false); // Important for modal loading
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const queryClient = useQueryClient();
   const documentsLimit = 3;
   const picturesLimit = 4;
@@ -108,6 +110,8 @@ export default function ModalCreateProduct({ close }) {
     });
     createProduct(formData);
   };
+
+  if (isSmallScreen) close();
 
   return (
     <Container>
