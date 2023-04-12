@@ -9,6 +9,10 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   padding: 20px 24px;
+
+  .css-lk2i2y-MuiFormHelperText-root {
+    margin-left: 0px;
+  }
 `;
 
 export const Form = styled.form``;

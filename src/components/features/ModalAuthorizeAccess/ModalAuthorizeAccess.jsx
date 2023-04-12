@@ -98,11 +98,15 @@ export default function ModalAuthorizeAccess({ close }) {
                           textField: {
                             error: !!errors.accessExpiration,
                             helperText: errors.accessExpiration ? (
-                              <ErrorMessage>
-                                {errors.accessExpiration.message}
-                              </ErrorMessage>
+                              <div>
+                                <ErrorMessage>
+                                  {errors.accessExpiration.message}
+                                </ErrorMessage>
+                              </div>
                             ) : (
-                              <ErrorMessage>{errorMessage}</ErrorMessage>
+                              <div>
+                                <ErrorMessage>{errorMessage}</ErrorMessage>
+                              </div>
                             ),
                           },
                         }}

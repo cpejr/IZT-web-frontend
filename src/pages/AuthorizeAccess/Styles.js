@@ -10,6 +10,11 @@ export const Container = styled.div`
 
   width: 95%;
   margin-bottom: 50px;
+
+  .css-mioa5p-MuiFormHelperText-root {
+    margin-left: 0px;
+    margin-top: 0px;
+  }
 `;
 
 export const Form = styled.form`
