@@ -106,3 +106,112 @@ export const Video = styled.img`
 
   margin-bottom: 1.8em;
 `;
+
+export const Scroll = styled.div`
+  display: grid;
+
+  width: 25%;
+  height: 100%;
+
+  @media (max-width: 800px) {
+    align-items: flex-start;
+    width: 100%;
+  }
+`;
+
+export const SubtitleScroll = styled.p`
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 30px;
+
+  color: ${(props) => props.theme.colors.blue};
+
+  @media (max-width: 800px) {
+    color: ${(props) => props.theme.colors.darkBlue};
+  }
+`;
+
+export const GreyLineScroll = styled.div`
+  width: 100%;
+  height: 2px;
+
+  background: #d9d9d9;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+`;
+
+export const TopicDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  div {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+  }
+`;
+
+export const ScrollIcon = styled.img`
+  width: 1.2rem;
+  height: 1.2rem;
+`;
+
+export const Topics = styled.p`
+  font-weight: 500;
+  font-size: 1.4em;
+  line-height: 24px;
+
+  color: #202020;
+
+  :hover {
+    cursor: pointer;
+  }
+
+  @media (max-width: 800px) {
+    color: #595959;
+  }
+  @media (max-width: 475px) {
+    font-size: 1.1rem;
+  }
+`;
+
+export const VideoTime = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 400;
+  font-size: 1.1em;
+  line-height: 24px;
+
+  color: #a5a5a5;
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const ChangeVideoButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-weight: 500;
+  font-size: 1em;
+
+  width: 7rem;
+  height: 2rem;
+  gap: 7%;
+
+  border: 1px solid ${(props) => props.theme.colors.blue};
+  border-radius: 4px;
+
+  color: ${(props) => props.theme.colors.blue};
+  background-color: transparent;
+
+  @media (min-width: 800px) {
+    display: none;
+  }
+`;
