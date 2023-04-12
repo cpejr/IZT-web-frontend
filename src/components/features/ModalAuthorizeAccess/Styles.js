@@ -35,6 +35,9 @@ export const AccessExpirationContainer = styled.div`
   display: flex;
   flex-direction: row;
   border-radius: 4px;
+
+  height: 56px;
+  background-color: white;
 `;
 
 export const Date = styled(DatePicker)``;
@@ -103,5 +106,5 @@ export const ErrorMessage = styled.p`
   font-weight: 600;
   font-size: 14px;
   color: red;
-  margin-top: 10px;
+  margin-top: 5px;
 `;

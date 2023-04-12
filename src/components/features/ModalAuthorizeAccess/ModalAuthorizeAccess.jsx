@@ -29,7 +29,7 @@ export default function ModalAuthorizeAccess({ close }) {
       fontFamily: 'Montserrat',
     },
     palette: {
-      mode: 'dark',
+      mode: 'light',
     },
   });
 
@@ -48,19 +48,19 @@ export default function ModalAuthorizeAccess({ close }) {
     close();
   };
 
-  // const errorMessage = useMemo(() => {
-  //   switch (dateError) {
-  //     case 'invalidDate': {
-  //       return 'Data inválida';
-  //     }
-  //     case 'disablePast': {
-  //       return 'Insira uma data futura';
-  //     }
-  //     default: {
-  //       return '';
-  //     }
-  //   }
-  // }, [dateError]);
+  const errorMessage = useMemo(() => {
+    switch (dateError) {
+      case 'invalidDate': {
+        return 'Data inválida';
+      }
+      case 'disablePast': {
+        return 'Insira uma data futura';
+      }
+      default: {
+        return '';
+      }
+    }
+  }, [dateError]);
 
   return (
     <Container>
@@ -96,11 +96,13 @@ export default function ModalAuthorizeAccess({ close }) {
                         disablePast
                         slotProps={{
                           textField: {
-                            // error: !!error,
-                            helperText: (
+                            error: !!errors.accessExpiration,
+                            helperText: errors.accessExpiration ? (
                               <ErrorMessage>
-                                {errors?.accessExpiration?.message}
+                                {errors.accessExpiration.message}
                               </ErrorMessage>
+                            ) : (
+                              <ErrorMessage>{errorMessage}</ErrorMessage>
                             ),
                           },
                         }}
