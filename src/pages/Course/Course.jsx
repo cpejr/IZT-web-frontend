@@ -17,6 +17,7 @@ import {
   ChangeVideoButton,
   Buttons,
   Subtitle,
+  VideoTitle,
 } from './Styles';
 
 export default function Course() {
@@ -170,7 +171,7 @@ export default function Course() {
           />
 
           <VideoSectionDiv id="videoSection">
-            <Title>{video.name}</Title>
+            <VideoTitle>{video.name}</VideoTitle>
             <Video src={Image} alt="CourseVideo" />
             <Buttons>
               <ChangeVideoButton onClick={() => previousVideo(video)}>

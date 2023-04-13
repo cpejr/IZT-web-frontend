@@ -35,11 +35,33 @@ export const Title = styled.p`
 
   color: ${(props) => props.theme.colors.blue};
 
+  @media (max-width: 800px) {
+    font-size: 1.65rem;
+  }
+  @media (max-width: 475px) {
+    font-size: 1.4rem;
+  }
+  @media (max-width: 380px) {
+    font-size: 1.25rem;
+  }
+`;
+
+export const VideoTitle = styled.p`
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+
+  color: ${(props) => props.theme.colors.blue};
+
+  @media (max-width: 800px) {
+    font-weight: 600;
+    font-size: 1.65rem;
+  }
   @media (max-width: 475px) {
     font-size: 1.5rem;
   }
-  @media (max-width: 380px) {
-    font-size: 1.3rem;
+  @media (max-width: 390px) {
+    font-size: 1.13rem;
   }
 `;
 
@@ -113,6 +135,7 @@ export const Video = styled.img`
 
   width: 100%;
   height: auto;
+  border-radius: 10px;
 
   margin-bottom: 1.8em;
 `;

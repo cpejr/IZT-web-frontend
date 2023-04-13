@@ -36,9 +36,10 @@ export const Topics = styled.p`
 
   @media (max-width: 800px) {
     color: #595959;
+    font-size: 1.1rem;
   }
   @media (max-width: 475px) {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 `;
 

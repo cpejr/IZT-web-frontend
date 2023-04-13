@@ -14,13 +14,18 @@ export const Scroll = styled.div`
 
 export const SubtitleScroll = styled.p`
   font-weight: 600;
-  font-size: 1.6rem;
+  font-size: 1.56rem;
   line-height: 30px;
+  margin-bottom: 0.3em;
 
   color: ${(props) => props.theme.colors.blue};
 
   @media (max-width: 800px) {
     color: ${(props) => props.theme.colors.darkBlue};
+    font-size: 1.4rem;
+  }
+  @media (max-width: 475px) {
+    font-size: 1.25rem;
   }
 `;
 
@@ -29,7 +34,7 @@ export const GreyLine = styled.div`
   height: 2px;
 
   background: #d9d9d9;
-  margin: 0.5em;
+  margin-bottom: 0.5em;
 
   @media (max-width: 800px) {
     display: none;
@@ -66,9 +71,6 @@ export const Topics = styled.p`
 
   @media (max-width: 800px) {
     color: #595959;
-  }
-  @media (max-width: 475px) {
-    font-size: 1.1rem;
   }
 `;
 
