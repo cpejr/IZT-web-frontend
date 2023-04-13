@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import PropTypes from 'prop-types';
 
 import FinishedVideo from '../../../assets/coursesPage/finishedVideo.png';
@@ -14,13 +12,7 @@ import {
   VideoTime,
 } from './Styles';
 
-export default function CoursesScroll({ availableVideos }) {
-  const [video, setVideo] = useState('');
-
-  const changeVideo = (newVideo) => {
-    setVideo(newVideo);
-  };
-
+export default function CoursesScroll({ availableVideos, setVideo }) {
   return (
     <Scroll id="videoScroll">
       <SubtitleScroll>Introdução</SubtitleScroll>
@@ -39,7 +31,7 @@ export default function CoursesScroll({ availableVideos }) {
         <TopicDiv>
           <div>
             <ScrollIcon src={FinishedVideo} alt="finishedVideo" />
-            <Topics id="1" onClick={() => changeVideo(availableVideos[0])}>
+            <Topics id="1" onClick={() => setVideo(availableVideos[0])}>
               Vídeo 1
             </Topics>
           </div>
@@ -49,7 +41,7 @@ export default function CoursesScroll({ availableVideos }) {
         <TopicDiv>
           <div>
             <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-            <Topics id="2" onClick={() => changeVideo(availableVideos[1])}>
+            <Topics id="2" onClick={() => setVideo(availableVideos[1])}>
               Vídeo 2
             </Topics>
           </div>
@@ -59,7 +51,7 @@ export default function CoursesScroll({ availableVideos }) {
         <TopicDiv>
           <div>
             <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-            <Topics id="3" onClick={() => changeVideo(availableVideos[2])}>
+            <Topics id="3" onClick={() => setVideo(availableVideos[2])}>
               Vídeo 3
             </Topics>
           </div>
@@ -73,7 +65,7 @@ export default function CoursesScroll({ availableVideos }) {
         <TopicDiv>
           <div>
             <ScrollIcon src={FinishedVideo} alt="finishedVideo" />
-            <Topics onClick={() => changeVideo(availableVideos[0])}>
+            <Topics onClick={() => setVideo(availableVideos[0])}>
               Introdução
             </Topics>
           </div>
@@ -83,7 +75,7 @@ export default function CoursesScroll({ availableVideos }) {
         <TopicDiv>
           <div>
             <ScrollIcon src={FinishedVideo} alt="finishedVideo" />
-            <Topics id="1" onClick={() => changeVideo(availableVideos[0])}>
+            <Topics id="1" onClick={() => setVideo(availableVideos[0])}>
               Vídeo 1
             </Topics>
           </div>
@@ -93,7 +85,7 @@ export default function CoursesScroll({ availableVideos }) {
         <TopicDiv>
           <div>
             <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-            <Topics id="2" onClick={() => changeVideo(availableVideos[1])}>
+            <Topics id="2" onClick={() => setVideo(availableVideos[1])}>
               Vídeo 2
             </Topics>
           </div>
@@ -103,7 +95,7 @@ export default function CoursesScroll({ availableVideos }) {
         <TopicDiv>
           <div>
             <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-            <Topics id="3" onClick={() => changeVideo(availableVideos[2])}>
+            <Topics id="3" onClick={() => setVideo(availableVideos[2])}>
               Vídeo 3
             </Topics>
           </div>
@@ -117,7 +109,7 @@ export default function CoursesScroll({ availableVideos }) {
         <TopicDiv>
           <div>
             <ScrollIcon src={FinishedVideo} alt="finishedVideo" />
-            <Topics onClick={() => changeVideo(availableVideos[0])}>
+            <Topics onClick={() => setVideo(availableVideos[0])}>
               Introdução
             </Topics>
           </div>
@@ -127,7 +119,7 @@ export default function CoursesScroll({ availableVideos }) {
         <TopicDiv>
           <div>
             <ScrollIcon src={FinishedVideo} alt="finishedVideo" />
-            <Topics id="1" onClick={() => changeVideo(availableVideos[0])}>
+            <Topics id="1" onClick={() => setVideo(availableVideos[0])}>
               Vídeo 1
             </Topics>
           </div>
@@ -137,7 +129,7 @@ export default function CoursesScroll({ availableVideos }) {
         <TopicDiv>
           <div>
             <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-            <Topics id="2" onClick={() => changeVideo(availableVideos[1])}>
+            <Topics id="2" onClick={() => setVideo(availableVideos[1])}>
               Vídeo 2
             </Topics>
           </div>
@@ -147,7 +139,7 @@ export default function CoursesScroll({ availableVideos }) {
         <TopicDiv>
           <div>
             <ScrollIcon src={UnfinishedVideo} alt="unfinishedVideo" />
-            <Topics id="3" onClick={() => changeVideo(availableVideos[2])}>
+            <Topics id="3" onClick={() => setVideo(availableVideos[2])}>
               Vídeo 3
             </Topics>
           </div>
@@ -159,5 +151,6 @@ export default function CoursesScroll({ availableVideos }) {
 }
 
 CoursesScroll.propTypes = {
-  availableVideos: PropTypes.isRequired,
+  availableVideos: PropTypes.array.isRequired,
+  setVideo: PropTypes.func.isRequired,
 };
