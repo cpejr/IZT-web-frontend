@@ -4,7 +4,6 @@ import CourseVideo from '../CourseVideo/CourseVideo';
 import { GreyLine, Scroll, SubtitleScroll } from './Styles';
 
 export default function CourseScroll({ availableChapters, setVideo }) {
-  console.log(availableChapters);
   return (
     <Scroll>
       {availableChapters?.map(({ _id, name, videos }) => (
