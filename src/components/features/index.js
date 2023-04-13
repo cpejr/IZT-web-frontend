@@ -13,4 +13,4 @@ export { default as BudgetForm } from './BudgetForm/BudgetForm';
 export { default as FormsContact } from './FormsContact/FormsContact';
 export { default as FilesList } from './FilesList/FilesList';
 export { default as ModalChangeUserData } from './ModalChangeUserData/ModalChangeUserData';
-export { default as CoursesScroll } from './CoursesScroll/CoursesScroll';
+export { default as CourseScroll } from './CourseScroll/CourseScroll';

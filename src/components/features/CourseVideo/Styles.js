@@ -1,40 +1,5 @@
 import styled from 'styled-components';
 
-export const Scroll = styled.div`
-  display: grid;
-
-  width: 25%;
-  height: 100%;
-
-  @media (max-width: 800px) {
-    align-items: flex-start;
-    width: 100%;
-  }
-`;
-
-export const SubtitleScroll = styled.p`
-  font-weight: 600;
-  font-size: 1.6rem;
-  line-height: 30px;
-
-  color: ${(props) => props.theme.colors.blue};
-
-  @media (max-width: 800px) {
-    color: ${(props) => props.theme.colors.darkBlue};
-  }
-`;
-
-export const GreyLine = styled.div`
-  width: 100%;
-  height: 2px;
-
-  background: #d9d9d9;
-
-  @media (max-width: 800px) {
-    display: none;
-  }
-`;
-
 export const TopicDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -57,10 +22,16 @@ export const Topics = styled.p`
   font-size: 1.4em;
   line-height: 24px;
 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 7.5rem;
+
   color: #202020;
 
   :hover {
     cursor: pointer;
+    overflow: visible;
   }
 
   @media (max-width: 800px) {

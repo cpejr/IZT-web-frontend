@@ -43,6 +43,18 @@ export const Title = styled.p`
   }
 `;
 
+export const Subtitle = styled.p`
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 30px;
+
+  color: ${(props) => props.theme.colors.blue};
+
+  @media (max-width: 800px) {
+    color: ${(props) => props.theme.colors.darkBlue};
+  }
+`;
+
 export const Text = styled.p`
   font-weight: 400;
   font-size: 1.1rem;
