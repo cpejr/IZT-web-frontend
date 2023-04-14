@@ -24,6 +24,7 @@ import {
   NotFound,
   Unauthorized,
   Forbidden,
+  PocVideoHosting,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -48,6 +49,8 @@ const router = createBrowserRouter(
         <Route path="cadastro" element={<Register />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
+        <Route path="pocvideohosting" element={<PocVideoHosting />} />
+
         <Route element={<PrivateRoutes />}>
           <Route path="perfil" element={<Profile />} />
           <Route path="administrador" element={<AdminRoutes />}>

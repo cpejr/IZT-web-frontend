@@ -13,3 +13,5 @@ export { default as EditProduct } from './EditProduct/EditProduct';
 export { default as EditCategory } from './EditCategory/EditCategory';
 export { default as Forbidden } from './Forbidden/Forbidden';
 export { default as Unauthorized } from './Unauthorized/Unauthorized';
+export { default as PocVideoHosting } from './PocVideoHosting/PocVideoHosting';
+// export { default as PocVideoHostingSignedUrl } from './PocVideoHostingSignedUrl/PocVideoHostingSignedUrl';
