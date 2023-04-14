@@ -19,6 +19,7 @@ import {
   ContentRow,
   MiddleData,
   ModalStyle,
+  EditBtn,
 } from './Styles';
 
 const data = [
@@ -39,10 +40,15 @@ const data = [
 export default function CourseAuthorization() {
   const [modalCourseAuthorization, setModalCourseAuthorization] =
     useState(false);
+  const [authorizeUser, setAuthorizeUser] = useState({});
 
   const { width: windowWidth } = useWindowSize();
   const mobileBreakpoint = 700;
+  async function openModalCourseAuthorization(d) {
+    setAuthorizeUser(d);
 
+    setModalCourseAuthorization(true);
+  }
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
@@ -55,7 +61,7 @@ export default function CourseAuthorization() {
             Autorizar acesso
           </StyledLink>
         ) : (
-          <AuthorizeButton onClick={() => setModalCourseAuthorization(true)}>
+          <AuthorizeButton onClick={() => openModalCourseAuthorization()}>
             <PlusOutlined size="20px" />
             {'   '}
             Autorizar acesso
@@ -75,7 +81,9 @@ export default function CourseAuthorization() {
             <ContentRow key={d.email}>
               <p>{d.email}</p>
               <MiddleData>{d.expiration}</MiddleData>
-              <TbPencil size={25} />
+              <EditBtn onClick={() => openModalCourseAuthorization(d)}>
+                <TbPencil size={25} />
+              </EditBtn>
             </ContentRow>
           ))}
         </Table>
@@ -101,6 +109,7 @@ export default function CourseAuthorization() {
       >
         <ModalAuthorizeAccess
           close={() => setModalCourseAuthorization(false)}
+          data={authorizeUser}
         />
       </ModalStyle>
     </Container>

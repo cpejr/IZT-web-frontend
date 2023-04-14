@@ -178,3 +178,13 @@ export const ModalStyle = styled(Modal)`
     background-color: ${(props) => props.theme.colors.darkBlue};
   }
 `;
+
+export const EditBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  width: 25px;
+  height: 25px;
+  :hover {
+    cursor: pointer;
+  }
+`;

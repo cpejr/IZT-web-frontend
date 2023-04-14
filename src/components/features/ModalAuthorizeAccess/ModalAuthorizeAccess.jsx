@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -20,7 +21,7 @@ import {
 } from './Styles';
 import { modalAuthorizeAccessValidationSchema } from './utils';
 
-export default function ModalAuthorizeAccess({ close }) {
+export default function ModalAuthorizeAccess({ close, data }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const [dateError, setDateError] = useState(null);
 
@@ -43,8 +44,8 @@ export default function ModalAuthorizeAccess({ close }) {
   });
 
   const onSubmit = (authorizedUser) => {
-    setIsPending(true);
     console.log(authorizedUser);
+    setIsPending(true);
     close();
   };
 
@@ -61,7 +62,6 @@ export default function ModalAuthorizeAccess({ close }) {
       }
     }
   }, [dateError]);
-
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -73,6 +73,7 @@ export default function ModalAuthorizeAccess({ close }) {
               name="email"
               type="email"
               placeholder="email@email.com"
+              defaultValue={data?.email}
               {...register('email')}
             />
             {errors?.email?.message && (
@@ -89,6 +90,7 @@ export default function ModalAuthorizeAccess({ close }) {
                   render={({ field: { onChange, onBlur } }) => (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <Date
+                        defaultValue={dayjs(data?.expiration, 'DD/MM/YYYY')}
                         onChange={onChange}
                         onBlur={onBlur}
                         format="DD/MM/YYYY"
@@ -141,4 +143,9 @@ export default function ModalAuthorizeAccess({ close }) {
 
 ModalAuthorizeAccess.propTypes = {
   close: PropTypes.func.isRequired,
+  data: PropTypes.object,
+};
+
+ModalAuthorizeAccess.defaultProps = {
+  data: {},
 };
