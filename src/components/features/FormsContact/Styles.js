@@ -113,7 +113,7 @@ export const Mensagem = styled.div`
   }
 `;
 
-export const BotaoEnviar = styled.button`
+export const SubmitButton = styled.button`
   align-self: flex-end;
   color: white;
   background-color: #23a4a6;

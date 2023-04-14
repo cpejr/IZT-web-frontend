@@ -11,7 +11,7 @@ import {
   Section,
   Title,
   Mensagem,
-  BotaoEnviar,
+  SubmitButton,
   InputMessage,
   AreaText,
 } from './Styles';
@@ -38,7 +38,6 @@ export default function FormsContact() {
   });
   const onSubmit = (formInput) => sendFormContact(formInput);
 
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <ContactUs>
       <Title>{`Entre em Contato ${isSmallScreen ? '' : 'Conosco'}`}</Title>
@@ -90,7 +89,24 @@ export default function FormsContact() {
                 {...register('message')}
               />
               {errors?.message?.message && <p>{errors?.message?.message}</p>}
-              <BotaoEnviar>Enviar</BotaoEnviar>
+              <SubmitButton type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    {/* <TailSpin
+                height="15"
+                width="15"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="5"
+                wrapperStyle={{}}
+                wrapperClass=""
+              /> */}
+                    Carregando
+                  </>
+                ) : (
+                  <>Enviar</>
+                )}
+              </SubmitButton>
             </Mensagem>
           </InputMessage>
         </Section>

@@ -4,6 +4,7 @@ import { SaveOutlined } from '@ant-design/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useUpdateUser } from '../../../hooks/query/users';
@@ -142,8 +143,23 @@ export default function ModalChangeUserData({ close }) {
           name="Salvar Alterações"
           relativeWidth="70%"
         >
-          <SaveOutlined />
-          {isPending ? 'Carregando...' : 'Salvar Alterações'}
+          {isPending ? (
+            <>
+              <TailSpin
+                height="15"
+                width="15"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="5"
+              />
+              Carregando
+            </>
+          ) : (
+            <>
+              <SaveOutlined />
+              Salvar Alterações
+            </>
+          )}
         </SaveChanges>
       </Form>
     </Container>

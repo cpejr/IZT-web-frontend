@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import 'react-toastify/dist/ReactToastify.css';
 import IZTLogo from '../../assets/IZTLogo.svg';
-import { DataInput, SubmitButton } from '../../components/common';
+import { DataInput } from '../../components/common';
 import { useLogin } from '../../hooks/query/sessions';
 import {
   Page,
@@ -13,8 +13,9 @@ import {
   Logo,
   Title,
   Form,
+  SubmitButton,
   DataEntry,
-  RemeberMe,
+  ForgotPassword,
   SignUpLink,
   Links,
 } from './Styles';
@@ -44,7 +45,6 @@ export default function Login() {
 
   const onSubmit = (data) => login(data);
 
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <Page>
       <Container>
@@ -71,15 +71,28 @@ export default function Login() {
               errors={errors}
               type="password"
             />
-            <SubmitButton
-              name="Entrar"
-              // submitErrorMessage={submitErrorMessage}
-              relativeWidth="70%"
-            />
+            <SubmitButton disabled={isLoading} type="submit">
+              {isLoading ? (
+                <>
+                  <TailSpin
+                    height="15"
+                    width="15"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="5"
+                  />
+                  Carregando
+                </>
+              ) : (
+                'Entrar'
+              )}
+            </SubmitButton>
           </Form>
         </DataEntry>
         <Links>
-          <RemeberMe to="/">Esqueceu a sua senha? Clique aqui!</RemeberMe>
+          <ForgotPassword to="/">
+            Esqueceu a sua senha? Clique aqui!
+          </ForgotPassword>
           <SignUpLink>
             Ainda não tem uma conta? <Link to="/">Cadastre-se aqui!</Link>
           </SignUpLink>

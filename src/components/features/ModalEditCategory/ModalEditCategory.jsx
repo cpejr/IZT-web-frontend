@@ -71,7 +71,7 @@ export default function ModalEditCategory({ category, close }) {
             id="name"
             name="name"
             placeholder="Digite aqui o nome da categoria"
-            error={errorMessage}
+            error={!!errorMessage}
             defaultValue={category?.name}
             {...register('name')}
           />

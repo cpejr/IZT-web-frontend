@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import 'react-toastify/dist/ReactToastify.css';
 import IZTLogo from '../../assets/IZTLogo.svg';
 import { RegisterInput, SubmitButton } from '../../components/common';
 import { useCreateUser } from '../../hooks/query/users';
@@ -42,7 +42,6 @@ export default function Register() {
   });
   const onSubmit = (data) => createUser(data);
 
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <Page>
       <Container>
@@ -151,11 +150,22 @@ export default function Register() {
               />
             </FormColumn>
           </DataEntry>
-          <SubmitButton
-            // submitErrorMessage={submitErrorMessage}
-            name="Criar conta"
-            relativeWidth="70%"
-          />
+          <SubmitButton disabled={isLoading} type="submit">
+            {isLoading ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                />
+                Carregando
+              </>
+            ) : (
+              'Entrar'
+            )}
+          </SubmitButton>
         </Form>
       </Container>
     </Page>

@@ -70,7 +70,7 @@ export default function ModalCreateCategory({ close }) {
             id="name"
             name="name"
             placeholder="Digite aqui o nome da categoria"
-            error={errorMessage}
+            error={!!errorMessage}
             {...register('name')}
           />
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}

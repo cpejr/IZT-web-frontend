@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+// import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useSendProductBudget } from '../../../hooks/query/products';
@@ -11,12 +12,12 @@ import {
   Section,
   Title,
   Subsection,
-  BotaoEnviar,
+  SubmitButton,
   Container,
 } from './Styles';
 import { budgetEmailSchema, buildBudgetEmailErrorMessage } from './utils';
 
-export default function BudgetForm({ productId }) {
+export default function FormsBudget({ productId, isLoadingProduct = false }) {
   const { mutate: sendProductBudget, isLoading } = useSendProductBudget({
     onError: (err) => {
       const errorMessage = buildBudgetEmailErrorMessage(err);
@@ -35,7 +36,6 @@ export default function BudgetForm({ productId }) {
   });
   const onSubmit = (formInput) => sendProductBudget({ productId, formInput });
 
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <ContactUs>
       <Title>Requisite um orçamento</Title>
@@ -119,12 +119,34 @@ export default function BudgetForm({ productId }) {
             />
           </Section>
         </Container>
-        <BotaoEnviar>Enviar</BotaoEnviar>
+        <SubmitButton type="submit" disabled={isLoading || isLoadingProduct}>
+          {isLoading || isLoadingProduct ? (
+            <>
+              {/* <TailSpin
+                height="15"
+                width="15"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="5"
+                wrapperStyle={{}}
+                wrapperClass=""
+              /> */}
+              Carregando
+            </>
+          ) : (
+            <>Enviar</>
+          )}
+        </SubmitButton>
       </Form>
     </ContactUs>
   );
 }
 
-BudgetForm.propTypes = {
+FormsBudget.defaultProps = {
+  isLoadingProduct: false,
+};
+
+FormsBudget.propTypes = {
   productId: PropTypes.string.isRequired,
+  isLoadingProduct: PropTypes.bool,
 };

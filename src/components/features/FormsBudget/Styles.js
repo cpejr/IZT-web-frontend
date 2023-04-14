@@ -96,7 +96,7 @@ export const Subsection = styled.div`
   }
 `;
 
-export const BotaoEnviar = styled.button`
+export const SubmitButton = styled.button`
   align-self: center;
   color: white;
   background-color: #23a4a6;
