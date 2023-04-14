@@ -47,12 +47,12 @@ export const Input = styled.input`
   padding: 8px 11px;
   gap: 10px;
 
+  border: ${({ error }) => (error ? '2px solid red' : '1px solid black')};
+  border-radius: 4px;
+
   max-width: 100%;
   width: 100%;
   height: 36px;
-
-  border: 1px solid black;
-  border-radius: 4px;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
@@ -67,12 +67,12 @@ export const TextArea = styled.textarea`
   padding: 8px 11px;
   gap: 10px;
 
+  border: ${({ error }) => (error ? '2px solid red' : '1px solid black')};
+  border-radius: 4px;
+
   max-width: 100%;
   width: 100%;
   height: 250px;
-
-  border: 1px solid black;
-  border-radius: 4px;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
@@ -123,9 +123,21 @@ export const DocumentsContainer = styled.div`
 
 export const CategorySection = styled.div`
   display: flex;
+  align-items: center;
 
   gap: 25px;
   width: 100%;
+
+  @media (max-width: 361px) {
+    align-items: start;
+    flex-direction: column;
+    gap: 5px;
+  }
+`;
+
+export const ErrorMessage = styled.p`
+  font-weight: 700;
+  color: red;
 `;
 
 export const SaveButton = styled.button`
@@ -145,6 +157,8 @@ export const SaveButton = styled.button`
   border-radius: 5px;
   background-color: transparent;
 
+  transition: background-color 500ms;
+
   p {
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
@@ -157,17 +171,17 @@ export const SaveButton = styled.button`
 
     color: black;
 
-    :hover {
-      transition: 1s;
-      color: white;
-    }
+    transition: color 500ms;
   }
   :hover {
-    transition: 1s;
     background-color: ${(props) => props.theme.colors.blue};
     color: white;
     border: white;
     cursor: pointer;
+
+    p {
+      color: white;
+    }
   }
 `;
 
@@ -188,6 +202,8 @@ export const CancelButton = styled(Link)`
   border-radius: 5px;
   background-color: transparent;
 
+  transition: background-color 500ms;
+
   p {
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
@@ -200,17 +216,17 @@ export const CancelButton = styled(Link)`
 
     color: black;
 
-    :hover {
-      transition: 1s;
-      color: white;
-    }
+    transition: 500ms;
   }
 
   :hover {
-    transition: 1s;
     background-color: red;
     color: white;
     border: white;
     cursor: pointer;
+
+    p {
+      color: white;
+    }
   }
 `;

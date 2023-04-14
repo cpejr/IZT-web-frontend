@@ -62,8 +62,17 @@ const editProductErrorMessages = {
 };
 const editProductDefaultErrorMessage =
   'Erro ao criar o produto. Tente novamente mais tarde';
-
 export function buildEditProductErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
   return editProductErrorMessages[code] || editProductDefaultErrorMessage;
+}
+
+const getCategoriesErrorMessages = {
+  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
+};
+const getCategoriesDefaultErrorMessage =
+  'Erro ao listar as categorias disponíveis. Tente novamente mais tarde';
+export function buildGetCategoriesErrorMessage(err) {
+  const code = err?.response?.data?.httpCode;
+  return getCategoriesErrorMessages[code] || getCategoriesDefaultErrorMessage;
 }

@@ -41,9 +41,9 @@ export const RightSection = styled.div`
 export const LeftSection = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
   padding: 0px;
-  gap: 30px;
 
   width: 400px;
   height: 770px;
@@ -72,6 +72,11 @@ export const Text = styled.p`
   line-height: 29px;
 
   color: white;
+`;
+
+export const ErrorMessage = styled.p`
+  font-weight: 700;
+  color: red;
 `;
 
 export const PicturesContainer = styled.div`
@@ -108,6 +113,8 @@ export const Input = styled.input`
   width: 100%;
   top: 34px;
 
+  border: ${({ error }) => (error ? '2px solid red' : 'none')};
+
   background: #ffffff;
   border-radius: 4px;
 
@@ -125,6 +132,8 @@ export const TextAreaModal = styled.textarea`
   padding: 8px 11px;
   width: 100%;
   height: 250px;
+
+  border: ${({ error }) => (error ? '2px solid red' : 'none')};
 
   background: #ffffff;
   border-radius: 4px;

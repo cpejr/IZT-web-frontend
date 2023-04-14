@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useCreateProduct } from '../../../hooks/query/products';
@@ -29,6 +30,7 @@ import {
   ModalButton,
   DocumentsContainer,
   PicturesContainer,
+  ErrorMessage,
 } from './Styles';
 import {
   buildCreateProductErrorMessage,
@@ -50,8 +52,7 @@ export default function ModalCreateProduct({ close }) {
       onError: (err) => {
         const errorMessage = buildGetCategoriesErrorMessage(err);
 
-        // Do something to the errorMessage
-        alert(errorMessage);
+        toast.error(errorMessage);
       },
     }
   );
@@ -66,8 +67,7 @@ export default function ModalCreateProduct({ close }) {
     onError: (err) => {
       const errorMessage = buildCreateProductErrorMessage(err);
 
-      // Do something to the errorMessage(toast)
-      alert(errorMessage);
+      toast.error(errorMessage);
       setIsPending(false);
     },
   });
@@ -123,10 +123,11 @@ export default function ModalCreateProduct({ close }) {
               <Input
                 id="name"
                 name="name"
-                type="text"
                 placeholder="Digite o nome do produto"
+                error={errors?.name?.message}
                 {...register('name')}
               />
+              <ErrorMessage>{errors?.name?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
@@ -135,18 +136,22 @@ export default function ModalCreateProduct({ close }) {
                 id="description"
                 name="description"
                 placeholder="Descreva o produto"
+                error={errors?.description?.message}
                 {...register('description')}
               />
+              <ErrorMessage>{errors?.description?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
               <Text>Vantagens:</Text>
               <TextAreaModal
                 id="advantages"
-                type="advantages"
+                name="advantages"
                 placeholder="Descreva as vantagens do produto"
+                error={errors?.advantages?.message}
                 {...register('advantages')}
               />
+              <ErrorMessage>{errors?.advantages?.message}</ErrorMessage>
             </Subsection>
           </LeftSection>
 
@@ -170,11 +175,13 @@ export default function ModalCreateProduct({ close }) {
               {fieldsPictures.length < picturesLimit && (
                 <AddFileButton
                   label="Novo Imagem"
+                  error={errors?.pictures?.message}
                   appendFn={appendPicture}
                   allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
                   sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
                 />
               )}
+              <ErrorMessage>{errors?.pictures?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
@@ -224,7 +231,10 @@ export default function ModalCreateProduct({ close }) {
               )}
             </CategorySubsection>
 
-            <ModalButton type="submit">
+            <ModalButton
+              type="submit"
+              disabled={isPending || isLoadingCategories}
+            >
               <FiSave size={20} />
               <p>{isPending ? 'Carregando...' : 'Criar produto'}</p>
             </ModalButton>

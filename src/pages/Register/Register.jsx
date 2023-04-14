@@ -23,13 +23,12 @@ export default function Register() {
   const navigate = useNavigate();
   const { mutate: createUser, isLoading } = useCreateUser({
     onSuccess: () => {
-      navigate('/login');
       toast.success('Usuário cadastrado com sucesso!');
+      navigate('/login');
     },
     onError: (err) => {
       const errorMessage = buildRegisterErrorMessage(err);
 
-      // Do something to the errorMessage
       toast.error(errorMessage);
     },
   });

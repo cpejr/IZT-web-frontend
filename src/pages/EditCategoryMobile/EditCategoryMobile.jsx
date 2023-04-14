@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { RegisterInput } from '../../components/common';
 import { useUpdateCategory } from '../../hooks/query/categories';
@@ -29,13 +30,14 @@ export default function EditCategoryMobile() {
           queryKey: ['category'],
         }),
       ]);
+
+      toast.success('Categoria atualizada com sucesso!');
       navigate('/administrador/listar-categorias');
     },
     onError: (err) => {
       const errorMessage = buildupdateCategoryErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 

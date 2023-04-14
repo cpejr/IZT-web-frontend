@@ -16,7 +16,6 @@ export const CloseButton = styled.button`
 
 export const ModalContent = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: flex-start;
   padding: 30px;
   gap: 10%;
@@ -39,9 +38,9 @@ export const RightSection = styled.div`
 export const LeftSection = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
   padding: 0px;
-  gap: 30px;
 
   width: 400px;
   height: 770px;
@@ -109,6 +108,8 @@ export const Input = styled.input`
   background: #ffffff;
   border-radius: 4px;
 
+  border: ${({ error }) => (error ? '2px solid red' : 'none')};
+
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
@@ -118,11 +119,18 @@ export const Input = styled.input`
   color: #000000;
 `;
 
+export const ErrorMessage = styled.p`
+  font-weight: 700;
+  color: red;
+`;
+
 export const TextAreaModal = styled.textarea`
   display: flex;
   padding: 8px 11px;
   width: 100%;
   height: 250px;
+
+  border: ${({ error }) => (error ? '2px solid red' : 'none')};
 
   background: #ffffff;
   border-radius: 4px;

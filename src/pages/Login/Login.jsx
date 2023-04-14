@@ -24,13 +24,12 @@ export default function Login() {
   const navigate = useNavigate();
   const { mutate: login, isLoading } = useLogin({
     onSuccess: () => {
-      navigate('/');
       toast.success('Usuário logado com sucesso!');
+      navigate('/');
     },
     onError: (err) => {
       const errorMessage = buildLoginErrorMessage(err);
 
-      // Do something to the errorMessage
       toast.error(errorMessage);
     },
   });

@@ -6,6 +6,7 @@ import objToFormData from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useUpdateProducts } from '../../../hooks/query/products';
@@ -30,9 +31,11 @@ import {
   TextAreaModal,
   PicturesContainer,
   DocumentsContainer,
+  ErrorMessage,
 } from './Styles';
 import {
   buildEditProductErrorMessage,
+  buildGetCategoriesErrorMessage,
   editProductValidationSchema,
 } from './utils';
 
@@ -47,10 +50,10 @@ export default function ModalEditProduct({ product, close }) {
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
     {
       onError: (err) => {
-        const errorMessage = buildEditProductErrorMessage(err);
+        const errorMessage = buildGetCategoriesErrorMessage(err);
 
-        // Do something to the errorMessage
-        alert(errorMessage);
+        toast.error(errorMessage);
+        close();
       },
     }
   );
@@ -65,8 +68,7 @@ export default function ModalEditProduct({ product, close }) {
     onError: (err) => {
       const errorMessage = buildEditProductErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
       setIsPending(false);
     },
   });
@@ -149,8 +151,10 @@ export default function ModalEditProduct({ product, close }) {
                 name="name"
                 type="text"
                 placeholder="Digite o nome do produto"
+                error={errors?.name?.message}
                 {...register('name')}
               />
+              <ErrorMessage>{errors?.name?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
@@ -159,8 +163,10 @@ export default function ModalEditProduct({ product, close }) {
                 id="description"
                 name="description"
                 placeholder="Descreva o produto"
+                error={errors?.description?.message}
                 {...register('description')}
               />
+              <ErrorMessage>{errors?.description?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
@@ -169,8 +175,10 @@ export default function ModalEditProduct({ product, close }) {
                 id="advantages"
                 name="advantages"
                 placeholder="Descreva as vantagens do produto"
+                error={errors?.advantages?.message}
                 {...register('advantages')}
               />
+              <ErrorMessage>{errors?.advantages?.message}</ErrorMessage>
             </Subsection>
           </LeftSection>
 
@@ -200,7 +208,7 @@ export default function ModalEditProduct({ product, close }) {
                   sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
                 />
               )}
-              <p>{errors?.pictures?.message}</p>
+              <ErrorMessage>{errors?.pictures?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
@@ -251,7 +259,10 @@ export default function ModalEditProduct({ product, close }) {
               )}
             </CategorySubsection>
 
-            <ModalButton type="submit">
+            <ModalButton
+              type="submit"
+              disabled={isPending || isLoadingCategories}
+            >
               <FiSave size={20} />
               <p>{isPending ? 'Carregando...' : 'Editar produto'}</p>
             </ModalButton>

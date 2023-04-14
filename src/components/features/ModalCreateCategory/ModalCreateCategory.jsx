@@ -16,6 +16,7 @@ import {
   Input,
   ModalContent,
   ModalButton,
+  ErrorMessage,
 } from './Styles';
 import {
   buildCreateCategoryErrorMessage,
@@ -32,8 +33,9 @@ export default function ModalCreateCategory({ close }) {
       queryClient.invalidateQueries({
         queryKey: ['categories'],
       });
-      close();
+
       toast.success('Categoria criada com sucesso!');
+      close();
     },
     onError: (err) => {
       const errorMessage = buildCreateCategoryErrorMessage(err);
@@ -57,19 +59,21 @@ export default function ModalCreateCategory({ close }) {
 
   if (isSmallScreen) close();
 
+  const errorMessage = errors?.name?.message;
+
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
-          <Label>Nome da categoria:</Label>
+          <Label htmlFor="name">Nome da categoria:</Label>
           <Input
             id="name"
             name="name"
-            type="name"
-            {...register('name')}
             placeholder="Digite aqui o nome da categoria"
+            error={errorMessage}
+            {...register('name')}
           />
-          {errors?.name?.message && <p>{errors?.name?.message}</p>}
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <ModalButton disabled={isPending} type="submit">
             <FiSave size={25} />
             <p>{isPending ? 'Carregando...' : 'Criar Categoria'}</p>

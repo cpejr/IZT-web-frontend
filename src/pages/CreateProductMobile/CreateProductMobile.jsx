@@ -5,6 +5,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { useMediaQuery } from 'react-responsive';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { FormSelect } from '../../components/common';
 import {
@@ -29,6 +30,7 @@ import {
   PicturesContainer,
   DocumentsContainer,
   Section,
+  ErrorMessage,
 } from './Styles';
 import {
   buildCreateProductErrorMessage,
@@ -49,8 +51,7 @@ export default function CreateProductMobile() {
       onError: (err) => {
         const errorMessage = buildGetCategoriesErrorMessage(err);
 
-        // Do something to the errorMessage
-        alert(errorMessage);
+        toast.error(errorMessage);
       },
     }
   );
@@ -61,13 +62,13 @@ export default function CreateProductMobile() {
           queryKey: ['products', 'searchByName'],
         });
 
+        toast.success('Produto criado com sucesso!');
         navigate('/administrador');
-      }, // insert toast
+      },
       onError: (err) => {
         const errorMessage = buildCreateProductErrorMessage(err);
 
-        // Do something to the errorMessage(toast)
-        alert(errorMessage);
+        toast.error(errorMessage);
       },
     });
 
@@ -121,8 +122,10 @@ export default function CreateProductMobile() {
             name="name"
             type="text"
             placeholder="Digite o nome do produto"
+            error={errors?.name?.message}
             {...register('name')}
           />
+          <ErrorMessage>{errors?.name?.message}</ErrorMessage>
         </Section>
 
         <Section>
@@ -131,8 +134,10 @@ export default function CreateProductMobile() {
             id="description"
             name="description"
             placeholder="Descreva o produto"
+            error={errors?.description?.message}
             {...register('description')}
           />
+          <ErrorMessage>{errors?.description?.message}</ErrorMessage>
         </Section>
 
         <Section>
@@ -141,8 +146,10 @@ export default function CreateProductMobile() {
             id="advantages"
             type="advantages"
             placeholder="Descreva as vantagens do produto"
+            error={errors?.advantages?.message}
             {...register('advantages')}
           />
+          <ErrorMessage>{errors?.advantages?.message}</ErrorMessage>
         </Section>
 
         <Section>
@@ -172,6 +179,7 @@ export default function CreateProductMobile() {
               sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
             />
           )}
+          <ErrorMessage>{errors?.pictures?.message}</ErrorMessage>
         </Section>
 
         <Section>
@@ -215,17 +223,32 @@ export default function CreateProductMobile() {
                 label: name,
                 value: _id,
               }))}
+              // Alter this
+              style={
+                !errors?.category?.message
+                  ? {
+                      border: '1px solid black',
+                      borderRadius: '6px',
+                    }
+                  : {}
+              }
               placeholder="Selecione a categoria"
             />
           )}
         </CategorySection>
 
-        <SaveButton type="submit">
+        <SaveButton
+          type="submit"
+          disabled={isLoadingCreate || isLoadingCategories}
+        >
           <FiSave size={20} />
           <p>{isLoadingCreate ? 'Carregando...' : 'Criar produto'}</p>
         </SaveButton>
 
-        <CancelButton to="/administrador">
+        <CancelButton
+          to="/administrador"
+          disabled={isLoadingCreate || isLoadingCategories}
+        >
           <p>Cancelar</p>
         </CancelButton>
       </Form>

@@ -2,6 +2,7 @@ import { useRef } from 'react';
 
 import PropTypes from 'prop-types';
 import { HiPlusSm } from 'react-icons/hi';
+import { toast } from 'react-toastify';
 
 import numToMegaBytes from '../../../utils/numToMegaBytes';
 import { AddButton } from './Styles';
@@ -33,7 +34,7 @@ export default function AddFileButton({
           const sizeLimit = numToMegaBytes(sizeLimitInMB);
 
           if (file.size > sizeLimit) {
-            alert('Limite excedido'); // Toast
+            toast.error(`Limite de ${sizeLimitInMB} MB excedido`);
           } else {
             appendFn({ file });
           }

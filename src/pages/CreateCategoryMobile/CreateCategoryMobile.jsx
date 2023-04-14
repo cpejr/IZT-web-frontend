@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { useMediaQuery } from 'react-responsive';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { RegisterInput } from '../../components/common';
 import { useCreateCategory } from '../../hooks/query/categories';
@@ -30,13 +31,14 @@ export default function CreateCategoryMobile() {
       queryClient.invalidateQueries({
         queryKey: ['categories'],
       });
+
+      toast.success('Categoria criada com sucesso!');
       navigate('/administrador/listar-categorias');
     },
     onError: (err) => {
       const errorMessage = buildCreateCategoryErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 

@@ -21,7 +21,6 @@ export default function BudgetForm({ productId }) {
     onError: (err) => {
       const errorMessage = buildBudgetEmailErrorMessage(err);
 
-      // Do something to the errorMessage
       toast.error(errorMessage);
     },
   });

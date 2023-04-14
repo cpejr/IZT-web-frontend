@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 
-import { Container, StyledSelect } from './Styles';
+import { Container, ErrorMessage, StyledSelect } from './Styles';
 
 export default function FormSelect({ data, name, control, errors, ...props }) {
+  const errorMessage = errors?.[name]?.message;
   return (
     <Container>
       <Controller
@@ -16,6 +17,7 @@ export default function FormSelect({ data, name, control, errors, ...props }) {
             ref={ref}
             value={currValue}
             {...props}
+            error={errorMessage}
           >
             {data.map(({ label, value }) => (
               <StyledSelect.Option key={value} value={value}>
@@ -25,7 +27,7 @@ export default function FormSelect({ data, name, control, errors, ...props }) {
           </StyledSelect>
         )}
       />
-      <p>{errors?.category?.message}</p>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>
   );
 }

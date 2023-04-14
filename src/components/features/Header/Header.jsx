@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useMediaQuery } from 'react-responsive';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useTheme } from 'styled-components';
 
 import { useLogout } from '../../../hooks/query/sessions';
@@ -48,8 +49,7 @@ export default function Header() {
       const errorMessage =
         'Ocorreu um erro ao realizar o logout. Tente novamente mais tarde';
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 

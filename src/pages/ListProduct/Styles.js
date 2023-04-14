@@ -199,7 +199,7 @@ export const SearchIconButton = styled.button`
 `;
 
 export const ModalStyle = styled(Modal)`
-  :where(.css-dev-only-do-not-override-1me4733).ant-modal .ant-modal-content {
-    background-color: ${(props) => props.theme.colors.darkBlue};
+  .ant-modal-content {
+    background-color: ${(props) => props.theme.colors.darkBlue} !important;
   }
 `;

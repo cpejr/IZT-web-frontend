@@ -28,8 +28,8 @@ export default function ModalChangeUserData({ close }) {
   const { mutate: updateUser } = useUpdateUser({
     onSuccess: (data) => {
       setUser(data);
-      console.log('ueeee');
-      toast?.success('Dados modificados com sucesso!');
+
+      toast.success('Dados modificados com sucesso!');
       close();
     },
     onError: (err) => {

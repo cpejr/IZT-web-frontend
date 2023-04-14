@@ -5,6 +5,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { useMediaQuery } from 'react-responsive';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { FormSelect } from '../../components/common';
 import {
@@ -30,6 +31,7 @@ import {
   TextArea,
   PicturesContainer,
   DocumentsContainer,
+  ErrorMessage,
 } from './Styles';
 import {
   buildEditProductErrorMessage,
@@ -52,8 +54,7 @@ export default function EditProductMobile() {
       onError: (err) => {
         const errorMessage = buildEditProductErrorMessage(err);
 
-        // Do something to the errorMessage
-        alert(errorMessage);
+        toast.error(errorMessage);
       },
     }
   );
@@ -64,13 +65,13 @@ export default function EditProductMobile() {
           queryKey: ['products', 'searchByName'],
         });
 
+        toast.success('Produto atualizado com sucesso!');
         navigate('/administrador');
       },
       onError: (err) => {
         const errorMessage = buildEditProductErrorMessage(err);
 
-        // Do something to the errorMessage
-        alert(errorMessage);
+        toast.error(errorMessage);
       },
     });
 
@@ -152,8 +153,10 @@ export default function EditProductMobile() {
             name="name"
             type="text"
             placeholder="Digite o nome do produto"
+            error={errors?.name?.message}
             {...register('name')}
           />
+          <ErrorMessage>{errors?.name?.message}</ErrorMessage>
         </Section>
 
         <Section>
@@ -162,8 +165,10 @@ export default function EditProductMobile() {
             id="description"
             name="description"
             placeholder="Descreva o produto"
+            error={errors?.description?.message}
             {...register('description')}
           />
+          <ErrorMessage>{errors?.description?.message}</ErrorMessage>
         </Section>
 
         <Section>
@@ -172,8 +177,10 @@ export default function EditProductMobile() {
             id="advantages"
             type="advantages"
             placeholder="Descreva as vantagens do produto"
+            error={errors?.advantages?.message}
             {...register('advantages')}
           />
+          <ErrorMessage>{errors?.advantages?.message}</ErrorMessage>
         </Section>
 
         <Section>
@@ -203,6 +210,7 @@ export default function EditProductMobile() {
               sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
             />
           )}
+          <ErrorMessage>{errors?.pictures?.message}</ErrorMessage>
         </Section>
 
         <Section>
@@ -246,12 +254,24 @@ export default function EditProductMobile() {
                 label: name,
                 value: _id,
               }))}
+              // Alter this
+              style={
+                !errors?.category?.message
+                  ? {
+                      border: '1px solid black',
+                      borderRadius: '6px',
+                    }
+                  : {}
+              }
               placeholder="Selecione a categoria"
             />
           )}
         </CategorySection>
 
-        <SaveButton type="submit">
+        <SaveButton
+          type="submit"
+          disabled={isLoadingUpdate || isLoadingCategories}
+        >
           <FiSave size={20} />
           <p>{isLoadingUpdate ? 'Carregando...' : 'Editar produto'}</p>
         </SaveButton>

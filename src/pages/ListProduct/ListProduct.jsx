@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
-import { toast } from 'react-toastify';
 import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
 
 import { Select } from '../../components/common';
 import { ModalEditProduct } from '../../components/features';
@@ -27,7 +27,10 @@ import {
   SearchIconButton,
   ModalStyle,
 } from './Styles';
-import { buildGetProductsErrorMessage } from './utils';
+import {
+  buildGetProductsErrorMessage,
+  buildGetCategoriesErrorMessage,
+} from './utils';
 
 export default function ListProduct() {
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
@@ -37,7 +40,13 @@ export default function ListProduct() {
   const [name, setName] = useState('');
   const debouncedName = useDebounce(name);
 
-  const { data: categories } = useGetCategories();
+  const { data: categories } = useGetCategories({
+    onError: (err) => {
+      const errorMessage = buildGetCategoriesErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
+  });
 
   const { data: products } = useSearchProductByName({
     name: debouncedName,
@@ -55,7 +64,6 @@ export default function ListProduct() {
   };
   const closeModalEditProduct = () => setModalEditProduct(false);
 
-  const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
       <Title>Lista de produtos</Title>
@@ -110,7 +118,7 @@ export default function ListProduct() {
         width={1100}
         padding={0}
         footer={null}
-        closeIcon={modalCloseButton}
+        closeIcon={<CloseOutlined style={{ color: 'white' }} />}
         bodyStyle={{
           alignItems: 'center',
           justifyContent: 'center',
