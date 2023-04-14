@@ -1,58 +1,46 @@
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
+
+import { useSendFormContact } from '../../../hooks/query/contact';
+import { FormInput, FormMask } from '../../common';
 import {
   ContactUs,
   Form,
   Section,
   Title,
   Mensagem,
-  BotaoEnviar,
+  SubmitButton,
   InputMessage,
   AreaText,
 } from './Styles';
-import useWindowSize from '../../../hooks/useWindowSize';
-import { FormInput, FormMask } from '../../common';
-
-const validationSchema = z.object({
-  company: z.string().min(1, 'Favor digitar o nome da empresa'),
-  representative: z.string().min(1, 'Favor digitar o nome do representante'),
-  email: z
-    .string()
-    .min(1, { message: 'Favor digitar o email' })
-    .email({
-      message: 'Insira um email válido',
-    })
-    .trim(),
-  telephone: z.string().min(1, 'Favor digitar o número do telefone'),
-  message: z
-    .string({ required_error: 'Favor inserir uma mensagem' })
-    .max(1500, {
-      message: 'A mensagem deve conter até no máximo 1500 caracteres',
-    })
-    .min(5, { message: 'A mensagem deve conter no mínimo 5 caracteres' }),
-});
+import { buildFormContactErrorMessage, formsValidationSchema } from './utils';
 
 export default function FormsContact() {
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
+
+  const { mutate: sendFormContact, isLoading } = useSendFormContact({
+    onSuccess: () => toast.success('Formulário de contao enviado com sucesso!'),
+    onError: (err) => {
+      const errorMessage = buildFormContactErrorMessage(err);
+      toast.error(errorMessage);
+    },
+  });
+
   const {
     handleSubmit,
     register,
     formState: { errors },
     control,
   } = useForm({
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(formsValidationSchema),
   });
-
-  const onSubmit = (data) => console.log(data);
-
-  const mobileBreakpoint = 700;
-  const { width: windowWidth } = useWindowSize();
+  const onSubmit = (formInput) => sendFormContact(formInput);
 
   return (
     <ContactUs>
-      <Title>{`Entre em Contato ${
-        windowWidth <= mobileBreakpoint ? '' : 'Conosco'
-      }`}</Title>
+      <Title>{`Entre em Contato ${isSmallScreen ? '' : 'Conosco'}`}</Title>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Section>
@@ -86,7 +74,7 @@ export default function FormsContact() {
             defaultValue=""
             control={control}
             placeholder="(99) 99999-9999"
-            mask="(99) 99999-9999"
+            mask="+99 (99) 99999-9999"
             errors={errors}
           />
         </Section>
@@ -95,8 +83,30 @@ export default function FormsContact() {
           <InputMessage>
             <Mensagem>
               Mensagem:
-              <AreaText rows={13} placeholder="Escreva aqui sua mensagem" />
-              <BotaoEnviar>Enviar</BotaoEnviar>
+              <AreaText
+                rows={13}
+                placeholder="Escreva aqui sua mensagem"
+                {...register('message')}
+              />
+              {errors?.message?.message && <p>{errors?.message?.message}</p>}
+              <SubmitButton type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    {/* <TailSpin
+                height="15"
+                width="15"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="5"
+                wrapperStyle={{}}
+                wrapperClass=""
+              /> */}
+                    Carregando
+                  </>
+                ) : (
+                  <>Enviar</>
+                )}
+              </SubmitButton>
             </Mensagem>
           </InputMessage>
         </Section>

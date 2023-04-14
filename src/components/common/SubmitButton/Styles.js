@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const ErrorMessage = styled.p`
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  color: red;
-  font-size: 0.7em;
-  font-weight: 700;
-  display: ${(props) => (props.submitErrorMessage ? 'flex' : 'none')};
-`;
+// export const ErrorMessage = styled.p`
+//   font-family: ${(props) => props.theme.fonts.montserrat};
+//   color: red;
+//   font-size: 0.7em;
+//   font-weight: 700;
+//   display: ${(props) => (props.submitErrorMessage ? 'flex' : 'none')};
+// `;
 
 export const SubmitSpace = styled.div`
   display: flex;

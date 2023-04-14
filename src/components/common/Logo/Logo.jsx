@@ -1,5 +1,5 @@
-import { LinkContainer, Image } from './Styles';
 import imageLogo from '../../../assets/IZTLogo.svg';
+import { LinkContainer, Image } from './Styles';
 
 export default function Logo() {
   return (

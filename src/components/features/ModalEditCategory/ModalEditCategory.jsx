@@ -1,49 +1,92 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { useState } from 'react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
+import PropTypes from 'prop-types';
+import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
-import { useCreateCategory } from '../../../hooks/query/categories';
+import { toast } from 'react-toastify';
+
+import { useUpdateCategory } from '../../../hooks/query/categories';
 import {
   Container,
-  Form,
   Label,
   Input,
   ModalContent,
   ModalButton,
+  Form,
+  ErrorMessage,
 } from './Styles';
+import {
+  buildUpdateCategoryErrorMessage,
+  updateCategoryValidationSchema,
+} from './utils';
 
-const validationSchema = z.object({
-  name: z
-    .string()
-    .min(1, 'Ctaegory name is required')
-    .min(3, 'Category name must be atleast 3 characters')
-    .max(40, 'Category name must be a maximum of 40 characters'),
-  description: z.string().optional(),
-});
+export default function ModalEditCategory({ category, close }) {
+  const [isPending, setIsPending] = useState(false); // Important for modal loading
+  const queryClient = useQueryClient();
 
-export default function ModalEditCategory() {
-  const { handleSubmit, register, watch } = useForm({
-    resolver: zodResolver(validationSchema),
+  const { mutate: updateCategory } = useUpdateCategory({
+    onSuccess: () => {
+      Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: ['categories'],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ['category'],
+        }),
+      ]);
+
+      toast.success('Categoria alterada com sucesso!');
+      close();
+    },
+    onError: (err) => {
+      const errorMessage = buildUpdateCategoryErrorMessage(err);
+
+      toast.error(errorMessage);
+      setIsPending(false);
+    },
   });
 
-  const { mutate: createCategory } = useCreateCategory();
-  const onSubmit = (data) => createCategory(data);
-  console.log(watch());
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(updateCategoryValidationSchema),
+  });
+  const onSubmit = (data) => {
+    updateCategory({ _id: category?._id, newCategoryData: data });
+    setIsPending(true);
+  };
+
+  const errorMessage = errors?.name?.message;
 
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
-          <Label>Nome da categoria:</Label>
-          <Input id="name" name="name" type="name" {...register('name')} />
-          <ModalButton type="submit">
+          <Label htmlFor="name">Nome da categoria:</Label>
+          <Input
+            id="name"
+            name="name"
+            placeholder="Digite aqui o nome da categoria"
+            error={!!errorMessage}
+            defaultValue={category?.name}
+            {...register('name')}
+          />
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+          <ModalButton disabled={isPending} type="submit">
             <FiSave size={25} />
-            <p>Salvar alterações</p>
+            <p>{isPending ? 'Carregando...' : 'Salvar Alterações'}</p>
           </ModalButton>
         </ModalContent>
       </Form>
     </Container>
   );
 }
+
+ModalEditCategory.propTypes = {
+  category: PropTypes.object.isRequired,
+  close: PropTypes.func.isRequired,
+};

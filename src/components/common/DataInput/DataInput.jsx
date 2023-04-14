@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import PropTypes from 'prop-types';
+
 import { Container, Label, Input, ErrorMessage } from './Styles';
 
 export default function DataInput({ name, label, errors, register, ...props }) {
@@ -8,7 +9,7 @@ export default function DataInput({ name, label, errors, register, ...props }) {
   return (
     <Container>
       <Label htmlFor={name}>{label}</Label>
-      <Input id={name} error={errorMessage} {...register(name)} {...props} />
+      <Input id={name} error={!!errorMessage} {...register(name)} {...props} />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Container>
   );

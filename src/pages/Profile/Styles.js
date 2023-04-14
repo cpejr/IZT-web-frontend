@@ -1,5 +1,12 @@
-import styled from 'styled-components';
 import { Modal } from 'antd';
+import styled from 'styled-components';
+
+export const ModalStyle = styled(Modal)`
+  :where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-content {
+    background-color: white;
+    border-radius: 0px;
+  }
+`;
 
 export const Background = styled.div`
   display: flex;
@@ -23,7 +30,7 @@ export const Body = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 5%;
-  margin-bottom: 15%;
+  margin-bottom: 10%;
   width: 100%;
   height: auto;
   @media (max-width: 700px) {
@@ -263,9 +270,10 @@ export const ChangeInfo = styled.button`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  width: 40%;
-  max-width: 239px;
+
+  width: 240px;
   height: 45px;
+
   border: 1px solid #000000;
   border-radius: 5px;
   background-color: transparent;
@@ -282,13 +290,8 @@ export const ChangeInfo = styled.button`
     background-color: ${(props) => props.theme.colors.blue};
     color: white;
   }
-
-  @media (max-width: 700px) {
-    align-items: center;
-    justify-content: center;
-    width: 218px;
-  }
 `;
+
 export const Contact = styled.div`
   display: flex;
   flex-direction: column;
@@ -360,9 +363,10 @@ export const Lessons = styled.div`
     }
   }
 `;
-export const Info2 = styled.div`
+export const LessonInfo = styled.div`
   display: flex;
   gap: 20px;
+  align-items: center;
   h1 {
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
@@ -404,12 +408,5 @@ export const Info2 = styled.div`
       font-size: 11px;
       line-height: 17px;
     }
-  }
-`;
-
-export const ModalStyle = styled(Modal)`
-  :where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-content {
-    background-color: white;
-    border-radius: 0px;
   }
 `;

@@ -1,57 +1,95 @@
-import {
-  // useMutation,
-  useQuery,
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+
 import {
   getProducts,
-  // createProducts,
+  getProductById,
+  createProduct,
+  searchProductByName,
   // deleteProducts,
-  // updateProducts,
+  sendProductBudget,
+  updateProduct,
 } from '../../services/api';
 
-// eslint-disable-next-line import/prefer-default-export
 export function useGetProducts({
   filters,
-  onSucess = () => {},
+  onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
     queryKey: ['products', filters],
     queryFn: () => getProducts(filters),
+    onSuccess,
+    onError,
+  });
+}
+
+export function useGetProductById({
+  _id,
+  onSucess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['product', _id],
+    queryFn: () => getProductById(_id),
     onSucess,
     onError,
   });
 }
 
-// export function useCreateProducts({
-//   onSucess = () => {},
-//   onError = (err) => console.log(err),
-// } = {}) {
-//   return useMutation({
-//     mutationFn: createProducts,
-//     onSucess,
-//     onError,
-//   });
-// }
+export function useSearchProductByName({
+  name,
+  category,
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['products', 'searchByName', { name, category }],
+    queryFn: () => searchProductByName({ name, category }),
+    onSuccess,
+    onError,
+  });
+}
 
-// export function useUpdateProducts({
-//   onSucess = () => {},
-//   onError = (err) => console.log(err),
-// } = {}) {
-//   return useMutation({
-//     mutationFn: updateProducts,
-//     onSucess,
-//     onError,
-//   });
-// }
+export function useCreateProduct({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: createProduct,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useUpdateProducts({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: updateProduct,
+    onSuccess,
+    onError,
+  });
+}
 
 // export function useDeleteProducts({
-//   onSucess = () => {},
+//   onSuccess = () => {},
 //   onError = (err) => console.log(err),
 // } = {}) {
 //   return useMutation({
 //     mutationFn: deleteProducts,
-//     onSucess,
+//     onSuccess,
 //     onError,
 //   });
 // }
+
+export function useSendProductBudget({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: sendProductBudget,
+    onSuccess,
+    onError,
+  });
+}

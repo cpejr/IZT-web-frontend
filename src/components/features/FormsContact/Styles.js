@@ -23,7 +23,7 @@ export const Title = styled.p`
   align-items: center;
   font-size: 40px;
   color: white;
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
   font-weight: 600;
   height: 20%;
   padding-bottom: 40px;
@@ -52,6 +52,7 @@ export const Form = styled.form`
     align-items: center;
     flex-direction: column;
     width: 100%;
+    gap: 0%;
   }
 
   @media (min-width: 1440px) {
@@ -77,7 +78,7 @@ export const Mensagem = styled.div`
 
   font-size: 24px;
   color: white;
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
   font-weight: 500;
   gap: 5px;
 
@@ -91,7 +92,7 @@ export const Mensagem = styled.div`
 
   textarea {
     border-radius: 4px;
-    font-family: 'Montserrat';
+    font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -112,13 +113,13 @@ export const Mensagem = styled.div`
   }
 `;
 
-export const BotaoEnviar = styled.button`
+export const SubmitButton = styled.button`
   align-self: flex-end;
   color: white;
   background-color: #23a4a6;
 
   font-size: 20px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
   font-weight: 500;
 
   height: 45px;

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import { Container, CardText, CardTitle, Button, Picture } from './Styles';
 
 export default function Card({
@@ -7,6 +8,9 @@ export default function Card({
   imageAlt,
   text,
   isMiddle = false,
+  isMiddleTitle = false,
+  isMiddleImg = false,
+  isMiddleBut = false,
   mediaTopWeb = false,
   media1000Top = false,
   media429Top = false,
@@ -16,6 +20,7 @@ export default function Card({
   return (
     <Container isMiddle={isMiddle}>
       <CardTitle
+        isMiddleTitle={isMiddleTitle}
         mediaTopWeb={mediaTopWeb}
         media1000Top={media1000Top}
         media429Top={media429Top}
@@ -24,18 +29,24 @@ export default function Card({
         {title}
       </CardTitle>
       <Picture
+        isMiddleImg={isMiddleImg}
         src={image}
         alt={imageAlt}
         pictureTopMedia1000={pictureTopMedia1000}
       />
       <CardText>{text}</CardText>
-      <Button type="button">Saiba mais</Button>
+      <Button type="button" isMiddleBut={isMiddleBut}>
+        Saiba mais
+      </Button>
     </Container>
   );
 }
 
 Card.defaultProps = {
   isMiddle: false,
+  isMiddleTitle: false,
+  isMiddleImg: false,
+  isMiddleBut: false,
   mediaTopWeb: false,
   media1000Top: false,
   media429Top: false,
@@ -49,6 +60,9 @@ Card.propTypes = {
   imageAlt: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   isMiddle: PropTypes.bool,
+  isMiddleTitle: PropTypes.bool,
+  isMiddleImg: PropTypes.bool,
+  isMiddleBut: PropTypes.bool,
   mediaTopWeb: PropTypes.bool,
   media1000Top: PropTypes.bool,
   media429Top: PropTypes.bool,

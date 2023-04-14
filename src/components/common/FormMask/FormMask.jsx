@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 import InputMask from 'react-input-mask';
+
 import { Container, Label, ErrorMessage } from './Styles';
 
 export default function FormMask({
@@ -14,7 +15,7 @@ export default function FormMask({
 }) {
   const errorMessage = errors?.[name]?.message;
   return (
-    <Container error={errorMessage}>
+    <Container error={!!errorMessage}>
       <Label htmlFor={name}>{label}</Label>
       <Controller
         control={control}

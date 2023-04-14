@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import { CloseOutlined } from '@ant-design/icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { useMediaQuery } from 'react-responsive';
 
+import ModalCreateCategory from '../ModalCreateCategory/ModalCreateCategory';
+import ModalCreateProduct from '../ModalCreateProduct/ModalCreateProduct';
 import {
   Container,
   MenuItens,
@@ -16,100 +19,103 @@ import {
   StyledLink,
   Button,
   ModalStyle,
+  MenuMobile,
   MobileMenuButton,
 } from './Styles';
 
-import ModalAddProduct from '../ModalAddProduct/ModalAddProduct';
-import ModalCreateCategory from '../ModalCreateCategory/ModalCreateCategory';
-
 export default function AdminMenu() {
-  const modalButton = {
-    closeIcon: <CloseOutlined style={{ color: 'white' }} />,
-  };
-
-  const [modalAddProduct, setModalAddProduct] = useState(false);
+  const [openMenuMobile, setOpenMenuMobile] = useState(false);
+  const [modalCreateProduct, setModalCreateProduct] = useState(false);
   const [modalCreateCategory, setModalCreateCategory] = useState(false);
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
-  const openModalAddProduct = (e) => {
-    e.preventDefault();
-    setModalAddProduct(true);
-  };
+  const openModalCreateProduct = () => setModalCreateProduct(true);
+  const closeModalCreateProduct = () => setModalCreateProduct(false);
 
-  const closeModalAddProduct = (e) => {
-    e.preventDefault();
-    setModalAddProduct(false);
-  };
+  const openModalCreateCategory = () => setModalCreateCategory(true);
+  const closeModalCreateCategory = () => setModalCreateCategory(false);
 
-  const openModalCreateCategory = (e) => {
-    e.preventDefault();
-    setModalCreateCategory(true);
-  };
-
-  const closeModalCreateCategory = (e) => {
-    e.preventDefault();
-    setModalCreateCategory(false);
-  };
-
+  const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
-      <MenuItens>
-        <TitleDiv>
+      <MenuItens opened={openMenuMobile}>
+        <MenuMobile id="collapse" opened={openMenuMobile}>
+          <TitleDiv>
+            <Section>
+              <Title>Menu do Administrador</Title>
+              <BlackLine />
+            </Section>
+          </TitleDiv>
+          <SectionMobile>
+            <Section>
+              <Title>Produtos</Title>
+
+              {isSmallScreen ? (
+                <StyledLink to="/administrador/criar-produto">
+                  Adicionar produtos
+                </StyledLink>
+              ) : (
+                <Button onClick={openModalCreateProduct}>
+                  Adicionar produtos
+                </Button>
+              )}
+
+              <StyledLink to="/administrador">Listar produtos</StyledLink>
+            </Section>
+
+            <Section>
+              <Title>Categorias</Title>
+
+              {isSmallScreen ? (
+                <StyledLink to="/administrador/criar-categoria">
+                  Adicionar categoria
+                </StyledLink>
+              ) : (
+                <Button onClick={openModalCreateCategory}>
+                  Adicionar categoria
+                </Button>
+              )}
+
+              <StyledLink to="/administrador/listar-categorias">
+                Listar categorias
+              </StyledLink>
+              <BlackLine />
+            </Section>
+          </SectionMobile>
+
+          <BlackLineMobile />
+
           <Section>
-            <Title>Menu do Administrador</Title>
-            <BlackLine />
+            <Title>Definições de acesso</Title>
+            <Text>Liberação do curso</Text>
+            <Text>Liberação do software</Text>
           </Section>
-        </TitleDiv>
-
-        <SectionMobile>
-          <Section>
-            <Title>Produtos</Title>
-            <Button onClick={openModalAddProduct}>Adicionar produtos</Button>
-            <StyledLink to="/administrador/editar-produtos">
-              Listar produtos
-            </StyledLink>
-          </Section>
-
-          <Section>
-            <Title>Categorias</Title>
-            <Button onClick={openModalCreateCategory}>
-              Adicionar categoria
-            </Button>
-            <StyledLink to="/administrador/editar-categorias">
-              Listar categorias
-            </StyledLink>
-            <BlackLine />
-          </Section>
-        </SectionMobile>
-
-        <BlackLineMobile />
-
-        <Section>
-          <Title>Definições de acesso</Title>
-          <Text>Liberação do curso</Text>
-          <Text>Liberação do software</Text>
-        </Section>
-
-        <MobileMenuButton>
+        </MenuMobile>
+        <MobileMenuButton
+          opened={openMenuMobile}
+          onClick={() => setOpenMenuMobile(!openMenuMobile)}
+        >
           <MdKeyboardArrowDown size={25} />
         </MobileMenuButton>
       </MenuItens>
 
       <ModalStyle
-        open={modalAddProduct}
-        onCancel={closeModalAddProduct}
+        open={modalCreateProduct}
+        onCancel={closeModalCreateProduct}
         width={1100}
         padding={null}
         footer={null}
-        closeIcon={modalButton.closeIcon}
+        closeIcon={modalCloseButton}
         bodyStyle={{
           margin: '0px',
           padding: '0px',
           color: 'none',
+          background: '#123645',
         }}
         centered
         destroyOnClose
       >
-        <ModalAddProduct />
+        <ModalCreateProduct close={closeModalCreateProduct} />
       </ModalStyle>
 
       <ModalStyle
@@ -119,7 +125,7 @@ export default function AdminMenu() {
         height={250}
         padding={0}
         footer={null}
-        closeIcon={modalButton.closeIcon}
+        closeIcon={modalCloseButton}
         bodyStyle={{
           alignItems: 'center',
           justifyContent: 'center',
@@ -131,7 +137,7 @@ export default function AdminMenu() {
         centered
         destroyOnClose
       >
-        <ModalCreateCategory />
+        <ModalCreateCategory close={closeModalCreateCategory} />
       </ModalStyle>
     </Container>
   );

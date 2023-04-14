@@ -3,18 +3,39 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
+  Navigate,
+  Outlet,
 } from 'react-router-dom';
+
 import { AppLayout, AdminLayout } from './layouts';
 import {
   Home,
   Login,
+  Register,
   Catalog,
-  NotFound,
   Product,
   Profile,
-  EditProduct,
-  EditCategory,
+  ListProduct,
+  CreateProductMobile,
+  EditProductMobile,
+  ListCategory,
+  CreateCategoryMobile,
+  EditCategoryMobile,
+  NotFound,
 } from './pages';
+import useAuthStore from './stores/auth';
+
+function PrivateRoutes() {
+  const auth = useAuthStore((state) => state?.auth);
+
+  return !auth ? <Navigate to="/login" /> : <Outlet />;
+}
+
+function AdminRoutes() {
+  const user = useAuthStore((state) => state?.auth?.user);
+
+  return !user.isAdmin ? <NotFound /> : <Outlet />;
+}
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,15 +43,27 @@ const router = createBrowserRouter(
       <Route path="/" element={<AppLayout />}>
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
+        <Route path="cadastro" element={<Register />} />
         <Route path="catalogo" element={<Catalog />} />
-        <Route path="administrador" element={<AdminLayout />}>
-          <Route path="editar-produtos" element={<EditProduct />} />
-          <Route path="editar-categorias" element={<EditCategory />} />
-        </Route>
         <Route path="produto/:_id" element={<Product />} />
-        <Route path="perfil" element={<Profile />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="perfil" element={<Profile />} />
+          <Route path="administrador" element={<AdminRoutes />}>
+            <Route element={<AdminLayout />}>
+              <Route index element={<ListProduct />} />
+              <Route path="criar-produto" element={<CreateProductMobile />} />
+              <Route path="editar-produto" element={<EditProductMobile />} />
+              <Route path="listar-categorias" element={<ListCategory />} />
+              <Route
+                path="criar-categoria"
+                element={<CreateCategoryMobile />}
+              />
+              <Route path="editar-categoria" element={<EditCategoryMobile />} />
+            </Route>
+          </Route>
+        </Route>
+        <Route path="*" element={<NotFound />} />
       </Route>
-      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );

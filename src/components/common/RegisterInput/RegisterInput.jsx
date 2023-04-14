@@ -1,29 +1,40 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import PropTypes from 'prop-types';
+
 import { Container, Label, Input, ErrorMessage } from './Styles';
 
 export default function RegisterInput({
   name,
   label,
+  labelStyle = {},
   errors,
+  errorStyle = {},
   register,
   ...props
 }) {
   const errorMessage = errors?.[name]?.message;
-
   return (
     <Container>
-      <Label htmlFor={name}>{label}</Label>
-      <Input id={name} error={errorMessage} {...register(name)} {...props} />
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      <Label htmlFor={name} style={labelStyle}>
+        {label}
+      </Label>
+      <Input id={name} error={!!errorMessage} {...register(name)} {...props} />
+      {errorMessage && (
+        <ErrorMessage style={errorStyle}>{errorMessage}</ErrorMessage>
+      )}
     </Container>
   );
 }
 
+RegisterInput.defaultProps = {
+  labelStyle: {},
+  errorStyle: {},
+};
+
 RegisterInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
+  labelStyle: PropTypes.object,
+  errorStyle: PropTypes.object,
   errors: PropTypes.object.isRequired,
   register: PropTypes.func.isRequired,
 };

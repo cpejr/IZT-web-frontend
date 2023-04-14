@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import useAuthStore from '../../../stores/auth';
 import { ERROR_CODES, ERROR_NAMES } from '../../../utils/constants';
 import { refresh } from '../publicEndpoints/endpoints';
@@ -33,10 +34,10 @@ privateApi.interceptors.response.use(
     // If is not a forbidden error or if the request was already sended
     if (!isForbiddenError || prevRequest?.sent) return Promise.reject(error);
 
-    const newAccessToken = await refresh();
+    const { accessToken } = await refresh();
 
     prevRequest.sent = true;
-    prevRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+    prevRequest.headers.Authorization = `Bearer ${accessToken}`;
 
     return privateApi(prevRequest);
   }

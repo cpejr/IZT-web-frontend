@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import { Container, Label, Input, ErrorMessage } from './Styles';
 
 export default function FormInput({
@@ -14,7 +15,7 @@ export default function FormInput({
       <Label htmlFor={name}>{label}</Label>
       <Input
         id={name}
-        error={errorMessage}
+        error={!!errorMessage}
         placeholder={placeholder}
         {...register(name)}
       />

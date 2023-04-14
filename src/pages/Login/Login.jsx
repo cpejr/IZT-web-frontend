@@ -1,75 +1,50 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import IZTLogo from '../../assets/IZTLogo.svg';
+import { DataInput } from '../../components/common';
+import { useLogin } from '../../hooks/query/sessions';
 import {
   Page,
   Container,
   Logo,
   Title,
   Form,
+  SubmitButton,
   DataEntry,
-  RemeberMe,
+  ForgotPassword,
   SignUpLink,
   Links,
 } from './Styles';
-import IZTLogo from '../../assets/IZTLogo.svg';
-import { DataInput, SubmitButton } from '../../components/common';
-import { useLogin } from '../../hooks/query/sessions';
-import { ERROR_CODES } from '../../utils/constants';
-
-const validationSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: 'Favor digitar o email' })
-    .email({
-      message: 'Insira um email no formato email@email.com',
-    })
-    .trim(),
-  password: z
-    .string()
-    .min(1, { message: 'Favor digitar uma senha' })
-    .min(6, 'A senha não pode ter menos de 6 caracteres')
-    .max(16, 'A senha não pode ter mais de 16 caracteres'),
-});
+import { buildLoginErrorMessage, loginValidationSchema } from './utils';
 
 export default function Login() {
+  const navigate = useNavigate();
+  const { mutate: login, isLoading } = useLogin({
+    onSuccess: () => {
+      toast.success('Usuário logado com sucesso!');
+      navigate('/');
+    },
+    onError: (err) => {
+      const errorMessage = buildLoginErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
+  });
+
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(loginValidationSchema),
   });
-  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
-  const navigate = useNavigate();
-  const onSuccess = () => navigate('/');
-  const onError = (error) => {
-    switch (error.response.status) {
-      case ERROR_CODES.BAD_REQUEST:
-        setSubmitErrorMessage('Dados inválidos');
-        break;
-      case ERROR_CODES.UNAUTHORIZED:
-        setSubmitErrorMessage('E-mail ou senha incorretos');
-        break;
-      case ERROR_CODES.FORBIDDEN:
-        setSubmitErrorMessage(
-          'A sua conta ainda não foi ativada. Por favor verifique o e-mail'
-        );
-        break;
-      case ERROR_CODES.INTERNAL_SERVER:
-        setSubmitErrorMessage(
-          'Erro ao realizar o login. Tente novamente mais tarde'
-        );
-        break;
-      default:
-        break;
-    }
-  };
-  const { mutate: login } = useLogin({ onSuccess, onError });
 
   const onSubmit = (data) => login(data);
+
   return (
     <Page>
       <Container>
@@ -96,15 +71,28 @@ export default function Login() {
               errors={errors}
               type="password"
             />
-            <SubmitButton
-              name="Entrar"
-              submitErrorMessage={submitErrorMessage}
-              relativeWidth="70%"
-            />
+            <SubmitButton disabled={isLoading} type="submit">
+              {isLoading ? (
+                <>
+                  <TailSpin
+                    height="15"
+                    width="15"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="5"
+                  />
+                  Carregando
+                </>
+              ) : (
+                'Entrar'
+              )}
+            </SubmitButton>
           </Form>
         </DataEntry>
         <Links>
-          <RemeberMe to="/">Esqueceu a sua senha? Clique aqui!</RemeberMe>
+          <ForgotPassword to="/">
+            Esqueceu a sua senha? Clique aqui!
+          </ForgotPassword>
           <SignUpLink>
             Ainda não tem uma conta? <Link to="/">Cadastre-se aqui!</Link>
           </SignUpLink>
