@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import IZTLogo from '../../assets/IZTLogo.svg';
@@ -23,10 +23,13 @@ import { buildLoginErrorMessage, loginValidationSchema } from './utils';
 
 export default function Login() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const redirectTo = state?.from || '/';
+
   const { mutate: login, isLoading } = useLogin({
     onSuccess: () => {
       toast.success('Usuário logado com sucesso!');
-      navigate('/');
+      navigate(redirectTo);
     },
     onError: (err) => {
       const errorMessage = buildLoginErrorMessage(err);

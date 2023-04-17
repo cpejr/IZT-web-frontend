@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
   Outlet,
+  useLocation,
 } from 'react-router-dom';
 
 import { AppLayout, AdminLayout } from './layouts';
@@ -28,8 +29,13 @@ import useAuthStore from './stores/auth';
 
 function PrivateRoutes() {
   const auth = useAuthStore((state) => state?.auth);
+  const { pathname } = useLocation();
 
-  return !auth ? <Navigate to="/login" /> : <Outlet />;
+  return !auth ? (
+    <Navigate to="/login" state={{ from: pathname }} />
+  ) : (
+    <Outlet />
+  );
 }
 
 function AdminRoutes() {
