@@ -7,6 +7,7 @@ export { default as Register } from './Register/Register';
 export { default as NotFound } from './NotFound/NotFound';
 export { default as ListCategory } from './ListCategory/ListCategory';
 export { default as ListProduct } from './ListProduct/ListProduct';
+export { default as Course } from './Course/Course';
 export { default as CreateCategoryMobile } from './CreateCategoryMobile/CreateCategoryMobile';
 export { default as CreateProductMobile } from './CreateProductMobile/CreateProductMobile';
 export { default as EditProductMobile } from './EditProductMobile/EditProductMobile';

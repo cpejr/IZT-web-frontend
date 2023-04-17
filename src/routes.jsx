@@ -19,6 +19,7 @@ import {
   CreateProductMobile,
   EditProductMobile,
   ListCategory,
+  Course,
   CreateCategoryMobile,
   EditCategoryMobile,
   NotFound,
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
         <Route element={<PrivateRoutes />}>
+          <Route path="curso" element={<Course />} />
           <Route path="perfil" element={<Profile />} />
           <Route path="administrador" element={<AdminRoutes />}>
             <Route element={<AdminLayout />}>
