@@ -20,10 +20,12 @@ import {
   CreateProductMobile,
   EditProductMobile,
   ListCategory,
+  AuthorizeAccess,
   Course,
   CreateCategoryMobile,
   EditCategoryMobile,
   NotFound,
+  CourseAuthorization,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -67,6 +69,11 @@ const router = createBrowserRouter(
                 element={<CreateCategoryMobile />}
               />
               <Route path="editar-categoria" element={<EditCategoryMobile />} />
+              <Route path="autorizar-acesso" element={<AuthorizeAccess />} />
+              <Route
+                path="liberacao-cursos"
+                element={<CourseAuthorization />}
+              />
             </Route>
           </Route>
         </Route>
