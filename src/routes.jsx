@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
   Outlet,
+  useLocation,
 } from 'react-router-dom';
 
 import { AppLayout, AdminLayout } from './layouts';
@@ -27,8 +28,9 @@ import useAuthStore from './stores/auth';
 
 function PrivateRoutes() {
   const auth = useAuthStore((state) => state?.auth);
+  const { pathname: from } = useLocation();
 
-  return !auth ? <Navigate to="/login" /> : <Outlet />;
+  return !auth ? <Navigate to="/login" state={{ from }} /> : <Outlet />;
 }
 
 function AdminRoutes() {
@@ -50,7 +52,8 @@ const router = createBrowserRouter(
           <Route path="perfil" element={<Profile />} />
           <Route path="administrador" element={<AdminRoutes />}>
             <Route element={<AdminLayout />}>
-              <Route index element={<ListProduct />} />
+              <Route index element={<h1>Área do Administrador</h1>} />
+              <Route path="listar-categorias" element={<ListProduct />} />
               <Route path="criar-produto" element={<CreateProductMobile />} />
               <Route path="editar-produto" element={<EditProductMobile />} />
               <Route path="listar-categorias" element={<ListCategory />} />
