@@ -79,7 +79,7 @@ export default function CourseAuthorization() {
           </TableHeader>
           {data.map((d) => (
             <ContentRow key={d.email}>
-              <p>{d.email}</p>
+              <p title={d.email}>{d.email}</p>
               <MiddleData>{d.expiration}</MiddleData>
               <EditBtn onClick={() => openModalCourseAuthorization(d)}>
                 <TbPencil size={25} />

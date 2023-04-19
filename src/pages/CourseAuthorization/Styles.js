@@ -149,7 +149,8 @@ export const ContentRow = styled.div`
   p {
     padding-left: 10px;
     white-space: nowrap;
-    overflow: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
     padding-bottom: 5px;
   }
   svg {
