@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMediaQuery } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -8,7 +9,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import { RegisterInput } from '../../components/common';
-import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
   Form,
@@ -84,11 +84,10 @@ export default function AuthorizeAccess() {
     navigate('/administrador/loja/liberacao-cursos');
   };
 
-  const { width: windowWidth } = useWindowSize();
-  const mobileBreakpoint = 700;
+  const isMobile = useMediaQuery('(max-width:700px)');
 
-  if (windowWidth > mobileBreakpoint)
-    return <Navigate to="/administrador/loja/liberacao-cursos" />;
+  if (!isMobile) return <Navigate to="/administrador/loja/liberacao-cursos" />;
+
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -131,13 +130,6 @@ export default function AuthorizeAccess() {
                           ),
                         },
                       }}
-                      // renderInput={(params) => (
-                      //   <TextField
-                      //     {...params}
-                      //     error={!!error}
-                      //     helperText={errors?.message}
-                      //   />
-                      // )}
                     />
                   </LocalizationProvider>
                 )}

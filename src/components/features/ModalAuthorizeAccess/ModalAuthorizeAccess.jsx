@@ -112,13 +112,6 @@ export default function ModalAuthorizeAccess({ close, data }) {
                             ),
                           },
                         }}
-                        // renderInput={(params) => (
-                        //   <TextField
-                        //     {...params}
-                        //     error={!!error}
-                        //     helperText={errors?.message}
-                        //   />
-                        // )}
                       />
                     </LocalizationProvider>
                   )}
