@@ -47,3 +47,9 @@ export const themeDatePicker = createTheme({
     fontFamily: 'Montserrat',
   },
 });
+
+export const emails = [
+  { label: 'thiagofraga@cpejr.com.br', value: 'thiagofraga@cpejr.com.br' },
+  { label: 'amandaalves@cpejr.com.br', value: 'amandaalves@cpejr.com.br' },
+  { label: 'joaopiraja@cpejr.com.br', value: 'joaopiraja@cpejr.com.br' },
+];

@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -13,13 +12,13 @@ import {
   Form,
   Label,
   AccessExpirationContainer,
-  Input,
+  SelectEmail,
   ModalContent,
   ModalButton,
   ErrorMessage,
   Date,
 } from './Styles';
-import { modalAuthorizeAccessValidationSchema, themeDatePicker } from './utils';
+import { modalAuthorizeAccessValidationSchema, themeDatePicker, emails } from './utils';
 
 export default function ModalAuthorizeAccess({ close, data }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
@@ -59,12 +58,13 @@ export default function ModalAuthorizeAccess({ close, data }) {
         <ModalContent>
           <div>
             <Label>Email:</Label>
-            <Input
+            <SelectEmail
               id="email"
               name="email"
               type="email"
               placeholder="email@email.com"
               defaultValue={data?.email}
+              options={emails}
               {...register('email')}
             />
             {errors?.email?.message && (
