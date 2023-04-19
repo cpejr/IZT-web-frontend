@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@mui/material/styles';
@@ -18,7 +18,12 @@ import {
   ErrorMessage,
   Date,
 } from './Styles';
-import { modalAuthorizeAccessValidationSchema, themeDatePicker, emails } from './utils';
+import {
+  modalAuthorizeAccessValidationSchema,
+  themeDatePicker,
+  emails,
+  errorMessage,
+} from './utils';
 
 export default function ModalAuthorizeAccess({ close, data }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
@@ -26,7 +31,6 @@ export default function ModalAuthorizeAccess({ close, data }) {
 
   const {
     handleSubmit,
-    register,
     formState: { errors },
     control,
   } = useForm({
@@ -39,34 +43,27 @@ export default function ModalAuthorizeAccess({ close, data }) {
     close();
   };
 
-  const errorMessage = useMemo(() => {
-    switch (dateError) {
-      case 'invalidDate': {
-        return 'Data inválida';
-      }
-      case 'disablePast': {
-        return 'Insira uma data futura';
-      }
-      default: {
-        return '';
-      }
-    }
-  }, [dateError]);
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
           <div>
             <Label>Email:</Label>
-            <SelectEmail
-              id="email"
+            <Controller
               name="email"
-              type="email"
-              placeholder="email@email.com"
-              defaultValue={data?.email}
-              options={emails}
-              {...register('email')}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <SelectEmail
+                  placeholder="Selecione o email"
+                  size="large"
+                  onChange={onChange}
+                  value={value}
+                  defaultValue={data?.email}
+                  options={emails}
+                />
+              )}
             />
+
             {errors?.email?.message && (
               <ErrorMessage>{errors?.email?.message}</ErrorMessage>
             )}

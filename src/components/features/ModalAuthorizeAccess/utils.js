@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { createTheme } from '@mui/material';
+import { useMemo } from 'react';
 import { z } from 'zod';
 
 const dateRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
@@ -7,7 +8,7 @@ const dateRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 // Form Validation
 export const modalAuthorizeAccessValidationSchema = z.object({
   email: z
-    .string()
+    .string({ message: 'Digite o email' })
     .min(1, { message: 'Favor digitar o email' })
     .email({
       message: 'Insira um email válido',
@@ -53,3 +54,19 @@ export const emails = [
   { label: 'amandaalves@cpejr.com.br', value: 'amandaalves@cpejr.com.br' },
   { label: 'joaopiraja@cpejr.com.br', value: 'joaopiraja@cpejr.com.br' },
 ];
+
+export const errorMessage = (dateError) => {
+  return useMemo(() => {
+    switch (dateError) {
+      case 'invalidDate': {
+        return 'Data inválida';
+      }
+      case 'disablePast': {
+        return 'Insira uma data futura';
+      }
+      default: {
+        return '';
+      }
+    }
+  }, [dateError]);
+};
