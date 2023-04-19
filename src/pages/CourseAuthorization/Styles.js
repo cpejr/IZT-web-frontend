@@ -184,6 +184,7 @@ export const EditBtn = styled.button`
   border: none;
   width: 25px;
   height: 25px;
+  justify-self: flex-end;
   :hover {
     cursor: pointer;
   }
