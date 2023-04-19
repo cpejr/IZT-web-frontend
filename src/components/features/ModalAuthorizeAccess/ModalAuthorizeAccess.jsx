@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
@@ -19,20 +19,11 @@ import {
   ErrorMessage,
   Date,
 } from './Styles';
-import { modalAuthorizeAccessValidationSchema } from './utils';
+import { modalAuthorizeAccessValidationSchema, themeDatePicker } from './utils';
 
 export default function ModalAuthorizeAccess({ close, data }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const [dateError, setDateError] = useState(null);
-
-  const customTheme = createTheme({
-    typography: {
-      fontFamily: 'Montserrat',
-    },
-    palette: {
-      mode: 'light',
-    },
-  });
 
   const {
     handleSubmit,
@@ -83,7 +74,7 @@ export default function ModalAuthorizeAccess({ close, data }) {
           <div>
             <Label>Validade do acesso:</Label>
             <AccessExpirationContainer>
-              <ThemeProvider theme={customTheme}>
+              <ThemeProvider theme={themeDatePicker}>
                 <Controller
                   control={control}
                   name="accessExpiration"
