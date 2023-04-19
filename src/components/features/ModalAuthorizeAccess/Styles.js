@@ -10,7 +10,7 @@ export const Container = styled.div`
   height: 100%;
   padding: 20px 24px;
 
-  .css-lk2i2y-MuiFormHelperText-root {
+  .css-mioa5p-MuiFormHelperText-root.Mui-error {
     margin-left: 0px;
   }
 `;

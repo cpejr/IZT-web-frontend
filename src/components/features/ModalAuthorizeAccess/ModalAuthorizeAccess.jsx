@@ -81,7 +81,6 @@ export default function ModalAuthorizeAccess({ close, data }) {
                   render={({ field: { onChange, onBlur } }) => (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <Date
-                        defaultValue={dayjs(data?.expiration, 'DD/MM/YYYY')}
                         onChange={onChange}
                         onBlur={onBlur}
                         format="DD/MM/YYYY"
