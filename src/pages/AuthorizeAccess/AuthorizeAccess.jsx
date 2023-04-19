@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMediaQuery } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Controller, useForm } from 'react-hook-form';
@@ -21,39 +21,12 @@ import {
   ErrorMessage,
   Date,
 } from './Styles';
-import { authorizeAccessValidationSchema } from './utils';
+import { authorizeAccessValidationSchema, themeDatePicker } from './utils';
 
 export default function AuthorizeAccess() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false); // Important for modal loading
   const [dateError, setDateError] = useState(null);
-
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#000000',
-        light: '#000000',
-      },
-      text: {
-        primary: '#000000',
-        secondary: '#000000',
-        disabled: '#000000',
-      },
-      action: {
-        active: '#000000',
-        hover: '#203699',
-        selected: '#203699',
-        disabled: '#000000',
-      },
-      background: {
-        default: '#fff',
-      },
-      divider: '#000000',
-    },
-    typography: {
-      fontFamily: 'Montserrat',
-    },
-  });
 
   const errorMessage = useMemo(() => {
     switch (dateError) {
@@ -106,7 +79,7 @@ export default function AuthorizeAccess() {
         <div>
           <Label>Validade do acesso:</Label>
           <AccessExpirationContainer>
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={themeDatePicker}>
               <Controller
                 control={control}
                 name="accessExpiration"
