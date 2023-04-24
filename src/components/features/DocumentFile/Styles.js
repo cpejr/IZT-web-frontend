@@ -1,3 +1,4 @@
+import { Upload } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -5,6 +6,15 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   gap: 1em;
+`;
+
+export const StyledUpload = styled(Upload)`
+  color: white;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
 `;
 
 export const FileLink = styled.a`

@@ -49,7 +49,7 @@ export const LeftSection = styled.div`
 export const Subsection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   padding-top: 10px;
   width: 100%;
 `;
@@ -69,6 +69,16 @@ export const Text = styled.p`
   line-height: 29px;
 
   color: white;
+`;
+
+export const UploadButton = styled.button`
+  all: unset;
+  color: white;
+  font-weight: 500;
+
+  div {
+    margin-top: 8px;
+  }
 `;
 
 export const PicturesContainer = styled.div`

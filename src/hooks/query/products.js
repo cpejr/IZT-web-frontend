@@ -8,6 +8,8 @@ import {
   // deleteProducts,
   sendProductBudget,
   updateProduct,
+  deleteFile,
+  uploadFile,
 } from '../../services/api';
 
 export function useGetProducts({
@@ -89,6 +91,28 @@ export function useSendProductBudget({
 } = {}) {
   return useMutation({
     mutationFn: sendProductBudget,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useUploadFile({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: uploadFile,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useDeleteFile({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: deleteFile,
     onSuccess,
     onError,
   });

@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useCreateProduct } from '../../../hooks/query/products';
-import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../../utils/constants';
+import { DOCUMENTS_CONFIG } from '../../../utils/constants';
 import { FormSelect } from '../../common';
 import AddFileButton from '../AddFileButton/AddFileButton';
 import DocumentFile from '../DocumentFile/DocumentFile';
@@ -29,7 +29,6 @@ import {
   Input,
   ModalButton,
   DocumentsContainer,
-  PicturesContainer,
   ErrorMessage,
 } from './Styles';
 import {
@@ -94,12 +93,12 @@ export default function ModalCreateProduct({ close }) {
   const {
     fields: fieldsPictures,
     append: appendPicture,
-    update: updatePicture,
     remove: removePicture,
   } = useFieldArray({
     control,
     name: 'pictures',
   });
+
   const onSubmit = (data) => {
     setIsPending(true);
 
@@ -124,7 +123,7 @@ export default function ModalCreateProduct({ close }) {
                 id="name"
                 name="name"
                 placeholder="Digite o nome do produto"
-                error={errors?.name?.message}
+                error={errors?.name?.message ? 1 : 0}
                 {...register('name')}
               />
               <ErrorMessage>{errors?.name?.message}</ErrorMessage>
@@ -136,7 +135,7 @@ export default function ModalCreateProduct({ close }) {
                 id="description"
                 name="description"
                 placeholder="Descreva o produto"
-                error={errors?.description?.message}
+                error={errors?.description?.message ? 1 : 0}
                 {...register('description')}
               />
               <ErrorMessage>{errors?.description?.message}</ErrorMessage>
@@ -148,7 +147,7 @@ export default function ModalCreateProduct({ close }) {
                 id="advantages"
                 name="advantages"
                 placeholder="Descreva as vantagens do produto"
-                error={errors?.advantages?.message}
+                error={errors?.advantages?.message ? 1 : 0}
                 {...register('advantages')}
               />
               <ErrorMessage>{errors?.advantages?.message}</ErrorMessage>
@@ -158,36 +157,33 @@ export default function ModalCreateProduct({ close }) {
           <RightSection>
             <Subsection>
               <Text>Imagens:</Text>
-              <MiniText>Anexe as imagens do produto</MiniText>
-              <PicturesContainer>
-                {fieldsPictures.map(({ id, file: picture }, index) => (
-                  <PictureFile
-                    key={id}
-                    index={index}
-                    picture={picture}
-                    control={control}
-                    buttonColor="white"
-                    updatePicture={updatePicture}
-                    removePicture={removePicture}
-                  />
-                ))}
-              </PicturesContainer>
               {fieldsPictures.length < picturesLimit && (
-                <AddFileButton
-                  label="Novo Imagem"
-                  error={errors?.pictures?.message}
-                  appendFn={appendPicture}
-                  allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
-                  sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
-                />
+                <MiniText>Anexe as imagens do produto</MiniText>
               )}
+              <PictureFile
+                picturesLimit={picturesLimit}
+                fieldsPictures={fieldsPictures}
+                appendPicture={appendPicture}
+                removePicture={removePicture}
+              />
               <ErrorMessage>{errors?.pictures?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
               <Text>Documentos:</Text>
-              <DocumentsContainer>
-                {fieldsDocuments.map(({ id, file: document }, index) => (
+              {/* <DocumentsContainer> */}
+              <DocumentFile
+                key={1}
+                index={1}
+                isLast={false}
+                document={{}}
+                control={control}
+                buttonColor="white"
+                moveDocument={moveDocument}
+                updateDocument={updateDocument}
+                removeDocument={removeDocument}
+              />
+              {/* {fieldsDocuments.map(({ id, file: document }, index) => (
                   <DocumentFile
                     key={id}
                     index={index}
@@ -199,9 +195,9 @@ export default function ModalCreateProduct({ close }) {
                     updateDocument={updateDocument}
                     removeDocument={removeDocument}
                   />
-                ))}
-              </DocumentsContainer>
-              {fieldsDocuments.length < documentsLimit && (
+                ))} */}
+              {/* </DocumentsContainer> */}
+              {/* {fieldsDocuments.length < documentsLimit && (
                 <AddFileButton
                   label="Novo Documento"
                   appendFn={appendDocument}
@@ -210,7 +206,7 @@ export default function ModalCreateProduct({ close }) {
                   )}
                   sizeLimitInMB={DOCUMENTS_CONFIG.sizeLimitInMB}
                 />
-              )}
+              )} */}
             </Subsection>
 
             <CategorySubsection>
@@ -248,3 +244,91 @@ export default function ModalCreateProduct({ close }) {
 ModalCreateProduct.propTypes = {
   close: PropTypes.func.isRequired,
 };
+
+// import { useState } from 'react';
+
+// import { PlusOutlined } from '@ant-design/icons';
+// import { Modal, Upload } from 'antd';
+// import { toast } from 'react-toastify';
+
+// import { useDeleteFile, useUploadFile } from '../../../hooks/query/products';
+// import { PICTURES_CONFIG } from '../../../utils/constants';
+// import { UploadButton } from './Styles';
+
+// function App() {
+//   const [previewOpen, setPreviewOpen] = useState(false);
+//   const [previewImage, setPreviewImage] = useState('');
+//   const [previewTitle, setPreviewTitle] = useState('');
+//   const [fileList, setFileList] = useState([]);
+
+//   const { mutateAsync: upload } = useUploadFile();
+//   const { mutate: deleteFile } = useDeleteFile();
+
+//   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+//   const handleRemove = ({ response: file }) => {
+//     const key = file?.key;
+//     return key ? deleteFile(key) : true;
+//   };
+//   const handlePreview = async (file) => {
+//     const url = file?.url || file?.response?.url;
+//     const name = file?.name || file?.response?.name;
+
+//     setPreviewImage(url);
+//     setPreviewOpen(true);
+//     setPreviewTitle(name);
+//   };
+//   const handleCancel = () => setPreviewOpen(false);
+//   const uploadImage = async (options) => {
+//     const { onSuccess, onError, file, onProgress } = options;
+
+//     const formData = new FormData();
+//     formData.append('file', file);
+
+//     try {
+//       const { data } = await upload({ file: formData, onProgress });
+//       onSuccess(data);
+//     } catch (err) {
+//       toast.error('Erro ao salvar o arquivo');
+//       onError({ err });
+//     }
+//   };
+
+//   return (
+//     <>
+//       <Upload
+//         listType="picture-card"
+//         onChange={handleChange}
+//         onRemove={handleRemove}
+//         onPreview={handlePreview}
+//         customRequest={uploadImage}
+//         accept={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
+//       >
+//         {fileList.length < 3 && (
+//           <UploadButton type="button">
+//             <PlusOutlined />
+//             <div>
+//               Salvar
+//               <br />
+//               Imagem
+//             </div>
+//           </UploadButton>
+//         )}
+//       </Upload>
+//       <Modal
+//         open={previewOpen}
+//         title={previewTitle}
+//         footer={null}
+//         onCancel={handleCancel}
+//       >
+//         <img
+//           alt="example"
+//           style={{
+//             width: '100%',
+//           }}
+//           src={previewImage}
+//         />
+//       </Modal>
+//     </>
+//   );
+// }
+// export default App;

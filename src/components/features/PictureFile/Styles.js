@@ -1,3 +1,4 @@
+import { Upload } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -6,6 +7,20 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1em;
+`;
+
+export const StyledUpload = styled(Upload)`
+  color: white;
+`;
+
+export const UploadButton = styled.button`
+  all: unset;
+  color: white;
+  font-weight: 500;
+
+  div {
+    margin-top: 8px;
+  }
 `;
 
 export const Buttons = styled.div`

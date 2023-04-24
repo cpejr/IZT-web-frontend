@@ -53,7 +53,7 @@ const router = createBrowserRouter(
           <Route path="administrador" element={<AdminRoutes />}>
             <Route element={<AdminLayout />}>
               <Route index element={<h1>Área do Administrador</h1>} />
-              <Route path="listar-categorias" element={<ListProduct />} />
+              <Route path="listar-produtos" element={<ListProduct />} />
               <Route path="criar-produto" element={<CreateProductMobile />} />
               <Route path="editar-produto" element={<EditProductMobile />} />
               <Route path="listar-categorias" element={<ListCategory />} />

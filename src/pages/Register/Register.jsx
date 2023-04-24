@@ -163,7 +163,7 @@ export default function Register() {
                 Carregando
               </>
             ) : (
-              'Entrar'
+              'Cadastrar'
             )}
           </SubmitButton>
         </Form>

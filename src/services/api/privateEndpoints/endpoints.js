@@ -42,6 +42,26 @@ export const updateProduct = async ({ _id, newProductData }) => {
   return data;
 };
 
+export const uploadFile = async ({ file, onProgress }) => {
+  const data = await privateApi.post('/products/file', file, {
+    onUploadProgress: (event) => {
+      const percent = Math.round((event.loaded * 100) / event.total);
+
+      onProgress({ percent });
+    },
+  });
+
+  return data;
+};
+
+export const deleteFile = async (key) => {
+  const data = await privateApi.delete(
+    `/products/file/${encodeURIComponent(key)}`
+  );
+
+  return data;
+};
+
 export const getFiles = async (fileIds) => {
   const responses = await Promise.all(
     fileIds.map((fileId) =>

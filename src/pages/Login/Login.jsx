@@ -97,7 +97,8 @@ export default function Login() {
             Esqueceu a sua senha? Clique aqui!
           </ForgotPassword>
           <SignUpLink>
-            Ainda não tem uma conta? <Link to="/">Cadastre-se aqui!</Link>
+            Ainda não tem uma conta?{' '}
+            <Link to="/cadastro">Cadastre-se aqui!</Link>
           </SignUpLink>
         </Links>
       </Container>
