@@ -16,4 +16,5 @@ export { default as PictureFile } from './PictureFile/PictureFile';
 export { default as AddFileButton } from './AddFileButton/AddFileButton';
 export { default as UpdateFileButton } from './UpdateFileButton/UpdateFileButton';
 export { default as ModalChangeUserData } from './ModalChangeUserData/ModalChangeUserData';
+export { default as CourseScroll } from './CourseScroll/CourseScroll';
 export { default as SystemLoading } from './SystemLoading/SystemLoading';
