@@ -25,7 +25,7 @@ import {
   DataContainer,
 } from './Styles';
 
-function Profile() {
+export default function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
   const user = useAuthStore((state) => state.auth.user);
 
@@ -140,5 +140,3 @@ function Profile() {
     </Background>
   );
 }
-
-export default Profile;

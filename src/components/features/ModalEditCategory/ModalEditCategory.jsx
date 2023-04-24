@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 import { useUpdateCategory } from '../../../hooks/query/categories';
 import {
@@ -14,6 +15,7 @@ import {
   ModalContent,
   ModalButton,
   Form,
+  ErrorMessage,
 } from './Styles';
 import {
   buildUpdateCategoryErrorMessage,
@@ -28,19 +30,20 @@ export default function ModalEditCategory({ category, close }) {
     onSuccess: () => {
       Promise.all([
         queryClient.invalidateQueries({
-          queryKey: ['categories', 'searchByName'],
+          queryKey: ['categories'],
         }),
         queryClient.invalidateQueries({
           queryKey: ['category'],
         }),
       ]);
+
+      toast.success('Categoria alterada com sucesso!');
       close();
     },
     onError: (err) => {
       const errorMessage = buildUpdateCategoryErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
       setIsPending(false);
     },
   });
@@ -57,25 +60,28 @@ export default function ModalEditCategory({ category, close }) {
     setIsPending(true);
   };
 
+  const errorMessage = errors?.name?.message;
+
   return (
     <Container>
-      <ModalContent>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <Label>Nome da categoria:</Label>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <ModalContent>
+          <Label htmlFor="name">Nome da categoria:</Label>
           <Input
-            defaultValue={category?.name}
             id="name"
             name="name"
-            type="name"
+            placeholder="Digite aqui o nome da categoria"
+            error={!!errorMessage}
+            defaultValue={category?.name}
             {...register('name')}
           />
-          {errors?.name?.message && <p>{errors?.name?.message}</p>}{' '}
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <ModalButton disabled={isPending} type="submit">
             <FiSave size={25} />
             <p>{isPending ? 'Carregando...' : 'Salvar Alterações'}</p>
           </ModalButton>
-        </Form>
-      </ModalContent>
+        </ModalContent>
+      </Form>
     </Container>
   );
 }

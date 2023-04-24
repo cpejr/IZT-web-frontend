@@ -25,12 +25,12 @@ import {
 
 export default function AdminMenu() {
   const [openMenuMobile, setOpenMenuMobile] = useState(false);
-  const [modalAddProduct, setModalAddProduct] = useState(false);
+  const [modalCreateProduct, setModalCreateProduct] = useState(false);
   const [modalCreateCategory, setModalCreateCategory] = useState(false);
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
-  const openModalAddProduct = () => setModalAddProduct(true);
-  const closeModalAddProduct = () => setModalAddProduct(false);
+  const openModalCreateProduct = () => setModalCreateProduct(true);
+  const closeModalCreateProduct = () => setModalCreateProduct(false);
 
   const openModalCreateCategory = () => setModalCreateCategory(true);
   const closeModalCreateCategory = () => setModalCreateCategory(false);
@@ -51,23 +51,23 @@ export default function AdminMenu() {
               <Title>Produtos</Title>
 
               {isSmallScreen ? (
-                <StyledLink to="/administrador/loja/criar-produto">
+                <StyledLink to="/administrador/criar-produto">
                   Adicionar produtos
                 </StyledLink>
               ) : (
-                <Button onClick={openModalAddProduct}>
+                <Button onClick={openModalCreateProduct}>
                   Adicionar produtos
                 </Button>
               )}
 
-              <StyledLink to="/administrador/loja">Listar produtos</StyledLink>
+              <StyledLink to="/administrador">Listar produtos</StyledLink>
             </Section>
 
             <Section>
               <Title>Categorias</Title>
 
               {isSmallScreen ? (
-                <StyledLink to="/administrador/loja/criar-categoria">
+                <StyledLink to="/administrador/criar-categoria">
                   Adicionar categoria
                 </StyledLink>
               ) : (
@@ -76,7 +76,7 @@ export default function AdminMenu() {
                 </Button>
               )}
 
-              <StyledLink to="/administrador/loja/listar-categorias">
+              <StyledLink to="/administrador/listar-categorias">
                 Listar categorias
               </StyledLink>
               <BlackLine />
@@ -100,8 +100,8 @@ export default function AdminMenu() {
       </MenuItens>
 
       <ModalStyle
-        open={modalAddProduct}
-        onCancel={closeModalAddProduct}
+        open={modalCreateProduct}
+        onCancel={closeModalCreateProduct}
         width={1100}
         padding={null}
         footer={null}
@@ -110,11 +110,12 @@ export default function AdminMenu() {
           margin: '0px',
           padding: '0px',
           color: 'none',
+          background: '#123645',
         }}
         centered
         destroyOnClose
       >
-        <ModalCreateProduct />
+        <ModalCreateProduct close={closeModalCreateProduct} />
       </ModalStyle>
 
       <ModalStyle

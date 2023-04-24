@@ -8,6 +8,8 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   padding: 20px 24px;
+
+  font-family: ${(props) => props.theme.fonts.montserrat};
 `;
 
 export const Form = styled.form``;
@@ -19,7 +21,6 @@ export const ModalContent = styled.div`
 `;
 
 export const Label = styled.label`
-  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -31,11 +32,10 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   display: flex;
-  flex-direction: row;
   align-items: flex-start;
   padding: 8px 11px;
   gap: 10px;
-  border: none;
+  border: ${({ error }) => (error ? '2px solid red' : 'none')};
   color: black;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
@@ -46,9 +46,15 @@ export const Input = styled.input`
 
   width: 400px;
   height: 40px;
-  margin-bottom: 20px;
 
   border-radius: 4px;
+`;
+
+export const ErrorMessage = styled.p`
+  font-weight: 700;
+  color: red;
+
+  margin-top: 5px;
 `;
 
 export const ModalButton = styled.button`
@@ -71,6 +77,8 @@ export const ModalButton = styled.button`
   border: 1px solid white;
   border-radius: 5px;
   color: white;
+
+  margin-top: 15px;
 
   p {
     font-family: ${(props) => props.theme.fonts.montserrat};

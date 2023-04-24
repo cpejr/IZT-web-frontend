@@ -4,6 +4,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
 
 import { Select } from '../../components/common';
 import { ModalEditProduct } from '../../components/features';
@@ -26,25 +27,43 @@ import {
   SearchIconButton,
   ModalStyle,
 } from './Styles';
+import {
+  buildGetProductsErrorMessage,
+  buildGetCategoriesErrorMessage,
+} from './utils';
 
 export default function ListProduct() {
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const [selectedCategory, setSelectedCategory] = useState({});
   const [modalEditProduct, setModalEditProduct] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({});
   const [name, setName] = useState('');
   const debouncedName = useDebounce(name);
 
-  const { data: categories } = useGetCategories();
+  const { data: categories } = useGetCategories({
+    onError: (err) => {
+      const errorMessage = buildGetCategoriesErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
+  });
 
   const { data: products } = useSearchProductByName({
     name: debouncedName,
     category: selectedCategory?._id,
+    onError: (err) => {
+      const errorMessage = buildGetProductsErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
   });
 
-  const openModalEditProduct = () => setModalEditProduct(true);
+  const openModalEditProduct = (product) => {
+    setSelectedProduct(product);
+    setModalEditProduct(true);
+  };
   const closeModalEditProduct = () => setModalEditProduct(false);
 
-  const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
       <Title>Lista de produtos</Title>
@@ -78,12 +97,15 @@ export default function ListProduct() {
             <Text>{product.category.name}</Text>
 
             {isSmallScreen ? (
-              <StyledLink to="/administrador/loja/editar-produto">
+              <StyledLink to="/administrador/editar-produto" state={product}>
                 <TbPencil size={30} />
               </StyledLink>
             ) : (
               <EditButton>
-                <TbPencil onClick={openModalEditProduct} size={30} />
+                <TbPencil
+                  onClick={() => openModalEditProduct(product)}
+                  size={30}
+                />
               </EditButton>
             )}
           </Row>
@@ -96,7 +118,7 @@ export default function ListProduct() {
         width={1100}
         padding={0}
         footer={null}
-        closeIcon={modalCloseButton}
+        closeIcon={<CloseOutlined style={{ color: 'white' }} />}
         bodyStyle={{
           alignItems: 'center',
           justifyContent: 'center',
@@ -108,7 +130,10 @@ export default function ListProduct() {
         centered
         destroyOnClose
       >
-        <ModalEditProduct />
+        <ModalEditProduct
+          product={selectedProduct}
+          close={closeModalEditProduct}
+        />
       </ModalStyle>
     </Container>
   );

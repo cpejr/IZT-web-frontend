@@ -1,9 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { TailSpin } from 'react-loader-spinner';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import IZTLogo from '../../assets/IZTLogo.svg';
-import { DataInput, SubmitButton } from '../../components/common';
+import { DataInput } from '../../components/common';
 import { useLogin } from '../../hooks/query/sessions';
 import {
   Page,
@@ -11,8 +13,9 @@ import {
   Logo,
   Title,
   Form,
+  SubmitButton,
   DataEntry,
-  RemeberMe,
+  ForgotPassword,
   SignUpLink,
   Links,
 } from './Styles';
@@ -20,13 +23,18 @@ import { buildLoginErrorMessage, loginValidationSchema } from './utils';
 
 export default function Login() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const redirectTo = state?.from || '/';
+
   const { mutate: login, isLoading } = useLogin({
-    onSuccess: () => navigate('/'),
+    onSuccess: () => {
+      toast.success('Usuário logado com sucesso!');
+      navigate(redirectTo);
+    },
     onError: (err) => {
       const errorMessage = buildLoginErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 
@@ -37,9 +45,9 @@ export default function Login() {
   } = useForm({
     resolver: zodResolver(loginValidationSchema),
   });
+
   const onSubmit = (data) => login(data);
 
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <Page>
       <Container>
@@ -66,15 +74,28 @@ export default function Login() {
               errors={errors}
               type="password"
             />
-            <SubmitButton
-              name="Entrar"
-              // submitErrorMessage={submitErrorMessage}
-              relativeWidth="70%"
-            />
+            <SubmitButton disabled={isLoading} type="submit">
+              {isLoading ? (
+                <>
+                  <TailSpin
+                    height="15"
+                    width="15"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="5"
+                  />
+                  Carregando
+                </>
+              ) : (
+                'Entrar'
+              )}
+            </SubmitButton>
           </Form>
         </DataEntry>
         <Links>
-          <RemeberMe to="/">Esqueceu a sua senha? Clique aqui!</RemeberMe>
+          <ForgotPassword to="/">
+            Esqueceu a sua senha? Clique aqui!
+          </ForgotPassword>
           <SignUpLink>
             Ainda não tem uma conta? <Link to="/">Cadastre-se aqui!</Link>
           </SignUpLink>

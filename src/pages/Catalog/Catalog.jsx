@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../hooks/query/categories';
 import {
@@ -26,12 +27,10 @@ export default function Catalog() {
     onError: (err) => {
       const errorMessage = buildGetCategoriesErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 
-  if (isLoading) return <p>Loading...</p>;
   return (
     <Page>
       <Container>
@@ -44,30 +43,45 @@ export default function Catalog() {
             encontre o bocal perfeito para sua aplicação.
           </Description>
         </Introduction>
-        <ButtonRow>
-          {categories?.map((category) => (
-            <Anchor key={category.name} href={`#${category.name}`}>
-              <Button>{category.name}</Button>
-            </Anchor>
-          ))}
-        </ButtonRow>
-        {categories?.map((category) => (
-          <ProductCategory key={category.name}>
-            <Divider />
-            <CategoryName>{category.name}</CategoryName>
-            <ProductRow>
-              {category?.products?.map((product) => (
-                <Product
-                  onClick={() => navigate(`/produto/${product._id}`)}
-                  key={product.name}
-                >
-                  <ProductImage src={product.pictures[0].url} />
-                  <ProductName>{product.name}</ProductName>
-                </Product>
+        {isLoading ? (
+          <h1
+            style={{
+              height: '660px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            Carregando...
+          </h1>
+        ) : (
+          <>
+            <ButtonRow>
+              {categories?.map((category) => (
+                <Anchor key={category.name} href={`#${category.name}`}>
+                  <Button>{category.name}</Button>
+                </Anchor>
               ))}
-            </ProductRow>
-          </ProductCategory>
-        ))}
+            </ButtonRow>
+            {categories?.map((category) => (
+              <ProductCategory key={category.name}>
+                <Divider />
+                <CategoryName>{category.name}</CategoryName>
+                <ProductRow>
+                  {category?.products?.map((product) => (
+                    <Product
+                      onClick={() => navigate(`/produto/${product._id}`)}
+                      key={product.name}
+                    >
+                      <ProductImage src={product.pictures[0].url} />
+                      <ProductName>{product.name}</ProductName>
+                    </Product>
+                  ))}
+                </ProductRow>
+              </ProductCategory>
+            ))}
+          </>
+        )}
       </Container>
     </Page>
   );

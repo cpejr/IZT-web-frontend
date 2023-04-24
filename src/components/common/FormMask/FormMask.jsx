@@ -15,7 +15,7 @@ export default function FormMask({
 }) {
   const errorMessage = errors?.[name]?.message;
   return (
-    <Container error={errorMessage}>
+    <Container error={!!errorMessage}>
       <Label htmlFor={name}>{label}</Label>
       <Controller
         control={control}

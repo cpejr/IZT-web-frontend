@@ -1,13 +1,23 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, useFieldArray } from 'react-hook-form';
-import { FiSave } from 'react-icons/fi';
-import { HiPlusSm } from 'react-icons/hi';
-import { z } from 'zod';
+import { useState } from 'react';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
+import objToFormData from 'object-to-formdata';
+import PropTypes from 'prop-types';
+import { useFieldArray, useForm } from 'react-hook-form';
+import { FiSave } from 'react-icons/fi';
+import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
+
+import { useGetCategories } from '../../../hooks/query/categories';
 import { useCreateProduct } from '../../../hooks/query/products';
+import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../../utils/constants';
+import { FormSelect } from '../../common';
+import AddFileButton from '../AddFileButton/AddFileButton';
+import DocumentFile from '../DocumentFile/DocumentFile';
+import PictureFile from '../PictureFile/PictureFile';
 import {
   Container,
-  Form,
   ModalContent,
   LeftSection,
   RightSection,
@@ -15,65 +25,97 @@ import {
   CategorySubsection,
   Text,
   MiniText,
-  AddButton,
   TextAreaModal,
   Input,
   ModalButton,
+  DocumentsContainer,
+  PicturesContainer,
+  ErrorMessage,
 } from './Styles';
+import {
+  buildCreateProductErrorMessage,
+  buildGetCategoriesErrorMessage,
+  createProductValidationSchema,
+} from './utils';
 
-const validationSchema = z.object({
-  name: z
-    .string()
-    .min(1, 'Favor digitar o nome do produto')
-    .max(20, 'Nome do produto deve ter no máximo 20 caracteres'),
-  category: z.string({ required_error: 'Product category ID is required' }), // Here we need to pass the category id only
+export default function ModalCreateProduct({ close }) {
+  // Variables
+  const [isPending, setIsPending] = useState(false); // Important for modal loading
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
+  const queryClient = useQueryClient();
+  const documentsLimit = 3;
+  const picturesLimit = 4;
 
-  description: z
-    .string()
-    .min(1, 'Favor inserir uma descrição do produto')
-    .max(150, 'Descrição do produto deve ter no máximo 150 caracteres'),
+  // Backend calls
+  const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
+    {
+      onError: (err) => {
+        const errorMessage = buildGetCategoriesErrorMessage(err);
 
-  advantages: z
-    .string()
-    .min(1, 'Favor inserir as vantagens do produto')
-    .max(150, 'Vantagens do produto devem ter no máximo 150 caracteres'),
+        toast.error(errorMessage);
+      },
+    }
+  );
+  const { mutate: createProduct } = useCreateProduct({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['products', 'searchByName'],
+      });
 
-  pictures: z
-    .array(z.instanceof(FileList))
-    .nonempty('Você deve inserir ao menos uma foto'),
+      close();
+    }, // insert toast
+    onError: (err) => {
+      const errorMessage = buildCreateProductErrorMessage(err);
 
-  documents: z.array(z.instanceof(FileList)).default([]),
-});
-
-export default function ModalCreateProduct() {
-  const { handleSubmit, register, control } = useForm({
-    resolver: zodResolver(validationSchema),
+      toast.error(errorMessage);
+      setIsPending(false);
+    },
   });
 
-  const { mutate: createProduct } = useCreateProduct();
-  const onSubmit = (data) => createProduct(data);
-
+  // Form handlers
   const {
-    fields: fieldsPictures,
-    append: appendPicture,
-    remove: removePicture,
-  } = useFieldArray({
+    handleSubmit,
+    register,
     control,
-    name: 'pictures',
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(createProductValidationSchema),
   });
-
   const {
     fields: fieldsDocuments,
     append: appendDocument,
+    move: moveDocument,
+    update: updateDocument,
     remove: removeDocument,
   } = useFieldArray({
     control,
     name: 'documents',
   });
+  const {
+    fields: fieldsPictures,
+    append: appendPicture,
+    update: updatePicture,
+    remove: removePicture,
+  } = useFieldArray({
+    control,
+    name: 'pictures',
+  });
+  const onSubmit = (data) => {
+    setIsPending(true);
+
+    const formData = objToFormData.serialize(data, {
+      allowEmptyArrays: true,
+      noFilesWithArrayNotation: true,
+      indices: true,
+    });
+    createProduct(formData);
+  };
+
+  if (isSmallScreen) close();
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
           <LeftSection>
             <Subsection>
@@ -81,10 +123,11 @@ export default function ModalCreateProduct() {
               <Input
                 id="name"
                 name="name"
-                type="name"
                 placeholder="Digite o nome do produto"
+                error={errors?.name?.message}
                 {...register('name')}
               />
+              <ErrorMessage>{errors?.name?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
@@ -92,10 +135,11 @@ export default function ModalCreateProduct() {
               <TextAreaModal
                 id="description"
                 name="description"
-                type="description"
                 placeholder="Descreva o produto"
+                error={errors?.description?.message}
                 {...register('description')}
               />
+              <ErrorMessage>{errors?.description?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
@@ -103,10 +147,11 @@ export default function ModalCreateProduct() {
               <TextAreaModal
                 id="advantages"
                 name="advantages"
-                type="advantages"
                 placeholder="Descreva as vantagens do produto"
+                error={errors?.advantages?.message}
                 {...register('advantages')}
               />
+              <ErrorMessage>{errors?.advantages?.message}</ErrorMessage>
             </Subsection>
           </LeftSection>
 
@@ -114,39 +159,92 @@ export default function ModalCreateProduct() {
             <Subsection>
               <Text>Imagens:</Text>
               <MiniText>Anexe as imagens do produto</MiniText>
-              {fieldsPictures.map((field, index) => (
-                <input
-                  type="file"
-                  key={field.id} // important to include key with field's id
-                  {...register(`pictures.${index}.value`)}
+              <PicturesContainer>
+                {fieldsPictures.map(({ id, file: picture }, index) => (
+                  <PictureFile
+                    key={id}
+                    index={index}
+                    picture={picture}
+                    control={control}
+                    buttonColor="white"
+                    updatePicture={updatePicture}
+                    removePicture={removePicture}
+                  />
+                ))}
+              </PicturesContainer>
+              {fieldsPictures.length < picturesLimit && (
+                <AddFileButton
+                  label="Novo Imagem"
+                  error={errors?.pictures?.message}
+                  appendFn={appendPicture}
+                  allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
+                  sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
                 />
-              ))}
-              <AddButton type="button" onClick={() => {}}>
-                <HiPlusSm size={25} />
-                Nova imagem
-              </AddButton>
+              )}
+              <ErrorMessage>{errors?.pictures?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
-              <Text>Documentos</Text>
-              <AddButton>
-                <HiPlusSm size={25} />
-                Novo documento
-              </AddButton>
+              <Text>Documentos:</Text>
+              <DocumentsContainer>
+                {fieldsDocuments.map(({ id, file: document }, index) => (
+                  <DocumentFile
+                    key={id}
+                    index={index}
+                    isLast={index === fieldsDocuments.length - 1}
+                    document={document}
+                    control={control}
+                    buttonColor="white"
+                    moveDocument={moveDocument}
+                    updateDocument={updateDocument}
+                    removeDocument={removeDocument}
+                  />
+                ))}
+              </DocumentsContainer>
+              {fieldsDocuments.length < documentsLimit && (
+                <AddFileButton
+                  label="Novo Documento"
+                  appendFn={appendDocument}
+                  allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(
+                    ', '
+                  )}
+                  sizeLimitInMB={DOCUMENTS_CONFIG.sizeLimitInMB}
+                />
+              )}
             </Subsection>
 
             <CategorySubsection>
-              <Text>Categorias</Text>
-              <p>SETLIST</p>
+              <Text>Categoria:</Text>
+              {isLoadingCategories ? (
+                <p>Carregando...</p>
+              ) : (
+                <FormSelect
+                  name="category"
+                  control={control}
+                  errors={errors}
+                  data={categories.map(({ _id, name }) => ({
+                    label: name,
+                    value: _id,
+                  }))}
+                  placeholder="Selecione a categoria"
+                />
+              )}
             </CategorySubsection>
 
-            <ModalButton type="submit">
+            <ModalButton
+              type="submit"
+              disabled={isPending || isLoadingCategories}
+            >
               <FiSave size={20} />
-              <p>Criar produto</p>
+              <p>{isPending ? 'Carregando...' : 'Criar produto'}</p>
             </ModalButton>
           </RightSection>
         </ModalContent>
-      </Form>
+      </form>
     </Container>
   );
 }
+
+ModalCreateProduct.propTypes = {
+  close: PropTypes.func.isRequired,
+};

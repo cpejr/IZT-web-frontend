@@ -5,6 +5,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
 
 import { useCreateCategory } from '../../../hooks/query/categories';
 import {
@@ -14,6 +16,7 @@ import {
   Input,
   ModalContent,
   ModalButton,
+  ErrorMessage,
 } from './Styles';
 import {
   buildCreateCategoryErrorMessage,
@@ -22,20 +25,22 @@ import {
 
 export default function ModalCreateCategory({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const queryClient = useQueryClient();
 
   const { mutate: createCategory } = useCreateCategory({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['categories', 'searchByName'],
+        queryKey: ['categories'],
       });
+
+      toast.success('Categoria criada com sucesso!');
       close();
     },
     onError: (err) => {
       const errorMessage = buildCreateCategoryErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
       setIsPending(false);
     },
   });
@@ -52,19 +57,23 @@ export default function ModalCreateCategory({ close }) {
     setIsPending(true);
   };
 
+  if (isSmallScreen) close();
+
+  const errorMessage = errors?.name?.message;
+
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
-          <Label>Nome da categoria:</Label>
+          <Label htmlFor="name">Nome da categoria:</Label>
           <Input
             id="name"
             name="name"
-            type="name"
-            {...register('name')}
             placeholder="Digite aqui o nome da categoria"
+            error={!!errorMessage}
+            {...register('name')}
           />
-          {errors?.name?.message && <p>{errors?.name?.message}</p>}
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <ModalButton disabled={isPending} type="submit">
             <FiSave size={25} />
             <p>{isPending ? 'Carregando...' : 'Criar Categoria'}</p>

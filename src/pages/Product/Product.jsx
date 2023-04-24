@@ -3,12 +3,13 @@ import { useMemo } from 'react';
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
 import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
 import step4 from '../../assets/productPage/steps/Group78.png';
-import { BudgetForm, FilesList, Carousel } from '../../components/features';
+import { FormsBudget, FilesList, Carousel } from '../../components/features';
 import { useGetProductById } from '../../hooks/query/products';
 import {
   Container,
@@ -49,8 +50,7 @@ export default function Product() {
       const code = err?.response?.data?.httpCode;
       const message = buildGetProducErrorMessage(code);
 
-      // Do something with the error message
-      alert(message);
+      toast.error(message);
 
       navigate('*'); // Go to NotFound page
     },
@@ -74,41 +74,54 @@ export default function Product() {
     [product]
   );
 
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
-
   return (
     <Container>
       <ProductData>
-        <ProductName>{product.name}</ProductName>
-        <ProductInfo>
-          <CarouselContainer>
-            <Carousel
-              carouselData={pictures}
-              maxHeight="537.17px"
-              maxWidth="543.75px"
-              aspectRatio="12 / 9"
-              miniImages
-            />
-          </CarouselContainer>
-          <TextInfoContainer>
-            <ProductDescription>
-              <DescriptionTitle>Descrição do produto</DescriptionTitle>
-              <Description>{product.description}</Description>
-            </ProductDescription>
-            <ProductBenefits>
-              <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-              <Benefits>{product.advantages}</Benefits>
-            </ProductBenefits>
-            <ProductInfos>
-              <InfoTitle>Mais informações</InfoTitle>
-              <InfoDescription>
-                <FilesList files={documents} />
-              </InfoDescription>
-            </ProductInfos>
-          </TextInfoContainer>
-        </ProductInfo>
+        {isLoading ? (
+          <h1
+            style={{
+              height: '660px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            Carregando...
+          </h1>
+        ) : (
+          <>
+            <ProductName>{product.name}</ProductName>
+            <ProductInfo>
+              <CarouselContainer>
+                <Carousel
+                  carouselData={pictures}
+                  maxHeight="537.17px"
+                  maxWidth="543.75px"
+                  aspectRatio="12 / 9"
+                  miniImages
+                />
+              </CarouselContainer>
+              <TextInfoContainer>
+                <ProductDescription>
+                  <DescriptionTitle>Descrição do produto</DescriptionTitle>
+                  <Description>{product.description}</Description>
+                </ProductDescription>
+                <ProductBenefits>
+                  <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
+                  <Benefits>{product.advantages}</Benefits>
+                </ProductBenefits>
+                <ProductInfos>
+                  <InfoTitle>Mais informações</InfoTitle>
+                  <InfoDescription>
+                    <FilesList files={documents} />
+                  </InfoDescription>
+                </ProductInfos>
+              </TextInfoContainer>
+            </ProductInfo>
+          </>
+        )}
       </ProductData>
-      <BudgetForm productId={_id} />
+      <FormsBudget productId={_id} isLoadingProduct={isLoading} />
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
