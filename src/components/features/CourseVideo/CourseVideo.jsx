@@ -4,17 +4,20 @@ import PropTypes from 'prop-types';
 
 import FinishedVideo from '../../../assets/coursesPage/finishedVideo.png';
 import UnfinishedVideo from '../../../assets/coursesPage/unfinishedVideo.png';
+import useVideoStore from '../../../stores/video';
 import { ScrollIcon, TopicDiv, Topics, VideoTime } from './Styles';
 
-export default function CourseVideo({ video, setVideo }) {
+export default function CourseVideo({ video }) {
   const [srcIcon, setSrcIcon] = useState(UnfinishedVideo);
+  const { setCurrVideo } = useVideoStore();
   const { duration, name } = video;
+
   return (
     <TopicDiv>
       <div style={{ flexDirection: 'row-reverse' }}>
         <Topics
           onClick={() => {
-            setVideo(video);
+            setCurrVideo(video?._id);
             setSrcIcon(FinishedVideo);
           }}
         >
@@ -29,5 +32,4 @@ export default function CourseVideo({ video, setVideo }) {
 
 CourseVideo.propTypes = {
   video: PropTypes.object.isRequired,
-  setVideo: PropTypes.func.isRequired,
 };
