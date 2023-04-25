@@ -17,7 +17,7 @@ export default function CourseVideo({ video }) {
       <div style={{ flexDirection: 'row-reverse' }}>
         <Topics
           onClick={() => {
-            setCurrVideo(video?._id);
+            setCurrVideo(video);
             setSrcIcon(FinishedVideo);
           }}
         >

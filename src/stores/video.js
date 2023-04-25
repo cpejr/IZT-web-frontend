@@ -5,16 +5,12 @@ const useVideoStore = create((set, get) => ({
   allVideos: null,
 
   setState: (chapters) => {
-    const firstVideo = chapters?.[0]?.videos?.[0];
     const allVideos = chapters?.map(({ videos }) => videos).flat(); // All videos in sequence
+    const firstVideo = allVideos[0];
 
     set({ currVideo: firstVideo, allVideos });
   },
-  setCurrVideo: (videoId) => {
-    const video = get()?.allVideos?.find(({ _id }) => _id === videoId);
-
-    set({ currVideo: video });
-  },
+  setCurrVideo: (video) => set({ currVideo: video }),
 
   next: () => {
     const { currVideo, allVideos } = get();
