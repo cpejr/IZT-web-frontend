@@ -10,7 +10,7 @@ import { ScrollIcon, TopicDiv, Topics, VideoTime } from './Styles';
 export default function CourseVideo({ video }) {
   const [srcIcon, setSrcIcon] = useState(UnfinishedVideo);
   const { setCurrVideo } = useVideoStore();
-  const { duration, name } = video;
+  const { duration, title } = video;
 
   return (
     <TopicDiv>
@@ -21,7 +21,7 @@ export default function CourseVideo({ video }) {
             setSrcIcon(FinishedVideo);
           }}
         >
-          {name}
+          {title}
         </Topics>
         <ScrollIcon src={srcIcon} alt="videoState" />
       </div>

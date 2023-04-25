@@ -33,14 +33,14 @@ export default function Course() {
     <Container>
       <MainDiv>
         <IntroductionDiv>
-          <Title>{course?.name}</Title>
+          <Title>{course?.title}</Title>
           <Text>{course?.description}</Text>
         </IntroductionDiv>
         <GreyLine />
         <MainSection>
           <CourseScroll chapters={course?.chapters} />
           <VideoSectionDiv id="videoSection">
-            <VideoTitle>{currVideo?.name}</VideoTitle>
+            <VideoTitle>{currVideo?.title}</VideoTitle>
             <Video src={Image} alt="CourseVideo" />
             <Buttons>
               <ChangeVideoButton onClick={previous}>

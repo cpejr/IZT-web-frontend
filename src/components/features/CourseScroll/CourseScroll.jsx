@@ -6,9 +6,9 @@ import { GreyLine, Scroll, SubtitleScroll } from './Styles';
 export default function CourseScroll({ chapters }) {
   return (
     <Scroll>
-      {chapters?.map(({ _id, name, videos }) => (
+      {chapters?.map(({ _id, title, videos }) => (
         <div key={_id}>
-          <SubtitleScroll>{name}</SubtitleScroll>
+          <SubtitleScroll>{title}</SubtitleScroll>
           <GreyLine />
           {videos?.map((video) => (
             <CourseVideo key={video?._id} video={video} />
