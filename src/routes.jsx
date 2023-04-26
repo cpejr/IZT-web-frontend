@@ -24,6 +24,7 @@ import {
   EditCategoryMobile,
   Course,
   NotFound,
+  TestPage,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
     <Route>
       <Route path="/" element={<AppLayout />}>
         <Route index element={<Home />} />
+        <Route path="test" element={<TestPage />} />
         <Route path="login" element={<Login />} />
         <Route path="cadastro" element={<Register />} />
         <Route path="catalogo" element={<Catalog />} />
