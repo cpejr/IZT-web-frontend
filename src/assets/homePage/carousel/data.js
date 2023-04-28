@@ -1,6 +1,6 @@
-import image1 from './carrossel1.png';
-import image2 from './carrossel2.png';
-import image3 from './carrossel3.png';
+import image1 from './carrossel1 - compressed.png';
+import image2 from './carrossel2 - compressed.png';
+import image3 from './carrossel3 - compressed.png';
 
 export default [
   {
