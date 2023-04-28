@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
@@ -25,9 +25,35 @@ export default function PictureFile({
     }))
   );
 
+  // In case the component unmouts before the file is saved, the request will be cancelled
+  const abortController = useRef(null);
+  useEffect(() => {
+    abortController.current = new AbortController();
+    return () => abortController.current?.abort();
+  }, []);
+
   const { mutateAsync: upload } = useUploadFile();
   const { mutateAsync: deleteFile } = useDeleteFile();
 
+  const handleUpload = async (options) => {
+    const { onSuccess, onError, file: originalFile, onProgress } = options;
+
+    const formData = new FormData();
+    formData.append('file', originalFile);
+
+    try {
+      const { data: file } = await upload({
+        file: formData,
+        onProgress,
+        signal: abortController.current?.signal,
+      });
+      appendPicture({ file });
+      onSuccess({ ...file, uid: file.key });
+    } catch (err) {
+      toast.error('Erro ao salvar o arquivo');
+      onError({ err });
+    }
+  };
   const handleChange = ({ fileList: newFileList }) =>
     setFileList(
       newFileList.map((file) => (file.response ? file.response : file))
@@ -38,7 +64,7 @@ export default function PictureFile({
 
     try {
       await deleteFile(key);
-      const deletedFileIndex = fileList.findIndex(
+      const deletedFileIndex = fileList?.findIndex(
         (fileFromList) => fileFromList.key === key
       );
       removePicture(deletedFileIndex);
@@ -54,39 +80,19 @@ export default function PictureFile({
     setPreviewOpen(true);
     setPreviewTitle(file?.name);
   };
-  const handleCancel = () => setPreviewOpen(false);
-  const uploadImage = async (options) => {
-    const { onSuccess, onError, file: originalFile, onProgress } = options;
-
-    const formData = new FormData();
-    formData.append('file', originalFile);
-
-    try {
-      const { data: file } = await upload({
-        file: formData,
-        onProgress,
-      });
-      appendPicture({ file });
-      onSuccess({ ...file, uid: file.key });
-    } catch (err) {
-      toast.error('Erro ao salvar o arquivo');
-      onError({ err });
-    }
-  };
-
   return (
     <>
       <StyledUpload
         listType="picture-card"
         locale={{ uploading: 'Salvando...' }} // Empty uploading message
         fileList={fileList}
+        customRequest={handleUpload}
         onChange={handleChange}
         onRemove={handleRemove}
         onPreview={handlePreview}
-        customRequest={uploadImage}
         accept={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
       >
-        {fileList.length < picturesLimit && (
+        {fileList?.length < picturesLimit && (
           <UploadButton type="button">
             <PlusOutlined />
             <div>
@@ -101,7 +107,7 @@ export default function PictureFile({
         open={previewOpen}
         title={previewTitle}
         footer={null}
-        onCancel={handleCancel}
+        onCancel={() => setPreviewOpen(false)}
       >
         <img
           alt="example"

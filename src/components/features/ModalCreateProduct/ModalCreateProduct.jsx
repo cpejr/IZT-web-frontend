@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import objToFormData from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
@@ -11,9 +10,7 @@ import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useCreateProduct } from '../../../hooks/query/products';
-import { DOCUMENTS_CONFIG } from '../../../utils/constants';
 import { FormSelect } from '../../common';
-import AddFileButton from '../AddFileButton/AddFileButton';
 import DocumentFile from '../DocumentFile/DocumentFile';
 import PictureFile from '../PictureFile/PictureFile';
 import {
@@ -28,7 +25,6 @@ import {
   TextAreaModal,
   Input,
   ModalButton,
-  DocumentsContainer,
   ErrorMessage,
 } from './Styles';
 import {
@@ -83,8 +79,6 @@ export default function ModalCreateProduct({ close }) {
   const {
     fields: fieldsDocuments,
     append: appendDocument,
-    move: moveDocument,
-    update: updateDocument,
     remove: removeDocument,
   } = useFieldArray({
     control,
@@ -98,16 +92,9 @@ export default function ModalCreateProduct({ close }) {
     control,
     name: 'pictures',
   });
-
   const onSubmit = (data) => {
     setIsPending(true);
-
-    const formData = objToFormData.serialize(data, {
-      allowEmptyArrays: true,
-      noFilesWithArrayNotation: true,
-      indices: true,
-    });
-    createProduct(formData);
+    createProduct(data);
   };
 
   if (isSmallScreen) close();
@@ -171,42 +158,12 @@ export default function ModalCreateProduct({ close }) {
 
             <Subsection>
               <Text>Documentos:</Text>
-              {/* <DocumentsContainer> */}
               <DocumentFile
-                key={1}
-                index={1}
-                isLast={false}
-                document={{}}
-                control={control}
-                buttonColor="white"
-                moveDocument={moveDocument}
-                updateDocument={updateDocument}
+                documentsLimit={documentsLimit}
+                fieldsDocuments={fieldsDocuments}
+                appendDocument={appendDocument}
                 removeDocument={removeDocument}
               />
-              {/* {fieldsDocuments.map(({ id, file: document }, index) => (
-                  <DocumentFile
-                    key={id}
-                    index={index}
-                    isLast={index === fieldsDocuments.length - 1}
-                    document={document}
-                    control={control}
-                    buttonColor="white"
-                    moveDocument={moveDocument}
-                    updateDocument={updateDocument}
-                    removeDocument={removeDocument}
-                  />
-                ))} */}
-              {/* </DocumentsContainer> */}
-              {/* {fieldsDocuments.length < documentsLimit && (
-                <AddFileButton
-                  label="Novo Documento"
-                  appendFn={appendDocument}
-                  allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(
-                    ', '
-                  )}
-                  sizeLimitInMB={DOCUMENTS_CONFIG.sizeLimitInMB}
-                />
-              )} */}
             </Subsection>
 
             <CategorySubsection>

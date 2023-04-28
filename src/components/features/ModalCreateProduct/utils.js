@@ -19,11 +19,31 @@ export const createProductValidationSchema = z.object({
     .min(5, 'Mínimo de 5 caracteres')
     .max(150, 'Vantagens do produto devem ter no máximo 150 caracteres'),
   pictures: z
-    .array(z.object({ file: z.instanceof(File) }))
+    .array(
+      z.object({
+        file: z.object({
+          name: z.string(),
+          mimeType: z.string(),
+          url: z.string(),
+          key: z.string(),
+          size: z.number(),
+        }),
+      })
+    )
     .nonempty('Você deve inserir ao menos uma foto')
     .transform((pictures) => pictures.map(({ file }) => file)),
   documents: z
-    .array(z.object({ file: z.instanceof(File) }))
+    .array(
+      z.object({
+        file: z.object({
+          name: z.string(),
+          mimeType: z.string(),
+          url: z.string(),
+          key: z.string(),
+          size: z.number(),
+        }),
+      })
+    )
     .default([])
     .transform((documents) => documents.map(({ file }) => file)),
 });

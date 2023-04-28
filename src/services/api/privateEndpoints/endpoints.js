@@ -42,13 +42,15 @@ export const updateProduct = async ({ _id, newProductData }) => {
   return data;
 };
 
-export const uploadFile = async ({ file, onProgress }) => {
+export const uploadFile = async ({ file, onProgress, signal }) => {
   const data = await privateApi.post('/products/file', file, {
     onUploadProgress: (event) => {
       const percent = Math.round((event.loaded * 100) / event.total);
 
       onProgress({ percent });
     },
+    // In case the component unmouts before the file is saved, the request will be cancelled
+    signal,
   });
 
   return data;

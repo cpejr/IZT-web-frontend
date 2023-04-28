@@ -138,7 +138,7 @@ export default function ModalEditProduct({ product, close }) {
 
     updateProduct({ _id: product._id, newProductData: formData });
   };
-
+  console.log(fieldsDocuments);
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>

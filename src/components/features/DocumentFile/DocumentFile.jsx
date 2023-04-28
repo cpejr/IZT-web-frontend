@@ -1,107 +1,102 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
+import { HiPlusSm } from 'react-icons/hi';
+import { toast } from 'react-toastify';
 
+import { useDeleteFile, useUploadFile } from '../../../hooks/query/products';
 import { DOCUMENTS_CONFIG } from '../../../utils/constants';
-import RemoveFileButton from '../RemoveFileButton/RemoveFileButton';
-import UpdateFileButton from '../UpdateFileButton/UpdateFileButton';
-import { Arrows, Container, FileLink, StyledUpload } from './Styles';
-import { UploadOutlined } from '@ant-design/icons';
-import { Button, Upload } from 'antd';
+import { AddButton, StyledUpload } from './Styles';
+
 export default function DocumentFile({
-  index,
-  document,
-  moveDocument,
-  updateDocument,
+  fieldsDocuments,
+  documentsLimit,
+  appendDocument,
   removeDocument,
-  isLast,
-  buttonColor,
 }) {
-  const props = {
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    onChange({ file, fileList }) {
-      if (file.status !== 'uploading') {
-        console.log(file, fileList);
-      }
-    },
-    defaultFileList: [
-      {
-        uid: '1',
-        name: 'xxx.png',
-        status: 'uploading',
-        url: 'http://www.baidu.com/xxx.png',
-        percent: 33,
-      },
-      {
-        uid: '2',
-        name: 'yyy.png',
-        status: 'done',
-        url: 'http://www.baidu.com/yyy.png',
-      },
-      {
-        uid: '3',
-        name: 'zzz.png',
-        status: 'error',
-        response: 'Server Error 500',
-        // custom error message to show
-        url: 'http://www.baidu.com/zzz.png',
-      },
-    ],
+  const [fileList, setFileList] = useState(
+    fieldsDocuments?.map(({ file }) => ({
+      uid: file.key,
+      ...file,
+    }))
+  );
+
+  // In case the component unmouts before the file is saved, the request will be cancelled
+  const abortController = useRef(null);
+  useEffect(() => {
+    abortController.current = new AbortController();
+    return () => abortController.current?.abort();
+  }, []);
+
+  const { mutateAsync: upload } = useUploadFile();
+  const { mutateAsync: deleteFile } = useDeleteFile();
+
+  const handleUpload = async (options) => {
+    const { onSuccess, onError, file: originalFile, onProgress } = options;
+
+    const formData = new FormData();
+    formData.append('file', originalFile);
+
+    try {
+      const { data: file } = await upload({
+        file: formData,
+        onProgress,
+        signal: abortController.current?.signal,
+      });
+      appendDocument({ file });
+      onSuccess({ ...file, uid: file.key });
+    } catch (err) {
+      toast.error('Erro ao salvar o arquivo');
+      onError({ err });
+    }
   };
+  const handleChange = ({ fileList: newFileList }) =>
+    setFileList(
+      newFileList.map((file) => (file.response ? file.response : file))
+    );
+  const handleRemove = async (file) => {
+    const key = file?.key;
+    if (!key) return true;
+
+    try {
+      await deleteFile(key);
+      const deletedFileIndex = fileList.findIndex(
+        (fileFromList) => fileFromList.key === key
+      );
+      removeDocument(deletedFileIndex);
+    } catch (err) {
+      toast.error('Erro ao deletar o arquivo. Tente novamente mais tarde');
+      return false;
+    }
+
+    return true;
+  };
+
   return (
-    <StyledUpload {...props}>
-      <Button icon={<UploadOutlined />}>Upload</Button>
+    <StyledUpload
+      progress={{
+        strokeWidth: 4,
+        showInfo: false,
+      }}
+      fileList={fileList}
+      customRequest={handleUpload}
+      onChange={handleChange}
+      onRemove={handleRemove}
+      accept={DOCUMENTS_CONFIG.allowedMimeTypes.join(', ')}
+    >
+      {fileList?.length < documentsLimit && (
+        <AddButton type="button" color="white">
+          <HiPlusSm size={25} />
+          Novo documento
+        </AddButton>
+      )}
     </StyledUpload>
   );
-  // const [documentUrl, setDocumentUrl] = useState('');
-  // useEffect(() => {
-  //   const url = document.url || URL.createObjectURL(document);
-  //   setDocumentUrl((prevUrl) => {
-  //     if (prevUrl) URL.revokeObjectURL(prevUrl);
-  //     return url;
-  //   });
-  //   return () => URL.revokeObjectURL(url);
-  // }, [document]);
-  // return (
-  //   <Container>
-  //     <Arrows>
-  //       {!!index && (
-  //         <button type="button" onClick={() => moveDocument(index, index - 1)}>
-  //           <CaretUpOutlined />
-  //         </button>
-  //       )}
-  //       {!isLast && (
-  //         <button type="button" onClick={() => moveDocument(index, index + 1)}>
-  //           <CaretDownOutlined />
-  //         </button>
-  //       )}
-  //     </Arrows>
-  //     <FileLink href={documentUrl} target="_blank" rel="noopener noreferrer">
-  //       {document.name}
-  //     </FileLink>
-  //     <UpdateFileButton
-  //       index={index}
-  //       updateFn={updateDocument}
-  //       allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(', ')}
-  //       sizeLimitInMB={DOCUMENTS_CONFIG.sizeLimitInMB}
-  //       color={buttonColor}
-  //     />
-  //     <RemoveFileButton
-  //       index={index}
-  //       removeFn={removeDocument}
-  //       color={buttonColor}
-  //     />
-  //   </Container>
-  // );
 }
 
 DocumentFile.propTypes = {
-  index: PropTypes.number.isRequired,
-  isLast: PropTypes.bool.isRequired,
-  document: PropTypes.object.isRequired,
-  moveDocument: PropTypes.func.isRequired,
-  updateDocument: PropTypes.func.isRequired,
+  fieldsDocuments: PropTypes.array.isRequired,
+  documentsLimit: PropTypes.number.isRequired,
+  appendDocument: PropTypes.func.isRequired,
   removeDocument: PropTypes.func.isRequired,
-  buttonColor: PropTypes.string.isRequired,
 };
