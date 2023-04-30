@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import objToFormData from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
@@ -10,7 +9,7 @@ import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
-import { useCreateProduct } from '../../../hooks/query/products';
+import { useCreateProduct, useUploadFile } from '../../../hooks/query/products';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../../utils/constants';
 import { FormSelect } from '../../common';
 import AddFileButton from '../AddFileButton/AddFileButton';
@@ -36,6 +35,7 @@ import {
   buildCreateProductErrorMessage,
   buildGetCategoriesErrorMessage,
   createProductValidationSchema,
+  processSubmitData,
 } from './utils';
 
 export default function ModalCreateProduct({ close }) {
@@ -71,6 +71,12 @@ export default function ModalCreateProduct({ close }) {
       setIsPending(false);
     },
   });
+  const { mutateAsync: upload } = useUploadFile({
+    onError: () => {
+      toast.error('Não foi possível realizar o upload de arquivos');
+      setIsPending(false);
+    },
+  });
 
   // Form handlers
   const {
@@ -100,15 +106,16 @@ export default function ModalCreateProduct({ close }) {
     control,
     name: 'pictures',
   });
-  const onSubmit = (data) => {
+
+  const onSubmit = async (updatedProductData) => {
     setIsPending(true);
 
-    const formData = objToFormData.serialize(data, {
-      allowEmptyArrays: true,
-      noFilesWithArrayNotation: true,
-      indices: true,
+    const processedProductData = await processSubmitData({
+      uploadFn: upload,
+      updatedProductData,
     });
-    createProduct(formData);
+
+    createProduct(processedProductData);
   };
 
   if (isSmallScreen) close();
@@ -124,7 +131,7 @@ export default function ModalCreateProduct({ close }) {
                 id="name"
                 name="name"
                 placeholder="Digite o nome do produto"
-                error={errors?.name?.message}
+                error={errors?.name?.message ? 1 : 0}
                 {...register('name')}
               />
               <ErrorMessage>{errors?.name?.message}</ErrorMessage>
@@ -136,7 +143,7 @@ export default function ModalCreateProduct({ close }) {
                 id="description"
                 name="description"
                 placeholder="Descreva o produto"
-                error={errors?.description?.message}
+                error={errors?.description?.message ? 1 : 0}
                 {...register('description')}
               />
               <ErrorMessage>{errors?.description?.message}</ErrorMessage>
@@ -148,7 +155,7 @@ export default function ModalCreateProduct({ close }) {
                 id="advantages"
                 name="advantages"
                 placeholder="Descreva as vantagens do produto"
-                error={errors?.advantages?.message}
+                error={errors?.advantages?.message ? 1 : 0}
                 {...register('advantages')}
               />
               <ErrorMessage>{errors?.advantages?.message}</ErrorMessage>
@@ -175,7 +182,7 @@ export default function ModalCreateProduct({ close }) {
               {fieldsPictures.length < picturesLimit && (
                 <AddFileButton
                   label="Novo Imagem"
-                  error={errors?.pictures?.message}
+                  error={errors?.pictures?.message ? 1 : 0}
                   appendFn={appendPicture}
                   allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
                   sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
@@ -233,7 +240,7 @@ export default function ModalCreateProduct({ close }) {
 
             <ModalButton
               type="submit"
-              disabled={isPending || isLoadingCategories}
+              // disabled={isPending || isLoadingCategories}
             >
               <FiSave size={20} />
               <p>{isPending ? 'Carregando...' : 'Criar produto'}</p>

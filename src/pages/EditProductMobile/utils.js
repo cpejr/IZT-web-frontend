@@ -27,7 +27,6 @@ export const editProductValidationSchema = z.object({
             url: z.string(),
             key: z.string(),
             size: z.number(),
-            orderPosition: z.number(),
           })
         ),
       })
@@ -44,7 +43,6 @@ export const editProductValidationSchema = z.object({
             url: z.string(),
             key: z.string(),
             size: z.number(),
-            orderPosition: z.number(),
           })
         ),
       })

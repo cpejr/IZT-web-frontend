@@ -2,16 +2,18 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import objToFormData from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
-import { useUpdateProducts } from '../../../hooks/query/products';
+import {
+  useDeleteFile,
+  useUpdateProducts,
+  useUploadFile,
+} from '../../../hooks/query/products';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../../utils/constants';
-import putIndexIntoFiles from '../../../utils/putIndexIntoFiles';
 import { FormSelect } from '../../common';
 import AddFileButton from '../AddFileButton/AddFileButton';
 import DocumentFile from '../DocumentFile/DocumentFile';
@@ -36,7 +38,9 @@ import {
 import {
   buildEditProductErrorMessage,
   buildGetCategoriesErrorMessage,
+  defaultValues,
   editProductValidationSchema,
+  processSubmitData,
 } from './utils';
 
 export default function ModalEditProduct({ product, close }) {
@@ -72,6 +76,18 @@ export default function ModalEditProduct({ product, close }) {
       setIsPending(false);
     },
   });
+  const { mutateAsync: upload } = useUploadFile({
+    onError: () => {
+      toast.error('Não foi possível realizar o upload de arquivos');
+      setIsPending(false);
+    },
+  });
+  const { mutateAsync: deleteFile } = useDeleteFile({
+    onError: () => {
+      toast.error('Não foi possível excluir os arquivos');
+      setIsPending(false);
+    },
+  });
 
   // Form handlers
   const {
@@ -81,20 +97,7 @@ export default function ModalEditProduct({ product, close }) {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(editProductValidationSchema),
-    defaultValues: {
-      name: product.name,
-      description: product.description,
-      advantages: product.advantages,
-      category: product.category._id,
-      pictures: product.pictures.map((pic) => ({
-        id: pic.key,
-        file: pic,
-      })),
-      documents: product.documents.map((doc) => ({
-        id: doc.key,
-        file: doc,
-      })),
-    },
+    defaultValues: defaultValues(product),
   });
   const {
     fields: fieldsDocuments,
@@ -115,28 +118,20 @@ export default function ModalEditProduct({ product, close }) {
     control,
     name: 'pictures',
   });
-  const onSubmit = (inputData) => {
+  const onSubmit = async (updatedProductData) => {
     setIsPending(true);
-    const { pictures, documents, ...data } = inputData;
 
-    const [newPictures, savedPictures] = putIndexIntoFiles(pictures);
-    const [newDocuments, savedDocuments] = putIndexIntoFiles(documents);
-
-    const dataObject = {
-      ...data,
-      newPictures,
-      savedPictures,
-      newDocuments,
-      savedDocuments,
-    };
-
-    const formData = objToFormData.serialize(dataObject, {
-      allowEmptyArrays: true,
-      noFilesWithArrayNotation: true,
-      indices: true,
+    const processedProductData = await processSubmitData({
+      uploadFn: upload,
+      deleteFn: deleteFile,
+      updatedProductData,
+      oldProductData: product,
     });
 
-    updateProduct({ _id: product._id, newProductData: formData });
+    updateProduct({
+      _id: product._id,
+      updatedData: processedProductData,
+    });
   };
 
   return (

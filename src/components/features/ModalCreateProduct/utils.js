@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { ERROR_CODES } from '../../../utils/constants';
+import uploadFiles from '../../../utils/uploadFiles';
 
 // Form Validation
 export const createProductValidationSchema = z.object({
@@ -51,4 +52,29 @@ const getCategoriesIdDefaultErrorMessage =
 export function buildGetCategoriesErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
   return getCategoriesErrorMessages[code] || getCategoriesIdDefaultErrorMessage;
+}
+
+// Form on submit
+export async function processSubmitData({ uploadFn, updatedProductData }) {
+  const { pictures: newPictures, documents: newDocuments } = updatedProductData;
+
+  const uploadPicsReq = uploadFiles({
+    uploadFn,
+    files: newPictures,
+  });
+  const uploadDocsReq = uploadFiles({
+    uploadFn,
+    files: newDocuments,
+  });
+
+  const [uploadedPictures, uploadedDocuments] = await Promise.all([
+    uploadPicsReq,
+    uploadDocsReq,
+  ]);
+
+  return {
+    ...updatedProductData,
+    pictures: uploadedPictures,
+    documents: uploadedDocuments,
+  };
 }

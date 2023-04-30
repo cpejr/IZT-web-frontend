@@ -16,7 +16,7 @@ import {
 import { useGetCategories } from '../../hooks/query/categories';
 import { useUpdateProducts } from '../../hooks/query/products';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../utils/constants';
-import putIndexIntoFiles from '../../utils/putIndexIntoFiles';
+// import putIndexIntoFiles from '../../utils/putIndexIntoFiles';
 import {
   Container,
   Title,
@@ -118,26 +118,22 @@ export default function EditProductMobile() {
     name: 'pictures',
   });
   const onSubmit = (inputData) => {
-    const { pictures, documents, ...data } = inputData;
-
-    const [newPictures, savedPictures] = putIndexIntoFiles(pictures);
-    const [newDocuments, savedDocuments] = putIndexIntoFiles(documents);
-
-    const dataObject = {
-      ...data,
-      newPictures,
-      savedPictures,
-      newDocuments,
-      savedDocuments,
-    };
-
-    const formData = objToFormData.serialize(dataObject, {
-      allowEmptyArrays: true,
-      noFilesWithArrayNotation: true,
-      indices: true,
-    });
-
-    updateProduct({ _id: product?._id, newProductData: formData });
+    // const { pictures, documents, ...data } = inputData;
+    // const [newPictures, savedPictures] = putIndexIntoFiles(pictures);
+    // const [newDocuments, savedDocuments] = putIndexIntoFiles(documents);
+    // const dataObject = {
+    //   ...data,
+    //   newPictures,
+    //   savedPictures,
+    //   newDocuments,
+    //   savedDocuments,
+    // };
+    // const formData = objToFormData.serialize(dataObject, {
+    //   allowEmptyArrays: true,
+    //   noFilesWithArrayNotation: true,
+    //   indices: true,
+    // });
+    // updateProduct({ _id: product?._id, newProductData: formData });
   };
 
   if (isMediumScreen || !product) return <Navigate to="/administrador" />;

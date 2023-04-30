@@ -5,9 +5,10 @@ import {
   getProductById,
   createProduct,
   searchProductByName,
-  // deleteProducts,
   sendProductBudget,
   updateProduct,
+  deleteFile,
+  uploadFile,
 } from '../../services/api';
 
 export function useGetProducts({
@@ -72,23 +73,34 @@ export function useUpdateProducts({
   });
 }
 
-// export function useDeleteProducts({
-//   onSuccess = () => {},
-//   onError = (err) => console.log(err),
-// } = {}) {
-//   return useMutation({
-//     mutationFn: deleteProducts,
-//     onSuccess,
-//     onError,
-//   });
-// }
-
 export function useSendProductBudget({
   onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useMutation({
     mutationFn: sendProductBudget,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useUploadFile({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: uploadFile,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useDeleteFile({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: deleteFile,
     onSuccess,
     onError,
   });

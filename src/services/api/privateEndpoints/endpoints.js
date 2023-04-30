@@ -37,6 +37,20 @@ export const updateCategory = async ({ _id, newCategoryData }) => {
   return data;
 };
 
+export const uploadFile = async (file) => {
+  const { data } = await privateApi.post('/products/file', file);
+
+  return data;
+};
+
+export const deleteFile = async (key) => {
+  const { data } = await privateApi.delete(
+    `/products/file/${encodeURIComponent(key)}`
+  );
+
+  return data;
+};
+
 const mockData = {
   0: {
     _id: 0,
@@ -88,6 +102,7 @@ const mockData = {
             src: 'https://www.youtube.com/watch?v=8pIhrMIsPAE&list=PL_QxeANzQhstL3mA0hoyFV7HsbA7yx6ie&index=2',
             description: '4:44 by Jay Z',
             duration: '3:33',
+            progress: 100,
           },
           {
             _id: 5,
@@ -167,8 +182,8 @@ export const getCourseById = async (_id) => {
   return data;
 };
 
-export const updateProduct = async ({ _id, newProductData }) => {
-  const data = await privateApi.put(`/products/${_id}`, newProductData);
+export const updateProduct = async ({ _id, updatedData }) => {
+  const { data } = await privateApi.put(`/products/${_id}`, updatedData);
 
   return data;
 };

@@ -24,7 +24,6 @@ export default function Course() {
   const { currVideo, next, previous } = useVideoStore();
   const { data: course, isLoading } = useGetCourseById({
     _id: 0,
-    onSucess: () => {},
     onError: () => {},
   });
 
