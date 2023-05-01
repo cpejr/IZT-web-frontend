@@ -1,6 +1,8 @@
 import { z } from 'zod';
 
 import { ERROR_CODES } from '../../../utils/constants';
+import deleteFiles from '../../../utils/deleteFiles';
+import uploadFiles from '../../../utils/uploadFiles';
 
 // Form Validation
 export const editProductValidationSchema = z.object({
@@ -27,7 +29,6 @@ export const editProductValidationSchema = z.object({
             url: z.string(),
             key: z.string(),
             size: z.number(),
-            orderPosition: z.number(),
           })
         ),
       })
@@ -44,7 +45,6 @@ export const editProductValidationSchema = z.object({
             url: z.string(),
             key: z.string(),
             size: z.number(),
-            orderPosition: z.number(),
           })
         ),
       })
@@ -75,4 +75,65 @@ const getCategoriesDefaultErrorMessage =
 export function buildGetCategoriesErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
   return getCategoriesErrorMessages[code] || getCategoriesDefaultErrorMessage;
+}
+
+// Default form data
+export function defaultValues(product) {
+  return {
+    name: product.name,
+    description: product.description,
+    advantages: product.advantages,
+    category: product.category._id,
+    pictures: product.pictures.map((pic) => ({
+      id: pic.key,
+      file: pic,
+    })),
+    documents: product.documents.map((doc) => ({
+      id: doc.key,
+      file: doc,
+    })),
+  };
+}
+
+// Form on submit
+export async function processSubmitData({
+  uploadFn,
+  deleteFn,
+  updatedProductData,
+  oldProductData,
+}) {
+  const { pictures: oldPictures, documents: oldDocuments } = oldProductData;
+  const { pictures: newPictures, documents: newDocuments } = updatedProductData;
+
+  const uploadPicsReq = uploadFiles({
+    uploadFn,
+    files: newPictures,
+  });
+  const uploadDocsReq = uploadFiles({
+    uploadFn,
+    files: newDocuments,
+  });
+  const deleteOldPicsReq = deleteFiles({
+    deleteFn,
+    originalFiles: oldPictures,
+    newFiles: newPictures,
+  });
+  const deleteOldDocsReq = deleteFiles({
+    deleteFn,
+    originalFiles: oldDocuments,
+    newFiles: newDocuments,
+  });
+
+  const [uploadedPictures, uploadedDocuments] = await Promise.all([
+    uploadPicsReq,
+    uploadDocsReq,
+    deleteOldPicsReq,
+    deleteOldDocsReq,
+  ]);
+
+  return {
+    ...updatedProductData,
+    pictures: uploadedPictures,
+    documents: uploadedDocuments,
+  };
 }

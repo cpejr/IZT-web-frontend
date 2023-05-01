@@ -49,7 +49,7 @@ export default function EditCategoryMobile() {
     resolver: zodResolver(updateCategoryValidationSchema),
   });
   const onSubmit = (data) =>
-    updateCategory({ _id: category?._id, newCategoryData: data });
+    updateCategory({ _id: category?._id, updatedData: data });
 
   if (isMediumScreen || !category)
     return <Navigate to="/administrador/listar-categorias" />;

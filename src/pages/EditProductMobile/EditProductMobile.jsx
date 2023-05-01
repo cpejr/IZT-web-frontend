@@ -8,15 +8,10 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { FormSelect } from '../../components/common';
-import {
-  AddFileButton,
-  DocumentFile,
-  PictureFile,
-} from '../../components/features';
+import { DocumentFiles, PictureFiles } from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
 import { useUpdateProducts } from '../../hooks/query/products';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../utils/constants';
-import putIndexIntoFiles from '../../utils/putIndexIntoFiles';
 import {
   Container,
   Title,
@@ -120,24 +115,24 @@ export default function EditProductMobile() {
   const onSubmit = (inputData) => {
     const { pictures, documents, ...data } = inputData;
 
-    const [newPictures, savedPictures] = putIndexIntoFiles(pictures);
-    const [newDocuments, savedDocuments] = putIndexIntoFiles(documents);
+    // const [newPictures, savedPictures] = putIndexIntoFiles(pictures);
+    // const [newDocuments, savedDocuments] = putIndexIntoFiles(documents);
 
-    const dataObject = {
-      ...data,
-      newPictures,
-      savedPictures,
-      newDocuments,
-      savedDocuments,
-    };
+    // const dataObject = {
+    //   ...data,
+    //   newPictures,
+    //   savedPictures,
+    //   newDocuments,
+    //   savedDocuments,
+    // };
 
-    const formData = objToFormData.serialize(dataObject, {
-      allowEmptyArrays: true,
-      noFilesWithArrayNotation: true,
-      indices: true,
-    });
+    // const formData = objToFormData.serialize(dataObject, {
+    //   allowEmptyArrays: true,
+    //   noFilesWithArrayNotation: true,
+    //   indices: true,
+    // });
 
-    updateProduct({ _id: product?._id, newProductData: formData });
+    // updateProduct({ _id: product?._id, updatedData: formData });
   };
 
   if (isMediumScreen || !product) return <Navigate to="/administrador" />;
@@ -190,7 +185,7 @@ export default function EditProductMobile() {
           )}
           <PicturesContainer>
             {fieldsPictures.map(({ id, file: picture }, index) => (
-              <PictureFile
+              <PictureFiles
                 key={id}
                 index={index}
                 picture={picture}
@@ -201,7 +196,7 @@ export default function EditProductMobile() {
               />
             ))}
           </PicturesContainer>
-          {fieldsPictures.length < picturesLimit && (
+          {/* {fieldsPictures.length < picturesLimit && (
             <AddFileButton
               color="black"
               label="Novo Imagem"
@@ -209,7 +204,7 @@ export default function EditProductMobile() {
               allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
               sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
             />
-          )}
+          )} */}
           <ErrorMessage>{errors?.pictures?.message}</ErrorMessage>
         </Section>
 
@@ -217,7 +212,7 @@ export default function EditProductMobile() {
           <Title>Documentos:</Title>
           <DocumentsContainer>
             {fieldsDocuments.map(({ id, file: document }, index) => (
-              <DocumentFile
+              <DocumentFiles
                 key={id}
                 index={index}
                 isLast={index === fieldsDocuments.length - 1}
@@ -230,7 +225,7 @@ export default function EditProductMobile() {
               />
             ))}
           </DocumentsContainer>
-          {fieldsDocuments.length < documentsLimit && (
+          {/* {fieldsDocuments.length < documentsLimit && (
             <AddFileButton
               color="black"
               label="Novo Documento"
@@ -238,7 +233,7 @@ export default function EditProductMobile() {
               allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(', ')}
               sizeLimitInMB={DOCUMENTS_CONFIG.sizeLimitInMB}
             />
-          )}
+          )} */}
         </Section>
 
         <CategorySection>

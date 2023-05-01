@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { ERROR_CODES } from '../../../utils/constants';
+import uploadFiles from '../../../utils/uploadFiles';
 
 // Form Validation
 export const createProductValidationSchema = z.object({
@@ -19,31 +20,11 @@ export const createProductValidationSchema = z.object({
     .min(5, 'Mínimo de 5 caracteres')
     .max(150, 'Vantagens do produto devem ter no máximo 150 caracteres'),
   pictures: z
-    .array(
-      z.object({
-        file: z.object({
-          name: z.string(),
-          mimeType: z.string(),
-          url: z.string(),
-          key: z.string(),
-          size: z.number(),
-        }),
-      })
-    )
+    .array(z.object({ file: z.instanceof(File) }))
     .nonempty('Você deve inserir ao menos uma foto')
     .transform((pictures) => pictures.map(({ file }) => file)),
   documents: z
-    .array(
-      z.object({
-        file: z.object({
-          name: z.string(),
-          mimeType: z.string(),
-          url: z.string(),
-          key: z.string(),
-          size: z.number(),
-        }),
-      })
-    )
+    .array(z.object({ file: z.instanceof(File) }))
     .default([])
     .transform((documents) => documents.map(({ file }) => file)),
 });
@@ -71,4 +52,29 @@ const getCategoriesIdDefaultErrorMessage =
 export function buildGetCategoriesErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
   return getCategoriesErrorMessages[code] || getCategoriesIdDefaultErrorMessage;
+}
+
+// Form on submit
+export async function processSubmitData({ uploadFn, updatedProductData }) {
+  const { pictures: newPictures, documents: newDocuments } = updatedProductData;
+
+  const uploadPicsReq = uploadFiles({
+    uploadFn,
+    files: newPictures,
+  });
+  const uploadDocsReq = uploadFiles({
+    uploadFn,
+    files: newDocuments,
+  });
+
+  const [uploadedPictures, uploadedDocuments] = await Promise.all([
+    uploadPicsReq,
+    uploadDocsReq,
+  ]);
+
+  return {
+    ...updatedProductData,
+    pictures: uploadedPictures,
+    documents: uploadedDocuments,
+  };
 }

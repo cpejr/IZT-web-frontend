@@ -33,13 +33,14 @@ export function useRefreshToken({
     console.error(err);
   },
 } = {}) {
-  const { auth } = useAuthStore();
+  const expireIn = useAuthStore(({ auth }) => auth?.expireIn);
 
   return useQuery({
     queryKey: ['refresh'],
     queryFn: refresh,
     onError,
     onSuccess,
-    enabled: !!getIsLoggedIn() && !auth,
+    refetchInterval: expireIn * 1000, // Milliseconds
+    enabled: !!getIsLoggedIn(),
   });
 }

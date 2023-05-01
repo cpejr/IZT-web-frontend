@@ -11,9 +11,7 @@ export { default as ModalCreateCategory } from './ModalCreateCategory/ModalCreat
 export { default as ModalEditCategory } from './ModalEditCategory/ModalEditCategory';
 export { default as FormsContact } from './FormsContact/FormsContact';
 export { default as FilesList } from './FilesList/FilesList';
-export { default as DocumentFile } from './DocumentFile/DocumentFile';
-export { default as PictureFile } from './PictureFile/PictureFile';
-export { default as AddFileButton } from './AddFileButton/AddFileButton';
-export { default as UpdateFileButton } from './UpdateFileButton/UpdateFileButton';
+export { default as DocumentFiles } from './DocumentFiles/DocumentFiles';
+export { default as PictureFiles } from './PictureFiles/PictureFiles';
 export { default as ModalChangeUserData } from './ModalChangeUserData/ModalChangeUserData';
 export { default as SystemLoading } from './SystemLoading/SystemLoading';

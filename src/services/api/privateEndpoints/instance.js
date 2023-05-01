@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import useAuthStore from '../../../stores/auth';
 import { ERROR_CODES, ERROR_NAMES } from '../../../utils/constants';
+import { removeIsLoggedIn } from '../../../utils/isLoggedIn';
 import { refresh } from '../publicEndpoints/endpoints';
 
 const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
@@ -31,13 +32,28 @@ privateApi.interceptors.response.use(
       error?.response?.data?.httpCode === ERROR_CODES.FORBIDDEN &&
       error?.response?.data?.name === ERROR_NAMES.FORBIDDEN;
 
-    // If is not a forbidden error or if the request was already sended
-    if (!isForbiddenError || prevRequest?.sent) return Promise.reject(error);
+    try {
+      // If is not a forbidden error or if the request was already sended
+      if (!isForbiddenError || prevRequest?.sent) return Promise.reject(error);
 
-    const { accessToken } = await refresh();
+      const { accessToken } = await refresh();
 
-    prevRequest.sent = true;
-    prevRequest.headers.Authorization = `Bearer ${accessToken}`;
+      prevRequest.sent = true;
+      prevRequest.headers.Authorization = `Bearer ${accessToken}`;
+    } catch (err) {
+      const isUnauthorizedError =
+        err?.response?.data?.httpCode === ERROR_CODES.UNAUTHORIZED &&
+        err?.response?.data?.name === ERROR_NAMES.UNAUTHORIZED;
+
+      if (isUnauthorizedError) {
+        // Logout
+        const { clearAuth } = useAuthStore.getState();
+        clearAuth();
+        removeIsLoggedIn();
+      }
+
+      return Promise.reject(err);
+    }
 
     return privateApi(prevRequest);
   }

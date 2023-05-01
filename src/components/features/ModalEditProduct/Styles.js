@@ -79,26 +79,6 @@ export const ErrorMessage = styled.p`
   color: red;
 `;
 
-export const PicturesContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  gap: 1em;
-`;
-
-export const DocumentsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1em;
-
-  width: 100%;
-  max-width: 350px;
-`;
-
 export const MiniText = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;

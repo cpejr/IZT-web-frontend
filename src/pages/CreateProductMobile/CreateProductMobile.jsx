@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import objToFormData from 'object-to-formdata';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { useMediaQuery } from 'react-responsive';
@@ -8,14 +7,10 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { FormSelect } from '../../components/common';
-import {
-  AddFileButton,
-  DocumentFile,
-  PictureFile,
-} from '../../components/features';
+import { DocumentFiles, PictureFiles } from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
-import { useCreateProduct } from '../../hooks/query/products';
-import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../utils/constants';
+import { useCreateProduct, useUploadFile } from '../../hooks/query/products';
+import { PICTURES_CONFIG } from '../../utils/constants';
 import {
   Container,
   Form,
@@ -27,8 +22,6 @@ import {
   CategorySection,
   SaveButton,
   CancelButton,
-  PicturesContainer,
-  DocumentsContainer,
   Section,
   ErrorMessage,
 } from './Styles';
@@ -36,14 +29,13 @@ import {
   buildCreateProductErrorMessage,
   buildGetCategoriesErrorMessage,
   createProductValidationSchema,
+  processSubmitData,
 } from './utils';
 
 export default function CreateProductMobile() {
   const isMediumScreen = useMediaQuery({ minWidth: 700 });
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const documentsLimit = 3;
-  const picturesLimit = 4;
 
   // Backend calls
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
@@ -71,6 +63,10 @@ export default function CreateProductMobile() {
         toast.error(errorMessage);
       },
     });
+  const { mutateAsync: upload } = useUploadFile({
+    onError: () =>
+      toast.error('Não foi possível realizar o upload de arquivos'),
+  });
 
   // Form handlers
   const {
@@ -81,35 +77,27 @@ export default function CreateProductMobile() {
   } = useForm({
     resolver: zodResolver(createProductValidationSchema),
   });
-  const {
-    fields: fieldsDocuments,
-    append: appendDocument,
-    move: moveDocument,
-    update: updateDocument,
-    remove: removeDocument,
-  } = useFieldArray({
+  const documentFieldArray = useFieldArray({
     control,
     name: 'documents',
   });
-  const {
-    fields: fieldsPictures,
-    append: appendPicture,
-    update: updatePicture,
-    remove: removePicture,
-  } = useFieldArray({
+  const pictureFieldArray = useFieldArray({
     control,
     name: 'pictures',
   });
-  const onSubmit = (data) => {
-    const formData = objToFormData.serialize(data, {
-      allowEmptyArrays: true,
-      noFilesWithArrayNotation: true,
-      indices: true,
+  const picsIsLesserThanLimit =
+    pictureFieldArray?.fields?.length < PICTURES_CONFIG.filesQuantityLimit;
+
+  const onSubmit = async (updatedProductData) => {
+    const processedProductData = await processSubmitData({
+      uploadFn: upload,
+      updatedProductData,
     });
-    createProduct(formData);
+
+    createProduct(processedProductData);
   };
 
-  if (isMediumScreen) return <Navigate to="/administrador" />;
+  if (isMediumScreen) return <Navigate to="/administrador/listar-produtos" />;
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -154,60 +142,16 @@ export default function CreateProductMobile() {
 
         <Section>
           <Title>Imagens:</Title>
-          {fieldsPictures.length < picturesLimit && (
+          {picsIsLesserThanLimit && (
             <MiniText>Anexe as imagens do produto</MiniText>
           )}
-          <PicturesContainer>
-            {fieldsPictures.map(({ id, file: picture }, index) => (
-              <PictureFile
-                key={id}
-                index={index}
-                picture={picture}
-                control={control}
-                buttonColor="black"
-                updatePicture={updatePicture}
-                removePicture={removePicture}
-              />
-            ))}
-          </PicturesContainer>
-          {fieldsPictures.length < picturesLimit && (
-            <AddFileButton
-              color="black"
-              label="Novo Imagem"
-              appendFn={appendPicture}
-              allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
-              sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
-            />
-          )}
+          <PictureFiles {...pictureFieldArray} isMobile />
           <ErrorMessage>{errors?.pictures?.message}</ErrorMessage>
         </Section>
 
         <Section>
           <Title>Documentos:</Title>
-          <DocumentsContainer>
-            {fieldsDocuments.map(({ id, file: document }, index) => (
-              <DocumentFile
-                key={id}
-                index={index}
-                isLast={index === fieldsDocuments.length - 1}
-                document={document}
-                control={control}
-                buttonColor="black"
-                moveDocument={moveDocument}
-                updateDocument={updateDocument}
-                removeDocument={removeDocument}
-              />
-            ))}
-          </DocumentsContainer>
-          {fieldsDocuments.length < documentsLimit && (
-            <AddFileButton
-              color="black"
-              label="Novo Documento"
-              appendFn={appendDocument}
-              allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(', ')}
-              sizeLimitInMB={DOCUMENTS_CONFIG.sizeLimitInMB}
-            />
-          )}
+          <DocumentFiles {...documentFieldArray} />
         </Section>
 
         <CategorySection>

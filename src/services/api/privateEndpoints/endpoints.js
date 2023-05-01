@@ -30,53 +30,36 @@ export const createProduct = async (newProduct) => {
   return data;
 };
 
-export const updateCategory = async ({ _id, newCategoryData }) => {
-  const data = await privateApi.put(`/categories/${_id}`, newCategoryData);
+export const updateCategory = async ({ _id, updatedData }) => {
+  const { data } = await privateApi.put(`/categories/${_id}`, updatedData);
 
   return data;
 };
 
-export const updateProduct = async ({ _id, newProductData }) => {
-  const data = await privateApi.put(`/products/${_id}`, newProductData);
+export const updateProduct = async ({ _id, updatedData }) => {
+  const { data } = await privateApi.put(`/products/${_id}`, updatedData);
 
   return data;
 };
 
-export const uploadFile = async ({ file, onProgress, signal }) => {
-  const data = await privateApi.post('/products/file', file, {
-    onUploadProgress: (event) => {
-      const percent = Math.round((event.loaded * 100) / event.total);
-
-      onProgress({ percent });
-    },
-    // In case the component unmouts before the file is saved, the request will be cancelled
-    signal,
-  });
+export const uploadFile = async (file) => {
+  const { data } = await privateApi.post(
+    '/products/file',
+    { file },
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data; charset=utf-8',
+      },
+    }
+  );
 
   return data;
 };
 
 export const deleteFile = async (key) => {
-  const data = await privateApi.delete(
+  const { data } = await privateApi.delete(
     `/products/file/${encodeURIComponent(key)}`
   );
-
-  return data;
-};
-
-export const getFiles = async (fileIds) => {
-  const responses = await Promise.all(
-    fileIds.map((fileId) =>
-      privateApi.get(`/files/${fileId}`, { responseType: 'blob' })
-    )
-  );
-  const data = responses.map((res) => {
-    const blob = res.data;
-    const fileName = res.headers['content-disposition'].match(/"(.*?)"/)[0];
-
-    const file = new File([blob], fileName, { type: blob.type });
-    return file;
-  });
 
   return data;
 };

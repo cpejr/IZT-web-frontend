@@ -101,26 +101,6 @@ export const MiniText = styled.p`
   color: black;
 `;
 
-export const PicturesContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  gap: 1em;
-`;
-
-export const DocumentsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1em;
-
-  width: 100%;
-  max-width: 350px;
-`;
-
 export const CategorySection = styled.div`
   display: flex;
   align-items: center;
@@ -159,7 +139,8 @@ export const SaveButton = styled.button`
 
   transition: background-color 500ms;
 
-  p {
+  p,
+  svg {
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
@@ -173,13 +154,15 @@ export const SaveButton = styled.button`
 
     transition: color 500ms;
   }
+
   :hover {
     background-color: ${(props) => props.theme.colors.blue};
     color: white;
     border: white;
     cursor: pointer;
 
-    p {
+    p,
+    svg {
       color: white;
     }
   }

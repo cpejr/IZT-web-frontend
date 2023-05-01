@@ -9,10 +9,11 @@ import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
-import { useCreateProduct } from '../../../hooks/query/products';
+import { useCreateProduct, useUploadFile } from '../../../hooks/query/products';
+import { PICTURES_CONFIG } from '../../../utils/constants';
 import { FormSelect } from '../../common';
-import DocumentFile from '../DocumentFile/DocumentFile';
-import PictureFile from '../PictureFile/PictureFile';
+import DocumentFiles from '../DocumentFiles/DocumentFiles';
+import PictureFiles from '../PictureFiles/PictureFiles';
 import {
   Container,
   ModalContent,
@@ -31,6 +32,7 @@ import {
   buildCreateProductErrorMessage,
   buildGetCategoriesErrorMessage,
   createProductValidationSchema,
+  processSubmitData,
 } from './utils';
 
 export default function ModalCreateProduct({ close }) {
@@ -38,8 +40,6 @@ export default function ModalCreateProduct({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const queryClient = useQueryClient();
-  const documentsLimit = 3;
-  const picturesLimit = 4;
 
   // Backend calls
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
@@ -66,6 +66,12 @@ export default function ModalCreateProduct({ close }) {
       setIsPending(false);
     },
   });
+  const { mutateAsync: upload } = useUploadFile({
+    onError: () => {
+      toast.error('Não foi possível realizar o upload de arquivos');
+      setIsPending(false);
+    },
+  });
 
   // Form handlers
   const {
@@ -76,25 +82,26 @@ export default function ModalCreateProduct({ close }) {
   } = useForm({
     resolver: zodResolver(createProductValidationSchema),
   });
-  const {
-    fields: fieldsDocuments,
-    append: appendDocument,
-    remove: removeDocument,
-  } = useFieldArray({
+  const documentFieldArray = useFieldArray({
     control,
     name: 'documents',
   });
-  const {
-    fields: fieldsPictures,
-    append: appendPicture,
-    remove: removePicture,
-  } = useFieldArray({
+  const pictureFieldArray = useFieldArray({
     control,
     name: 'pictures',
   });
-  const onSubmit = (data) => {
+  const picsIsLesserThanLimit =
+    pictureFieldArray?.fields?.length < PICTURES_CONFIG.filesQuantityLimit;
+
+  const onSubmit = async (updatedProductData) => {
     setIsPending(true);
-    createProduct(data);
+
+    const processedProductData = await processSubmitData({
+      uploadFn: upload,
+      updatedProductData,
+    });
+
+    createProduct(processedProductData);
   };
 
   if (isSmallScreen) close();
@@ -144,26 +151,16 @@ export default function ModalCreateProduct({ close }) {
           <RightSection>
             <Subsection>
               <Text>Imagens:</Text>
-              {fieldsPictures.length < picturesLimit && (
+              {picsIsLesserThanLimit && (
                 <MiniText>Anexe as imagens do produto</MiniText>
               )}
-              <PictureFile
-                picturesLimit={picturesLimit}
-                fieldsPictures={fieldsPictures}
-                appendPicture={appendPicture}
-                removePicture={removePicture}
-              />
+              <PictureFiles {...pictureFieldArray} />
               <ErrorMessage>{errors?.pictures?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
               <Text>Documentos:</Text>
-              <DocumentFile
-                documentsLimit={documentsLimit}
-                fieldsDocuments={fieldsDocuments}
-                appendDocument={appendDocument}
-                removeDocument={removeDocument}
-              />
+              <DocumentFiles {...documentFieldArray} />
             </Subsection>
 
             <CategorySubsection>
@@ -201,91 +198,3 @@ export default function ModalCreateProduct({ close }) {
 ModalCreateProduct.propTypes = {
   close: PropTypes.func.isRequired,
 };
-
-// import { useState } from 'react';
-
-// import { PlusOutlined } from '@ant-design/icons';
-// import { Modal, Upload } from 'antd';
-// import { toast } from 'react-toastify';
-
-// import { useDeleteFile, useUploadFile } from '../../../hooks/query/products';
-// import { PICTURES_CONFIG } from '../../../utils/constants';
-// import { UploadButton } from './Styles';
-
-// function App() {
-//   const [previewOpen, setPreviewOpen] = useState(false);
-//   const [previewImage, setPreviewImage] = useState('');
-//   const [previewTitle, setPreviewTitle] = useState('');
-//   const [fileList, setFileList] = useState([]);
-
-//   const { mutateAsync: upload } = useUploadFile();
-//   const { mutate: deleteFile } = useDeleteFile();
-
-//   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
-//   const handleRemove = ({ response: file }) => {
-//     const key = file?.key;
-//     return key ? deleteFile(key) : true;
-//   };
-//   const handlePreview = async (file) => {
-//     const url = file?.url || file?.response?.url;
-//     const name = file?.name || file?.response?.name;
-
-//     setPreviewImage(url);
-//     setPreviewOpen(true);
-//     setPreviewTitle(name);
-//   };
-//   const handleCancel = () => setPreviewOpen(false);
-//   const uploadImage = async (options) => {
-//     const { onSuccess, onError, file, onProgress } = options;
-
-//     const formData = new FormData();
-//     formData.append('file', file);
-
-//     try {
-//       const { data } = await upload({ file: formData, onProgress });
-//       onSuccess(data);
-//     } catch (err) {
-//       toast.error('Erro ao salvar o arquivo');
-//       onError({ err });
-//     }
-//   };
-
-//   return (
-//     <>
-//       <Upload
-//         listType="picture-card"
-//         onChange={handleChange}
-//         onRemove={handleRemove}
-//         onPreview={handlePreview}
-//         customRequest={uploadImage}
-//         accept={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
-//       >
-//         {fileList.length < 3 && (
-//           <UploadButton type="button">
-//             <PlusOutlined />
-//             <div>
-//               Salvar
-//               <br />
-//               Imagem
-//             </div>
-//           </UploadButton>
-//         )}
-//       </Upload>
-//       <Modal
-//         open={previewOpen}
-//         title={previewTitle}
-//         footer={null}
-//         onCancel={handleCancel}
-//       >
-//         <img
-//           alt="example"
-//           style={{
-//             width: '100%',
-//           }}
-//           src={previewImage}
-//         />
-//       </Modal>
-//     </>
-//   );
-// }
-// export default App;

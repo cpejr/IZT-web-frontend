@@ -56,7 +56,7 @@ export default function ModalEditCategory({ category, close }) {
     resolver: zodResolver(updateCategoryValidationSchema),
   });
   const onSubmit = (data) => {
-    updateCategory({ _id: category?._id, newCategoryData: data });
+    updateCategory({ _id: category?._id, updatedData: data });
     setIsPending(true);
   };
 

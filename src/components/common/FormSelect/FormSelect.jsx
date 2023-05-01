@@ -16,8 +16,8 @@ export default function FormSelect({ data, name, control, errors, ...props }) {
             onChange={onChange}
             ref={ref}
             value={currValue}
-            {...props}
             error={errorMessage ? 1 : 0}
+            {...props}
           >
             {data.map(({ label, value }) => (
               <StyledSelect.Option key={value} value={value}>

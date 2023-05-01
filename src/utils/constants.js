@@ -21,10 +21,12 @@ export const ERROR_NAMES = {
 export const DOCUMENTS_CONFIG = {
   allowedMimeTypes: ['text/plain', 'application/pdf'],
   sizeLimitInMB: 15,
+  filesQuantityLimit: 3,
 };
 export const PICTURES_CONFIG = {
   allowedMimeTypes: ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'],
   sizeLimitInMB: 5,
+  filesQuantityLimit: 4,
 };
 export const VIDEOS_CONFIG = {
   allowedMimeTypes: [
