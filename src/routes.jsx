@@ -13,6 +13,7 @@ import {
   Home,
   Login,
   Register,
+  ConfirmEmail,
   Catalog,
   Product,
   Profile,
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="cadastro" element={<Register />} />
+        <Route path="confirmar-email" element={<ConfirmEmail />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
         <Route element={<PrivateRoutes />}>
