@@ -114,7 +114,13 @@ export const Mensagem = styled.div`
 `;
 
 export const SubmitButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   align-self: flex-end;
+  gap: 10px;
+
   color: white;
   background-color: #23a4a6;
 

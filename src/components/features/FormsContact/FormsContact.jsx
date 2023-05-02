@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
@@ -89,22 +90,20 @@ export default function FormsContact() {
                 {...register('message')}
               />
               {errors?.message?.message && <p>{errors?.message?.message}</p>}
-              <SubmitButton type="submit" disabled={isLoading}>
+              <SubmitButton disabled={isLoading} type="submit">
                 {isLoading ? (
                   <>
-                    {/* <TailSpin
-                height="15"
-                width="15"
-                color="white"
-                ariaLabel="tail-spin-loading"
-                radius="5"
-                wrapperStyle={{}}
-                wrapperClass=""
-              /> */}
+                    <TailSpin
+                      height="15"
+                      width="15"
+                      color="white"
+                      ariaLabel="tail-spin-loading"
+                      radius="5"
+                    />
                     Carregando
                   </>
                 ) : (
-                  <>Enviar</>
+                  'Entrar'
                 )}
               </SubmitButton>
             </Mensagem>
