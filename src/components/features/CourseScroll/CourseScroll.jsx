@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CourseVideo from '../CourseVideo/CourseVideo';
 import { GreyLine, Scroll, SubtitleScroll } from './Styles';
 
-export default function CourseScroll({ chapters }) {
+export default function CourseScroll({ chapters, ended }) {
   return (
     <Scroll>
       {chapters?.map(({ _id, title, videos }) => (
@@ -11,7 +11,7 @@ export default function CourseScroll({ chapters }) {
           <SubtitleScroll>{title}</SubtitleScroll>
           <GreyLine />
           {videos?.map((video) => (
-            <CourseVideo key={video?._id} video={video} />
+            <CourseVideo key={video?._id} video={video} ended={ended} />
           ))}
         </div>
       ))}
@@ -21,4 +21,5 @@ export default function CourseScroll({ chapters }) {
 
 CourseScroll.propTypes = {
   chapters: PropTypes.array.isRequired,
+  ended: PropTypes.bool.isRequired,
 };

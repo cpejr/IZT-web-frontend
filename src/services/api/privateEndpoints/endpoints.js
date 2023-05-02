@@ -50,15 +50,15 @@ const mockData = {
         videos: [
           {
             _id: 0,
-            title: '4:44 by Jay Z',
-            src: 'https://www.youtube.com/watch?v=8pIhrMIsPAE&list=PL_QxeANzQhstL3mA0hoyFV7HsbA7yx6ie&index=2',
-            description: '4:44 by Jay Z',
+            title: 'TOTK trailer',
+            src: 'https://youtu.be/uHGShqcAHlQ',
+            description: 'Trailer do futuro goty',
             duration: '3:33',
           },
           {
             _id: 1,
             title: 'PRIDE.',
-            src: 'https://www.youtube.com/watch?v=IN0CAapgP0E',
+            src: 'https://youtu.be/A5AV5HAKjh0',
             description: 'PRIDE. by Kendrick Lamar',
             duration: '5:43',
           },

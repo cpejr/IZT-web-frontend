@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -7,10 +7,16 @@ import UnfinishedVideo from '../../../assets/coursesPage/unfinishedVideo.png';
 import useVideoStore from '../../../stores/video';
 import { ScrollIcon, TopicDiv, Topics, VideoTime } from './Styles';
 
-export default function CourseVideo({ video }) {
+export default function CourseVideo({ video, ended }) {
   const [srcIcon, setSrcIcon] = useState(UnfinishedVideo);
   const { setCurrVideo } = useVideoStore();
   const { duration, title } = video;
+
+  useEffect(() => {
+    console.log('ended', ended);
+    if (ended === true) setSrcIcon(FinishedVideo);
+    else setSrcIcon(UnfinishedVideo);
+  }, [ended]);
 
   return (
     <TopicDiv>
@@ -18,7 +24,6 @@ export default function CourseVideo({ video }) {
         <Topics
           onClick={() => {
             setCurrVideo(video);
-            setSrcIcon(FinishedVideo);
           }}
         >
           {title}
@@ -32,4 +37,5 @@ export default function CourseVideo({ video }) {
 
 CourseVideo.propTypes = {
   video: PropTypes.object.isRequired,
+  ended: PropTypes.bool.isRequired,
 };

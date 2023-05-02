@@ -1,6 +1,7 @@
+import { useState } from 'react';
+
 import { DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons';
 
-import Image from '../../assets/coursesPage/womanStudying.png';
 import { CourseScroll } from '../../components/features';
 import { useGetCourseById } from '../../hooks/query/courses';
 import useVideoStore from '../../stores/video';
@@ -18,10 +19,13 @@ import {
   Buttons,
   Subtitle,
   VideoTitle,
+  Player,
 } from './Styles';
+import { playerConfig } from './utils';
 
 export default function Course() {
   const { currVideo, next, previous } = useVideoStore();
+  const [endedVid, setEndedVid] = useState(false);
   const { data: course, isLoading } = useGetCourseById({
     _id: 0,
     onSucess: () => {},
@@ -38,10 +42,21 @@ export default function Course() {
         </IntroductionDiv>
         <GreyLine />
         <MainSection>
-          <CourseScroll chapters={course?.chapters} />
+          <CourseScroll chapters={course?.chapters} ended={endedVid} />
           <VideoSectionDiv id="videoSection">
             <VideoTitle>{currVideo?.title}</VideoTitle>
-            <Video src={Image} alt="CourseVideo" />
+            <Video>
+              <Player
+                url={currVideo?.src}
+                width="100%"
+                height="100%"
+                controls
+                config={playerConfig}
+                onEnded={() => {
+                  setEndedVid(true);
+                }}
+              />
+            </Video>
             <Buttons>
               <ChangeVideoButton onClick={previous}>
                 <DoubleLeftOutlined />
@@ -52,9 +67,6 @@ export default function Course() {
                 <DoubleRightOutlined />
               </ChangeVideoButton>
             </Buttons>
-            <a href={currVideo?.src} style={{ fontSize: '20px' }}>
-              Link do vídeo
-            </a>
             <Subtitle>Descrição</Subtitle>
             <Text>{currVideo?.description}</Text>
           </VideoSectionDiv>

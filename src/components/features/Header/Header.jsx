@@ -112,7 +112,7 @@ export default function Header() {
               Produtos
             </Link>
             <Link
-              to="/"
+              to="/curso"
               onClick={() => {
                 setBar(false);
                 setCollapseLogout(false);

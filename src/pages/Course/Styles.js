@@ -1,4 +1,5 @@
 // import { Link } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -128,16 +129,23 @@ export const VideoSectionDiv = styled.div`
   max-height: 735.25px;
 `;
 
-export const Video = styled.img`
+export const Video = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 
+  position: relative;
   width: 100%;
-  height: auto;
+  padding-top: 56.25%;
   border-radius: 10px;
 
   margin-bottom: 1.8em;
+`;
+
+export const Player = styled(ReactPlayer)`
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 export const Buttons = styled.div`
