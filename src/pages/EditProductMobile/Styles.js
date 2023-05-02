@@ -149,7 +149,7 @@ export const SaveButton = styled.button`
   gap: 10px;
   margin-top: 10px;
 
-  width: 191px;
+  width: 211px;
   height: 45px;
 
   border: 1px solid black;

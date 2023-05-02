@@ -6,6 +6,7 @@ import objToFormData from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
@@ -62,7 +63,7 @@ export default function ModalEditProduct({ product, close }) {
       queryClient.invalidateQueries({
         queryKey: ['products', 'searchByName'],
       });
-
+      toast.success('Produto alterado com sucesso!');
       close();
     },
     onError: (err) => {
@@ -263,8 +264,23 @@ export default function ModalEditProduct({ product, close }) {
               type="submit"
               disabled={isPending || isLoadingCategories}
             >
-              <FiSave size={20} />
-              <p>{isPending ? 'Carregando...' : 'Editar produto'}</p>
+              {isPending ? (
+                <>
+                  <TailSpin
+                    height="15"
+                    width="15"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="5"
+                  />
+                  <p>Carregando</p>
+                </>
+              ) : (
+                <>
+                  <FiSave size={25} />
+                  <p>Salvar Alterações</p>
+                </>
+              )}
             </ModalButton>
           </RightSection>
         </ModalContent>

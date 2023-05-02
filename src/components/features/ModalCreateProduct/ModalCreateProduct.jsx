@@ -6,6 +6,7 @@ import objToFormData from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { TailSpin } from 'react-loader-spinner';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
@@ -62,8 +63,9 @@ export default function ModalCreateProduct({ close }) {
         queryKey: ['products', 'searchByName'],
       });
 
+      toast.success('Produto criado com sucesso!');
       close();
-    }, // insert toast
+    },
     onError: (err) => {
       const errorMessage = buildCreateProductErrorMessage(err);
 
@@ -235,8 +237,23 @@ export default function ModalCreateProduct({ close }) {
               type="submit"
               disabled={isPending || isLoadingCategories}
             >
-              <FiSave size={20} />
-              <p>{isPending ? 'Carregando...' : 'Criar produto'}</p>
+              {isPending ? (
+                <>
+                  <TailSpin
+                    height="15"
+                    width="15"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="5"
+                  />
+                  <p>Carregando</p>
+                </>
+              ) : (
+                <>
+                  <FiSave size={25} />
+                  <p>Criar Produto</p>
+                </>
+              )}
             </ModalButton>
           </RightSection>
         </ModalContent>
