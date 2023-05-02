@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import IZTLogo from '../../assets/IZTLogo.svg';
-import { RegisterInput, SubmitButton } from '../../components/common';
+import { RegisterInput } from '../../components/common';
 import { useCreateUser } from '../../hooks/query/users';
 import {
   Page,
@@ -16,6 +16,8 @@ import {
   DataEntry,
   Form,
   Subtitle,
+  ButtonDiv,
+  SubmitButton,
 } from './Styles';
 import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
 
@@ -150,22 +152,24 @@ export default function Register() {
               />
             </FormColumn>
           </DataEntry>
-          <SubmitButton disabled={isLoading} type="submit">
-            {isLoading ? (
-              <>
-                <TailSpin
-                  height="15"
-                  width="15"
-                  color="white"
-                  ariaLabel="tail-spin-loading"
-                  radius="5"
-                />
-                Carregando
-              </>
-            ) : (
-              'Entrar'
-            )}
-          </SubmitButton>
+          <ButtonDiv>
+            <SubmitButton disabled={isLoading} type="submit">
+              {isLoading ? (
+                <>
+                  <TailSpin
+                    height="15"
+                    width="15"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="5"
+                  />
+                  Carregando
+                </>
+              ) : (
+                'Criar Conta'
+              )}
+            </SubmitButton>
+          </ButtonDiv>
         </Form>
       </Container>
     </Page>
