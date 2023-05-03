@@ -7,6 +7,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
+// import { toast } from 'react-toastify';
 
 import {
   Container,
@@ -33,6 +35,20 @@ export default function ModalAuthorizeAccess({ close, data }) {
       mode: 'light',
     },
   });
+
+  // ADICIONAR A FUNÇÃO AQUI
+  // const { mutate: autorizeAcess } = useAutorizeAcess({
+  //   onSuccess: () => {
+  //     toast.success('Acesso Autorizado com sucesso!');
+  //     close();
+  //   },
+  //   onError: (err) => {
+  //     const errorMessage = buildUpdateCategoryErrorMessage(err);
+
+  //     toast.error(errorMessage);
+  //     setIsPending(false);
+  //   },
+  // });
 
   const {
     handleSubmit,
@@ -112,13 +128,6 @@ export default function ModalAuthorizeAccess({ close, data }) {
                             ),
                           },
                         }}
-                        // renderInput={(params) => (
-                        //   <TextField
-                        //     {...params}
-                        //     error={!!error}
-                        //     helperText={errors?.message}
-                        //   />
-                        // )}
                       />
                     </LocalizationProvider>
                   )}
@@ -133,7 +142,20 @@ export default function ModalAuthorizeAccess({ close, data }) {
           </div>
 
           <ModalButton disabled={isPending || dateError} type="submit">
-            <p>{isPending ? 'Carregando...' : '+ Autorizar'}</p>
+            {isPending ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                />
+                <p>Carregando</p>
+              </>
+            ) : (
+              <p>+ Autorizar</p>
+            )}
           </ModalButton>
         </ModalContent>
       </Form>

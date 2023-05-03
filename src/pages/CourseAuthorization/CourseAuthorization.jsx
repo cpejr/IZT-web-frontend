@@ -55,7 +55,7 @@ export default function CourseAuthorization() {
       <PageTitle>Liberação do curso</PageTitle>
       <AuthorizationDiv>
         {windowWidth <= mobileBreakpoint ? (
-          <StyledLink to="/administrador/loja/autorizar-acesso">
+          <StyledLink to="/administrador/autorizar-acesso">
             <PlusOutlined size="20px" />
             {'   '}
             Autorizar acesso

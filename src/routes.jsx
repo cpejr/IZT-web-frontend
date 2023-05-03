@@ -21,6 +21,7 @@ import {
   EditProductMobile,
   ListCategory,
   AuthorizeAccess,
+  EditAuthorizeAccess,
   Course,
   CreateCategoryMobile,
   EditCategoryMobile,
@@ -70,6 +71,7 @@ const router = createBrowserRouter(
               />
               <Route path="editar-categoria" element={<EditCategoryMobile />} />
               <Route path="autorizar-acesso" element={<AuthorizeAccess />} />
+              <Route path="editar-acesso" element={<EditAuthorizeAccess />} />
               <Route
                 path="liberacao-cursos"
                 element={<CourseAuthorization />}

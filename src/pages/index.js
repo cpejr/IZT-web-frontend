@@ -14,3 +14,4 @@ export { default as CreateCategoryMobile } from './CreateCategoryMobile/CreateCa
 export { default as CreateProductMobile } from './CreateProductMobile/CreateProductMobile';
 export { default as EditProductMobile } from './EditProductMobile/EditProductMobile';
 export { default as EditCategoryMobile } from './EditCategoryMobile/EditCategoryMobile';
+export { default as EditAuthorizeAccess } from './EditAuthorizeAccess/EditAuthorizeAccess';

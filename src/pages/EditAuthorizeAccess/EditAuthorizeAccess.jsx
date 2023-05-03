@@ -25,7 +25,7 @@ import {
 } from './Styles';
 import { authorizeAccessValidationSchema } from './utils';
 
-export default function AuthorizeAccess() {
+export default function EditAuthorizeAccess() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false); // Important for modal loading
   const [dateError, setDateError] = useState(null);
@@ -160,7 +160,7 @@ export default function AuthorizeAccess() {
                 <p>Carregando</p>
               </>
             ) : (
-              <p>+ Autorizar</p>
+              <p>+ Salvar Autorização</p>
             )}
           </SaveButton>
 
