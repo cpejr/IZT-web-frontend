@@ -187,9 +187,9 @@ export const MenuMobile = styled.div`
   padding: 0px;
   overflow-y: hidden;
 
-  transition: height 700ms ease-in-out 5s;
   @media (max-width: 700px) {
     height: ${(props) => (props.opened ? 'auto' : '0')};
+    /* transition: height 700ms ease-in-out 5s; */
   }
 `;
 
@@ -214,7 +214,7 @@ export const MobileMenuButton = styled.button`
 `;
 
 export const ModalStyle = styled(Modal)`
-  :where(.css-dev-only-do-not-override-1me4733).ant-modal .ant-modal-content {
-    background-color: ${(props) => props.theme.colors.darkBlue};
+  .ant-modal-content {
+    background-color: ${(props) => props.theme.colors.darkBlue} !important;
   }
 `;

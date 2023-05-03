@@ -1,20 +1,9 @@
-/* eslint-disable */
 import { createTheme } from '@mui/material';
-import { useMemo } from 'react';
 import { z } from 'zod';
-
-const dateRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 
 // Form Validation
 export const modalAuthorizeAccessValidationSchema = z.object({
-  email: z
-    .string({ message: 'Digite o email' })
-    .min(1, { message: 'Favor digitar o email' })
-    .email({
-      message: 'Insira um email válido',
-    })
-    .trim(),
-
+  email: z.string({ required_error: 'Favor selecionar uma email' }),
   accessExpiration: z.coerce.date({
     errorMap: () => ({
       message: 'Favor inserir uma data',
@@ -22,6 +11,7 @@ export const modalAuthorizeAccessValidationSchema = z.object({
   }),
 });
 
+// MUI DatePicker theme
 export const themeDatePicker = createTheme({
   palette: {
     primary: {
@@ -48,25 +38,3 @@ export const themeDatePicker = createTheme({
     fontFamily: 'Montserrat',
   },
 });
-
-export const emails = [
-  { label: 'thiagofraga@cpejr.com.br', value: 'thiagofraga@cpejr.com.br' },
-  { label: 'amandaalves@cpejr.com.br', value: 'amandaalves@cpejr.com.br' },
-  { label: 'joaopiraja@cpejr.com.br', value: 'joaopiraja@cpejr.com.br' },
-];
-
-export const errorMessage = (dateError) => {
-  return useMemo(() => {
-    switch (dateError) {
-      case 'invalidDate': {
-        return 'Data inválida';
-      }
-      case 'disablePast': {
-        return 'Insira uma data futura';
-      }
-      default: {
-        return '';
-      }
-    }
-  }, [dateError]);
-};

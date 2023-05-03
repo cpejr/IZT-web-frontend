@@ -1,21 +1,33 @@
 import { z } from 'zod';
 
+import { ERROR_CODES } from '../../../utils/constants';
+
 // eslint-disable-next-line import/prefer-default-export
 export const formsValidationSchema = z.object({
-  company: z.string().min(1, 'Favor digitar o nome da empresa'),
-  representative: z.string().min(1, 'Favor digitar o nome do representante'),
+  company: z.string().nonempty('Favor digitar o nome da empresa'),
+  representative: z.string().nonempty('Favor digitar o nome do representante'),
   email: z
     .string()
-    .min(1, { message: 'Favor digitar o email' })
-    .email({
-      message: 'Insira um email válido',
-    })
+    .nonempty('Favor digitar o email')
+    .email('Insira um email válido')
     .trim(),
-  telephone: z.string().min(1, 'Favor digitar o número do telefone'),
+  telephone: z
+    .string()
+    .nonempty('Favor digitar o número do telefone')
+    .transform((value) => value.replace(/[\s()-]*/g, '')),
   message: z
-    .string({ required_error: 'Favor inserir uma mensagem' })
-    .max(1500, {
-      message: 'A mensagem deve conter até no máximo 1500 caracteres',
-    })
-    .min(5, { message: 'A mensagem deve conter no mínimo 5 caracteres' }),
+    .string()
+    .nonempty('Favor inserir uma mensagem')
+    .min(5, 'A mensagem deve conter no mínimo 5 caracteres')
+    .max(1500, 'A mensagem deve conter até no máximo 1500 caracteres'),
 });
+
+const formContactErrorMessages = {
+  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
+};
+const defaultFormContactErrorMessage =
+  'Erro ao enviar a mensagem. Tente novamente mais tarde';
+export function buildFormContactErrorMessage(err) {
+  const code = err?.response?.data?.httpCode;
+  return formContactErrorMessages[code] || defaultFormContactErrorMessage;
+}

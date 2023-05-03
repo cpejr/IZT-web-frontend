@@ -1,5 +1,4 @@
 import { DatePicker } from '@mui/x-date-pickers';
-import { Select } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -40,35 +39,15 @@ export const AccessExpirationContainer = styled.div`
   display: flex;
   flex-direction: row;
   border-radius: 4px;
-
   height: 56px;
   background-color: white;
 `;
 
-export const Date = styled(DatePicker)``;
-
-export const SelectEmail = styled(Select)`
-  border: none;
-  color: black;
-
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-
-  width: 400px;
-  height: 40px;
-
-  border-radius: 4px;
-  span {
-    input {
-      font-family: ${(props) => props.theme.fonts.montserrat};
-      font-style: normal;
-      font-weight: 400;
-      font-size: 20px;
-      line-height: 24px;
-    }
+export const Date = styled(DatePicker)`
+  border-radius: 8px;
+  .Mui-error .MuiOutlinedInput-notchedOutline {
+    border-width: 2px;
+    border-radius: 8px;
   }
 `;
 

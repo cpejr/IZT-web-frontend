@@ -1,4 +1,5 @@
 import { Modal } from 'antd';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -128,7 +129,7 @@ export const CategoryList = styled.div`
   }
 `;
 
-export const StyledLink = styled.button`
+export const StyledLink = styled(Link)`
   all: unset;
   cursor: pointer;
 `;
@@ -175,7 +176,7 @@ export const SearchIconButton = styled.button`
 `;
 
 export const ModalStyle = styled(Modal)`
-  :where(.css-dev-only-do-not-override-1me4733).ant-modal .ant-modal-content {
-    background-color: ${(props) => props.theme.colors.darkBlue};
+  .ant-modal-content {
+    background-color: ${(props) => props.theme.colors.darkBlue} !important;
   }
 `;

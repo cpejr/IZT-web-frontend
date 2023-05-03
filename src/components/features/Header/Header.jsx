@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useMediaQuery } from 'react-responsive';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useTheme } from 'styled-components';
 
 import { useLogout } from '../../../hooks/query/sessions';
@@ -38,28 +39,28 @@ export default function Header() {
   const [language, setLanguage] = useState('EN'); // default language is EN
   const availableLaguages = ['EN', 'PT', 'DE'];
 
-  const { mutate: logout } = useLogout({
-    onSuccess: () => {
-      setBar(false);
-      setCollapseLogout(false);
-      navigate('/');
-    },
-    onError: () => {
-      const errorMessage =
-        'Ocorreu um erro ao realizar o logout. Tente novamente mais tarde';
-
-      // Do something to the errorMessage
-      alert(errorMessage);
-    },
-  });
-
   const handleProfileBtn = () => {
     setBar(false);
     setCollapseLogout(false);
     navigate('/perfil');
   };
 
-  const welcomeSection = () => {
+  const { mutate: logout } = useLogout({
+    onSuccess: () => {
+      setBar(false);
+      setCollapseLogout(false);
+      toast.success('Usuário deslogado com sucesso!');
+      navigate('/');
+    },
+    onError: () => {
+      const errorMessage =
+        'Ocorreu um erro ao realizar o logout. Tente novamente mais tarde';
+
+      toast.error(errorMessage);
+    },
+  });
+
+  const welcomeSectionComponent = (() => {
     if (isSmallScreen)
       return (
         <MenuProfile collapse={collapseLogout} bar={bar}>
@@ -82,7 +83,7 @@ export default function Header() {
     const firstName = auth?.user?.name?.split(' ')?.[0];
     const nameLengthLimit = 10;
 
-    const isLessThanEqualLimit = firstName.length <= nameLengthLimit;
+    const isLessThanEqualLimit = firstName?.length <= nameLengthLimit;
     return (
       <>
         <Link to="/perfil" onClick={() => setBar(false)}>
@@ -93,7 +94,7 @@ export default function Header() {
         </LogoutBtn>
       </>
     );
-  };
+  })();
 
   return (
     <Content>
@@ -130,7 +131,7 @@ export default function Header() {
             </Link>
             <InvertItems>
               {auth ? (
-                <Welcome>{welcomeSection()}</Welcome>
+                <Welcome>{welcomeSectionComponent}</Welcome>
               ) : (
                 <ButtonLogin
                   backgroundColor800={theme.colors.greenishBlue}

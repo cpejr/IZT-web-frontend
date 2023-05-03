@@ -4,7 +4,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
-import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { ModalEditCategory } from '../../components/features';
 import { useSearchByNameCategories } from '../../hooks/query/categories';
@@ -26,7 +26,6 @@ import {
 import { buildGetCategoriesErrorMessage } from './utils';
 
 export default function ListCategory() {
-  const navigate = useNavigate();
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const [modalEditCategory, setModalEditCategory] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState({});
@@ -38,15 +37,9 @@ export default function ListCategory() {
     onError: (err) => {
       const errorMessage = buildGetCategoriesErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
-
-  const goToEditCategoryPage = (category) =>
-    navigate('/administrador/loja/editar-categoria', {
-      state: category,
-    });
 
   const openModalEditCategory = (category) => {
     setSelectedCategory(category);
@@ -77,7 +70,7 @@ export default function ListCategory() {
             <Text>{category.name}</Text>
 
             {isSmallScreen ? (
-              <StyledLink onClick={() => goToEditCategoryPage(category)}>
+              <StyledLink to="/administrador/editar-categoria" state={category}>
                 <TbPencil size={30} />
               </StyledLink>
             ) : (

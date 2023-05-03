@@ -54,12 +54,12 @@ export default function AuthorizeAccess() {
   const onSubmit = (authorizedUser) => {
     setIsLoading(true);
     console.log(authorizedUser);
-    navigate('/administrador/loja/liberacao-cursos');
+    navigate('/administrador/liberacao-cursos');
   };
 
   const isMobile = useMediaQuery('(max-width:700px)');
 
-  if (!isMobile) return <Navigate to="/administrador/loja/liberacao-cursos" />;
+  if (!isMobile) return <Navigate to="/administrador/liberacao-cursos" />;
 
   return (
     <Container>
@@ -121,7 +121,7 @@ export default function AuthorizeAccess() {
             <p>{isLoading ? 'Carregando...' : '+ Autorizar'}</p>
           </SaveButton>
 
-          <CancelButton to="/administrador/loja/liberacao-cursos">
+          <CancelButton to="/administrador/liberacao-cursos">
             <p>Cancelar</p>
           </CancelButton>
         </ButtonsDiv>

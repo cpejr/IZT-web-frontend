@@ -4,6 +4,8 @@ import { SaveOutlined } from '@ant-design/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 
 import { useUpdateUser } from '../../../hooks/query/users';
 import useAuthStore from '../../../stores/auth';
@@ -20,22 +22,22 @@ import { buildUpdateUserErrorMessage, updateUserSchema } from './utils';
 
 export default function ModalChangeUserData({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modals usage
-  const {
-    auth: { user },
-    setUser,
-  } = useAuthStore();
+
+  const user = useAuthStore((state) => state.auth.user);
+  const setUser = useAuthStore((state) => state.setUser);
 
   const { mutate: updateUser } = useUpdateUser({
     onSuccess: (data) => {
       setUser(data);
+
+      toast.success('Dados modificados com sucesso!');
       close();
     },
     onError: (err) => {
       const errorMessage = buildUpdateUserErrorMessage(err);
 
-      // Do something to the errorMessage
+      toast.error(errorMessage);
       setIsPending(false);
-      alert(errorMessage);
     },
   });
 
@@ -141,8 +143,23 @@ export default function ModalChangeUserData({ close }) {
           name="Salvar Alterações"
           relativeWidth="70%"
         >
-          <SaveOutlined />
-          {isPending ? 'Carregando...' : 'Salvar Alterações'}
+          {isPending ? (
+            <>
+              <TailSpin
+                height="15"
+                width="15"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="5"
+              />
+              Carregando
+            </>
+          ) : (
+            <>
+              <SaveOutlined />
+              Salvar Alterações
+            </>
+          )}
         </SaveChanges>
       </Form>
     </Container>

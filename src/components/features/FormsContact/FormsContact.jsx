@@ -1,7 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
 
+import { useSendFormContact } from '../../../hooks/query/contact';
 import { FormInput, FormMask } from '../../common';
 import {
   ContactUs,
@@ -9,14 +11,22 @@ import {
   Section,
   Title,
   Mensagem,
-  BotaoEnviar,
+  SubmitButton,
   InputMessage,
   AreaText,
 } from './Styles';
-import { formsValidationSchema } from './utils';
+import { buildFormContactErrorMessage, formsValidationSchema } from './utils';
 
 export default function FormsContact() {
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
+
+  const { mutate: sendFormContact, isLoading } = useSendFormContact({
+    onSuccess: () => toast.success('Formulário de contao enviado com sucesso!'),
+    onError: (err) => {
+      const errorMessage = buildFormContactErrorMessage(err);
+      toast.error(errorMessage);
+    },
+  });
 
   const {
     handleSubmit,
@@ -26,7 +36,7 @@ export default function FormsContact() {
   } = useForm({
     resolver: zodResolver(formsValidationSchema),
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (formInput) => sendFormContact(formInput);
 
   return (
     <ContactUs>
@@ -64,7 +74,7 @@ export default function FormsContact() {
             defaultValue=""
             control={control}
             placeholder="(99) 99999-9999"
-            mask="(99) 99999-9999"
+            mask="+99 (99) 99999-9999"
             errors={errors}
           />
         </Section>
@@ -73,8 +83,30 @@ export default function FormsContact() {
           <InputMessage>
             <Mensagem>
               Mensagem:
-              <AreaText rows={13} placeholder="Escreva aqui sua mensagem" />
-              <BotaoEnviar>Enviar</BotaoEnviar>
+              <AreaText
+                rows={13}
+                placeholder="Escreva aqui sua mensagem"
+                {...register('message')}
+              />
+              {errors?.message?.message && <p>{errors?.message?.message}</p>}
+              <SubmitButton type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    {/* <TailSpin
+                height="15"
+                width="15"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="5"
+                wrapperStyle={{}}
+                wrapperClass=""
+              /> */}
+                    Carregando
+                  </>
+                ) : (
+                  <>Enviar</>
+                )}
+              </SubmitButton>
             </Mensagem>
           </InputMessage>
         </Section>

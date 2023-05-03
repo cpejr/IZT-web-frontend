@@ -7,27 +7,27 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 
+import { FormSelect } from '../../common';
 import {
   Container,
   Form,
   Label,
   AccessExpirationContainer,
-  SelectEmail,
   ModalContent,
   ModalButton,
   ErrorMessage,
   Date,
 } from './Styles';
-import {
-  modalAuthorizeAccessValidationSchema,
-  themeDatePicker,
-  emails,
-  errorMessage,
-} from './utils';
+import { modalAuthorizeAccessValidationSchema, themeDatePicker } from './utils';
+
+export const emails = [
+  { label: 'thiagofraga@cpejr.com.br', value: 'thiagofraga@cpejr.com.br' },
+  { label: 'amandaalves@cpejr.com.br', value: 'amandaalves@cpejr.com.br' },
+  { label: 'joaopiraja@cpejr.com.br', value: 'joaopiraja@cpejr.com.br' },
+];
 
 export default function ModalAuthorizeAccess({ close, data }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
-  const [dateError, setDateError] = useState(null);
 
   const {
     handleSubmit,
@@ -36,7 +36,6 @@ export default function ModalAuthorizeAccess({ close, data }) {
   } = useForm({
     resolver: zodResolver(modalAuthorizeAccessValidationSchema),
   });
-
   const onSubmit = (authorizedUser) => {
     console.log(authorizedUser);
     setIsPending(true);
@@ -49,24 +48,19 @@ export default function ModalAuthorizeAccess({ close, data }) {
         <ModalContent>
           <div>
             <Label>Email:</Label>
-            <Controller
+            <FormSelect
               name="email"
               control={control}
-              render={({ field: { onChange, value } }) => (
-                <SelectEmail
-                  placeholder="Selecione o email"
-                  size="large"
-                  onChange={onChange}
-                  value={value}
-                  defaultValue={data?.email}
-                  options={emails}
-                />
-              )}
+              errors={errors}
+              data={emails}
+              placeholder="Selecione o email"
+              filterOption={(input, option) =>
+                option?.key?.toLowerCase()?.includes(input?.toLowerCase())
+              }
+              showSearch
+              style={{ width: '400px' }}
+              size="large"
             />
-
-            {errors?.email?.message && (
-              <ErrorMessage>{errors?.email?.message}</ErrorMessage>
-            )}
           </div>
           <div>
             <Label>Validade do acesso:</Label>
@@ -81,22 +75,10 @@ export default function ModalAuthorizeAccess({ close, data }) {
                         onChange={onChange}
                         onBlur={onBlur}
                         format="DD/MM/YYYY"
-                        onError={(newError) => setDateError(newError)}
                         disablePast
                         slotProps={{
                           textField: {
                             error: !!errors.accessExpiration,
-                            helperText: errors.accessExpiration ? (
-                              <div>
-                                <ErrorMessage>
-                                  {errors.accessExpiration.message}
-                                </ErrorMessage>
-                              </div>
-                            ) : (
-                              <div>
-                                <ErrorMessage>{errorMessage}</ErrorMessage>
-                              </div>
-                            ),
                           },
                         }}
                       />
@@ -105,14 +87,10 @@ export default function ModalAuthorizeAccess({ close, data }) {
                 />
               </ThemeProvider>
             </AccessExpirationContainer>
-            {errors?.accessExpiration?.message && (
-              <ErrorMessage>
-                {errors?.accessExErrorMessageiration?.message}
-              </ErrorMessage>
-            )}
+            <ErrorMessage>{errors?.accessExpiration?.message}</ErrorMessage>
           </div>
 
-          <ModalButton disabled={isPending || dateError} type="submit">
+          <ModalButton disabled={isPending} type="submit">
             <p>{isPending ? 'Carregando...' : '+ Autorizar'}</p>
           </ModalButton>
         </ModalContent>
