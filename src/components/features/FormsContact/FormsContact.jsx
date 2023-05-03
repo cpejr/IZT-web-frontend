@@ -103,7 +103,7 @@ export default function FormsContact() {
                     Carregando
                   </>
                 ) : (
-                  'Entrar'
+                  'Enviar'
                 )}
               </SubmitButton>
             </Mensagem>
