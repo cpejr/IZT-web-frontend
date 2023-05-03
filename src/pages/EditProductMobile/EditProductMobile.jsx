@@ -273,7 +273,7 @@ export default function EditProductMobile() {
           disabled={isLoadingUpdate || isLoadingCategories}
         >
           <FiSave size={20} />
-          <p>{isLoadingUpdate ? 'Carregando...' : 'Salvar Alterações'}</p>
+          <p>{isLoadingUpdate ? 'Carregando...' : 'Editar produto'}</p>
         </SaveButton>
 
         <CancelButton to="/administrador">

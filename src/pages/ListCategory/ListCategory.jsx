@@ -6,6 +6,7 @@ import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
+import { Loading } from '../../components/common';
 import { ModalEditCategory } from '../../components/features';
 import { useSearchByNameCategories } from '../../hooks/query/categories';
 import useDebounce from '../../hooks/useDebounce';
@@ -32,14 +33,15 @@ export default function ListCategory() {
   const [name, setName] = useState('');
   const debouncedName = useDebounce(name);
 
-  const { data: categories } = useSearchByNameCategories({
-    name: debouncedName,
-    onError: (err) => {
-      const errorMessage = buildGetCategoriesErrorMessage(err);
+  const { data: categories, isLoading: isLoadingCategories } =
+    useSearchByNameCategories({
+      name: debouncedName,
+      onError: (err) => {
+        const errorMessage = buildGetCategoriesErrorMessage(err);
 
-      toast.error(errorMessage);
-    },
-  });
+        toast.error(errorMessage);
+      },
+    });
 
   const openModalEditCategory = (category) => {
     setSelectedCategory(category);
@@ -64,26 +66,33 @@ export default function ListCategory() {
         </SearchSection>
       </CategoryFilterContainer>
 
-      <CategoryList>
-        {categories?.map((category) => (
-          <Row key={category._id}>
-            <Text>{category.name}</Text>
+      {isLoadingCategories ? (
+        <Loading />
+      ) : (
+        <CategoryList>
+          {categories?.map((category) => (
+            <Row key={category._id}>
+              <Text>{category.name}</Text>
 
-            {isSmallScreen ? (
-              <StyledLink to="/administrador/editar-categoria" state={category}>
-                <TbPencil size={30} />
-              </StyledLink>
-            ) : (
-              <EditButton>
-                <TbPencil
-                  onClick={() => openModalEditCategory(category)}
-                  size={30}
-                />
-              </EditButton>
-            )}
-          </Row>
-        ))}
-      </CategoryList>
+              {isSmallScreen ? (
+                <StyledLink
+                  to="/administrador/editar-categoria"
+                  state={category}
+                >
+                  <TbPencil size={30} />
+                </StyledLink>
+              ) : (
+                <EditButton>
+                  <TbPencil
+                    onClick={() => openModalEditCategory(category)}
+                    size={30}
+                  />
+                </EditButton>
+              )}
+            </Row>
+          ))}
+        </CategoryList>
+      )}
 
       <ModalStyle
         open={modalEditCategory}

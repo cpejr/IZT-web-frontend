@@ -6,7 +6,7 @@ import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
-import { Select } from '../../components/common';
+import { Loading, Select } from '../../components/common';
 import { ModalEditProduct } from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
 import { useSearchProductByName } from '../../hooks/query/products';
@@ -40,23 +40,26 @@ export default function ListProduct() {
   const [name, setName] = useState('');
   const debouncedName = useDebounce(name);
 
-  const { data: categories } = useGetCategories({
-    onError: (err) => {
-      const errorMessage = buildGetCategoriesErrorMessage(err);
+  const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
+    {
+      onError: (err) => {
+        const errorMessage = buildGetCategoriesErrorMessage(err);
 
-      toast.error(errorMessage);
-    },
-  });
+        toast.error(errorMessage);
+      },
+    }
+  );
 
-  const { data: products } = useSearchProductByName({
-    name: debouncedName,
-    category: selectedCategory?._id,
-    onError: (err) => {
-      const errorMessage = buildGetProductsErrorMessage(err);
+  const { data: products, isLoading: isLoadingSearchProductByName } =
+    useSearchProductByName({
+      name: debouncedName,
+      category: selectedCategory?._id,
+      onError: (err) => {
+        const errorMessage = buildGetProductsErrorMessage(err);
 
-      toast.error(errorMessage);
-    },
-  });
+        toast.error(errorMessage);
+      },
+    });
 
   const openModalEditProduct = (product) => {
     setSelectedProduct(product);
@@ -90,27 +93,31 @@ export default function ListProduct() {
         </SearchSection>
       </CategoryFilterContainer>
 
-      <ProductList>
-        {products?.map((product) => (
-          <Row key={product._id}>
-            <Text>{product.name}</Text>
-            <Text>{product.category.name}</Text>
+      {isLoadingCategories ? (
+        <Loading />
+      ) : (
+        <ProductList>
+          {products?.map((product) => (
+            <Row key={product._id}>
+              <Text>{product.name}</Text>
+              <Text>{product.category.name}</Text>
 
-            {isSmallScreen ? (
-              <StyledLink to="/administrador/editar-produto" state={product}>
-                <TbPencil size={30} />
-              </StyledLink>
-            ) : (
-              <EditButton>
-                <TbPencil
-                  onClick={() => openModalEditProduct(product)}
-                  size={30}
-                />
-              </EditButton>
-            )}
-          </Row>
-        ))}
-      </ProductList>
+              {isSmallScreen ? (
+                <StyledLink to="/administrador/editar-produto" state={product}>
+                  <TbPencil size={30} />
+                </StyledLink>
+              ) : (
+                <EditButton>
+                  <TbPencil
+                    onClick={() => openModalEditProduct(product)}
+                    size={30}
+                  />
+                </EditButton>
+              )}
+            </Row>
+          ))}
+        </ProductList>
+      )}
 
       <ModalStyle
         open={modalEditProduct}
