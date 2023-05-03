@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 
   width: 95%;
   margin-bottom: 50px;
@@ -17,7 +17,6 @@ export const Form = styled.form`
   max-width: 390px;
   width: 100%;
   align-self: center;
-  gap: 20px;
 `;
 
 export const Title = styled.p`
@@ -26,6 +25,7 @@ export const Title = styled.p`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  padding-bottom: 20px;
 
   color: black;
 `;
