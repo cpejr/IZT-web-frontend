@@ -9,7 +9,6 @@ export { default as ListCategory } from './ListCategory/ListCategory';
 export { default as ListProduct } from './ListProduct/ListProduct';
 export { default as CourseAuthorization } from './CourseAuthorization/CourseAuthorization';
 export { default as AuthorizeAccess } from './AuthorizeAccess/AuthorizeAccess';
-export { default as Course } from './Course/Course';
 export { default as CreateCategoryMobile } from './CreateCategoryMobile/CreateCategoryMobile';
 export { default as CreateProductMobile } from './CreateProductMobile/CreateProductMobile';
 export { default as EditProductMobile } from './EditProductMobile/EditProductMobile';

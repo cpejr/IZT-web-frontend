@@ -25,6 +25,7 @@ import {
   Course,
   CreateCategoryMobile,
   EditCategoryMobile,
+>>>>>>>>> Temporary merge branch 2
   NotFound,
   CourseAuthorization,
 } from './pages';
@@ -32,13 +33,9 @@ import useAuthStore from './stores/auth';
 
 function PrivateRoutes() {
   const auth = useAuthStore((state) => state?.auth);
-  const { pathname } = useLocation();
+  const { pathname: from } = useLocation();
 
-  return !auth ? (
-    <Navigate to="/login" state={{ from: pathname }} />
-  ) : (
-    <Outlet />
-  );
+  return !auth ? <Navigate to="/login" state={{ from }} /> : <Outlet />;
 }
 
 function AdminRoutes() {
@@ -61,7 +58,8 @@ const router = createBrowserRouter(
           <Route path="perfil" element={<Profile />} />
           <Route path="administrador" element={<AdminRoutes />}>
             <Route element={<AdminLayout />}>
-              <Route index element={<ListProduct />} />
+              <Route index element={<h1>Área do Administrador</h1>} />
+              <Route path="listar-categorias" element={<ListProduct />} />
               <Route path="criar-produto" element={<CreateProductMobile />} />
               <Route path="editar-produto" element={<EditProductMobile />} />
               <Route path="listar-categorias" element={<ListCategory />} />

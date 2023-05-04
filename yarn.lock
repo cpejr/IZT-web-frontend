@@ -3686,9 +3686,10 @@ rc-pagination@~3.3.1:
     classnames "^2.2.1"
 
 rc-picker@~3.6.1:
-  version "3.6.2"
-  resolved "https://registry.yarnpkg.com/rc-picker/-/rc-picker-3.6.2.tgz#68d13af7d240e792769a306ed6447e66e47040aa"
-  integrity sha512-acLNCi2WTNAuvTtcEzKp72mU15ni0sqrIKVlEcj04KgLZxhlVPMabCS+Sc8VuOCPJbOcW0XeOydbNnJbWTvzxg==
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/rc-picker/-/rc-picker-3.6.1.tgz#a48484d0876fb019e3c9668da0acfd6477d2f846"
+  integrity sha512-9L8mfTaEUkUfuPPEso8BNZqoiCu0Kum8SVYjmWjYZ376/PCqYnEm28KV2nlfTPfSZBjlcZBTesHCLbDwKHJ90A==
+>>>>>>>>> Temporary merge branch 2
   dependencies:
     "@babel/runtime" "^7.10.1"
     "@rc-component/trigger" "^1.5.0"
