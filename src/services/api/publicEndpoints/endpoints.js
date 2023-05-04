@@ -90,7 +90,8 @@ export const sendProductBudget = async ({ productId, formInput }) => {
 };
 
 export const verifyEmail = async (token) => {
-  const { data } = await publicApi.post('/confirm-email', token);
+  console.log(token);
+  const { data } = await publicApi.put(`/users/confirm-email/${token}`);
 
   return data;
 };
