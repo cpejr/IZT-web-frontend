@@ -97,35 +97,55 @@ export const Subsection = styled.div`
 `;
 
 export const SubmitButton = styled.button`
-  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+
   color: white;
   background-color: #23a4a6;
 
-  font-size: 24px;
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  font-weight: 700;
+  font-size: 20px;
+  font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
+  font-weight: 500;
 
-  width: 500px;
-  height: 57px;
-  margin-top: 40px;
-  line-height: 29px;
-
+  height: 45px;
+  margin-top: 20px;
+  width: 200px;
   border: none;
   border-radius: 4px;
 
-  @media (max-width: ${firstBreakPoint}) {
-    width: 50%;
-    font-size: 18px;
-    height: 44px;
+  @media (max-width: 700px) {
+    width: 100%;
   }
-  @media (max-width: ${secondBreakPoint}) {
+
+  @media (max-width: 370px) {
     font-size: 12px;
     height: 30px;
-    margin-top: 25px;
   }
+
   cursor: pointer;
   transition-duration: 0.3s;
   :hover {
     background-color: rgba(35, 164, 166, 0.5);
   }
+`;
+
+export const InputMessage = styled.div`
+  height: 72%;
+`;
+
+export const AreaText = styled.textarea`
+  @media (max-width: 700px) {
+    height: 160px;
+  }
+`;
+
+export const ButtonDiv = styled.div`
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;

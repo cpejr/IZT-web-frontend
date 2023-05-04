@@ -22,7 +22,8 @@ export default function FormsContact() {
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
   const { mutate: sendFormContact, isLoading } = useSendFormContact({
-    onSuccess: () => toast.success('Formulário de contao enviado com sucesso!'),
+    onSuccess: () =>
+      toast.success('Formulário de contato enviado com sucesso!'),
     onError: (err) => {
       const errorMessage = buildFormContactErrorMessage(err);
       toast.error(errorMessage);

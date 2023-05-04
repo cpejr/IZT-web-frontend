@@ -77,6 +77,7 @@ export default function CourseAuthorization() {
               <SearchBox placeholder="Pesquisar Email" />
             </SearchContainer>
           </TableHeader>
+
           {data.map((d) => (
             <ContentRow key={d.email}>
               <p>{d.email}</p>
