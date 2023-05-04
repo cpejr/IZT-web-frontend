@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
+import { serialize } from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
@@ -9,7 +10,7 @@ import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
-import { useCreateProduct, useUploadFile } from '../../../hooks/query/products';
+import { useCreateProduct } from '../../../hooks/query/products';
 import { PICTURES_CONFIG } from '../../../utils/constants';
 import { FormSelect } from '../../common';
 import DocumentFiles from '../DocumentFiles/DocumentFiles';
@@ -32,7 +33,6 @@ import {
   buildCreateProductErrorMessage,
   buildGetCategoriesErrorMessage,
   createProductValidationSchema,
-  processSubmitData,
 } from './utils';
 
 export default function ModalCreateProduct({ close }) {
@@ -66,12 +66,6 @@ export default function ModalCreateProduct({ close }) {
       setIsPending(false);
     },
   });
-  const { mutateAsync: upload } = useUploadFile({
-    onError: () => {
-      toast.error('Não foi possível realizar o upload de arquivos');
-      setIsPending(false);
-    },
-  });
 
   // Form handlers
   const {
@@ -96,12 +90,13 @@ export default function ModalCreateProduct({ close }) {
   const onSubmit = async (updatedProductData) => {
     setIsPending(true);
 
-    const processedProductData = await processSubmitData({
-      uploadFn: upload,
-      updatedProductData,
+    const formData = serialize(updatedProductData, {
+      allowEmptyArrays: true,
+      noFilesWithArrayNotation: true,
+      indices: true,
     });
 
-    createProduct(processedProductData);
+    createProduct(formData);
   };
 
   if (isSmallScreen) close();

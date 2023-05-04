@@ -24,11 +24,11 @@ export const editProductValidationSchema = z.object({
       z.object({
         file: z.instanceof(File).or(
           z.object({
+            _id: z.string(),
+            key: z.string(),
             name: z.string(),
             mimeType: z.string(),
             url: z.string(),
-            key: z.string(),
-            size: z.number(),
           })
         ),
       })
@@ -40,11 +40,11 @@ export const editProductValidationSchema = z.object({
       z.object({
         file: z.instanceof(File).or(
           z.object({
+            _id: z.string(),
+            key: z.string(),
             name: z.string(),
             mimeType: z.string(),
             url: z.string(),
-            key: z.string(),
-            size: z.number(),
           })
         ),
       })

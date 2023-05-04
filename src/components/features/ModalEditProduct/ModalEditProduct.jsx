@@ -102,6 +102,7 @@ export default function ModalEditProduct({ product, close }) {
     control,
     name: 'pictures',
   });
+
   const onSubmit = async (updatedProductData) => {
     setIsPending(true);
 

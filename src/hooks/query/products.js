@@ -10,7 +10,7 @@ import {
   updateProduct,
   deleteFile,
   uploadFile,
-} from '../../services/api';
+} from '../../services/api/endpoints';
 
 export function useGetProducts({
   filters,
