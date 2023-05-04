@@ -24,7 +24,7 @@ export default function Register() {
   const { mutate: createUser, isLoading } = useCreateUser({
     onSuccess: () => {
       navigate('/confirmar-email');
-      toast.success('Confirme seu email');
+      toast.success('verifique sua caixa de mensagens e confirme seu email!');
     },
     onError: (err) => {
       const errorMessage = buildRegisterErrorMessage(err);
