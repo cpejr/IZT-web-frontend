@@ -1,6 +1,13 @@
+import { useState } from 'react';
+
+import { CloseOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import {
+  ModalDeleteCategory,
+  ModalDeleteProduct,
+} from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
 import {
   Page,
@@ -18,11 +25,31 @@ import {
   Product,
   ProductImage,
   ProductName,
+  ModalStyle,
 } from './Styles';
 import buildGetCategoriesErrorMessage from './utils';
 
 export default function Catalog() {
   const navigate = useNavigate();
+  const [modalDeleteProduct, setModalDeleteProduct] = useState(false);
+  const [modalDeleteCategory, setModalDeleteCategory] = useState(false);
+  const [productId, setProductId] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+
+  const openModalDeleteProduct = (_id) => {
+    setProductId(_id);
+    setModalDeleteProduct(true);
+  };
+  const openModalDeleteCategory = (_id) => {
+    // if (categoryId === _id) {
+    //   doNothing();
+    // } else {
+    setCategoryId(_id);
+    setModalDeleteCategory(true);
+  };
+  const closeModalDeleteProduct = () => setModalDeleteProduct(false);
+  const closeModalDeleteCategory = () => setModalDeleteCategory(false);
+
   const { data: categories, isLoading } = useGetCategories({
     onError: (err) => {
       const errorMessage = buildGetCategoriesErrorMessage(err);
@@ -59,7 +86,12 @@ export default function Catalog() {
             <ButtonRow>
               {categories?.map((category) => (
                 <Anchor key={category.name} href={`#${category.name}`}>
-                  <Button>{category.name}</Button>
+                  <Button>
+                    {category.name}
+                    <CloseOutlined
+                      onClick={() => openModalDeleteCategory(category._id)}
+                    />
+                  </Button>
                 </Anchor>
               ))}
             </ButtonRow>
@@ -73,6 +105,9 @@ export default function Catalog() {
                       onClick={() => navigate(`/produto/${product._id}`)}
                       key={product.name}
                     >
+                      <CloseOutlined
+                        onClick={() => openModalDeleteProduct(product._id)}
+                      />
                       <ProductImage src={product.pictures[0].url} />
                       <ProductName>{product.name}</ProductName>
                     </Product>
@@ -83,6 +118,31 @@ export default function Catalog() {
           </>
         )}
       </Container>
+      <ModalStyle
+        open={modalDeleteProduct}
+        onCancel={closeModalDeleteProduct}
+        footer={null}
+        width={1000}
+        closeIcon={<CloseOutlined />}
+        destroyOnClose
+        centered
+      >
+        <ModalDeleteProduct _id={productId} close={closeModalDeleteProduct} />
+      </ModalStyle>
+      <ModalStyle
+        open={modalDeleteCategory}
+        onCancel={closeModalDeleteCategory}
+        footer={null}
+        width={1000}
+        closeIcon={<CloseOutlined />}
+        destroyOnClose
+        centered
+      >
+        <ModalDeleteCategory
+          _id={categoryId}
+          close={closeModalDeleteCategory}
+        />
+      </ModalStyle>
     </Page>
   );
 }

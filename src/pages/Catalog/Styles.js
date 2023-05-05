@@ -1,8 +1,17 @@
+import { Modal } from 'antd';
 import styled from 'styled-components';
 
 const breakValue900 = '900px';
 const breakValue600 = '600px';
 const breakValue380 = '380px';
+
+export const ModalStyle = styled(Modal)`
+  /* :where(.css-dev-only-do-not-override-ph9edi).ant-modal  */
+  .ant-modal-content {
+    background-color: white;
+    border-radius: 0px;
+  }
+`;
 
 export const Page = styled.div`
   display: flex;
