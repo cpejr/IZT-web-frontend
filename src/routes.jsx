@@ -24,6 +24,7 @@ import {
   EditCategoryMobile,
   Course,
   NotFound,
+  AccessDenied,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -49,6 +50,10 @@ const router = createBrowserRouter(
         <Route path="cadastro" element={<Register />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
+        <Route
+          path="accessdenied"
+          element={<AccessDenied texts="software" />}
+        />
         <Route element={<PrivateRoutes />}>
           <Route path="curso" element={<Course />} />
           <Route path="perfil" element={<Profile />} />
