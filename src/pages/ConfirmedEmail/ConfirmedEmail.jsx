@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import { useVerifyUser } from '../../hooks/query/confirmEmail';
+import { useVerifyUser } from '../../hooks/query/users';
 import { Container, Title } from './Styles';
 
 export default function NotFound() {
@@ -14,7 +14,9 @@ export default function NotFound() {
       setMessage('Não foi possível validar seu email.');
     },
     onSuccess: () => {
-      setMessage(`Parabéns ${user.name}! Seu email foi validado com sucesso!`);
+      setMessage(
+        `Parabéns ${user.name}! Seu email foi validado com sucesso. Clique no botão e siga para o login.`
+      );
     },
   });
   return (
