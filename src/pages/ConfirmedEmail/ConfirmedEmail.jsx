@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Lottie from 'react-lottie';
 import { useParams } from 'react-router-dom';
 
+import lottieConfirmedEmail from '../../assets/lotties/lottieConfirmedEmail.json';
 import lottieFailedEmail from '../../assets/lotties/lottieFailedEmail.json';
 import { useVerifyUser } from '../../hooks/query/users';
 import { Container, Title } from './Styles';
@@ -23,7 +24,7 @@ export default function NotFound() {
   });
   return (
     <Container>
-      {message === 'Não foi possível validar o seu email.' && (
+      {message === 'Não foi possível validar o seu email.' ? (
         <Lottie
           options={{
             loop: true,
@@ -35,6 +36,19 @@ export default function NotFound() {
           }}
           height={200}
           width={200}
+        />
+      ) : (
+        <Lottie
+          options={{
+            loop: true,
+            autoplay: true,
+            rendererSettings: {
+              preserveAspectRatio: 'xMidYMid slice',
+            },
+            animationData: lottieConfirmedEmail,
+          }}
+          height={230}
+          width={230}
         />
       )}
 
