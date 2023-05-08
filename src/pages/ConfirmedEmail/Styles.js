@@ -9,4 +9,7 @@ export const Container = styled.div`
   height: 50vh;
 `;
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+  padding-top: 25px;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+`;
