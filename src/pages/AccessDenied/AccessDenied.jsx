@@ -5,10 +5,12 @@ import { Container, UpperDiv, TextDiv } from './Styles';
 import PageText from './utils';
 
 export default function AccessDenied({ texts }) {
+  // texts prop define if the user tried to access the software page or the course page
+  // texts is required and can be only course or software
   const pageContent = PageText(texts);
   return (
     <Container>
-      <UpperDiv>
+      <UpperDiv image={pageContent.imageURL}>
         <TextDiv>
           <h1>{pageContent.title}</h1>
         </TextDiv>
@@ -16,7 +18,10 @@ export default function AccessDenied({ texts }) {
           <p>{pageContent.text}</p>
         </TextDiv>
       </UpperDiv>
-      <FormsContact title={pageContent.formTitle} smallTitle={pageContent.formTitle} />
+      <FormsContact
+        title={pageContent.formTitle}
+        smallTitle={pageContent.formTitle}
+      />
     </Container>
   );
 }

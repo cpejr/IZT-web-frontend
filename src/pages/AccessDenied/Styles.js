@@ -24,6 +24,14 @@ export const UpperDiv = styled.div`
   align-items: center;
   justify-content: space-between;
 
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(${(props) => props.image});
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  background-color: ${(props) => props.theme.colors.blue};
+  color: white;
+
   @media (max-width: 750px) {
     flex-direction: column;
     gap: 40px;
