@@ -111,6 +111,8 @@ export const Button = styled.button`
   color: white;
   text-align: center;
   justify-content: center;
+  align-items: center;
+  gap: 0.5em;
   animation-timing-function: ease;
 
   @keyframes shadow {

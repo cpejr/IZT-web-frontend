@@ -5,11 +5,9 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 import { useDeleteCategory } from '../../../hooks/query/categories';
-import { Container } from './Styles';
+import { Container, Delete, Message } from './Styles';
 
 export default function ModalDeleteCategory({ _id, close }) {
-  // const [isPending, setIsPending] = useState(false); // Important for modals usage
-
   const { mutate: deleteCategory } = useDeleteCategory({
     onSuccess: () => {
       toast.success('Categoria deletada com sucesso.');
@@ -22,10 +20,12 @@ export default function ModalDeleteCategory({ _id, close }) {
 
   return (
     <Container>
-      <h1>Clique no botão abaixo para confirmar a exclusão da catrgoria.</h1>
-      <button type="button" onClick={deleteCategory(_id)}>
+      <Message>
+        Clique no botão abaixo para confirmar a exclusão da categoria:
+      </Message>
+      <Delete type="button" onClick={() => deleteCategory(_id)}>
         Excluir
-      </button>
+      </Delete>
     </Container>
   );
 }

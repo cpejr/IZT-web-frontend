@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 import { useDeleteProducts } from '../../../hooks/query/products';
-import { Container } from './Styles';
+import { Container, Delete, Message } from './Styles';
 
 export default function ModalDeleteProduct({ _id, close }) {
   // const [isPending, setIsPending] = useState(false); // Important for modals usage
@@ -22,10 +22,12 @@ export default function ModalDeleteProduct({ _id, close }) {
 
   return (
     <Container>
-      <h1>Clique no botão abaixo para confirmar a exclusão do produto.</h1>
-      <button type="button" onClick={deleteProduct(_id)}>
+      <Message>
+        Clique no botão abaixo para confirmar a exclusão do produto.
+      </Message>
+      <Delete type="button" onClick={() => deleteProduct(_id)}>
         Excluir
-      </button>
+      </Delete>
     </Container>
   );
 }

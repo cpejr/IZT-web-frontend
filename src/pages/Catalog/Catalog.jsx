@@ -89,6 +89,7 @@ export default function Catalog() {
                   <Button>
                     {category.name}
                     <CloseOutlined
+                      style={{ fontSize: '1rem' }}
                       onClick={() => openModalDeleteCategory(category._id)}
                     />
                   </Button>
@@ -101,15 +102,19 @@ export default function Catalog() {
                 <CategoryName>{category.name}</CategoryName>
                 <ProductRow>
                   {category?.products?.map((product) => (
-                    <Product
-                      onClick={() => navigate(`/produto/${product._id}`)}
-                      key={product.name}
-                    >
+                    <Product key={product.name}>
                       <CloseOutlined
                         onClick={() => openModalDeleteProduct(product._id)}
                       />
-                      <ProductImage src={product.pictures[0].url} />
-                      <ProductName>{product.name}</ProductName>
+                      <ProductImage
+                        src={product.pictures[0].url}
+                        onClick={() => navigate(`/produto/${product._id}`)}
+                      />
+                      <ProductName
+                        onClick={() => navigate(`/produto/${product._id}`)}
+                      >
+                        {product.name}
+                      </ProductName>
                     </Product>
                   ))}
                 </ProductRow>
