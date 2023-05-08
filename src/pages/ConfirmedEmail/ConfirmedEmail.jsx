@@ -11,18 +11,21 @@ import { Container, Title } from './Styles';
 
 export default function NotFound() {
   const { token } = useParams();
-  const [message, setMessage] = useState('');
   const { data: user, isLoading } = useVerifyUser({
     token,
-    onError: () => {
-      setMessage('Não foi possível validar o seu email.');
-    },
-    onSuccess: () => {
-      setMessage(
-        `Parabéns ${user.name}! Seu email foi validado com sucesso. Clique no botão e siga para o login.`
-      );
-    },
+    // onError: () => {
+    //   setMessage('Não foi possível validar o seu email.');
+    // },
+    // onSettled: () => {
+    //   setMessage(
+    //     `Parabéns ${user?.name}! Seu email foi validado com sucesso. Clique no botão e siga para o login.`
+    //   );
+    // },
   });
+  const message = user
+    ? `Parabéns ${user?.name}! Seu email foi validado com sucesso. Clique no botão e siga para o login.`
+    : 'Não foi possível validar o seu email.';
+
   return (
     <Container>
       {message === 'Não foi possível validar o seu email.' ? (
