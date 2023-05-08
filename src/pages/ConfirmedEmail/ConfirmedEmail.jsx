@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import lottieConfirmedEmail from '../../assets/lotties/lottieConfirmedEmail.json';
 import lottieFailedEmail from '../../assets/lotties/lottieFailedEmail.json';
+import Loading from '../../components/common/Loading/Loading';
 import { useVerifyUser } from '../../hooks/query/users';
 import { Container, Title } from './Styles';
 
@@ -61,7 +62,7 @@ export default function NotFound() {
             alignItems: 'center',
           }}
         >
-          Carregando...
+          <Loading />
         </h1>
       ) : (
         <Title>{message}</Title>
