@@ -23,8 +23,8 @@ export default function Register() {
   const navigate = useNavigate();
   const { mutate: createUser, isLoading } = useCreateUser({
     onSuccess: () => {
-      toast.success('Usuário cadastrado com sucesso!');
-      navigate('/login');
+      navigate('/confirmar-email');
+      toast.success('verifique sua caixa de mensagens e confirme seu email!');
     },
     onError: (err) => {
       const errorMessage = buildRegisterErrorMessage(err);
