@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
+import { useMediaQuery } from 'react-responsive';
 
 import { ModalAuthorizeAccess } from '../../components/features';
-import useWindowSize from '../../hooks/useWindowSize';
 import {
   Container,
   PageTitle,
@@ -22,7 +22,7 @@ import {
   EditBtn,
 } from './Styles';
 
-const data = [
+const coursesAuth = [
   {
     email: 'jplp100@hotmail.com',
     expiration: '12/08/2023',
@@ -41,27 +41,29 @@ export default function CourseAuthorization() {
   const [modalCourseAuthorization, setModalCourseAuthorization] =
     useState(false);
   const [authorizeUser, setAuthorizeUser] = useState({});
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
-  const { width: windowWidth } = useWindowSize();
-  const mobileBreakpoint = 700;
-  async function openModalCourseAuthorization(d) {
-    setAuthorizeUser(d);
+  const openModalCourseAuthorization = (courseAuth) => {
+    setAuthorizeUser(courseAuth);
 
     setModalCourseAuthorization(true);
-  }
+  };
+  const closeModalCourseAuthorization = () =>
+    setModalCourseAuthorization(false);
+
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
       <PageTitle>Liberação do curso</PageTitle>
       <AuthorizationDiv>
-        {windowWidth <= mobileBreakpoint ? (
+        {isSmallScreen ? (
           <StyledLink to="/administrador/autorizar-acesso">
             <PlusOutlined size="20px" />
             {'   '}
             Autorizar acesso
           </StyledLink>
         ) : (
-          <AuthorizeButton onClick={() => openModalCourseAuthorization()}>
+          <AuthorizeButton onClick={openModalCourseAuthorization}>
             <PlusOutlined size="20px" />
             {'   '}
             Autorizar acesso
@@ -77,11 +79,11 @@ export default function CourseAuthorization() {
               <SearchBox placeholder="Pesquisar Email" />
             </SearchContainer>
           </TableHeader>
-          {data.map((d) => (
-            <ContentRow key={d.email}>
-              <p title={d.email}>{d.email}</p>
-              <MiddleData>{d.expiration}</MiddleData>
-              <EditBtn onClick={() => openModalCourseAuthorization(d)}>
+          {coursesAuth.map((courseAuth) => (
+            <ContentRow key={courseAuth.email}>
+              <p title={courseAuth.email}>{courseAuth.email}</p>
+              <MiddleData>{courseAuth.expiration}</MiddleData>
+              <EditBtn onClick={() => openModalCourseAuthorization(courseAuth)}>
                 <TbPencil size={25} />
               </EditBtn>
             </ContentRow>
@@ -90,7 +92,7 @@ export default function CourseAuthorization() {
       </AuthorizationDiv>
       <ModalStyle
         open={modalCourseAuthorization}
-        onCancel={() => setModalCourseAuthorization(false)}
+        onCancel={closeModalCourseAuthorization}
         width={500}
         height={250}
         padding={0}
@@ -108,7 +110,7 @@ export default function CourseAuthorization() {
         destroyOnClose
       >
         <ModalAuthorizeAccess
-          close={() => setModalCourseAuthorization(false)}
+          close={closeModalCourseAuthorization}
           data={authorizeUser}
         />
       </ModalStyle>

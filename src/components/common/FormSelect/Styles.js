@@ -1,10 +1,10 @@
 import { Select } from 'antd';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
   .ant-select-selector {
-    border-color: #9f9f9f !important;
+    border-color: ${(props) => (props.error ? 'red' : '#9f9f9f ')} !important;
   }
 
   .ant-select-selection-placeholder {
@@ -12,16 +12,9 @@ export const Container = styled.div`
   }
 `;
 
-const errorState = css`
-  border: 2px solid red;
-  border-radius: 8px;
-`;
-
 export const StyledSelect = styled(Select)`
   flex-grow: 1;
   width: 100%;
-
-  ${({ error }) => (error ? errorState : '')}
 `;
 
 export const ErrorMessage = styled.p`

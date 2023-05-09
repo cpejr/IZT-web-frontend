@@ -22,7 +22,7 @@ export const Form = styled.form`
   flex-direction: column;
   width: 100%;
   max-width: 400px;
-  gap: 5px;
+  gap: 15px;
 `;
 
 export const Title = styled.p`
@@ -58,6 +58,7 @@ export const SaveButton = styled.button`
   border: 1px solid black;
   border-radius: 5px;
   background-color: transparent;
+  transition: all 500ms;
 
   p {
     font-family: ${(props) => props.theme.fonts.montserrat};
@@ -70,15 +71,13 @@ export const SaveButton = styled.button`
     text-align: center;
 
     color: black;
+  }
 
-    :hover {
-      transition: 1s;
+  :hover {
+    background-color: ${(props) => props.theme.colors.blue};
+    p {
       color: white;
     }
-  }
-  :hover {
-    transition: 1s;
-    background-color: ${(props) => props.theme.colors.blue};
     color: white;
     border: white;
     cursor: pointer;
@@ -101,6 +100,7 @@ export const CancelButton = styled(Link)`
   border: 1px solid #000000;
   border-radius: 5px;
   background-color: transparent;
+  transition: 500ms;
 
   p {
     font-family: ${(props) => props.theme.fonts.montserrat};
@@ -113,15 +113,12 @@ export const CancelButton = styled(Link)`
     text-align: center;
 
     color: black;
-
-    :hover {
-      transition: 1s;
-      color: white;
-    }
   }
 
   :hover {
-    transition: 1s;
+    p {
+      color: white;
+    }
     background-color: red;
     color: white;
     border: white;

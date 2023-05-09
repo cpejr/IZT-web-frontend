@@ -47,7 +47,6 @@ export const Date = styled(DatePicker)`
   border-radius: 8px;
   .Mui-error .MuiOutlinedInput-notchedOutline {
     border-width: 2px;
-    border-radius: 8px;
   }
 `;
 

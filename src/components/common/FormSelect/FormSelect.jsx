@@ -1,3 +1,4 @@
+import { Empty } from 'antd';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 
@@ -5,8 +6,9 @@ import { Container, ErrorMessage, StyledSelect } from './Styles';
 
 export default function FormSelect({ data, name, control, errors, ...props }) {
   const errorMessage = errors?.[name]?.message;
+
   return (
-    <Container>
+    <Container error={errorMessage ? 1 : 0}>
       <Controller
         control={control}
         name={name}
@@ -16,8 +18,7 @@ export default function FormSelect({ data, name, control, errors, ...props }) {
             onChange={onChange}
             ref={ref}
             value={currValue}
-            error={!!errorMessage}
-            notFoundContent="Sem dados"
+            notFoundContent={<Empty description={false} />}
             {...props}
           >
             {data.map(({ label, value }) => (
