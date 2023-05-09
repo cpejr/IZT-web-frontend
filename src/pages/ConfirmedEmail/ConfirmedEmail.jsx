@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Lottie from 'react-lottie';
 import { useParams } from 'react-router-dom';
@@ -13,18 +13,19 @@ export default function NotFound() {
   const { token } = useParams();
   const { data: user, isLoading } = useVerifyUser({
     token,
-    // onError: () => {
-    //   setMessage('Não foi possível validar o seu email.');
-    // },
-    // onSettled: () => {
-    //   setMessage(
-    //     `Parabéns ${user?.name}! Seu email foi validado com sucesso. Clique no botão e siga para o login.`
-    //   );
-    // },
   });
   const message = user
-    ? `Parabéns ${user?.name}! Seu email foi validado com sucesso. Clique no botão e siga para o login.`
+    ? `Parabéns ${user?.name}! Seu email foi validado com sucesso. Agora você será redirecionado(a) para a página de Login.`
     : 'Não foi possível validar o seu email.';
+
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     window.location.href = '/login';
+  //     console.log(timeoutId);
+  //   }, 7000);
+
+  //   return () => clearTimeout(timeoutId);
+  // }, []);
 
   return (
     <Container>
