@@ -41,9 +41,6 @@ export default function Catalog() {
     setModalDeleteProduct(true);
   };
   const openModalDeleteCategory = (_id) => {
-    // if (categoryId === _id) {
-    //   doNothing();
-    // } else {
     setCategoryId(_id);
     setModalDeleteCategory(true);
   };

@@ -22,7 +22,7 @@ export const Delete = styled.button`
   width: 10em;
   height: 3em;
 
-  border-radius: 15px;
+  border-radius: 8px;
   background-color: red;
 
   font-size: 1rem;
