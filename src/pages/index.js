@@ -12,3 +12,4 @@ export { default as CreateProductMobile } from './CreateProductMobile/CreateProd
 export { default as EditProductMobile } from './EditProductMobile/EditProductMobile';
 export { default as EditCategoryMobile } from './EditCategoryMobile/EditCategoryMobile';
 export { default as Course } from './Course/Course';
+export { default as RedefinePassword } from './RedefinePassword/RedefinePassword';

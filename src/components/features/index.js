@@ -18,3 +18,4 @@ export { default as UpdateFileButton } from './UpdateFileButton/UpdateFileButton
 export { default as ModalChangeUserData } from './ModalChangeUserData/ModalChangeUserData';
 export { default as CourseScroll } from './CourseScroll/CourseScroll';
 export { default as SystemLoading } from './SystemLoading/SystemLoading';
+export { default as ModalForgotPassword } from './ModalForgotPassword/ModalForgotPassword';
