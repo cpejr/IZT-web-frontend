@@ -15,7 +15,7 @@ export default function ModalDeleteProduct({ _id, close }) {
   const { mutate: deleteProduct, isLoading } = useDeleteProducts({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['categories'],
+        queryKey: ['products'],
       });
 
       toast.success('Produto deletado com sucesso.');
@@ -42,7 +42,7 @@ export default function ModalDeleteProduct({ _id, close }) {
           deleteProduct(_id);
         }}
       >
-        {isPending ? 'Carregando...' : 'Deletar'}
+        {isPending ? 'Carregando...' : 'Excluir'}
       </Delete>
     </Container>
   );

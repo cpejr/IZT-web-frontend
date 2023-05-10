@@ -9,13 +9,15 @@ export const Container = styled.div`
 
   width: 100%;
   max-width: 1000px;
-  height: 20em;
+  height: 100%;
 `;
 
 export const Message = styled.h1`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   text-align: center;
+  margin: 1em;
+  color: white;
 `;
 
 export const Delete = styled.button`
@@ -23,10 +25,10 @@ export const Delete = styled.button`
   height: 3em;
 
   border-radius: 8px;
-  background-color: red;
+  background-color: white;
 
   font-size: 1rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-weight: 500;
+  font-weight: 700;
   text-align: center;
 `;

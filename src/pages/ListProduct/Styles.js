@@ -118,13 +118,26 @@ export const SearchProduct = styled.input`
 
 export const Row = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 30px;
+  grid-template-columns: 30px 1fr 1fr 30px 30px;
   justify-content: space-between;
   gap: 10px;
   width: 100%;
 `;
 
 export const EditButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  svg {
+    @media (max-width: 700px) {
+      height: 23px;
+      width: 23px;
+    }
+  }
+`;
+
+export const DeleteButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;

@@ -1,6 +1,3 @@
-// import { useState } from 'react';
-
-// import { TailSpin } from 'react-loader-spinner';
 import { useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
@@ -44,7 +41,7 @@ export default function ModalDeleteCategory({ _id, close }) {
           deleteCategory(_id);
         }}
       >
-        {isPending ? 'Carregando...' : 'Deletar'}
+        {isPending ? 'Carregando...' : 'Excluir'}
       </Delete>
     </Container>
   );
