@@ -6,7 +6,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
+import { useGetUsers } from '../../../hooks/query/users';
 import { FormSelect } from '../../common';
 import {
   Container,
@@ -18,16 +20,24 @@ import {
   ErrorMessage,
   Date,
 } from './Styles';
-import { modalAuthorizeAccessValidationSchema, themeDatePicker } from './utils';
-
-export const emails = [
-  { label: 'thiagofraga@cpejr.com.br', value: 'thiagofraga@cpejr.com.br' },
-  { label: 'amandaalves@cpejr.com.br', value: 'amandaalves@cpejr.com.br' },
-  { label: 'joaopiraja@cpejr.com.br', value: 'joaopiraja@cpejr.com.br' },
-];
+import {
+  buildGetUsersErrorMessage,
+  modalAuthorizeAccessValidationSchema,
+  themeDatePicker,
+} from './utils';
 
 export default function ModalAuthorizeAccess({ close, data }) {
+  // Variables
   const [isPending, setIsPending] = useState(false); // Important for modal loading
+
+  // Backend calls
+  const { data: users, isLoading: isLoadingUsers } = useGetUsers({
+    onError: (err) => {
+      const errorMessage = buildGetUsersErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
+  });
 
   const {
     handleSubmit,
@@ -52,7 +62,10 @@ export default function ModalAuthorizeAccess({ close, data }) {
               name="email"
               control={control}
               errors={errors}
-              data={emails}
+              data={users?.map(({ _id, email }) => ({
+                label: email,
+                value: _id,
+              }))}
               placeholder="Selecione o email"
               filterOption={(input, option) =>
                 option?.key?.toLowerCase()?.includes(input?.toLowerCase())
