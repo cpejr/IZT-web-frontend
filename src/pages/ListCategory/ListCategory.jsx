@@ -40,7 +40,6 @@ export default function ListCategory() {
       toast.error(errorMessage);
     },
   });
-
   const openModalEditCategory = (category) => {
     setSelectedCategory(category);
     setModalEditCategory(true);
