@@ -37,6 +37,27 @@ export const updateCategory = async ({ _id, newCategoryData }) => {
   return data;
 };
 
+export const createUserCourse = async (newUserCourseData) => {
+  const { data } = await privateApi.post('/user-courses', newUserCourseData);
+
+  return data;
+};
+
+export const updateUserCourse = async ({ _id, newUserCourseData }) => {
+  const { data } = await privateApi.put(
+    `/user-courses/${_id}`,
+    newUserCourseData
+  );
+
+  return data;
+};
+
+export const deleteUserCourse = async (_id) => {
+  const { data } = await privateApi.delete(`/user-courses/${_id}`);
+
+  return data;
+};
+
 const mockData = {
   0: {
     _id: 0,
