@@ -26,7 +26,6 @@ import {
   Course,
   AuthorizeAccessMobile,
   NotFound,
-  ConfirmedEmail,
   CourseAuthorization,
 } from './pages';
 import useAuthStore from './stores/auth';
@@ -51,7 +50,6 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="cadastro" element={<Register />} />
-        <Route path="email-confirmado/:token" element={<ConfirmedEmail />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
         <Route element={<PrivateRoutes />}>
@@ -60,7 +58,7 @@ const router = createBrowserRouter(
           <Route path="administrador" element={<AdminRoutes />}>
             <Route element={<AdminLayout />}>
               <Route index element={<h1>Área do Administrador</h1>} />
-              <Route path="listar-categorias" element={<ListProduct />} />
+              <Route path="listar-produtos" element={<ListProduct />} />
               <Route path="criar-produto" element={<CreateProductMobile />} />
               <Route path="editar-produto" element={<EditProductMobile />} />
               <Route path="listar-categorias" element={<ListCategory />} />

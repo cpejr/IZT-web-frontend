@@ -60,7 +60,9 @@ export default function AdminMenu() {
                 </Button>
               )}
 
-              <StyledLink to="/administrador">Listar produtos</StyledLink>
+              <StyledLink to="/administrador/listar-produtos">
+                Listar produtos
+              </StyledLink>
             </Section>
 
             <Section>
