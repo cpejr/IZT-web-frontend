@@ -4,28 +4,26 @@ import { ERROR_CODES } from '../../../utils/constants';
 
 // Form Validation
 export const budgetEmailSchema = z.object({
-  name: z.string().min(1, 'Digite o seu nome completo'),
-  company: z.string().min(1, 'Digite o nome da empresa'),
+  name: z.string().nonempty('Digite o seu nome completo'),
+  company: z.string().nonempty('Digite o nome da empresa'),
   email: z
     .string()
-    .min(1, { message: 'Digite o email' })
-    .email({
-      message: 'Insira um email válido',
-    })
+    .nonempty('Digite o email')
+    .email('Insira um email válido')
     .trim(),
   telephone: z
     .string()
-    .min(1, 'Digite o seu número do telefone')
+    .nonempty('Digite o seu número do telefone')
     .transform((value) => value.replace(/[\s()-]*/g, '')), // Taking off mask chars
-  country: z.string().min(1, 'Digite nome do seu país'),
-  state: z.string().min(1, 'Digite o estado'),
-  city: z.string().min(1, 'Digite a cidade'),
+  country: z.string().nonempty('Digite nome do seu país'),
+  state: z.string().nonempty('Digite o estado'),
+  city: z.string().nonempty('Digite a cidade'),
   ZIPcode: z
     .string()
-    .min(1, 'Digite o seu CEP')
+    .nonempty('Digite o seu CEP')
     .length(9, 'Digite um CEP válido')
     .transform((value) => value.replace(/-/g, '')), // Taking off mask chars,
-  address: z.string().min(1, 'Digite o seu seu endereço'),
+  address: z.string().nonempty('Digite o seu seu endereço'),
 });
 
 // Error Handling
