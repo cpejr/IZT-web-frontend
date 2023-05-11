@@ -42,7 +42,7 @@ export default function Header() {
   const handleProfileBtn = () => {
     setBar(false);
     setCollapseLogout(false);
-    navigate('/perfil');
+    navigate(auth.user.isAdmin ? '/administrador' : '/perfil');
   };
 
   const { mutate: logout } = useLogout({
@@ -86,7 +86,10 @@ export default function Header() {
     const isLessThanEqualLimit = firstName?.length <= nameLengthLimit;
     return (
       <>
-        <Link to="/perfil" onClick={() => setBar(false)}>
+        <Link
+          to={auth.user.isAdmin ? '/administrador' : '/perfil'}
+          onClick={() => setBar(false)}
+        >
           {isLessThanEqualLimit ? `Olá, ${firstName}!` : 'Meu Perfil'}
         </Link>
         <LogoutBtn onClick={logout} collapse={collapseLogout}>
