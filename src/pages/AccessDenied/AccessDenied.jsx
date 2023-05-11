@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 
 import { FormsContact } from '../../components/features';
 import { Container, UpperDiv, TextDiv } from './Styles';
-import PageText from './utils';
+import { contentOptions } from './utils';
 
 export default function AccessDenied({ texts }) {
   // texts prop define if the user tried to access the software page or the course page
   // texts is required and can be only course or software
-  const pageContent = PageText(texts);
+  const pageContent = contentOptions[texts];
   return (
     <Container>
       <UpperDiv image={pageContent.imageURL}>

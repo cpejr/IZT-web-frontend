@@ -1,4 +1,5 @@
-const Options = {
+/* eslint-disable import/prefer-default-export */
+export const contentOptions = {
   course: {
     title: 'Você ainda não tem acesso ao nosso curso!',
     text: 'Lamentamos informar que o seu acesso ao curso foi negado. Este curso é exclusivo para aqueles que se inscreveram previamente. No entanto, estamos aqui para ajudá-lo a adquirir este curso e outros produtos que possam ser de seu interesse. Entre em contato conosco pelo formulário a baixo para adquiri-lo',
@@ -12,23 +13,3 @@ const Options = {
     imageURL: 'src/assets/accessDeniedPage/BGSoftware.jpg',
   },
 };
-
-export default function PageText(texts) {
-  switch (texts) {
-    case 'course':
-      return Options.course;
-    case 'software':
-    default:
-      return Options.software;
-  }
-}
-
-export function BGImage(texts) {
-  switch (texts) {
-    case 'course':
-      return Options.course;
-    case 'software':
-    default:
-      return Options.software;
-  }
-}

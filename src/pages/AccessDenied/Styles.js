@@ -24,7 +24,7 @@ export const UpperDiv = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
     url(${(props) => props.image});
   background-repeat: no-repeat;
   background-size: cover;
