@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 import { Container, CardText, CardTitle, Button, Picture } from './Styles';
 
@@ -16,7 +17,9 @@ export default function Card({
   media429Top = false,
   media360Top = false,
   pictureTopMedia1000 = false,
+  linkTo,
 }) {
+  const navigate = useNavigate();
   return (
     <Container isMiddle={isMiddle}>
       <CardTitle
@@ -35,7 +38,12 @@ export default function Card({
         pictureTopMedia1000={pictureTopMedia1000}
       />
       <CardText>{text}</CardText>
-      <Button type="button" isMiddleBut={isMiddleBut}>
+      <Button
+        type="button"
+        isMiddleBut={isMiddleBut}
+        linkTo={linkTo}
+        onClick={() => navigate(`/${linkTo}`)}
+      >
         Saiba mais
       </Button>
     </Container>
@@ -52,6 +60,7 @@ Card.defaultProps = {
   media429Top: false,
   media360Top: false,
   pictureTopMedia1000: false,
+  linkTo: null,
 };
 
 Card.propTypes = {
@@ -68,4 +77,5 @@ Card.propTypes = {
   media429Top: PropTypes.bool,
   media360Top: PropTypes.bool,
   pictureTopMedia1000: PropTypes.bool,
+  linkTo: PropTypes.string,
 };
