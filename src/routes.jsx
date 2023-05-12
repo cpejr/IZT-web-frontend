@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   RouterProvider,
   createBrowserRouter,
@@ -23,8 +24,10 @@ import {
   CreateCategoryMobile,
   EditCategoryMobile,
   Course,
+  AuthorizeAccessMobile,
   NotFound,
   RedefinePassword,
+  CourseAuthorization,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -57,7 +60,7 @@ const router = createBrowserRouter(
           <Route path="administrador" element={<AdminRoutes />}>
             <Route element={<AdminLayout />}>
               <Route index element={<h1>Área do Administrador</h1>} />
-              <Route path="listar-categorias" element={<ListProduct />} />
+              <Route path="listar-produtos" element={<ListProduct />} />
               <Route path="criar-produto" element={<CreateProductMobile />} />
               <Route path="editar-produto" element={<EditProductMobile />} />
               <Route path="listar-categorias" element={<ListCategory />} />
@@ -66,6 +69,14 @@ const router = createBrowserRouter(
                 element={<CreateCategoryMobile />}
               />
               <Route path="editar-categoria" element={<EditCategoryMobile />} />
+              <Route
+                path="autorizar-acesso"
+                element={<AuthorizeAccessMobile />}
+              />
+              <Route
+                path="liberacao-cursos"
+                element={<CourseAuthorization />}
+              />
             </Route>
           </Route>
         </Route>

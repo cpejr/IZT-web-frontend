@@ -29,12 +29,12 @@ export default function ModalForgotPassword({ close }) {
       toast.success('Email enviado com sucesso');
       close();
     },
-    /* onError: (err) => {
+    onError: (err) => {
       const errorMessage = buildVerifyEmailErrorMessage(err);
 
       toast.error(errorMessage);
       setIsPending(false);
-    }, */
+    },
   });
 
   const {

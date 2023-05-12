@@ -13,3 +13,5 @@ export { default as EditProductMobile } from './EditProductMobile/EditProductMob
 export { default as EditCategoryMobile } from './EditCategoryMobile/EditCategoryMobile';
 export { default as Course } from './Course/Course';
 export { default as RedefinePassword } from './RedefinePassword/RedefinePassword';
+export { default as CourseAuthorization } from './CourseAuthorization/CourseAuthorization';
+export { default as AuthorizeAccessMobile } from './AuthorizeAccessMobile/AuthorizeAccessMobile';
