@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 
 import { Select } from '../../components/common';
 import {
-  ModalDeleteCategory,
   ModalDeleteProduct,
   ModalEditProduct,
 } from '../../components/features';
@@ -42,8 +41,6 @@ export default function ListProduct() {
   const [selectedCategory, setSelectedCategory] = useState({});
   const [modalDeleteProduct, setModalDeleteProduct] = useState(false);
   const [productId, setProductId] = useState('');
-  const [modalDeleteCategory, setModalDeleteCategory] = useState(false);
-  const [categoryId, setCategoryId] = useState('');
   const [modalEditProduct, setModalEditProduct] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
   const [name, setName] = useState('');
@@ -72,18 +69,12 @@ export default function ListProduct() {
     setModalDeleteProduct(true);
   };
 
-  const openModalDeleteCategory = (_id) => {
-    setCategoryId(_id);
-    setModalDeleteCategory(true);
-  };
-
   const openModalEditProduct = (product) => {
     setSelectedProduct(product);
     setModalEditProduct(true);
   };
   const closeModalEditProduct = () => setModalEditProduct(false);
   const closeModalDeleteProduct = () => setModalDeleteProduct(false);
-  const closeModalDeleteCategory = () => setModalDeleteCategory(false);
 
   return (
     <Container>
@@ -115,11 +106,6 @@ export default function ListProduct() {
         {products?.map((product) => (
           <Row key={product._id}>
             <Text>{product.name}</Text>
-            <DeleteButton>
-              <CloseOutlined
-                onClick={() => openModalDeleteCategory(product.category._id)}
-              />
-            </DeleteButton>
             <Text>{product.category.name}</Text>
 
             {isSmallScreen ? (
@@ -178,20 +164,6 @@ export default function ListProduct() {
         centered
       >
         <ModalDeleteProduct _id={productId} close={closeModalDeleteProduct} />
-      </ModalStyle>
-      <ModalStyle
-        open={modalDeleteCategory}
-        onCancel={closeModalDeleteCategory}
-        footer={null}
-        width={1000}
-        closeIcon={<CloseOutlined />}
-        destroyOnClose
-        centered
-      >
-        <ModalDeleteCategory
-          _id={categoryId}
-          close={closeModalDeleteCategory}
-        />
       </ModalStyle>
     </Container>
   );

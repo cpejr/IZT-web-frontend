@@ -87,7 +87,7 @@ export default function Header() {
     return (
       <>
         <Link
-          to={auth.user.isAdmin ? '/administrador' : '/perfil'}
+          to={auth?.user?.isAdmin ? '/administrador' : '/perfil'}
           onClick={() => setBar(false)}
         >
           {isLessThanEqualLimit ? `Olá, ${firstName}!` : 'Meu Perfil'}
