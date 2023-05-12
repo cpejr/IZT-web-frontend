@@ -10,7 +10,6 @@ export const verifyEmailSchema = z.object({
 // Error Handling
 const verifyEmailErrorMessages = {
   [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
-  [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autorizado',
   [ERROR_CODES.NOT_FOUND]: 'Usuário não encontrado',
 };
 const verifyEmailDefaultErrorMessage =

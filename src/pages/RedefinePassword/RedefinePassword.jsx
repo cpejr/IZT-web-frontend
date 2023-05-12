@@ -46,7 +46,7 @@ export default function RedefinePassword() {
       // Passwords match
       setLoading(true);
       try {
-        toast.success('Senhas coincidem!');
+        toast.success('Senhas alteradas com sucesso');
         onSuccess();
       } catch (err) {
         toast.error('Ocorreu um erro ao processar a comparação de senhas.');
@@ -106,7 +106,7 @@ export default function RedefinePassword() {
                   Carregando
                 </>
               ) : (
-                'Confirmar'
+                'Salvar nova senha'
               )}
             </SubmitButton>
           </Form>

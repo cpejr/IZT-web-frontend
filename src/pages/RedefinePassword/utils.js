@@ -3,18 +3,20 @@ import { z } from 'zod';
 import { ERROR_CODES } from '../../utils/constants';
 
 // Form Validation
-export const redifinePasswordValidationSchema = z.object({
-  password: z
-    .string()
-    .min(1, { message: 'Favor digitar uma senha' })
-    .min(6, 'A senha não pode ter menos de 6 caracteres')
-    .max(16, 'A senha não pode ter mais de 16 caracteres'),
-  confirmPassword: z
-    .string()
-    .min(1, { message: 'Favor digitar uma senha' })
-    .min(6, 'A senha não pode ter menos de 6 caracteres')
-    .max(16, 'A senha não pode ter mais de 16 caracteres'),
-});
+export const redifinePasswordValidationSchema = z
+  .object({
+    password: z
+      .string()
+      .min(1, { message: 'Favor digitar uma senha' })
+      .min(6, 'A senha não pode ter menos de 6 caracteres')
+      .max(16, 'A senha não pode ter mais de 16 caracteres'),
+
+    confirmPassword: z.string().min(1, { message: 'Confirme sua senha' }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ['confirmPassword'],
+    message: 'Senhas não coincidem',
+  });
 
 // Error Handling
 const redefinePasswordErrorMessages = {

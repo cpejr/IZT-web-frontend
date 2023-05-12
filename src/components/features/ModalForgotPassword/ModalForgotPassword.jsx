@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useGetUsers } from '../../../hooks/query/users';
+import { getEmailUser } from '../../../services/api';
 import useAuthStore from '../../../stores/auth';
 import { RegisterInput } from '../../common';
 import {
@@ -24,9 +24,9 @@ import { buildVerifyEmailErrorMessage, verifyEmailSchema } from './utils';
 export default function ModalForgotPassword({ close }) {
   const [isPending, setIsPending] = useState(false);
 
-  const { mutate: verifyEmail } = useGetUsers({
+  const { mutate: verifyEmail } = getEmailUser({
     onSuccess: () => {
-      toast.success('Email verified successfully!');
+      toast.success('Email enviado com sucesso');
       close();
     },
     onError: (err) => {

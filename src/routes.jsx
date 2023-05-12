@@ -50,7 +50,7 @@ const router = createBrowserRouter(
         <Route path="cadastro" element={<Register />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
-        <Route path="redefinirsenha" element={<RedefinePassword />} />
+        <Route path="redefinir-senha/:token" element={<RedefinePassword />} />
         <Route element={<PrivateRoutes />}>
           <Route path="curso" element={<Course />} />
           <Route path="perfil" element={<Profile />} />

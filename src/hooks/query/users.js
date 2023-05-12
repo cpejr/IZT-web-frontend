@@ -5,6 +5,7 @@ import {
   createUser,
   deleteUser,
   updateUser,
+  getEmailUser,
 } from '../../services/api';
 
 export function useGetUsers({
@@ -15,6 +16,18 @@ export function useGetUsers({
   return useQuery({
     queryKey: ['users', filters],
     queryFn: () => getUsers(filters),
+    onSuccess,
+    onError,
+  });
+}
+export function useGetEmailUser({
+  email,
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['users', { email }],
+    queryFn: () => getEmailUser(email),
     onSuccess,
     onError,
   });

@@ -13,6 +13,13 @@ export const updateUser = async ({ _id, newUserData }) => {
   return data;
 };
 
+export const getEmailUser = async (email) => {
+  const filters = { email };
+  const users = await getUsers(filters);
+
+  return users.length > 0; // Returns true if users array is not empty
+};
+
 export const deleteUser = async (_id) => {
   const { data } = await privateApi.delete(`/users/${_id}`);
 
