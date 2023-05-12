@@ -21,7 +21,6 @@ export default function NotFound() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       window.location.href = '/login';
-      console.log(timeoutId);
     }, 7000);
 
     return () => clearTimeout(timeoutId);
