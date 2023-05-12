@@ -18,14 +18,14 @@ export default function NotFound() {
     ? `Parabéns ${user?.name}! Seu email foi validado com sucesso. Agora você será redirecionado(a) para a página de Login.`
     : 'Não foi possível validar o seu email.';
 
-  // useEffect(() => {
-  //   const timeoutId = setTimeout(() => {
-  //     window.location.href = '/login';
-  //     console.log(timeoutId);
-  //   }, 7000);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      window.location.href = '/login';
+      console.log(timeoutId);
+    }, 7000);
 
-  //   return () => clearTimeout(timeoutId);
-  // }, []);
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   return (
     <Container>
