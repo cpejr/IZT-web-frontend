@@ -9,13 +9,6 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-export const Text = styled.p`
-  margin-top: 15px;
-  font-size: 19px;
-  font-weight: 600;
-  font-family: ${(props) => props.theme.fonts.montserrat};
-`;
-
 export const Loader = styled.div`
   display: flex;
   justify-content: center;

@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-
 import Lottie from 'react-lottie';
 import { useParams } from 'react-router-dom';
 
@@ -11,65 +9,30 @@ import { Container, Title } from './Styles';
 
 export default function NotFound() {
   const { token } = useParams();
-  const { data: user, isLoading } = useVerifyUser({
+  const { data: userName, isLoading } = useVerifyUser({
     token,
   });
-  const message = user
-    ? `Parabéns ${user?.name}! Seu email foi validado com sucesso. Agora você será redirecionado(a) para a página de Login.`
-    : 'Não foi possível validar o seu email.';
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      window.location.href = '/login';
-    }, 7000);
-
-    return () => clearTimeout(timeoutId);
-  }, []);
-
+  if (isLoading) return <Loading />;
   return (
     <Container>
-      {message === 'Não foi possível validar o seu email.' ? (
-        <Lottie
-          options={{
-            loop: true,
-            autoplay: true,
-            rendererSettings: {
-              preserveAspectRatio: 'xMidYMid slice',
-            },
-            animationData: lottieFailedEmail,
-          }}
-          height={200}
-          width={200}
-        />
-      ) : (
-        <Lottie
-          options={{
-            loop: true,
-            autoplay: true,
-            rendererSettings: {
-              preserveAspectRatio: 'xMidYMid slice',
-            },
-            animationData: lottieConfirmedEmail,
-          }}
-          height={230}
-          width={230}
-        />
-      )}
-
-      {isLoading ? (
-        <h1
-          style={{
-            height: '660px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Loading />
-        </h1>
-      ) : (
-        <Title>{message}</Title>
-      )}
+      <Lottie
+        options={{
+          loop: true,
+          autoplay: true,
+          rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice',
+          },
+          animationData: userName ? lottieConfirmedEmail : lottieFailedEmail,
+        }}
+        height={userName ? 230 : 200}
+        width={userName ? 230 : 200}
+      />
+      <Title>
+        {userName
+          ? `Parabéns, ${userName}! Seu e-mail foi validado com sucesso!`
+          : 'Não foi possível validar o seu e-mail'}
+      </Title>
     </Container>
   );
 }
