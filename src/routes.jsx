@@ -31,16 +31,16 @@ import {
 import useAuthStore from './stores/auth';
 
 function PrivateRoutes() {
-  const auth = useAuthStore((state) => state?.auth);
+  const auth = useAuthStore((state) => state.auth);
   const { pathname: from } = useLocation();
 
   return !auth ? <Navigate to="/login" state={{ from }} /> : <Outlet />;
 }
 
 function AdminRoutes() {
-  const user = useAuthStore((state) => state?.auth?.user);
+  const user = useAuthStore((state) => state.auth?.user);
 
-  return !user.isAdmin ? <NotFound /> : <Outlet />;
+  return !user?.isAdmin ? <NotFound /> : <Outlet />;
 }
 
 const router = createBrowserRouter(
