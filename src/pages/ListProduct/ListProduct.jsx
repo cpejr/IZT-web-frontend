@@ -1,13 +1,16 @@
 import { useState } from 'react';
 
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
 import { Select } from '../../components/common';
-import { ModalEditProduct } from '../../components/features';
+import {
+  ModalDeleteProduct,
+  ModalEditProduct,
+} from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
 import { useSearchProductByName } from '../../hooks/query/products';
 import useDebounce from '../../hooks/useDebounce';
@@ -26,6 +29,7 @@ import {
   EditButton,
   SearchIconButton,
   ModalStyle,
+  DeleteButton,
 } from './Styles';
 import {
   buildGetProductsErrorMessage,
@@ -35,6 +39,8 @@ import {
 export default function ListProduct() {
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const [selectedCategory, setSelectedCategory] = useState({});
+  const [modalDeleteProduct, setModalDeleteProduct] = useState(false);
+  const [productId, setProductId] = useState('');
   const [modalEditProduct, setModalEditProduct] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
   const [name, setName] = useState('');
@@ -58,12 +64,19 @@ export default function ListProduct() {
     },
   });
 
+  const openModalDeleteProduct = (_id) => {
+    setProductId(_id);
+    setModalDeleteProduct(true);
+  };
+
   const openModalEditProduct = (product) => {
     setSelectedProduct(product);
     setModalEditProduct(true);
   };
   const closeModalEditProduct = () => setModalEditProduct(false);
+  const closeModalDeleteProduct = () => setModalDeleteProduct(false);
 
+  const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
       <Title>Lista de produtos</Title>
@@ -108,6 +121,12 @@ export default function ListProduct() {
                 />
               </EditButton>
             )}
+            <DeleteButton>
+              <DeleteOutlined
+                onClick={() => openModalDeleteProduct(product._id)}
+                size={30}
+              />
+            </DeleteButton>
           </Row>
         ))}
       </ProductList>
@@ -118,7 +137,7 @@ export default function ListProduct() {
         width={1100}
         padding={0}
         footer={null}
-        closeIcon={<CloseOutlined style={{ color: 'white' }} />}
+        closeIcon={modalCloseButton}
         bodyStyle={{
           alignItems: 'center',
           justifyContent: 'center',
@@ -134,6 +153,17 @@ export default function ListProduct() {
           product={selectedProduct}
           close={closeModalEditProduct}
         />
+      </ModalStyle>
+      <ModalStyle
+        open={modalDeleteProduct}
+        onCancel={closeModalDeleteProduct}
+        footer={null}
+        width={500}
+        closeIcon={modalCloseButton}
+        destroyOnClose
+        centered
+      >
+        <ModalDeleteProduct _id={productId} close={closeModalDeleteProduct} />
       </ModalStyle>
     </Container>
   );

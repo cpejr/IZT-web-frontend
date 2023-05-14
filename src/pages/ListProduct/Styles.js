@@ -118,8 +118,9 @@ export const SearchProduct = styled.input`
 
 export const Row = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 30px;
+  grid-template-columns: 1fr 1fr 30px 30px;
   justify-content: space-between;
+  align-items: center;
   gap: 10px;
   width: 100%;
 `;
@@ -134,6 +135,17 @@ export const EditButton = styled.button`
       height: 23px;
       width: 23px;
     }
+  }
+`;
+
+export const DeleteButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  svg {
+    height: 23px;
+    width: 23px;
   }
 `;
 

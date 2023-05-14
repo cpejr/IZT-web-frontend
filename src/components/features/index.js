@@ -18,4 +18,6 @@ export { default as UpdateFileButton } from './UpdateFileButton/UpdateFileButton
 export { default as ModalChangeUserData } from './ModalChangeUserData/ModalChangeUserData';
 export { default as CourseScroll } from './CourseScroll/CourseScroll';
 export { default as SystemLoading } from './SystemLoading/SystemLoading';
+export { default as ModalDeleteProduct } from './ModalDeleteProduct/ModalDeleteProduct';
+export { default as ModalDeleteCategory } from './ModalDeleteCategory/ModalDeleteCategory';
 export { default as ModalAuthorizeAccess } from './ModalAuthorizeAccess/ModalAuthorizeAccess';
