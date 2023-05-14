@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   RouterProvider,
   createBrowserRouter,
@@ -22,21 +23,24 @@ import {
   ListCategory,
   CreateCategoryMobile,
   EditCategoryMobile,
+  Course,
+  AuthorizeAccessMobile,
   NotFound,
+  CourseAuthorization,
 } from './pages';
 import useAuthStore from './stores/auth';
 
 function PrivateRoutes() {
-  const auth = useAuthStore((state) => state?.auth);
+  const auth = useAuthStore((state) => state.auth);
   const { pathname: from } = useLocation();
 
   return !auth ? <Navigate to="/login" state={{ from }} /> : <Outlet />;
 }
 
 function AdminRoutes() {
-  const user = useAuthStore((state) => state?.auth?.user);
+  const user = useAuthStore((state) => state.auth?.user);
 
-  return !user.isAdmin ? <NotFound /> : <Outlet />;
+  return !user?.isAdmin ? <NotFound /> : <Outlet />;
 }
 
 const router = createBrowserRouter(
@@ -49,6 +53,7 @@ const router = createBrowserRouter(
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
         <Route element={<PrivateRoutes />}>
+          <Route path="curso" element={<Course />} />
           <Route path="perfil" element={<Profile />} />
           <Route path="administrador" element={<AdminRoutes />}>
             <Route element={<AdminLayout />}>
@@ -62,6 +67,14 @@ const router = createBrowserRouter(
                 element={<CreateCategoryMobile />}
               />
               <Route path="editar-categoria" element={<EditCategoryMobile />} />
+              <Route
+                path="autorizar-acesso"
+                element={<AuthorizeAccessMobile />}
+              />
+              <Route
+                path="liberacao-cursos"
+                element={<CourseAuthorization />}
+              />
             </Route>
           </Route>
         </Route>

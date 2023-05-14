@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactDOM from 'react-dom/client';
@@ -25,11 +27,13 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <GlobalStyles />
-    <QueryClientProvider client={queryClient}>
-      <Theme>
-        <Routes />
-      </Theme>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <QueryClientProvider client={queryClient}>
+        <Theme>
+          <Routes />
+        </Theme>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </LocalizationProvider>
   </React.StrictMode>
 );

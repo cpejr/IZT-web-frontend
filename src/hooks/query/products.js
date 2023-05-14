@@ -5,7 +5,7 @@ import {
   getProductById,
   createProduct,
   searchProductByName,
-  // deleteProducts,
+  deleteProduct,
   sendProductBudget,
   updateProduct,
   deleteFile,
@@ -74,16 +74,16 @@ export function useUpdateProducts({
   });
 }
 
-// export function useDeleteProducts({
-//   onSuccess = () => {},
-//   onError = (err) => console.log(err),
-// } = {}) {
-//   return useMutation({
-//     mutationFn: deleteProducts,
-//     onSuccess,
-//     onError,
-//   });
-// }
+export function useDeleteProducts({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: deleteProduct,
+    onSuccess,
+    onError,
+  });
+}
 
 export function useSendProductBudget({
   onSuccess = () => {},

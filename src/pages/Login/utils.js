@@ -22,7 +22,6 @@ const loginErrorMessages = {
   [ERROR_CODES.UNAUTHORIZED]: 'E-mail ou senha incorretos',
   [ERROR_CODES.FORBIDDEN]:
     'A sua conta ainda não foi ativada. Por favor verifique o e-mail',
-  [ERROR_CODES.CONFLICT]: 'O email já está sendo utilizado',
 };
 const loginDefaultErrorMessage =
   'Erro ao realizar o login. Tente novamente mais tarde';

@@ -6,7 +6,7 @@ import {
   searchByNameCategories,
   createCategory,
   updateCategory,
-  // deleteProducts,
+  deleteCategory,
 } from '../../services/api/endpoints';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -66,6 +66,17 @@ export function useUpdateCategory({
 } = {}) {
   return useMutation({
     mutationFn: updateCategory,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useDeleteCategory({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: deleteCategory,
     onSuccess,
     onError,
   });

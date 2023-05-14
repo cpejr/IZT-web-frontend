@@ -11,3 +11,6 @@ export { default as CreateCategoryMobile } from './CreateCategoryMobile/CreateCa
 export { default as CreateProductMobile } from './CreateProductMobile/CreateProductMobile';
 export { default as EditProductMobile } from './EditProductMobile/EditProductMobile';
 export { default as EditCategoryMobile } from './EditCategoryMobile/EditCategoryMobile';
+export { default as Course } from './Course/Course';
+export { default as CourseAuthorization } from './CourseAuthorization/CourseAuthorization';
+export { default as AuthorizeAccessMobile } from './AuthorizeAccessMobile/AuthorizeAccessMobile';
