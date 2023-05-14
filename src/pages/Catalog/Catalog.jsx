@@ -23,6 +23,7 @@ import buildGetCategoriesErrorMessage from './utils';
 
 export default function Catalog() {
   const navigate = useNavigate();
+
   const { data: categories, isLoading } = useGetCategories({
     onError: (err) => {
       const errorMessage = buildGetCategoriesErrorMessage(err);
@@ -70,8 +71,8 @@ export default function Catalog() {
                 <ProductRow>
                   {category?.products?.map((product) => (
                     <Product
-                      onClick={() => navigate(`/produto/${product._id}`)}
                       key={product.name}
+                      onClick={() => navigate(`/produto/${product._id}`)}
                     >
                       <ProductImage src={product.pictures[0].url} />
                       <ProductName>{product.name}</ProductName>

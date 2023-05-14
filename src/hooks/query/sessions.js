@@ -33,7 +33,7 @@ export function useRefreshToken({
     console.error(err);
   },
 } = {}) {
-  const { auth } = useAuthStore();
+  const auth = useAuthStore((state) => state.auth);
 
   return useQuery({
     queryKey: ['refresh'],

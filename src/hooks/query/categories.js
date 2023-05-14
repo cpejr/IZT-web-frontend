@@ -6,6 +6,7 @@ import {
   searchByNameCategories,
   createCategory,
   updateCategory,
+  deleteCategory,
   // deleteProducts,
 } from '../../services/api';
 
@@ -66,6 +67,17 @@ export function useUpdateCategory({
 } = {}) {
   return useMutation({
     mutationFn: updateCategory,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useDeleteCategory({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: deleteCategory,
     onSuccess,
     onError,
   });
