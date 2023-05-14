@@ -4,10 +4,10 @@ import { FormsContact } from '../../components/features';
 import { Container, UpperDiv, TextDiv } from './Styles';
 import { contentOptions } from './utils';
 
-export default function AccessDenied({ texts }) {
+export default function AccessDenied({ content }) {
   // texts prop define if the user tried to access the software page or the course page
   // texts is required and can be only course or software
-  const pageContent = contentOptions[texts];
+  const pageContent = contentOptions[content];
   return (
     <Container>
       <UpperDiv image={pageContent.imageURL}>
@@ -27,5 +27,5 @@ export default function AccessDenied({ texts }) {
 }
 
 AccessDenied.propTypes = {
-  texts: PropTypes.string.isRequired,
+  content: PropTypes.oneOf(['course', 'software']).isRequired,
 };

@@ -55,11 +55,11 @@ const router = createBrowserRouter(
         <Route path="produto/:_id" element={<Product />} />
         <Route
           path="acesso-negado-curso"
-          element={<AccessDenied texts="course" />}
+          element={<AccessDenied content="course" />}
         />
         <Route
           path="acesso-negado-software"
-          element={<AccessDenied texts="software" />}
+          element={<AccessDenied content="software" />}
         />
         <Route element={<PrivateRoutes />}>
           <Route path="curso" element={<Course />} />

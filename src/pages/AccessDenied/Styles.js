@@ -32,7 +32,7 @@ export const UpperDiv = styled.div`
   background-color: ${(props) => props.theme.colors.blue};
   color: white;
 
-  @media (max-width: 750px) {
+  @media (max-width: 1080px) {
     flex-direction: column;
     gap: 40px;
   }
@@ -45,7 +45,7 @@ export const TextDiv = styled.div`
     font-size: 3.2em;
     font-weight: 700;
 
-    @media (max-width: 750px) {
+    @media (max-width: 1080px) {
       text-align: center;
     }
   }
