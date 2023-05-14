@@ -6,12 +6,12 @@ const useAuthStore = create((set) => ({
   setAuth: (accessToken) => {
     const {
       user,
-      iat: issuedAtTimeStamp,
-      exp: expireAtTimeStamp,
+      iat: issuedAtTimestamp,
+      exp: expireAtTimestamp,
     } = jwtDecode(accessToken);
 
     const secureTime = 10; // Seconds before the expire in, for secure refresh token request
-    const expireIn = expireAtTimeStamp - issuedAtTimeStamp - secureTime; // Seconds
+    const expireIn = expireAtTimestamp - issuedAtTimestamp - secureTime; // Seconds
 
     set({ auth: { accessToken, user, expireIn } });
   },

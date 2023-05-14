@@ -33,7 +33,7 @@ export function useRefreshToken({
     console.error(err);
   },
 } = {}) {
-  const expireIn = useAuthStore(({ auth }) => auth?.expireIn);
+  const expireIn = useAuthStore((state) => state.auth?.expireIn);
 
   return useQuery({
     queryKey: ['refresh'],
