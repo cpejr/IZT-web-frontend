@@ -28,6 +28,7 @@ export const Title = styled.p`
   height: 20%;
   padding-bottom: 40px;
   padding-top: 40px;
+  text-align: center;
 
   @media (max-width: 700px) {
     font-weight: 600;

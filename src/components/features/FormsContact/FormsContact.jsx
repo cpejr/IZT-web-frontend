@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
@@ -17,7 +18,7 @@ import {
 } from './Styles';
 import { buildFormContactErrorMessage, formsValidationSchema } from './utils';
 
-export default function FormsContact() {
+export default function FormsContact({ title, smallTitle }) {
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
   const { mutate: sendFormContact, isLoading } = useSendFormContact({
@@ -40,7 +41,7 @@ export default function FormsContact() {
 
   return (
     <ContactUs>
-      <Title>{`Entre em Contato ${isSmallScreen ? '' : 'Conosco'}`}</Title>
+      <Title>{`${isSmallScreen ? smallTitle : title}`}</Title>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Section>
@@ -114,3 +115,13 @@ export default function FormsContact() {
     </ContactUs>
   );
 }
+
+FormsContact.propTypes = {
+  title: PropTypes.string,
+  smallTitle: PropTypes.string,
+};
+
+FormsContact.defaultProps = {
+  title: 'Entre em Contato Conosco',
+  smallTitle: 'Entre em Contato',
+};

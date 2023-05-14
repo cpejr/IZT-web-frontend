@@ -27,6 +27,7 @@ import {
   AuthorizeAccessMobile,
   NotFound,
   CourseAuthorization,
+  AccessDenied,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -52,6 +53,14 @@ const router = createBrowserRouter(
         <Route path="cadastro" element={<Register />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
+        <Route
+          path="acesso-negado-curso"
+          element={<AccessDenied content="course" />}
+        />
+        <Route
+          path="acesso-negado-software"
+          element={<AccessDenied content="software" />}
+        />
         <Route element={<PrivateRoutes />}>
           <Route path="curso" element={<Course />} />
           <Route path="perfil" element={<Profile />} />

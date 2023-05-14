@@ -14,3 +14,4 @@ export { default as EditCategoryMobile } from './EditCategoryMobile/EditCategory
 export { default as Course } from './Course/Course';
 export { default as CourseAuthorization } from './CourseAuthorization/CourseAuthorization';
 export { default as AuthorizeAccessMobile } from './AuthorizeAccessMobile/AuthorizeAccessMobile';
+export { default as AccessDenied } from './AccessDenied/AccessDenied';
