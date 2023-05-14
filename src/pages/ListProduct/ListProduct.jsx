@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
@@ -76,6 +76,7 @@ export default function ListProduct() {
   const closeModalEditProduct = () => setModalEditProduct(false);
   const closeModalDeleteProduct = () => setModalDeleteProduct(false);
 
+  const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
       <Title>Lista de produtos</Title>
@@ -113,20 +114,19 @@ export default function ListProduct() {
                 <TbPencil size={30} />
               </StyledLink>
             ) : (
-              <>
-                <DeleteButton>
-                  <CloseOutlined
-                    onClick={() => openModalDeleteProduct(product._id)}
-                  />
-                </DeleteButton>
-                <EditButton>
-                  <TbPencil
-                    onClick={() => openModalEditProduct(product)}
-                    size={30}
-                  />
-                </EditButton>
-              </>
+              <EditButton>
+                <TbPencil
+                  onClick={() => openModalEditProduct(product)}
+                  size={30}
+                />
+              </EditButton>
             )}
+            <DeleteButton>
+              <DeleteOutlined
+                onClick={() => openModalDeleteProduct(product._id)}
+                size={30}
+              />
+            </DeleteButton>
           </Row>
         ))}
       </ProductList>
@@ -137,7 +137,7 @@ export default function ListProduct() {
         width={1100}
         padding={0}
         footer={null}
-        closeIcon={<CloseOutlined style={{ color: 'white' }} />}
+        closeIcon={modalCloseButton}
         bodyStyle={{
           alignItems: 'center',
           justifyContent: 'center',
@@ -158,8 +158,8 @@ export default function ListProduct() {
         open={modalDeleteProduct}
         onCancel={closeModalDeleteProduct}
         footer={null}
-        width={1000}
-        closeIcon={<CloseOutlined />}
+        width={500}
+        closeIcon={modalCloseButton}
         destroyOnClose
         centered
       >

@@ -6,12 +6,13 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 import { useDeleteProducts } from '../../../hooks/query/products';
-import { Container, Delete, Message } from './Styles';
+import { Container, DeleteButton, Message } from './Styles';
 import { buildDeleteProductErrorMessage } from './utils';
 
 export default function ModalDeleteProduct({ _id, close }) {
   const [isPending, setIsPending] = useState(false); // Important for modals usage
   const queryClient = useQueryClient();
+
   const { mutate: deleteProduct, isLoading } = useDeleteProducts({
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -31,10 +32,8 @@ export default function ModalDeleteProduct({ _id, close }) {
 
   return (
     <Container>
-      <Message>
-        Clique no botão abaixo para confirmar a exclusão do produto.
-      </Message>
-      <Delete
+      <Message>Tem certeza que deseja excluir o produto?</Message>
+      <DeleteButton
         type="button"
         disabled={isPending || isLoading}
         onClick={() => {
@@ -43,7 +42,7 @@ export default function ModalDeleteProduct({ _id, close }) {
         }}
       >
         {isPending ? 'Carregando...' : 'Excluir'}
-      </Delete>
+      </DeleteButton>
     </Container>
   );
 }

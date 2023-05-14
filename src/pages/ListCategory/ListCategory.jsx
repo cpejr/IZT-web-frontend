@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
@@ -46,6 +46,7 @@ export default function ListCategory() {
       toast.error(errorMessage);
     },
   });
+
   const openModalEditCategory = (category) => {
     setSelectedCategory(category);
     setModalEditCategory(true);
@@ -79,12 +80,6 @@ export default function ListCategory() {
         {categories?.map((category) => (
           <Row key={category._id}>
             <Text>{category.name}</Text>
-            <DeleteButton>
-              <CloseOutlined
-                onClick={() => openModalDeleteCategory(category._id)}
-              />
-            </DeleteButton>
-
             {isSmallScreen ? (
               <StyledLink to="/administrador/editar-categoria" state={category}>
                 <TbPencil size={30} />
@@ -97,6 +92,11 @@ export default function ListCategory() {
                 />
               </EditButton>
             )}
+            <DeleteButton>
+              <DeleteOutlined
+                onClick={() => openModalDeleteCategory(category._id)}
+              />
+            </DeleteButton>
           </Row>
         ))}
       </CategoryList>
@@ -129,8 +129,8 @@ export default function ListCategory() {
         open={modalDeleteCategory}
         onCancel={closeModalDeleteCategory}
         footer={null}
-        width={1000}
-        closeIcon={<CloseOutlined />}
+        width={500}
+        closeIcon={modalCloseButton}
         destroyOnClose
         centered
         bodyStyle={{

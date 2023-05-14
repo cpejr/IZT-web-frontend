@@ -20,7 +20,9 @@ export const Message = styled.h1`
   color: white;
 `;
 
-export const Delete = styled.button`
+export const DeleteButton = styled.button`
+  cursor: pointer;
+
   width: 10em;
   height: 3em;
 

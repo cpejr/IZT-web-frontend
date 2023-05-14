@@ -144,10 +144,8 @@ export const DeleteButton = styled.button`
   cursor: pointer;
 
   svg {
-    @media (max-width: 700px) {
-      height: 23px;
-      width: 23px;
-    }
+    height: 23px;
+    width: 23px;
   }
 `;
 

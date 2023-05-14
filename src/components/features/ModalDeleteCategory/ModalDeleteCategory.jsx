@@ -5,12 +5,13 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 import { useDeleteCategory } from '../../../hooks/query/categories';
-import { Container, Delete, Message } from './Styles';
+import { Container, DeleteButton, Message } from './Styles';
 import { buildDeleteCategoryErrorMessage } from './utils';
 
 export default function ModalDeleteCategory({ _id, close }) {
   const [isPending, setIsPending] = useState(false); // Important for modals usage
   const queryClient = useQueryClient();
+
   const { mutate: deleteCategory, isLoading } = useDeleteCategory({
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -30,10 +31,8 @@ export default function ModalDeleteCategory({ _id, close }) {
 
   return (
     <Container>
-      <Message>
-        Clique no botão abaixo para confirmar a exclusão da categoria:
-      </Message>
-      <Delete
+      <Message>Tem certeza que deseja excluir a categoria?</Message>
+      <DeleteButton
         type="button"
         disabled={isPending || isLoading}
         onClick={() => {
@@ -41,8 +40,9 @@ export default function ModalDeleteCategory({ _id, close }) {
           deleteCategory(_id);
         }}
       >
+        {/* Put proper loading here */}
         {isPending ? 'Carregando...' : 'Excluir'}
-      </Delete>
+      </DeleteButton>
     </Container>
   );
 }
