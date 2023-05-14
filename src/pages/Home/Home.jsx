@@ -34,7 +34,7 @@ export default function Home() {
             media360Top
             image={Training}
             imageAlt="Training image"
-            linkTo="curso"
+            linkTo="/curso"
           />
           <Card
             isMiddle
@@ -42,7 +42,7 @@ export default function Home() {
             text="Conheça nossos produtos."
             image={Catalog}
             imageAlt="Catalog image"
-            linkTo="catalogo"
+            linkTo="/catalogo"
           />
           <Card
             title="Centerless Grinding Software (CGS)"
@@ -50,6 +50,7 @@ export default function Home() {
             image={Software}
             imageAlt="Software image"
             pictureTopMedia1000
+            linkTo="/" // Put the corret route here
           />
         </CardsContainer>
         <FormsContact />
