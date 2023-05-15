@@ -1,14 +1,8 @@
-import { Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const breakValue = '700px';
-export const ModalStyle = styled(Modal)`
-  :where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-content {
-    background-color: white;
-    border-radius: 0px;
-  }
-`;
+
 export const Page = styled.div`
   background-color: ${(props) => props.theme.colors.gray.mediumGray};
   width: 100%;

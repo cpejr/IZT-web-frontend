@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { CloseOutlined } from '@ant-design/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Modal } from 'antd';
 import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -22,7 +23,6 @@ import {
   ForgotPassword,
   SignUpLink,
   Links,
-  ModalStyle,
 } from './Styles';
 import { buildLoginErrorMessage, loginValidationSchema } from './utils';
 
@@ -106,17 +106,17 @@ export default function Login() {
           <ForgotPassword onClick={openModalForgotPassword}>
             Esqueceu a sua senha? Clique aqui!
           </ForgotPassword>
-          <ModalStyle
+          <Modal
             open={showModal}
             onCancel={closeModalForgotPassword}
             footer={null}
-            width={1000}
+            width={700}
             closeIcon={<CloseOutlined />}
             destroyOnClose
             centered
           >
             <ModalForgotPassword close={closeModalForgotPassword} />
-          </ModalStyle>
+          </Modal>
 
           <SignUpLink>
             Ainda não tem uma conta?{' '}
