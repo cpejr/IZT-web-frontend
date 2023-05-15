@@ -8,7 +8,7 @@ import {
   updateCategory,
   deleteCategory,
   // deleteProducts,
-} from '../../services/api';
+} from '../../services/api/endpoints';
 
 // eslint-disable-next-line import/prefer-default-export
 export function useGetCategories({

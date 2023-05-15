@@ -8,7 +8,7 @@ import {
   verifyEmail,
   forgotPassword,
   redefinePassword,
-} from '../../services/api';
+} from '../../services/api/endpoints';
 
 export function useGetUsers({
   filters,

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getCourseById } from '../../services/api';
+import { getCourseById } from '../../services/api/endpoints';
 
 // eslint-disable-next-line import/prefer-default-export
 export function useGetCourseById({

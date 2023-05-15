@@ -8,7 +8,7 @@ import {
   deleteProduct,
   sendProductBudget,
   updateProduct,
-} from '../../services/api';
+} from '../../services/api/endpoints';
 
 export function useGetProducts({
   filters,
