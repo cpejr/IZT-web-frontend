@@ -4,6 +4,8 @@ export { default as Catalog } from './Catalog/Catalog';
 export { default as Profile } from './Profile/Profile';
 export { default as Product } from './Product/Product';
 export { default as Register } from './Register/Register';
+export { default as VerifyEmail } from './VerifyEmail/VerifyEmail';
+export { default as ConfirmedEmail } from './ConfirmedEmail/ConfirmedEmail';
 export { default as NotFound } from './NotFound/NotFound';
 export { default as ListCategory } from './ListCategory/ListCategory';
 export { default as ListProduct } from './ListProduct/ListProduct';

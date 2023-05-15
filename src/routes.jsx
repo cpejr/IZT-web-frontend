@@ -14,6 +14,7 @@ import {
   Home,
   Login,
   Register,
+  ConfirmedEmail,
   Catalog,
   Product,
   Profile,
@@ -28,6 +29,7 @@ import {
   NotFound,
   CourseAuthorization,
   AccessDenied,
+  VerifyEmail,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -51,6 +53,8 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="cadastro" element={<Register />} />
+        <Route path="email-confirmado/:token" element={<ConfirmedEmail />} />
+        <Route path="verificar-email" element={<VerifyEmail />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
         <Route
