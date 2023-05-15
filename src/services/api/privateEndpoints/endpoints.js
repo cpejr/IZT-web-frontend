@@ -196,3 +196,15 @@ export const getFiles = async (fileIds) => {
 
   return data;
 };
+
+export const deleteProduct = async (_id) => {
+  const { data } = await privateApi.delete(`/products/${_id}`);
+
+  return data;
+};
+
+export const deleteCategory = async (_id) => {
+  const { data } = await privateApi.delete(`/categories/${_id}`);
+
+  return data;
+};

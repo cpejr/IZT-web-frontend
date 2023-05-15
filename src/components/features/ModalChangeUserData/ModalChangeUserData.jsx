@@ -23,7 +23,7 @@ import { buildUpdateUserErrorMessage, updateUserSchema } from './utils';
 export default function ModalChangeUserData({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modals usage
 
-  const user = useAuthStore((state) => state.auth.user);
+  const user = useAuthStore((state) => state.auth?.user);
   const setUser = useAuthStore((state) => state.setUser);
 
   const { mutate: updateUser } = useUpdateUser({

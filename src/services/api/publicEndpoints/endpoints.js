@@ -74,6 +74,12 @@ export const createUser = async (newUser) => {
   return data;
 };
 
+export const verifyEmail = async (token) => {
+  const { data } = await publicApi.put(`/users/confirm-email/${token}`);
+
+  return data;
+};
+
 export const sendFormContact = async (formInput) => {
   const { data } = await publicApi.post(`/forms-contact`, formInput);
 

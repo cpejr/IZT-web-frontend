@@ -6,6 +6,7 @@ import {
   deleteUser,
   updateUser,
   getEmailUser,
+  verifyEmail,
 } from '../../services/api';
 
 export function useGetUsers({
@@ -39,6 +40,19 @@ export function useCreateUser({
 } = {}) {
   return useMutation({
     mutationFn: createUser,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useVerifyUser({
+  token,
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['verifyEmail'],
+    queryFn: () => verifyEmail(token),
     onSuccess,
     onError,
   });
