@@ -7,8 +7,7 @@ import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { getEmailUser } from '../../../services/api';
-import useAuthStore from '../../../stores/auth';
+import { useForgotPassword } from '../../../hooks/query/users';
 import { RegisterInput } from '../../common';
 import {
   Container,
@@ -16,21 +15,21 @@ import {
   DataEntry,
   FormColumn,
   SaveChanges,
+  Title,
   Subtitle,
-  Subtitle2,
 } from './Styles';
-import { buildVerifyEmailErrorMessage, verifyEmailSchema } from './utils';
+import { buildForgotPasswordErrorMessage, forgotPasswordSchema } from './utils';
 
 export default function ModalForgotPassword({ close }) {
   const [isPending, setIsPending] = useState(false);
 
-  const { mutate: verifyEmail } = getEmailUser({
+  const { mutate: forgotPassword } = useForgotPassword({
     onSuccess: () => {
       toast.success('Email enviado com sucesso');
       close();
     },
     onError: (err) => {
-      const errorMessage = buildVerifyEmailErrorMessage(err);
+      const errorMessage = buildForgotPasswordErrorMessage(err);
 
       toast.error(errorMessage);
       setIsPending(false);
@@ -42,12 +41,12 @@ export default function ModalForgotPassword({ close }) {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(verifyEmailSchema),
+    resolver: zodResolver(forgotPasswordSchema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = ({ email }) => {
     setIsPending(true);
-    verifyEmail(data);
+    forgotPassword(email);
   };
 
   return (
@@ -55,11 +54,10 @@ export default function ModalForgotPassword({ close }) {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <DataEntry>
           <FormColumn>
-            <Subtitle>Recuperação de Conta</Subtitle>
-            <Subtitle2>
-              Insira seu email e enviaremos um link para você recuperar sua
-              conta
-            </Subtitle2>
+            <Title>Recuperação de Conta</Title>
+            <Subtitle>
+              Enviaremos um link para você recuperar sua conta
+            </Subtitle>
             <RegisterInput
               label="Insira seu Email: "
               name="email"

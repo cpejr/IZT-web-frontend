@@ -7,11 +7,11 @@ export const redifinePasswordValidationSchema = z
   .object({
     password: z
       .string()
-      .min(1, { message: 'Favor digitar uma senha' })
+      .nonempty('Favor digitar uma senha')
       .min(6, 'A senha não pode ter menos de 6 caracteres')
       .max(16, 'A senha não pode ter mais de 16 caracteres'),
 
-    confirmPassword: z.string().min(1, { message: 'Confirme sua senha' }),
+    confirmPassword: z.string().nonempty('Confirme sua senha'),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ['confirmPassword'],
@@ -20,10 +20,8 @@ export const redifinePasswordValidationSchema = z
 
 // Error Handling
 const redefinePasswordErrorMessages = {
-  [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',
-  [ERROR_CODES.UNAUTHORIZED]: 'E-mail ou senha incorretos',
-  [ERROR_CODES.FORBIDDEN]:
-    'A sua conta ainda não foi ativada. Por favor verifique o e-mail',
+  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
+  [ERROR_CODES.NOT_FOUND]: 'Usuário não encontrado',
 };
 const redefinePasswordDefaultErrorMessage =
   'Erro ao realizar a redefinição de senha. Tente novamente mais tarde';

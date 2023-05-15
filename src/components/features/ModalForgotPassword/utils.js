@@ -3,19 +3,22 @@ import { z } from 'zod';
 import { ERROR_CODES } from '../../../utils/constants';
 
 // Form Validation
-export const verifyEmailSchema = z.object({
-  email: z.string().email(),
+export const forgotPasswordSchema = z.object({
+  email: z
+    .string()
+    .nonempty('Favor digitar o email')
+    .email('Insira um email no formato email@email.com'),
 });
 
 // Error Handling
-const verifyEmailErrorMessages = {
+const forgotPasswordErrorMessages = {
   [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
-  [ERROR_CODES.NOT_FOUND]: 'Usuário não encontrado',
+  [ERROR_CODES.NOT_FOUND]: 'E-mail não encontrado ou não verificado',
 };
-const verifyEmailDefaultErrorMessage =
-  'Erro ao enviar o email. Tente novamente mais tarde';
+const forgotPasswordDefaultErrorMessage =
+  'Erro ao enviar o e-mail. Tente novamente mais tarde';
 
-export function buildVerifyEmailErrorMessage(err) {
+export function buildForgotPasswordErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
-  return verifyEmailErrorMessages[code] || verifyEmailDefaultErrorMessage;
+  return forgotPasswordErrorMessages[code] || forgotPasswordDefaultErrorMessage;
 }

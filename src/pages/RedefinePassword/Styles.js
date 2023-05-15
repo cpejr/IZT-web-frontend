@@ -84,7 +84,7 @@ export const SubmitButton = styled.button`
   gap: 10px;
 
   width: 100%;
-  max-width: 300px;
+  max-width: 200px;
   height: 53px;
 
   border: 1px solid #000000;

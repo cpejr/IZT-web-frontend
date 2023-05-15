@@ -87,14 +87,14 @@ export const SaveChanges = styled.button`
   }
 `;
 
-export const Subtitle = styled.p`
+export const Title = styled.p`
   font-size: 1.5em;
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
   margin-bottom: 2%;
 `;
 
-export const Subtitle2 = styled.p`
+export const Subtitle = styled.p`
   text-align: center;
   font-size: 1em;
   font-weight: 500;

@@ -74,6 +74,21 @@ export const createUser = async (newUser) => {
   return data;
 };
 
+export const forgotPassword = async (email) => {
+  const { data } = await publicApi.post(`/users/fogot-password`, { email });
+
+  return data;
+};
+
+export const redefinePassword = async ({ token, password }) => {
+  const { data } = await publicApi.post(`/users/redefine-password`, {
+    token,
+    password,
+  });
+
+  return data;
+};
+
 export const verifyEmail = async (token) => {
   const { data } = await publicApi.put(`/users/confirm-email/${token}`);
 

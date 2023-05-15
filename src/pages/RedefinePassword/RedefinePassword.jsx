@@ -1,13 +1,11 @@
-import { useState } from 'react';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 import IZTLogo from '../../assets/IZTLogo.svg';
 import { DataInput } from '../../components/common';
+import { useRedefinePassword } from '../../hooks/query/users';
 import {
   Page,
   Container,
@@ -17,46 +15,16 @@ import {
   SubmitButton,
   DataEntry,
 } from './Styles';
-import {
-  buildRedefinePasswordErrorMessage,
-  redifinePasswordValidationSchema,
-} from './utils';
+import { redifinePasswordValidationSchema } from './utils';
 
 export default function RedefinePassword() {
-  const navigate = useNavigate();
-  const { state } = useLocation();
-  const redirectTo = state?.from || '/login';
+  const { token } = useParams();
+  const { data: redefinePassword, isLoading } = useRedefinePassword({
+    token,
+  });
 
-  const [isLoading, setLoading] = useState(false);
-
-  const onSuccess = () => {
-    // Handle success case here
-    navigate(redirectTo);
-  };
-
-  const onError = (err) => {
-    // Handle error case here
-    const errorMessage = buildRedefinePasswordErrorMessage(err);
-    toast.error(errorMessage);
-  };
-
-  const onSubmit = async (data) => {
-    const { password, confirmPassword } = data;
-    if (password === confirmPassword) {
-      // Passwords match
-      setLoading(true);
-      try {
-        toast.success('Senhas alteradas com sucesso');
-        onSuccess();
-      } catch (err) {
-        toast.error('Ocorreu um erro ao processar a comparação de senhas.');
-        onError(err);
-      }
-    } else {
-      // Passwords do not match
-      toast.error('As senhas não coincidem!');
-      onError();
-    }
+  const onSubmit = async ({ password }) => {
+    redefinePassword({ token, password });
   };
 
   const {
@@ -106,7 +74,7 @@ export default function RedefinePassword() {
                   Carregando
                 </>
               ) : (
-                'Salvar nova senha'
+                'Salvar'
               )}
             </SubmitButton>
           </Form>

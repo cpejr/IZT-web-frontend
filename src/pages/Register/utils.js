@@ -59,7 +59,7 @@ export const registerValidationSchema = z
 
 // Error Handling
 const registerErrorMessages = {
-  [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',
+  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
   [ERROR_CODES.CONFLICT]: 'O email já está sendo utilizado',
 };
 const registerDefaultErrorMessage =
