@@ -30,7 +30,7 @@ export const createProductValidationSchema = z.object({
 
 // Error Handling
 const createProductErrorMessages = {
-  [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',
+  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
   [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',
   [ERROR_CODES.FORBIDDEN]: 'Usuário não autorizado',
   [ERROR_CODES.CONFLICT]: 'O produto já foi criado',

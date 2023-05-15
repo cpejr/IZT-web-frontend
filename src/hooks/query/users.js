@@ -6,6 +6,8 @@ import {
   deleteUser,
   updateUser,
   verifyEmail,
+  forgotPassword,
+  redefinePassword,
 } from '../../services/api';
 
 export function useGetUsers({
@@ -16,6 +18,28 @@ export function useGetUsers({
   return useQuery({
     queryKey: ['users', filters],
     queryFn: () => getUsers(filters),
+    onSuccess,
+    onError,
+  });
+}
+
+export function useForgotPassword({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: forgotPassword,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useRedefinePassword({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: redefinePassword,
     onSuccess,
     onError,
   });

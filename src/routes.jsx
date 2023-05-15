@@ -27,6 +27,7 @@ import {
   Course,
   AuthorizeAccessMobile,
   NotFound,
+  RedefinePassword,
   CourseAuthorization,
   AccessDenied,
   VerifyEmail,
@@ -65,6 +66,7 @@ const router = createBrowserRouter(
           path="acesso-negado-software"
           element={<AccessDenied content="software" />}
         />
+        <Route path="redefinir-senha/:token" element={<RedefinePassword />} />
         <Route element={<PrivateRoutes />}>
           <Route path="curso" element={<Course />} />
           <Route path="perfil" element={<Profile />} />
