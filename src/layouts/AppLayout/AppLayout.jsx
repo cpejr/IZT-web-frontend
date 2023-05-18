@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AddToast } from '../../components/common';
 import { Header, Footer, SystemLoading } from '../../components/features';
 import { useRefreshToken } from '../../hooks/query/sessions';
+import ScrollToTop from '../../utils/ScrollToTop';
 
 export default function AppLayout() {
   const { isInitialLoading } = useRefreshToken();
@@ -25,6 +26,7 @@ export default function AppLayout() {
     <SystemLoading />
   ) : (
     <>
+      <ScrollToTop />
       <Header />
       <Outlet />
       <AddToast />
