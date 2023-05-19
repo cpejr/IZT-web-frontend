@@ -1,4 +1,4 @@
-import { Container, Loader, Text } from './Styles';
+import { Container, Loader } from './Styles';
 
 export default function Loading() {
   return (
@@ -8,7 +8,6 @@ export default function Loading() {
         <div />
         <div />
       </Loader>
-      <Text>Carregando...</Text>
     </Container>
   );
 }

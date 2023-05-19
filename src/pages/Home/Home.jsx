@@ -50,7 +50,7 @@ export default function Home() {
             image={Software}
             imageAlt="Software image"
             pictureTopMedia1000
-            linkTo="/" // Put the corret route here
+            linkTo="/curso"
           />
         </CardsContainer>
         <FormsContact />

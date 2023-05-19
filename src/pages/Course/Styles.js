@@ -123,7 +123,7 @@ export const GreyLine = styled.div`
 
 export const VideoSectionDiv = styled.div`
   width: 100%;
-  height: auto;
+  height: 100%;
   max-width: 982px;
   max-height: 735.25px;
 `;

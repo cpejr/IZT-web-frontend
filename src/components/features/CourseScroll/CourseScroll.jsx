@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CourseVideo from '../CourseVideo/CourseVideo';
 import { GreyLine, Scroll, SubtitleScroll } from './Styles';
 
-export default function CourseScroll({ chapters }) {
+export default function CourseScroll({ chapters = [] }) {
   return (
     <Scroll>
       {chapters?.map(({ _id, title, videos }) => (
@@ -19,6 +19,10 @@ export default function CourseScroll({ chapters }) {
   );
 }
 
+CourseScroll.defaultProps = {
+  chapters: [],
+};
+
 CourseScroll.propTypes = {
-  chapters: PropTypes.array.isRequired,
+  chapters: PropTypes.array,
 };

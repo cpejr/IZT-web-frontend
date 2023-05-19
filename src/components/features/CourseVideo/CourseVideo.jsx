@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import PropTypes from 'prop-types';
 
 import FinishedVideo from '../../../assets/coursesPage/finishedVideo.png';
@@ -8,24 +6,25 @@ import useVideoStore from '../../../stores/video';
 import { ScrollIcon, TopicDiv, Topics, VideoTime } from './Styles';
 
 export default function CourseVideo({ video }) {
-  const [srcIcon, setSrcIcon] = useState(UnfinishedVideo);
-  const { setCurrVideo } = useVideoStore();
-  const { duration, title } = video;
+  const setCurrVideoId = useVideoStore((state) => state.setCurrVideoId);
+  const isCompleted = video.progress === 100;
 
   return (
     <TopicDiv>
       <div style={{ flexDirection: 'row-reverse' }}>
         <Topics
           onClick={() => {
-            setCurrVideo(video);
-            setSrcIcon(FinishedVideo);
+            setCurrVideoId(video._id);
           }}
         >
-          {title}
+          {video.title}
         </Topics>
-        <ScrollIcon src={srcIcon} alt="videoState" />
+        <ScrollIcon
+          src={isCompleted ? FinishedVideo : UnfinishedVideo}
+          alt="videoState"
+        />
       </div>
-      <VideoTime>{duration}</VideoTime>
+      <VideoTime>{video.formatedDuration}</VideoTime>
     </TopicDiv>
   );
 }

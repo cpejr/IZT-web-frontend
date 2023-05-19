@@ -1,9 +1,9 @@
-import { DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons';
+import { Navigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-import Image from '../../assets/coursesPage/womanStudying.png';
-import { CourseScroll } from '../../components/features';
-import { useGetCourseById } from '../../hooks/query/courses';
-import useVideoStore from '../../stores/video';
+import { CourseScroll, VideoPlayer } from '../../components/features';
+import { useGetUserCourse } from '../../hooks/query/courses';
+import useAuthStore from '../../stores/auth';
 import {
   Container,
   MainDiv,
@@ -11,24 +11,31 @@ import {
   Title,
   Text,
   MainSection,
-  VideoSectionDiv,
-  Video,
   GreyLine,
-  ChangeVideoButton,
-  Buttons,
-  Subtitle,
-  VideoTitle,
 } from './Styles';
+import { buildGetCourseInfoErrorMessage } from './utils';
 
 export default function Course() {
-  const { currVideo, next, previous } = useVideoStore();
-  const { data: course, isLoading } = useGetCourseById({
-    _id: 0,
-    onSucess: () => {},
-    onError: () => {},
+  const { courseId } = useParams();
+  const userId = useAuthStore((state) => state.auth?.user?._id);
+
+  const {
+    data: course,
+    isError,
+    isLoadingCourse,
+  } = useGetUserCourse({
+    user: userId,
+    course: '645548677d3184e5b411a08f' || courseId,
+    onError: (err) => {
+      const errorMessage = buildGetCourseInfoErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
   });
 
-  if (isLoading) return <h1>Carregando...</h1>;
+  if (isLoadingCourse) return <h1>Carregando...</h1>;
+  if (isError) return <Navigate to="/acesso-negado-curso" />;
+
   return (
     <Container>
       <MainDiv>
@@ -39,25 +46,7 @@ export default function Course() {
         <GreyLine />
         <MainSection>
           <CourseScroll chapters={course?.chapters} />
-          <VideoSectionDiv id="videoSection">
-            <VideoTitle>{currVideo?.title}</VideoTitle>
-            <Video src={Image} alt="CourseVideo" />
-            <Buttons>
-              <ChangeVideoButton onClick={previous}>
-                <DoubleLeftOutlined />
-                Anterior
-              </ChangeVideoButton>
-              <ChangeVideoButton onClick={next}>
-                Próximo
-                <DoubleRightOutlined />
-              </ChangeVideoButton>
-            </Buttons>
-            <a href={currVideo?.src} style={{ fontSize: '20px' }}>
-              Link do vídeo
-            </a>
-            <Subtitle>Descrição</Subtitle>
-            <Text>{currVideo?.description}</Text>
-          </VideoSectionDiv>
+          <VideoPlayer />
         </MainSection>
       </MainDiv>
     </Container>
