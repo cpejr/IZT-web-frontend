@@ -25,8 +25,9 @@ export default function VideoPlayer() {
   const previous = useVideoStore((state) => state.previous);
   const next = useVideoStore((state) => state.next);
 
-  const { data: currVideo, isInitialLoading } = useGetVideo({
+  const { data: currVideo, isLoading } = useGetVideo({
     videoId: currVideoId,
+    onSuccess: ({ progress }) => {},
     onError: (err) => {
       const errorMessage = buildGetVideoErrorMessage(err);
 
@@ -35,33 +36,26 @@ export default function VideoPlayer() {
   });
 
   useEffect(() => {
-    playerRef.current?.seekTo(120.7);
+    playerRef.current?.seekTo(12, 'seconds');
 
-    return () => {
-      console.log(videoProgress);
-      console.log('UNMOUTEEEEED');
-    };
-  }, []);
+    return () => console.log(videoProgress);
+  }, [videoProgress]);
 
-  if (isInitialLoading) return <Loading />;
-  if (!currVideo)
-    return (
-      <Container>
-        <h1>Esqueleto</h1>
-      </Container>
-    );
+  if (isLoading) return <Loading />;
   return (
     <Container>
       <VideoTitle>{currVideo?.title}</VideoTitle>
       <VideoContainer>
         <Player
-          ref={playerRef}
+          ref={(ref) => {
+            playerRef.current = ref;
+          }}
           url={currVideo?.url}
           width="100%"
           height="100%"
           controls
           config={playerConfig}
-          onProgress={({ played }) => setVideoProgress(100 * played)}
+          onProgress={({ played }) => setVideoProgress(100 * played)} // Turn to a number between 0 and 100
         />
       </VideoContainer>
       <Buttons>

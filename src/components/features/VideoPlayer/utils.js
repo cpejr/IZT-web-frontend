@@ -4,7 +4,6 @@ export const playerConfig = {
   file: {
     attributes: {
       controlsList: 'nodownload', // deactive download button
-      autoPlay: true, // Autoplay the video
     },
   },
 };

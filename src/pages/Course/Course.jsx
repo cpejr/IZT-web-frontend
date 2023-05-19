@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { CourseScroll, VideoPlayer } from '../../components/features';
 import { useGetUserCourse } from '../../hooks/query/courses';
 import useAuthStore from '../../stores/auth';
+import useVideoStore from '../../stores/video';
 import {
   Container,
   MainDiv,
@@ -17,6 +18,7 @@ import { buildGetCourseInfoErrorMessage } from './utils';
 
 export default function Course() {
   const { courseId } = useParams();
+  const currVideoId = useVideoStore((state) => state.currVideoId);
   const userId = useAuthStore((state) => state.auth?.user?._id);
 
   const {
@@ -46,7 +48,7 @@ export default function Course() {
         <GreyLine />
         <MainSection>
           <CourseScroll chapters={course?.chapters} />
-          <VideoPlayer />
+          {!currVideoId ? <h1>Nenhum vídeo</h1> : <VideoPlayer />}
         </MainSection>
       </MainDiv>
     </Container>
