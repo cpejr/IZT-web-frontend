@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import IZTLogo from '../../assets/IZTLogo.svg';
 import { DataInput } from '../../components/common';
@@ -15,12 +16,22 @@ import {
   SubmitButton,
   DataEntry,
 } from './Styles';
-import { redifinePasswordValidationSchema } from './utils';
+import {
+  redifinePasswordValidationSchema,
+  buildRedefinePasswordErrorMessage,
+} from './utils';
 
 export default function RedefinePassword() {
   const { token } = useParams();
-  const { data: redefinePassword, isLoading } = useRedefinePassword({
-    token,
+  const { mutate: redefinePassword, isLoading } = useRedefinePassword({
+    onSuccess: () => {
+      toast.success('Senha alterada com sucesso');
+    },
+    onError: (err) => {
+      const errorMessage = buildRedefinePasswordErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
   });
 
   const onSubmit = async ({ password }) => {
