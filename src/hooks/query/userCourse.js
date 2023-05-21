@@ -1,10 +1,24 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import {
+  getUserCourses,
   updateUserCourse,
   deleteUserCourse,
   createUserCourse,
 } from '../../services/api';
+
+export function useGetUserCourses({
+  filters,
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['user-courses', filters],
+    queryFn: () => getUserCourses(filters),
+    onSuccess,
+    onError,
+  });
+}
 
 export function useCreateUserCourse({
   onSuccess = () => {},

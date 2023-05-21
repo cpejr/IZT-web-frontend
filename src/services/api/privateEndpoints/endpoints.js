@@ -37,6 +37,12 @@ export const updateCategory = async ({ _id, newCategoryData }) => {
   return data;
 };
 
+export const getUserCourses = async (filters = {}) => {
+  const { data } = await privateApi.get('/user-courses', { params: filters });
+
+  return data;
+};
+
 export const createUserCourse = async (newUserCourseData) => {
   const { data } = await privateApi.post('/user-courses', newUserCourseData);
 

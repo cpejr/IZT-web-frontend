@@ -4,8 +4,10 @@ import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
 
 import { ModalAuthorizeAccess } from '../../components/features';
+import { useGetUserCourses } from '../../hooks/query/userCourse';
 import {
   Container,
   PageTitle,
@@ -21,27 +23,22 @@ import {
   ModalStyle,
   EditBtn,
 } from './Styles';
-
-const coursesAuth = [
-  {
-    email: 'jplp100@hotmail.com',
-    expiration: '12/08/2023',
-  },
-  {
-    email: 'thiago.r.fraga@hotmail.com',
-    expiration: '14/06/2023',
-  },
-  {
-    email: 'andrerobocop@hotmail.com',
-    expiration: '12/12/2023',
-  },
-];
+import { buildGetUserCoursesErrorMessage } from './utils';
 
 export default function CourseAuthorization() {
   const [modalCourseAuthorization, setModalCourseAuthorization] =
     useState(false);
   const [authorizeUser, setAuthorizeUser] = useState({});
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
+
+  // Backend calls
+  const { data: userCourses, isLoading: isLoadingUsers } = useGetUserCourses({
+    onError: (err) => {
+      const errorMessage = buildGetUserCoursesErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
+  });
 
   const openModalCourseAuthorization = (courseAuth) => {
     setAuthorizeUser(courseAuth);
@@ -79,17 +76,19 @@ export default function CourseAuthorization() {
               <SearchBox placeholder="Pesquisar Email" />
             </SearchContainer>
           </TableHeader>
-          {coursesAuth.map((courseAuth) => (
-            <ContentRow key={courseAuth.email}>
-              <p title={courseAuth.email}>{courseAuth.email}</p>
-              <MiddleData>{courseAuth.expiration}</MiddleData>
-              <EditBtn onClick={() => openModalCourseAuthorization(courseAuth)}>
+
+          {userCourses?.map((userCourse) => (
+            <ContentRow key={userCourse._id}>
+              <p title={userCourse.user.email}>{userCourse.user.email}</p>
+              <MiddleData>{userCourse.expiresAt}</MiddleData>
+              <EditBtn onClick={() => openModalCourseAuthorization(userCourse)}>
                 <TbPencil size={25} />
               </EditBtn>
             </ContentRow>
           ))}
         </Table>
       </AuthorizationDiv>
+
       <ModalStyle
         open={modalCourseAuthorization}
         onCancel={closeModalCourseAuthorization}
