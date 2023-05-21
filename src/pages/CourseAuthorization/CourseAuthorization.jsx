@@ -6,7 +6,10 @@ import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
-import { ModalAuthorizeAccess } from '../../components/features';
+import {
+  ModalAuthorizeAccess,
+  ModalEditAuthorizeAccess,
+} from '../../components/features';
 import { useGetUserCourses } from '../../hooks/query/userCourse';
 import {
   Container,
@@ -28,6 +31,8 @@ import { buildGetUserCoursesErrorMessage } from './utils';
 export default function CourseAuthorization() {
   const [modalCourseAuthorization, setModalCourseAuthorization] =
     useState(false);
+  const [modalEditCourseAuthorization, setModalEditCourseAuthorization] =
+    useState(false);
   const [authorizeUser, setAuthorizeUser] = useState({});
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
@@ -40,6 +45,7 @@ export default function CourseAuthorization() {
     },
   });
 
+  // Modal Course Authorization Functions
   const openModalCourseAuthorization = (courseAuth) => {
     setAuthorizeUser(courseAuth);
 
@@ -47,6 +53,15 @@ export default function CourseAuthorization() {
   };
   const closeModalCourseAuthorization = () =>
     setModalCourseAuthorization(false);
+
+  // Modal Edit Course Authorization Functions
+  const openModalEditCourseAuthorization = (courseAuth) => {
+    setAuthorizeUser(courseAuth);
+
+    setModalEditCourseAuthorization(true);
+  };
+  const closeModalEditCourseAuthorization = () =>
+    setModalEditCourseAuthorization(false);
 
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
@@ -81,7 +96,9 @@ export default function CourseAuthorization() {
             <ContentRow key={userCourse._id}>
               <p title={userCourse.user.email}>{userCourse.user.email}</p>
               <MiddleData>{userCourse.expiresAt}</MiddleData>
-              <EditBtn onClick={() => openModalCourseAuthorization(userCourse)}>
+              <EditBtn
+                onClick={() => openModalEditCourseAuthorization(userCourse)}
+              >
                 <TbPencil size={25} />
               </EditBtn>
             </ContentRow>
@@ -110,6 +127,31 @@ export default function CourseAuthorization() {
       >
         <ModalAuthorizeAccess
           close={closeModalCourseAuthorization}
+          data={authorizeUser}
+        />
+      </ModalStyle>
+
+      <ModalStyle
+        open={modalEditCourseAuthorization}
+        onCancel={closeModalEditCourseAuthorization}
+        width={500}
+        height={250}
+        padding={0}
+        footer={null}
+        closeIcon={modalCloseButton}
+        bodyStyle={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#123645',
+          color: 'white',
+          padding: 0,
+          borderRadius: 'none',
+        }}
+        centered
+        destroyOnClose
+      >
+        <ModalEditAuthorizeAccess
+          close={closeModalEditCourseAuthorization}
           data={authorizeUser}
         />
       </ModalStyle>
