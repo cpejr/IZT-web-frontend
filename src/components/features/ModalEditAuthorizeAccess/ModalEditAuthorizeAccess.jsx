@@ -33,7 +33,11 @@ export default function ModalEditAuthorizeAccess({ authorizedUser, close }) {
   const queryClient = useQueryClient();
 
   // Backend calls
-  const { mutate: updateUserCourse } = useUpdateUserCourse({
+  const {
+    mutate: updateUserCourse,
+    authorizedUser: userCourse,
+    isLoading: isLoadingUserCourses,
+  } = useUpdateUserCourse({
     onSuccess: () => {
       Promise.all([
         queryClient.invalidateQueries({
@@ -75,7 +79,20 @@ export default function ModalEditAuthorizeAccess({ authorizedUser, close }) {
               name="email"
               control={control}
               errors={errors}
-              defaultValue={authorizedUser?.user.email}
+              disabled
+              defaultValue={userCourse?.user?.email}
+              data={[
+                {
+                  label: userCourse?.user?.email,
+                  value: userCourse?._id,
+                },
+              ]}
+              filterOption={(input, option) =>
+                option?.key?.toLowerCase()?.includes(input?.toLowerCase())
+              }
+              showSearch
+              style={{ width: '400px' }}
+              size="large"
             />
           </div>
           <div>

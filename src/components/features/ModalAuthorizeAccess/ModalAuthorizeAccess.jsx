@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { QueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -22,21 +23,39 @@ import {
   Date,
 } from './Styles';
 import {
+  buildCreateUserCourseErrorMessage,
   buildGetUsersErrorMessage,
   modalAuthorizeAccessValidationSchema,
   themeDatePicker,
 } from './utils';
 
-export default function ModalAuthorizeAccess({ close, data }) {
+export default function ModalAuthorizeAccess({ close }) {
   // Variables
   const [isPending, setIsPending] = useState(false); // Important for modal loading
 
   // Backend calls
-  const { data: users, isLoading: isLoadingUsers } = useGetUsers({
+  const { data: users, isLoading: isLoadingUserCourses } = useGetUsers({
     onError: (err) => {
       const errorMessage = buildGetUsersErrorMessage(err);
 
       toast.error(errorMessage);
+    },
+  });
+
+  const { mutate: createUserCourse } = useCreateUserCourse({
+    onSuccess: () => {
+      QueryClient.invalidateQueries({
+        queryKey: ['user-courses'],
+      });
+
+      toast.success('Autorização ao curso concedida com sucesso!');
+      close();
+    },
+    onError: (err) => {
+      const errorMessage = buildCreateUserCourseErrorMessage(err);
+
+      toast.error(errorMessage);
+      setIsPending(false);
     },
   });
 
@@ -48,7 +67,7 @@ export default function ModalAuthorizeAccess({ close, data }) {
     resolver: zodResolver(modalAuthorizeAccessValidationSchema),
   });
   const onSubmit = (authorizedUser) => {
-    console.log(authorizedUser);
+    createUserCourse(authorizedUser);
     setIsPending(true);
     close();
   };
@@ -115,9 +134,4 @@ export default function ModalAuthorizeAccess({ close, data }) {
 
 ModalAuthorizeAccess.propTypes = {
   close: PropTypes.func.isRequired,
-  data: PropTypes.object,
-};
-
-ModalAuthorizeAccess.defaultProps = {
-  data: {},
 };
