@@ -3,7 +3,7 @@ import Software from '../../assets/homePage/cards/software.png';
 import Training from '../../assets/homePage/cards/training.png';
 import carouselData from '../../assets/homePage/carousel/data';
 import Image from '../../assets/homePage/imagemDaEmpresa.png';
-import { Carousel, FormsContact, Card } from '../../components/features';
+import { FormsContact, Card, NewCarousel } from '../../components/features';
 import {
   AboutUs,
   Container,
@@ -12,17 +12,16 @@ import {
   Picture,
   CardsContainer,
   OuterDiv,
+  CarouselContainer,
 } from './Styles';
 
 export default function Home() {
   return (
     <OuterDiv>
       <Container>
-        <Carousel
-          maxHeight="500px"
-          aspectRatio="24 / 7"
-          carouselData={carouselData}
-        />
+        <CarouselContainer>
+          <NewCarousel carouselData={carouselData} />
+        </CarouselContainer>
         <CardsContainer>
           <Card
             title="Treinamento em Retificação Centerless"
