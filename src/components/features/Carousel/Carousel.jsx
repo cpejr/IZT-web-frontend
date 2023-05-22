@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -17,6 +16,8 @@ import {
   MiniImageContainer,
   Dots,
   NavButtons,
+  StyledSwiperSlide,
+  StyledSwiper,
 } from './Styles';
 
 export default function Carousel({
@@ -63,72 +64,74 @@ export default function Carousel({
   // };
 
   return (
-    <Container
-      maxHeight={maxHeight}
-      maxWidth={maxWidth}
-      width={width}
-      height={height}
-      aspectRatio={aspectRatio}
-      // onTouchStart={onTouchStart}
-      // onTouchMove={onTouchMove}
-      // onTouchEnd={onTouchEnd}
+    // <Container
+    //   maxHeight={maxHeight}
+    //   maxWidth={maxWidth}
+    //   width={width}
+    //   height={height}
+    //   aspectRatio={aspectRatio}
+    //   onTouchStart={onTouchStart}
+    //   onTouchMove={onTouchMove}
+    //   onTouchEnd={onTouchEnd}
+    // >
+    //   <ImagesContainer>
+    //     <Inner currentImageIndex={currentImageIndex}>
+    //       {carouselData.map(({ src, name, alt }) => (
+    //         <ImageContainer key={name}>
+    //           <img src={src} alt={alt} />
+    //         </ImageContainer>
+    //       ))}
+    //     </Inner>
+    //   </ImagesContainer>
+
+    <StyledSwiper
+      cssMode
+      navigation
+      pagination
+      mousewheel
+      keyboard
+      modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+      className="mySwiper"
     >
-      {/* <ImagesContainer>
-        <Inner currentImageIndex={currentImageIndex}>
-          {carouselData.map(({ src, name, alt }) => (
-            <ImageContainer key={name}>
-              <img src={src} alt={alt} />
-            </ImageContainer>
-          ))}
-        </Inner>
-      </ImagesContainer> */}
+      {carouselData.map(({ src, name, alt }) => (
+        <StyledSwiperSlide key={name}>
+          <img src={src} alt={alt} />
+        </StyledSwiperSlide>
+      ))}
+    </StyledSwiper>
 
-      <Swiper
-        cssMode
-        navigation
-        pagination
-        mousewheel
-        keyboard
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-        className="mySwiper"
-      >
-        {carouselData.map(({ src, name, alt }) => (
-          <SwiperSlide key={name} src={src} alt={alt} />
-        ))}
-      </Swiper>
+    //   <NavButtons>
+    //     <Button
+    //       type="button"
+    //       onClick={() => updateImage(currentImageIndex - 1)}
+    //     >
+    //       <MdKeyboardArrowLeft />
+    //     </Button>
 
-      {/* <NavButtons>
-        <Button
-          type="button"
-          onClick={() => updateImage(currentImageIndex - 1)}
-        >
-          <MdKeyboardArrowLeft />
-        </Button>
+    //     {carouselData.map(({ src, name, alt }, index) =>
+    //       miniImages ? (
+    //         <MiniImageContainer
+    //           key={name}
+    //           active={index === currentImageIndex}
+    //           onClick={() => updateImage(index)}
+    //         >
+    //           <img src={src} alt={alt} />
+    //         </MiniImageContainer>
+    //       ) : (
+    //         <Dots
+    //           type="button"
+    //           key={name}
+    //           active={index === currentImageIndex}
+    //           onClick={() => updateImage(index)}
+    //         />
+    //       )
+    //     )}
 
-        {carouselData.map(({ src, name, alt }, index) =>
-          miniImages ? (
-            <MiniImageContainer
-              key={name}
-              active={index === currentImageIndex}
-              onClick={() => updateImage(index)}
-            >
-              <img src={src} alt={alt} />
-            </MiniImageContainer>
-          ) : (
-            <Dots
-              type="button"
-              key={name}
-              active={index === currentImageIndex}
-              onClick={() => updateImage(index)}
-            />
-          )
-        )}
-
-        <Button onClick={() => updateImage(currentImageIndex + 1)}>
-          <MdKeyboardArrowRight />
-        </Button>
-      </NavButtons> */}
-    </Container>
+    //     <Button onClick={() => updateImage(currentImageIndex + 1)}>
+    //       <MdKeyboardArrowRight />
+    //     </Button>
+    //   </NavButtons>
+    // </Container>
   );
 }
 
