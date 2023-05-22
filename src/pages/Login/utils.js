@@ -20,7 +20,7 @@ export const loginValidationSchema = z.object({
 
 // Error Handling
 const loginErrorMessages = {
-  [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',
+  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
   [ERROR_CODES.UNAUTHORIZED]: 'E-mail ou senha incorretos',
   [ERROR_CODES.FORBIDDEN]:
     'A sua conta ainda não foi ativada. Por favor verifique o e-mail',

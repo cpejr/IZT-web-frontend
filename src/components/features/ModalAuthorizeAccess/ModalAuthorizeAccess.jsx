@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { QueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -32,6 +32,7 @@ import {
 export default function ModalAuthorizeAccess({ close }) {
   // Variables
   const [isPending, setIsPending] = useState(false); // Important for modal loading
+  const queryClient = useQueryClient();
 
   // Backend calls
   const { data: users, isLoading: isLoadingUserCourses } = useGetUsers({
@@ -44,7 +45,7 @@ export default function ModalAuthorizeAccess({ close }) {
 
   const { mutate: createUserCourse } = useCreateUserCourse({
     onSuccess: () => {
-      QueryClient.invalidateQueries({
+      queryClient.invalidateQueries({
         queryKey: ['user-courses'],
       });
 
@@ -62,14 +63,17 @@ export default function ModalAuthorizeAccess({ close }) {
   // Form handlers
   const {
     handleSubmit,
-    register,
     formState: { errors },
     control,
   } = useForm({
     resolver: zodResolver(modalAuthorizeAccessValidationSchema),
   });
-  const onSubmit = (authorizedUser) => {
-    createUserCourse(authorizedUser);
+  const onSubmit = ({ userId, expiresAt }) => {
+    createUserCourse({
+      user: userId,
+      expiresAt,
+      course: '645548677d3184e5b411a08f',
+    });
     setIsPending(true);
     close();
   };
@@ -81,9 +85,8 @@ export default function ModalAuthorizeAccess({ close }) {
           <div>
             <Label>Email:</Label>
             <FormSelect
-              id="email"
-              name="email"
-              {...register('user.email')}
+              id="userId"
+              name="userId"
               control={control}
               errors={errors}
               data={users?.map(({ _id, email }) => ({
@@ -107,7 +110,6 @@ export default function ModalAuthorizeAccess({ close }) {
                   control={control}
                   id="expiresAt"
                   name="expiresAt"
-                  {...register('expiresAt')}
                   render={({ field: { onChange, onBlur } }) => (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <Date

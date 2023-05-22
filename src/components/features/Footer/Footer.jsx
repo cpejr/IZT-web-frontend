@@ -65,8 +65,8 @@ export default function Footer() {
 
         <SectionGoTo>
           <Tittle>Ir para</Tittle>
-          <GoTo to="/">Produtos</GoTo>
-          <GoTo to="/">Cursos</GoTo>
+          <GoTo to="/catalogo">Produtos</GoTo>
+          <GoTo to="/curso">Cursos</GoTo>
           <GoTo to="/">Software</GoTo>
         </SectionGoTo>
       </SideContainer>

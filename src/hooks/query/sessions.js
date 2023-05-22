@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { login, logout, refresh } from '../../services/api';
+import { login, logout, refresh } from '../../services/api/endpoints';
 import useAuthStore from '../../stores/auth';
 import { getIsLoggedIn, removeIsLoggedIn } from '../../utils/isLoggedIn';
 
@@ -33,13 +33,14 @@ export function useRefreshToken({
     console.error(err);
   },
 } = {}) {
-  const { auth } = useAuthStore();
+  const expireIn = useAuthStore((state) => state.auth?.expireIn);
 
   return useQuery({
     queryKey: ['refresh'],
     queryFn: refresh,
     onError,
     onSuccess,
-    enabled: !!getIsLoggedIn() && !auth,
+    refetchInterval: expireIn * 1000, // Milliseconds
+    enabled: !!getIsLoggedIn(),
   });
 }

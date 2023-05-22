@@ -276,7 +276,7 @@ export default function EditProductMobile() {
           <p>{isLoadingUpdate ? 'Carregando...' : 'Editar produto'}</p>
         </SaveButton>
 
-        <CancelButton to="/administrador">
+        <CancelButton to="/administrador/listar-produtos">
           <p>Cancelar</p>
         </CancelButton>
       </Form>

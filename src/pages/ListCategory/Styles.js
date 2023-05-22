@@ -96,8 +96,8 @@ export const SearchProduct = styled.input`
 `;
 
 export const Row = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 40px 40px;
   justify-content: space-between;
   align-items: center;
 `;
@@ -138,6 +138,17 @@ export const Subsection = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
+`;
+
+export const DeleteButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  svg {
+    height: 23px;
+    width: 23px;
+  }
 `;
 
 export const SearchSection = styled.div`

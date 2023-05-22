@@ -246,7 +246,7 @@ export default function CreateProductMobile() {
         </SaveButton>
 
         <CancelButton
-          to="/administrador"
+          to="/administrador/listar-produtos"
           disabled={isLoadingCreate || isLoadingCategories}
         >
           <p>Cancelar</p>

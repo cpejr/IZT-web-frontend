@@ -5,7 +5,7 @@ import {
   updateUserCourse,
   deleteUserCourse,
   createUserCourse,
-} from '../../services/api';
+} from '../../services/api/endpoints';
 
 export function useGetUserCourses({
   filters,
