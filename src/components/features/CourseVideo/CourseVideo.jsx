@@ -6,12 +6,12 @@ import useVideoStore from '../../../stores/video';
 import { ScrollIcon, TopicDiv, Topics, VideoTime } from './Styles';
 
 export default function CourseVideo({ video }) {
+  const currVideoId = useVideoStore((state) => state.currVideoId);
   const setCurrVideoId = useVideoStore((state) => state.setCurrVideoId);
-  const isCompleted = video.progress === 100;
 
   return (
-    <TopicDiv>
-      <div style={{ flexDirection: 'row-reverse' }}>
+    <TopicDiv active={video._id === currVideoId} title={video.title}>
+      <div>
         <Topics
           onClick={() => {
             setCurrVideoId(video._id);
@@ -20,8 +20,8 @@ export default function CourseVideo({ video }) {
           {video.title}
         </Topics>
         <ScrollIcon
-          src={isCompleted ? FinishedVideo : UnfinishedVideo}
-          alt="videoState"
+          src={video.isCompleted ? FinishedVideo : UnfinishedVideo}
+          alt="video state"
         />
       </div>
       <VideoTime>{video.formatedDuration}</VideoTime>

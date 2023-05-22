@@ -3,35 +3,43 @@ import styled from 'styled-components';
 export const TopicDiv = styled.div`
   display: flex;
   justify-content: space-between;
+
+  padding: 5px 10px;
   margin-bottom: 10px;
 
-  div {
+  & > div {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     gap: 5px;
   }
+
+  & > div:nth-child(1) {
+    flex-direction: row-reverse;
+  }
+
+  background-color: ${({ active }) => (active ? '#f5f5f5' : 'none')};
 `;
 
 export const ScrollIcon = styled.img`
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 2rem;
+  height: 2rem;
 `;
 
 export const Topics = styled.p`
   font-weight: 500;
-  font-size: 1.4em;
+  font-size: 2rem;
   line-height: 24px;
 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 7.5rem;
+  max-width: 15rem;
 
   color: #202020;
 
   :hover {
     cursor: pointer;
-    overflow: visible;
   }
 
   @media (max-width: 800px) {

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons';
 import { toast } from 'react-toastify';
 
-import { useGetVideo } from '../../../hooks/query/chapters';
+import { useGetVideo } from '../../../hooks/query/videos';
 import useVideoStore from '../../../stores/video';
 import { Loading } from '../../common';
 import {
@@ -27,7 +27,6 @@ export default function VideoPlayer() {
 
   const { data: currVideo, isLoading } = useGetVideo({
     videoId: currVideoId,
-    onSuccess: ({ progress }) => {},
     onError: (err) => {
       const errorMessage = buildGetVideoErrorMessage(err);
 
@@ -36,26 +35,33 @@ export default function VideoPlayer() {
   });
 
   useEffect(() => {
-    playerRef.current?.seekTo(12, 'seconds');
+    const player = playerRef.current;
+    // player?.seekTo(currVideo?.progress, 'seconds');
 
-    return () => console.log(videoProgress);
-  }, [videoProgress]);
+    console.log(player?.getCurrentTime());
+    return () => {
+      console.log(player?.getCurrentTime());
+    };
+  }, [currVideo, videoProgress]);
 
-  if (isLoading) return <Loading />;
+  if (isLoading)
+    return (
+      <Container>
+        <Loading />;
+      </Container>
+    );
   return (
     <Container>
       <VideoTitle>{currVideo?.title}</VideoTitle>
       <VideoContainer>
         <Player
-          ref={(ref) => {
-            playerRef.current = ref;
-          }}
+          ref={playerRef}
           url={currVideo?.url}
           width="100%"
           height="100%"
           controls
           config={playerConfig}
-          onProgress={({ played }) => setVideoProgress(100 * played)} // Turn to a number between 0 and 100
+          // onProgress={({ played }) => setVideoProgress(100 * played)} // Turn to a number between 0 and 100
         />
       </VideoContainer>
       <Buttons>

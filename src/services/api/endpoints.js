@@ -159,8 +159,10 @@ export const getCourseById = async ({ user, course }) => {
   setState(data?.chapters);
   return data;
 };
+
+// User Progress
 export const getVideo = async (videoId) => {
-  const { data } = await api.get(`/chapters/video/${videoId}`);
+  const { data } = await api.get(`/videos/${videoId}`);
 
   return data;
 };

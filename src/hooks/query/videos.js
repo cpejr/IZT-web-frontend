@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getVideo } from '../../services/api/endpoints';
 
-/* eslint-disable import/prefer-default-export */
+// eslint-disable-next-line import/prefer-default-export
 export function useGetVideo({
   videoId,
   onSuccess = () => {},

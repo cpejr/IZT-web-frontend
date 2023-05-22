@@ -27,7 +27,7 @@ export default function Course() {
     isLoadingCourse,
   } = useGetUserCourse({
     user: userId,
-    course: '645548677d3184e5b411a08f' || courseId,
+    course: '646acfad1bae8cb3a56a05f4' || courseId,
     onError: (err) => {
       const errorMessage = buildGetCourseInfoErrorMessage(err);
 

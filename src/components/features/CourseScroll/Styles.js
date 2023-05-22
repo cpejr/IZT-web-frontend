@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Scroll = styled.div`
   display: grid;
 
-  width: 25%;
   height: 100%;
 
   @media (max-width: 800px) {
@@ -14,7 +13,7 @@ export const Scroll = styled.div`
 
 export const SubtitleScroll = styled.p`
   font-weight: 600;
-  font-size: 1.56rem;
+  font-size: 2rem;
   line-height: 30px;
   margin-bottom: 0.3em;
 
@@ -22,10 +21,10 @@ export const SubtitleScroll = styled.p`
 
   @media (max-width: 800px) {
     color: ${(props) => props.theme.colors.darkBlue};
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
   @media (max-width: 475px) {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
   }
 `;
 
