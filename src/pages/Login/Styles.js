@@ -11,103 +11,115 @@ export const Page = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 25px 0px;
-  font-size: 22px;
+  padding: 2.5rem 0rem;
+  /* font-size: 22px;
   @media (max-width: ${breakValue}) {
     font-size: 15px;
-  }
+  } */
 `;
 
 export const Container = styled.div`
   width: 90%;
   height: auto;
-  max-width: 600px;
-  border-radius: 30px;
-  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
+  max-width: 60rem;
+  border-radius: 3rem;
+  box-shadow: 0rem 0rem 1rem 0.5rem rgba(0, 0, 0, 0.25);
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2em 0.5em;
-  gap: 1.4em;
+  padding: 4.4rem 1.1rem;
+  gap: 3rem;
   @media (max-width: ${breakValue}) {
-    padding: 50px 10%;
+    padding: 5rem 10%;
     @media (min-width: 550px) {
       width: 70%;
     }
   }
   @media (max-width: 390px) {
-    padding: 50px 10px;
+    padding: 5rem 1rem;
   }
 `;
 
 export const Logo = styled.img`
-  width: 4em;
-  max-height: 100px;
+  width: 8.8rem;
+  max-height: 10rem;
+  @media (max-width: ${breakValue}) {
+    width: 6rem;
+  }
 `;
 
 export const DataEntry = styled.div`
-  max-width: 500px;
+  max-width: 50rem;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.2em;
+  gap: 2.64rem;
+  @media (max-width: ${breakValue}) {
+    gap: 1.8rem;
+  }
 `;
 
 export const Title = styled.h1`
   color: ${(props) => props.theme.colors.blue};
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 1.5em;
+  font-size: 3.3rem;
   font-weight: 700;
   text-align: center;
+  @media (max-width: ${breakValue}) {
+    font-size: 2.25rem;
+  }
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1em;
+  gap: 2.2rem;
   width: 100%;
+  @media (max-width: ${breakValue}) {
+    gap: 1.5rem;
+  }
 `;
 
 export const SubmitButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
 
   width: 100%;
-  max-width: 300px;
-  height: 53px;
+  max-width: 30rem;
+  height: 5.3rem;
 
-  border: 1px solid #000000;
-  border-radius: 10px;
+  border: 0.1rem solid #000000;
+  border-radius: 1rem;
 
   background-color: ${(props) => props.theme.colors.blue};
 
-  margin-top: 20px;
+  margin-top: 2rem;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 1em;
+  font-size: 2.2rem;
   font-weight: 600;
 
   color: white;
   cursor: pointer;
 
-  @media (max-width: 700px) {
+  @media (max-width: ${breakValue}) {
     align-items: center;
     justify-content: center;
     width: 100%;
-    font-size: 1em;
-    height: 38px;
+    font-size: 1.5rem;
+    height: 3.8rem;
   }
 `;
 
 export const ForgotPassword = styled(Link)`
   all: unset;
 
-  font-size: 0.7em;
+  font-size: 1.54rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   color: ${(props) => props.theme.colors.gray.darkGray};
   font-weight: 600;
@@ -117,11 +129,12 @@ export const ForgotPassword = styled(Link)`
   }
   @media (max-width: ${breakValue}) {
     font-weight: 700;
+    font-size: 1.05rem;
   }
 `;
 
 export const SignUpLink = styled.p`
-  font-size: 0.7em;
+  font-size: 1.54rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   color: black;
   font-weight: 700;
@@ -137,15 +150,21 @@ export const SignUpLink = styled.p`
       cursor: pointer;
     }
   }
+  @media (max-width: ${breakValue}) {
+    font-size: 1.05rem;
+  }
   @media (max-width: 315px) {
-    width: 200px;
+    width: 20rem;
   }
 `;
 
 export const Links = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 1.1rem;
   align-items: center;
   text-align: center;
+  @media (max-width: ${breakValue}) {
+    gap: 0.75rem;
+  }
 `;
