@@ -59,8 +59,10 @@ export default function ModalAuthorizeAccess({ close }) {
     },
   });
 
+  // Form handlers
   const {
     handleSubmit,
+    register,
     formState: { errors },
     control,
   } = useForm({
@@ -79,7 +81,9 @@ export default function ModalAuthorizeAccess({ close }) {
           <div>
             <Label>Email:</Label>
             <FormSelect
+              id="email"
               name="email"
+              {...register('user.email')}
               control={control}
               errors={errors}
               data={users?.map(({ _id, email }) => ({
@@ -101,7 +105,9 @@ export default function ModalAuthorizeAccess({ close }) {
               <ThemeProvider theme={themeDatePicker}>
                 <Controller
                   control={control}
-                  name="accessExpiration"
+                  id="expiresAt"
+                  name="expiresAt"
+                  {...register('expiresAt')}
                   render={({ field: { onChange, onBlur } }) => (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <Date
