@@ -62,7 +62,7 @@ export default function CourseAuthorization() {
   };
   const closeModalEditCourseAuthorization = () =>
     setModalEditCourseAuthorization(false);
-
+  console.log(authorizeUser);
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
@@ -95,7 +95,11 @@ export default function CourseAuthorization() {
           {userCourses?.map((userCourse) => (
             <ContentRow key={userCourse._id}>
               <p title={userCourse.user.email}>{userCourse.user.email}</p>
-              <MiddleData>{userCourse.expiresAt}</MiddleData>
+              <MiddleData>
+                {new Intl.DateTimeFormat('pt-BR').format(
+                  new Date(userCourse.expiresAt)
+                )}
+              </MiddleData>
               <EditBtn
                 onClick={() => openModalEditCourseAuthorization(userCourse)}
               >
@@ -125,10 +129,7 @@ export default function CourseAuthorization() {
         centered
         destroyOnClose
       >
-        <ModalAuthorizeAccess
-          close={closeModalCourseAuthorization}
-          data={authorizeUser}
-        />
+        <ModalAuthorizeAccess close={closeModalCourseAuthorization} />
       </ModalStyle>
 
       <ModalStyle
@@ -152,7 +153,7 @@ export default function CourseAuthorization() {
       >
         <ModalEditAuthorizeAccess
           close={closeModalEditCourseAuthorization}
-          data={authorizeUser}
+          authorizeUser={authorizeUser}
         />
       </ModalStyle>
     </Container>
