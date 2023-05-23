@@ -4,13 +4,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 export const StyledSwiper = styled(Swiper)`
   aspect-ratio: 24 / 7;
   width: 100%;
-  max-width: 1440px;
-  max-height: 500px;
+  max-width: 90rem;
+  //max-height: 31.25rem;
   overflow-x: hidden;
 `;
 export const StyledSwiperSlide = styled(SwiperSlide)`
   text-align: center;
-  font-size: 18px;
+  font-size: 1.125rem;
   background: #fff;
 
   img {
