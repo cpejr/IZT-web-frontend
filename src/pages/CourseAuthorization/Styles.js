@@ -137,7 +137,7 @@ export const SearchBox = styled.input`
 export const ContentRow = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 0.3fr 0.3fr;
   grid-template-rows: 2.5em;
   align-items: center;
   padding: 5px 20px;
@@ -157,13 +157,13 @@ export const ContentRow = styled.div`
     justify-self: end;
   }
   @media (max-width: 930px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 2fr 0.5fr 0.5fr;
   }
   @media (max-width: 700px) {
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1.5fr 0.3fr 0.3fr;
   }
   @media (max-width: 550px) {
-    grid-template-columns: 1fr 1fr 25px;
+    grid-template-columns: 2fr 1.5fr 0.3fr 0.3fr;
     padding-left: 0px;
   }
 `;
@@ -188,5 +188,16 @@ export const EditBtn = styled.button`
   justify-self: flex-end;
   :hover {
     cursor: pointer;
+  }
+`;
+
+export const DeleteButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  svg {
+    height: 23px;
+    width: 23px;
   }
 `;

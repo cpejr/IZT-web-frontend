@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
-import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
+import { PlusOutlined, CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
 import {
+  ModalDeleteAuthorizeAccess,
   ModalAuthorizeAccess,
   ModalEditAuthorizeAccess,
 } from '../../components/features';
@@ -25,6 +26,7 @@ import {
   MiddleData,
   ModalStyle,
   EditBtn,
+  DeleteButton,
 } from './Styles';
 import { buildGetUserCoursesErrorMessage } from './utils';
 
@@ -33,6 +35,9 @@ export default function CourseAuthorization() {
     useState(false);
   const [modalEditCourseAuthorization, setModalEditCourseAuthorization] =
     useState(false);
+  const [modalDeleteAuthorizeAccess, setModalDeleteAuthorizeAccess] =
+    useState(false);
+  const [userCourseId, setUserCourseId] = useState('');
   const [authorizeUser, setAuthorizeUser] = useState({});
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
@@ -62,7 +67,15 @@ export default function CourseAuthorization() {
   };
   const closeModalEditCourseAuthorization = () =>
     setModalEditCourseAuthorization(false);
-  console.log(authorizeUser);
+
+  // Modal Delete Course Authorization Functions
+  const openModalDeleteAuthorizeAccess = (_id) => {
+    setUserCourseId(_id);
+    setModalDeleteAuthorizeAccess(true);
+  };
+  const closeModalDeleteAuthorizeAccess = () =>
+    setModalDeleteAuthorizeAccess(false);
+
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
@@ -105,6 +118,12 @@ export default function CourseAuthorization() {
               >
                 <TbPencil size={25} />
               </EditBtn>
+
+              <DeleteButton>
+                <DeleteOutlined
+                  onClick={() => openModalDeleteAuthorizeAccess(userCourse._id)}
+                />
+              </DeleteButton>
             </ContentRow>
           ))}
         </Table>
@@ -154,6 +173,24 @@ export default function CourseAuthorization() {
         <ModalEditAuthorizeAccess
           close={closeModalEditCourseAuthorization}
           authorizeUser={authorizeUser}
+        />
+      </ModalStyle>
+      <ModalStyle
+        open={modalDeleteAuthorizeAccess}
+        onCancel={closeModalDeleteAuthorizeAccess}
+        footer={null}
+        width={500}
+        closeIcon={modalCloseButton}
+        destroyOnClose
+        centered
+        bodyStyle={{
+          background: '#123645',
+          color: 'white',
+        }}
+      >
+        <ModalDeleteAuthorizeAccess
+          _id={userCourseId}
+          close={closeModalDeleteAuthorizeAccess}
         />
       </ModalStyle>
     </Container>
