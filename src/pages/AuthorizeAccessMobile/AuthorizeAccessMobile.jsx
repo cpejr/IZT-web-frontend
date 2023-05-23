@@ -4,11 +4,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { useQueryClient } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
 import { useMediaQuery } from 'react-responsive';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { FormSelect } from '../../components/common';
+import { useCreateUserCourse } from '../../hooks/query/userCourse';
+import { useGetUsers } from '../../hooks/query/users';
 import {
   Container,
   Form,
@@ -21,19 +25,45 @@ import {
   ErrorMessage,
   Date,
 } from './Styles';
-import { authorizeAccessValidationSchema, themeDatePicker } from './utils';
-
-export const emails = [
-  { label: 'thiagofraga@cpejr.com.br', value: 'thiagofraga@cpejr.com.br' },
-  { label: 'amandaalves@cpejr.com.br', value: 'amandaalves@cpejr.com.br' },
-  { label: 'joaopiraja@cpejr.com.br', value: 'joaopiraja@cpejr.com.br' },
-];
+import {
+  authorizeAccessValidationSchema,
+  themeDatePicker,
+  buildCreateUserCourseErrorMessage,
+  buildGetUsersErrorMessage,
+} from './utils';
 
 export default function AuthorizeAccessMobile() {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false); // Important for modal loading
+  const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
+  // Backend calls
+  const { data: users, isLoading: isLoadingUserCourses } = useGetUsers({
+    onError: (err) => {
+      const errorMessage = buildGetUsersErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
+  });
+
+  const { mutate: createUserCourse } = useCreateUserCourse({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['user-courses'],
+      });
+
+      toast.success('Autorização ao curso concedida com sucesso!');
+    },
+    onError: (err) => {
+      const errorMessage = buildCreateUserCourseErrorMessage(err);
+
+      toast.error(errorMessage);
+      setIsLoading(false);
+    },
+  });
+
+  // Form handlers
   const {
     handleSubmit,
     control,
@@ -41,8 +71,12 @@ export default function AuthorizeAccessMobile() {
   } = useForm({
     resolver: zodResolver(authorizeAccessValidationSchema),
   });
-  const onSubmit = (authorizedUser) => {
-    console.log(authorizedUser);
+  const onSubmit = ({ userId, expiresAt }) => {
+    createUserCourse({
+      user: userId,
+      expiresAt,
+      course: '645548677d3184e5b411a08f',
+    });
     setIsLoading(true);
     navigate('/administrador/liberacao-cursos');
   };
@@ -57,10 +91,14 @@ export default function AuthorizeAccessMobile() {
         <div>
           <Label>Email:</Label>
           <FormSelect
-            name="email"
+            id="userId"
+            name="userId"
             control={control}
             errors={errors}
-            data={emails}
+            data={users?.map(({ _id, email }) => ({
+              label: email,
+              value: _id,
+            }))}
             placeholder="Selecione o email"
             filterOption={(input, option) =>
               option?.key?.toLowerCase()?.includes(input?.toLowerCase())
@@ -76,7 +114,8 @@ export default function AuthorizeAccessMobile() {
             <ThemeProvider theme={themeDatePicker}>
               <Controller
                 control={control}
-                name="accessExpiration"
+                id="expiresAt"
+                name="expiresAt"
                 render={({ field: { onChange, onBlur } }) => (
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <Date
