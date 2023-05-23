@@ -1,11 +1,18 @@
+import { useState } from 'react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Country } from 'country-state-city';
 import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import IZTLogo from '../../assets/IZTLogo.svg';
-import { RegisterInput, SubmitButton } from '../../components/common';
+import {
+  RegisterInput,
+  RegisterSelect,
+  SubmitButton,
+} from '../../components/common';
 import { useCreateUser } from '../../hooks/query/users';
 import {
   Page,
@@ -20,6 +27,13 @@ import {
 import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
 
 export default function Register() {
+  let countryData = Country.getAllCountries();
+  const [stateData, setStateData] = useState();
+  const [cityData, setCityData] = useState();
+
+  const [country, setCountry] = useState(countryData[0]);
+  const [state, setState] = useState();
+  const [city, setCity] = useState();
   const navigate = useNavigate();
   const { mutate: createUser, isLoading } = useCreateUser({
     onSuccess: (user) => {
@@ -89,15 +103,18 @@ export default function Register() {
             </FormColumn>
             <FormColumn>
               <Subtitle>Endereço</Subtitle>
-              <RegisterInput
+              <RegisterSelect
                 label="País: "
                 name="country"
                 placeholder="Nome do país"
                 register={register}
                 errors={errors}
+                data={countryData}
+                selected={country}
+                setSelected={setCountry}
                 type="text"
               />
-              <RegisterInput
+              <RegisterSelect
                 label="Estado: "
                 name="state"
                 placeholder="Nome do estado"
@@ -105,7 +122,7 @@ export default function Register() {
                 errors={errors}
                 type="text"
               />
-              <RegisterInput
+              <RegisterSelect
                 label="Cidade: "
                 name="city"
                 placeholder="Nome da cidade"
