@@ -8,36 +8,36 @@ export const ContactUs = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 50px 0px;
+  padding: 5rem 0rem;
 
   width: 100%;
 
   background-color: ${(props) => props.theme.colors.darkBlue};
 
   @media (max-width: ${firstBreakPoint}) {
-    padding: 30px 0px;
-    gap: 0px;
+    padding: 3rem 0rem;
+    gap: 0rem;
   }
 `;
 
 export const Title = styled.p`
   color: white;
 
-  font-size: 30px;
+  font-size: 3rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 600;
 
-  padding-bottom: 40px;
+  padding-bottom: 4rem;
 
   @media (max-width: ${firstBreakPoint}) {
-    font-size: 24px;
-    line-height: 39px;
-    height: 39px;
+    font-size: 2.4rem;
+    line-height: 3.9rem;
+    height: 3.9rem;
 
-    padding-bottom: 60px;
+    padding-bottom: 6rem;
   }
   @media (max-width: ${secondBreakPoint}) {
-    font-size: 18px;
+    font-size: 1.8rem;
   }
 `;
 
@@ -49,7 +49,7 @@ export const Form = styled.form`
 
   height: 100%;
   width: 80%;
-  max-width: 1440px;
+  max-width: 144rem;
 
   @media (max-width: ${firstBreakPoint}) {
     width: 85%;
@@ -65,7 +65,7 @@ export const Container = styled.div`
   width: 100%;
 
   @media (max-width: ${firstBreakPoint}) {
-    gap: 10px;
+    gap: 1rem;
     flex-direction: column;
   }
 `;
@@ -73,7 +73,7 @@ export const Container = styled.div`
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2rem;
 
   width: 48.5%;
   height: 100%;
@@ -85,14 +85,14 @@ export const Section = styled.div`
 
 export const Subsection = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 2rem;
 
-  padding: 0px;
+  padding: 0rem;
 
   width: 100%;
 
   > div {
-    width: calc(50% - 20px / 2);
+    width: calc(50% - 2rem / 2);
   }
 `;
 
@@ -101,27 +101,27 @@ export const SubmitButton = styled.button`
   color: white;
   background-color: #23a4a6;
 
-  font-size: 24px;
+  font-size: 2.4rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 700;
 
-  width: 500px;
-  height: 57px;
-  margin-top: 40px;
-  line-height: 29px;
+  width: 50rem;
+  height: 5.7rem;
+  margin-top: 4rem;
+  line-height: 2.9rem;
 
   border: none;
-  border-radius: 4px;
+  border-radius: 0.4rem;
 
   @media (max-width: ${firstBreakPoint}) {
     width: 50%;
-    font-size: 18px;
-    height: 44px;
+    font-size: 1.8rem;
+    height: 4.4rem;
   }
   @media (max-width: ${secondBreakPoint}) {
-    font-size: 12px;
-    height: 30px;
-    margin-top: 25px;
+    font-size: 1.2rem;
+    height: 3rem;
+    margin-top: 2.5rem;
   }
   cursor: pointer;
   transition-duration: 0.3s;
