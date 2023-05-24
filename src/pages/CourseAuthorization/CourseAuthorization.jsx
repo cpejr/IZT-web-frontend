@@ -6,6 +6,7 @@ import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
+import { Loading } from '../../components/common';
 import {
   ModalDeleteAuthorizeAccess,
   ModalAuthorizeAccess,
@@ -17,6 +18,7 @@ import {
   PageTitle,
   AuthorizationDiv,
   StyledLink,
+  EditLink,
   AuthorizeButton,
   Table,
   TableHeader,
@@ -105,27 +107,44 @@ export default function CourseAuthorization() {
             </SearchContainer>
           </TableHeader>
 
-          {userCourses?.map((userCourse) => (
-            <ContentRow key={userCourse._id}>
-              <p title={userCourse.user.email}>{userCourse.user.email}</p>
-              <MiddleData>
-                {new Intl.DateTimeFormat('pt-BR').format(
-                  new Date(userCourse.expiresAt)
-                )}
-              </MiddleData>
-              <EditBtn
-                onClick={() => openModalEditCourseAuthorization(userCourse)}
-              >
-                <TbPencil size={25} />
-              </EditBtn>
+          {isLoadingUsers ? (
+            <Loading />
+          ) : (
+            <div>
+              {userCourses?.map((userCourse) => (
+                <ContentRow key={userCourse._id}>
+                  <p title={userCourse.user.email}>{userCourse.user.email}</p>
+                  <MiddleData>
+                    {new Intl.DateTimeFormat('pt-BR').format(
+                      new Date(userCourse.expiresAt)
+                    )}
+                  </MiddleData>
 
-              <DeleteButton>
-                <DeleteOutlined
-                  onClick={() => openModalDeleteAuthorizeAccess(userCourse._id)}
-                />
-              </DeleteButton>
-            </ContentRow>
-          ))}
+                  {isSmallScreen ? (
+                    <EditLink to="/administrador/editar-autorizacao-de-acesso">
+                      <TbPencil size={30} />
+                    </EditLink>
+                  ) : (
+                    <EditBtn
+                      onClick={() =>
+                        openModalEditCourseAuthorization(userCourse)
+                      }
+                    >
+                      <TbPencil size={30} />
+                    </EditBtn>
+                  )}
+
+                  <DeleteButton>
+                    <DeleteOutlined
+                      onClick={() =>
+                        openModalDeleteAuthorizeAccess(userCourse._id)
+                      }
+                    />
+                  </DeleteButton>
+                </ContentRow>
+              ))}
+            </div>
+          )}
         </Table>
       </AuthorizationDiv>
 

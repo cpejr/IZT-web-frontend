@@ -49,6 +49,11 @@ export const StyledLink = styled(Link)`
   font-family: ${(props) => props.theme.fonts.montserrat};
 `;
 
+export const EditLink = styled(Link)`
+  all: unset;
+  cursor: pointer;
+`;
+
 export const AuthorizeButton = styled.button`
   background-color: ${(props) => props.theme.colors.darkGreenishBlue};
   padding: 5px 10px;
@@ -137,7 +142,7 @@ export const SearchBox = styled.input`
 export const ContentRow = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 0.3fr 0.3fr;
+  grid-template-columns: 2.17fr 2fr 0.12fr 0.12fr;
   grid-template-rows: 2.5em;
   align-items: center;
   align-content: center;
@@ -155,7 +160,7 @@ export const ContentRow = styled.div`
     padding-bottom: 5px;
   }
   svg {
-    justify-self: end;
+    justify-self: center;
   }
   @media (max-width: 930px) {
     grid-template-columns: 1.5fr 2fr 0.5fr 0.5fr;
@@ -184,9 +189,9 @@ export const ModalStyle = styled(Modal)`
 export const EditBtn = styled.button`
   background-color: transparent;
   border: none;
-  width: 25px;
-  height: 25px;
-  justify-self: flex-end;
+  width: auto;
+  height: auto;
+  justify-self: center;
   :hover {
     cursor: pointer;
   }

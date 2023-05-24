@@ -7,6 +7,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useUpdateUserCourse } from '../../../hooks/query/userCourse';
@@ -32,22 +33,21 @@ export default function ModalEditAuthorizeAccess({ authorizeUser, close }) {
   const queryClient = useQueryClient();
 
   // Backend calls
-  const { mutate: updateUserCourse, isLoading: isLoadingUserCourses } =
-    useUpdateUserCourse({
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ['user-courses'],
-        });
-        toast.success('Autorização de acesso ao curso alterada com sucesso!');
-        close();
-      },
-      onError: (err) => {
-        const errorMessage = buildUpdateUserCourseErrorMessage(err);
+  const { mutate: updateUserCourse } = useUpdateUserCourse({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['user-courses'],
+      });
+      toast.success('Autorização de acesso ao curso alterada com sucesso!');
+      close();
+    },
+    onError: (err) => {
+      const errorMessage = buildUpdateUserCourseErrorMessage(err);
 
-        toast.error(errorMessage);
-        setIsPending(false);
-      },
-    });
+      toast.error(errorMessage);
+      setIsPending(false);
+    },
+  });
 
   const {
     handleSubmit,
@@ -57,7 +57,6 @@ export default function ModalEditAuthorizeAccess({ authorizeUser, close }) {
     resolver: zodResolver(modalUpdateAuthorizeAccessValidationSchema),
   });
   const onSubmit = ({ expiresAt }) => {
-    console.log({ expiresAt });
     updateUserCourse({
       _id: authorizeUser?._id,
       newUserCourseData: { expiresAt },
@@ -65,7 +64,6 @@ export default function ModalEditAuthorizeAccess({ authorizeUser, close }) {
     setIsPending(true);
     close();
   };
-  console.log(authorizeUser);
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -103,7 +101,22 @@ export default function ModalEditAuthorizeAccess({ authorizeUser, close }) {
           </div>
 
           <ModalButton disabled={isPending} type="submit">
-            <p>{isPending ? 'Carregando...' : '+ Salvar Alterações'}</p>
+            {isPending ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+                <p>Carregando</p>
+              </>
+            ) : (
+              <p>Salvar Alterações</p>
+            )}
           </ModalButton>
         </ModalContent>
       </Form>

@@ -12,8 +12,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { FormSelect } from '../../components/common';
-import { useCreateUserCourse } from '../../hooks/query/userCourse';
-import { useGetUsers } from '../../hooks/query/users';
+import { useUpdateUserCourse } from '../../hooks/query/userCourse';
 import {
   Container,
   Form,
@@ -27,37 +26,27 @@ import {
   Date,
 } from './Styles';
 import {
-  authorizeAccessValidationSchema,
+  updateAuthorizeAccessValidationSchema,
   themeDatePicker,
-  buildCreateUserCourseErrorMessage,
-  buildGetUsersErrorMessage,
+  buildUpdateUserCourseErrorMessage,
 } from './utils';
 
-export default function AuthorizeAccessMobile() {
+export default function EditAuthorizeAccessMobile({ authorizeUser }) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
   // Backend calls
-  const { data: users } = useGetUsers({
-    onError: (err) => {
-      const errorMessage = buildGetUsersErrorMessage(err);
-
-      toast.error(errorMessage);
-    },
-  });
-
-  const { mutate: createUserCourse } = useCreateUserCourse({
+  const { mutate: updateUserCourse } = useUpdateUserCourse({
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['user-courses'],
       });
-
-      toast.success('Autorização ao curso concedida com sucesso!');
+      toast.success('Autorização de acesso ao curso alterada com sucesso!');
     },
     onError: (err) => {
-      const errorMessage = buildCreateUserCourseErrorMessage(err);
+      const errorMessage = buildUpdateUserCourseErrorMessage(err);
 
       toast.error(errorMessage);
       setIsLoading(false);
@@ -70,13 +59,12 @@ export default function AuthorizeAccessMobile() {
     control,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(authorizeAccessValidationSchema),
+    resolver: zodResolver(updateAuthorizeAccessValidationSchema),
   });
-  const onSubmit = ({ userId, expiresAt }) => {
-    createUserCourse({
-      user: userId,
-      expiresAt,
-      course: '645548677d3184e5b411a08f',
+  const onSubmit = ({ expiresAt }) => {
+    updateUserCourse({
+      _id: authorizeUser?._id,
+      newUserCourseData: { expiresAt },
     });
     setIsLoading(true);
     navigate('/administrador/liberacao-cursos');
@@ -91,23 +79,7 @@ export default function AuthorizeAccessMobile() {
 
         <div>
           <Label>Email:</Label>
-          <FormSelect
-            id="userId"
-            name="userId"
-            control={control}
-            errors={errors}
-            data={users?.map(({ _id, email }) => ({
-              label: email,
-              value: _id,
-            }))}
-            placeholder="Selecione o email"
-            filterOption={(input, option) =>
-              option?.key?.toLowerCase()?.includes(input?.toLowerCase())
-            }
-            showSearch
-            style={{ width: '400px' }}
-            size="large"
-          />
+          <h1>{authorizeUser?.user?.email}</h1>
         </div>
         <div>
           <Label>Validade do acesso:</Label>
@@ -126,7 +98,7 @@ export default function AuthorizeAccessMobile() {
                       disablePast
                       slotProps={{
                         textField: {
-                          error: !!errors.accessExpiration,
+                          error: !!errors.expiresAt,
                         },
                       }}
                     />
@@ -135,7 +107,7 @@ export default function AuthorizeAccessMobile() {
               />
             </ThemeProvider>
           </AccessExpirationContainer>
-          <ErrorMessage>{errors?.accessExpiration?.message}</ErrorMessage>
+          <ErrorMessage>{errors?.expiresAt?.message}</ErrorMessage>
         </div>
 
         <ButtonsDiv>
@@ -154,7 +126,7 @@ export default function AuthorizeAccessMobile() {
                 <p>Carregando</p>
               </>
             ) : (
-              <p>+ Autorizar</p>
+              <p>Salvar Alterações</p>
             )}
           </SaveButton>
 
