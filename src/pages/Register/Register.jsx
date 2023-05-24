@@ -1,7 +1,8 @@
-import { useState } from 'react';
+/* eslint-disable no-unused-expressions */
+import { useState, useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Country } from 'country-state-city';
+import { City, Country, State } from 'country-state-city';
 import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
@@ -34,6 +35,24 @@ export default function Register() {
   const [country, setCountry] = useState(countryData[0]);
   const [state, setState] = useState();
   const [city, setCity] = useState();
+
+  useEffect(() => {
+    setStateData(State.getStatesOfCountry(country?.isoCode));
+  }, [country]);
+
+  useEffect(() => {
+    setCityData(City.getCitiesOfState(country?.isoCode, state?.isoCode));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
+
+  useEffect(() => {
+    stateData && setState(stateData[0]);
+  }, [stateData]);
+
+  useEffect(() => {
+    cityData && setCity(cityData[0]);
+  }, [cityData]);
+
   const navigate = useNavigate();
   const { mutate: createUser, isLoading } = useCreateUser({
     onSuccess: (user) => {
@@ -120,6 +139,9 @@ export default function Register() {
                 placeholder="Nome do estado"
                 register={register}
                 errors={errors}
+                data={stateData}
+                selected={state}
+                setSelected={setState}
                 type="text"
               />
               <RegisterSelect
@@ -128,6 +150,9 @@ export default function Register() {
                 placeholder="Nome da cidade"
                 register={register}
                 errors={errors}
+                data={cityData}
+                selected={city}
+                setSelected={setCity}
                 type="text"
               />
               <RegisterInput
