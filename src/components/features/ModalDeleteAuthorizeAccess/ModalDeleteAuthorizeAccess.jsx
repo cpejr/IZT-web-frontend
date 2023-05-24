@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
+import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useDeleteUserCourse } from '../../../hooks/query/userCourse';
@@ -43,8 +44,22 @@ export default function ModalDeleteUserCourse({ _id, close }) {
           deleteUserCourse(_id);
         }}
       >
-        {/* Put proper loading here */}
-        {isPending ? 'Carregando...' : 'Excluir'}
+        {isLoading ? (
+          <>
+            <TailSpin
+              height="15"
+              width="15"
+              color="white"
+              ariaLabel="tail-spin-loading"
+              radius="5"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+            <p>Carregando</p>
+          </>
+        ) : (
+          <p>Excluir</p>
+        )}
       </DeleteButton>
     </Container>
   );

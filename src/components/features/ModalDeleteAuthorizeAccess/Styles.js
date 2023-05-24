@@ -5,7 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3em;
 
   width: 100%;
   max-width: 1000px;
@@ -16,21 +15,40 @@ export const Message = styled.h1`
   font-size: 1.5em;
   font-family: ${(props) => props.theme.fonts.montserrat};
   text-align: center;
-  margin: 1em;
+  margin-top: 1em;
   color: white;
 `;
 
 export const DeleteButton = styled.button`
   cursor: pointer;
 
-  width: 10em;
-  height: 3em;
+  width: 15rem;
+  height: 5rem;
 
-  border-radius: 8px;
-  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
-  font-size: 1rem;
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  font-weight: 700;
-  text-align: center;
+  flex-direction: row;
+  align-items: center;
+
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  color: white;
+
+  margin-top: 1.5rem;
+
+  p {
+    font-family: ${(props) => props.theme.fonts.montserrat};
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+
+  svg {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+  }
 `;

@@ -140,6 +140,7 @@ export const ContentRow = styled.div`
   grid-template-columns: 1.5fr 1fr 0.3fr 0.3fr;
   grid-template-rows: 2.5em;
   align-items: center;
+  align-content: center;
   padding: 5px 20px;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 0.8em;
@@ -195,6 +196,7 @@ export const DeleteButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+  justify-self: flex-end;
 
   svg {
     height: 23px;

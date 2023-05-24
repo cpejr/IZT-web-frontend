@@ -7,6 +7,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useCreateUserCourse } from '../../../hooks/query/userCourse';
@@ -132,7 +133,22 @@ export default function ModalAuthorizeAccess({ close }) {
           </div>
 
           <ModalButton disabled={isPending} type="submit">
-            <p>{isPending ? 'Carregando...' : '+ Autorizar'}</p>
+            {isPending ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+                <p>Carregando</p>
+              </>
+            ) : (
+              <p>+ Autorizar</p>
+            )}
           </ModalButton>
         </ModalContent>
       </Form>
