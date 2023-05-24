@@ -121,7 +121,10 @@ export default function CourseAuthorization() {
                   </MiddleData>
 
                   {isSmallScreen ? (
-                    <EditLink to="/administrador/editar-autorizacao-de-acesso">
+                    <EditLink
+                      to="/administrador/editar-autorizacao-de-acesso"
+                      state={userCourse}
+                    >
                       <TbPencil size={30} />
                     </EditLink>
                   ) : (

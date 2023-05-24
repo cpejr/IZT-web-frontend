@@ -105,7 +105,7 @@ export default function AuthorizeAccessMobile() {
               option?.key?.toLowerCase()?.includes(input?.toLowerCase())
             }
             showSearch
-            style={{ width: '400px' }}
+            style={{ width: '100%' }}
             size="large"
           />
         </div>

@@ -8,10 +8,9 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { useMediaQuery } from 'react-responsive';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { FormSelect } from '../../components/common';
 import { useUpdateUserCourse } from '../../hooks/query/userCourse';
 import {
   Container,
@@ -21,6 +20,7 @@ import {
   SaveButton,
   CancelButton,
   Label,
+  EmailText,
   AccessExpirationContainer,
   ErrorMessage,
   Date,
@@ -31,10 +31,11 @@ import {
   buildUpdateUserCourseErrorMessage,
 } from './utils';
 
-export default function EditAuthorizeAccessMobile({ authorizeUser }) {
+export default function EditAuthorizeAccessMobile() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
+  const authorizeUser = useLocation().state;
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
   // Backend calls
@@ -44,6 +45,7 @@ export default function EditAuthorizeAccessMobile({ authorizeUser }) {
         queryKey: ['user-courses'],
       });
       toast.success('Autorização de acesso ao curso alterada com sucesso!');
+      navigate('/administrador/liberacao-cursos');
     },
     onError: (err) => {
       const errorMessage = buildUpdateUserCourseErrorMessage(err);
@@ -75,11 +77,11 @@ export default function EditAuthorizeAccessMobile({ authorizeUser }) {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Autorizar Acesso</Title>
+        <Title>Editar Autorização de Acesso</Title>
 
         <div>
           <Label>Email:</Label>
-          <h1>{authorizeUser?.user?.email}</h1>
+          <EmailText>{authorizeUser?.user?.email}</EmailText>
         </div>
         <div>
           <Label>Validade do acesso:</Label>

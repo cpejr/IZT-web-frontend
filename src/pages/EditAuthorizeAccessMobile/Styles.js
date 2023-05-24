@@ -150,6 +150,17 @@ export const Label = styled.label`
   padding-bottom: 5px;
 `;
 
+export const EmailText = styled.p`
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-style: normal;
+  align-self: baseline;
+
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  padding-bottom: 5px;
+`;
+
 export const ErrorMessage = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
