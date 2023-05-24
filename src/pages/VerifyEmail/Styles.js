@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const Text = styled.p`
   width: 100%;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 5rem;
 
-  font-size: 22px;
+  font-size: 2.2rem;
 `;
