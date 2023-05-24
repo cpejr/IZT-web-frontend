@@ -28,7 +28,7 @@ import {
 import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
 
 export default function Register() {
-  let countryData = Country.getAllCountries();
+  const countryData = Country.getAllCountries();
   const [stateData, setStateData] = useState();
   const [cityData, setCityData] = useState();
 

@@ -40,7 +40,7 @@ export default function RegisterSelect({
         {...register(name)}
         {...props}
         value={selected}
-        onChange={setSelected}
+        onChange={((event) => setQuery(event.target.value), setSelected())}
       >
         {filteredPlace?.map((place) => (
           <option
@@ -49,21 +49,6 @@ export default function RegisterSelect({
             onChange={(event) => setQuery(event.target.value)}
             value={place}
           >
-            {/* {({ select, active }) => (
-              console.log(place),
-              (
-                <>
-                  <span>{place.name}</span>
-                  {select ? (
-                    <span
-                      className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                        active ? 'text-white' : 'text-teal-600'
-                      }`}
-                    />
-                  ) : null}
-                </>
-              )
-            )} */}
             {place.name}
           </option>
         ))}
