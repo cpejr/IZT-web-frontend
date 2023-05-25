@@ -92,6 +92,7 @@ export const Title = styled.p`
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
   margin-bottom: 2%;
+  text-align: center;
 `;
 
 export const Subtitle = styled.p`
