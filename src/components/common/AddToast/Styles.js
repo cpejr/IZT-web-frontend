@@ -8,7 +8,7 @@ export const StyledContainer = styled(ToastContainer)`
   }
   .Toastify__toast {
     font-family: 'Montserrat';
-    font-size: 16px;
+    font-size: 1.6rem;
   }
   .Toastify__toast-body {
   }

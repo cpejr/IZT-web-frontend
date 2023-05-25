@@ -12,10 +12,6 @@ export const Page = styled.div`
   align-items: center;
   justify-content: center;
   padding: 2.5rem 0rem;
-  /* font-size: 22px;
-  @media (max-width: ${breakValue}) {
-    font-size: 15px;
-  } */
 `;
 
 export const Container = styled.div`

@@ -6,14 +6,14 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 2rem;
 
   width: 95%;
-  margin-bottom: 50px;
+  margin-bottom: 5rem;
 
   .css-mioa5p-MuiFormHelperText-root {
-    margin-left: 0px;
-    margin-top: 0px;
+    margin-left: 0rem;
+    margin-top: 0rem;
   }
 `;
 
@@ -21,17 +21,17 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px;
-  gap: 15px;
+  max-width: 40rem;
+  gap: 1.5rem;
 `;
 
 export const Title = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 700;
-  font-size: 1.5em;
-  line-height: 24px;
-  padding-bottom: 20px;
+  font-size: 2.1rem;
+  line-height: 2.4rem;
+  padding-bottom: 2rem;
 
   color: black;
 `;
@@ -48,15 +48,15 @@ export const SaveButton = styled.button`
   align-items: center;
   align-self: center;
   justify-content: center;
-  padding: 10px;
-  gap: 10px;
-  margin-bottom: 10px;
+  padding: 1rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
 
   width: auto;
-  height: 45px;
+  height: 4.5rem;
 
-  border: 1px solid black;
-  border-radius: 5px;
+  border: 0.1rem solid black;
+  border-radius: 0.5rem;
   background-color: transparent;
   transition: all 500ms;
 
@@ -64,7 +64,7 @@ export const SaveButton = styled.button`
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 1.8rem;
 
     display: flex;
     align-items: center;
@@ -91,14 +91,14 @@ export const CancelButton = styled(Link)`
   align-items: center;
   justify-content: center;
   align-self: center;
-  padding: 5px 10px;
-  gap: 10px;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
   text-decoration: none;
-  width: 84px;
-  height: 27px;
+  width: 8.4rem;
+  height: 2.7rem;
 
-  border: 1px solid #000000;
-  border-radius: 5px;
+  border: 0.1rem solid #000000;
+  border-radius: 0.5rem;
   background-color: transparent;
   transition: 500ms;
 
@@ -106,7 +106,7 @@ export const CancelButton = styled(Link)`
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 1.4rem;
 
     display: flex;
     align-items: center;
@@ -129,7 +129,7 @@ export const CancelButton = styled(Link)`
 export const AccessExpirationContainer = styled.div`
   display: flex;
   flex-direction: row;
-  border-radius: 4px;
+  border-radius: 0.4rem;
 `;
 
 export const Date = styled(DatePicker)``;
@@ -139,17 +139,17 @@ export const Label = styled.label`
   font-style: normal;
   align-self: baseline;
 
-  font-size: 1.5em;
+  font-size: 2.1rem;
   font-weight: 400;
 
-  padding-bottom: 5px;
+  padding-bottom: 0.5rem;
 `;
 
 export const ErrorMessage = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1.4rem;
   color: red;
-  margin-left: 0px;
+  margin-left: 0rem;
 `;

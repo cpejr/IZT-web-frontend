@@ -45,7 +45,7 @@ export default function Select({ data, getValue, maxWidth, standart }) {
 
 Select.defaultProps = {
   data: [],
-  maxWidth: '250px',
+  maxWidth: '25rem',
 };
 
 Select.propTypes = {

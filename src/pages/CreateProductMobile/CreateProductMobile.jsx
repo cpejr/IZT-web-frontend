@@ -227,8 +227,8 @@ export default function CreateProductMobile() {
               style={
                 !errors?.category?.message
                   ? {
-                      border: '1px solid black',
-                      borderRadius: '6px',
+                      border: '0.1rem solid black',
+                      borderRadius: '0.6rem',
                     }
                   : {}
               }

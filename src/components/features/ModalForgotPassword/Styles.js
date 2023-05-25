@@ -59,8 +59,8 @@ export const SaveChanges = styled.button`
   max-width: 25rem;
   height: 5.5rem;
 
-  border: 1px solid #000000;
-  border-radius: 5px;
+  border: 0.1rem solid #000000;
+  border-radius: 0.5rem;
   background-color: transparent;
 
   padding: 0 1.1rem;

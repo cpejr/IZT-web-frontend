@@ -47,7 +47,7 @@ export default function Catalog() {
         {isLoading ? (
           <h1
             style={{
-              height: '660px',
+              height: '66rem',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
