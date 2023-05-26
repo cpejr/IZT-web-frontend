@@ -8,7 +8,7 @@ import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
 import step4 from '../../assets/productPage/steps/Group78.png';
-import { BudgetForm, FilesList, Carousel } from '../../components/features';
+import { BudgetForm, FilesList, NewCarousel } from '../../components/features';
 import { useGetProductById } from '../../hooks/query/products';
 import {
   Container,
@@ -82,7 +82,7 @@ export default function Product() {
         <ProductName>{product.name}</ProductName>
         <ProductInfo>
           <CarouselContainer>
-            <Carousel
+            <NewCarousel
               carouselData={pictures}
               maxHeight="537.17px"
               maxWidth="543.75px"

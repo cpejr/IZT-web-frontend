@@ -7,11 +7,16 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { StyledSwiper, StyledSwiperSlide } from './Styles';
 
-export default function NewCarousel({ carouselData = [] }) {
+export default function NewCarousel({
+  carouselData = [],
+  maxWidth,
+  maxHeight,
+  aspectRatio,
+}) {
   return (
     <StyledSwiper
       cssMode
-      navigation
+      navigation={{ clickable: true }}
       pagination={{ clickable: true }}
       loop
       modules={[Navigation, Pagination, Autoplay]}
@@ -20,6 +25,9 @@ export default function NewCarousel({ carouselData = [] }) {
         delay: 5000,
         disableOnInteraction: true,
       }}
+      maxWidth={maxWidth}
+      maxHeight={maxHeight}
+      aspectRatio={aspectRatio}
     >
       {carouselData.map(({ src, name, alt }) => (
         <StyledSwiperSlide key={name}>
@@ -36,4 +44,7 @@ NewCarousel.defaultProps = {
 
 NewCarousel.propTypes = {
   carouselData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+  maxWidth: PropTypes.string.isRequired,
+  maxHeight: PropTypes.string.isRequired,
+  aspectRatio: PropTypes.string.isRequired,
 };
