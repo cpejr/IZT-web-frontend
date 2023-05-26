@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
 import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
@@ -49,8 +50,7 @@ export default function Product() {
       const code = err?.response?.data?.httpCode;
       const message = buildGetProducErrorMessage(code);
 
-      // Do something with the error message
-      alert(message);
+      toast.error(message);
 
       navigate('*'); // Go to NotFound page
     },
@@ -73,8 +73,6 @@ export default function Product() {
       })),
     [product]
   );
-
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
 
   return (
     <Container>
@@ -108,7 +106,7 @@ export default function Product() {
           </TextInfoContainer>
         </ProductInfo>
       </ProductData>
-      <BudgetForm productId={_id} />
+      <FormsBudget productId={_id} isLoadingProduct={isLoading} />
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
