@@ -39,11 +39,12 @@ export default function Register() {
   useEffect(() => {
     setStateData(State.getStatesOfCountry(country?.isoCode));
   }, [country]);
+  console.log(country);
 
   useEffect(() => {
     setCityData(City.getCitiesOfState(country?.isoCode, state?.isoCode));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
+    console.log(City.getCitiesOfState(country?.isoCode, state?.isoCode));
+  }, [state, country]);
 
   useEffect(() => {
     stateData && setState(stateData[0]);

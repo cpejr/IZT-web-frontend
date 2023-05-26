@@ -40,14 +40,18 @@ export default function RegisterSelect({
         {...register(name)}
         {...props}
         value={selected}
-        onChange={((event) => setQuery(event.target.value), setSelected())}
+        onChange={(e) => {
+          console.log(JSON.parse(e.target.value));
+          // setQuery(e.target.value);
+          setSelected(JSON.parse(e.target.value));
+        }}
       >
         {filteredPlace?.map((place) => (
           <option
             key={place.isoCode}
             displayValue={place.name}
-            onChange={(event) => setQuery(event.target.value)}
-            value={place}
+            // onChange={(event) => setQuery(event.target.value)}
+            value={JSON.stringify(place)}
           >
             {place.name}
           </option>
@@ -77,3 +81,5 @@ RegisterSelect.propTypes = {
   selected: PropTypes.string.isRequired,
   setSelected: PropTypes.string.isRequired,
 };
+// (e) => setQuery(e.target.value),
+// () => setSelected();
