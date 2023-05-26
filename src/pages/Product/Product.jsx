@@ -106,7 +106,7 @@ export default function Product() {
           </TextInfoContainer>
         </ProductInfo>
       </ProductData>
-      <FormsBudget productId={_id} isLoadingProduct={isLoading} />
+      <BudgetForm productId={_id} isLoadingProduct={isLoading} />
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
