@@ -144,7 +144,7 @@ export default function EditProductMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Adicionar produto</Title>
+        <Title>Editar produto</Title>
 
         <Section>
           <Subtitle>Nome do produto:</Subtitle>
@@ -258,8 +258,8 @@ export default function EditProductMobile() {
               style={
                 !errors?.category?.message
                   ? {
-                      border: '1px solid black',
-                      borderRadius: '6px',
+                      border: '0.1rem solid black',
+                      borderRadius: '0.1rem',
                     }
                   : {}
               }

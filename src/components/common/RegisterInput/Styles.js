@@ -11,33 +11,34 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.label`
-  font-size: 1em;
+  font-size: 2.2rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 400;
 `;
 
 export const Input = styled.input`
-  height: 3em;
+  height: 4.5rem;
   width: 100%;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   background-color: transparent;
   padding: 0 5%;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 1em;
+  font-size: 2.2rem;
   font-weight: 600;
-  margin-top: 0.4em;
-  border: ${(props) => (props.error ? '2px red solid' : '1px black solid')};
+  margin-top: 1rem;
+  border: ${(props) =>
+    props.error ? '0.2rem red solid' : '0.1rem black solid'};
   ::placeholder {
     color: black;
     font-weight: 400;
   }
   @media (max-width: ${mobileBreakpoint}) {
-    height: 50px;
+    height: 4rem;
   }
 `;
 
 export const ErrorMessage = styled.p`
-  font-size: 0.7em;
+  font-size: 1.5rem;
   color: red;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 600;

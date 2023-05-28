@@ -111,8 +111,8 @@ export default function AdminMenu() {
         footer={null}
         closeIcon={modalCloseButton}
         bodyStyle={{
-          margin: '0px',
-          padding: '0px',
+          margin: '0rem',
+          padding: '0rem',
           color: 'none',
           background: '#123645',
         }}

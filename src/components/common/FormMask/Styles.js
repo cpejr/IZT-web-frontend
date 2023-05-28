@@ -6,58 +6,58 @@ export const Container = styled.div`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
-  gap: 5px;
+  gap: 0.5rem;
   height: auto;
   width: 100%;
 
   input {
-    height: 40px;
-    font-size: 20px;
-    padding: 8px 16px;
-    border-radius: 4px;
+    height: 4rem;
+    font-size: 2rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: 0.4rem;
 
-    border: ${(props) => (props.error ? '2px red solid' : 'none')};
+    border: ${(props) => (props.error ? '0.2rem red solid' : 'none')};
     background: ${(props) =>
       props.error ? 'rgba(239, 202, 202, 1)' : 'white'};
 
     @media (max-width: 700px) {
       font-weight: 400;
-      font-size: 16px;
-      line-height: 20px;
-      height: 30px;
+      font-size: 1.6rem;
+      line-height: 2rem;
+      height: 3rem;
     }
 
     @media (max-width: 370px) {
-      font-size: 12px;
+      font-size: 1.2rem;
     }
   }
 `;
 
 export const Label = styled.label`
   color: #ffffff;
-  font-size: 24px;
+  font-size: 2.4rem;
 
   @media (max-width: 700px) {
-    font-size: 20px;
+    font-size: 2rem;
   }
   @media (max-width: 370px) {
-    font-size: 15px;
+    font-size: 1.5rem;
   }
 `;
 
 export const ErrorMessage = styled.p`
   font-style: normal;
   font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 1.6rem;
+  line-height: 2rem;
   color: red;
 
   @media (max-width: 700px) {
     font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 1.4rem;
+    line-height: 1.7rem;
   }
   @media (max-width: 370px) {
-    font-size: 12px;
+    font-size: 1.2rem;
   }
 `;

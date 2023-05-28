@@ -13,7 +13,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 700px) {
-    margin-top: 0px;
+    margin-top: 0rem;
     height: 90vh;
   }
 `;
@@ -21,14 +21,14 @@ export const Container = styled.div`
 export const Title = styled.h1`
   width: 60%;
   text-align: center;
-  padding-top: 50px;
+  padding-top: 5rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
 
   @media (max-width: 700px) {
     width: 80%;
-    font-size: 18px;
+    font-size: 1.8rem;
   }
   @media (max-width: 400px) {
-    font-size: 15px;
+    font-size: 1.5rem;
   }
 `;

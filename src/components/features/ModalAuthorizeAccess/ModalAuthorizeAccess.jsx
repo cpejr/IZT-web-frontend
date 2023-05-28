@@ -58,7 +58,7 @@ export default function ModalAuthorizeAccess({ close, data }) {
                 option?.key?.toLowerCase()?.includes(input?.toLowerCase())
               }
               showSearch
-              style={{ width: '400px' }}
+              style={{ width: '40rem' }}
               size="large"
             />
           </div>
