@@ -156,13 +156,24 @@ export const getCourseById = async ({ user, course }) => {
   const { setState } = useVideoStore.getState();
   const { data } = await api.get(`/user-courses/info/${user}/${course}`);
 
-  setState(data?.chapters);
+  setState(data);
   return data;
 };
 
-// User Progress
+// User videos
 export const getVideo = async (videoId) => {
   const { data } = await api.get(`/videos/${videoId}`);
+
+  return data;
+};
+
+// User progress
+export const saveVideoProgress = async ({ video, progress, isCompleted }) => {
+  const { data } = await api.post(`/user-progresses`, {
+    video,
+    progress,
+    isCompleted,
+  });
 
   return data;
 };

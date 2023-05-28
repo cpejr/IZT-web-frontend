@@ -6,6 +6,7 @@ import { getCourseById } from '../../services/api/endpoints';
 export function useGetUserCourse({
   user,
   course,
+  userHasAccess,
   onSucess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
@@ -14,5 +15,6 @@ export function useGetUserCourse({
     queryFn: () => getCourseById({ user, course }),
     onSucess,
     onError,
+    enabled: userHasAccess,
   });
 }

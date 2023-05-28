@@ -4,11 +4,10 @@ const useVideoStore = create((set, get) => ({
   currVideoId: null,
   allVideos: null,
 
-  setState: (chapters) => {
-    const allVideos = chapters?.map(({ videos }) => videos).flat(); // All videos in sequence
-    const firstVideo = allVideos?.[0];
+  setState: (course) => {
+    const allVideos = course?.chapters?.map(({ videos }) => videos).flat(); // All videos in sequence
 
-    set({ currVideoId: firstVideo._id, allVideos });
+    set({ currVideoId: course?.lastWatchedVideo, allVideos });
   },
   setCurrVideoId: (videoId) => set({ currVideoId: videoId }),
 

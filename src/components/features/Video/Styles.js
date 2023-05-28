@@ -1,102 +1,110 @@
-import ReactPlayer from 'react-player';
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+
+  gap: 1.5rem;
+
   width: 100%;
-  height: auto;
-  max-width: 982px;
-  max-height: 735.25px;
 `;
-export const VideoContainer = styled.div`
+
+export const VideoBody = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
-  position: relative;
+  gap: 2rem;
+
   width: 100%;
-  padding-top: 56.25%;
-  border-radius: 10px;
-
-  margin-bottom: 1.8em;
 `;
+
 export const VideoTitle = styled.p`
+  text-align: start;
+
+  width: 100%;
+
   font-weight: 700;
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
+  font-size: 2.2rem;
 
   color: ${(props) => props.theme.colors.blue};
 
-  @media (max-width: 800px) {
+  @media (max-width: 970px) {
     font-weight: 600;
-    font-size: 1.65rem;
-  }
-  @media (max-width: 475px) {
-    font-size: 1.5rem;
-  }
-  @media (max-width: 390px) {
-    font-size: 1.13rem;
+    font-size: 2rem;
   }
 `;
-export const VideoSubTitle = styled.p`
+
+export const Description = styled.p`
   font-weight: 600;
-  font-size: 1.6rem;
-  line-height: 30px;
+  font-size: 2.2rem;
+  line-height: 3rem;
 
   color: ${(props) => props.theme.colors.blue};
-
-  @media (max-width: 800px) {
-    color: ${(props) => props.theme.colors.darkBlue};
-  }
 `;
 
-export const Player = styled(ReactPlayer)`
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
 export const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
 `;
+
 export const ChangeVideoButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 500;
-  font-size: 1em;
+  font-size: 1.4rem;
 
-  width: 7rem;
-  height: 2rem;
-  gap: 7%;
+  gap: 0.2rem;
 
-  border: 1px solid ${(props) => props.theme.colors.blue};
-  border-radius: 4px;
+  border: 0.1rem solid ${(props) => props.theme.colors.blue};
+  border-radius: 0.4rem;
+
+  padding: 0.5rem;
 
   color: ${(props) => props.theme.colors.blue};
   background-color: transparent;
 
   cursor: pointer;
   transition-duration: 0.3s;
+
   :hover {
     background-color: ${(props) => props.theme.colors.blue};
     color: white;
   }
 
-  @media (min-width: 800px) {
+  @media (min-width: 970px) {
     display: none;
   }
 `;
+
 export const Text = styled.p`
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: 1.8rem;
 
-  padding-bottom: 20px;
+  padding-bottom: 2rem;
   width: 100%;
+
+  overflow-wrap: break-word;
+  hyphens: manual;
 
   color: black;
 
-  @media (max-width: 475px) {
-    font-size: 0.9rem;
+  @media (max-width: 970px) {
+    font-size: inherit;
   }
+`;
+
+export const VideoFooter = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
 `;

@@ -13,6 +13,7 @@ export function useGetVideo({
     queryFn: () => getVideo(videoId),
     onSuccess,
     onError,
+    cacheTime: 0,
     enabled: !!videoId,
   });
 }

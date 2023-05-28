@@ -2,8 +2,6 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -70,19 +68,17 @@ export default function ModalAuthorizeAccess({ close, data }) {
                   control={control}
                   name="accessExpiration"
                   render={({ field: { onChange, onBlur } }) => (
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Date
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        format="DD/MM/YYYY"
-                        disablePast
-                        slotProps={{
-                          textField: {
-                            error: !!errors.accessExpiration,
-                          },
-                        }}
-                      />
-                    </LocalizationProvider>
+                    <Date
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      format="DD/MM/YYYY"
+                      disablePast
+                      slotProps={{
+                        textField: {
+                          error: !!errors.accessExpiration,
+                        },
+                      }}
+                    />
                   )}
                 />
               </ThemeProvider>

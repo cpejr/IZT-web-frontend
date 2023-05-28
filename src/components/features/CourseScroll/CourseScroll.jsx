@@ -1,21 +1,29 @@
 import PropTypes from 'prop-types';
 
-import CourseVideo from '../CourseVideo/CourseVideo';
-import { GreyLine, Scroll, SubtitleScroll } from './Styles';
+import VideoSelect from '../VideoSelect/VideoSelect';
+import {
+  GreyLine,
+  CourseContent,
+  ChapterTitle,
+  ChaptersContainer,
+  ChaptersContent,
+} from './Styles';
 
 export default function CourseScroll({ chapters = [] }) {
   return (
-    <Scroll>
+    <CourseContent>
       {chapters?.map(({ _id, title, videos }) => (
-        <div key={_id}>
-          <SubtitleScroll>{title}</SubtitleScroll>
+        <ChaptersContainer key={_id}>
+          <ChapterTitle>{title}</ChapterTitle>
           <GreyLine />
-          {videos?.map((video) => (
-            <CourseVideo key={video?._id} video={video} />
-          ))}
-        </div>
+          <ChaptersContent>
+            {videos?.map((video) => (
+              <VideoSelect key={video?._id} video={video} />
+            ))}
+          </ChaptersContent>
+        </ChaptersContainer>
       ))}
-    </Scroll>
+    </CourseContent>
   );
 }
 
