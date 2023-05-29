@@ -52,7 +52,7 @@ export default function Course() {
                 <DoubleRightOutlined />
               </ChangeVideoButton>
             </Buttons>
-            <a href={currVideo?.src} style={{ fontSize: '20px' }}>
+            <a href={currVideo?.src} style={{ fontSize: '2rem' }}>
               Link do vídeo
             </a>
             <Subtitle>Descrição</Subtitle>

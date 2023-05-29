@@ -88,7 +88,7 @@ export default function ListProduct() {
             standart="Selecionar"
             data={categories}
             getValue={setSelectedCategory}
-            maxWidth="250px"
+            maxWidth="25rem"
           />
         </Subsection>
 

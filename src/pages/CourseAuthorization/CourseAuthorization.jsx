@@ -58,13 +58,13 @@ export default function CourseAuthorization() {
       <AuthorizationDiv>
         {isSmallScreen ? (
           <StyledLink to="/administrador/autorizar-acesso">
-            <PlusOutlined size="20px" />
+            <PlusOutlined size="2rem" />
             {'   '}
             Autorizar acesso
           </StyledLink>
         ) : (
           <AuthorizeButton onClick={openModalCourseAuthorization}>
-            <PlusOutlined size="20px" />
+            <PlusOutlined size="2rem" />
             {'   '}
             Autorizar acesso
           </AuthorizeButton>
@@ -75,7 +75,7 @@ export default function CourseAuthorization() {
             <h2>Email</h2>
             <h2>Validade do Acesso</h2>
             <SearchContainer>
-              <HiSearch size="25px" />
+              <HiSearch size="2rem" />
               <SearchBox placeholder="Pesquisar Email" />
             </SearchContainer>
           </TableHeader>

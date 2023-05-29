@@ -80,7 +80,7 @@ export default function Product() {
         {isLoading ? (
           <h1
             style={{
-              height: '660px',
+              height: '66rem',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
@@ -95,8 +95,8 @@ export default function Product() {
               <CarouselContainer>
                 <Carousel
                   carouselData={pictures}
-                  maxHeight="537.17px"
-                  maxWidth="543.75px"
+                  maxHeight="53.717rem"
+                  maxWidth="54.375rem"
                   aspectRatio="12 / 9"
                   miniImages
                 />
@@ -130,9 +130,9 @@ export default function Product() {
 
             <Arrow>
               {isMediumScreen ? (
-                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
               ) : (
-                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
               )}
             </Arrow>
 
@@ -140,9 +140,9 @@ export default function Product() {
 
             <Arrow>
               {isMediumScreen ? (
-                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
               ) : (
-                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
               )}
             </Arrow>
 
@@ -150,9 +150,9 @@ export default function Product() {
 
             <Arrow>
               {isMediumScreen ? (
-                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
               ) : (
-                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
               )}
             </Arrow>
 

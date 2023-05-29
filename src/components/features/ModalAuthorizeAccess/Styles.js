@@ -8,10 +8,10 @@ export const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  padding: 20px 24px;
+  padding: 2rem 2.4rem;
 
   .css-mioa5p-MuiFormHelperText-root.Mui-error {
-    margin-left: 0px;
+    margin-left: 0rem;
   }
 `;
 
@@ -21,32 +21,32 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  gap: 20px;
+  gap: 2rem;
 `;
 
 export const Label = styled.label`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 2.4rem;
   align-self: baseline;
 
   color: white;
-  padding-bottom: 5px;
+  padding-bottom: 0.5rem;
 `;
 
 export const AccessExpirationContainer = styled.div`
   display: flex;
   flex-direction: row;
-  border-radius: 4px;
-  height: 56px;
+  border-radius: 0.4rem;
+  height: 5.6rem;
   background-color: white;
 `;
 
 export const Date = styled(DatePicker)`
-  border-radius: 8px;
+  border-radius: 0.8rem;
   .Mui-error .MuiOutlinedInput-notchedOutline {
-    border-width: 2px;
+    border-width: 0.2rem;
   }
 `;
 
@@ -60,7 +60,7 @@ export const Picture = styled.img`
 
 export const ModalButton = styled.button`
   cursor: pointer;
-  gap: 7px;
+  gap: 0.7rem;
   align-self: flex-end;
 
   display: flex;
@@ -71,19 +71,19 @@ export const ModalButton = styled.button`
   flex-direction: row;
   align-items: center;
 
-  width: 212px;
-  height: 45px;
+  width: 21.2rem;
+  height: 4.5rem;
 
   background-color: transparent;
-  border: 1px solid white;
-  border-radius: 5px;
+  border: 0.1rem solid white;
+  border-radius: 0.5rem;
   color: white;
 
   p {
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 1.8rem;
   }
 `;
 
@@ -91,7 +91,7 @@ export const ErrorMessage = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1.4rem;
   color: red;
-  margin-top: 5px;
+  margin-top: 0.5rem;
 `;

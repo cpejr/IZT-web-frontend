@@ -14,27 +14,27 @@ export const Scroll = styled.div`
 
 export const SubtitleScroll = styled.p`
   font-weight: 600;
-  font-size: 1.56rem;
-  line-height: 30px;
-  margin-bottom: 0.3em;
+  font-size: 2rem;
+  line-height: 3rem;
+  margin-bottom: 0.6rem;
 
   color: ${(props) => props.theme.colors.blue};
 
   @media (max-width: 800px) {
     color: ${(props) => props.theme.colors.darkBlue};
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
   @media (max-width: 475px) {
-    font-size: 1.25rem;
+    font-size: 1.7rem;
   }
 `;
 
 export const GreyLine = styled.div`
   width: 100%;
-  height: 2px;
+  height: 0.2rem;
 
   background: #d9d9d9;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.7rem;
 
   @media (max-width: 800px) {
     display: none;
@@ -44,42 +44,16 @@ export const GreyLine = styled.div`
 export const TopicDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 
   div {
     display: flex;
     justify-content: flex-start;
-    gap: 5px;
+    gap: 0.5rem;
   }
 `;
 
 export const ScrollIcon = styled.img`
-  width: 1.2rem;
-  height: 1.2rem;
-`;
-
-export const Topics = styled.p`
-  font-weight: 500;
-  font-size: 1.4em;
-  line-height: 24px;
-
-  color: #202020;
-
-  :hover {
-    cursor: pointer;
-  }
-
-  @media (max-width: 800px) {
-    color: #595959;
-  }
-`;
-
-export const VideoTime = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  font-weight: 400;
-  font-size: 1.1em;
-  line-height: 24px;
-
-  color: #a5a5a5;
+  width: 1.68rem;
+  height: 1.68rem;
 `;
