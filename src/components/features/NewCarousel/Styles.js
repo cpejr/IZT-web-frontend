@@ -8,7 +8,6 @@ export const StyledSwiper = styled(Swiper)`
   max-height: ${(props) => props.maxHeight || '31.25rem'};
   overflow-x: hidden;
 `;
-export const StyledSwiper2 = styled(Swiper)``;
 export const StyledSwiperSlide = styled(SwiperSlide)`
   text-align: center;
   font-size: 1.125rem;

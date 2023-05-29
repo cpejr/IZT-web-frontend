@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import React, { useState } from 'react';
+import React from 'react';
 
 import PropTypes from 'prop-types';
 import { FreeMode, Navigation, Thumbs } from 'swiper';
@@ -9,7 +9,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import { StyledSwiper, StyledSwiperSlide, StyledSwiper2 } from './Styles';
+import { StyledSwiper, StyledSwiperSlide } from './Styles';
 
 export default function NewCarousel({
   carouselData = [],
@@ -18,15 +18,22 @@ export default function NewCarousel({
   aspectRatio,
   miniImages,
 }) {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const pagination = {
+    clickable: true,
+    renderBullet() {
+      carouselData.map((src, alt) => {
+        return `<img src=${src} alt=${alt} />`;
+      });
+    },
+  };
   return (
     <>
       <StyledSwiper
         cssMode
-        navigation
+        navigation={{ clickable: true }}
+        pagination={miniImages ? pagination : { clickable: true }}
         spaceBetween={10}
         loop
-        thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
         keyboard={{ enabled: true }}
         maxWidth={maxWidth}
@@ -39,7 +46,7 @@ export default function NewCarousel({
           </StyledSwiperSlide>
         ))}
       </StyledSwiper>
-      <StyledSwiper
+      {/* <StyledSwiper
         onSwiper={setThumbsSwiper}
         loop
         spaceBetween={10}
@@ -53,7 +60,7 @@ export default function NewCarousel({
             <img src={src} alt={alt} />
           </StyledSwiperSlide>
         ))}
-      </StyledSwiper>
+      </StyledSwiper> */}
     </>
   );
 }
@@ -68,4 +75,5 @@ NewCarousel.propTypes = {
   maxWidth: PropTypes.string.isRequired,
   maxHeight: PropTypes.string.isRequired,
   aspectRatio: PropTypes.number.isRequired,
+  miniImages: PropTypes.bool,
 };

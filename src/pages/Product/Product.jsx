@@ -44,12 +44,12 @@ export default function Product() {
   const navigate = useNavigate();
   const isMediumScreen = useMediaQuery({ minWidth: 700 });
 
-  const { data: product } = useGetProductById({
+  const { data: product, isLoading } = useGetProductById({
     _id,
     onError: (err) => {
       const code = err?.response?.data?.httpCode;
       const message = buildGetProducErrorMessage(code);
-      alert(message);
+      toast.error(message);
 
       navigate('*'); // Go to NotFound page
     },

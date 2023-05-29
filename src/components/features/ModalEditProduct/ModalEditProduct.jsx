@@ -6,6 +6,7 @@ import objToFormData from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useUpdateProducts } from '../../../hooks/query/products';
@@ -50,7 +51,7 @@ export default function ModalEditProduct({ product, close }) {
         const errorMessage = buildEditProductErrorMessage(err);
 
         // Do something to the errorMessage
-        alert(errorMessage);
+        toast.error(errorMessage);
       },
     }
   );
@@ -66,7 +67,7 @@ export default function ModalEditProduct({ product, close }) {
       const errorMessage = buildEditProductErrorMessage(err);
 
       // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
       setIsPending(false);
     },
   });
