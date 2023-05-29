@@ -7,20 +7,21 @@ export const Container = styled.div`
   align-items: center;
 
   width: 100%;
-  max-width: 1330px;
+  max-width: 133rem;
   height: 100%;
 `;
 
 export const DataEntry = styled.div`
-  max-width: 1190px;
+  max-width: 119rem;
   width: 90%;
   display: flex;
   justify-content: center;
-  gap: 1.2em;
+  gap: 2.64rem;
 
   @media (max-width: 730px) {
     flex-direction: column;
     align-items: center;
+    gap: 1.8rem;
   }
 `;
 
@@ -28,23 +29,23 @@ export const FormColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* gap: 1em; */
   width: 100%;
-  max-width: 350px;
+  max-width: 35rem;
 `;
 
 export const Form = styled.form`
-  max-width: 1190px;
+  max-width: 119rem;
   width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1.2em;
+  gap: 2.64rem;
 
   @media (max-width: 750px) {
     flex-direction: column;
     align-items: center;
+    gap: 1.8rem;
   }
 `;
 
@@ -52,21 +53,21 @@ export const SaveChanges = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
 
   width: 100%;
-  max-width: 250px;
-  height: 2.5em;
+  max-width: 20rem;
+  height: 4.5rem;
 
-  border: 1px solid #000000;
-  border-radius: 5px;
+  border: 0.1rem solid #000000;
+  border-radius: 0.5rem;
   background-color: transparent;
 
-  padding: 0 0.5em;
+  /* padding: 0 1.1rem; */
   margin-top: 2%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 1.4em;
+  font-size: 2rem;
   font-weight: 600;
   color: ${(props) => props.theme.colors.blue};
 
@@ -81,23 +82,31 @@ export const SaveChanges = styled.button`
     align-items: center;
     justify-content: center;
     width: 90%;
-    font-size: 1em;
-
-    max-width: 200px;
+    font-size: 1.5rem;
+    height: 3.75rem;
+    max-width: 15rem;
+    padding: 0 0.75rem;
   }
 `;
 
 export const Title = styled.p`
-  font-size: 1.5em;
+  font-size: 2.2rem;
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
   margin-bottom: 2%;
+  text-align: center;
+  @media (max-width: 700px) {
+    font-size: 2.25rem;
+  }
 `;
 
 export const Subtitle = styled.p`
   text-align: center;
-  font-size: 1em;
+  font-size: 1.5rem;
   font-weight: 500;
   font-family: ${(props) => props.theme.fonts.montserrat};
   margin-bottom: 5%;
+  @media (max-width: 700px) {
+    font-size: 1.5rem;
+  }
 `;

@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { TailSpin } from 'react-loader-spinner';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
@@ -76,7 +77,23 @@ export default function ModalCreateCategory({ close }) {
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <ModalButton disabled={isPending} type="submit">
             <FiSave size={25} />
-            <p>{isPending ? 'Carregando...' : 'Criar Categoria'}</p>
+            {isPending ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                />
+                <p>Carregando</p>
+              </>
+            ) : (
+              <>
+                <FiSave size={25} />
+                <p>Criar Categoria</p>
+              </>
+            )}
           </ModalButton>
         </ModalContent>
       </Form>

@@ -31,6 +31,7 @@ export const CourseHeader = styled.div`
 export const Title = styled.p`
   font-weight: 700;
   font-size: 3rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
 
   color: ${(props) => props.theme.colors.blue};
@@ -42,6 +43,7 @@ export const Title = styled.p`
 
 export const Description = styled.p`
   font-weight: 400;
+  font-size: 1.8rem;
   font-size: 1.8rem;
 
   width: 100%;
@@ -70,7 +72,7 @@ export const GreyLine = styled.div`
 
   background: #d9d9d9;
 
-  margin: 1em;
+  margin: 0.7rem;
 
   @media (min-width: 800px) {
     display: none;

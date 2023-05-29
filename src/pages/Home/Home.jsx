@@ -19,7 +19,7 @@ export default function Home() {
     <OuterDiv>
       <Container>
         <Carousel
-          maxHeight="500px"
+          maxHeight="50rem"
           aspectRatio="24 / 7"
           carouselData={carouselData}
         />

@@ -7,30 +7,8 @@ export const Container = styled.div`
   font-style: normal;
   font-weight: 500;
   gap: 0.5rem;
-  height: auto;
+
   width: 100%;
-
-  input {
-    height: 4rem;
-    font-size: 2rem;
-    padding: 0.8rem 1.6rem;
-    border-radius: 0.4rem;
-
-    border: ${(props) => (props.error ? '0.2rem red solid' : 'none')};
-    background: ${(props) =>
-      props.error ? 'rgba(239, 202, 202, 1)' : 'white'};
-
-    @media (max-width: 700px) {
-      font-weight: 400;
-      font-size: 1.6rem;
-      line-height: 2rem;
-      height: 3rem;
-    }
-
-    @media (max-width: 370px) {
-      font-size: 1.2rem;
-    }
-  }
 `;
 
 export const Label = styled.label`
@@ -45,9 +23,18 @@ export const Label = styled.label`
   }
 `;
 
+export const TextArea = styled.textarea`
+  border: ${(props) => (props.error ? '0.2rem red solid' : 'none')};
+  background: ${(props) => (props.error ? 'rgba(239, 202, 202, 1)' : 'white')};
+
+  @media (max-width: 700px) {
+    height: 16rem;
+  }
+`;
+
 export const ErrorMessage = styled.p`
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.6rem;
   line-height: 2rem;
   color: red;
@@ -57,6 +44,7 @@ export const ErrorMessage = styled.p`
     font-size: 1.4rem;
     line-height: 1.7rem;
   }
+
   @media (max-width: 370px) {
     font-size: 1.2rem;
   }

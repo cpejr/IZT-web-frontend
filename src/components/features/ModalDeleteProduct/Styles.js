@@ -5,31 +5,31 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3em;
+  gap: 2rem;
 
   width: 100%;
-  max-width: 1000px;
+  max-width: 100rem;
   height: 100%;
 `;
 
 export const Message = styled.h1`
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   text-align: center;
-  margin: 1em;
+  margin: 2rem;
   color: white;
 `;
 
 export const DeleteButton = styled.button`
   cursor: pointer;
 
-  width: 10em;
-  height: 3em;
+  width: 10rem;
+  height: 4rem;
 
-  border-radius: 8px;
+  border-radius: 0.8rem;
   background-color: white;
 
-  font-size: 1rem;
+  font-size: 1.7rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 700;
   text-align: center;

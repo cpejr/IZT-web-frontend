@@ -55,14 +55,13 @@ export const deleteUser = async (_id) => {
   return data;
 };
 export const forgotPassword = async (email) => {
-  const { data } = await api.post(`/users/fogot-password`, { email });
+  const { data } = await api.post(`/users/forgot-password`, { email });
 
   return data;
 };
 export const redefinePassword = async ({ token, password }) => {
-  const { data } = await api.post(`/users/redefine-password`, {
-    token,
-    password,
+  const { data } = await api.put(`/users/forgot-password/${token}`, {
+    newPassword: password,
   });
 
   return data;

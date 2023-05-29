@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1em;
+  gap: 1rem;
 `;
 
 export const Buttons = styled.div`
@@ -13,12 +13,12 @@ export const Buttons = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap: 1em;
+  gap: 1rem;
 `;
 
 export const Image = styled.img`
-  width: 70px;
-  height: 70px;
+  width: 7rem;
+  height: 7rem;
 
   object-fit: cover;
 `;

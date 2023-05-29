@@ -5,7 +5,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 5px;
+  gap: 0.5rem;
   width: 100%;
   height: 100%;
   width: ${(props) => props.width};
@@ -46,22 +46,22 @@ export const NavButtons = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
 `;
 
 export const Button = styled.button`
   all: unset;
   cursor: pointer;
-  padding: 2px 8px;
+  padding: 0.2rem 0.8rem;
 
   svg {
-    height: 50px;
-    width: 50px;
-    filter: drop-shadow(0px 4px 4px rgb(0 0 0 / 0.25));
+    height: 5rem;
+    width: 5rem;
+    filter: drop-shadow(0rem 0.4rem 0.4rem rgb(0 0 0 / 0.25));
 
     @media (max-width: 450px) {
-      width: 20px;
-      height: 20px;
+      width: 2rem;
+      height: 2rem;
     }
   }
 `;
@@ -72,14 +72,14 @@ export const Dots = styled.button`
   text-align: center;
   display: inline-block;
   color: black;
-  width: 10px;
-  height: 10px;
-  border: 1px solid black;
+  width: 1rem;
+  height: 1rem;
+  border: 0.1rem solid black;
   border-radius: 50%;
 
   @media (max-width: 450px) {
-    width: 10px;
-    height: 10px;
+    width: 1rem;
+    height: 1rem;
   }
 
   ${({ active }) => active && 'background: black;'}
@@ -88,8 +88,8 @@ export const Dots = styled.button`
 export const MiniImageContainer = styled.button`
   all: unset;
   display: inline-block;
-  width: 50px;
-  height: 50px;
+  width: 5rem;
+  height: 5rem;
   opacity: ${({ active }) => (active ? 1 : 0.7)};
   cursor: pointer;
   &:hover {
@@ -101,7 +101,7 @@ export const MiniImageContainer = styled.button`
     object-fit: cover;
   }
   @media (max-width: 450px) {
-    width: 40px;
-    height: 40px;
+    width: 4rem;
+    height: 4rem;
   }
 `;
