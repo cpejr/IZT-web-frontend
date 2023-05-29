@@ -115,7 +115,13 @@ export const Mensagem = styled.div`
 `;
 
 export const SubmitButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   align-self: flex-end;
+  gap: 1rem;
+
   color: white;
   background-color: #23a4a6;
 
@@ -147,10 +153,4 @@ export const SubmitButton = styled.button`
 
 export const InputMessage = styled.div`
   height: 72%;
-`;
-
-export const AreaText = styled.textarea`
-  @media (max-width: 700px) {
-    height: 16rem;
-  }
 `;

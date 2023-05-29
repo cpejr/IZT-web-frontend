@@ -3,6 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import objToFormData from 'object-to-formdata';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { TailSpin } from 'react-loader-spinner';
 import { useMediaQuery } from 'react-responsive';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -272,8 +273,23 @@ export default function EditProductMobile() {
           type="submit"
           disabled={isLoadingUpdate || isLoadingCategories}
         >
-          <FiSave size={20} />
-          <p>{isLoadingUpdate ? 'Carregando...' : 'Editar produto'}</p>
+          {isLoadingUpdate ? (
+            <>
+              <TailSpin
+                height="15"
+                width="15"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="5"
+              />
+              <p>Carregando</p>
+            </>
+          ) : (
+            <>
+              <FiSave size={25} />
+              <p>Editar Produto</p>
+            </>
+          )}
         </SaveButton>
 
         <CancelButton to="/administrador/listar-produtos">

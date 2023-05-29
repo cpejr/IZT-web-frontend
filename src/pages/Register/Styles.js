@@ -90,6 +90,15 @@ export const Form = styled.form`
   }
 `;
 
+export const ButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+`;
+
 export const SubmitButton = styled.button`
   display: flex;
   justify-content: center;
@@ -98,7 +107,7 @@ export const SubmitButton = styled.button`
 
   width: 100%;
   max-width: 30rem;
-  height: 5.3rem;
+  height: 6.7rem;
 
   border: 0.1rem solid #000000;
   border-radius: 1rem;

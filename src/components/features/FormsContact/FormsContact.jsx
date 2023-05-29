@@ -1,11 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
 import { useSendFormContact } from '../../../hooks/query/contact';
-import { FormInput, FormMask } from '../../common';
+import { FormInput, FormsTextArea, FormMask } from '../../common';
 import {
   ContactUs,
   Form,
@@ -14,7 +15,6 @@ import {
   Mensagem,
   SubmitButton,
   InputMessage,
-  AreaText,
 } from './Styles';
 import { buildFormContactErrorMessage, formsValidationSchema } from './utils';
 
@@ -22,7 +22,8 @@ export default function FormsContact({ title, smallTitle }) {
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
   const { mutate: sendFormContact, isLoading } = useSendFormContact({
-    onSuccess: () => toast.success('Formulário de contao enviado com sucesso!'),
+    onSuccess: () =>
+      toast.success('Formulário de contato enviado com sucesso!'),
     onError: (err) => {
       const errorMessage = buildFormContactErrorMessage(err);
       toast.error(errorMessage);
@@ -41,7 +42,7 @@ export default function FormsContact({ title, smallTitle }) {
 
   return (
     <ContactUs>
-      <Title>{`${isSmallScreen ? smallTitle : title}`}</Title>
+      <Title>{isSmallScreen ? smallTitle : title}</Title>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Section>
@@ -83,29 +84,28 @@ export default function FormsContact({ title, smallTitle }) {
         <Section>
           <InputMessage>
             <Mensagem>
-              Mensagem:
-              <AreaText
-                rows={13}
+              <FormsTextArea
+                name="message"
+                label="Mensagem:"
+                rows={11}
                 placeholder="Escreva aqui sua mensagem"
-                {...register('message')}
+                errors={errors}
+                register={register}
               />
-              {errors?.message?.message && <p>{errors?.message?.message}</p>}
-              <SubmitButton type="submit" disabled={isLoading}>
+              <SubmitButton disabled={isLoading} type="submit">
                 {isLoading ? (
                   <>
-                    {/* <TailSpin
-                height="15"
-                width="15"
-                color="white"
-                ariaLabel="tail-spin-loading"
-                radius="5"
-                wrapperStyle={{}}
-                wrapperClass=""
-              /> */}
+                    <TailSpin
+                      height="15"
+                      width="15"
+                      color="white"
+                      ariaLabel="tail-spin-loading"
+                      radius="5"
+                    />
                     Carregando
                   </>
                 ) : (
-                  <>Enviar</>
+                  'Enviar'
                 )}
               </SubmitButton>
             </Mensagem>

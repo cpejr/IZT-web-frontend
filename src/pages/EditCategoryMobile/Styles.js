@@ -17,7 +17,7 @@ export const Form = styled.form`
   max-width: 39rem;
   width: 100%;
   align-self: center;
-  gap: 2rem;
+  gap: 1rem;
 `;
 
 export const Title = styled.p`
@@ -26,6 +26,7 @@ export const Title = styled.p`
   font-weight: 700;
   font-size: 2rem;
   line-height: 2.4rem;
+  padding-bottom: 2rem;
 
   color: black;
 `;
