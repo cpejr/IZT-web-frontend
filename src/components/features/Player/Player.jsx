@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 import { useSaveProgress } from '../../../hooks/query/progress';
 import useAuthStore from '../../../stores/auth';
-import { buildSaveProgressErrorMessage } from './Styles';
+import { buildSaveProgressErrorMessage } from './utils';
 
 export default function Player({
   videoId,
@@ -19,7 +19,6 @@ export default function Player({
 }) {
   const [isReady, setIsReady] = useState(false);
   const playerRef = useRef(null);
-  const userId = useAuthStore((state) => state.auth?.user?._id);
   const queryClient = useQueryClient();
 
   const { mutate: saveProgress } = useSaveProgress({
@@ -32,22 +31,23 @@ export default function Player({
     },
   });
 
-  useLayoutEffect(() => {
+  const saveProgressEvent = useCallback(() => {
     const player = playerRef.current;
+    const { auth } = useAuthStore.getState();
+    if (!player || !auth) return; // If the player ref is not instanciated or the user is not logged in, return
 
-    return () => {
-      if (!player) return;
+    const progress = (player.getCurrentTime() / duration) * 100;
+    // If the video progress reach 100%, it will be saved in the onEnded player event
+    if (progress < 100)
+      saveProgress({
+        video: videoId,
+        progress,
+      });
+  }, [saveProgress, duration, videoId]);
 
-      const progress = (player.getCurrentTime() / duration) * 100;
-
-      // If the video progress reach 100%, it will be saved in the onEnded player event
-      if (progress < 100)
-        saveProgress({
-          video: videoId,
-          progress,
-        });
-    };
-  }, [saveProgress, duration, userId, videoId]);
+  useLayoutEffect(() => {
+    return saveProgressEvent;
+  }, [saveProgressEvent]);
 
   const onReady = useCallback(() => {
     if (!isReady && initialProgress && duration) {
@@ -65,8 +65,9 @@ export default function Player({
       height="100%"
       controls
       stopOnUnmount
-      onEnded={() => saveProgress({ video: videoId, progress: 100 })}
       onReady={onReady}
+      onPause={saveProgressEvent}
+      onEnded={() => saveProgress({ video: videoId, progress: 100 })}
       config={config}
       {...props}
     />
