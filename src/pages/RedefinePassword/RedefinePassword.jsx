@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import IZTLogo from '../../assets/IZTLogo.svg';
@@ -23,9 +23,12 @@ import {
 
 export default function RedefinePassword() {
   const { token } = useParams();
+  const navigate = useNavigate();
+
   const { mutate: redefinePassword, isLoading } = useRedefinePassword({
     onSuccess: () => {
       toast.success('Senha alterada com sucesso');
+      navigate('/login');
     },
     onError: (err) => {
       const errorMessage = buildRedefinePasswordErrorMessage(err);

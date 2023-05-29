@@ -61,7 +61,7 @@ export const forgotPassword = async (email) => {
 };
 export const redefinePassword = async ({ token, password }) => {
   const { data } = await api.put(`/users/forgot-password/${token}`, {
-    password,
+    newPassword: password,
   });
 
   return data;
