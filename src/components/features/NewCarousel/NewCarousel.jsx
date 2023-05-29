@@ -16,6 +16,7 @@ export default function NewCarousel({
   maxWidth,
   maxHeight,
   aspectRatio,
+  miniImages,
 }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   return (
@@ -59,6 +60,7 @@ export default function NewCarousel({
 
 NewCarousel.defaultProps = {
   carouselData: [],
+  miniImages: false,
 };
 
 NewCarousel.propTypes = {

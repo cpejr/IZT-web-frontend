@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
 import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
@@ -104,7 +105,7 @@ export default function Product() {
           </TextInfoContainer>
         </ProductInfo>
       </ProductData>
-      <BudgetForm productId={_id} />
+      <BudgetForm productId={_id} isLoadingProduct={isLoading} />
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
