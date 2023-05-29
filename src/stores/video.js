@@ -1,33 +1,33 @@
 import { create } from 'zustand';
 
 const useVideoStore = create((set, get) => ({
-  currVideo: null,
+  currVideoId: null,
   allVideos: null,
 
-  setState: (chapters) => {
-    const allVideos = chapters?.map(({ videos }) => videos).flat(); // All videos in sequence
-    const firstVideo = allVideos[0];
+  setState: (course) => {
+    const allVideos = course?.chapters?.map(({ videos }) => videos).flat(); // All videos in sequence
 
-    set({ currVideo: firstVideo, allVideos });
+    set({ currVideoId: course?.lastWatchedVideo, allVideos });
   },
-  setCurrVideo: (video) => set({ currVideo: video }),
+  setCurrVideoId: (videoId) => set({ currVideoId: videoId }),
 
   next: () => {
-    const { currVideo, allVideos } = get();
+    const { currVideoId, allVideos } = get();
     const currVideoIndex = allVideos?.findIndex(
-      ({ _id }) => _id === currVideo?._id
+      ({ _id }) => _id === currVideoId
     );
 
     if (currVideoIndex < allVideos.length - 1)
-      set({ currVideo: allVideos[currVideoIndex + 1] });
+      set({ currVideoId: allVideos[currVideoIndex + 1]?._id });
   },
   previous: () => {
-    const { currVideo, allVideos } = get();
+    const { currVideoId, allVideos } = get();
     const currVideoIndex = allVideos?.findIndex(
-      ({ _id }) => _id === currVideo?._id
+      ({ _id }) => _id === currVideoId
     );
 
-    if (currVideoIndex > 0) set({ currVideo: allVideos[currVideoIndex - 1] });
+    if (currVideoIndex > 0)
+      set({ currVideoId: allVideos[currVideoIndex - 1]?._id });
   },
 }));
 

@@ -23,4 +23,6 @@ export { default as ModalDeleteCategory } from './ModalDeleteCategory/ModalDelet
 export { default as ModalAuthorizeAccess } from './ModalAuthorizeAccess/ModalAuthorizeAccess';
 export { default as ModalEditAuthorizeAccess } from './ModalEditAuthorizeAccess/ModalEditAuthorizeAccess';
 export { default as ModalForgotPassword } from './ModalForgotPassword/ModalForgotPassword';
+export { default as VideoSelect } from './VideoSelect/VideoSelect';
+export { default as Video } from './Video/Video';
 export { default as ModalDeleteAuthorizeAccess } from './ModalDeleteAuthorizeAccess/ModalDeleteAuthorizeAccess';

@@ -5,20 +5,20 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 20px;
+  font-size: 2rem;
   padding: 1.25em 2em;
   gap: 2em;
-  max-width: 1440px;
+  max-width: 144rem;
   width: 100%;
 
   @media (max-width: 1100px) {
-    font-size: 17px;
+    font-size: 1.7rem;
   }
   @media (max-width: 800px) {
-    font-size: 15px;
+    font-size: 1.5rem;
   }
   @media (max-width: 700px) {
-    padding: 1.25em 0.4em;
+    padding: 1.25rem 0.4rem;
   }
 `;
 
@@ -56,7 +56,7 @@ export const EditLink = styled(Link)`
 
 export const AuthorizeButton = styled.button`
   background-color: ${(props) => props.theme.colors.darkGreenishBlue};
-  padding: 5px 10px;
+  padding: 0.5rem 1rem;
   border: none;
   font-size: 0.8em;
   font-weight: 500;
@@ -81,7 +81,7 @@ export const TableHeader = styled.div`
   grid-template-rows: 2.5em;
   align-items: center;
   background-color: ${(props) => props.theme.colors.gray.lightGrey};
-  padding: 5px 20px;
+  padding: 0.5rem 2rem;
   h2 {
     font-size: 0.8em;
     overflow: auto;
@@ -95,7 +95,7 @@ export const TableHeader = styled.div`
   @media (max-width: 550px) {
     grid-template-columns: 1fr 1fr;
     grid-auto-columns: 100%;
-    padding: 5px 5px;
+    padding: 0.5rem 0.5rem;
     grid-template-rows: 3em;
     h2 {
       grid-row: 2;
@@ -109,10 +109,10 @@ export const SearchContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  border-radius: 18px;
+  border-radius: 1.8rem;
   height: 2em;
   background-color: white;
-  padding: 0px 10px;
+  padding: 0rem 1rem;
   width: 100%;
   overflow-x: hidden;
   @media (max-width: 550px) {
@@ -126,7 +126,7 @@ export const SearchBox = styled.input`
   background-color: transparent;
   font-size: 0.8em;
   color: black;
-  margin-left: 10px;
+  margin-left: 1rem;
   height: auto;
   font-weight: 500;
   font-family: ${(props) => props.theme.fonts.montserrat};
@@ -146,18 +146,18 @@ export const ContentRow = styled.div`
   grid-template-rows: 2.5em;
   align-items: center;
   align-content: center;
-  padding: 5px 20px;
+  padding: 0.5rem 2rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 0.8em;
   font-weight: 500;
   justify-items: stretch;
 
   p {
-    padding-left: 10px;
+    padding-left: 1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-bottom: 5px;
+    padding-bottom: 0.5rem;
   }
   svg {
     justify-self: center;
@@ -170,7 +170,7 @@ export const ContentRow = styled.div`
   }
   @media (max-width: 550px) {
     grid-template-columns: 2fr 1.5fr 0.3fr 0.3fr;
-    padding-left: 0px;
+    padding-left: 0;
   }
 `;
 
@@ -204,7 +204,7 @@ export const DeleteButton = styled.button`
   justify-self: flex-end;
 
   svg {
-    height: 23px;
-    width: 23px;
+    height: 2.3rem;
+    width: 2.3rem;
   }
 `;

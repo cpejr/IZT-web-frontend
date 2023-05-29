@@ -12,20 +12,20 @@ export const Container = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1.5rem;
 
   width: 100%;
 
-  margin-bottom: 50px;
+  margin-bottom: 5rem;
 `;
 
 export const Title = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-  padding-bottom: 10px;
+  font-size: 2rem;
+  line-height: 2.4rem;
+  padding-bottom: 1rem;
 
   color: black;
 `;
@@ -34,8 +34,8 @@ export const Subtitle = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 2rem;
+  line-height: 2.4rem;
 
   color: black;
 `;
@@ -44,40 +44,40 @@ export const Input = styled.input`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 8px 11px;
-  gap: 10px;
+  padding: 0.8rem 1.1rem;
+  gap: 1rem;
 
-  border: ${({ error }) => (error ? '2px solid red' : '1px solid black')};
-  border-radius: 4px;
+  border: ${({ error }) => (error ? '0.2rem solid red' : '0.1rem solid black')};
+  border-radius: 0.4rem;
 
   max-width: 100%;
   width: 100%;
-  height: 36px;
+  height: 3.6rem;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 1.6rem;
 `;
 
 export const TextArea = styled.textarea`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 8px 11px;
-  gap: 10px;
+  padding: 0.8rem 1.1rem;
+  gap: 1rem;
 
-  border: ${({ error }) => (error ? '2px solid red' : '1px solid black')};
-  border-radius: 4px;
+  border: ${({ error }) => (error ? '0.2rem solid red' : '0.1rem solid black')};
+  border-radius: 0.4rem;
 
   max-width: 100%;
   width: 100%;
-  height: 250px;
+  height: 25rem;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 1.6rem;
   resize: none;
 `;
 
@@ -89,8 +89,8 @@ export const ErrorMessage = styled.p`
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding-top: 10px;
+  gap: 0.5rem;
+  padding-top: 1rem;
   width: 100%;
 `;
 
@@ -98,10 +98,10 @@ export const MiniText = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 1.4rem;
+  line-height: 1.7rem;
 
-  padding-bottom: 6px;
+  padding-bottom: 0.6rem;
 
   color: black;
 `;
@@ -112,7 +112,7 @@ export const PicturesContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  gap: 1em;
+  gap: 1rem;
 `;
 
 export const DocumentsContainer = styled.div`
@@ -120,22 +120,22 @@ export const DocumentsContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 1em;
+  gap: 1rem;
 
   width: 100%;
-  max-width: 350px;
+  max-width: 35rem;
 `;
 
 export const CategorySection = styled.div`
   display: flex;
 
-  gap: 25px;
+  gap: 2.5rem;
   width: 100%;
 
   @media (max-width: 361px) {
     align-items: start;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.5rem;
   }
 `;
 
@@ -145,22 +145,22 @@ export const SaveButton = styled.button`
   align-items: center;
   align-self: center;
   justify-content: center;
-  padding: 10px;
-  gap: 10px;
-  margin-top: 10px;
+  padding: 1rem;
+  gap: 1rem;
+  margin-top: 1rem;
 
-  width: 191px;
-  height: 45px;
+  width: 19.1rem;
+  height: 4.5rem;
 
-  border: 1px solid black;
-  border-radius: 5px;
+  border: 0.1rem solid black;
+  border-radius: 0.5rem;
   background-color: transparent;
 
   p {
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 1.8rem;
 
     display: flex;
     align-items: center;
@@ -190,21 +190,21 @@ export const CancelButton = styled(Link)`
   align-items: center;
   justify-content: center;
   align-self: center;
-  padding: 5px 10px;
-  gap: 10px;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
   text-decoration: none;
-  width: 84px;
-  height: 27px;
+  width: 8.4rem;
+  height: 2.7rem;
 
-  border: 1px solid #000000;
-  border-radius: 5px;
+  border: 0.1rem solid #000000;
+  border-radius: 0.5rem;
   background-color: transparent;
 
   p {
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 1.4rem;
 
     display: flex;
     align-items: center;

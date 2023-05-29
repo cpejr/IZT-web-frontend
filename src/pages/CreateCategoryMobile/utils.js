@@ -6,7 +6,7 @@ import { ERROR_CODES } from '../../utils/constants';
 export const createCategoryValidationSchema = z.object({
   name: z
     .string()
-    .min(1, 'Favor inserir o nome da categoria')
+    .nonempty('Favor inserir o nome da categoria')
     .min(3, 'O nome da categoria deve ter pelo menos 3 caracteres')
     .max(40, 'O nome da categoria deve ter no máximo 40 caracteres'),
   description: z.string().optional(),

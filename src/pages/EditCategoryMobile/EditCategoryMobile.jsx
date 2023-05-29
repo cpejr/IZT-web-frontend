@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { TailSpin } from 'react-loader-spinner';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -69,8 +70,23 @@ export default function EditCategoryMobile() {
         />
 
         <SaveButton disabled={isLoading} type="submit">
-          <FiSave size={20} />
-          <p>{isLoading ? 'Carregando...' : 'Editar categoria'}</p>
+          {isLoading ? (
+            <>
+              <TailSpin
+                height="15"
+                width="15"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="5"
+              />
+              <p>Carregando</p>
+            </>
+          ) : (
+            <>
+              <FiSave size={20} />
+              <p>Editar Categoria</p>
+            </>
+          )}
         </SaveButton>
       </Form>
 

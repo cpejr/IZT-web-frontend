@@ -13,20 +13,20 @@ const Button = styled.button`
   max-width: ${(props) => props.maxWidth};
   min-height: ${(props) => props.minHeight};
   max-height: ${(props) => props.maxHeight};
-  padding-top: ${(props) => props.paddingTop ?? '7px'};
-  padding-left: ${(props) => props.paddingLeft ?? '30px'};
-  padding-right: ${(props) => props.paddingRight ?? '30px'};
-  padding-bottom: ${(props) => props.paddingBottom ?? '7px'};
+  padding-top: ${(props) => props.paddingTop ?? '0.7rem'};
+  padding-left: ${(props) => props.paddingLeft ?? '3rem'};
+  padding-right: ${(props) => props.paddingRight ?? '3rem'};
+  padding-bottom: ${(props) => props.paddingBottom ?? '0.7rem'};
   height: ${(props) => props.height};
   gap: ${(props) => props.gap};
   width: ${(props) => props.width};
   /*cor e estilo do botão*/
   color: ${(props) => props.color ?? props.theme.colors.blue};
   background-color: ${(props) => props.backgroundColor ?? 'white'};
-  border-width: ${(props) => props.borderWidth ?? '1.5px'};
+  border-width: ${(props) => props.borderWidth ?? '0.15rem'};
   border-color: ${(props) => props.borderColor ?? props.theme.colors.blue};
   border-style: solid;
-  border-radius: ${(props) => props.borderRadius ?? '4px'};
+  border-radius: ${(props) => props.borderRadius ?? '0.4rem'};
   box-shadow: ${(props) => props.boxShadow ?? 'none'};
   cursor: pointer;
   /*características do texto*/
@@ -48,22 +48,22 @@ const Button = styled.button`
   }
 
   @media (max-width: 990px) {
-    font-size: ${(props) => props.fontSize990 ?? '18px'};
-    padding-top: ${(props) => props.paddingTop990 ?? '5px'};
-    padding-left: ${(props) => props.paddingLeft990 ?? '20px'};
-    padding-right: ${(props) => props.paddingRight990 ?? '20px'};
-    padding-bottom: ${(props) => props.paddingBottom990 ?? '5px'};
+    font-size: ${(props) => props.fontSize990 ?? '1.8rem'};
+    padding-top: ${(props) => props.paddingTop990 ?? '0.5rem'};
+    padding-left: ${(props) => props.paddingLeft990 ?? '2rem'};
+    padding-right: ${(props) => props.paddingRight990 ?? '2rem'};
+    padding-bottom: ${(props) => props.paddingBottom990 ?? '0.5rem'};
     border-color: ${(props) => props.borderColor990};
     background-color: ${(props) => props.backgroundColor990};
     color: ${(props) => props.color990};
   }
 
   @media (max-width: 800px) {
-    font-size: ${(props) => props.fontSize800 ?? '18px'};
-    padding-top: ${(props) => props.paddingTop800 ?? '5px'};
-    padding-left: ${(props) => props.paddingLeft800 ?? '20px'};
-    padding-right: ${(props) => props.paddingRight800 ?? '20px'};
-    padding-bottom: ${(props) => props.paddingBottom800 ?? '5px'};
+    font-size: ${(props) => props.fontSize800 ?? '1.8rem'};
+    padding-top: ${(props) => props.paddingTop800 ?? '0.5rem'};
+    padding-left: ${(props) => props.paddingLeft800 ?? '2rem'};
+    padding-right: ${(props) => props.paddingRight800 ?? '2rem'};
+    padding-bottom: ${(props) => props.paddingBottom800 ?? '0.5rem'};
     border-color: ${(props) => props.borderColor800};
     background-color: ${(props) => props.backgroundColor800};
     color: ${(props) => props.color800};

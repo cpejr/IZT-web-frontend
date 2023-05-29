@@ -2,17 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-
-  font-size: 20px;
-  @media (max-width: 1100px) {
-    font-size: 18px;
-  }
-  @media (max-width: 750px) {
-    font-size: 15px;
-  }
-  @media (max-width: 500px) {
-    font-size: 10px;
-  }
 `;
 
 export const UpperDiv = styled.div`
@@ -34,7 +23,7 @@ export const UpperDiv = styled.div`
 
   @media (max-width: 1080px) {
     flex-direction: column;
-    gap: 40px;
+    gap: 4rem;
   }
 `;
 
@@ -42,7 +31,7 @@ export const TextDiv = styled.div`
   width: 100%;
   font-family: ${(props) => props.theme.fonts.montserrat};
   h1 {
-    font-size: 3.2em;
+    font-size: 6.4rem;
     font-weight: 700;
 
     @media (max-width: 1080px) {
@@ -50,8 +39,32 @@ export const TextDiv = styled.div`
     }
   }
   p {
-    font-size: 1.4em;
+    font-size: 2.8rem;
     font-weight: 500;
     text-align: center;
+  }
+  @media (max-width: 1100px) {
+    h1 {
+      font-size: 5.76rem;
+    }
+    p {
+      font-size: 2.52rem;
+    }
+  }
+  @media (max-width: 750px) {
+    h1 {
+      font-size: 4.8rem;
+    }
+    p {
+      font-size: 2.1rem;
+    }
+  }
+  @media (max-width: 500px) {
+    h1 {
+      font-size: 3.2rem;
+    }
+    p {
+      font-size: 1.4rem;
+    }
   }
 `;

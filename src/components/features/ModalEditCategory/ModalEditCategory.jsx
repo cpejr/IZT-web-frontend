@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useUpdateCategory } from '../../../hooks/query/categories';
@@ -77,8 +78,23 @@ export default function ModalEditCategory({ category, close }) {
           />
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <ModalButton disabled={isPending} type="submit">
-            <FiSave size={25} />
-            <p>{isPending ? 'Carregando...' : 'Salvar Alterações'}</p>
+            {isPending ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                />
+                <p>Carregando</p>
+              </>
+            ) : (
+              <>
+                <FiSave size={25} />
+                <p>Salvar Alterações</p>
+              </>
+            )}
           </ModalButton>
         </ModalContent>
       </Form>

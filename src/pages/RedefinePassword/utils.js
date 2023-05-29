@@ -21,6 +21,7 @@ export const redifinePasswordValidationSchema = z
 // Error Handling
 const redefinePasswordErrorMessages = {
   [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
+  [ERROR_CODES.FORBIDDEN]: 'Link expirado ou inválido',
   [ERROR_CODES.NOT_FOUND]: 'Usuário não encontrado',
 };
 const redefinePasswordDefaultErrorMessage =

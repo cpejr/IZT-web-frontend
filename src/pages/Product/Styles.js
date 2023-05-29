@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   justify-items: center;
   width: 100%;
-  margin-top: 35px;
+  margin-top: 3.5rem;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
@@ -18,10 +18,10 @@ export const ProductData = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 35px;
+  gap: 3.5rem;
 
   width: 90%;
-  max-width: 1440px;
+  max-width: 144rem;
 
   @media (max-width: 700px) {
     gap: 0;
@@ -30,21 +30,21 @@ export const ProductData = styled.div`
 
 export const ProductName = styled.p`
   width: 100%;
-  max-width: 328px;
+  max-width: 32.8rem;
 
-  padding: 35px 0;
+  padding: 3.5rem 0;
 
-  font-size: 36px;
-  line-height: 44px;
+  font-size: 3.6rem;
+  line-height: 4.4rem;
   text-align: center;
   color: #000000;
 
   @media (max-width: 500px) {
-    font-size: 26px;
+    font-size: 2.6rem;
   }
 
   @media (max-width: 700px) {
-    padding: 10px 0;
+    padding: 1rem 0;
   }
 `;
 
@@ -52,8 +52,8 @@ export const ProductInfo = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  gap: 50px;
-  margin-bottom: 40px;
+  gap: 5rem;
+  margin-bottom: 4rem;
 
   @media (max-width: 1080px) {
     flex-direction: column;
@@ -73,19 +73,19 @@ export const TextInfoContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  gap: 40px;
+  gap: 4rem;
 
   width: 100%;
 
-  padding: 0px;
+  padding: 0rem;
 `;
 
 export const ProductDescription = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
-  gap: 15px;
+  padding: 0rem;
+  gap: 1.5rem;
 
   width: 100%;
 `;
@@ -93,16 +93,16 @@ export const ProductDescription = styled.div`
 export const DescriptionTitle = styled.div`
   width: 100%;
 
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 2.4rem;
+  line-height: 2.9rem;
   color: #000000;
 `;
 
 export const Description = styled.div`
   width: 100%;
 
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
 
   color: #000000;
 `;
@@ -111,8 +111,8 @@ export const ProductBenefits = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
-  gap: 15px;
+  padding: 0rem;
+  gap: 1.5rem;
 
   width: 100%;
 `;
@@ -120,8 +120,8 @@ export const ProductBenefits = styled.div`
 export const BenefitsTitle = styled.div`
   width: 100%;
 
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 2.4rem;
+  line-height: 2.9rem;
   text-align: left;
   color: #000000;
 `;
@@ -129,8 +129,8 @@ export const BenefitsTitle = styled.div`
 export const Benefits = styled.div`
   width: 100%;
 
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
   color: #000000;
 `;
 
@@ -138,8 +138,8 @@ export const ProductInfos = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px;
-  gap: 15px;
+  padding: 2rem;
+  gap: 1.5rem;
 
   width: 100%;
 
@@ -149,8 +149,8 @@ export const ProductInfos = styled.div`
 export const InfoTitle = styled.div`
   width: 100%;
 
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 2.4rem;
+  line-height: 2.9rem;
   text-align: left;
   color: #000000;
 `;
@@ -158,7 +158,7 @@ export const InfoTitle = styled.div`
 export const InfoDescription = styled.div`
   width: 100%;
 
-  max-height: 200px;
+  max-height: 20rem;
   overflow-y: auto;
 `;
 
@@ -166,10 +166,10 @@ export const ProcessSteps = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 5px;
-  gap: 40px;
-  margin-top: 35px;
-  margin-bottom: 50px;
+  padding: 0rem 0.5rem;
+  gap: 4rem;
+  margin-top: 3.5rem;
+  margin-bottom: 5rem;
   flex-direction: column;
 
   width: 100%;
@@ -178,7 +178,7 @@ export const ProcessSteps = styled.div`
 export const Steps = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
   width: 100%;
 
   @media (max-width: 700px) {
@@ -192,46 +192,46 @@ export const Title = styled.div`
   width: 100%;
   text-align: center;
 
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 2.4rem;
+  line-height: 2.9rem;
 
   color: #000000;
 
   @media (max-width: 370px) {
-    font-size: 20px;
+    font-size: 2rem;
   }
 `;
 
 export const Image = styled.img`
-  height: 136px;
+  height: 13.6rem;
 
   @media (max-width: 1000px) {
-    height: 100px;
+    height: 10rem;
   }
 `;
 
 export const StepsText = styled.p`
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
   text-align: center;
 
   @media (max-width: 1000px) {
-    font-size: 15px;
+    font-size: 1.5rem;
   }
   @media (max-width: 700px) {
     height: auto;
-    font-size: 18px;
-    margin-bottom: 5px;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
   }
   @media (max-width: 350px) {
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 600;
   }
 `;
 export const Pic = styled.div`
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 4rem;
 `;
 export const All = styled.div`
   display: flex;
@@ -244,7 +244,7 @@ export const Block = styled.div`
   @media (max-width: 700px) {
     flex-direction: row;
     align-items: center;
-    gap: 20px;
+    gap: 2rem;
     justify-content: flex-start;
   }
 `;
@@ -262,49 +262,49 @@ export const Arrow = styled.div`
 `;
 
 export const EmptyCell = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 4rem;
+  height: 4rem;
 `;
 
 export const StepsImages = styled.div`
   display: grid;
-  grid-template-columns: 135px 40px 135px 40px 135px 40px 135px;
+  grid-template-columns: 13.5rem 4rem 13.5rem 4rem 13.5rem 4rem 13.5rem;
   justify-content: center;
   justify-items: center;
-  column-gap: 25px;
+  column-gap: 2.5rem;
   width: 100%;
 
   @media (max-width: 1000px) {
-    column-gap: 5px;
+    column-gap: 0.5rem;
   }
   @media (max-width: 700px) {
-    grid-template-rows: 110px 40px 110px 40px 110px 40px 110px;
+    grid-template-rows: 11rem 4rem 11rem 4rem 11rem 4rem 11rem;
     grid-template-columns: 1fr;
     justify-items: center;
-    row-gap: 5px;
-    max-width: 100px;
+    row-gap: 0.5rem;
+    max-width: 10rem;
     align-content: center;
   }
 `;
 
 export const StepsDescription = styled.div`
   display: grid;
-  grid-template-columns: 135px 40px 135px 40px 135px 40px 135px;
+  grid-template-columns: 13.5rem 4rem 13.5rem 4rem 13.5rem 4rem 13.5rem;
   justify-content: center;
   align-content: center;
   align-items: flex-start;
   justify-items: center;
-  column-gap: 25px;
+  column-gap: 2.5rem;
   width: 100%;
   @media (max-width: 1000px) {
-    column-gap: 5px;
+    column-gap: 0.5rem;
   }
 
   @media (max-width: 700px) {
-    grid-template-rows: 110px 40px 110px 40px 110px 40px 110px;
+    grid-template-rows: 11rem 4rem 11rem 4rem 11rem 4rem 11rem;
     grid-template-columns: 1fr;
-    row-gap: 5px;
-    max-width: 200px;
+    row-gap: 0.5rem;
+    max-width: 20rem;
     align-items: center;
   }
 `;

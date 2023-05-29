@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
   font-size: 1.4rem;
   background: white;
   text-rendering: optimizeLegibility;

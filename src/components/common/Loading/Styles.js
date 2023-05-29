@@ -2,18 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 500px;
+  height: 50rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-`;
-
-export const Text = styled.p`
-  margin-top: 15px;
-  font-size: 19px;
-  font-weight: 600;
-  font-family: ${(props) => props.theme.fonts.montserrat};
 `;
 
 export const Loader = styled.div`
@@ -23,14 +16,14 @@ export const Loader = styled.div`
 
   div {
     background: black;
-    width: 15px;
-    height: 20px;
+    width: 1.5rem;
+    height: 2rem;
     justify-content: center;
     align-items: center;
     animation: Loader 1.2s infinite;
     @keyframes Loader {
       50% {
-        height: 60px;
+        height: 6rem;
       }
     }
   }
@@ -40,12 +33,12 @@ export const Loader = styled.div`
     animation-delay: -0.4s;
   }
   div:nth-child(2) {
-    margin-left: 5px;
+    margin-left: 0.5rem;
     background-color: ${(props) => props.theme.colors.darkGreenishBlue};
     animation-delay: -0.2s;
   }
   div:nth-child(3) {
-    margin-left: 5px;
+    margin-left: 0.5rem;
     background-color: ${(props) => props.theme.colors.greenishBlue};
     animation-delay: 0s;
   }
