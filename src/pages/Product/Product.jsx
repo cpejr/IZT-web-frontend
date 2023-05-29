@@ -43,13 +43,11 @@ export default function Product() {
   const navigate = useNavigate();
   const isMediumScreen = useMediaQuery({ minWidth: 700 });
 
-  const { data: product, isLoading } = useGetProductById({
+  const { data: product } = useGetProductById({
     _id,
     onError: (err) => {
       const code = err?.response?.data?.httpCode;
       const message = buildGetProducErrorMessage(code);
-
-      // Do something with the error message
       alert(message);
 
       navigate('*'); // Go to NotFound page
@@ -74,12 +72,10 @@ export default function Product() {
     [product]
   );
 
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
-
   return (
     <Container>
       <ProductData>
-        <ProductName>{product.name}</ProductName>
+        <ProductName>{product?.name}</ProductName>
         <ProductInfo>
           <CarouselContainer>
             <NewCarousel
@@ -93,11 +89,11 @@ export default function Product() {
           <TextInfoContainer>
             <ProductDescription>
               <DescriptionTitle>Descrição do produto</DescriptionTitle>
-              <Description>{product.description}</Description>
+              <Description>{product?.description}</Description>
             </ProductDescription>
             <ProductBenefits>
               <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-              <Benefits>{product.advantages}</Benefits>
+              <Benefits>{product?.advantages}</Benefits>
             </ProductBenefits>
             <ProductInfos>
               <InfoTitle>Mais informações</InfoTitle>
