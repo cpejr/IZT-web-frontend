@@ -56,18 +56,18 @@ export const SaveChanges = styled.button`
   gap: 1rem;
 
   width: 100%;
-  max-width: 25rem;
-  height: 5.5rem;
+  max-width: 20rem;
+  height: 4.5rem;
 
   border: 0.1rem solid #000000;
   border-radius: 0.5rem;
   background-color: transparent;
 
-  padding: 0 1.1rem;
+  /* padding: 0 1.1rem; */
   margin-top: 2%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 3.08rem;
+  font-size: 2rem;
   font-weight: 600;
   color: ${(props) => props.theme.colors.blue};
 
@@ -84,13 +84,13 @@ export const SaveChanges = styled.button`
     width: 90%;
     font-size: 1.5rem;
     height: 3.75rem;
-    max-width: 20rem;
+    max-width: 15rem;
     padding: 0 0.75rem;
   }
 `;
 
 export const Title = styled.p`
-  font-size: 3.3rem;
+  font-size: 2.2rem;
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
   margin-bottom: 2%;
