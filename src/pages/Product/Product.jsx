@@ -77,7 +77,7 @@ export default function Product() {
   return (
     <Container>
       <ProductData>
-        <ProductName>{product.name}</ProductName>
+        <ProductName>{product?.name}</ProductName>
         <ProductInfo>
           <CarouselContainer>
             <NewCarousel
@@ -91,11 +91,11 @@ export default function Product() {
           <TextInfoContainer>
             <ProductDescription>
               <DescriptionTitle>Descrição do produto</DescriptionTitle>
-              <Description>{product.description}</Description>
+              <Description>{product?.description}</Description>
             </ProductDescription>
             <ProductBenefits>
               <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-              <Benefits>{product.advantages}</Benefits>
+              <Benefits>{product?.advantages}</Benefits>
             </ProductBenefits>
             <ProductInfos>
               <InfoTitle>Mais informações</InfoTitle>

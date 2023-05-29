@@ -57,6 +57,13 @@ export default function Carousel({
     else if (isRightSwipe) updateImage(currentImageIndex - 1);
   };
 
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '">' + (index + 1) + '</span>';
+    },
+  };
+
   return (
     <Container
       maxHeight={maxHeight}

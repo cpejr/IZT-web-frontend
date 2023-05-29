@@ -12,12 +12,22 @@ export default function NewCarousel({
   maxWidth,
   maxHeight,
   aspectRatio,
+  miniImages,
 }) {
+  const pagination = {
+    clickable: true,
+    renderBullet() {
+      carouselData.map((src, alt) => {
+        console.log(src);
+        return `<img src=${src} alt=${alt} />`;
+      });
+    },
+  };
   return (
     <StyledSwiper
       cssMode
       navigation={{ clickable: true }}
-      pagination={{ clickable: true }}
+      pagination={miniImages ? pagination : { clickable: true }}
       loop
       modules={[Navigation, Pagination, Autoplay]}
       keyboard={{ enabled: true }}
@@ -40,6 +50,7 @@ export default function NewCarousel({
 
 NewCarousel.defaultProps = {
   carouselData: [],
+  miniImages: false,
 };
 
 NewCarousel.propTypes = {
@@ -47,4 +58,5 @@ NewCarousel.propTypes = {
   maxWidth: PropTypes.string.isRequired,
   maxHeight: PropTypes.string.isRequired,
   aspectRatio: PropTypes.string.isRequired,
+  miniImages: PropTypes.bool,
 };
