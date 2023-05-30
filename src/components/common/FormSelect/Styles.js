@@ -1,13 +1,23 @@
 import { Select } from 'antd';
 import styled from 'styled-components';
 
-// eslint-disable-next-line import/prefer-default-export
+export const Container = styled.div`
+  width: 100%;
+  .ant-select-selector {
+    border-color: ${(props) => (props.error ? 'red' : '#9f9f9f ')} !important;
+  }
+
+  .ant-select-selection-placeholder {
+    color: #9f9f9f;
+  }
+`;
+
 export const StyledSelect = styled(Select)`
   flex-grow: 1;
-  width: 200px;
+  width: 100%;
+`;
 
-  .ant-select-selector:hover {
-    border: 1px solid white;
-  }
-  /* max-width: 120px; */
+export const ErrorMessage = styled.p`
+  font-weight: 700;
+  color: red;
 `;

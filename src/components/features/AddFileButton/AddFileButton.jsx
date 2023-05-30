@@ -2,6 +2,7 @@ import { useRef } from 'react';
 
 import PropTypes from 'prop-types';
 import { HiPlusSm } from 'react-icons/hi';
+import { toast } from 'react-toastify';
 
 import numToMegaBytes from '../../../utils/numToMegaBytes';
 import { AddButton } from './Styles';
@@ -11,6 +12,7 @@ export default function AddFileButton({
   appendFn,
   allowedMimeTypes,
   sizeLimitInMB,
+  color = 'white',
   ...props
 }) {
   const fileInputRef = useRef(null);
@@ -19,6 +21,7 @@ export default function AddFileButton({
     <AddButton
       type="button"
       onClick={() => fileInputRef.current.click()}
+      color={color}
       {...props}
     >
       <input
@@ -31,7 +34,7 @@ export default function AddFileButton({
           const sizeLimit = numToMegaBytes(sizeLimitInMB);
 
           if (file.size > sizeLimit) {
-            alert('Limite excedido');
+            toast.error(`Limite de ${sizeLimitInMB} MB excedido`);
           } else {
             appendFn({ file });
           }
@@ -43,7 +46,12 @@ export default function AddFileButton({
   );
 }
 
+AddFileButton.defaultProps = {
+  color: 'white',
+};
+
 AddFileButton.propTypes = {
+  color: PropTypes.string,
   label: PropTypes.string.isRequired,
   appendFn: PropTypes.func.isRequired,
   allowedMimeTypes: PropTypes.string.isRequired,

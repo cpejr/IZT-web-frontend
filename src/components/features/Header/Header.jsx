@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useMediaQuery } from 'react-responsive';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useTheme } from 'styled-components';
 
 import { useLogout } from '../../../hooks/query/sessions';
@@ -27,49 +28,57 @@ import {
 } from './Styles';
 
 export default function Header() {
-  const theme = useTheme();
-  const navigate = useNavigate();
-  const isSmallScreen = useMediaQuery({ maxWidth: 900 });
-  const { auth } = useAuthStore();
-
+  // State variables
   const [bar, setBar] = useState(false);
   const [collapse, setCollapse] = useState(false);
   const [collapseLogout, setCollapseLogout] = useState(false);
   const [language, setLanguage] = useState('EN'); // default language is EN
+
+  const theme = useTheme();
+  const navigate = useNavigate();
+  const isSmallScreen = useMediaQuery({ maxWidth: 900 });
+  const user = useAuthStore((state) => state.auth?.user);
   const availableLaguages = ['EN', 'PT', 'DE'];
 
+  const closeHeader = () => {
+    setBar(false);
+    setCollapseLogout(false);
+  };
+
+  // Backend call
   const { mutate: logout } = useLogout({
     onSuccess: () => {
-      setBar(false);
-      setCollapseLogout(false);
+      closeHeader();
+      toast.success('Usuário deslogado com sucesso!');
       navigate('/');
     },
     onError: () => {
       const errorMessage =
         'Ocorreu um erro ao realizar o logout. Tente novamente mais tarde';
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 
-  const handleProfileBtn = () => {
-    setBar(false);
-    setCollapseLogout(false);
-    navigate('/perfil');
-  };
+  // Component
 
-  const welcomeSection = () => {
+  const welcomeSectionComponent = (() => {
     if (isSmallScreen)
       return (
         <MenuProfile collapse={collapseLogout} bar={bar}>
           <MyProfile>
-            <button type="button" onClick={handleProfileBtn}>
+            <button
+              type="button"
+              onClick={() => {
+                closeHeader();
+                navigate(user?.isAdmin ? '/administrador' : '/perfil');
+              }}
+            >
               Meu Perfil
             </button>
             <IoIosArrowDown
               color="white"
-              onClick={() => setCollapseLogout(!collapseLogout)}
+              onClick={() => setCollapseLogout((prev) => !prev)}
             />
           </MyProfile>
           <Divider collapse={collapseLogout && bar} />
@@ -79,13 +88,16 @@ export default function Header() {
         </MenuProfile>
       );
 
-    const firstName = auth?.user?.name?.split(' ')?.[0];
+    const firstName = user?.name?.split(' ')?.[0];
     const nameLengthLimit = 10;
 
-    const isLessThanEqualLimit = firstName.length <= nameLengthLimit;
+    const isLessThanEqualLimit = firstName?.length <= nameLengthLimit;
     return (
       <>
-        <Link to="/perfil" onClick={() => setBar(false)}>
+        <Link
+          to={user?.isAdmin ? '/administrador' : '/perfil'}
+          onClick={() => setBar(false)}
+        >
           {isLessThanEqualLimit ? `Olá, ${firstName}!` : 'Meu Perfil'}
         </Link>
         <LogoutBtn onClick={logout} collapse={collapseLogout}>
@@ -93,7 +105,7 @@ export default function Header() {
         </LogoutBtn>
       </>
     );
-  };
+  })();
 
   return (
     <Content>
@@ -101,36 +113,18 @@ export default function Header() {
         <Logo />
         <Menu>
           <Nav bar={bar} collapse={collapse}>
-            <Link
-              to="/catalogo"
-              onClick={() => {
-                setBar(false);
-                setCollapseLogout(false);
-              }}
-            >
+            <Link to="/catalogo" onClick={closeHeader}>
               Produtos
             </Link>
-            <Link
-              to="/"
-              onClick={() => {
-                setBar(false);
-                setCollapseLogout(false);
-              }}
-            >
+            <Link to="/curso" onClick={closeHeader}>
               Cursos
             </Link>
-            <Link
-              to="/"
-              onClick={() => {
-                setBar(false);
-                setCollapseLogout(false);
-              }}
-            >
+            <Link to="/" onClick={closeHeader}>
               Software
             </Link>
             <InvertItems>
-              {auth ? (
-                <Welcome>{welcomeSection()}</Welcome>
+              {user ? (
+                <Welcome>{welcomeSectionComponent}</Welcome>
               ) : (
                 <ButtonLogin
                   backgroundColor800={theme.colors.greenishBlue}
@@ -141,17 +135,15 @@ export default function Header() {
                   hoverBorderColor800={theme.colors.greenishBlue}
                   collapse={bar}
                   onClick={() => {
-                    setBar(false);
-                    setCollapseLogout(false);
+                    closeHeader();
                     navigate('/login');
                   }}
                 >
                   Entrar
                 </ButtonLogin>
               )}
-
               <Select bar={bar}>
-                <Selected onClick={() => setCollapse(!collapse)}>
+                <Selected onClick={() => setCollapse((prev) => !prev)}>
                   <p>{language}</p>
                   <IoIosArrowDown />
                 </Selected>
@@ -162,7 +154,7 @@ export default function Header() {
                       key={lang}
                       onClick={() => {
                         setLanguage(lang);
-                        setCollapse(!collapse);
+                        setCollapse((prev) => !prev);
                       }}
                       style={{ display: collapse ? 'flex' : 'none' }}
                     >
@@ -174,7 +166,7 @@ export default function Header() {
             </InvertItems>
           </Nav>
 
-          <Bar bar={bar} onClick={() => setBar(!bar)}>
+          <Bar bar={bar} onClick={() => setBar((prev) => !prev)}>
             <span />
           </Bar>
         </Menu>

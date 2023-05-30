@@ -25,9 +25,9 @@ import {
   DataContainer,
 } from './Styles';
 
-function Profile() {
+export default function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
-  const user = useAuthStore((state) => state.auth.user);
+  const user = useAuthStore((state) => state.auth?.user);
 
   const openModalChangeUserData = () => setUpdateUserModalState(true);
   const closeModalChangeUserData = () => setUpdateUserModalState(false);
@@ -45,19 +45,19 @@ function Profile() {
                   <Infos>
                     <Info>
                       <h1>Empresa: </h1>
-                      <h2>{user.company}</h2>
+                      <h2>{user?.company}</h2>
                     </Info>
                     <Info>
                       <h1>Nome: </h1>
-                      <h2>{user.name}</h2>
+                      <h2>{user?.name}</h2>
                     </Info>
                     <Info>
                       <h1>Sobrenome: </h1>
-                      <h2>{user.surname}</h2>
+                      <h2>{user?.surname}</h2>
                     </Info>
                     <Info>
                       <h1>Cargo: </h1>
-                      <h2>{user.role}</h2>
+                      <h2>{user?.role}</h2>
                     </Info>
                   </Infos>
                 </PersonalData>
@@ -66,19 +66,19 @@ function Profile() {
                   <Infos>
                     <Info>
                       <h1>Pais: </h1>
-                      <h2>{user.country}</h2>
+                      <h2>{user?.country}</h2>
                     </Info>
                     <Info>
                       <h1>Estado: </h1>
-                      <h2>{user.state}</h2>
+                      <h2>{user?.state}</h2>
                     </Info>
                     <Info>
                       <h1>Cidade: </h1>
-                      <h2>{user.city}</h2>
+                      <h2>{user?.city}</h2>
                     </Info>
                     <Info>
                       <h1>Rua: </h1>
-                      <h2>{user.address}</h2>
+                      <h2>{user?.address}</h2>
                     </Info>
                   </Infos>
                 </Address>
@@ -89,11 +89,11 @@ function Profile() {
                   <Infos>
                     <Info>
                       <h1>Email: </h1>
-                      <h2>{user.email}</h2>
+                      <h2>{user?.email}</h2>
                     </Info>
                     <Info>
                       <h1>Telefone: </h1>
-                      <h2>{user.email}</h2>
+                      <h2>{user?.email}</h2>
                     </Info>
                   </Infos>
                 </Contact>
@@ -140,5 +140,3 @@ function Profile() {
     </Background>
   );
 }
-
-export default Profile;

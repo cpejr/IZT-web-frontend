@@ -76,36 +76,53 @@ export default function Product() {
   return (
     <Container>
       <ProductData>
-        <ProductName>{product?.name}</ProductName>
-        <ProductInfo>
-          <CarouselContainer>
-            <NewCarousel
-              carouselData={pictures}
-              maxHeight="537.17px"
-              maxWidth="543.75px"
-              aspectRatio="12 / 9"
-              miniImages
-            />
-          </CarouselContainer>
-          <TextInfoContainer>
-            <ProductDescription>
-              <DescriptionTitle>Descrição do produto</DescriptionTitle>
-              <Description>{product?.description}</Description>
-            </ProductDescription>
-            <ProductBenefits>
-              <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-              <Benefits>{product?.advantages}</Benefits>
-            </ProductBenefits>
-            <ProductInfos>
-              <InfoTitle>Mais informações</InfoTitle>
-              <InfoDescription>
-                <FilesList files={documents} />
-              </InfoDescription>
-            </ProductInfos>
-          </TextInfoContainer>
-        </ProductInfo>
+        {isLoading ? (
+          <h1
+            style={{
+              height: '66rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            Carregando...
+          </h1>
+        ) : (
+          <>
+            <ProductName>{product.name}</ProductName>
+            <ProductInfo>
+              <CarouselContainer>
+                <NewCarousel
+                  carouselData={pictures}
+                  maxHeight="537.17px"
+                  maxWidth="543.75px"
+                  aspectRatio="12 / 9"
+                  miniImages
+                />
+              </CarouselContainer>
+              <TextInfoContainer>
+                <ProductDescription>
+                  <DescriptionTitle>Descrição do produto</DescriptionTitle>
+                  <Description>{product?.description}</Description>
+                </ProductDescription>
+                <ProductBenefits>
+                  <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
+                  <Benefits>{product?.advantages}</Benefits>
+                </ProductBenefits>
+                <ProductInfos>
+                  <InfoTitle>Mais informações</InfoTitle>
+                  <InfoDescription>
+                    <FilesList files={documents} />
+                  </InfoDescription>
+                </ProductInfos>
+              </TextInfoContainer>
+            </ProductInfo>
+          </>
+        )}
+
+          
       </ProductData>
-      <BudgetForm productId={_id} isLoadingProduct={isLoading} />
+      <FormsBudget productId={_id} isLoadingProduct={isLoading} />
       <ProcessSteps>
         <Title>Como processamos seu orçamento?</Title>
         <Steps>
@@ -114,9 +131,9 @@ export default function Product() {
 
             <Arrow>
               {isMediumScreen ? (
-                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
               ) : (
-                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
               )}
             </Arrow>
 
@@ -124,9 +141,9 @@ export default function Product() {
 
             <Arrow>
               {isMediumScreen ? (
-                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
               ) : (
-                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
               )}
             </Arrow>
 
@@ -134,9 +151,9 @@ export default function Product() {
 
             <Arrow>
               {isMediumScreen ? (
-                <AiOutlineRight color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
               ) : (
-                <AiOutlineDown color="#123645" size="40px" strokeWidth={20} />
+                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
               )}
             </Arrow>
 

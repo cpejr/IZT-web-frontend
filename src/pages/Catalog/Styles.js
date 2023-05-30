@@ -14,28 +14,28 @@ export const Page = styled.div`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 5rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   background-color: white;
-  font-size: 20px;
+  font-size: 2rem;
   align-items: stretch;
-  padding: 50px 10%;
+  padding: 5rem 10%;
   width: 100%;
-  max-width: 1440px;
+  max-width: 144rem;
   @media (max-width: ${breakValue900}) {
-    font-size: 18px;
-    padding: 50px 7%;
+    font-size: 1.8rem;
+    padding: 5rem 7%;
   }
   @media (max-width: ${breakValue600}) {
-    font-size: 15px;
-    padding: 30px 5%;
+    font-size: 1.5rem;
+    padding: 3rem 5%;
   }
   @media (max-width: ${breakValue380}) {
-    font-size: 14px;
-    padding: 30px 3%;
+    font-size: 1.4rem;
+    padding: 3rem 3%;
   }
   @media (min-width: 1440px) {
-    padding: 50px 144px;
+    padding: 5rem 14.4rem;
   }
 `;
 
@@ -43,23 +43,39 @@ export const Introduction = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 2rem;
 `;
 
 export const Title = styled.h1`
   text-align: center;
-  font-size: 1.3em;
+  font-size: 2.6rem;
   font-weight: 700;
   color: ${(props) => props.theme.colors.blue};
+  @media (max-width: ${breakValue900}) {
+    font-size: 2.34rem;
+  }
+  @media (max-width: ${breakValue600}) {
+    font-size: 1.95rem;
+  }
+  @media (max-width: ${breakValue380}) {
+    font-size: 1.82rem;
+  }
 `;
 
 export const Description = styled.p`
-  font-size: 0.9em;
+  font-size: 1.8rem;
   font-weight: 500;
   text-align: center;
   width: 60%;
   @media (max-width: ${breakValue900}) {
+    font-size: 1.62rem;
     width: 70%;
+  }
+  @media (max-width: ${breakValue600}) {
+    font-size: 1.35rem;
+  }
+  @media (max-width: ${breakValue380}) {
+    font-size: 1.26rem;
   }
 `;
 
@@ -70,7 +86,7 @@ export const ButtonRow = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   gap: 2%;
-  padding: 5px;
+  padding: 0.5rem;
   @media (max-width: 965px) {
     justify-content: center;
   }
@@ -80,10 +96,10 @@ export const Anchor = styled.a`
   text-decoration: none;
   display: flex;
   flex-grow: 1;
-  min-width: 140px;
-  max-width: 215px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  min-width: 14rem;
+  max-width: 21.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   @media (max-width: 965px) {
     flex-grow: 0;
   }
@@ -92,16 +108,18 @@ export const Anchor = styled.a`
 export const Button = styled.button`
   display: flex;
   flex-grow: 1;
-  padding: 5px;
+  padding: 0.5rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 500;
-  font-size: 1em;
+  font-size: 2rem;
   background-color: ${(props) => props.theme.colors.darkGreenishBlue};
-  border-radius: 10px;
+  border-radius: 1rem;
   border: none;
   color: white;
   text-align: center;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
   animation-timing-function: ease;
 
   @keyframes shadow {
@@ -109,15 +127,25 @@ export const Button = styled.button`
       box-shadow: none;
     }
     to {
-      box-shadow: 3px 3px 3px black;
+      box-shadow: 0.3rem 0.3rem 0.3rem black;
     }
   }
   :hover {
     animation: shadow 0.3s ease 10ms 1 normal forwards;
     cursor: pointer;
   }
+  @media (max-width: ${breakValue900}) {
+    font-size: 1.8rem;
+    gap: 0.9rem;
+  }
   @media (max-width: ${breakValue600}) {
+    font-size: 1.5rem;
     font-weight: 700;
+    gap: 0.75rem;
+  }
+  @media (max-width: ${breakValue380}) {
+    font-size: 1.4rem;
+    gap: 0.7rem;
   }
 `;
 
@@ -126,24 +154,33 @@ export const ProductCategory = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 10px;
+  padding-top: 1rem;
 `;
 
 export const Divider = styled.div`
-  height: 2px;
+  height: 0.2rem;
   width: 50%;
-  max-width: 300px;
-  border: 1px solid ${(props) => props.theme.colors.blue};
+  max-width: 30rem;
+  border: 0.1rem solid ${(props) => props.theme.colors.blue};
   background-color: ${(props) => props.theme.colors.blue};
-  margin-bottom: 50px;
+  margin-bottom: 5rem;
 `;
 
 export const CategoryName = styled.h2`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 600;
-  font-size: 1.25em;
+  font-size: 2.5rem;
   color: ${(props) => props.theme.colors.blue};
-  margin-bottom: 30px;
+  margin-bottom: 3rem;
+  @media (max-width: ${breakValue900}) {
+    font-size: 2.25rem;
+  }
+  @media (max-width: ${breakValue600}) {
+    font-size: 1.875rem;
+  }
+  @media (max-width: ${breakValue380}) {
+    font-size: 1.75rem;
+  }
 `;
 
 export const ProductRow = styled.div`
@@ -153,12 +190,12 @@ export const ProductRow = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 100px;
+  gap: 10rem;
   @media (max-width: ${breakValue600}) {
-    gap: 40px;
+    gap: 4rem;
   }
   @media (max-width: ${breakValue380}) {
-    gap: 20px;
+    gap: 2rem;
   }
 `;
 
@@ -169,19 +206,19 @@ export const Product = styled.div`
   justify-content: space-between;
   align-self: stretch;
   width: auto;
-  height: 280px;
+  height: 28rem;
   max-width: 25%;
-  min-width: 150px;
-  padding: 10px;
-  border-radius: 20px;
+  min-width: 15rem;
+  padding: 1rem;
+  border-radius: 2rem;
   @keyframes onHover {
     from {
-      padding: 10px;
+      padding: 1rem;
       border: none;
     }
     to {
-      padding: 5px;
-      border: 2px solid ${(props) => props.theme.colors.blue};
+      padding: 0.5rem;
+      border: 0.2rem solid ${(props) => props.theme.colors.blue};
     }
   }
   :hover {
@@ -189,17 +226,17 @@ export const Product = styled.div`
     cursor: pointer;
   }
   @media (max-width: 1200px) {
-    height: 250px;
+    height: 25rem;
   }
   @media (max-width: ${breakValue900}) {
-    height: 200px;
+    height: 20rem;
   }
   @media (max-width: ${breakValue600}) {
-    height: 160px;
+    height: 16rem;
   }
   @media (max-width: ${breakValue380}) {
-    min-width: 116px;
-    height: 150px;
+    min-width: 11.6rem;
+    height: 15rem;
   }
 `;
 
@@ -209,11 +246,20 @@ export const ProductImage = styled.img`
   width: auto;
   max-height: 90%;
   max-width: 100%;
-  border-radius: 20px;
+  border-radius: 2rem;
 `;
 
 export const ProductName = styled.h3`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 500;
-  font-size: 1em;
+  font-size: 2rem;
+  @media (max-width: ${breakValue900}) {
+    font-size: 1.8rem;
+  }
+  @media (max-width: ${breakValue600}) {
+    font-size: 1.5rem;
+  }
+  @media (max-width: ${breakValue380}) {
+    font-size: 1.4rem;
+  }
 `;

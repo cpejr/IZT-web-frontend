@@ -8,17 +8,17 @@ export const Content = styled.div`
   display: flex;
   justify-content: center;
 
-  padding: 0px 50px;
+  padding: 0rem 5rem;
 
-  height: 100px;
+  height: 10rem;
   width: 100%;
 
   background-color: white;
-  border-bottom: 2px solid ${(props) => props.theme.colors.blue};
+  border-bottom: 0.2rem solid ${(props) => props.theme.colors.blue};
 
   @media (max-width: 420px) {
-    padding: 0px 20px;
-    height: 80px;
+    padding: 0rem 2rem;
+    height: 8rem;
   }
 `;
 
@@ -28,15 +28,15 @@ export const InternContainer = styled.div`
   justify-content: space-between;
   flex-direction: row;
   width: 100%;
-  max-width: 1400px;
+  max-width: 140rem;
 `;
 
 export const Menu = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 4rem;
   @media (max-width: 1100px) {
-    gap: 20px;
+    gap: 2rem;
   }
 `;
 
@@ -45,9 +45,9 @@ export const Nav = styled.div`
   align-items: center;
   justify-content: space-between;
   text-align: justify;
-  gap: 20px;
+  gap: 2rem;
   a {
-    font-size: 22px;
+    font-size: 2.2rem;
     font-family: ${(props) => props.theme.fonts.montserrat};
     text-decoration: none;
     color: ${(props) => props.theme.colors.blue};
@@ -58,14 +58,14 @@ export const Nav = styled.div`
       text-decoration: underline;
     }
     @media (max-width: 1080px) {
-      font-size: 18px;
+      font-size: 1.8rem;
     }
     @media (max-width: ${menuBreak}) {
-      margin-right: 0px;
+      margin-right: 0rem;
     }
   }
   @media (max-width: 990px) {
-    gap: 10px;
+    gap: 1rem;
   }
   @media (max-width: ${menuBreak}) {
     background-color: ${(props) => props.theme.colors.darkGreenishBlue};
@@ -76,7 +76,7 @@ export const Nav = styled.div`
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    top: 100px;
+    top: 10rem;
     padding: ${(props) => (props.bar ? '1rem 0' : '0')};
     height: ${(props) => (props.bar ? 'auto' : '0%')};
     left: 0%;
@@ -95,14 +95,14 @@ export const Nav = styled.div`
     }
   }
   @media (max-width: 420px) {
-    top: 80px;
+    top: 8rem;
   }
 `;
 
 export const Bar = styled.div`
-  width: 26px;
+  width: 2.6rem;
   right: 4%;
-  height: 40px;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,19 +117,19 @@ export const Bar = styled.div`
   span {
     position: absolute;
     width: 100%;
-    height: 2px;
+    height: 0.2rem;
     background-color: ${(props) =>
       props.bar ? 'transparent' : props.theme.colors.darkGreenishBlue};
-    border-radius: 5px;
+    border-radius: 0.5rem;
     transition: all 400ms ease-in-out;
     :before,
     :after {
       content: '';
       position: absolute;
       width: 100%;
-      height: 2px;
+      height: 0.2rem;
       background-color: #1d4f69;
-      border-radius: 5px;
+      border-radius: 0.5rem;
     }
     :before {
       transform: ${(props) =>
@@ -145,11 +145,11 @@ export const Bar = styled.div`
 `;
 
 export const ButtonLogin = styled(Button)`
-  font-size: 20px;
-  width: 130px;
+  font-size: 2rem;
+  width: 13rem;
   @media (max-width: 990px) {
-    font-size: 18px;
-    width: 120px;
+    font-size: 1.8rem;
+    width: 12rem;
   }
   @media (max-width: ${menuBreak}) {
     display: ${(props) => (props.collapse ? 'flex' : 'none')};
@@ -161,20 +161,20 @@ export const LanguageSelector = styled.div`
   flex-direction: column;
   position: absolute;
   z-index: 200;
-  margin-top: 20px;
+  margin-top: 2rem;
   transition: height 1s ease-in-out;
-  height: ${(props) => (props.collapse ? 'auto' : '0px')};
+  height: ${(props) => (props.collapse ? 'auto' : '0rem')};
   overflow-y: hidden;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 700;
   background-color: white;
-  border: 1.5px solid ${(props) => props.theme.colors.blue};
-  border-radius: 5px;
-  gap: 3px;
+  border: 0.15rem solid ${(props) => props.theme.colors.blue};
+  border-radius: 0.5rem;
+  gap: 0.3rem;
   button {
     border: none;
     background-color: white;
-    width: 35px;
+    width: 3.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -199,7 +199,7 @@ export const LanguageSelector = styled.div`
     text-align: center;
     justify-content: center;
     button {
-      font-size: 15px;
+      font-size: 1.5rem;
       background-color: ${(props) => props.theme.colors.darkGreenishBlue};
       color: white;
       font-weight: 600;
@@ -210,7 +210,7 @@ export const LanguageSelector = styled.div`
 export const Select = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0.5rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 700;
   align-self: center;
@@ -223,7 +223,7 @@ export const Select = styled.div`
     font-weight: 600;
   }
   p {
-    font-size: 15px;
+    font-size: 1.5rem;
   }
 `;
 
@@ -231,9 +231,9 @@ export const Selected = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-width: 42px;
+  min-width: 4.2rem;
   @media (max-width: ${menuBreak}) {
-    padding-left: 14px;
+    padding-left: 1.4rem;
     svg {
       color: white;
     }
@@ -248,7 +248,7 @@ export const InvertItems = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 40px;
+  gap: 4rem;
 
   @media (max-width: ${menuBreak}) {
     flex-direction: column-reverse;
@@ -261,12 +261,15 @@ export const Welcome = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0px;
+  padding: 0rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 1em;
+  font-size: 2.2rem;
   font-weight: 700;
   a {
-    margin-right: 5px;
+    margin-right: 0.5rem;
+  }
+  @media (max-width: 1080px) {
+    font-size: 1.8rem;
   }
   @media (max-width: ${menuBreak}) {
     text-align: center;
@@ -276,9 +279,9 @@ export const Welcome = styled.div`
 
 export const Divider = styled.div`
   background-color: white;
-  height: 2px;
+  height: 0.2rem;
   display: ${(props) => (props.collapse ? 'flex' : 'none')};
-  max-height: ${(props) => (props.collapse ? 'none' : '0px')};
+  max-height: ${(props) => (props.collapse ? 'none' : '0rem')};
   align-self: stretch;
   transition: all 0.5s ease-in-out 0.5s;
 `;
@@ -288,7 +291,7 @@ export const MenuProfile = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 0.5rem;
   transition: all 0.5s ease-in-out 0.5s;
   div {
     svg {
@@ -303,7 +306,7 @@ export const MyProfile = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
+  gap: 0.5rem;
 
   button {
     background-color: transparent;
@@ -311,24 +314,25 @@ export const MyProfile = styled.div`
     max-height: none;
     color: white;
     font-family: ${(props) => props.theme.fonts.montserrat};
-    font-size: 18px;
+    font-size: 1.8rem;
   }
 `;
 
 export const LogoutBtn = styled.button`
   border: none;
-  border-left: 2px solid ${(props) => props.theme.colors.blue};
+  border-left: 0.2rem solid ${(props) => props.theme.colors.blue};
   color: ${(props) => props.theme.colors.blue};
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 500;
   text-decoration: none;
   background-color: transparent;
-  padding-left: 5px;
+  padding-left: 0.5rem;
   display: flex;
   align-items: center;
-  font-size: 22px;
+  font-size: 2.2rem;
   :hover {
-    text-decoration: underline solid ${(props) => props.theme.colors.blue} 2px;
+    text-decoration: underline solid ${(props) => props.theme.colors.blue}
+      0.2rem;
     cursor: pointer;
   }
 
@@ -336,16 +340,16 @@ export const LogoutBtn = styled.button`
     border-left: none;
     color: white;
     font-weight: 500;
-    padding-left: 0px;
+    padding-left: 0rem;
     display: ${(props) => (props.collapse ? 'flex' : 'none')};
-    max-height: ${(props) => (props.collapse ? 'none' : '0px')};
+    max-height: ${(props) => (props.collapse ? 'none' : '0rem')};
     :hover {
       text-decoration-color: white;
-      text-decoration-thickness: 1px;
+      text-decoration-thickness: 0.1rem;
     }
   }
   @media (max-width: 1080px) {
-    font-size: 18px;
+    font-size: 1.8rem;
   }
   transition: all 0.5s ease-in-out 0.5s;
 `;

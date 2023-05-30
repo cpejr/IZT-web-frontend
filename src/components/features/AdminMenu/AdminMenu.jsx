@@ -51,7 +51,7 @@ export default function AdminMenu() {
               <Title>Produtos</Title>
 
               {isSmallScreen ? (
-                <StyledLink to="/administrador/loja/criar-produto">
+                <StyledLink to="/administrador/criar-produto">
                   Adicionar produtos
                 </StyledLink>
               ) : (
@@ -60,14 +60,16 @@ export default function AdminMenu() {
                 </Button>
               )}
 
-              <StyledLink to="/administrador/loja">Listar produtos</StyledLink>
+              <StyledLink to="/administrador/listar-produtos">
+                Listar produtos
+              </StyledLink>
             </Section>
 
             <Section>
               <Title>Categorias</Title>
 
               {isSmallScreen ? (
-                <StyledLink to="/administrador/loja/criar-categoria">
+                <StyledLink to="/administrador/criar-categoria">
                   Adicionar categoria
                 </StyledLink>
               ) : (
@@ -76,7 +78,7 @@ export default function AdminMenu() {
                 </Button>
               )}
 
-              <StyledLink to="/administrador/loja/listar-categorias">
+              <StyledLink to="/administrador/listar-categorias">
                 Listar categorias
               </StyledLink>
               <BlackLine />
@@ -87,7 +89,9 @@ export default function AdminMenu() {
 
           <Section>
             <Title>Definições de acesso</Title>
-            <Text>Liberação do curso</Text>
+            <StyledLink to="/administrador/liberacao-cursos">
+              Liberação do curso
+            </StyledLink>
             <Text>Liberação do software</Text>
           </Section>
         </MenuMobile>
@@ -107,8 +111,8 @@ export default function AdminMenu() {
         footer={null}
         closeIcon={modalCloseButton}
         bodyStyle={{
-          margin: '0px',
-          padding: '0px',
+          margin: '0rem',
+          padding: '0rem',
           color: 'none',
           background: '#123645',
         }}

@@ -6,6 +6,9 @@ import objToFormData from 'object-to-formdata';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { TailSpin } from 'react-loader-spinner';
+import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useCreateProduct } from '../../../hooks/query/products';
@@ -16,7 +19,6 @@ import DocumentFile from '../DocumentFile/DocumentFile';
 import PictureFile from '../PictureFile/PictureFile';
 import {
   Container,
-  Form,
   ModalContent,
   LeftSection,
   RightSection,
@@ -29,6 +31,7 @@ import {
   ModalButton,
   DocumentsContainer,
   PicturesContainer,
+  ErrorMessage,
 } from './Styles';
 import {
   buildCreateProductErrorMessage,
@@ -39,6 +42,7 @@ import {
 export default function ModalCreateProduct({ close }) {
   // Variables
   const [isPending, setIsPending] = useState(false); // Important for modal loading
+  const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const queryClient = useQueryClient();
   const documentsLimit = 3;
   const picturesLimit = 4;
@@ -49,8 +53,7 @@ export default function ModalCreateProduct({ close }) {
       onError: (err) => {
         const errorMessage = buildGetCategoriesErrorMessage(err);
 
-        // Do something to the errorMessage
-        alert(errorMessage);
+        toast.error(errorMessage);
       },
     }
   );
@@ -60,13 +63,13 @@ export default function ModalCreateProduct({ close }) {
         queryKey: ['products', 'searchByName'],
       });
 
+      toast.success('Produto criado com sucesso!');
       close();
     }, // insert toast
     onError: (err) => {
       const errorMessage = buildCreateProductErrorMessage(err);
 
-      // Do something to the errorMessage(toast)
-      alert(errorMessage);
+      toast.error(errorMessage);
       setIsPending(false);
     },
   });
@@ -110,9 +113,11 @@ export default function ModalCreateProduct({ close }) {
     createProduct(formData);
   };
 
+  if (isSmallScreen) close();
+
   return (
     <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
           <LeftSection>
             <Subsection>
@@ -120,10 +125,11 @@ export default function ModalCreateProduct({ close }) {
               <Input
                 id="name"
                 name="name"
-                type="text"
                 placeholder="Digite o nome do produto"
+                error={errors?.name?.message}
                 {...register('name')}
               />
+              <ErrorMessage>{errors?.name?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
@@ -132,18 +138,22 @@ export default function ModalCreateProduct({ close }) {
                 id="description"
                 name="description"
                 placeholder="Descreva o produto"
+                error={errors?.description?.message}
                 {...register('description')}
               />
+              <ErrorMessage>{errors?.description?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
               <Text>Vantagens:</Text>
               <TextAreaModal
                 id="advantages"
-                type="advantages"
+                name="advantages"
                 placeholder="Descreva as vantagens do produto"
+                error={errors?.advantages?.message}
                 {...register('advantages')}
               />
+              <ErrorMessage>{errors?.advantages?.message}</ErrorMessage>
             </Subsection>
           </LeftSection>
 
@@ -166,12 +176,14 @@ export default function ModalCreateProduct({ close }) {
               </PicturesContainer>
               {fieldsPictures.length < picturesLimit && (
                 <AddFileButton
-                  label="Novo imagem"
+                  label="Novo Imagem"
+                  error={errors?.pictures?.message}
                   appendFn={appendPicture}
                   allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
                   sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
                 />
               )}
+              <ErrorMessage>{errors?.pictures?.message}</ErrorMessage>
             </Subsection>
 
             <Subsection>
@@ -193,7 +205,7 @@ export default function ModalCreateProduct({ close }) {
               </DocumentsContainer>
               {fieldsDocuments.length < documentsLimit && (
                 <AddFileButton
-                  label="Novo documento"
+                  label="Novo Documento"
                   appendFn={appendDocument}
                   allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(
                     ', '
@@ -221,13 +233,31 @@ export default function ModalCreateProduct({ close }) {
               )}
             </CategorySubsection>
 
-            <ModalButton type="submit">
-              <FiSave size={20} />
-              <p>{isPending ? 'Carregando...' : 'Criar produto'}</p>
+            <ModalButton
+              type="submit"
+              disabled={isPending || isLoadingCategories}
+            >
+              {isPending ? (
+                <>
+                  <TailSpin
+                    height="15"
+                    width="15"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="5"
+                  />
+                  <p>Carregando</p>
+                </>
+              ) : (
+                <>
+                  <FiSave size={25} />
+                  <p>Criar Produto</p>
+                </>
+              )}
             </ModalButton>
           </RightSection>
         </ModalContent>
-      </Form>
+      </form>
     </Container>
   );
 }

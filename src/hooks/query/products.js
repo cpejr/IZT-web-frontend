@@ -5,10 +5,10 @@ import {
   getProductById,
   createProduct,
   searchProductByName,
-  // deleteProducts,
+  deleteProduct,
   sendProductBudget,
   updateProduct,
-} from '../../services/api';
+} from '../../services/api/endpoints';
 
 export function useGetProducts({
   filters,
@@ -38,6 +38,7 @@ export function useGetProductById({
 
 export function useSearchProductByName({
   name,
+  categories,
   category,
   onSuccess = () => {},
   onError = (err) => console.log(err),
@@ -47,6 +48,7 @@ export function useSearchProductByName({
     queryFn: () => searchProductByName({ name, category }),
     onSuccess,
     onError,
+    enabled: !!categories,
   });
 }
 
@@ -72,16 +74,16 @@ export function useUpdateProducts({
   });
 }
 
-// export function useDeleteProducts({
-//   onSuccess = () => {},
-//   onError = (err) => console.log(err),
-// } = {}) {
-//   return useMutation({
-//     mutationFn: deleteProducts,
-//     onSuccess,
-//     onError,
-//   });
-// }
+export function useDeleteProducts({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: deleteProduct,
+    onSuccess,
+    onError,
+  });
+}
 
 export function useSendProductBudget({
   onSuccess = () => {},

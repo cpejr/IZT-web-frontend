@@ -7,7 +7,8 @@ export const Container = styled.div`
   background-color: white;
   width: 100%;
   height: 100%;
-  max-width: 1440px;
+  padding-top: 1rem;
+  max-width: 144rem;
   align-items: center;
   justify-content: center;
 `;
@@ -36,19 +37,19 @@ export const OurHistoryTitle = styled.h1`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 600;
   font-style: normal;
-  font-size: 36px;
+  font-size: 3.6rem;
   margin-bottom: 3%;
 
   @media (max-width: 485px) {
-    font-size: 30px;
+    font-size: 3rem;
   }
 
   @media (max-width: 410px) {
-    font-size: 25px;
+    font-size: 2.5rem;
   }
 
   @media (max-width: 337px) {
-    font-size: 20px;
+    font-size: 2rem;
   }
 `;
 
@@ -59,8 +60,8 @@ export const OurHistory = styled.div`
   color: black;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 2rem;
+  line-height: 2.4rem;
   margin-bottom: 3%;
 
   @media (max-width: 1100px) {
@@ -68,11 +69,11 @@ export const OurHistory = styled.div`
   }
 
   @media (max-width: 485px) {
-    font-size: 18px;
+    font-size: 1.8rem;
   }
 
   @media (max-width: 410px) {
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 `;
 
@@ -80,10 +81,10 @@ export const Picture = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 466px;
+  width: 46.6rem;
   height: auto;
-  left: 834px;
-  top: 45px;
+  left: 83.4rem;
+  top: 4.5rem;
   max-width: 100%;
   object-fit: scale-down;
   margin-left: 3%;

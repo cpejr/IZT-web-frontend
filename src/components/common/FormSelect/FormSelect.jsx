@@ -1,11 +1,14 @@
+import { Empty } from 'antd';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 
-import { StyledSelect } from './Styles';
+import { Container, ErrorMessage, StyledSelect } from './Styles';
 
 export default function FormSelect({ data, name, control, errors, ...props }) {
+  const errorMessage = errors?.[name]?.message;
+
   return (
-    <div>
+    <Container error={errorMessage ? 1 : 0}>
       <Controller
         control={control}
         name={name}
@@ -15,6 +18,7 @@ export default function FormSelect({ data, name, control, errors, ...props }) {
             onChange={onChange}
             ref={ref}
             value={currValue}
+            notFoundContent={<Empty description={false} />}
             {...props}
           >
             {data.map(({ label, value }) => (
@@ -25,8 +29,8 @@ export default function FormSelect({ data, name, control, errors, ...props }) {
           </StyledSelect>
         )}
       />
-      <p>{errors?.category?.message}</p>
-    </div>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
+    </Container>
   );
 }
 

@@ -1,6 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import IZTLogo from '../../assets/IZTLogo.svg';
 import { RegisterInput, SubmitButton } from '../../components/common';
@@ -14,18 +16,21 @@ import {
   DataEntry,
   Form,
   Subtitle,
+  ButtonDiv,
 } from './Styles';
 import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
 
 export default function Register() {
   const navigate = useNavigate();
   const { mutate: createUser, isLoading } = useCreateUser({
-    onSuccess: () => navigate('/login'),
+    onSuccess: (user) => {
+      toast.success('Verifique sua caixa de mensagens e confirme seu email!');
+      navigate('/verificar-email', { state: user.email });
+    },
     onError: (err) => {
       const errorMessage = buildRegisterErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
 
@@ -38,7 +43,6 @@ export default function Register() {
   });
   const onSubmit = (data) => createUser(data);
 
-  if (isLoading) return <p style={{ height: '100vh' }}>Loading...</p>;
   return (
     <Page>
       <Container>
@@ -147,11 +151,24 @@ export default function Register() {
               />
             </FormColumn>
           </DataEntry>
-          <SubmitButton
-            // submitErrorMessage={submitErrorMessage}
-            name="Criar conta"
-            relativeWidth="70%"
-          />
+          <ButtonDiv>
+            <SubmitButton disabled={isLoading} type="submit">
+              {isLoading ? (
+                <>
+                  <TailSpin
+                    height="15"
+                    width="15"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="5"
+                  />
+                  Carregando
+                </>
+              ) : (
+                'Criar Conta'
+              )}
+            </SubmitButton>
+          </ButtonDiv>
         </Form>
       </Container>
     </Page>

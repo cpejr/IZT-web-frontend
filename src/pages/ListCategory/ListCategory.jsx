@@ -1,12 +1,16 @@
 import { useState } from 'react';
 
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
-import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-import { ModalEditCategory } from '../../components/features';
+import { Loading } from '../../components/common';
+import {
+  ModalDeleteCategory,
+  ModalEditCategory,
+} from '../../components/features';
 import { useSearchByNameCategories } from '../../hooks/query/categories';
 import useDebounce from '../../hooks/useDebounce';
 import {
@@ -22,37 +26,39 @@ import {
   SearchIconButton,
   SearchSection,
   ModalStyle,
+  DeleteButton,
 } from './Styles';
 import { buildGetCategoriesErrorMessage } from './utils';
 
 export default function ListCategory() {
-  const navigate = useNavigate();
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const [modalEditCategory, setModalEditCategory] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState({});
+  const [modalDeleteCategory, setModalDeleteCategory] = useState(false);
+  const [categoryId, setCategoryId] = useState('');
   const [name, setName] = useState('');
   const debouncedName = useDebounce(name);
 
-  const { data: categories } = useSearchByNameCategories({
+  const { data: categories, isLoading } = useSearchByNameCategories({
     name: debouncedName,
     onError: (err) => {
       const errorMessage = buildGetCategoriesErrorMessage(err);
 
-      // Do something to the errorMessage
-      alert(errorMessage);
+      toast.error(errorMessage);
     },
   });
-
-  const goToEditCategoryPage = (category) =>
-    navigate('/administrador/loja/editar-categoria', {
-      state: category,
-    });
 
   const openModalEditCategory = (category) => {
     setSelectedCategory(category);
     setModalEditCategory(true);
   };
   const closeModalEditCategory = () => setModalEditCategory(false);
+
+  const openModalDeleteCategory = (_id) => {
+    setCategoryId(_id);
+    setModalDeleteCategory(true);
+  };
+  const closeModalDeleteCategory = () => setModalDeleteCategory(false);
 
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
@@ -71,26 +77,37 @@ export default function ListCategory() {
         </SearchSection>
       </CategoryFilterContainer>
 
-      <CategoryList>
-        {categories?.map((category) => (
-          <Row key={category._id}>
-            <Text>{category.name}</Text>
-
-            {isSmallScreen ? (
-              <StyledLink onClick={() => goToEditCategoryPage(category)}>
-                <TbPencil size={30} />
-              </StyledLink>
-            ) : (
-              <EditButton>
-                <TbPencil
-                  onClick={() => openModalEditCategory(category)}
-                  size={30}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <CategoryList>
+          {categories?.map((category) => (
+            <Row key={category._id}>
+              <Text>{category.name}</Text>
+              {isSmallScreen ? (
+                <StyledLink
+                  to="/administrador/editar-categoria"
+                  state={category}
+                >
+                  <TbPencil size={30} />
+                </StyledLink>
+              ) : (
+                <EditButton>
+                  <TbPencil
+                    onClick={() => openModalEditCategory(category)}
+                    size={30}
+                  />
+                </EditButton>
+              )}
+              <DeleteButton>
+                <DeleteOutlined
+                  onClick={() => openModalDeleteCategory(category._id)}
                 />
-              </EditButton>
-            )}
-          </Row>
-        ))}
-      </CategoryList>
+              </DeleteButton>
+            </Row>
+          ))}
+        </CategoryList>
+      )}
 
       <ModalStyle
         open={modalEditCategory}
@@ -114,6 +131,24 @@ export default function ListCategory() {
         <ModalEditCategory
           category={selectedCategory}
           close={closeModalEditCategory}
+        />
+      </ModalStyle>
+      <ModalStyle
+        open={modalDeleteCategory}
+        onCancel={closeModalDeleteCategory}
+        footer={null}
+        width={500}
+        closeIcon={modalCloseButton}
+        destroyOnClose
+        centered
+        bodyStyle={{
+          background: '#123645',
+          color: 'white',
+        }}
+      >
+        <ModalDeleteCategory
+          _id={categoryId}
+          close={closeModalDeleteCategory}
         />
       </ModalStyle>
     </Container>

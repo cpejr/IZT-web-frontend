@@ -6,16 +6,16 @@ import { ERROR_CODES } from '../../../utils/constants';
 export const editProductValidationSchema = z.object({
   name: z
     .string()
-    .min(1, 'Favor digitar o nome do produto')
+    .nonempty('Favor digitar o nome do produto')
     .max(20, 'Nome do produto deve ter no máximo 20 caracteres'),
   category: z.string({ required_error: 'Product category ID is required' }), // Here we need to pass the category id only
   description: z
     .string()
-    .min(1, 'Favor inserir uma descrição do produto')
+    .nonempty('Favor inserir uma descrição do produto')
     .max(150, 'Descrição do produto deve ter no máximo 150 caracteres'),
   advantages: z
     .string()
-    .min(1, 'Favor inserir as vantagens do produto')
+    .nonempty('Favor inserir as vantagens do produto')
     .max(150, 'Vantagens do produto devem ter no máximo 150 caracteres'),
   pictures: z
     .array(
@@ -55,15 +55,24 @@ export const editProductValidationSchema = z.object({
 
 // Error Handling
 const editProductErrorMessages = {
-  [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',
+  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
   [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',
   [ERROR_CODES.FORBIDDEN]: 'Usuário não autorizado',
-  [ERROR_CODES.CONFLICT]: 'O produto já foi criado',
+  [ERROR_CODES.CONFLICT]: 'O produto já existe',
 };
 const editProductDefaultErrorMessage =
   'Erro ao criar o produto. Tente novamente mais tarde';
-
 export function buildEditProductErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
   return editProductErrorMessages[code] || editProductDefaultErrorMessage;
+}
+
+const getCategoriesErrorMessages = {
+  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
+};
+const getCategoriesDefaultErrorMessage =
+  'Erro ao listar as categorias disponíveis. Tente novamente mais tarde';
+export function buildGetCategoriesErrorMessage(err) {
+  const code = err?.response?.data?.httpCode;
+  return getCategoriesErrorMessages[code] || getCategoriesDefaultErrorMessage;
 }

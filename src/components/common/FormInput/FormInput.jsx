@@ -15,7 +15,7 @@ export default function FormInput({
       <Label htmlFor={name}>{label}</Label>
       <Input
         id={name}
-        error={errorMessage}
+        error={!!errorMessage}
         placeholder={placeholder}
         {...register(name)}
       />

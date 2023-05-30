@@ -5,7 +5,10 @@ import {
   createUser,
   deleteUser,
   updateUser,
-} from '../../services/api';
+  verifyEmail,
+  forgotPassword,
+  redefinePassword,
+} from '../../services/api/endpoints';
 
 export function useGetUsers({
   filters,
@@ -20,12 +23,47 @@ export function useGetUsers({
   });
 }
 
+export function useForgotPassword({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: forgotPassword,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useRedefinePassword({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: redefinePassword,
+    onSuccess,
+    onError,
+  });
+}
+
 export function useCreateUser({
   onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useMutation({
     mutationFn: createUser,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useVerifyUser({
+  token,
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['verifyEmail'],
+    queryFn: () => verifyEmail(token),
     onSuccess,
     onError,
   });

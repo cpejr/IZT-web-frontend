@@ -8,19 +8,19 @@ export const AddButton = styled.button`
   justify-content: baseline;
   align-items: center;
 
-  width: 180px;
-  height: 30px;
+  width: 18rem;
+  height: 3rem;
   background-color: transparent;
   border: none;
 
-  color: white;
+  color: ${({ color }) => color};
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
 
   svg {
-    padding-right: 5px;
+    padding-right: 0.5rem;
   }
 `;

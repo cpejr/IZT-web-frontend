@@ -4,8 +4,6 @@ export const Container = styled.div`
   z-index: 1000;
 `;
 
-export const Form = styled.form``;
-
 export const CloseButton = styled.button`
   background-color: transparent;
   border: none;
@@ -18,9 +16,8 @@ export const CloseButton = styled.button`
 
 export const ModalContent = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: flex-start;
-  padding: 30px;
+  padding: 3rem;
   gap: 10%;
 
   width: 100%;
@@ -32,35 +29,35 @@ export const RightSection = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 0px;
+  padding: 0rem;
 
-  width: 400px;
-  height: 770px;
+  width: 40rem;
+  height: 77rem;
 `;
 
 export const LeftSection = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
-  padding: 0px;
-  gap: 30px;
+  padding: 0rem;
 
-  width: 400px;
-  height: 770px;
+  width: 40rem;
+  height: 77rem;
 `;
 
 export const Subsection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding-top: 10px;
+  gap: 0.5rem;
+  padding-top: 1rem;
   width: 100%;
 `;
 
 export const CategorySubsection = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 25px;
+  gap: 2.5rem;
   width: 100%;
 `;
 
@@ -68,8 +65,8 @@ export const Text = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 2.4rem;
+  line-height: 2.9rem;
 
   color: white;
 `;
@@ -80,7 +77,7 @@ export const PicturesContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  gap: 1em;
+  gap: 1rem;
 `;
 
 export const DocumentsContainer = styled.div`
@@ -88,51 +85,60 @@ export const DocumentsContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 1em;
+  gap: 1rem;
 
   width: 100%;
-  max-width: 350px;
+  max-width: 35rem;
 `;
 
 export const MiniText = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 1.6rem;
+  line-height: 2rem;
   color: white;
 `;
 
 export const Input = styled.input`
-  padding: 8px 11px;
+  padding: 0.8rem 1.1rem;
   width: 100%;
-  top: 34px;
+  top: 3.4rem;
 
   background: #ffffff;
-  border-radius: 4px;
+  border-radius: 0.4rem;
+
+  border: ${({ error }) => (error ? '0.2rem solid red' : 'none')};
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 2rem;
+  line-height: 2.4rem;
 
   color: #000000;
 `;
 
+export const ErrorMessage = styled.p`
+  font-weight: 700;
+  color: red;
+`;
+
 export const TextAreaModal = styled.textarea`
   display: flex;
-  padding: 8px 11px;
+  padding: 0.8rem 1.1rem;
   width: 100%;
-  height: 250px;
+  height: 25rem;
+
+  border: ${({ error }) => (error ? '0.2rem solid red' : 'none')};
 
   background: #ffffff;
-  border-radius: 4px;
+  border-radius: 0.4rem;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 2rem;
 
   resize: none;
   color: #000000;
@@ -145,21 +151,21 @@ export const ModalButton = styled.button`
   align-self: flex-end;
   cursor: pointer;
 
-  border: 1px solid white;
-  border-radius: 5px;
+  border: 0.1rem solid white;
+  border-radius: 0.5rem;
   background-color: transparent;
 
-  width: 180px;
-  height: 45px;
-  left: 813px;
-  top: 703px;
-  padding: 10px;
+  width: 18rem;
+  height: 4.5rem;
+  left: 81.3rem;
+  top: 70.3rem;
+  padding: 1rem;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
 
   color: white;
 
@@ -170,6 +176,6 @@ export const ModalButton = styled.button`
   }
 
   p {
-    padding-left: 8px;
+    padding-left: 0.8rem;
   }
 `;
