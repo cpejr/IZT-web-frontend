@@ -18,3 +18,5 @@ export { default as RedefinePassword } from './RedefinePassword/RedefinePassword
 export { default as CourseAuthorization } from './CourseAuthorization/CourseAuthorization';
 export { default as AuthorizeAccessMobile } from './AuthorizeAccessMobile/AuthorizeAccessMobile';
 export { default as AccessDenied } from './AccessDenied/AccessDenied';
+export { default as ReportSection } from './ReportSection/ReportSection';
+export { default as TESTE } from './ReportSection/TESTE';

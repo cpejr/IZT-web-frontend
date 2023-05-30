@@ -9,7 +9,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import { AppLayout, AdminLayout } from './layouts';
+import { AppLayout, AdminLayout, SoftwareLayout } from './layouts';
 import {
   Home,
   Login,
@@ -31,6 +31,7 @@ import {
   CourseAuthorization,
   AccessDenied,
   VerifyEmail,
+  TESTE,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -50,51 +51,56 @@ function AdminRoutes() {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<AppLayout />}>
-        <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="cadastro" element={<Register />} />
-        <Route path="email-confirmado/:token" element={<ConfirmedEmail />} />
-        <Route path="verificar-email" element={<VerifyEmail />} />
-        <Route path="catalogo" element={<Catalog />} />
-        <Route path="produto/:_id" element={<Product />} />
-        <Route
-          path="acesso-negado-curso"
-          element={<AccessDenied content="course" />}
-        />
-        <Route
-          path="acesso-negado-software"
-          element={<AccessDenied content="software" />}
-        />
-        <Route path="redefinir-senha/:token" element={<RedefinePassword />} />
-        <Route element={<PrivateRoutes />}>
-          <Route path="curso" element={<Course />} />
-          <Route path="perfil" element={<Profile />} />
-          <Route path="administrador" element={<AdminRoutes />}>
-            <Route element={<AdminLayout />}>
-              <Route index element={<h1>Área do Administrador</h1>} />
-              <Route path="listar-produtos" element={<ListProduct />} />
-              <Route path="criar-produto" element={<CreateProductMobile />} />
-              <Route path="editar-produto" element={<EditProductMobile />} />
-              <Route path="listar-categorias" element={<ListCategory />} />
-              <Route
-                path="criar-categoria"
-                element={<CreateCategoryMobile />}
-              />
-              <Route path="editar-categoria" element={<EditCategoryMobile />} />
-              <Route
-                path="autorizar-acesso"
-                element={<AuthorizeAccessMobile />}
-              />
-              <Route
-                path="liberacao-cursos"
-                element={<CourseAuthorization />}
-              />
+      <Route path='/'>
+      <Route element={<SoftwareLayout />} >
+        <Route path='software' element={<TESTE />} /> 
+      </Route>
+        <Route element={<AppLayout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="cadastro" element={<Register />} />
+          <Route path="email-confirmado/:token" element={<ConfirmedEmail />} />
+          <Route path="verificar-email" element={<VerifyEmail />} />
+          <Route path="catalogo" element={<Catalog />} />
+          <Route path="produto/:_id" element={<Product />} />
+          <Route
+            path="acesso-negado-curso"
+            element={<AccessDenied content="course" />}
+          />
+          <Route
+            path="acesso-negado-software"
+            element={<AccessDenied content="software" />}
+          />
+          <Route path="redefinir-senha/:token" element={<RedefinePassword />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="curso" element={<Course />} />
+            <Route path="perfil" element={<Profile />} />
+            <Route path="administrador" element={<AdminRoutes />}>
+              <Route element={<AdminLayout />}>
+                <Route index element={<h1>Área do Administrador</h1>} />
+                <Route path="listar-produtos" element={<ListProduct />} />
+                <Route path="criar-produto" element={<CreateProductMobile />} />
+                <Route path="editar-produto" element={<EditProductMobile />} />
+                <Route path="listar-categorias" element={<ListCategory />} />
+                <Route
+                  path="criar-categoria"
+                  element={<CreateCategoryMobile />}
+                />
+                <Route path="editar-categoria" element={<EditCategoryMobile />} />
+                <Route
+                  path="autorizar-acesso"
+                  element={<AuthorizeAccessMobile />}
+                />
+                <Route
+                  path="liberacao-cursos"
+                  element={<CourseAuthorization />}
+                />
+              </Route>
             </Route>
           </Route>
+          <Route path="*" element={<NotFound />} />
+          </Route>
         </Route>
-        <Route path="*" element={<NotFound />} />
-      </Route>
     </Route>
   )
 );
