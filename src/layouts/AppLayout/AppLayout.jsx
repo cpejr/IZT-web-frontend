@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AddToast } from '../../components/common';
 import { Header, Footer, SystemLoading } from '../../components/features';
 import { useRefreshToken } from '../../hooks/query/sessions';
+import { Container } from './Styles';
 
 export default function AppLayout() {
   const [isLoadingScreen, setIsLoadingScreen] = useState(true);
@@ -29,11 +30,11 @@ export default function AppLayout() {
   return isInitialLoading || isLoadingScreen ? (
     <SystemLoading />
   ) : (
-    <>
+    <Container>
       <Header />
       <Outlet />
       <AddToast />
       <Footer />
-    </>
+    </Container>
   );
 }

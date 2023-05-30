@@ -10,6 +10,8 @@ export const Container = styled.div`
 
   width: 95%;
 
+  height: 100%;
+
   margin-bottom: 5rem;
   padding-left: 4rem;
   padding-right: 5%;

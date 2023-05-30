@@ -18,16 +18,17 @@ export const Container = styled.div`
   padding-right: 5%;
   padding-top: 2.5rem;
 
+  height: 100%;
+
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   color: #000000;
+
   @media (max-width: 700px) {
     align-items: center;
-    justify-content: center;
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-    height: auto;
     margin-bottom: 5rem;
     gap: 1rem;
   }

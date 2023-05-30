@@ -8,8 +8,10 @@ export const Container = styled.div`
   font-size: 2rem;
   padding: 1.25em 2em;
   gap: 2em;
-  max-width: 144rem;
+
+  height: 100%;
   width: 100%;
+  max-width: 144rem;
 
   @media (max-width: 1100px) {
     font-size: 1.7rem;
