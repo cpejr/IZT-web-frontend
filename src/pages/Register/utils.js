@@ -19,19 +19,16 @@ export const registerValidationSchema = z
     role: z.string().min(1, 'Informe um cargo'),
     country: z
       .string()
-      .min(1, 'Informe um país')
-      .min(3, 'User country must be atleast 3 characters')
-      .max(30, 'User country must be a maximum of 30 characters'),
+      .nonempty('Informe um país')
+      .transform((value) => JSON.parse(value).name),
     state: z
       .string()
-      .min(1, 'Informe um estado')
-      .min(3, 'User state must be atleast 3 characters')
-      .max(30, 'User state must be a maximum of 30 characters'),
+      .nonempty('Informe um estado')
+      .transform((value) => JSON.parse(value).name),
     city: z
       .string()
-      .min(1, 'Informe uma cidade')
-      .min(3, 'User city must be atleast 3 characters')
-      .max(30, 'User city must be a maximum of 30 characters'),
+      .nonempty('Informe uma cidade')
+      .transform((value) => JSON.parse(value).name),
     address: z
       .string()
       .min(1, 'Informe um endereço')

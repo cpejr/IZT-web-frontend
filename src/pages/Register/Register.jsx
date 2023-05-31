@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-expressions */
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { City, Country, State } from 'country-state-city';
@@ -10,8 +9,8 @@ import { toast } from 'react-toastify';
 
 import IZTLogo from '../../assets/IZTLogo.svg';
 import {
+  FormSelect,
   RegisterInput,
-  RegisterSelect,
   SubmitButton,
 } from '../../components/common';
 import { useCreateUser } from '../../hooks/query/users';
@@ -28,32 +27,6 @@ import {
 import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
 
 export default function Register() {
-  const countryData = Country.getAllCountries();
-  const [stateData, setStateData] = useState();
-  const [cityData, setCityData] = useState();
-
-  const [country, setCountry] = useState(countryData[0]);
-  const [state, setState] = useState();
-  const [city, setCity] = useState();
-
-  useEffect(() => {
-    setStateData(State.getStatesOfCountry(country?.isoCode));
-  }, [country]);
-  console.log(country);
-
-  useEffect(() => {
-    setCityData(City.getCitiesOfState(country?.isoCode, state?.isoCode));
-    console.log(City.getCitiesOfState(country?.isoCode, state?.isoCode));
-  }, [state, country]);
-
-  useEffect(() => {
-    stateData && setState(stateData[0]);
-  }, [stateData]);
-
-  useEffect(() => {
-    cityData && setCity(cityData[0]);
-  }, [cityData]);
-
   const navigate = useNavigate();
   const { mutate: createUser, isLoading } = useCreateUser({
     onSuccess: (user) => {
@@ -70,11 +43,39 @@ export default function Register() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: zodResolver(registerValidationSchema),
   });
-  const onSubmit = (data) => createUser(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    createUser(data);
+  };
+
+  const countries = useMemo(() => Country.getAllCountries(), []);
+  const selectedContry = watch('country');
+
+  const states = useMemo(
+    () =>
+      selectedContry
+        ? State.getStatesOfCountry(JSON.parse(selectedContry)?.isoCode)
+        : null,
+    [selectedContry]
+  );
+  const selectedState = watch('state');
+
+  const cities = useMemo(
+    () =>
+      selectedContry && selectedState
+        ? City.getCitiesOfState(
+            JSON.parse(selectedContry)?.isoCode,
+            JSON.parse(selectedState)?.isoCode
+          )
+        : null,
+    [selectedContry, selectedState]
+  );
 
   return (
     <Page>
@@ -123,38 +124,37 @@ export default function Register() {
             </FormColumn>
             <FormColumn>
               <Subtitle>Endereço</Subtitle>
-              <RegisterSelect
-                label="País: "
+              <FormSelect
                 name="country"
                 placeholder="Nome do país"
-                register={register}
+                control={control}
                 errors={errors}
-                data={countryData}
-                selected={country}
-                setSelected={setCountry}
-                type="text"
+                data={countries.map(({ name, isoCode }) => ({
+                  label: name,
+                  value: JSON.stringify({ name, isoCode }),
+                }))}
               />
-              <RegisterSelect
-                label="Estado: "
+              <FormSelect
                 name="state"
                 placeholder="Nome do estado"
-                register={register}
+                control={control}
                 errors={errors}
-                data={stateData}
-                selected={state}
-                setSelected={setState}
-                type="text"
+                data={states?.map(({ name, isoCode }) => ({
+                  label: name,
+                  value: JSON.stringify({ name, isoCode }),
+                }))}
+                disabled={!states}
               />
-              <RegisterSelect
-                label="Cidade: "
+              <FormSelect
                 name="city"
                 placeholder="Nome da cidade"
-                register={register}
+                control={control}
                 errors={errors}
-                data={cityData}
-                selected={city}
-                setSelected={setCity}
-                type="text"
+                data={cities?.map(({ name, isoCode }) => ({
+                  label: name,
+                  value: JSON.stringify({ name, isoCode }),
+                }))}
+                disabled={!cities}
               />
               <RegisterInput
                 label="Endereço: "
