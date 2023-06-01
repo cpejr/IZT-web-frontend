@@ -21,6 +21,8 @@ export default function NewCarousel({
   miniImages,
 }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  console.log(thumbsSwiper);
   return (
     <>
       {miniImages ? (
@@ -50,8 +52,8 @@ export default function NewCarousel({
             }}
             spaceBetween={10}
             navigation
-            thumbs={{ swiper: thumbsSwiper }}
             modules={[FreeMode, Navigation, Thumbs]}
+            {...(!!thumbsSwiper && { swiper: thumbsSwiper })}
           >
             {carouselData.map(({ src, name, alt }) => (
               <StyledSwiperSlide key={name}>
@@ -60,7 +62,7 @@ export default function NewCarousel({
             ))}
           </StyledSwiper>
           <StyledSwiper
-            onSwiper={setThumbsSwiper()}
+            onSwiper={setThumbsSwiper}
             spaceBetween={10}
             slidesPerView={4}
             freeMode
