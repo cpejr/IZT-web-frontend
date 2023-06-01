@@ -39,7 +39,6 @@ export const AccessExpirationContainer = styled.div`
   display: flex;
   flex-direction: row;
   border-radius: 0.4rem;
-  height: 5.6rem;
   background-color: white;
 `;
 
@@ -48,6 +47,8 @@ export const Date = styled(DatePicker)`
   .Mui-error .MuiOutlinedInput-notchedOutline {
     border-width: 0.2rem;
   }
+
+  width: 100%;
 `;
 
 export const Picture = styled.img`

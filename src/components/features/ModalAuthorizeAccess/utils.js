@@ -5,7 +5,7 @@ import { ERROR_CODES } from '../../../utils/constants';
 
 // Form Validation
 export const modalAuthorizeAccessValidationSchema = z.object({
-  userId: z.string({ required_error: 'Favor selecionar uma email' }),
+  userId: z.string({ required_error: 'Favor selecionar uma email' }), // Needs to be required_error because it is for a select component
   expiresAt: z.coerce.date({
     errorMap: () => ({
       message: 'Favor inserir uma data',
@@ -42,6 +42,19 @@ export const themeDatePicker = createTheme({
 });
 
 // Error Handling
+
+// Get users for select
+const getUsersErrorMessages = {
+  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
+};
+const getUsersIdDefaultErrorMessage =
+  'Ocorreu um erro na listagem dos usuários. Tente novamente mais tarde';
+export function buildGetUsersErrorMessage(err) {
+  const code = err?.response?.data?.httpCode;
+  return getUsersErrorMessages[code] || getUsersIdDefaultErrorMessage;
+}
+
+// Create user course request
 const createUserCourseErrorMessages = {
   [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',
   [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',
@@ -56,15 +69,4 @@ export function buildCreateUserCourseErrorMessage(err) {
   return (
     createUserCourseErrorMessages[code] || createUserCourseDefaultErrorMessage
   );
-}
-
-// Get users for select
-const getUsersErrorMessages = {
-  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
-};
-const getUsersIdDefaultErrorMessage =
-  'Ocorreu um erro na listagem dos usuários. Tente novamente mais tarde';
-export function buildGetUsersErrorMessage(err) {
-  const code = err?.response?.data?.httpCode;
-  return getUsersErrorMessages[code] || getUsersIdDefaultErrorMessage;
 }

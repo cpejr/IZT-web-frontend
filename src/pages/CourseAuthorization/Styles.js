@@ -191,8 +191,6 @@ export const ModalStyle = styled(Modal)`
 export const EditBtn = styled.button`
   background-color: transparent;
   border: none;
-  width: auto;
-  height: auto;
   justify-self: center;
   :hover {
     cursor: pointer;

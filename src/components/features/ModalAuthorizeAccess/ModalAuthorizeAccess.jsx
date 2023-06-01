@@ -2,8 +2,6 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
@@ -12,7 +10,7 @@ import { toast } from 'react-toastify';
 
 import { useCreateUserCourse } from '../../../hooks/query/userCourse';
 import { useGetUsers } from '../../../hooks/query/users';
-import { FormSelect } from '../../common';
+import { FormSelect, Loading } from '../../common';
 import {
   Container,
   Form,
@@ -36,7 +34,7 @@ export default function ModalAuthorizeAccess({ close }) {
   const queryClient = useQueryClient();
 
   // Backend calls
-  const { data: users, isLoading: isLoadingUserCourses } = useGetUsers({
+  const { data: users, isLoading } = useGetUsers({
     onError: (err) => {
       const errorMessage = buildGetUsersErrorMessage(err);
 
@@ -72,12 +70,19 @@ export default function ModalAuthorizeAccess({ close }) {
   const onSubmit = ({ userId, expiresAt }) => {
     createUserCourse({
       user: userId,
-      expiresAt,
       course: '645548677d3184e5b411a08f',
+      expiresAt,
     });
     setIsPending(true);
     close();
   };
+
+  if (isLoading)
+    return (
+      <Container>
+        <Loading />
+      </Container>
+    );
 
   return (
     <Container>
@@ -96,7 +101,7 @@ export default function ModalAuthorizeAccess({ close }) {
               }))}
               placeholder="Selecione o email"
               filterOption={(input, option) =>
-                option?.key?.toLowerCase()?.includes(input?.toLowerCase())
+                option?.children?.toLowerCase()?.includes(input?.toLowerCase())
               }
               showSearch
               style={{ width: '400px' }}
@@ -112,24 +117,22 @@ export default function ModalAuthorizeAccess({ close }) {
                   id="expiresAt"
                   name="expiresAt"
                   render={({ field: { onChange, onBlur } }) => (
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Date
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        format="DD/MM/YYYY"
-                        disablePast
-                        slotProps={{
-                          textField: {
-                            error: !!errors.accessExpiration,
-                          },
-                        }}
-                      />
-                    </LocalizationProvider>
+                    <Date
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      format="DD/MM/YYYY"
+                      disablePast
+                      slotProps={{
+                        textField: {
+                          error: !!errors.expiresAt,
+                        },
+                      }}
+                    />
                   )}
                 />
               </ThemeProvider>
             </AccessExpirationContainer>
-            <ErrorMessage>{errors?.accessExpiration?.message}</ErrorMessage>
+            <ErrorMessage>{errors?.expiresAt?.message}</ErrorMessage>
           </div>
 
           <ModalButton disabled={isPending} type="submit">
@@ -141,8 +144,6 @@ export default function ModalAuthorizeAccess({ close }) {
                   color="white"
                   ariaLabel="tail-spin-loading"
                   radius="5"
-                  wrapperStyle={{}}
-                  wrapperClass=""
                 />
                 <p>Carregando</p>
               </>

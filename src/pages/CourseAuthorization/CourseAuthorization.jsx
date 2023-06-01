@@ -13,6 +13,7 @@ import {
   ModalEditAuthorizeAccess,
 } from '../../components/features';
 import { useGetUserCourses } from '../../hooks/query/userCourse';
+import formatDate from '../../utils/formatDate';
 import {
   Container,
   PageTitle,
@@ -115,9 +116,7 @@ export default function CourseAuthorization() {
                 <ContentRow key={userCourse._id}>
                   <p title={userCourse.user.email}>{userCourse.user.email}</p>
                   <MiddleData>
-                    {new Intl.DateTimeFormat('pt-BR').format(
-                      new Date(userCourse.expiresAt)
-                    )}
+                    {formatDate({ value: userCourse.expiresAt })}
                   </MiddleData>
 
                   {isSmallScreen ? (
@@ -197,6 +196,7 @@ export default function CourseAuthorization() {
           authorizeUser={authorizeUser}
         />
       </ModalStyle>
+
       <ModalStyle
         open={modalDeleteAuthorizeAccess}
         onCancel={closeModalDeleteAuthorizeAccess}

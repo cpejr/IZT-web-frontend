@@ -8,6 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 20px;
 
+  height: 100%;
   width: 95%;
   margin-bottom: 50px;
 
@@ -36,7 +37,14 @@ export const Title = styled.p`
   color: black;
 `;
 
-export const ButtonsDiv = styled.div`
+export const Field = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.25rem;
+`;
+
+export const Buttons = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

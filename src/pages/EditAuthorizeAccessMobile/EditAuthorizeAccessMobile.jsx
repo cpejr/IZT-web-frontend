@@ -1,9 +1,5 @@
-import { useState } from 'react';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useQueryClient } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
@@ -16,7 +12,7 @@ import {
   Container,
   Form,
   Title,
-  ButtonsDiv,
+  Buttons,
   SaveButton,
   CancelButton,
   Label,
@@ -24,6 +20,7 @@ import {
   AccessExpirationContainer,
   ErrorMessage,
   Date,
+  Field,
 } from './Styles';
 import {
   updateAuthorizeAccessValidationSchema,
@@ -33,13 +30,12 @@ import {
 
 export default function EditAuthorizeAccessMobile() {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
   const authorizeUser = useLocation().state;
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
   // Backend calls
-  const { mutate: updateUserCourse } = useUpdateUserCourse({
+  const { mutate: updateUserCourse, isLoading } = useUpdateUserCourse({
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['user-courses'],
@@ -51,7 +47,6 @@ export default function EditAuthorizeAccessMobile() {
       const errorMessage = buildUpdateUserCourseErrorMessage(err);
 
       toast.error(errorMessage);
-      setIsLoading(false);
     },
   });
 
@@ -63,14 +58,11 @@ export default function EditAuthorizeAccessMobile() {
   } = useForm({
     resolver: zodResolver(updateAuthorizeAccessValidationSchema),
   });
-  const onSubmit = ({ expiresAt }) => {
+  const onSubmit = ({ expiresAt }) =>
     updateUserCourse({
       _id: authorizeUser?._id,
       newUserCourseData: { expiresAt },
     });
-    setIsLoading(true);
-    navigate('/administrador/liberacao-cursos');
-  };
 
   if (!isSmallScreen) return <Navigate to="/administrador/liberacao-cursos" />;
 
@@ -79,11 +71,11 @@ export default function EditAuthorizeAccessMobile() {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Title>Editar Autorização de Acesso</Title>
 
-        <div>
+        <Field>
           <Label>Email:</Label>
           <EmailText>{authorizeUser?.user?.email}</EmailText>
-        </div>
-        <div>
+        </Field>
+        <Field>
           <Label>Validade do acesso:</Label>
           <AccessExpirationContainer>
             <ThemeProvider theme={themeDatePicker}>
@@ -92,27 +84,25 @@ export default function EditAuthorizeAccessMobile() {
                 id="expiresAt"
                 name="expiresAt"
                 render={({ field: { onChange, onBlur } }) => (
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <Date
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      format="DD/MM/YYYY"
-                      disablePast
-                      slotProps={{
-                        textField: {
-                          error: !!errors.expiresAt,
-                        },
-                      }}
-                    />
-                  </LocalizationProvider>
+                  <Date
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    format="DD/MM/YYYY"
+                    disablePast
+                    slotProps={{
+                      textField: {
+                        error: !!errors.expiresAt,
+                      },
+                    }}
+                  />
                 )}
               />
             </ThemeProvider>
           </AccessExpirationContainer>
           <ErrorMessage>{errors?.expiresAt?.message}</ErrorMessage>
-        </div>
+        </Field>
 
-        <ButtonsDiv>
+        <Buttons>
           <SaveButton disabled={isLoading} type="submit">
             {isLoading ? (
               <>
@@ -122,8 +112,6 @@ export default function EditAuthorizeAccessMobile() {
                   color="white"
                   ariaLabel="tail-spin-loading"
                   radius="5"
-                  wrapperStyle={{}}
-                  wrapperClass=""
                 />
                 <p>Carregando</p>
               </>
@@ -135,7 +123,7 @@ export default function EditAuthorizeAccessMobile() {
           <CancelButton to="/administrador/liberacao-cursos">
             <p>Cancelar</p>
           </CancelButton>
-        </ButtonsDiv>
+        </Buttons>
       </Form>
     </Container>
   );
