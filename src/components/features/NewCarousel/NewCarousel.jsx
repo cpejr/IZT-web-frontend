@@ -26,6 +26,7 @@ export default function NewCarousel({
   miniImages,
 }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  console.log(maxHeight);
   return (
     <>
       {miniImages ? (
@@ -34,7 +35,6 @@ export default function NewCarousel({
             maxWidth={maxWidth}
             maxHeight={maxHeight}
             aspectRatio={aspectRatio}
-            spaceBetween={10}
             navigation
             loop
             modules={[FreeMode, Navigation, Thumbs]}
@@ -49,7 +49,7 @@ export default function NewCarousel({
           <ThumbsSwiper
             onSwiper={setThumbsSwiper}
             spaceBetween={10}
-            slidesPerView={3}
+            slidesPerView={4}
             freeMode
             loop
             watchSlidesProgress

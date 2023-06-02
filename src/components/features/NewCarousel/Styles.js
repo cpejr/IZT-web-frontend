@@ -17,6 +17,7 @@ export const ThumbsSwiper = styled(Swiper)`
   max-height: ${(props) => props.maxHeight || '31.25rem'};
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 export const StyledSwiperSlide = styled(SwiperSlide)`

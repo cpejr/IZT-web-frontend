@@ -94,8 +94,8 @@ export default function Product() {
               <CarouselContainer>
                 <NewCarousel
                   carouselData={pictures}
-                  maxHeight="537.17px"
-                  maxWidth="543.75px"
+                  maxHeight="53.717rem"
+                  maxWidth="54.375rem"
                   aspectRatio="12 / 9"
                   miniImages
                 />
