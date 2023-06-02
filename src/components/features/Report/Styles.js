@@ -29,6 +29,12 @@ export const DataColumn = styled.div`
   height: 100%;
   max-height: 20rem;
   max-width: 25rem;
+  @media (max-width: 1350px) {
+    max-height: 30rem;
+  }
+  @media (max-width: 940px) {
+    max-height: 30rem;
+  }
 `;
 
 export const DataRow = styled.div`
@@ -38,6 +44,9 @@ export const DataRow = styled.div`
   width: 100%;
   height: 100%;
   padding-left: 1rem;
+  @media (max-width: 1075px) {
+    gap: 0.5rem;
+  }
 `;
 
 export const DataContainer = styled.div`
@@ -50,6 +59,9 @@ export const DataContainer = styled.div`
   height: 100%;
   max-height: 15rem;
   max-width: 25rem;
+  @media (max-width: 1350px) {
+    max-height: 25rem;
+  }
 `;
 
 export const ButtonRow = styled.div`
@@ -76,6 +88,9 @@ export const Label = styled.div`
   font-weight: 400;
   line-height: 1.83rem;
   color: white;
+  @media (max-width: 1075px) {
+    font-size: 1.2rem;
+  }
 `;
 export const Data = styled.div`
   font-family: ${(prop) => prop.theme.fonts.montserrat};
@@ -84,6 +99,9 @@ export const Data = styled.div`
   line-height: 1.83rem;
   color: white;
   border-bottom: 0.1rem solid white;
+  @media (max-width: 1075px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const Title = styled.div`

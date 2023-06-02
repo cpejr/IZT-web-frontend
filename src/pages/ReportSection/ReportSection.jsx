@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { HiSearch } from 'react-icons/hi';
 
 import Report from '../../components/features/Report/Report';
@@ -10,7 +12,6 @@ import {
   SearchDiv,
   Search,
 } from './Styles';
-import { useState } from 'react';
 
 const data = [
   {
@@ -87,7 +88,7 @@ export default function ReportSection() {
             <HiSearch size={25} />
             <Search
               onChange={(e) => setName(e.target.value)}
-              placeholder={name ? name : 'Pesquisar por nome'}
+              placeholder={name || 'Pesquisar por nome'}
             />
           </SearchDiv>
         </ReportsHeader>

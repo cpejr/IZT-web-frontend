@@ -28,11 +28,23 @@ export const Title = styled.div`
 
 export const ReportsArea = styled.div`
   margin: 4rem;
-  /* width: 100%; */
   max-width: 106rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  @media (max-width: 1100px) {
+    margin: 3rem;
+  }
+  @media (max-width: 970px) {
+    margin: 2rem;
+  }
+  @media (max-width: 880px) {
+    margin: 2rem;
+  }
+  @media (max-width: 820px) {
+    margin: 1rem;
+  }
 `;
 
 export const ReportsHeader = styled.div`
