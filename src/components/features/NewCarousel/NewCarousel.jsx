@@ -49,12 +49,11 @@ export default function NewCarousel({
           <ThumbsSwiper
             onSwiper={setThumbsSwiper}
             spaceBetween={10}
-            slidesPerView={4}
+            slidesPerView={3}
             freeMode
             loop
             watchSlidesProgress
             modules={[FreeMode, Navigation, Thumbs]}
-            className="mySwiper"
           >
             {carouselData.map(({ src, name, alt }) => (
               <StyledSwiperSlide key={name}>

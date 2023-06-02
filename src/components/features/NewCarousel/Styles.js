@@ -13,6 +13,10 @@ export const ThumbsSwiper = styled(Swiper)`
   width: 100%;
   height: 20%;
   overflow-x: hidden;
+  max-width: ${(props) => props.maxWidth || '144rem'};
+  max-height: ${(props) => props.maxHeight || '31.25rem'};
+  display: flex;
+  align-items: center;
 `;
 
 export const StyledSwiperSlide = styled(SwiperSlide)`
