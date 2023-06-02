@@ -15,6 +15,7 @@ export const Container = styled.div`
 export const StyledSelect = styled(Select)`
   flex-grow: 1;
   width: 100%;
+  height: auto;
 `;
 
 export const ErrorMessage = styled.p`

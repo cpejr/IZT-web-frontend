@@ -69,12 +69,25 @@ export const Subtitle = styled.h1`
   margin-bottom: 5%;
 `;
 
+export const Label = styled.p`
+  font-size: 1em;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-weight: 400;
+  margin-bottom: 0.4em;
+`;
+
 export const FormColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
   max-width: 350px;
+`;
+
+export const AddressSelectDiv = styled.div`
+  margin-bottom: 3rem;
+  width: 100%;
+  height: auto;
 `;
 
 export const Form = styled.form`

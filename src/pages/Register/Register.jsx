@@ -23,6 +23,8 @@ import {
   DataEntry,
   Form,
   Subtitle,
+  Label,
+  AddressSelectDiv,
 } from './Styles';
 import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
 
@@ -124,38 +126,53 @@ export default function Register() {
             </FormColumn>
             <FormColumn>
               <Subtitle>Endereço</Subtitle>
-              <FormSelect
-                name="country"
-                placeholder="Nome do país"
-                control={control}
-                errors={errors}
-                data={countries.map(({ name, isoCode }) => ({
-                  label: name,
-                  value: JSON.stringify({ name, isoCode }),
-                }))}
-              />
-              <FormSelect
-                name="state"
-                placeholder="Nome do estado"
-                control={control}
-                errors={errors}
-                data={states?.map(({ name, isoCode }) => ({
-                  label: name,
-                  value: JSON.stringify({ name, isoCode }),
-                }))}
-                disabled={!states}
-              />
-              <FormSelect
-                name="city"
-                placeholder="Nome da cidade"
-                control={control}
-                errors={errors}
-                data={cities?.map(({ name, isoCode }) => ({
-                  label: name,
-                  value: JSON.stringify({ name, isoCode }),
-                }))}
-                disabled={!cities}
-              />
+              <AddressSelectDiv>
+                <Label>País:</Label>
+                <FormSelect
+                  name="country"
+                  placeholder="Nome do país"
+                  size="large"
+                  control={control}
+                  errors={errors}
+                  data={countries.map(({ name, isoCode }) => ({
+                    label: name,
+                    value: JSON.stringify({ name, isoCode }),
+                  }))}
+                />
+              </AddressSelectDiv>
+
+              <AddressSelectDiv>
+                <Label>Estado:</Label>
+                <FormSelect
+                  name="state"
+                  placeholder="Nome do estado"
+                  size="large"
+                  control={control}
+                  errors={errors}
+                  data={states?.map(({ name, isoCode }) => ({
+                    label: name,
+                    value: JSON.stringify({ name, isoCode }),
+                  }))}
+                  disabled={!states}
+                />
+              </AddressSelectDiv>
+
+              <AddressSelectDiv>
+                <Label>Cidade:</Label>
+                <FormSelect
+                  name="city"
+                  placeholder="Nome da cidade"
+                  size="large"
+                  control={control}
+                  errors={errors}
+                  data={cities?.map(({ name, isoCode }) => ({
+                    label: name,
+                    value: JSON.stringify({ name, isoCode }),
+                  }))}
+                  disabled={!cities}
+                />
+              </AddressSelectDiv>
+
               <RegisterInput
                 label="Endereço: "
                 name="address"
