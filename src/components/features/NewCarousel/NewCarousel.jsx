@@ -11,7 +11,12 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/thumbs';
-import { StyledSwiper, StyledSwiperSlide } from './Styles';
+import {
+  StyledSwiper,
+  StyledSwiperSlide,
+  SwiperWrapper,
+  ThumbsSwiper,
+} from './Styles';
 
 export default function NewCarousel({
   carouselData = [],
@@ -21,37 +26,17 @@ export default function NewCarousel({
   miniImages,
 }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
-  console.log(thumbsSwiper);
   return (
     <>
       {miniImages ? (
-        <StyledSwiper
-          cssMode
-          navigation={{ clickable: true }}
-          pagination={{ clickable: true }}
-          loop
-          modules={[Navigation, Pagination]}
-          keyboard={{ enabled: true }}
-          maxWidth={maxWidth}
-          maxHeight={maxHeight}
-          aspectRatio={aspectRatio}
-        >
-          {carouselData.map(({ src, name, alt }) => (
-            <StyledSwiperSlide key={name}>
-              <img src={src} alt={alt} />
-            </StyledSwiperSlide>
-          ))}
-        </StyledSwiper>
-      ) : (
-        <>
+        <SwiperWrapper>
           <StyledSwiper
-            style={{
-              '--swiper-navigation-color': '#fff',
-              '--swiper-pagination-color': '#fff',
-            }}
+            maxWidth={maxWidth}
+            maxHeight={maxHeight}
+            aspectRatio={aspectRatio}
             spaceBetween={10}
             navigation
+            loop
             modules={[FreeMode, Navigation, Thumbs]}
             {...(!!thumbsSwiper && { swiper: thumbsSwiper })}
           >
@@ -61,14 +46,35 @@ export default function NewCarousel({
               </StyledSwiperSlide>
             ))}
           </StyledSwiper>
-          <StyledSwiper
+          <ThumbsSwiper
             onSwiper={setThumbsSwiper}
             spaceBetween={10}
             slidesPerView={4}
             freeMode
+            loop
             watchSlidesProgress
             modules={[FreeMode, Navigation, Thumbs]}
             className="mySwiper"
+          >
+            {carouselData.map(({ src, name, alt }) => (
+              <StyledSwiperSlide key={name}>
+                <img src={src} alt={alt} />
+              </StyledSwiperSlide>
+            ))}
+          </ThumbsSwiper>
+        </SwiperWrapper>
+      ) : (
+        <>
+          <StyledSwiper
+            cssMode
+            navigation={{ clickable: true }}
+            pagination={{ clickable: true }}
+            loop
+            modules={[Navigation, Pagination]}
+            keyboard={{ enabled: true }}
+            maxWidth={maxWidth}
+            maxHeight={maxHeight}
+            aspectRatio={aspectRatio}
           >
             {carouselData.map(({ src, name, alt }) => (
               <StyledSwiperSlide key={name}>
