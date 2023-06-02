@@ -10,6 +10,7 @@ import {
   SearchDiv,
   Search,
 } from './Styles';
+import { useState } from 'react';
 
 const data = [
   {
@@ -75,6 +76,7 @@ const data = [
 ];
 
 export default function ReportSection() {
+  const [name, setName] = useState('');
   return (
     <Container>
       <Title>Relatórios</Title>
@@ -83,7 +85,10 @@ export default function ReportSection() {
           <ReportsTitle>Relatório</ReportsTitle>
           <SearchDiv>
             <HiSearch size={25} />
-            <Search placeholder="Pesquisar por nome" />
+            <Search
+              onChange={(e) => setName(e.target.value)}
+              placeholder={name ? name : 'Pesquisar por nome'}
+            />
           </SearchDiv>
         </ReportsHeader>
         {data.map((report) => {

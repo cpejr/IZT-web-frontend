@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  max-width: 100rem;
+  max-width: 106rem;
   margin-top: 2rem;
+  padding-left: 1.5rem;
 `;
 
 export const Columns = styled.div`
@@ -13,7 +14,7 @@ export const Columns = styled.div`
   gap: 0.5rem;
   width: 100%;
   height: 100%;
-  max-width: 100rem;
+  max-width: 106rem;
   margin-bottom: 2rem;
   max-height: ${(props) => (props.focused ? 'auto' : '0rem')};
   overflow-y: hidden;
@@ -93,13 +94,13 @@ export const Title = styled.div`
   margin-bottom: 1.5rem;
 `;
 export const ReportName = styled.div`
+  display: flex;
+  justify-content: space-between;
   font-family: ${(prop) => prop.theme.fonts.montserrat};
   font-size: 1.6rem;
   font-weight: 600;
   color: white;
-  margin-bottom: 1.5rem;
+  padding: 1.5rem;
   width: 100%;
   max-width: 106rem;
-  display: flex;
-  justify-content: space-between;
 `;

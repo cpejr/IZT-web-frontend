@@ -27,9 +27,8 @@ export const Title = styled.div`
 `;
 
 export const ReportsArea = styled.div`
-  margin-left: 4rem;
-  margin-top: 4rem;
-  width: 100%;
+  margin: 4rem;
+  /* width: 100%; */
   max-width: 106rem;
   display: flex;
   flex-direction: column;
