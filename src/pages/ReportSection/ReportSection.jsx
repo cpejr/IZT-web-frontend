@@ -77,7 +77,7 @@ const data = [
 export default function ReportSection() {
   return (
     <Container>
-      <Title>Relatório</Title>
+      <Title>Relatórios</Title>
       <ReportsArea>
         <ReportsHeader>
           <ReportsTitle>Relatório</ReportsTitle>
@@ -86,7 +86,9 @@ export default function ReportSection() {
             <Search placeholder="Pesquisar por nome" />
           </SearchDiv>
         </ReportsHeader>
-        <Report data={data} />
+        {data.map((report) => {
+          return <Report key={report.name} data={report} />;
+        })}
       </ReportsArea>
     </Container>
   );

@@ -30,9 +30,10 @@ export const ReportsArea = styled.div`
   margin-left: 4rem;
   margin-top: 4rem;
   width: 100%;
-  max-width: 100rem;
+  max-width: 106rem;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 `;
 
 export const ReportsHeader = styled.div`
@@ -71,6 +72,8 @@ export const SearchDiv = styled.div`
 `;
 
 export const Search = styled.input`
+  display: flex;
+  justify-content: center;
   width: 100%;
   background-color: transparent;
   border: none;
