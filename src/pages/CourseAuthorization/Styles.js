@@ -6,12 +6,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 2rem;
-  padding: 1.25em 2em;
-  gap: 2em;
 
+  gap: 2rem;
   height: 100%;
-  width: 100%;
-  max-width: 144rem;
+  width: 95%;
+  padding-left: 4rem;
+  padding-right: 5%;
+  padding-top: 2.5rem;
 
   @media (max-width: 1100px) {
     font-size: 1.7rem;
@@ -77,16 +78,20 @@ export const Table = styled.div`
 `;
 
 export const TableHeader = styled.div`
-  width: 100%;
   display: grid;
+  height: 50px;
+  width: 100%;
+
   grid-template-columns: 2fr 1fr 1fr;
   grid-template-rows: 2.5em;
-  align-items: center;
-  background-color: ${(props) => props.theme.colors.gray.lightGrey};
   padding: 0.5rem 2rem;
+
+  background-color: ${(props) => props.theme.colors.gray.lightGrey};
+
   h2 {
     font-size: 0.8em;
     overflow: auto;
+    padding-top: 1rem;
   }
   @media (max-width: 930px) {
     grid-template-columns: 1fr 1fr 1fr;
@@ -112,7 +117,8 @@ export const SearchContainer = styled.div`
   justify-content: flex-start;
 
   border-radius: 1.8rem;
-  height: 2em;
+  max-height: 3.5rem;
+  margin-top: 0.25rem;
   background-color: white;
   padding: 0rem 1rem;
   width: 100%;
