@@ -12,6 +12,24 @@ export const Page = styled.div`
   justify-content: center;
   padding: 25px 0px;
   font-size: 22px;
+
+  .ant-select-single.ant-select-lg:not(.ant-select-customize-input)
+    .ant-select-selector {
+    width: 100%;
+    height: 6.6rem;
+
+    border-radius: 4px;
+    padding: 1.3rem 2rem;
+
+    font-size: 1.35em;
+    font-weight: 400;
+    font-family: ${(props) => props.theme.fonts.montserrat};
+
+    @media (max-width: 700px) {
+      height: 50px;
+      padding: 0.5rem 2rem;
+    }
+  }
 `;
 
 export const Container = styled.div`
@@ -85,7 +103,7 @@ export const FormColumn = styled.div`
 `;
 
 export const AddressSelectDiv = styled.div`
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   width: 100%;
   height: auto;
 `;
