@@ -9,7 +9,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import { AppLayout, AdminLayout } from './layouts';
+import { AppLayout, AdminLayout, SoftwareLayout } from './layouts';
 import {
   Home,
   Login,
@@ -31,6 +31,7 @@ import {
   CourseAuthorization,
   AccessDenied,
   VerifyEmail,
+  TESTE,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -50,7 +51,11 @@ function AdminRoutes() {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<AppLayout />}>
+    <Route path='/'>
+      <Route element={<SoftwareLayout />} >
+        <Route path='software' element={<TESTE />} /> 
+      </Route>
+      <Route element={<AppLayout />}>
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="cadastro" element={<Register />} />
@@ -95,6 +100,7 @@ const router = createBrowserRouter(
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
+    </Route>
     </Route>
   )
 );
