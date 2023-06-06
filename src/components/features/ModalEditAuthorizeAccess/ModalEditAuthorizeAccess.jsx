@@ -2,8 +2,6 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
@@ -80,24 +78,22 @@ export default function ModalEditAuthorizeAccess({ authorizeUser, close }) {
                   control={control}
                   name="expiresAt"
                   render={({ field: { onChange, onBlur } }) => (
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Date
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        format="DD/MM/YYYY"
-                        disablePast
-                        slotProps={{
-                          textField: {
-                            error: !!errors.expiresAt,
-                          },
-                        }}
-                      />
-                    </LocalizationProvider>
+                    <Date
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      format="DD/MM/YYYY"
+                      disablePast
+                      slotProps={{
+                        textField: {
+                          error: !!errors.expiresAt,
+                        },
+                      }}
+                    />
                   )}
                 />
               </ThemeProvider>
             </AccessExpirationContainer>
-            <ErrorMessage>{errors?.expiresAt?.message}</ErrorMessage>
+            <ErrorMessage>{errors.expiresAt?.message}</ErrorMessage>
           </div>
 
           <ModalButton disabled={isPending} type="submit">
@@ -109,8 +105,6 @@ export default function ModalEditAuthorizeAccess({ authorizeUser, close }) {
                   color="white"
                   ariaLabel="tail-spin-loading"
                   radius="5"
-                  wrapperStyle={{}}
-                  wrapperClass=""
                 />
                 <p>Carregando</p>
               </>

@@ -172,7 +172,7 @@ export const EmailText = styled.p`
 export const ErrorMessage = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 14px;
   color: red;
   margin-left: 0px;

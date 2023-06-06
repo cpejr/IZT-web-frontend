@@ -91,7 +91,7 @@ export const ModalButton = styled.button`
 export const ErrorMessage = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.4rem;
   color: red;
   margin-top: 0.5rem;

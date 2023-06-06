@@ -2,8 +2,6 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useQueryClient } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
@@ -33,7 +31,7 @@ import {
   buildGetUsersErrorMessage,
 } from './utils';
 
-export default function AuthorizeAccessMobile() {
+export default function CourseAuthorizationMobile() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -47,7 +45,6 @@ export default function AuthorizeAccessMobile() {
       toast.error(errorMessage);
     },
   });
-
   const { mutate: createUserCourse } = useCreateUserCourse({
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -102,7 +99,7 @@ export default function AuthorizeAccessMobile() {
             }))}
             placeholder="Selecione o email"
             filterOption={(input, option) =>
-              option?.key?.toLowerCase()?.includes(input?.toLowerCase())
+              option?.children?.toLowerCase()?.includes(input?.toLowerCase())
             }
             showSearch
             style={{ width: '100%' }}
@@ -118,24 +115,22 @@ export default function AuthorizeAccessMobile() {
                 id="expiresAt"
                 name="expiresAt"
                 render={({ field: { onChange, onBlur } }) => (
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <Date
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      format="DD/MM/YYYY"
-                      disablePast
-                      slotProps={{
-                        textField: {
-                          error: !!errors.accessExpiration,
-                        },
-                      }}
-                    />
-                  </LocalizationProvider>
+                  <Date
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    format="DD/MM/YYYY"
+                    disablePast
+                    slotProps={{
+                      textField: {
+                        error: !!errors.expiresAt,
+                      },
+                    }}
+                  />
                 )}
               />
             </ThemeProvider>
           </AccessExpirationContainer>
-          <ErrorMessage>{errors?.accessExpiration?.message}</ErrorMessage>
+          <ErrorMessage>{errors?.expiresAt?.message}</ErrorMessage>
         </div>
 
         <ButtonsDiv>
@@ -148,8 +143,6 @@ export default function AuthorizeAccessMobile() {
                   color="white"
                   ariaLabel="tail-spin-loading"
                   radius="5"
-                  wrapperStyle={{}}
-                  wrapperClass=""
                 />
                 <p>Carregando</p>
               </>

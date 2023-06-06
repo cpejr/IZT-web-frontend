@@ -80,7 +80,7 @@ export default function ModalAuthorizeAccess({ close }) {
   if (isLoading)
     return (
       <Container>
-        <Loading />
+        <Loading style={{ height: '25rem' }} />
       </Container>
     );
 
