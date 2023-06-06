@@ -32,6 +32,7 @@ import {
 } from './utils';
 
 export default function CourseAuthorizationMobile() {
+  const courseId = '646acfad1bae8cb3a56a05f4';
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -49,6 +50,9 @@ export default function CourseAuthorizationMobile() {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['user-courses'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['users'],
       });
 
       toast.success('Autorização ao curso concedida com sucesso!');
@@ -73,7 +77,7 @@ export default function CourseAuthorizationMobile() {
     createUserCourse({
       user: userId,
       expiresAt,
-      course: '645548677d3184e5b411a08f',
+      course: courseId,
     });
     setIsLoading(true);
     navigate('/administrador/liberacao-cursos');
@@ -93,10 +97,12 @@ export default function CourseAuthorizationMobile() {
             name="userId"
             control={control}
             errors={errors}
-            data={users?.map(({ _id, email }) => ({
-              label: email,
-              value: _id,
-            }))}
+            data={users
+              ?.filter(({ courses }) => !courses?.includes(courseId))
+              ?.map(({ _id, email }) => ({
+                label: email,
+                value: _id,
+              }))}
             placeholder="Selecione o email"
             filterOption={(input, option) =>
               option?.children?.toLowerCase()?.includes(input?.toLowerCase())

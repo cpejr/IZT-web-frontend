@@ -18,6 +18,9 @@ export default function ModalDeleteUserCourse({ _id, close }) {
       queryClient.invalidateQueries({
         queryKey: ['user-courses'],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['users'],
+      });
 
       toast.success('Autorização ao curso deletada com sucesso.');
       close();

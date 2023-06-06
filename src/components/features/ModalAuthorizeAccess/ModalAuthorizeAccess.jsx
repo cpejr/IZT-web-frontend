@@ -30,6 +30,7 @@ import {
 
 export default function ModalAuthorizeAccess({ close }) {
   // Variables
+  const courseId = '646acfad1bae8cb3a56a05f4';
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const queryClient = useQueryClient();
 
@@ -46,6 +47,9 @@ export default function ModalAuthorizeAccess({ close }) {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['user-courses'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['users'],
       });
 
       toast.success('Autorização ao curso concedida com sucesso!');
@@ -70,7 +74,7 @@ export default function ModalAuthorizeAccess({ close }) {
   const onSubmit = ({ userId, expiresAt }) => {
     createUserCourse({
       user: userId,
-      course: '645548677d3184e5b411a08f',
+      course: courseId,
       expiresAt,
     });
     setIsPending(true);
@@ -95,10 +99,12 @@ export default function ModalAuthorizeAccess({ close }) {
               name="userId"
               control={control}
               errors={errors}
-              data={users?.map(({ _id, email }) => ({
-                label: email,
-                value: _id,
-              }))}
+              data={users
+                ?.filter(({ courses }) => !courses?.includes(courseId))
+                ?.map(({ _id, email }) => ({
+                  label: email,
+                  value: _id,
+                }))}
               placeholder="Selecione o email"
               filterOption={(input, option) =>
                 option?.children?.toLowerCase()?.includes(input?.toLowerCase())
