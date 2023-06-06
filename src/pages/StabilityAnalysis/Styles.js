@@ -127,3 +127,64 @@ export const Input = styled.input`
   font-size: 1.5rem;
   width: 100%;
 `;
+
+export const Analysis = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 85rem;
+  text-align: start;
+  padding: 2rem;
+  gap: 1.5rem;
+`;
+
+export const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+  width: auto;
+  height: auto;
+
+  color: white;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-weight: 500;
+  font-size: 1.6rem;
+  border: 1px solid white;
+  background-color: transparent;
+  border-radius: 5px;
+  margin: 1rem;
+`;
+
+export const TitleRow = styled.div`
+  display: flex;
+  width: 100%;
+  text-align: start;
+  align-items: center;
+  gap: 2rem;
+`;
+export const Diagram = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 2rem;
+  gap: 2rem;
+`;
+export const DiagramTitle = styled.div`
+  display: flex;
+  width: 100%;
+  text-align: start;
+  align-items: center;
+  color: white;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-weight: 600;
+  font-size: 1.6rem;
+`;
+
+export const Canvas = styled.div`
+  /* max-width: 64rem;
+  max-height: 36rem; */
+  width: 64rem;
+  height: 36rem;
+  background-color: white;
+`;

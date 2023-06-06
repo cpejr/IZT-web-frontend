@@ -1,7 +1,13 @@
 import { useState } from 'react';
 
 import { AiOutlineDown } from 'react-icons/ai';
+import { TbPencil } from 'react-icons/tb';
 
+import {
+  AnalysisData,
+  MachineData,
+  ProductData,
+} from '../../components/features';
 import {
   Container,
   DataEntryDiv,
@@ -10,11 +16,12 @@ import {
   Collapsable,
   CollapsableHeader,
   DataTitle,
-  CollapsableData,
-  Line,
-  Label,
-  SelectInput,
-  Input,
+  Analysis,
+  Button,
+  TitleRow,
+  Diagram,
+  DiagramTitle,
+  Canvas,
 } from './Styles';
 
 export default function StabilityAnalysis() {
@@ -49,45 +56,7 @@ export default function StabilityAnalysis() {
               <DataTitle>Dados da Análise</DataTitle>
               <AiOutlineDown size={18} />
             </CollapsableHeader>
-            <CollapsableData collapse={collapse.analysis}>
-              <Line>
-                <Label>Processo de retificação: </Label>
-                <SelectInput>
-                  <option value="">Selecionar</option>
-                  <option value="Centerless de Mergulho">
-                    Centerless de Mergulho
-                  </option>
-                  <option value="Centerless de Passagem">
-                    Centerless de Passagem
-                  </option>
-                </SelectInput>
-              </Line>
-              <Line>
-                <Label>Maquina: </Label>
-                <Input />
-              </Line>
-              <Line>
-                <Label>N° da Maquina: </Label>
-                <Input />
-              </Line>
-              <Line>
-                <Label>Operação: </Label>
-                <SelectInput>
-                  <option value="">Selecionar</option>
-                  <option value="Desbaste">Desbaste</option>
-                  <option value="Pré Desbaste">Pré Desbaste</option>
-                  <option value="Acabamento">Acabamento</option>
-                </SelectInput>
-              </Line>
-              <Line>
-                <Label>Departamento: </Label>
-                <Input />
-              </Line>
-              <Line>
-                <Label>Responsável: </Label>
-                <Input />
-              </Line>
-            </CollapsableData>
+            <AnalysisData collapse={collapse} />
           </Collapsable>
           <Collapsable>
             <CollapsableHeader
@@ -97,56 +66,36 @@ export default function StabilityAnalysis() {
               <DataTitle>Dados da Maquina</DataTitle>
               <AiOutlineDown size={18} />
             </CollapsableHeader>
-            <CollapsableData collapse={collapse.machine}>
-              <Line>
-                <Label>Diametro do RC(máx): </Label>
-                <Input />
-                <Label> mm</Label>
-              </Line>
-              <Line>
-                <Label>Diametro do RC(min): </Label>
-                <Input />
-                <Label>mm</Label>
-              </Line>
-              <Line>
-                <Label>Diametro do RA: </Label>
-                <Input />
-                <Label>mm</Label>
-              </Line>
-              <Line>
-                <Label>Comprimento RC </Label>
-                <Input />
-                <Label> mm</Label>
-              </Line>
-              <Line>
-                <Label>Comprimento RA: </Label>
-                <Input />
-                <Label>mm</Label>
-              </Line>
-              <Line>
-                <Label>Comprimento efetivo RC: </Label>
-                <Input />
-                <Label>mm</Label>
-              </Line>
-              <Line>
-                <Label>Rotação do RC </Label>
-                <Input />
-                <Label> mm</Label>
-              </Line>
-              <Line>
-                <Label>Rotação do RA: </Label>
-                <Input />
-                <Label>mm</Label>
-              </Line>
-              <Line>
-                <Label>Inclinação RW: </Label>
-                <Input />
-                <Label>°</Label>
-              </Line>
-            </CollapsableData>
+            <MachineData collapse={collapse} />
+          </Collapsable>
+          <Collapsable>
+            <CollapsableHeader
+              collapse={collapse.product}
+              onClick={() => openCollapse('product')}
+            >
+              <DataTitle>Dados do Produto</DataTitle>
+              <AiOutlineDown size={18} />
+            </CollapsableHeader>
+            <ProductData collapse={collapse} />
           </Collapsable>
         </DataEntry>
+        <Button>Calcular</Button>
       </DataEntryDiv>
+      <Analysis>
+        <TitleRow>
+          <Title>Análise #1</Title>
+          <TbPencil size={25} style={{ color: 'white' }} />
+          <Button>Salvar relatório</Button>
+        </TitleRow>
+        <Diagram>
+          <DiagramTitle>Diagrama - Estabilidade de processo</DiagramTitle>
+          <Canvas />
+        </Diagram>
+        <Diagram>
+          <DiagramTitle>Diagrama - Estabilidade de altura da peça</DiagramTitle>
+          <Canvas />
+        </Diagram>
+      </Analysis>
     </Container>
   );
 }
