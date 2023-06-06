@@ -1,10 +1,11 @@
 import { createTheme } from '@mui/material';
 import { z } from 'zod';
 
+import { ERROR_CODES } from '../../utils/constants';
+
 // Form Validation
-export const authorizeAccessValidationSchema = z.object({
-  email: z.string({ required_error: 'Favor selecionar uma email' }).trim(),
-  accessExpiration: z.coerce.date({
+export const updateAuthorizeAccessValidationSchema = z.object({
+  expiresAt: z.coerce.date({
     errorMap: () => ({
       message: 'Favor inserir uma data',
     }),
@@ -39,3 +40,18 @@ export const themeDatePicker = createTheme({
     fontFamily: 'Montserrat',
   },
 });
+
+// Error Handling
+const updateUserCourseErrorMessages = {
+  [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',
+  [ERROR_CODES.CONFLICT]: 'O usuário já tem acesso ao curso',
+};
+const updateUserCourseDefaultErrorMessage =
+  'Erro autorizar acesso do curso ao usuário. Tente novamente mais tarde';
+
+export function buildUpdateUserCourseErrorMessage(err) {
+  const code = err?.response?.data?.httpCode;
+  return (
+    updateUserCourseErrorMessages[code] || updateUserCourseDefaultErrorMessage
+  );
+}
