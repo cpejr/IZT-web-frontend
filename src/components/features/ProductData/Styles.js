@@ -7,8 +7,8 @@ export const CollapsableData = styled.div`
   align-items: center;
   gap: 1rem;
   overflow-y: hidden;
-  max-height: ${(props) => (props.collapse ? 'auto' : '0rem')};
-  transition: all 0.5s ease-in-out 0.5s;
+  max-height: ${(props) => (props.collapse ? '22.5rem' : '0rem')};
+  transition: all 200ms ease-in-out 200ms;
 `;
 
 export const Line = styled.div`
@@ -19,7 +19,7 @@ export const Line = styled.div`
 export const DataColumn = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
   width: 100%;
 `;
 
