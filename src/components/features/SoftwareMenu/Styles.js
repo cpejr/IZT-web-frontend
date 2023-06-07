@@ -13,7 +13,7 @@ export const Menu = styled.div`
   left: 0px;
   top: 109px;
 
-  background: #1d4f69;
+  background: ${(props) => props.theme.colors.darkGreenishBlue};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
@@ -26,7 +26,7 @@ export const MenuItem = styled.div`
 export const MenuLink = styled.div`
   width: 153px;
   height: 60px;
-  font-family: 'Montserrat';
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
