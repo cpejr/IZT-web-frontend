@@ -52,15 +52,16 @@ export default function StabilityAnalysis() {
           [0.625, 1.25, 3.125, 6.25, 10.625],
           [0, 0.625, 2.5, 5.625, 10],
         ],
+        // x: [10, 10.625, 12.5, 15.625, 20],
+        // y: [2.5, 3.125, 5.0, 8.125, 12.5],
         type: 'contour',
         size: 2,
+        marker: { color: 'red' },
       },
     ];
     setPlotData(data);
   };
   const layout = {
-    width: '100%',
-    height: '30vh',
     autosize: true,
   };
 
@@ -111,12 +112,14 @@ export default function StabilityAnalysis() {
         <Diagram>
           <DiagramTitle>Diagrama - Estabilidade de processo</DiagramTitle>
           <Canvas>
-            <ContourMap data={plotData} layout={layout} />
+            <ContourMap data={plotData} layout={layout} useResizeHandler />
           </Canvas>
         </Diagram>
         <Diagram>
           <DiagramTitle>Diagrama - Estabilidade de altura da peça</DiagramTitle>
-          <Canvas />
+          <Canvas>
+            <ContourMap data={plotData} layout={layout} useResizeHandler />
+          </Canvas>
         </Diagram>
       </Analysis>
     </Container>

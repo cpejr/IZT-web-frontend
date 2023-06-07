@@ -91,7 +91,27 @@ export const Analysis = styled.div`
   padding: 1.38vw;
   gap: 2.3vh;
   max-height: 83vh;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  margin-bottom: 2.9rem;
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.colors.gray.darkGray};
+    border-radius: 0.5rem;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
 
 export const Button = styled.button`
@@ -137,10 +157,8 @@ export const DiagramTitle = styled.div`
 `;
 
 export const Canvas = styled.div`
-  /* max-width: 64rem;
-  max-height: 36rem; */
-  height: 30vh;
-  width: 54vh;
+  width: 45vw;
+  aspect-ratio: 16 / 9;
   background-color: white;
 `;
 
