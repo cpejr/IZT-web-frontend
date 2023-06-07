@@ -52,8 +52,6 @@ export default function StabilityAnalysis() {
           [0.625, 1.25, 3.125, 6.25, 10.625],
           [0, 0.625, 2.5, 5.625, 10],
         ],
-        // x: [10, 10.625, 12.5, 15.625, 20],
-        // y: [2.5, 3.125, 5.0, 8.125, 12.5],
         type: 'contour',
         size: 2,
         marker: { color: 'red' },
