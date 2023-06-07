@@ -9,7 +9,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import { AppLayout, AdminLayout } from './layouts';
+import { AppLayout, AdminLayout, SoftwareLayout } from './layouts';
 import {
   Home,
   Login,
@@ -70,6 +70,7 @@ const router = createBrowserRouter(
         <Route element={<PrivateRoutes />}>
           <Route path="curso" element={<Course />} />
           <Route path="perfil" element={<Profile />} />
+          <Route path="software" element={<SoftwareLayout />} />
           <Route path="administrador" element={<AdminRoutes />}>
             <Route element={<AdminLayout />}>
               <Route index element={<h1>Área do Administrador</h1>} />

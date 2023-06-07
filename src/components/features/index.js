@@ -24,3 +24,4 @@ export { default as ModalAuthorizeAccess } from './ModalAuthorizeAccess/ModalAut
 export { default as ModalForgotPassword } from './ModalForgotPassword/ModalForgotPassword';
 export { default as VideoSelect } from './VideoSelect/VideoSelect';
 export { default as Video } from './Video/Video';
+export { default as SoftwareMenu } from './SoftwareMenu/SoftwareMenu';
