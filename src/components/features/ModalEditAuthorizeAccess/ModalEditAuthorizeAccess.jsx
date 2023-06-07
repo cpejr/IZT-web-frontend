@@ -8,9 +8,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useCreateUserCourse } from '../../../hooks/query/userCourse';
-import { useGetUsers } from '../../../hooks/query/users';
-import { FormSelect, Loading } from '../../common';
+import { useUpdateUserCourse } from '../../../hooks/query/userCourse';
 import {
   Container,
   Form,
@@ -22,97 +20,55 @@ import {
   Date,
 } from './Styles';
 import {
-  buildCreateUserCourseErrorMessage,
-  buildGetUsersErrorMessage,
-  modalAuthorizeAccessValidationSchema,
+  buildUpdateUserCourseErrorMessage,
+  modalUpdateAuthorizeAccessValidationSchema,
   themeDatePicker,
 } from './utils';
 
-export default function ModalAuthorizeAccess({ close }) {
+export default function ModalEditAuthorizeAccess({ authorizeUser, close }) {
   // Variables
-  const courseId = '646acfad1bae8cb3a56a05f4';
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const queryClient = useQueryClient();
 
   // Backend calls
-  const { data: users, isLoading } = useGetUsers({
-    onError: (err) => {
-      const errorMessage = buildGetUsersErrorMessage(err);
-
-      toast.error(errorMessage);
-    },
-  });
-
-  const { mutate: createUserCourse } = useCreateUserCourse({
+  const { mutate: updateUserCourse } = useUpdateUserCourse({
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['user-courses'],
       });
-      queryClient.invalidateQueries({
-        queryKey: ['users'],
-      });
-
-      toast.success('Autorização ao curso concedida com sucesso!');
+      toast.success('Autorização de acesso ao curso alterada com sucesso!');
       close();
     },
     onError: (err) => {
-      const errorMessage = buildCreateUserCourseErrorMessage(err);
+      const errorMessage = buildUpdateUserCourseErrorMessage(err);
 
       toast.error(errorMessage);
       setIsPending(false);
     },
   });
 
-  // Form handlers
   const {
     handleSubmit,
     formState: { errors },
     control,
   } = useForm({
-    resolver: zodResolver(modalAuthorizeAccessValidationSchema),
+    resolver: zodResolver(modalUpdateAuthorizeAccessValidationSchema),
   });
-  const onSubmit = ({ userId, expiresAt }) => {
-    createUserCourse({
-      user: userId,
-      course: courseId,
-      expiresAt,
+  const onSubmit = ({ expiresAt }) => {
+    updateUserCourse({
+      _id: authorizeUser?._id,
+      newUserCourseData: { expiresAt },
     });
     setIsPending(true);
     close();
   };
-
-  if (isLoading)
-    return (
-      <Container>
-        <Loading style={{ height: '25rem' }} />
-      </Container>
-    );
-
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
           <div>
             <Label>Email:</Label>
-            <FormSelect
-              id="userId"
-              name="userId"
-              control={control}
-              errors={errors}
-              data={users
-                ?.filter(({ courses }) => !courses?.includes(courseId))
-                ?.map(({ _id, email }) => ({
-                  label: email,
-                  value: _id,
-                }))}
-              placeholder="Selecione o email"
-              filterOption={(input, option) =>
-                option?.children?.toLowerCase()?.includes(input?.toLowerCase())
-              }
-              showSearch
-              style={{ width: '400px' }}
-              size="large"
-            />
+            <h1>{authorizeUser?.user?.email}</h1>
           </div>
           <div>
             <Label>Validade do acesso:</Label>
@@ -120,7 +76,6 @@ export default function ModalAuthorizeAccess({ close }) {
               <ThemeProvider theme={themeDatePicker}>
                 <Controller
                   control={control}
-                  id="expiresAt"
                   name="expiresAt"
                   render={({ field: { onChange, onBlur } }) => (
                     <Date
@@ -138,7 +93,7 @@ export default function ModalAuthorizeAccess({ close }) {
                 />
               </ThemeProvider>
             </AccessExpirationContainer>
-            <ErrorMessage>{errors?.expiresAt?.message}</ErrorMessage>
+            <ErrorMessage>{errors.expiresAt?.message}</ErrorMessage>
           </div>
 
           <ModalButton disabled={isPending} type="submit">
@@ -154,7 +109,7 @@ export default function ModalAuthorizeAccess({ close }) {
                 <p>Carregando</p>
               </>
             ) : (
-              <p>+ Autorizar</p>
+              <p>Salvar Alterações</p>
             )}
           </ModalButton>
         </ModalContent>
@@ -163,6 +118,11 @@ export default function ModalAuthorizeAccess({ close }) {
   );
 }
 
-ModalAuthorizeAccess.propTypes = {
+ModalEditAuthorizeAccess.propTypes = {
   close: PropTypes.func.isRequired,
+  authorizeUser: PropTypes.object,
+};
+
+ModalEditAuthorizeAccess.defaultProps = {
+  authorizeUser: {},
 };

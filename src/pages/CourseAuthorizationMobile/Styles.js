@@ -82,6 +82,11 @@ export const SaveButton = styled.button`
     border: white;
     cursor: pointer;
   }
+
+  svg {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+  }
 `;
 
 export const CancelButton = styled(Link)`
@@ -148,7 +153,7 @@ export const Label = styled.label`
 export const ErrorMessage = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.4rem;
   color: red;
   margin-left: 0rem;

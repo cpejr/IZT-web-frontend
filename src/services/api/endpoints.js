@@ -150,6 +150,32 @@ export const sendProductBudget = async ({ productId, formInput }) => {
   return data;
 };
 
+// UserCourses
+
+export const getUserCourses = async (filters = {}) => {
+  const { data } = await api.get('/user-courses', { params: filters });
+
+  return data;
+};
+
+export const createUserCourse = async (newUserCourseData) => {
+  const { data } = await api.post('/user-courses', newUserCourseData);
+
+  return data;
+};
+
+export const updateUserCourse = async ({ _id, newUserCourseData }) => {
+  const { data } = await api.put(`/user-courses/${_id}`, newUserCourseData);
+
+  return data;
+};
+
+export const deleteUserCourse = async (_id) => {
+  const { data } = await api.delete(`/user-courses/${_id}`);
+
+  return data;
+};
+
 // Courses
 export const getCourseById = async ({ user, course }) => {
   const { setState } = useVideoStore.getState();
