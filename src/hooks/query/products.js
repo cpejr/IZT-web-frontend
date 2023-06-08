@@ -38,6 +38,7 @@ export function useGetProductById({
 
 export function useSearchProductByName({
   name,
+  categories,
   category,
   onSuccess = () => {},
   onError = (err) => console.log(err),
@@ -47,6 +48,7 @@ export function useSearchProductByName({
     queryFn: () => searchProductByName({ name, category }),
     onSuccess,
     onError,
+    enabled: !!categories,
   });
 }
 

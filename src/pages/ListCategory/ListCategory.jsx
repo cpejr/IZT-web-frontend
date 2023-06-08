@@ -6,6 +6,7 @@ import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
+import { Loading } from '../../components/common';
 import {
   ModalDeleteCategory,
   ModalEditCategory,
@@ -38,7 +39,7 @@ export default function ListCategory() {
   const [name, setName] = useState('');
   const debouncedName = useDebounce(name);
 
-  const { data: categories } = useSearchByNameCategories({
+  const { data: categories, isLoading } = useSearchByNameCategories({
     name: debouncedName,
     onError: (err) => {
       const errorMessage = buildGetCategoriesErrorMessage(err);
@@ -76,30 +77,37 @@ export default function ListCategory() {
         </SearchSection>
       </CategoryFilterContainer>
 
-      <CategoryList>
-        {categories?.map((category) => (
-          <Row key={category._id}>
-            <Text>{category.name}</Text>
-            {isSmallScreen ? (
-              <StyledLink to="/administrador/editar-categoria" state={category}>
-                <TbPencil size={30} />
-              </StyledLink>
-            ) : (
-              <EditButton>
-                <TbPencil
-                  onClick={() => openModalEditCategory(category)}
-                  size={30}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <CategoryList>
+          {categories?.map((category) => (
+            <Row key={category._id}>
+              <Text>{category.name}</Text>
+              {isSmallScreen ? (
+                <StyledLink
+                  to="/administrador/editar-categoria"
+                  state={category}
+                >
+                  <TbPencil size={30} />
+                </StyledLink>
+              ) : (
+                <EditButton>
+                  <TbPencil
+                    onClick={() => openModalEditCategory(category)}
+                    size={30}
+                  />
+                </EditButton>
+              )}
+              <DeleteButton>
+                <DeleteOutlined
+                  onClick={() => openModalDeleteCategory(category._id)}
                 />
-              </EditButton>
-            )}
-            <DeleteButton>
-              <DeleteOutlined
-                onClick={() => openModalDeleteCategory(category._id)}
-              />
-            </DeleteButton>
-          </Row>
-        ))}
-      </CategoryList>
+              </DeleteButton>
+            </Row>
+          ))}
+        </CategoryList>
+      )}
 
       <ModalStyle
         open={modalEditCategory}

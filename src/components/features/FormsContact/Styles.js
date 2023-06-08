@@ -7,38 +7,38 @@ export const ContactUs = styled.div`
   flex-direction: column;
   width: 100vw;
   height: auto;
-  padding-bottom: 40px;
+  padding-bottom: 4rem;
   background-color: rgba(18, 54, 69, 1);
 
   @media (max-width: 700px) {
     height: auto;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    margin-bottom: 30px;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
   }
 `;
 
 export const Title = styled.p`
   display: flex;
   align-items: center;
-  font-size: 40px;
+  font-size: 4rem;
   color: white;
   font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
   font-weight: 600;
   height: 20%;
-  padding-bottom: 40px;
-  padding-top: 40px;
+  padding-bottom: 4rem;
+  padding-top: 4rem;
   text-align: center;
 
   @media (max-width: 700px) {
     font-weight: 600;
-    font-size: 32px;
-    line-height: 39px;
-    height: 39px;
+    font-size: 3.2rem;
+    line-height: 3.9rem;
+    height: 3.9rem;
   }
 
   @media (max-width: 370px) {
-    font-size: 25px;
+    font-size: 2.5rem;
   }
 `;
 
@@ -46,7 +46,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: row;
   width: 80%;
-  gap: 20px;
+  gap: 2rem;
   height: 100%;
 
   @media (max-width: 700px) {
@@ -57,7 +57,7 @@ export const Form = styled.form`
   }
 
   @media (min-width: 1440px) {
-    max-width: 1440px;
+    max-width: 144rem;
   }
 `;
 
@@ -66,7 +66,7 @@ export const Section = styled.section`
   flex-direction: column;
   width: 50%;
   height: 100%;
-  gap: 20px;
+  gap: 2rem;
 
   @media (max-width: 700px) {
     width: 80%;
@@ -77,65 +77,71 @@ export const Mensagem = styled.div`
   display: flex;
   flex-direction: column;
 
-  font-size: 24px;
+  font-size: 2.4rem;
   color: white;
   font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
   font-weight: 500;
-  gap: 5px;
+  gap: 0.5rem;
 
   @media (max-width: 700px) {
-    font-size: 20px;
-    margin-top: 20px;
+    font-size: 2rem;
+    margin-top: 2rem;
   }
   @media (max-width: 370px) {
-    font-size: 15px;
+    font-size: 1.5rem;
   }
 
   textarea {
-    border-radius: 4px;
+    border-radius: 0.4rem;
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    padding: 8px 16px;
+    font-size: 2rem;
+    line-height: 2.4rem;
+    padding: 0.8rem 1.6rem;
 
     color: #000000;
     resize: none;
 
     @media (max-width: 700px) {
       font-weight: 400;
-      font-size: 16px;
-      line-height: 20px;
+      font-size: 1.6rem;
+      line-height: 2rem;
     }
     @media (max-width: 370px) {
-      font-size: 12px;
+      font-size: 1.2rem;
     }
   }
 `;
 
 export const SubmitButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   align-self: flex-end;
+  gap: 1rem;
+
   color: white;
   background-color: #23a4a6;
 
-  font-size: 20px;
+  font-size: 2rem;
   font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
   font-weight: 500;
 
-  height: 45px;
-  margin-top: 20px;
-  width: 200px;
+  height: 4.5rem;
+  margin-top: 2rem;
+  width: 20rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.4rem;
 
   @media (max-width: 700px) {
     width: 100%;
   }
 
   @media (max-width: 370px) {
-    font-size: 12px;
-    height: 30px;
+    font-size: 1.2rem;
+    height: 3rem;
   }
 
   cursor: pointer;
@@ -147,10 +153,4 @@ export const SubmitButton = styled.button`
 
 export const InputMessage = styled.div`
   height: 72%;
-`;
-
-export const AreaText = styled.textarea`
-  @media (max-width: 700px) {
-    height: 160px;
-  }
 `;

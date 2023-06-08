@@ -3,6 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import objToFormData from 'object-to-formdata';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
+import { TailSpin } from 'react-loader-spinner';
 import { useMediaQuery } from 'react-responsive';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -227,8 +228,8 @@ export default function CreateProductMobile() {
               style={
                 !errors?.category?.message
                   ? {
-                      border: '1px solid black',
-                      borderRadius: '6px',
+                      border: '0.1rem solid black',
+                      borderRadius: '0.6rem',
                     }
                   : {}
               }
@@ -241,8 +242,23 @@ export default function CreateProductMobile() {
           type="submit"
           disabled={isLoadingCreate || isLoadingCategories}
         >
-          <FiSave size={20} />
-          <p>{isLoadingCreate ? 'Carregando...' : 'Criar produto'}</p>
+          {isLoadingCreate ? (
+            <>
+              <TailSpin
+                height="15"
+                width="15"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="5"
+              />
+              <p>Carregando</p>
+            </>
+          ) : (
+            <>
+              <FiSave size={25} />
+              <p>Criar Produto</p>
+            </>
+          )}
         </SaveButton>
 
         <CancelButton

@@ -1,14 +1,13 @@
-import { Container, Loader, Text } from './Styles';
+import { Container, Loader } from './Styles';
 
-export default function Loading() {
+export default function Loading(props) {
   return (
-    <Container>
+    <Container {...props}>
       <Loader>
         <div />
         <div />
         <div />
       </Loader>
-      <Text>Carregando...</Text>
     </Container>
   );
 }

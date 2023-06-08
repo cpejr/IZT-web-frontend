@@ -210,22 +210,24 @@ export default function Register() {
               />
             </FormColumn>
           </DataEntry>
-          <SubmitButton disabled={isLoading} type="submit">
-            {isLoading ? (
-              <>
-                <TailSpin
-                  height="15"
-                  width="15"
-                  color="white"
-                  ariaLabel="tail-spin-loading"
-                  radius="5"
-                />
-                Carregando
-              </>
-            ) : (
-              'Entrar'
-            )}
-          </SubmitButton>
+          <ButtonDiv>
+            <SubmitButton disabled={isLoading} type="submit">
+              {isLoading ? (
+                <>
+                  <TailSpin
+                    height="15"
+                    width="15"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="5"
+                  />
+                  Carregando
+                </>
+              ) : (
+                'Criar Conta'
+              )}
+            </SubmitButton>
+          </ButtonDiv>
         </Form>
       </Container>
     </Page>

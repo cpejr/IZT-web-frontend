@@ -4,14 +4,14 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 600;
   position: relative;
   height: 100%;
   max-width: ${(props) => props.maxWidth};
   width: 100%;
   @media (max-width: 700) {
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 `;
 
@@ -20,9 +20,9 @@ export const Selected = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 5px;
-  padding: 10px;
-  max-height: 40px;
+  gap: 0.5rem;
+  padding: 1rem;
+  max-height: 4rem;
   background-color: white;
   max-width: ${(props) => props.maxWidth};
   width: 100%;
@@ -32,7 +32,7 @@ export const Selected = styled.div`
   p {
     white-space: nowrap;
     max-width: 100%;
-    max-height: 40px;
+    max-height: 4rem;
     overflow: hidden;
     text-overflow: hidden;
     max-width: 70%;
@@ -47,7 +47,7 @@ export const Options = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 1000;
-  max-height: ${(props) => (props.show ? '250px' : '0')};
+  max-height: ${(props) => (props.show ? '25rem' : '0')};
   overflow-y: ${(props) => (props.show ? 'auto' : 'hidden')};
   background-color: white;
   width: 100%;
@@ -57,15 +57,15 @@ export const Options = styled.div`
 export const Option = styled.div`
   display: inline-block;
   width: 100%;
-  padding: 10px;
+  padding: 1rem;
   :hover {
     cursor: pointer;
   }
   p {
-    font-size: 0.9em;
+    font-size: 1.4rem;
     font-weight: 700;
     text-decoration: ${(props) => (props.isSelected ? 'underline' : 'none')};
     text-decoration-color: ${(props) => props.theme.colors.blue};
-    text-decoration-thickness: 2px;
+    text-decoration-thickness: 0.2rem;
   }
 `;

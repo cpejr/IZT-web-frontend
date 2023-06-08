@@ -55,14 +55,13 @@ export const deleteUser = async (_id) => {
   return data;
 };
 export const forgotPassword = async (email) => {
-  const { data } = await api.post(`/users/fogot-password`, { email });
+  const { data } = await api.post(`/users/forgot-password`, { email });
 
   return data;
 };
 export const redefinePassword = async ({ token, password }) => {
-  const { data } = await api.post(`/users/redefine-password`, {
-    token,
-    password,
+  const { data } = await api.put(`/users/forgot-password/${token}`, {
+    newPassword: password,
   });
 
   return data;
@@ -151,133 +150,55 @@ export const sendProductBudget = async ({ productId, formInput }) => {
   return data;
 };
 
-// Courses
-const mockData = {
-  0: {
-    _id: 0,
-    title: 'Treinamento em Retificação Centerless',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed odio eu enim gravida varius quis non orci. Curabitur sed placerat sem, eu faucibus diam. Fusce ut nulla sed sapien.',
-    chapters: [
-      {
-        title: 'Introdução',
-        _id: 0,
-        videos: [
-          {
-            _id: 0,
-            title: '4:44 by Jay Z',
-            src: 'https://www.youtube.com/watch?v=8pIhrMIsPAE&list=PL_QxeANzQhstL3mA0hoyFV7HsbA7yx6ie&index=2',
-            description: '4:44 by Jay Z',
-            duration: '3:33',
-          },
-          {
-            _id: 1,
-            title: 'PRIDE.',
-            src: 'https://www.youtube.com/watch?v=IN0CAapgP0E',
-            description: 'PRIDE. by Kendrick Lamar',
-            duration: '5:43',
-          },
-          {
-            _id: 2,
-            title: 'Money trees',
-            src: 'https://www.youtube.com/watch?v=smqhSl0u_sI',
-            description: 'Money trees by Kendrick Lamar',
-            duration: '3:10',
-          },
-          {
-            _id: 3,
-            title: 'Alright',
-            src: 'https://www.youtube.com/watch?v=Z-48u_uWMHY',
-            description: 'Alright by Kendrick Lamar',
-            duration: '7:43',
-          },
-        ],
-      },
-      {
-        title: 'Capítulo 1',
-        _id: 1,
-        videos: [
-          {
-            _id: 4,
-            title: '4:44 by Jay Z',
-            src: 'https://www.youtube.com/watch?v=8pIhrMIsPAE&list=PL_QxeANzQhstL3mA0hoyFV7HsbA7yx6ie&index=2',
-            description: '4:44 by Jay Z',
-            duration: '3:33',
-          },
-          {
-            _id: 5,
-            title: 'PRIDE.',
-            src: 'https://www.youtube.com/watch?v=IN0CAapgP0E',
-            description: 'PRIDE. by Kendrick Lamar',
-            duration: '5:43',
-          },
-          {
-            _id: 6,
-            title: 'Money trees',
-            src: 'https://www.youtube.com/watch?v=smqhSl0u_sI',
-            description: 'Money trees by Kendrick Lamar',
-            duration: '3:10',
-          },
-          {
-            _id: 7,
-            title: 'Alright',
-            src: 'https://www.youtube.com/watch?v=Z-48u_uWMHY',
-            description: 'Alright by Kendrick Lamar',
-            duration: '7:43',
-          },
-        ],
-      },
-      {
-        title: 'Capítulo 2',
-        _id: 2,
-        videos: [
-          {
-            _id: 8,
-            title: '4:44 by Jay Z',
-            src: 'https://www.youtube.com/watch?v=8pIhrMIsPAE&list=PL_QxeANzQhstL3mA0hoyFV7HsbA7yx6ie&index=2',
-            description: '4:44 by Jay Z',
-            duration: '3:33',
-          },
-          {
-            _id: 9,
-            title: 'PRIDE.',
-            src: 'https://www.youtube.com/watch?v=IN0CAapgP0E',
-            description: 'PRIDE. by Kendrick Lamar',
-            duration: '5:43',
-          },
-          {
-            _id: 10,
-            title: 'Money trees',
-            src: 'https://www.youtube.com/watch?v=smqhSl0u_sI',
-            description: 'Money trees by Kendrick Lamar',
-            duration: '3:10',
-          },
-          {
-            _id: 11,
-            title: 'Alright',
-            src: 'https://www.youtube.com/watch?v=Z-48u_uWMHY',
-            description: 'Alright by Kendrick Lamar',
-            duration: '7:43',
-          },
-        ],
-      },
-    ],
-  },
+// UserCourses
+
+export const getUserCourses = async (filters = {}) => {
+  const { data } = await api.get('/user-courses', { params: filters });
+
+  return data;
 };
 
-const promise = (_id) =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        data: mockData[_id],
-      });
-    }, 1000);
-  });
-export const getCourseById = async (_id) => {
-  const { setState } = useVideoStore.getState();
-  // const { data } = await api.get(`/courses/${_id}`);
-  const { data } = await promise(_id);
+export const createUserCourse = async (newUserCourseData) => {
+  const { data } = await api.post('/user-courses', newUserCourseData);
 
-  setState(data?.chapters);
+  return data;
+};
+
+export const updateUserCourse = async ({ _id, newUserCourseData }) => {
+  const { data } = await api.put(`/user-courses/${_id}`, newUserCourseData);
+
+  return data;
+};
+
+export const deleteUserCourse = async (_id) => {
+  const { data } = await api.delete(`/user-courses/${_id}`);
+
+  return data;
+};
+
+// Courses
+export const getCourseById = async ({ user, course }) => {
+  const { setState } = useVideoStore.getState();
+  const { data } = await api.get(`/user-courses/info/${user}/${course}`);
+
+  setState(data);
+  return data;
+};
+
+// User videos
+export const getVideo = async (videoId) => {
+  const { data } = await api.get(`/videos/${videoId}`);
+
+  return data;
+};
+
+// User progress
+export const saveVideoProgress = async ({ video, progress, isCompleted }) => {
+  const { data } = await api.post(`/user-progresses`, {
+    video,
+    progress,
+    isCompleted,
+  });
+
   return data;
 };

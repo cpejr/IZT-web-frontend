@@ -2,12 +2,15 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
+import { TailSpin } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 
-import { FormSelect } from '../../common';
+import { useCreateUserCourse } from '../../../hooks/query/userCourse';
+import { useGetUsers } from '../../../hooks/query/users';
+import { FormSelect, Loading } from '../../common';
 import {
   Container,
   Form,
@@ -18,17 +21,49 @@ import {
   ErrorMessage,
   Date,
 } from './Styles';
-import { modalAuthorizeAccessValidationSchema, themeDatePicker } from './utils';
+import {
+  buildCreateUserCourseErrorMessage,
+  buildGetUsersErrorMessage,
+  modalAuthorizeAccessValidationSchema,
+  themeDatePicker,
+} from './utils';
 
-export const emails = [
-  { label: 'thiagofraga@cpejr.com.br', value: 'thiagofraga@cpejr.com.br' },
-  { label: 'amandaalves@cpejr.com.br', value: 'amandaalves@cpejr.com.br' },
-  { label: 'joaopiraja@cpejr.com.br', value: 'joaopiraja@cpejr.com.br' },
-];
-
-export default function ModalAuthorizeAccess({ close, data }) {
+export default function ModalAuthorizeAccess({ close }) {
+  // Variables
+  const courseId = '646acfad1bae8cb3a56a05f4';
   const [isPending, setIsPending] = useState(false); // Important for modal loading
+  const queryClient = useQueryClient();
 
+  // Backend calls
+  const { data: users, isLoading } = useGetUsers({
+    onError: (err) => {
+      const errorMessage = buildGetUsersErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
+  });
+
+  const { mutate: createUserCourse } = useCreateUserCourse({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['user-courses'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['users'],
+      });
+
+      toast.success('Autorização ao curso concedida com sucesso!');
+      close();
+    },
+    onError: (err) => {
+      const errorMessage = buildCreateUserCourseErrorMessage(err);
+
+      toast.error(errorMessage);
+      setIsPending(false);
+    },
+  });
+
+  // Form handlers
   const {
     handleSubmit,
     formState: { errors },
@@ -36,11 +71,22 @@ export default function ModalAuthorizeAccess({ close, data }) {
   } = useForm({
     resolver: zodResolver(modalAuthorizeAccessValidationSchema),
   });
-  const onSubmit = (authorizedUser) => {
-    console.log(authorizedUser);
+  const onSubmit = ({ userId, expiresAt }) => {
+    createUserCourse({
+      user: userId,
+      course: courseId,
+      expiresAt,
+    });
     setIsPending(true);
     close();
   };
+
+  if (isLoading)
+    return (
+      <Container>
+        <Loading style={{ height: '25rem' }} />
+      </Container>
+    );
 
   return (
     <Container>
@@ -49,13 +95,19 @@ export default function ModalAuthorizeAccess({ close, data }) {
           <div>
             <Label>Email:</Label>
             <FormSelect
-              name="email"
+              id="userId"
+              name="userId"
               control={control}
               errors={errors}
-              data={emails}
+              data={users
+                ?.filter(({ courses }) => !courses?.includes(courseId))
+                ?.map(({ _id, email }) => ({
+                  label: email,
+                  value: _id,
+                }))}
               placeholder="Selecione o email"
               filterOption={(input, option) =>
-                option?.key?.toLowerCase()?.includes(input?.toLowerCase())
+                option?.children?.toLowerCase()?.includes(input?.toLowerCase())
               }
               showSearch
               style={{ width: '400px' }}
@@ -68,30 +120,42 @@ export default function ModalAuthorizeAccess({ close, data }) {
               <ThemeProvider theme={themeDatePicker}>
                 <Controller
                   control={control}
-                  name="accessExpiration"
+                  id="expiresAt"
+                  name="expiresAt"
                   render={({ field: { onChange, onBlur } }) => (
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Date
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        format="DD/MM/YYYY"
-                        disablePast
-                        slotProps={{
-                          textField: {
-                            error: !!errors.accessExpiration,
-                          },
-                        }}
-                      />
-                    </LocalizationProvider>
+                    <Date
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      format="DD/MM/YYYY"
+                      disablePast
+                      slotProps={{
+                        textField: {
+                          error: !!errors.expiresAt,
+                        },
+                      }}
+                    />
                   )}
                 />
               </ThemeProvider>
             </AccessExpirationContainer>
-            <ErrorMessage>{errors?.accessExpiration?.message}</ErrorMessage>
+            <ErrorMessage>{errors?.expiresAt?.message}</ErrorMessage>
           </div>
 
           <ModalButton disabled={isPending} type="submit">
-            <p>{isPending ? 'Carregando...' : '+ Autorizar'}</p>
+            {isPending ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                />
+                <p>Carregando</p>
+              </>
+            ) : (
+              <p>+ Autorizar</p>
+            )}
           </ModalButton>
         </ModalContent>
       </Form>
@@ -101,9 +165,4 @@ export default function ModalAuthorizeAccess({ close, data }) {
 
 ModalAuthorizeAccess.propTypes = {
   close: PropTypes.func.isRequired,
-  data: PropTypes.object,
-};
-
-ModalAuthorizeAccess.defaultProps = {
-  data: {},
 };

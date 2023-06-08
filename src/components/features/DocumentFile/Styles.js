@@ -4,11 +4,11 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 1em;
+  gap: 1rem;
 `;
 
 export const FileLink = styled.a`
-  font-size: 1.3em;
+  font-size: 1.8rem;
   color: 'white';
 
   flex: 1;
@@ -23,5 +23,5 @@ export const Arrows = styled.div`
   display: flex;
   flex-direction: column;
 
-  gap: 2px;
+  gap: 0.2rem;
 `;

@@ -6,7 +6,7 @@ import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
-import { Select } from '../../components/common';
+import { Select, Loading } from '../../components/common';
 import {
   ModalDeleteProduct,
   ModalEditProduct,
@@ -54,8 +54,9 @@ export default function ListProduct() {
     },
   });
 
-  const { data: products } = useSearchProductByName({
+  const { data: products, isLoading } = useSearchProductByName({
     name: debouncedName,
+    categories, // Enable products query only if the categories is not undefined
     category: selectedCategory?._id,
     onError: (err) => {
       const errorMessage = buildGetProductsErrorMessage(err);
@@ -88,7 +89,7 @@ export default function ListProduct() {
             standart="Selecionar"
             data={categories}
             getValue={setSelectedCategory}
-            maxWidth="250px"
+            maxWidth="25rem"
           />
         </Subsection>
 
@@ -103,33 +104,37 @@ export default function ListProduct() {
         </SearchSection>
       </CategoryFilterContainer>
 
-      <ProductList>
-        {products?.map((product) => (
-          <Row key={product._id}>
-            <Text>{product.name}</Text>
-            <Text>{product.category.name}</Text>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ProductList>
+          {products?.map((product) => (
+            <Row key={product._id}>
+              <Text>{product.name}</Text>
+              <Text>{product.category.name}</Text>
 
-            {isSmallScreen ? (
-              <StyledLink to="/administrador/editar-produto" state={product}>
-                <TbPencil size={30} />
-              </StyledLink>
-            ) : (
-              <EditButton>
-                <TbPencil
-                  onClick={() => openModalEditProduct(product)}
+              {isSmallScreen ? (
+                <StyledLink to="/administrador/editar-produto" state={product}>
+                  <TbPencil size={30} />
+                </StyledLink>
+              ) : (
+                <EditButton>
+                  <TbPencil
+                    onClick={() => openModalEditProduct(product)}
+                    size={30}
+                  />
+                </EditButton>
+              )}
+              <DeleteButton>
+                <DeleteOutlined
+                  onClick={() => openModalDeleteProduct(product._id)}
                   size={30}
                 />
-              </EditButton>
-            )}
-            <DeleteButton>
-              <DeleteOutlined
-                onClick={() => openModalDeleteProduct(product._id)}
-                size={30}
-              />
-            </DeleteButton>
-          </Row>
-        ))}
-      </ProductList>
+              </DeleteButton>
+            </Row>
+          ))}
+        </ProductList>
+      )}
 
       <ModalStyle
         open={modalEditProduct}

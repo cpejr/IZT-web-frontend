@@ -8,36 +8,35 @@ export const ContactUs = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 50px 0px;
+  padding: 5rem 0rem;
 
   width: 100%;
 
   background-color: ${(props) => props.theme.colors.darkBlue};
 
   @media (max-width: ${firstBreakPoint}) {
-    padding: 30px 0px;
-    gap: 0px;
+    padding: 3rem 0rem;
   }
 `;
 
 export const Title = styled.p`
   color: white;
 
-  font-size: 30px;
+  font-size: 3rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 600;
 
-  padding-bottom: 40px;
+  padding-bottom: 4rem;
 
   @media (max-width: ${firstBreakPoint}) {
-    font-size: 24px;
-    line-height: 39px;
-    height: 39px;
+    font-size: 2.4rem;
+    line-height: 3.9rem;
+    height: 3.9rem;
 
-    padding-bottom: 60px;
+    padding-bottom: 6rem;
   }
   @media (max-width: ${secondBreakPoint}) {
-    font-size: 18px;
+    font-size: 1.8rem;
   }
 `;
 
@@ -49,7 +48,7 @@ export const Form = styled.form`
 
   height: 100%;
   width: 80%;
-  max-width: 1440px;
+  max-width: 144rem;
 
   @media (max-width: ${firstBreakPoint}) {
     width: 85%;
@@ -65,7 +64,7 @@ export const Container = styled.div`
   width: 100%;
 
   @media (max-width: ${firstBreakPoint}) {
-    gap: 10px;
+    gap: 1rem;
     flex-direction: column;
   }
 `;
@@ -73,7 +72,7 @@ export const Container = styled.div`
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2rem;
 
   width: 48.5%;
   height: 100%;
@@ -85,9 +84,9 @@ export const Section = styled.div`
 
 export const Subsection = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 2rem;
 
-  padding: 0px;
+  padding: 0rem;
 
   width: 100%;
 
@@ -97,35 +96,55 @@ export const Subsection = styled.div`
 `;
 
 export const SubmitButton = styled.button`
-  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+
   color: white;
   background-color: #23a4a6;
 
-  font-size: 24px;
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  font-weight: 700;
+  font-size: 2rem;
+  font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
+  font-weight: 500;
 
-  width: 500px;
-  height: 57px;
-  margin-top: 40px;
-  line-height: 29px;
-
+  height: 4.5rem;
+  margin-top: 2rem;
+  width: 20rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.4rem;
 
-  @media (max-width: ${firstBreakPoint}) {
-    width: 50%;
-    font-size: 18px;
-    height: 44px;
+  @media (max-width: 700px) {
+    width: 100%;
   }
-  @media (max-width: ${secondBreakPoint}) {
-    font-size: 12px;
-    height: 30px;
-    margin-top: 25px;
+
+  @media (max-width: 370px) {
+    font-size: 1.2rem;
+    height: 3rem;
   }
+
   cursor: pointer;
   transition-duration: 0.3s;
   :hover {
     background-color: rgba(35, 164, 166, 0.5);
   }
+`;
+
+export const InputMessage = styled.div`
+  height: 72%;
+`;
+
+export const AreaText = styled.textarea`
+  @media (max-width: 700px) {
+    height: 16rem;
+  }
+`;
+
+export const ButtonDiv = styled.div`
+  gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;

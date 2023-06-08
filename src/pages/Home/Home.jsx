@@ -19,7 +19,7 @@ export default function Home() {
     <OuterDiv>
       <Container>
         <Carousel
-          maxHeight="500px"
+          maxHeight="50rem"
           aspectRatio="24 / 7"
           carouselData={carouselData}
         />
@@ -50,7 +50,7 @@ export default function Home() {
             image={Software}
             imageAlt="Software image"
             pictureTopMedia1000
-            linkTo="/" // Put the corret route here
+            linkTo="/curso"
           />
         </CardsContainer>
         <FormsContact />

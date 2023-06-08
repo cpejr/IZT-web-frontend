@@ -26,10 +26,10 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <GlobalStyles />
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <QueryClientProvider client={queryClient}>
         <Theme>
+          <GlobalStyles />
           <Routes />
         </Theme>
         <ReactQueryDevtools />

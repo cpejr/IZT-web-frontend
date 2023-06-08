@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-// import { TailSpin } from 'react-loader-spinner';
+import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useSendProductBudget } from '../../../hooks/query/products';
@@ -14,11 +14,13 @@ import {
   Subsection,
   SubmitButton,
   Container,
+  ButtonDiv,
 } from './Styles';
 import { budgetEmailSchema, buildBudgetEmailErrorMessage } from './utils';
 
 export default function FormsBudget({ productId, isLoadingProduct = false }) {
   const { mutate: sendProductBudget, isLoading } = useSendProductBudget({
+    onSuccess: () => toast.success('Pedido enviado com sucesso!'),
     onError: (err) => {
       const errorMessage = buildBudgetEmailErrorMessage(err);
 
@@ -121,20 +123,18 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
         </Container>
         <SubmitButton type="submit" disabled={isLoading || isLoadingProduct}>
           {isLoading || isLoadingProduct ? (
-            <>
-              {/* <TailSpin
+            <ButtonDiv>
+              <TailSpin
                 height="15"
                 width="15"
                 color="white"
                 ariaLabel="tail-spin-loading"
                 radius="5"
-                wrapperStyle={{}}
-                wrapperClass=""
-              /> */}
+              />
               Carregando
-            </>
+            </ButtonDiv>
           ) : (
-            <>Enviar</>
+            'Enviar'
           )}
         </SubmitButton>
       </Form>

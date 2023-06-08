@@ -8,7 +8,7 @@ export default function FilesList({ files = [] }) {
     <FileListWrapper>
       {files?.map((file) => (
         <FileItem key={file.url}>
-          <FaDownload color="#900603" size="24px" />
+          <FaDownload color="#900603" size="2.4rem" />
           <a href={file.url} target="_blank" rel="noopener noreferrer">
             {file.name}
           </a>

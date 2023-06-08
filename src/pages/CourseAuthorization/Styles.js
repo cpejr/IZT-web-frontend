@@ -5,20 +5,23 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 20px;
-  padding: 1.25em 2em;
-  gap: 2em;
-  max-width: 1440px;
-  width: 100%;
+  font-size: 2rem;
+
+  gap: 2rem;
+  height: 100%;
+  width: 95%;
+  padding-left: 4rem;
+  padding-right: 5%;
+  padding-top: 2.5rem;
 
   @media (max-width: 1100px) {
-    font-size: 17px;
+    font-size: 1.7rem;
   }
   @media (max-width: 800px) {
-    font-size: 15px;
+    font-size: 1.5rem;
   }
   @media (max-width: 700px) {
-    padding: 1.25em 0.4em;
+    padding: 1.25rem 0.4rem;
   }
 `;
 
@@ -49,9 +52,14 @@ export const StyledLink = styled(Link)`
   font-family: ${(props) => props.theme.fonts.montserrat};
 `;
 
+export const EditLink = styled(Link)`
+  all: unset;
+  cursor: pointer;
+`;
+
 export const AuthorizeButton = styled.button`
   background-color: ${(props) => props.theme.colors.darkGreenishBlue};
-  padding: 5px 10px;
+  padding: 0.5rem 1rem;
   border: none;
   font-size: 0.8em;
   font-weight: 500;
@@ -70,16 +78,20 @@ export const Table = styled.div`
 `;
 
 export const TableHeader = styled.div`
-  width: 100%;
   display: grid;
+  height: 50px;
+  width: 100%;
+
   grid-template-columns: 2fr 1fr 1fr;
   grid-template-rows: 2.5em;
-  align-items: center;
+  padding: 0.5rem 2rem;
+
   background-color: ${(props) => props.theme.colors.gray.lightGrey};
-  padding: 5px 20px;
+
   h2 {
     font-size: 0.8em;
     overflow: auto;
+    padding-top: 1rem;
   }
   @media (max-width: 930px) {
     grid-template-columns: 1fr 1fr 1fr;
@@ -90,7 +102,7 @@ export const TableHeader = styled.div`
   @media (max-width: 550px) {
     grid-template-columns: 1fr 1fr;
     grid-auto-columns: 100%;
-    padding: 5px 5px;
+    padding: 0.5rem 0.5rem;
     grid-template-rows: 3em;
     h2 {
       grid-row: 2;
@@ -104,10 +116,11 @@ export const SearchContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  border-radius: 18px;
-  height: 2em;
+  border-radius: 1.8rem;
+  max-height: 3.5rem;
+  margin-top: 0.25rem;
   background-color: white;
-  padding: 0px 10px;
+  padding: 0rem 1rem;
   width: 100%;
   overflow-x: hidden;
   @media (max-width: 550px) {
@@ -121,7 +134,7 @@ export const SearchBox = styled.input`
   background-color: transparent;
   font-size: 0.8em;
   color: black;
-  margin-left: 10px;
+  margin-left: 1rem;
   height: auto;
   font-weight: 500;
   font-family: ${(props) => props.theme.fonts.montserrat};
@@ -137,34 +150,35 @@ export const SearchBox = styled.input`
 export const ContentRow = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2.17fr 2fr 0.12fr 0.12fr;
   grid-template-rows: 2.5em;
   align-items: center;
-  padding: 5px 20px;
+  align-content: center;
+  padding: 0.5rem 2rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 0.8em;
   font-weight: 500;
   justify-items: stretch;
 
   p {
-    padding-left: 10px;
+    padding-left: 1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-bottom: 5px;
+    padding-bottom: 0.5rem;
   }
   svg {
-    justify-self: end;
+    justify-self: center;
   }
   @media (max-width: 930px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 2fr 0.5fr 0.5fr;
   }
   @media (max-width: 700px) {
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1.5fr 0.3fr 0.3fr;
   }
   @media (max-width: 550px) {
-    grid-template-columns: 1fr 1fr 25px;
-    padding-left: 0px;
+    grid-template-columns: 2fr 1.5fr 0.3fr 0.3fr;
+    padding-left: 0;
   }
 `;
 
@@ -183,10 +197,20 @@ export const ModalStyle = styled(Modal)`
 export const EditBtn = styled.button`
   background-color: transparent;
   border: none;
-  width: 25px;
-  height: 25px;
-  justify-self: flex-end;
+  justify-self: center;
   :hover {
     cursor: pointer;
+  }
+`;
+
+export const DeleteButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  justify-self: flex-end;
+
+  svg {
+    height: 2.3rem;
+    width: 2.3rem;
   }
 `;

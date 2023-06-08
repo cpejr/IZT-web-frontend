@@ -26,14 +26,15 @@ export function useLogout({
   });
 }
 
-export function useRefreshToken({
-  onSuccess = () => {},
-  onError = (err) => {
-    removeIsLoggedIn(); // In case the user did not logout and the cookie expire
-    console.error(err);
-  },
-} = {}) {
+export function useRefreshToken({ onSuccess = () => {} } = {}) {
   const expireIn = useAuthStore((state) => state.auth?.expireIn);
+  const clearAuth = useAuthStore((state) => state.clearAuth);
+
+  const onError = (err) => {
+    console.error(err);
+    clearAuth();
+    removeIsLoggedIn(); // In case the user did not logout and the cookie expire
+  };
 
   return useQuery({
     queryKey: ['refresh'],
