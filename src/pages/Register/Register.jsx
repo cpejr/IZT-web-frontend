@@ -25,6 +25,7 @@ import {
   Subtitle,
   Label,
   AddressSelectDiv,
+  ButtonDiv,
 } from './Styles';
 import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
 

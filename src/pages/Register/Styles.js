@@ -15,18 +15,24 @@ export const Page = styled.div`
 
   .ant-select-single.ant-select-lg:not(.ant-select-customize-input)
     .ant-select-selector {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+
     width: 100%;
-    height: 6.6rem;
+    height: 4.5rem;
+    margin-top: 1rem;
+    margin-bottom: 3%;
+    padding: 0px 5%;
 
     border-radius: 4px;
-    padding: 1.3rem 2rem;
 
-    font-size: 1.35em;
+    font-size: 2.2rem;
     font-weight: 400;
     font-family: ${(props) => props.theme.fonts.montserrat};
 
     @media (max-width: 700px) {
-      height: 50px;
+      height: 4rem;
       padding: 0.5rem 2rem;
     }
   }
@@ -63,7 +69,6 @@ export const DataEntry = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 3.5rem;
 `;
 
 export const Title = styled.h1`
@@ -91,7 +96,6 @@ export const Label = styled.p`
   font-size: 1em;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 400;
-  margin-bottom: 0.4em;
 `;
 
 export const FormColumn = styled.div`
@@ -103,7 +107,6 @@ export const FormColumn = styled.div`
 `;
 
 export const AddressSelectDiv = styled.div`
-  margin-bottom: 1rem;
   width: 100%;
   height: auto;
 `;
