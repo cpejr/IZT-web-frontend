@@ -6,17 +6,19 @@ export const Container = styled.div`
   max-width: 106rem;
   margin-top: 2rem;
   padding-left: 1.5rem;
+  max-height: ${(props) => (props.isFocused ? '100%' : '0rem')};
+  overflow-y: hidden;
 `;
 
 export const Columns = styled.div`
   display: flex;
   justify-content: flex-start;
-  gap: 0.5rem;
+  gap: 0.3rem;
   width: 100%;
   height: 100%;
   max-width: 106rem;
   margin-bottom: 2rem;
-  max-height: ${(props) => (props.focused ? 'auto' : '0rem')};
+  /* max-height: ${(props) => (props.focused ? 'auto' : '0rem')}; */
   overflow-y: hidden;
 `;
 
@@ -40,7 +42,7 @@ export const DataColumn = styled.div`
 export const DataRow = styled.div`
   display: flex;
   justify-content: flex-start;
-  gap: 1rem;
+  gap: 0.7rem;
   width: 100%;
   height: 100%;
   padding-left: 1rem;
@@ -84,7 +86,7 @@ export const ButtonRow = styled.div`
 
 export const Label = styled.div`
   font-family: ${(prop) => prop.theme.fonts.montserrat};
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 400;
   line-height: 1.83rem;
   color: white;
@@ -94,11 +96,10 @@ export const Label = styled.div`
 `;
 export const Data = styled.div`
   font-family: ${(prop) => prop.theme.fonts.montserrat};
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 400;
   line-height: 1.83rem;
   color: white;
-  border-bottom: 0.1rem solid white;
   @media (max-width: 1075px) {
     font-size: 1.2rem;
   }
