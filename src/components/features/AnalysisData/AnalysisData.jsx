@@ -15,7 +15,7 @@ export default function AnalysisData({ collapse }) {
     <CollapsableData collapse={collapse.analysis}>
       <DataColumn>
         <Line>
-          <Label>Processo de retificação: </Label>
+          <Label>Processo de retificação:</Label>
           <SelectInput>
             <option value="">Selecionar</option>
             <option value="Centerless de Mergulho">
@@ -27,15 +27,15 @@ export default function AnalysisData({ collapse }) {
           </SelectInput>
         </Line>
         <Line>
-          <Label>Maquina: </Label>
+          <Label>Maquina:</Label>
           <Input />
         </Line>
         <Line>
-          <Label>N° da Maquina: </Label>
+          <Label>N° da Maquina:</Label>
           <Input />
         </Line>
         <Line>
-          <Label>Operação: </Label>
+          <Label>Operação:</Label>
           <SelectInput>
             <option value="">Selecionar</option>
             <option value="Desbaste">Desbaste</option>
@@ -44,11 +44,11 @@ export default function AnalysisData({ collapse }) {
           </SelectInput>
         </Line>
         <Line>
-          <Label>Departamento: </Label>
+          <Label>Departamento:</Label>
           <Input />
         </Line>
         <Line>
-          <Label>Responsável: </Label>
+          <Label>Responsável:</Label>
           <Input />
         </Line>
       </DataColumn>

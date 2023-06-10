@@ -28,17 +28,21 @@ export const DataEntryDiv = styled.div`
   width: 100%;
   max-width: 28vw;
   align-items: center;
-  padding: 1.38vw;
-  gap: 2vh;
-  max-height: 83vh;
+  padding: 3vh 1.3vw;
+  gap: 1.5vh;
+  max-height: 87vh;
+  min-width: 29.5rem;
 `;
 
 export const Title = styled.h1`
-  font-size: 3.5vh;
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
   color: white;
   text-align: center;
+  font-size: 2.2rem;
+  @media (max-width: 1100px) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const DataEntry = styled.form`
@@ -71,16 +75,19 @@ export const CollapsableHeader = styled.div`
     transform: ${(props) =>
       props.collapse ? 'rotate(180deg)' : 'rotate(0deg)'};
     transition: all 200ms ease-in-out 200ms;
-    height: 3vh;
-    width: 3vh;
+    height: 2.5vh;
+    width: 2.5vh;
   }
 `;
 
 export const DataTitle = styled.div`
-  font-size: 2.8vh;
   color: white;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 500;
+  font-size: 2rem;
+  @media (max-width: 1100px) {
+    font-size: 1.6rem;
+  }
 `;
 
 export const Analysis = styled.div`
@@ -124,11 +131,14 @@ export const Button = styled.button`
 
   color: white;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-weight: 500;
-  font-size: 2.6vh;
-  border: 1px solid white;
+  font-weight: 600;
+  border: 0.1rem solid white;
   background-color: transparent;
-  border-radius: 5px;
+  border-radius: 0.5rem;
+  font-size: 2rem;
+  @media (max-width: 1100px) {
+    font-size: 1.6rem;
+  }
 `;
 
 export const TitleRow = styled.div`
@@ -143,6 +153,7 @@ export const Diagram = styled.div`
   flex-direction: column;
   width: 100%;
   padding-left: 1.4vw;
+  padding-right: 1.4vw;
   gap: 2.5vh;
 `;
 export const DiagramTitle = styled.div`
@@ -153,11 +164,14 @@ export const DiagramTitle = styled.div`
   color: white;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 600;
-  font-size: 2.5vh;
+  font-size: 2rem;
+  @media (max-width: 1100px) {
+    font-size: 1.6rem;
+  }
 `;
 
 export const Canvas = styled.div`
-  width: 45vw;
+  width: 100%;
   aspect-ratio: 16 / 9;
   background-color: white;
 `;

@@ -14,47 +14,47 @@ export default function MachineData({ collapse }) {
     <CollapsableData collapse={collapse.machine}>
       <DataColumn>
         <Line>
-          <Label>Diametro do RC(máx): </Label>
-          <Input />
-          <Label> mm</Label>
-        </Line>
-        <Line>
-          <Label>Diametro do RC(min): </Label>
+          <Label>Diametro do RC(máx):</Label>
           <Input />
           <Label>mm</Label>
         </Line>
         <Line>
-          <Label>Diametro do RA: </Label>
+          <Label>Diametro do RC(min):</Label>
           <Input />
           <Label>mm</Label>
         </Line>
         <Line>
-          <Label>Comprimento RC </Label>
-          <Input />
-          <Label> mm</Label>
-        </Line>
-        <Line>
-          <Label>Comprimento RA: </Label>
+          <Label>Diametro do RA:</Label>
           <Input />
           <Label>mm</Label>
         </Line>
         <Line>
-          <Label>Comprimento efetivo RC: </Label>
+          <Label>Comprimento RC:</Label>
           <Input />
           <Label>mm</Label>
         </Line>
         <Line>
-          <Label>Rotação do RC </Label>
-          <Input />
-          <Label> mm</Label>
-        </Line>
-        <Line>
-          <Label>Rotação do RA: </Label>
+          <Label>Comprimento RA:</Label>
           <Input />
           <Label>mm</Label>
         </Line>
         <Line>
-          <Label>Inclinação RW: </Label>
+          <Label>Comprimento efetivo RC:</Label>
+          <Input />
+          <Label>mm</Label>
+        </Line>
+        <Line>
+          <Label>Rotação do RC</Label>
+          <Input />
+          <Label>mm</Label>
+        </Line>
+        <Line>
+          <Label>Rotação do RA:</Label>
+          <Input />
+          <Label>mm</Label>
+        </Line>
+        <Line>
+          <Label>Inclinação RW:</Label>
           <Input />
           <Label>°</Label>
         </Line>

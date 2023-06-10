@@ -110,13 +110,23 @@ export default function StabilityAnalysis() {
         <Diagram>
           <DiagramTitle>Diagrama - Estabilidade de processo</DiagramTitle>
           <Canvas>
-            <ContourMap data={plotData} layout={layout} useResizeHandler />
+            <ContourMap
+              data={plotData}
+              layout={layout}
+              useResizeHandler
+              config={{ responsive: true }}
+            />
           </Canvas>
         </Diagram>
         <Diagram>
           <DiagramTitle>Diagrama - Estabilidade de altura da peça</DiagramTitle>
           <Canvas>
-            <ContourMap data={plotData} layout={layout} useResizeHandler />
+            <ContourMap
+              data={plotData}
+              layout={layout}
+              useResizeHandler
+              config={{ responsive: true }}
+            />
           </Canvas>
         </Diagram>
       </Analysis>

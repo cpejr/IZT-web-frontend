@@ -14,30 +14,30 @@ export default function MachinProductData({ collapse }) {
     <CollapsableData collapse={collapse.product}>
       <DataColumn>
         <Line>
-          <Label>Produto: </Label>
+          <Label>Produto:</Label>
           <Input />
         </Line>
         <Line>
-          <Label>N do produto: </Label>
+          <Label>N do produto:</Label>
           <Input />
         </Line>
         <Line>
-          <Label>Diametro: </Label>
-          <Input />
-          <Label>mm</Label>
-        </Line>
-        <Line>
-          <Label>Comprimento total: </Label>
-          <Input />
-          <Label> mm</Label>
-        </Line>
-        <Line>
-          <Label>Comprimento eletivo: </Label>
+          <Label>Diametro:</Label>
           <Input />
           <Label>mm</Label>
         </Line>
         <Line>
-          <Label>Sobremetal: </Label>
+          <Label>Comprimento total:</Label>
+          <Input />
+          <Label>mm</Label>
+        </Line>
+        <Line>
+          <Label>Comprimento eletivo:</Label>
+          <Input />
+          <Label>mm</Label>
+        </Line>
+        <Line>
+          <Label>Sobremetal:</Label>
           <Input />
           <Label>mm</Label>
         </Line>

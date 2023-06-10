@@ -5,21 +5,22 @@ export const CollapsableData = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   overflow-y: hidden;
-  max-height: ${(props) => (props.collapse ? '22.5rem' : '0rem')};
+  max-height: ${(props) => (props.collapse ? '23rem' : '0rem')};
   transition: all 200ms ease-in-out 200ms;
 `;
 
 export const Line = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 0.5vw;
 `;
 
 export const DataColumn = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1vh;
+  gap: 1.5vh;
   width: 100%;
 `;
 
@@ -32,7 +33,7 @@ export const Label = styled.label`
 `;
 
 export const SelectInput = styled.select`
-  height: 2rem;
+  height: 100%;
   background-color: transparent;
   margin-left: 1rem;
   border: none;
@@ -58,6 +59,7 @@ export const Input = styled.input`
   border-bottom: 0.1rem solid white;
   font-size: 1.5rem;
   width: 100%;
+  height: 100%;
 `;
 
 export const Button = styled.button`
