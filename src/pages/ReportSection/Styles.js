@@ -17,6 +17,7 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   padding: 3rem;
+  overflow-y: hidden;
 `;
 
 export const Title = styled.div`
@@ -28,7 +29,7 @@ export const Title = styled.div`
 
 export const ReportsArea = styled.div`
   margin: 4rem;
-  max-width: 106rem;
+  max-width: 110rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

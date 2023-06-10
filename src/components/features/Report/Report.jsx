@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { DownOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
@@ -18,24 +18,34 @@ import {
 
 export default function Report({ data }) {
   const [isFocused, setIsFocused] = useState(false);
+  const reportRef = useRef(null);
+
+  const handleFocus = () => {
+    setIsFocused(!isFocused);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (reportRef.current && !reportRef.current.contains(event.target)) {
+        setIsFocused(false);
+      }
+    };
+
+    const { parentElement } = reportRef.current;
+    parentElement.addEventListener('click', handleClickOutside);
+
+    return () => {
+      parentElement.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const analysisDataList = data.analysis;
   const productDataList = data.product;
   const machineDataList = data.machineData;
 
-  const handleFocus = () => {
-    if (!isFocused) {
-      setIsFocused(true);
-      document.getElementById(data.name).focus();
-    }
-    if (isFocused) {
-      setIsFocused(false);
-    }
-  };
-
   return (
-    <div id={data.name} onBlur={handleFocus}>
-      <ReportName onClick={handleFocus}>
+    <div ref={reportRef} id={data.name}>
+      <ReportName onClick={handleFocus} isFocused={isFocused}>
         {data.name}
         <DownOutlined />
       </ReportName>

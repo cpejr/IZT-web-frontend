@@ -4,10 +4,10 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   max-width: 106rem;
-  margin-top: 2rem;
   padding-left: 1.5rem;
-  max-height: ${(props) => (props.isFocused ? '100%' : '0rem')};
+  max-height: ${(props) => (props.isFocused ? '100rem' : '0rem')};
   overflow-y: hidden;
+  transition: all 0.5s ease-in-out 0.3s;
 `;
 
 export const Columns = styled.div`
@@ -27,10 +27,11 @@ export const DataColumn = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   gap: 0.5rem;
-  width: 100%;
+  width: auto;
   height: 100%;
   max-height: 20rem;
   max-width: 25rem;
+  padding-right: 0.5rem;
   @media (max-width: 1350px) {
     max-height: 30rem;
   }
@@ -90,6 +91,7 @@ export const Label = styled.div`
   font-weight: 400;
   line-height: 1.83rem;
   color: white;
+  white-space: nowrap;
   @media (max-width: 1075px) {
     font-size: 1.2rem;
   }
@@ -100,6 +102,7 @@ export const Data = styled.div`
   font-weight: 400;
   line-height: 1.83rem;
   color: white;
+  white-space: nowrap;
   @media (max-width: 1075px) {
     font-size: 1.2rem;
   }
@@ -122,4 +125,10 @@ export const ReportName = styled.div`
   padding: 1.5rem;
   width: 100%;
   max-width: 106rem;
+
+  svg {
+    transform: ${(props) =>
+      props.isFocused ? 'rotate(180deg)' : 'rotate(0deg)'};
+    transition: all 0.5s ease-in-out 0.3s;
+  }
 `;
