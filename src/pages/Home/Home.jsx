@@ -3,7 +3,7 @@ import Software from '../../assets/homePage/cards/software.png';
 import Training from '../../assets/homePage/cards/training.png';
 import carouselData from '../../assets/homePage/carousel/data';
 import Image from '../../assets/homePage/imagemDaEmpresa.png';
-import { FormsContact, Card, NewCarousel } from '../../components/features';
+import { FormsContact, Card, Carousel } from '../../components/features';
 import {
   AboutUs,
   Container,
@@ -20,7 +20,7 @@ export default function Home() {
     <OuterDiv>
       <Container>
         <CarouselContainer>
-          <NewCarousel carouselData={carouselData} />
+          <Carousel carouselData={carouselData} />
         </CarouselContainer>
         <CardsContainer>
           <Card
