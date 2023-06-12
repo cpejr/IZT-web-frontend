@@ -50,9 +50,9 @@ export const ProductName = styled.p`
 
 export const ProductInfo = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 100%;
   gap: 5rem;
+
+  width: 100%;
   margin-bottom: 4rem;
 
   @media (max-width: 1080px) {
