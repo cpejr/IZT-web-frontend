@@ -6,30 +6,29 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 2rem;
-  padding: 2.5rem 4rem;
-  gap: 4rem;
-  max-width: 144rem;
-  width: 100%;
+
+  gap: 2rem;
+  height: 100%;
+  width: 95%;
+  padding-left: 4rem;
+  padding-right: 5%;
+  padding-top: 2.5rem;
+
+  @media (max-width: 1100px) {
+    font-size: 1.7rem;
+  }
+  @media (max-width: 800px) {
+    font-size: 1.5rem;
+  }
   @media (max-width: 700px) {
-    padding: 2rem 0.8rem;
-    gap: 3rem;
+    padding: 1.25rem 0.4rem;
   }
 `;
 
 export const PageTitle = styled.h1`
-  font-size: 3.2rem;
+  font-size: 1.6em;
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  @media (max-width: 1100px) {
-    font-size: 2.72rem;
-  }
-  @media (max-width: 800px) {
-    font-size: 2.4rem;
-  }
-  @media (max-width: 700px) {
-    padding: 2rem 0.8rem;
-    gap: 3rem;
-  }
 `;
 
 export const AuthorizationDiv = styled.div`
@@ -37,7 +36,7 @@ export const AuthorizationDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 1em;
 `;
 
 export const StyledLink = styled(Link)`
@@ -45,36 +44,29 @@ export const StyledLink = styled(Link)`
   cursor: pointer;
 
   background-color: ${(props) => props.theme.colors.darkGreenishBlue};
-  padding: 0.5rem 1rem;
+  padding: 5px 10px;
   border: none;
-  font-size: 1.6rem;
+  font-size: 0.8em;
   font-weight: 500;
   color: white;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  @media (max-width: 1100px) {
-    font-size: 1.36rem;
-  }
-  @media (max-width: 800px) {
-    font-size: 1.2rem;
-  }
+`;
+
+export const EditLink = styled(Link)`
+  all: unset;
+  cursor: pointer;
 `;
 
 export const AuthorizeButton = styled.button`
   background-color: ${(props) => props.theme.colors.darkGreenishBlue};
   padding: 0.5rem 1rem;
   border: none;
-  font-size: 1.6rem;
+  font-size: 0.8em;
   font-weight: 500;
   color: white;
   font-family: ${(props) => props.theme.fonts.montserrat};
   :hover {
     cursor: pointer;
-  }
-  @media (max-width: 1100px) {
-    font-size: 1.36rem;
-  }
-  @media (max-width: 800px) {
-    font-size: 1.2rem;
   }
 `;
 
@@ -86,16 +78,20 @@ export const Table = styled.div`
 `;
 
 export const TableHeader = styled.div`
-  width: 100%;
   display: grid;
+  height: 50px;
+  width: 100%;
+
   grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 5rem;
-  align-items: center;
-  background-color: ${(props) => props.theme.colors.gray.lightGrey};
+  grid-template-rows: 2.5em;
   padding: 0.5rem 2rem;
+
+  background-color: ${(props) => props.theme.colors.gray.lightGrey};
+
   h2 {
     font-size: 0.8em;
     overflow: auto;
+    padding-top: 1rem;
   }
   @media (max-width: 930px) {
     grid-template-columns: 1fr 1fr 1fr;
@@ -108,16 +104,9 @@ export const TableHeader = styled.div`
     grid-auto-columns: 100%;
     padding: 0.5rem 0.5rem;
     grid-template-rows: 3em;
-    row-gap: 1rem;
     h2 {
       grid-row: 2;
     }
-  }
-  @media (max-width: 1100px) {
-    grid-template-rows: 4.2rem;
-  }
-  @media (max-width: 800px) {
-    grid-template-rows: 3.75rem;
   }
 `;
 
@@ -128,7 +117,8 @@ export const SearchContainer = styled.div`
   justify-content: flex-start;
 
   border-radius: 1.8rem;
-  height: 4rem;
+  max-height: 3.5rem;
+  margin-top: 0.25rem;
   background-color: white;
   padding: 0rem 1rem;
   width: 100%;
@@ -137,18 +127,12 @@ export const SearchContainer = styled.div`
     grid-column: 1 / 3;
     grid-row: 1;
   }
-  @media (max-width: 1100px) {
-    height: 3.8rem;
-  }
-  @media (max-width: 800px) {
-    height: 3rem;
-  }
 `;
 
 export const SearchBox = styled.input`
   border: none;
   background-color: transparent;
-  font-size: 1.6rem;
+  font-size: 0.8em;
   color: black;
   margin-left: 1rem;
   height: auto;
@@ -161,20 +145,15 @@ export const SearchBox = styled.input`
     color: black;
     font-weight: 500;
   }
-  @media (max-width: 1100px) {
-    font-size: 1.36rem;
-  }
-  @media (max-width: 800px) {
-    font-size: 1.2rem;
-  }
 `;
 
 export const ContentRow = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 5rem;
+  grid-template-columns: 2.17fr 2fr 0.12fr 0.12fr;
+  grid-template-rows: 2.5em;
   align-items: center;
+  align-content: center;
   padding: 0.5rem 2rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 0.8em;
@@ -189,23 +168,17 @@ export const ContentRow = styled.div`
     padding-bottom: 0.5rem;
   }
   svg {
-    justify-self: end;
+    justify-self: center;
   }
   @media (max-width: 930px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 2fr 0.5fr 0.5fr;
   }
   @media (max-width: 700px) {
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1.5fr 0.3fr 0.3fr;
   }
   @media (max-width: 550px) {
-    grid-template-columns: 1fr 1fr 2.5rem;
-    padding-left: 0rem;
-  }
-  @media (max-width: 1100px) {
-    grid-template-rows: 4.2rem;
-  }
-  @media (max-width: 800px) {
-    grid-template-rows: 3.75rem;
+    grid-template-columns: 2fr 1.5fr 0.3fr 0.3fr;
+    padding-left: 0;
   }
 `;
 
@@ -224,10 +197,20 @@ export const ModalStyle = styled(Modal)`
 export const EditBtn = styled.button`
   background-color: transparent;
   border: none;
-  width: 2.5rem;
-  height: 2.5rem;
-  justify-self: flex-end;
+  justify-self: center;
   :hover {
     cursor: pointer;
+  }
+`;
+
+export const DeleteButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  justify-self: flex-end;
+
+  svg {
+    height: 2.3rem;
+    width: 2.3rem;
   }
 `;

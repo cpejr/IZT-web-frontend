@@ -1,16 +1,25 @@
 import { useState } from 'react';
 
-import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
+import { PlusOutlined, CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
 import { TbPencil } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
 
-import { ModalAuthorizeAccess } from '../../components/features';
+import { Loading } from '../../components/common';
+import {
+  ModalDeleteAuthorizeAccess,
+  ModalAuthorizeAccess,
+  ModalEditAuthorizeAccess,
+} from '../../components/features';
+import { useGetUserCourses } from '../../hooks/query/userCourse';
+import formatDate from '../../utils/formatDate';
 import {
   Container,
   PageTitle,
   AuthorizationDiv,
   StyledLink,
+  EditLink,
   AuthorizeButton,
   Table,
   TableHeader,
@@ -20,29 +29,31 @@ import {
   MiddleData,
   ModalStyle,
   EditBtn,
+  DeleteButton,
 } from './Styles';
-
-const coursesAuth = [
-  {
-    email: 'jplp100@hotmail.com',
-    expiration: '12/08/2023',
-  },
-  {
-    email: 'thiago.r.fraga@hotmail.com',
-    expiration: '14/06/2023',
-  },
-  {
-    email: 'andrerobocop@hotmail.com',
-    expiration: '12/12/2023',
-  },
-];
+import { buildGetUserCoursesErrorMessage } from './utils';
 
 export default function CourseAuthorization() {
   const [modalCourseAuthorization, setModalCourseAuthorization] =
     useState(false);
+  const [modalEditCourseAuthorization, setModalEditCourseAuthorization] =
+    useState(false);
+  const [modalDeleteAuthorizeAccess, setModalDeleteAuthorizeAccess] =
+    useState(false);
+  const [userCourseId, setUserCourseId] = useState('');
   const [authorizeUser, setAuthorizeUser] = useState({});
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
+  // Backend calls
+  const { data: userCourses, isLoading: isLoadingUsers } = useGetUserCourses({
+    onError: (err) => {
+      const errorMessage = buildGetUserCoursesErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
+  });
+
+  // Modal Course Authorization Functions
   const openModalCourseAuthorization = (courseAuth) => {
     setAuthorizeUser(courseAuth);
 
@@ -50,6 +61,23 @@ export default function CourseAuthorization() {
   };
   const closeModalCourseAuthorization = () =>
     setModalCourseAuthorization(false);
+
+  // Modal Edit Course Authorization Functions
+  const openModalEditCourseAuthorization = (courseAuth) => {
+    setAuthorizeUser(courseAuth);
+
+    setModalEditCourseAuthorization(true);
+  };
+  const closeModalEditCourseAuthorization = () =>
+    setModalEditCourseAuthorization(false);
+
+  // Modal Delete Course Authorization Functions
+  const openModalDeleteAuthorizeAccess = (_id) => {
+    setUserCourseId(_id);
+    setModalDeleteAuthorizeAccess(true);
+  };
+  const closeModalDeleteAuthorizeAccess = () =>
+    setModalDeleteAuthorizeAccess(false);
 
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
@@ -79,17 +107,49 @@ export default function CourseAuthorization() {
               <SearchBox placeholder="Pesquisar Email" />
             </SearchContainer>
           </TableHeader>
-          {coursesAuth.map((courseAuth) => (
-            <ContentRow key={courseAuth.email}>
-              <p title={courseAuth.email}>{courseAuth.email}</p>
-              <MiddleData>{courseAuth.expiration}</MiddleData>
-              <EditBtn onClick={() => openModalCourseAuthorization(courseAuth)}>
-                <TbPencil size={25} />
-              </EditBtn>
-            </ContentRow>
-          ))}
+
+          {isLoadingUsers ? (
+            <Loading />
+          ) : (
+            <div>
+              {userCourses?.map((userCourse) => (
+                <ContentRow key={userCourse._id}>
+                  <p title={userCourse.user.email}>{userCourse.user.email}</p>
+                  <MiddleData>
+                    {formatDate({ value: userCourse.expiresAt })}
+                  </MiddleData>
+
+                  {isSmallScreen ? (
+                    <EditLink
+                      to="/administrador/editar-autorizacao-de-acesso"
+                      state={userCourse}
+                    >
+                      <TbPencil size={30} />
+                    </EditLink>
+                  ) : (
+                    <EditBtn
+                      onClick={() =>
+                        openModalEditCourseAuthorization(userCourse)
+                      }
+                    >
+                      <TbPencil size={30} />
+                    </EditBtn>
+                  )}
+
+                  <DeleteButton>
+                    <DeleteOutlined
+                      onClick={() =>
+                        openModalDeleteAuthorizeAccess(userCourse._id)
+                      }
+                    />
+                  </DeleteButton>
+                </ContentRow>
+              ))}
+            </div>
+          )}
         </Table>
       </AuthorizationDiv>
+
       <ModalStyle
         open={modalCourseAuthorization}
         onCancel={closeModalCourseAuthorization}
@@ -109,9 +169,50 @@ export default function CourseAuthorization() {
         centered
         destroyOnClose
       >
-        <ModalAuthorizeAccess
-          close={closeModalCourseAuthorization}
-          data={authorizeUser}
+        <ModalAuthorizeAccess close={closeModalCourseAuthorization} />
+      </ModalStyle>
+
+      <ModalStyle
+        open={modalEditCourseAuthorization}
+        onCancel={closeModalEditCourseAuthorization}
+        width={500}
+        height={250}
+        padding={0}
+        footer={null}
+        closeIcon={modalCloseButton}
+        bodyStyle={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#123645',
+          color: 'white',
+          padding: 0,
+          borderRadius: 'none',
+        }}
+        centered
+        destroyOnClose
+      >
+        <ModalEditAuthorizeAccess
+          close={closeModalEditCourseAuthorization}
+          authorizeUser={authorizeUser}
+        />
+      </ModalStyle>
+
+      <ModalStyle
+        open={modalDeleteAuthorizeAccess}
+        onCancel={closeModalDeleteAuthorizeAccess}
+        footer={null}
+        width={500}
+        closeIcon={modalCloseButton}
+        destroyOnClose
+        centered
+        bodyStyle={{
+          background: '#123645',
+          color: 'white',
+        }}
+      >
+        <ModalDeleteAuthorizeAccess
+          _id={userCourseId}
+          close={closeModalDeleteAuthorizeAccess}
         />
       </ModalStyle>
     </Container>

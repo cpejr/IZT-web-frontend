@@ -55,13 +55,11 @@ export const Picture = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: auto;
-  height: auto;
 `;
 
 export const ModalButton = styled.button`
   cursor: pointer;
-  gap: 0.7rem;
+  gap: 7px;
   align-self: flex-end;
 
   display: flex;
