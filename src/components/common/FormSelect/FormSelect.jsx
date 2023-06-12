@@ -23,9 +23,6 @@ export default function FormSelect({ data, name, control, errors, ...props }) {
           >
             {data.map(({ label, value }) => (
               <StyledSelect.Option key={value} value={value}>
-                {/* <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                  {value.name}
-                </span> */}
                 {label}
               </StyledSelect.Option>
             ))}

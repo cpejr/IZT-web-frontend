@@ -18,9 +18,22 @@ export const budgetEmailSchema = z.object({
     .string()
     .nonempty('Digite o seu número do telefone')
     .transform((value) => value.replace(/[\s()-]*/g, '')), // Taking off mask chars
-  country: z.string().nonempty('Digite nome do seu país'),
-  state: z.string().nonempty('Digite o estado'),
-  city: z.string().nonempty('Digite a cidade'),
+  country: z
+    .string({
+      errorMap: () => ({
+        // Necessary because contry starts with undefined
+        message: 'Informe um país',
+      }),
+    })
+    .transform((value) => JSON.parse(value).name),
+  state: z
+    .string()
+    .nonempty('Informe um estado')
+    .transform((value) => JSON.parse(value).name),
+  city: z
+    .string()
+    .nonempty('Informe uma cidade')
+    .transform((value) => JSON.parse(value).name),
   ZIPcode: z
     .string()
     .nonempty('Digite o seu CEP')

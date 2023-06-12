@@ -93,6 +93,7 @@ export const Subtitle = styled.h1`
 `;
 
 export const Label = styled.p`
+  margin-bottom: 1rem;
   font-size: 1em;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 400;
@@ -106,9 +107,11 @@ export const FormColumn = styled.div`
   max-width: 35rem;
 `;
 
-export const AddressSelectDiv = styled.div`
+export const AddressSelect = styled.div`
   width: 100%;
   height: auto;
+
+  margin-bottom: 3%;
 `;
 
 export const Form = styled.form`

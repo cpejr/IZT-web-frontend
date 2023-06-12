@@ -95,6 +95,20 @@ export const Subsection = styled.div`
   }
 `;
 
+export const AddressSelectDiv = styled.div`
+  width: 100%;
+  height: auto;
+
+  margin-bottom: 3%;
+`;
+
+export const Label = styled.p`
+  margin-bottom: 1rem;
+  font-size: 1em;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-weight: 400;
+`;
+
 export const SubmitButton = styled.button`
   display: flex;
   flex-direction: row;

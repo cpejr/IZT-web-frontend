@@ -3,8 +3,10 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
+
   .ant-select-selector {
-    border-color: ${(props) => (props.error ? 'red' : '#9f9f9f ')} !important;
+    border: 0.2rem solid ${(props) => (props.error ? 'red' : '#9f9f9f ')} !important;
+    margin: 0 !important;
   }
 
   .ant-select-selection-placeholder {
@@ -15,10 +17,10 @@ export const Container = styled.div`
 export const StyledSelect = styled(Select)`
   flex-grow: 1;
   width: 100%;
-  height: auto;
 `;
 
 export const ErrorMessage = styled.p`
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: red;
 `;

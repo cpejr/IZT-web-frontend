@@ -14,12 +14,16 @@ export const registerValidationSchema = z
     surname: z
       .string()
       .nonempty('Informe um sobrenome')
-      .min(2, 'O sobrenome não pode ter menos de 2 caracteres')
+      .min(3, 'O sobrenome não pode ter menos de 2 caracteres')
       .max(40, 'O sobrenome não pode ter mais de 40 caracteres'),
     role: z.string().nonempty('Informe um cargo'),
     country: z
-      .string()
-      .nonempty('Informe um país')
+      .string({
+        errorMap: () => ({
+          // Necessary because contry starts with undefined
+          message: 'Informe um país',
+        }),
+      })
       .transform((value) => JSON.parse(value).name),
     state: z
       .string()
