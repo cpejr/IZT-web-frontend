@@ -119,7 +119,7 @@ export default function Header() {
             <Link to="/curso" onClick={closeHeader}>
               Cursos
             </Link>
-            <Link to="/" onClick={closeHeader}>
+            <Link to="/software" onClick={closeHeader}>
               Software
             </Link>
             <InvertItems>
