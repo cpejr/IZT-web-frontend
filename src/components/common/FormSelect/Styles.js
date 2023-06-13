@@ -15,6 +15,19 @@ const isBudgetStyle = css`
   }
 `;
 
+const isBudgetLabelStyle = css`
+  color: #ffffff;
+  font-size: 2.4rem;
+  font-weight: 500 !important;
+
+  @media (max-width: 700px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 370px) {
+    font-size: 1.5rem;
+  }
+`;
+
 const isProfileStyle = css`
   margin-bottom: 3%;
   .ant-select-selector {
@@ -85,4 +98,11 @@ export const Label = styled.label`
   font-size: 2.2rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 400;
+  ${({ isBudget }) => (isBudget ? isBudgetLabelStyle : '')};
+  @media (max-width: 700px) {
+    ${({ isBudget }) => (isBudget ? isBudgetLabelStyle : '')};
+  }
+  @media (max-width: 370px) {
+    ${({ isBudget }) => (isBudget ? isBudgetLabelStyle : '')};
+  }
 `;

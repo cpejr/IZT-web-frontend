@@ -19,7 +19,6 @@ import {
   Container,
   ButtonDiv,
   AddressSelectDiv,
-  Label,
 } from './Styles';
 import { budgetEmailSchema, buildBudgetEmailErrorMessage } from './utils';
 
@@ -140,8 +139,8 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
 
           <Section>
             <AddressSelectDiv>
-              <Label>País:</Label>
               <FormSelect
+                subtitle="País:"
                 name="country"
                 placeholder="Nome do país"
                 size="large"
@@ -155,8 +154,8 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
             </AddressSelectDiv>
             <Subsection>
               <AddressSelectDiv>
-                <Label>Estado:</Label>
                 <FormSelect
+                  subtitle="Estado:"
                   name="state"
                   placeholder="Nome do estado"
                   size="large"
@@ -171,8 +170,8 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
               </AddressSelectDiv>
 
               <AddressSelectDiv>
-                <Label>Cidade:</Label>
                 <FormSelect
+                  subtitle="Cidade:"
                   name="city"
                   placeholder="Nome da cidade"
                   size="large"

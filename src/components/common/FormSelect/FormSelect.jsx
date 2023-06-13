@@ -24,7 +24,9 @@ export default function FormSelect({
       isProfile={isProfile}
       isRegister={isRegister}
     >
-      <Label htmlFor={name}>{subtitle}</Label>
+      <Label htmlFor={name} isBudget={isBudget}>
+        {subtitle}
+      </Label>
       <Controller
         control={control}
         name={name}
