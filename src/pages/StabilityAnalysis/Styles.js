@@ -1,18 +1,6 @@
 import Plot from 'react-plotly.js';
 import styled from 'styled-components';
 
-// apagar depois
-export const TESTEContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-`;
-// apagar depois
-export const TESTEMenu = styled.div`
-  width: 20rem;
-`;
-
 export const Container = styled.div`
   background-color: ${(props) => props.theme.colors.darkBlue};
   width: 100%;
@@ -136,9 +124,16 @@ export const Button = styled.button`
   background-color: transparent;
   border-radius: 0.5rem;
   font-size: 2rem;
+
   @media (max-width: 1100px) {
     font-size: 1.6rem;
   }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  cursor: pointer;
 `;
 
 export const TitleRow = styled.div`

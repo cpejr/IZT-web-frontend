@@ -11,18 +11,18 @@ import {
 
 export default function MachinProductData({ collapse }) {
   return (
-    <CollapsableData collapse={collapse.product}>
+    <CollapsableData collapse={collapse}>
       <DataColumn>
         <Line>
           <Label>Produto:</Label>
           <Input />
         </Line>
         <Line>
-          <Label>N do produto:</Label>
+          <Label>N° do produto:</Label>
           <Input />
         </Line>
         <Line>
-          <Label>Diametro:</Label>
+          <Label>Diâmetro:</Label>
           <Input />
           <Label>mm</Label>
         </Line>

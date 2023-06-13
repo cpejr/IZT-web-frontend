@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-// eslint-disable-next-line import/prefer-default-export
+// apagar depois
 export const Container = styled.div`
-  max-height: 100vh;
-  height: 100%;
-  overflow-y: hidden;
+  display: flex;
+
+  width: 100%;
+`;
+// apagar depois
+export const Menu = styled.div`
+  width: 20rem;
 `;

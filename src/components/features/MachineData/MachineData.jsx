@@ -11,20 +11,20 @@ import {
 
 export default function MachineData({ collapse }) {
   return (
-    <CollapsableData collapse={collapse.machine}>
+    <CollapsableData collapse={collapse}>
       <DataColumn>
         <Line>
-          <Label>Diametro do RC(máx):</Label>
+          <Label>Diâmetro do RC (máx):</Label>
           <Input />
           <Label>mm</Label>
         </Line>
         <Line>
-          <Label>Diametro do RC(min):</Label>
+          <Label>Diâmetro do RC (min):</Label>
           <Input />
           <Label>mm</Label>
         </Line>
         <Line>
-          <Label>Diametro do RA:</Label>
+          <Label>Diâmetro do RA:</Label>
           <Input />
           <Label>mm</Label>
         </Line>

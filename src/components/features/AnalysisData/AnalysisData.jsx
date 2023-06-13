@@ -12,7 +12,7 @@ import {
 
 export default function AnalysisData({ collapse }) {
   return (
-    <CollapsableData collapse={collapse.analysis}>
+    <CollapsableData collapse={collapse}>
       <DataColumn>
         <Line>
           <Label>Processo de retificação:</Label>

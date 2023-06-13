@@ -25,42 +25,32 @@ import {
   ContourMap,
 } from './Styles';
 
+const data = [
+  {
+    z: [
+      [10, 10.625, 12.5, 15.625, 20],
+      [5.625, 6.25, 8.125, 11.25, 15.625],
+      [2.5, 3.125, 5.0, 8.125, 12.5],
+      [0.625, 1.25, 3.125, 6.25, 10.625],
+      [0, 0.625, 2.5, 5.625, 10],
+    ],
+    type: 'contour',
+    size: 2,
+    marker: { color: 'red' },
+  },
+];
+
 export default function StabilityAnalysis() {
   const [plotData, setPlotData] = useState([]);
-  const [collapse, setCollapse] = useState({
-    analysis: false,
-    machine: false,
-    product: false,
-  });
+  const [collapse, setCollapse] = useState('');
 
-  const handleCollapse = (collapseName) => {
-    setCollapse((prevState) => ({
-      ...prevState,
-      analysis: collapseName === 'analysis' ? !prevState.analysis : false,
-      machine: collapseName === 'machine' ? !prevState.machine : false,
-      product: collapseName === 'product' ? !prevState.product : false,
-    }));
+  const handleCollapse = (sectionName) => {
+    if (collapse === sectionName) setCollapse('');
+    else setCollapse(sectionName);
   };
 
   const handlePlot = () => {
-    const data = [
-      {
-        z: [
-          [10, 10.625, 12.5, 15.625, 20],
-          [5.625, 6.25, 8.125, 11.25, 15.625],
-          [2.5, 3.125, 5.0, 8.125, 12.5],
-          [0.625, 1.25, 3.125, 6.25, 10.625],
-          [0, 0.625, 2.5, 5.625, 10],
-        ],
-        type: 'contour',
-        size: 2,
-        marker: { color: 'red' },
-      },
-    ];
     setPlotData(data);
-  };
-  const layout = {
-    autosize: true,
   };
 
   return (
@@ -70,33 +60,33 @@ export default function StabilityAnalysis() {
         <DataEntry>
           <Collapsable>
             <CollapsableHeader
-              collapse={collapse.analysis}
+              collapse={collapse === 'analysis'}
               onClick={() => handleCollapse('analysis')}
             >
               <DataTitle>Dados da Análise</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
-            <AnalysisData collapse={collapse} />
+            <AnalysisData collapse={collapse === 'analysis'} />
           </Collapsable>
           <Collapsable>
             <CollapsableHeader
-              collapse={collapse.machine}
+              collapse={collapse === 'machine'}
               onClick={() => handleCollapse('machine')}
             >
               <DataTitle>Dados da Maquina</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
-            <MachineData collapse={collapse} />
+            <MachineData collapse={collapse === 'machine'} />
           </Collapsable>
           <Collapsable>
             <CollapsableHeader
-              collapse={collapse.product}
+              collapse={collapse === 'product'}
               onClick={() => handleCollapse('product')}
             >
               <DataTitle>Dados do Produto</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
-            <ProductData collapse={collapse} />
+            <ProductData collapse={collapse === 'product'} />
           </Collapsable>
         </DataEntry>
         <Button onClick={handlePlot}>Calcular</Button>
@@ -112,9 +102,9 @@ export default function StabilityAnalysis() {
           <Canvas>
             <ContourMap
               data={plotData}
-              layout={layout}
-              useResizeHandler
+              layout={{ autosize: true }}
               config={{ responsive: true }}
+              useResizeHandler
             />
           </Canvas>
         </Diagram>
@@ -123,9 +113,9 @@ export default function StabilityAnalysis() {
           <Canvas>
             <ContourMap
               data={plotData}
-              layout={layout}
-              useResizeHandler
+              layout={{ autosize: true }}
               config={{ responsive: true }}
+              useResizeHandler
             />
           </Canvas>
         </Diagram>
