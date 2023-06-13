@@ -148,6 +148,7 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
                 control={control}
                 errors={errors}
                 data={countries.map(formatSelectData)}
+                isBudget
                 showSearch
                 filterOption={selectFilter}
               />
@@ -162,6 +163,7 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
                   control={control}
                   errors={errors}
                   data={states?.map(formatSelectData)}
+                  isBudget
                   showSearch
                   filterOption={selectFilter}
                   disabled={!states}
@@ -177,6 +179,7 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
                   control={control}
                   errors={errors}
                   data={cities?.map(formatSelectData)}
+                  isBudget
                   showSearch
                   filterOption={selectFilter}
                   disabled={!cities}

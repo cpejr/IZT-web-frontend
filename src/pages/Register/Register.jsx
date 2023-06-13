@@ -166,6 +166,7 @@ export default function Register() {
                   errors={errors}
                   data={countries.map(formatSelectData)}
                   showSearch
+                  isRegister
                   filterOption={selectFilter}
                 />
               </AddressSelect>
@@ -180,6 +181,7 @@ export default function Register() {
                   errors={errors}
                   data={states?.map(formatSelectData)}
                   showSearch
+                  isRegister
                   filterOption={selectFilter}
                   disabled={!states}
                 />
@@ -195,6 +197,7 @@ export default function Register() {
                   errors={errors}
                   data={cities?.map(formatSelectData)}
                   showSearch
+                  isRegister
                   filterOption={selectFilter}
                   disabled={!cities}
                 />

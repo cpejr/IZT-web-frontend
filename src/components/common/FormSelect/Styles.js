@@ -1,17 +1,73 @@
 import { Select } from 'antd';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const isBudgetStyle = css`
+  .ant-select-selector {
+    border: 0.2rem ${(props) => (props.error ? ' red' : 'none')} !important;
+    border-radius: 0.4rem !important;
+    background-color: white !important;
+  }
+
+  .ant-select-selection-placeholder {
+    color: ${(props) => props.theme.colors.gray.mediumGray} !important;
+    font-family: ${(props) => props.theme.fonts.montserrat} !important;
+    font-size: 2.4rem !important;
+  }
+`;
+
+const isProfileStyle = css`
+  margin-bottom: 3%;
+  .ant-select-selector {
+    border: ${(props) =>
+      props.error ? '0.2rem red solid' : '0.1rem black solid'} !important;
+    border-radius: 0.4rem !important;
+    height: 4.5rem !important;
+    width: 100% !important;
+    background-color: transparent !important;
+    padding: 0 5% !important;
+    font-family: ${(props) => props.theme.fonts.montserrat} !important;
+    font-size: 2.2rem !important;
+    font-weight: 600 !important;
+    margin-top: 1rem !important;
+  }
+
+  .ant-select-selection-placeholder {
+    color: black;
+    font-weight: 400 !important;
+    font-family: ${(props) => props.theme.fonts.montserrat} !important;
+    font-size: 2.4rem !important;
+    font-weight: 600 !important;
+  }
+`;
+
+const isRegisterStyle = css`
+  .ant-select-selector {
+    border: ${(props) =>
+      props.error ? '0.2rem red solid' : '0.1rem black solid'} !important;
+  }
+
+  .ant-select-selection-placeholder {
+    color: black;
+    font-weight: 400 !important;
+    font-family: ${(props) => props.theme.fonts.montserrat} !important;
+    font-size: 2.4rem !important;
+  }
+`;
 
 export const Container = styled.div`
   width: 100%;
 
   .ant-select-selector {
-    border: 0.2rem solid ${(props) => (props.error ? 'red' : '#9f9f9f ')} !important;
+    border: 0.2rem solid ${(props) => (props.error ? 'red' : '#9f9f9f ')};
     margin: 0 !important;
   }
 
   .ant-select-selection-placeholder {
     color: #9f9f9f;
   }
+  ${({ isBudget }) => (isBudget ? isBudgetStyle : '')};
+  ${({ isProfile }) => (isProfile ? isProfileStyle : '')};
+  ${({ isRegister }) => (isRegister ? isRegisterStyle : '')};
 `;
 
 export const StyledSelect = styled(Select)`
@@ -23,4 +79,10 @@ export const ErrorMessage = styled.p`
   font-size: 1.5rem;
   font-weight: 600;
   color: red;
+`;
+
+export const Label = styled.label`
+  font-size: 2.2rem;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-weight: 400;
 `;
