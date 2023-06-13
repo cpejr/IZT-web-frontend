@@ -1,9 +1,9 @@
-/* eslint-disable import/no-unresolved */
 import { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { FreeMode, Navigation, Pagination, Thumbs } from 'swiper';
 
+/* eslint-disable import/no-unresolved */
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
@@ -112,6 +112,6 @@ Carousel.propTypes = {
   maxHeight: PropTypes.string,
   thumbsMaxWidth: PropTypes.string,
   thumbsMaxHeight: PropTypes.string,
-  aspectRatio: PropTypes.number,
+  aspectRatio: PropTypes.string,
   miniImages: PropTypes.bool,
 };

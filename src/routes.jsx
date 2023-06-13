@@ -86,7 +86,7 @@ const router = createBrowserRouter(
             <Route index element={<StabilityAnalysis />} />
           </Route>
           <Route path="administrador" element={<AdminLayout />}>
-            <Route index element={<h1>Área do Administrador</h1>} />
+            <Route index element={<Profile />} />
             <Route path="listar-produtos" element={<ListProduct />} />
             <Route path="criar-produto" element={<CreateProductMobile />} />
             <Route path="editar-produto" element={<EditProductMobile />} />
