@@ -13,6 +13,12 @@ export const Container = styled.div`
   justify-content: center;
 `;
 
+export const CarouselContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 1440px;
+`;
+
 export const AboutUs = styled.div`
   display: flex;
   flex-direction: column;

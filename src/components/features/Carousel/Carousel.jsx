@@ -1,134 +1,117 @@
+/* eslint-disable import/no-unresolved */
 import { useState } from 'react';
 
 import PropTypes from 'prop-types';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import { FreeMode, Navigation, Pagination, Thumbs } from 'swiper';
 
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/thumbs';
 import {
-  Button,
-  Container,
-  ImageContainer,
-  ImagesContainer,
-  Inner,
-  MiniImageContainer,
-  Dots,
-  NavButtons,
+  StyledSwiper,
+  StyledSwiperSlide,
+  SwiperWrapper,
+  ThumbsSwiper,
 } from './Styles';
 
 export default function Carousel({
   carouselData = [],
-  maxHeight = 'none',
-  maxWidth = 'none',
-  width = '100%',
-  height = '100%',
-  aspectRatio = '16 / 9',
-  miniImages = true,
+  maxWidth = '144rem',
+  maxHeight = '31.25rem',
+  thumbsMaxWidth = '80rem',
+  thumbsMaxHeight = '15rem',
+  aspectRatio = '24 / 7',
+  miniImages = false,
 }) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  const slidesCount = carouselData.length;
-  const minSwipeDistance = 50;
-
-  const updateImage = (newIndex) => {
-    if (newIndex < 0) setCurrentImageIndex(slidesCount - 1);
-    else if (newIndex >= slidesCount) setCurrentImageIndex(0);
-    else setCurrentImageIndex(newIndex);
-  };
-
-  const onTouchStart = (e) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e) => {
-    const touchEndCurrentPos = e.targetTouches[0].clientX;
-    setTouchEnd(touchEndCurrentPos);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe) updateImage(currentImageIndex + 1);
-    else if (isRightSwipe) updateImage(currentImageIndex - 1);
-  };
+  if (miniImages)
+    return (
+      <SwiperWrapper>
+        <StyledSwiper
+          maxWidth={maxWidth}
+          maxHeight={maxHeight}
+          aspectRatio={aspectRatio}
+          navigation
+          loop
+          pagination={{ clickable: true }}
+          modules={[FreeMode, Navigation, Thumbs]}
+          style={{
+            '--swiper-navigation-color': '#fff',
+          }}
+          thumbs={{
+            swiper:
+              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+          }}
+        >
+          {carouselData.map(({ src, name, alt }) => (
+            <StyledSwiperSlide key={name}>
+              <img src={src} alt={alt} />
+            </StyledSwiperSlide>
+          ))}
+        </StyledSwiper>
+        <ThumbsSwiper
+          thumbsMaxWidth={thumbsMaxWidth}
+          thumbsMaxHeight={thumbsMaxHeight}
+          onSwiper={setThumbsSwiper}
+          spaceBetween={10}
+          slidesPerView={4}
+          freeMode
+          loop
+          watchSlidesProgress
+        >
+          {carouselData.map(({ src, name, alt }) => (
+            <StyledSwiperSlide key={name} isThumb>
+              <img src={src} alt={alt} />
+            </StyledSwiperSlide>
+          ))}
+        </ThumbsSwiper>
+      </SwiperWrapper>
+    );
 
   return (
-    <Container
-      maxHeight={maxHeight}
+    <StyledSwiper
+      cssMode
+      navigation={{ clickable: true }}
+      pagination={{ clickable: true }}
+      loop
+      modules={[Navigation, Pagination]}
+      keyboard={{ enabled: true }}
       maxWidth={maxWidth}
-      width={width}
-      hight={height}
+      maxHeight={maxHeight}
       aspectRatio={aspectRatio}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
+      style={{
+        '--swiper-navigation-color': '#fff',
+        '--swiper-pagination-color': '#fff',
+      }}
     >
-      <ImagesContainer>
-        <Inner currentImageIndex={currentImageIndex}>
-          {carouselData.map(({ src, name, alt }) => (
-            <ImageContainer key={name}>
-              <img src={src} alt={alt} />
-            </ImageContainer>
-          ))}
-        </Inner>
-      </ImagesContainer>
-
-      <NavButtons>
-        <Button
-          type="button"
-          onClick={() => updateImage(currentImageIndex - 1)}
-        >
-          <MdKeyboardArrowLeft />
-        </Button>
-
-        {carouselData.map(({ src, name, alt }, index) =>
-          miniImages ? (
-            <MiniImageContainer
-              key={name}
-              active={index === currentImageIndex}
-              onClick={() => updateImage(index)}
-            >
-              <img src={src} alt={alt} />
-            </MiniImageContainer>
-          ) : (
-            <Dots
-              type="button"
-              key={name}
-              active={index === currentImageIndex}
-              onClick={() => updateImage(index)}
-            />
-          )
-        )}
-
-        <Button onClick={() => updateImage(currentImageIndex + 1)}>
-          <MdKeyboardArrowRight />
-        </Button>
-      </NavButtons>
-    </Container>
+      {carouselData.map(({ src, name, alt }) => (
+        <StyledSwiperSlide key={name}>
+          <img src={src} alt={alt} />
+        </StyledSwiperSlide>
+      ))}
+    </StyledSwiper>
   );
 }
 
 Carousel.defaultProps = {
   carouselData: [],
-  maxHeight: 'none',
-  maxWidth: 'none',
-  width: '100%',
-  height: '100%',
-  aspectRatio: '16 / 9',
+  maxWidth: '144rem',
+  maxHeight: '42rem',
+  thumbsMaxWidth: '80rem',
+  thumbsMaxHeight: '15rem',
+  aspectRatio: '24/7',
   miniImages: false,
 };
 
 Carousel.propTypes = {
   carouselData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
-  maxHeight: PropTypes.string,
   maxWidth: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
+  maxHeight: PropTypes.string,
+  thumbsMaxWidth: PropTypes.string,
+  thumbsMaxHeight: PropTypes.string,
+  aspectRatio: PropTypes.number,
   miniImages: PropTypes.bool,
-  aspectRatio: PropTypes.string,
 };
