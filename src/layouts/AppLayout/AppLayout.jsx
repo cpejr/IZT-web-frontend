@@ -4,7 +4,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { AddToast } from '../../components/common';
-import { Header, Footer, SystemLoading } from '../../components/features';
+import { Header, SystemLoading } from '../../components/features';
 import { useRefreshToken } from '../../hooks/query/sessions';
 import { Container } from './Styles';
 
@@ -34,7 +34,6 @@ export default function AppLayout() {
       <Header />
       <Outlet />
       <AddToast />
-      <Footer />
     </Container>
   );
 }

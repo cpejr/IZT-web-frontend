@@ -9,7 +9,7 @@ import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
 import step4 from '../../assets/productPage/steps/Group78.png';
-import { FormsBudget, FilesList, Carousel } from '../../components/features';
+import { FilesList, FormsBudget, Carousel } from '../../components/features';
 import { useGetProductById } from '../../hooks/query/products';
 import {
   Container,
@@ -49,7 +49,6 @@ export default function Product() {
     onError: (err) => {
       const code = err?.response?.data?.httpCode;
       const message = buildGetProducErrorMessage(code);
-
       toast.error(message);
 
       navigate('*'); // Go to NotFound page
@@ -104,11 +103,11 @@ export default function Product() {
               <TextInfoContainer>
                 <ProductDescription>
                   <DescriptionTitle>Descrição do produto</DescriptionTitle>
-                  <Description>{product.description}</Description>
+                  <Description>{product?.description}</Description>
                 </ProductDescription>
                 <ProductBenefits>
                   <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-                  <Benefits>{product.advantages}</Benefits>
+                  <Benefits>{product?.advantages}</Benefits>
                 </ProductBenefits>
                 <ProductInfos>
                   <InfoTitle>Mais informações</InfoTitle>

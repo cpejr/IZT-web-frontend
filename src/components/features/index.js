@@ -26,3 +26,6 @@ export { default as ModalForgotPassword } from './ModalForgotPassword/ModalForgo
 export { default as VideoSelect } from './VideoSelect/VideoSelect';
 export { default as Video } from './Video/Video';
 export { default as ModalDeleteAuthorizeAccess } from './ModalDeleteAuthorizeAccess/ModalDeleteAuthorizeAccess';
+export { default as AnalysisData } from './AnalysisData/AnalysisData';
+export { default as MachineData } from './MachineData/MachineData';
+export { default as ProductData } from './ProductData/ProductData';
