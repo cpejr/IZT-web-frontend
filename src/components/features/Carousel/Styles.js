@@ -1,107 +1,47 @@
 import styled from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 0.5rem;
+export const StyledSwiper = styled(Swiper)`
   width: 100%;
-  height: 100%;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-
-  max-height: ${(props) => props.maxHeight};
   max-width: ${(props) => props.maxWidth};
+  max-height: ${(props) => props.maxHeight};
 
   aspect-ratio: ${(props) => props.aspectRatio};
 `;
 
-export const ImagesContainer = styled.div`
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-`;
-export const Inner = styled.div`
-  height: 100%;
-  white-space: nowrap;
-  transform: translateX(
-    -${({ currentImageIndex }) => currentImageIndex * 100}%
-  );
-  transition: transform 0.8s ease-out;
-`;
-
-export const ImageContainer = styled.div`
-  display: inline-block;
+export const ThumbsSwiper = styled(Swiper)`
   width: 100%;
   height: 100%;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  max-width: ${(props) => props.thumbsMaxWidth};
+  max-height: ${(props) => props.thumbsMaxHeight};
 `;
 
-export const NavButtons = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.8rem;
-`;
-
-export const Button = styled.button`
-  all: unset;
-  cursor: pointer;
-  padding: 0.2rem 0.8rem;
-
-  svg {
-    height: 5rem;
-    width: 5rem;
-    filter: drop-shadow(0rem 0.4rem 0.4rem rgb(0 0 0 / 0.25));
-
-    @media (max-width: 450px) {
-      width: 2rem;
-      height: 2rem;
-    }
-  }
-`;
-
-export const Dots = styled.button`
-  all: unset;
-  cursor: pointer;
+export const StyledSwiperSlide = styled(SwiperSlide)`
   text-align: center;
-  display: inline-block;
-  color: black;
-  width: 1rem;
-  height: 1rem;
-  border: 0.1rem solid black;
-  border-radius: 50%;
+  font-size: 1.125rem;
+  background: #fff;
 
-  @media (max-width: 450px) {
-    width: 1rem;
-    height: 1rem;
-  }
+  width: 100%;
+  height: 100%;
 
-  ${({ active }) => active && 'background: black;'}
-`;
+  ${(props) => (props.isThumb ? 'cursor: pointer;' : '')}
 
-export const MiniImageContainer = styled.button`
-  all: unset;
-  display: inline-block;
-  width: 5rem;
-  height: 5rem;
-  opacity: ${({ active }) => (active ? 1 : 0.7)};
-  cursor: pointer;
-  &:hover {
-    opacity: 1;
-  }
   img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  @media (max-width: 450px) {
-    width: 4rem;
-    height: 4rem;
-  }
+`;
+
+export const SwiperWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  width: 100%;
+  height: 100%;
+  max-width: ${(props) => props.maxWidth};
+  max-height: ${(props) => props.maxHeight};
 `;

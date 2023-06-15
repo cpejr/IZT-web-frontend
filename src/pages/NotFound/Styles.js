@@ -4,10 +4,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 30%;
+  gap: 4rem;
 
-  width: 100vw;
-  margin: 7rem auto;
+  width: 100%;
+  margin: 4.5rem auto;
 
   margin-right: auto;
   margin-left: auto;
@@ -18,12 +18,10 @@ export const Container = styled.div`
   }
 
   @media screen and (max-width: 1024px) {
-    position: static;
     align-items: center;
     justify-content: center;
     gap: 1vh;
 
-    height: 100vh;
     width: 90vw;
   }
 `;
