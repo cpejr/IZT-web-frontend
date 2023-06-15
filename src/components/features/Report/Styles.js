@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 100%;
   max-width: 106rem;
   padding-left: 1.5rem;
-  max-height: ${(props) => (props.isFocused ? '100rem' : '0rem')};
+  max-height: ${(props) => (props.isOpened ? '100rem' : '0rem')};
   overflow-y: hidden;
   transition: all 0.5s ease-in-out 0.3s;
 `;
@@ -18,7 +18,6 @@ export const Columns = styled.div`
   height: 100%;
   max-width: 106rem;
   margin-bottom: 2rem;
-  /* max-height: ${(props) => (props.focused ? 'auto' : '0rem')}; */
   overflow-y: hidden;
   overflow-x: hidden;
 `;
@@ -83,6 +82,9 @@ export const ButtonRow = styled.div`
     font-weight: 500;
     border: 0.1rem solid white;
     border-radius: 0.5rem;
+    :hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -129,7 +131,18 @@ export const ReportName = styled.div`
 
   svg {
     transform: ${(props) =>
-      props.isFocused ? 'rotate(180deg)' : 'rotate(0deg)'};
+      props.isOpened ? 'rotate(180deg)' : 'rotate(0deg)'};
     transition: all 0.5s ease-in-out 0.3s;
   }
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const DashedBar = styled.div`
+  display: flex;
+  height: auto;
+  width: 0.1rem;
+  border-right: 0.1rem dashed white;
 `;

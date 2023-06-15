@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import { DownOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
@@ -14,42 +14,27 @@ import {
   Data,
   DataContainer,
   ReportName,
+  DashedBar,
 } from './Styles';
 
-export default function Report({ data }) {
-  const [isFocused, setIsFocused] = useState(false);
-  const reportRef = useRef(null);
-
-  const handleFocus = () => {
-    setIsFocused(!isFocused);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (reportRef.current && !reportRef.current.contains(event.target)) {
-        setIsFocused(false);
-      }
-    };
-
-    const { parentElement } = reportRef.current;
-    parentElement.addEventListener('click', handleClickOutside);
-
-    return () => {
-      parentElement.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
+export default function Report({ data, openedReport, handleOpened }) {
+  const [isOpened, setIsOpened] = useState(openedReport === data.name);
 
   const analysisDataList = data.analysis;
   const productDataList = data.product;
   const machineDataList = data.machineData;
 
+  useEffect(() => {
+    setIsOpened(openedReport === data.name);
+  }, [openedReport, data.name]);
+
   return (
-    <div ref={reportRef} id={data.name}>
-      <ReportName onClick={handleFocus} isFocused={isFocused}>
+    <div>
+      <ReportName isOpened={isOpened} onClick={() => handleOpened(data.name)}>
         {data.name}
         <DownOutlined />
       </ReportName>
-      <Container isFocused={isFocused}>
+      <Container isOpened={isOpened}>
         <Columns>
           <DataColumn>
             <Title>Dados da análise</Title>
@@ -80,14 +65,7 @@ export default function Report({ data }) {
               </DataRow>
             </DataContainer>
           </DataColumn>
-          <view
-            style={{
-              borderStyle: 'dashed',
-              borderWidth: 1,
-              borderRadius: 1,
-              color: 'white',
-            }}
-          />
+          <DashedBar />
           <DataColumn>
             <Title>Dados do produto</Title>
             <DataContainer>
@@ -117,14 +95,7 @@ export default function Report({ data }) {
               </DataRow>
             </DataContainer>
           </DataColumn>
-          <view
-            style={{
-              borderStyle: 'dashed',
-              borderWidth: 1,
-              borderRadius: 1,
-              color: 'white',
-            }}
-          />
+          <DashedBar />
           <DataColumn>
             <Title>Dados da máquina</Title>
             <DataContainer>
@@ -179,4 +150,6 @@ export default function Report({ data }) {
 
 Report.propTypes = {
   data: PropTypes.object.isRequired,
+  openedReport: PropTypes.string.isRequired,
+  handleOpened: PropTypes.func.isRequired,
 };

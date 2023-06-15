@@ -5,7 +5,7 @@ export const TESTEContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  height: 100%;
+  max-height: (100% - 10px);
 `;
 // apagar depois
 export const TESTEMenu = styled.div`
@@ -15,9 +15,7 @@ export const TESTEMenu = styled.div`
 export const Container = styled.div`
   background-color: ${(props) => props.theme.colors.darkBlue};
   width: 100%;
-  height: 100%;
   padding: 3rem;
-  overflow-y: hidden;
 `;
 
 export const Title = styled.div`
@@ -45,6 +43,34 @@ export const ReportsArea = styled.div`
   }
   @media (max-width: 820px) {
     margin: 1rem;
+  }
+`;
+
+export const Reports = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 70%;
+  overflow-y: auto;
+  gap: 0.5rem;
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.colors.gray.darkGray};
+    border-radius: 0.5rem;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 `;
 
