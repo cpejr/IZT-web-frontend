@@ -5,7 +5,8 @@ export const TESTEContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  max-height: (100% - 10px);
+  height: 100%;
+  max-height: (100vh - 10rem);
 `;
 // apagar depois
 export const TESTEMenu = styled.div`
@@ -31,7 +32,9 @@ export const ReportsArea = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-
+  max-height: calc(90vh - 17rem);
+  height: auto;
+  padding: 1rem;
   @media (max-width: 1100px) {
     margin: 3rem;
   }
@@ -50,7 +53,6 @@ export const Reports = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 70%;
   overflow-y: auto;
   gap: 0.5rem;
   ::-webkit-scrollbar {
@@ -78,6 +80,7 @@ export const ReportsHeader = styled.div`
   background-color: white;
   width: 100%;
   height: 5rem;
+  min-height: 5rem;
   display: flex;
   flex-direction: row;
   align-items: center;

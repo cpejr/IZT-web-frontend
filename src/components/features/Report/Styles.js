@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 106rem;
   padding-left: 1.5rem;
   max-height: ${(props) => (props.isOpened ? '100rem' : '0rem')};
@@ -25,7 +25,7 @@ export const Columns = styled.div`
 export const DataColumn = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: flex-start;
   gap: 0.5rem;
   width: auto;
   height: 100%;
