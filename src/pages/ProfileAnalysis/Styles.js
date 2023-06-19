@@ -137,3 +137,18 @@ export const Text = styled.a`
 
   color: #ffffff;
 `;
+
+export const Data = styled.div`
+  display: flex;
+  align-self: center;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+`;
+export const InputData = styled.div`
+  width: 24%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2%;
+`;
