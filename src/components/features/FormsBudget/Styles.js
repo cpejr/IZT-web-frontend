@@ -67,16 +67,6 @@ export const Container = styled.div`
     gap: 1rem;
     flex-direction: column;
   }
-
-  :where(.css-dev-only-12jzuas).ant-select-single.ant-select-lg:not(
-      .ant-select-customize-input
-    )
-    .ant-select-selector {
-    width: 100%;
-    height: 20px;
-    font-size: 10px;
-    padding: 0 11px;
-  }
 `;
 
 export const Section = styled.div`

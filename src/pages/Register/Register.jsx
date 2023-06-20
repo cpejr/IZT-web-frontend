@@ -160,7 +160,7 @@ export default function Register() {
                 <Label>País:</Label>
                 <FormSelect
                   name="country"
-                  // placeholder="Nome do país"
+                  placeholder="Nome do país"
                   size="large"
                   control={control}
                   errors={errors}
@@ -175,7 +175,7 @@ export default function Register() {
                 <Label>Estado:</Label>
                 <FormSelect
                   name="state"
-                  // placeholder="Nome do estado"
+                  placeholder="Nome do estado"
                   size="large"
                   control={control}
                   errors={errors}
@@ -191,7 +191,7 @@ export default function Register() {
                 <Label>Cidade:</Label>
                 <FormSelect
                   name="city"
-                  // placeholder="Nome da cidade"
+                  placeholder="Nome da cidade"
                   size="large"
                   control={control}
                   errors={errors}

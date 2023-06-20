@@ -3,14 +3,14 @@ import styled, { css } from 'styled-components';
 
 const isBudgetStyle = css`
   .ant-select-selector {
-    display: flex;
-    align-items: center;
-    align-items: center;
+    display: flex !important;
+    align-items: center !important;
+    align-items: center !important;
     border: 0.2rem ${(props) => (props.error ? ' red' : 'none')} !important;
     border-radius: 0.4rem !important;
     background-color: white !important;
-    font-size: 2rem;
-    padding: 0.8rem 1.6rem;
+    font-size: 2rem !important;
+    padding: 0.8rem 1.6rem !important;
     line-height: 2rem !important;
     height: 4rem !important;
 
@@ -75,7 +75,6 @@ const isProfileStyle = css`
 
 const isRegisterStyle = css`
   .ant-select-selector {
-    font-weight: 600 !important;
     border: ${(props) =>
       props.error ? '0.2rem red solid' : '0.1rem black solid'} !important;
   }
@@ -83,7 +82,7 @@ const isRegisterStyle = css`
   .ant-select-selection-placeholder {
     color: black;
     font-family: ${(props) => props.theme.fonts.montserrat} !important;
-    font-size: 2.4rem !important;
+    font-size: 2.2rem !important;
   }
 `;
 
@@ -125,7 +124,6 @@ export const ErrorMessage = styled.p`
 export const Label = styled.label`
   font-size: 2.2rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-weight: 400;
   ${({ isBudget }) => (isBudget ? isBudgetLabelStyle : '')};
   @media (max-width: 700px) {
     ${({ isBudget }) => (isBudget ? isBudgetLabelStyle : '')};
