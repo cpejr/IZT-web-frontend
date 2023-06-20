@@ -38,6 +38,7 @@ const isBudgetLabelStyle = css`
   color: #ffffff;
   font-size: 2.4rem;
   font-weight: 500 !important;
+  margin-bottom: 0.5rem !important;
 
   @media (max-width: 700px) {
     font-size: 2rem;
@@ -74,13 +75,13 @@ const isProfileStyle = css`
 
 const isRegisterStyle = css`
   .ant-select-selector {
+    font-weight: 600 !important;
     border: ${(props) =>
       props.error ? '0.2rem red solid' : '0.1rem black solid'} !important;
   }
 
   .ant-select-selection-placeholder {
     color: black;
-    font-weight: 400 !important;
     font-family: ${(props) => props.theme.fonts.montserrat} !important;
     font-size: 2.4rem !important;
   }
@@ -89,7 +90,6 @@ const isRegisterStyle = css`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   width: 100%;
 
   .ant-select-selector {
@@ -114,6 +114,8 @@ export const ErrorMessage = styled.p`
   font-size: 1.5rem;
   font-weight: 600;
   color: red;
+
+  margin-top: ${(props) => (props.error ? '0.5rem' : '0')};
 
   @media (max-width: 700px) {
     font-size: 1.4rem !important;
