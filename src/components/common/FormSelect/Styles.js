@@ -6,9 +6,10 @@ const isBudgetStyle = css`
     display: flex !important;
     align-items: center !important;
     align-items: center !important;
-    border: 0.2rem ${(props) => (props.error ? ' red' : 'none')} !important;
+    background-color: ${(props) =>
+      props.error ? 'rgb(239, 202, 202)' : 'white'} !important;
+    border: 0.2rem solid ${(props) => (props.error ? ' red' : 'none')} !important;
     border-radius: 0.4rem !important;
-    background-color: white !important;
     font-size: 2rem !important;
     padding: 0.8rem 1.6rem !important;
     line-height: 2rem !important;
