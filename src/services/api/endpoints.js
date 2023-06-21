@@ -150,6 +150,34 @@ export const sendProductBudget = async ({ productId, formInput }) => {
   return data;
 };
 
+// SoftwareAcess
+
+export const getSoftwareAccess = async (filters = {}) => {
+  const { data } = await api.get('/users', { params: filters });
+
+  return data;
+};
+
+export const updateSoftwareAccess = async ({
+  _id,
+  UpdateSoftwareAccessData,
+}) => {
+  const { data } = await api.put(
+    `/users/user-software-access/${_id}`,
+    UpdateSoftwareAccessData
+  );
+
+  return data;
+};
+
+export const deleteSoftwareAccess = async ({
+  _id,
+  UpdateSoftwareAccessData,
+}) => {
+  await api.put(`/users/user-software-access/${_id}`, UpdateSoftwareAccessData);
+  return null;
+};
+
 // UserCourses
 
 export const getUserCourses = async (filters = {}) => {
