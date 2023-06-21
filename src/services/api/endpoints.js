@@ -158,6 +158,18 @@ export const getSoftwareAccess = async (filters = {}) => {
   return data;
 };
 
+export const createSoftwareAccess = async ({
+  _id,
+  UpdateSoftwareAccessData,
+}) => {
+  const { data } = await api.put(
+    `/users/user-software-access/${_id}`,
+    UpdateSoftwareAccessData
+  );
+
+  return data;
+};
+
 export const updateSoftwareAccess = async ({
   _id,
   UpdateSoftwareAccessData,

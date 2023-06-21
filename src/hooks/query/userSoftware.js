@@ -19,6 +19,17 @@ export function useGetSoftwareAccess({
   });
 }
 
+export function useCreateSoftwareAccess({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: updateSoftwareAccess,
+    onSuccess,
+    onError,
+  });
+}
+
 export function useUpdateSoftwareAccess({
   onSuccess = () => {},
   onError = (err) => console.log(err),

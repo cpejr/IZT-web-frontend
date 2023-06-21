@@ -59,10 +59,10 @@ const createUserSoftwareAccessErrorMessages = {
   [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',
   [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',
   [ERROR_CODES.FORBIDDEN]: 'Usuário não autorizado',
-  [ERROR_CODES.CONFLICT]: 'O usuário já tem acesso ao curso',
+  [ERROR_CODES.CONFLICT]: 'O usuário já tem acesso ao software',
 };
 const createUserSoftwareAccessDefaultErrorMessage =
-  'Erro autorizar acesso do curso ao usuário. Tente novamente mais tarde';
+  'Erro autorizar acesso do software ao usuário. Tente novamente mais tarde';
 
 export function buildCreateUserSoftwareAccessErrorMessage(err) {
   const code = err?.response?.data?.httpCode;

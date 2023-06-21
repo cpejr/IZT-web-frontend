@@ -8,7 +8,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import {} from '../../../hooks/query/userSoftware';
+import { useCreateSoftwareAccess } from '../../../hooks/query/userSoftware';
 import { useGetUsers } from '../../../hooks/query/users';
 import { FormSelect, Loading } from '../../common';
 import {
@@ -40,6 +40,26 @@ export default function ModalAuthorizeAccess({ close }) {
       const errorMessage = buildGetUsersErrorMessage(err);
 
       toast.error(errorMessage);
+    },
+  });
+
+  const { mutate: createSoftwareAccess } = useCreateSoftwareAccess({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['/users/user-software-access/${_id}'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['users'],
+      });
+
+      toast.success('Autorização ao software concedida com sucesso!');
+      close();
+    },
+    onError: (err) => {
+      const errorMessage = buildCreateUserSoftwareAccessErrorMessage(err);
+
+      toast.error(errorMessage);
+      setIsPending(false);
     },
   });
 
