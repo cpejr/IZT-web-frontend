@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   //align-items: center;
   flex-direction: row;
-  background-color: #1d4f69;
+  background-color: #123645;
 `;
 export const DataInput = styled.div`
   h1 {
@@ -26,7 +26,7 @@ export const Containerleft = styled.div`
   display: flex;
   //align-items: center;
   flex-direction: row;
-  background-color: #1d4f69;
+  background-color: #123645;
 `;
 
 export const ContainerRight = styled.div`
@@ -37,7 +37,7 @@ export const ContainerRight = styled.div`
   display: flex;
   //align-items: center;
   flex-direction: row;
-  background-color: #1d4f69;
+  background-color: #123645;
 `;
 
 export const Container2 = styled.div`
@@ -151,4 +151,19 @@ export const InputData = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2%;
+`;
+
+export const Button = styled.button`
+  display: inline-block;
+  margin-left: 5%;
+  padding: 5px, 20px, 5px, 20px;
+  font-size: 20px;
+  font-weight: normal;
+  text-align: center;
+  color: white;
+  background-color: #123645;
+  border-radius: 6px;
+  border: solid;
+  border-color: white;
+  font-family: 'Montserrat';
 `;

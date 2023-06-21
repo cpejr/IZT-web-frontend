@@ -35,6 +35,7 @@ import {
   Data,
   Containerleft,
   ContainerRight,
+  Button,
 } from './Styles';
 import AccordionDemo from '../../components/common/ProfileAnalysis/Arcoordeon';
 export default function ProfileAnalysis() {
@@ -46,11 +47,12 @@ export default function ProfileAnalysis() {
            <Data>
               <AccordionDemo/>
                 </Data>
+              <Button> Calcular </Button>
                 </InputData>
       </Containerleft>
       <Container>
         <Analysis>
-        <h1>Analise #1 <HiOutlinePencil size={20} color="white"/></h1> 
+        <h1>Analise #1 <HiOutlinePencil size={20} color="white"/> <Button>Salvar relatório</Button></h1> 
         <Container2></Container2>
         <ContainerRight>
         <OutputData>
