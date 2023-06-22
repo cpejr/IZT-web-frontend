@@ -5,7 +5,7 @@ import { ERROR_CODES } from '../../utils/constants';
 
 // Form Validation
 export const updateAuthorizeAccessValidationSchema = z.object({
-  expiresAt: z.coerce.date({
+  softwareAccess: z.coerce.date({
     errorMap: () => ({
       message: 'Favor inserir uma data',
     }),
@@ -26,9 +26,8 @@ export const themeDatePicker = createTheme({
     },
     action: {
       active: '#000000',
-      hover: '2#03699',
+      hover: '#203699',
       selected: '#203699',
-
       disabled: '#000000',
     },
     background: {
@@ -42,16 +41,17 @@ export const themeDatePicker = createTheme({
 });
 
 // Error Handling
-const updateUserCourseErrorMessages = {
+const updateSoftwareAccessErrorMessages = {
   [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',
-  [ERROR_CODES.CONFLICT]: 'O usuário já tem acesso ao curso',
+  [ERROR_CODES.CONFLICT]: 'O usuário já tem acesso ao software',
 };
-const updateUserCourseDefaultErrorMessage =
-  'Erro autorizar acesso do curso ao usuário. Tente novamente mais tarde';
+const updateSoftwareAccessDefaultErrorMessage =
+  'Erro autorizar acesso do software ao usuário. Tente novamente mais tarde';
 
-export function buildUpdateUserCourseErrorMessage(err) {
+export function buildUpdateSoftwareAccessErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
   return (
-    updateUserCourseErrorMessages[code] || updateUserCourseDefaultErrorMessage
+    updateSoftwareAccessErrorMessages[code] ||
+    updateSoftwareAccessDefaultErrorMessage
   );
 }

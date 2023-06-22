@@ -7,7 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { useUpdateUserCourse } from '../../hooks/query/userCourse';
+import { useUpdateSoftwareAccess } from '../../hooks/query/users';
 import {
   Container,
   Form,
@@ -25,7 +25,7 @@ import {
 import {
   updateAuthorizeAccessValidationSchema,
   themeDatePicker,
-  buildUpdateUserCourseErrorMessage,
+  buildUpdateSoftwareAccessErrorMessage,
 } from './utils';
 
 export default function EditAuthorizeSofwareAccessMobile() {
@@ -35,16 +35,16 @@ export default function EditAuthorizeSofwareAccessMobile() {
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
   // Backend calls
-  const { mutate: updateUserCourse, isLoading } = useUpdateUserCourse({
+  const { mutate: updateSoftwareAccess, isLoading } = useUpdateSoftwareAccess({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['user-courses'],
+        queryKey: ['users-with-software-access'],
       });
-      toast.success('Autorização de acesso ao curso alterada com sucesso!');
-      navigate('/administrador/liberacao-cursos');
+      toast.success('Autorização de acesso ao software alterada com sucesso!');
+      navigate('/administrador/liberacao-software');
     },
     onError: (err) => {
-      const errorMessage = buildUpdateUserCourseErrorMessage(err);
+      const errorMessage = buildUpdateSoftwareAccessErrorMessage(err);
 
       toast.error(errorMessage);
     },
@@ -58,13 +58,14 @@ export default function EditAuthorizeSofwareAccessMobile() {
   } = useForm({
     resolver: zodResolver(updateAuthorizeAccessValidationSchema),
   });
-  const onSubmit = ({ expiresAt }) =>
-    updateUserCourse({
+  const onSubmit = ({ softwareAccess }) =>
+    updateSoftwareAccess({
       _id: authorizeUser?._id,
-      newUserCourseData: { expiresAt },
+      softwareAccess,
     });
 
-  if (!isSmallScreen) return <Navigate to="/administrador/liberacao-cursos" />;
+  if (!isSmallScreen)
+    return <Navigate to="/administrador/liberacao-software" />;
 
   return (
     <Container>
@@ -73,7 +74,7 @@ export default function EditAuthorizeSofwareAccessMobile() {
 
         <Field>
           <Label>Email:</Label>
-          <EmailText>{authorizeUser?.user?.email}</EmailText>
+          <EmailText>{authorizeUser.email}</EmailText>
         </Field>
         <Field>
           <Label>Validade do acesso:</Label>
@@ -81,17 +82,17 @@ export default function EditAuthorizeSofwareAccessMobile() {
             <ThemeProvider theme={themeDatePicker}>
               <Controller
                 control={control}
-                id="expiresAt"
-                name="expiresAt"
+                name="softwareAccess"
                 render={({ field: { onChange, onBlur } }) => (
                   <Date
+                    id="softwareAccess"
                     onChange={onChange}
                     onBlur={onBlur}
                     format="DD/MM/YYYY"
                     disablePast
                     slotProps={{
                       textField: {
-                        error: !!errors.expiresAt,
+                        error: !!errors.softwareAccess,
                       },
                     }}
                   />
@@ -99,7 +100,7 @@ export default function EditAuthorizeSofwareAccessMobile() {
               />
             </ThemeProvider>
           </AccessExpirationContainer>
-          <ErrorMessage>{errors?.expiresAt?.message}</ErrorMessage>
+          <ErrorMessage>{errors.softwareAccess?.message}</ErrorMessage>
         </Field>
 
         <Buttons>
@@ -120,7 +121,7 @@ export default function EditAuthorizeSofwareAccessMobile() {
             )}
           </SaveButton>
 
-          <CancelButton to="/administrador/liberacao-cursos">
+          <CancelButton to="/administrador/liberacao-software">
             <p>Cancelar</p>
           </CancelButton>
         </Buttons>

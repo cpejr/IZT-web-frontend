@@ -10,8 +10,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { FormSelect } from '../../components/common';
-import { useCreateUserCourse } from '../../hooks/query/userCourse';
-import { useGetUsers } from '../../hooks/query/users';
+import { useGetUsers, useUpdateSoftwareAccess } from '../../hooks/query/users';
 import {
   Container,
   Form,
@@ -27,12 +26,10 @@ import {
 import {
   authorizeAccessValidationSchema,
   themeDatePicker,
-  buildCreateUserCourseErrorMessage,
-  buildGetUsersErrorMessage,
+  buildCreateUserSoftwareAccessErrorMessage,
 } from './utils';
 
 export default function SoftwareAuthorizationMobile() {
-  const courseId = '646acfad1bae8cb3a56a05f4';
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -41,24 +38,25 @@ export default function SoftwareAuthorizationMobile() {
   // Backend calls
   const { data: users } = useGetUsers({
     onError: (err) => {
-      const errorMessage = buildGetUsersErrorMessage(err);
+      const errorMessage = buildCreateUserSoftwareAccessErrorMessage(err);
 
       toast.error(errorMessage);
     },
   });
-  const { mutate: createUserCourse } = useCreateUserCourse({
+  const { mutate: updateSoftwareAccess } = useUpdateSoftwareAccess({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['users'],
+        queryKey: ['users-with-software-access'],
       });
 
-      toast.success('Autorização ao curso concedida com sucesso!');
+      toast.success('Autorização ao software concedida com sucesso!');
+      close();
     },
     onError: (err) => {
-      const errorMessage = buildCreateUserCourseErrorMessage(err);
+      const errorMessage = buildCreateUserSoftwareAccessErrorMessage(err);
 
       toast.error(errorMessage);
-      setIsLoading(false);
+      setIsPending(false);
     },
   });
 
@@ -70,17 +68,17 @@ export default function SoftwareAuthorizationMobile() {
   } = useForm({
     resolver: zodResolver(authorizeAccessValidationSchema),
   });
-  const onSubmit = ({ userId, expiresAt }) => {
-    createUserCourse({
-      user: userId,
-      expiresAt,
-      course: courseId,
+  const onSubmit = ({ userId, softwareAccess }) => {
+    updateSoftwareAccess({
+      _id: userId,
+      softwareAccess,
     });
     setIsLoading(true);
-    navigate('/administrador/liberacao-cursos');
+    navigate('/administrador/liberacao-software');
   };
 
-  if (!isSmallScreen) return <Navigate to="/administrador/liberacao-cursos" />;
+  if (!isSmallScreen)
+    return <Navigate to="/administrador/liberacao-software" />;
 
   return (
     <Container>
@@ -94,18 +92,16 @@ export default function SoftwareAuthorizationMobile() {
             name="userId"
             control={control}
             errors={errors}
-            data={users
-              ?.filter(({ courses }) => !courses?.includes(courseId))
-              ?.map(({ _id, email }) => ({
-                label: email,
-                value: _id,
-              }))}
+            data={users?.map(({ _id, email }) => ({
+              label: email,
+              value: _id,
+            }))}
             placeholder="Selecione o email"
             filterOption={(input, option) =>
               option?.children?.toLowerCase()?.includes(input?.toLowerCase())
             }
             showSearch
-            style={{ width: '100%' }}
+            style={{ width: '400px' }}
             size="large"
           />
         </div>
@@ -115,17 +111,17 @@ export default function SoftwareAuthorizationMobile() {
             <ThemeProvider theme={themeDatePicker}>
               <Controller
                 control={control}
-                id="expiresAt"
-                name="expiresAt"
+                name="softwareAccess"
                 render={({ field: { onChange, onBlur } }) => (
                   <Date
+                    id="softwareAccess"
                     onChange={onChange}
                     onBlur={onBlur}
                     format="DD/MM/YYYY"
                     disablePast
                     slotProps={{
                       textField: {
-                        error: !!errors.expiresAt,
+                        error: !!errors.softwareAccess,
                       },
                     }}
                   />
@@ -133,7 +129,7 @@ export default function SoftwareAuthorizationMobile() {
               />
             </ThemeProvider>
           </AccessExpirationContainer>
-          <ErrorMessage>{errors?.expiresAt?.message}</ErrorMessage>
+          <ErrorMessage>{errors?.softwareAccess?.message}</ErrorMessage>
         </div>
 
         <ButtonsDiv>
@@ -154,7 +150,7 @@ export default function SoftwareAuthorizationMobile() {
             )}
           </SaveButton>
 
-          <CancelButton to="/administrador/liberacao-cursos">
+          <CancelButton to="/administrador/liberacao-software">
             <p>Cancelar</p>
           </CancelButton>
         </ButtonsDiv>

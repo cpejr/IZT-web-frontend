@@ -59,7 +59,7 @@ export const Picture = styled.img`
 export const ModalButton = styled.button`
   cursor: pointer;
   gap: 7px;
-  align-self: flex-end;
+  align-self: center;
 
   display: flex;
   flex-direction: row;
@@ -92,4 +92,11 @@ export const ErrorMessage = styled.p`
   font-size: 1.4rem;
   color: red;
   margin-top: 0.5rem;
+`;
+
+export const EmailText = styled.h1`
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-style: normal;
+  font-size: 2rem;
+  color: white;
 `;

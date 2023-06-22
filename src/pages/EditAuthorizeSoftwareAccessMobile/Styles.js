@@ -33,7 +33,6 @@ export const Title = styled.p`
   font-size: 1.5em;
   line-height: 24px;
   padding-bottom: 20px;
-
   color: black;
 `;
 

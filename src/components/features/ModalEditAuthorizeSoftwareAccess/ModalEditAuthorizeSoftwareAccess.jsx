@@ -18,6 +18,7 @@ import {
   ModalButton,
   ErrorMessage,
   Date,
+  EmailText,
 } from './Styles';
 import {
   buildUpdateSoftwareAccessErrorMessage,
@@ -73,7 +74,7 @@ export default function ModalEditAuthorizeSoftwareAccess({
         <ModalContent>
           <div>
             <Label>Email:</Label>
-            <h1>{authorizeUser.email}</h1>
+            <EmailText>{authorizeUser.email}</EmailText>
           </div>
 
           <div>

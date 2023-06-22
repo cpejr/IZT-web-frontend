@@ -89,7 +89,7 @@ export default function SoftwareAuthorization() {
       <PageTitle>Liberação do Software</PageTitle>
       <AuthorizationDiv>
         {isSmallScreen ? (
-          <StyledLink to="/administrador/liberacao-software">
+          <StyledLink to="/administrador/autorizar-acesso-software">
             <PlusOutlined size="2rem" />
             {'   '}
             Autorizar acesso
