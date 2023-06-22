@@ -152,18 +152,6 @@ export const sendProductBudget = async ({ productId, formInput }) => {
 
 // SoftwareAcess
 
-export const createSoftwareAccess = async ({
-  _id,
-  UpdateSoftwareAccessData,
-}) => {
-  const { data } = await api.put(
-    `/users/user-software-access/${_id}`,
-    UpdateSoftwareAccessData
-  );
-
-  return data;
-};
-
 export const updateSoftwareAccess = async ({ _id, softwareAccess }) => {
   const { data } = await api.put(`/users/user-software-access/${_id}`, {
     softwareAccess,

@@ -34,25 +34,23 @@ export default function ModalEditAuthorizeSoftwareAccess({
   const queryClient = useQueryClient();
 
   // Backend calls
-  const { mutate: updateSoftwareAccess, data: users } = useUpdateSoftwareAccess(
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ['users'],
-        });
-        toast.success(
-          'Autorização de acesso ao software alterada com sucesso!'
-        );
-        close();
-      },
-      onError: (err) => {
-        const errorMessage = buildUpdateSoftwareAccessErrorMessage(err);
+  const { mutate: updateSoftwareAccess } = useUpdateSoftwareAccess({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['users'],
+      });
+      toast.success('Autorização de acesso ao software alterada com sucesso!');
+      close();
+    },
+    onError: (err) => {
+      const errorMessage = buildUpdateSoftwareAccessErrorMessage(err);
 
-        toast.error(errorMessage);
-        setIsPending(false);
-      },
-    }
-  );
+      toast.error(errorMessage);
+      setIsPending(false);
+    },
+  });
+
+  // Form handlers
 
   const {
     handleSubmit,
@@ -64,7 +62,7 @@ export default function ModalEditAuthorizeSoftwareAccess({
   const onSubmit = ({ softwareAccess }) => {
     updateSoftwareAccess({
       _id: authorizeUser?._id,
-      newSoftwareAccessData: { softwareAccess },
+      softwareAccess,
     });
     setIsPending(true);
     close();
@@ -87,6 +85,7 @@ export default function ModalEditAuthorizeSoftwareAccess({
                   name="softwareAccess"
                   render={({ field: { onChange, onBlur } }) => (
                     <Date
+                      id="softwareAccess"
                       onChange={onChange}
                       onBlur={onBlur}
                       format="DD/MM/YYYY"
@@ -129,8 +128,4 @@ export default function ModalEditAuthorizeSoftwareAccess({
 ModalEditAuthorizeSoftwareAccess.propTypes = {
   close: PropTypes.func.isRequired,
   authorizeUser: PropTypes.object,
-};
-
-ModalEditAuthorizeSoftwareAccess.defaultProps = {
-  authorizeUser: {},
 };
