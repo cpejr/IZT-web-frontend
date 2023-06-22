@@ -48,7 +48,6 @@ export default function SoftwareAuthorization() {
 
   // Backend calls
   const { data: users, isLoading: isLoadingUsers } = useGetUsers({
-    softwareAccess: !null,
     onError: (err) => {
       const errorMessage = buildGetSoftwareAccessErrorMessage(err);
 
