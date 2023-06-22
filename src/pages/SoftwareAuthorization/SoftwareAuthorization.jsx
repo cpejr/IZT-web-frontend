@@ -12,7 +12,7 @@ import {
   ModalAuthorizeSoftwareAccess,
   ModalEditAuthorizeSoftwareAccess,
 } from '../../components/features';
-import { useGetSoftwareAccess } from '../../hooks/query/userSoftware';
+import { useGetUsers } from '../../hooks/query/users';
 import formatDate from '../../utils/formatDate';
 import {
   Container,
@@ -47,7 +47,8 @@ export default function SoftwareAuthorization() {
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
   // Backend calls
-  const { data: users, isLoading: isLoadingUsers } = useGetSoftwareAccess({
+  const { data: users, isLoading: isLoadingUsers } = useGetUsers({
+    softwareAccess: !null,
     onError: (err) => {
       const errorMessage = buildGetSoftwareAccessErrorMessage(err);
 
@@ -116,10 +117,6 @@ export default function SoftwareAuthorization() {
           ) : (
             <div>
               {users?.map((softwareAccess) => {
-                if (!softwareAccess.softwareAccess) {
-                  return null;
-                }
-
                 return (
                   <ContentRow key={softwareAccess?._id}>
                     <p title={softwareAccess.email}>{softwareAccess.email}</p>

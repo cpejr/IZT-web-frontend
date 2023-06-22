@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useDeleteSoftwareAccess } from '../../../hooks/query/userSoftware';
+import { useUpdateSoftwareAccess } from '../../../hooks/query/users';
 import { Container, DeleteButton, Message } from './Styles';
 import { buildDeleteUserSoftwareAccessErrorMessage } from './utils';
 
@@ -14,11 +14,8 @@ export default function ModalDeleteUserSoftwareAccess({ _id, close }) {
   const queryClient = useQueryClient();
 
   const { mutate: deleteUserSoftwareAccess, isLoading } =
-    useDeleteSoftwareAccess({
+    useUpdateSoftwareAccess({
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ['/users/user-software-access/${_id}'],
-        });
         queryClient.invalidateQueries({
           queryKey: ['users'],
         });
@@ -45,7 +42,7 @@ export default function ModalDeleteUserSoftwareAccess({ _id, close }) {
         disabled={isPending || isLoading}
         onClick={() => {
           setIsPending(true);
-          deleteUserSoftwareAccess(_id);
+          deleteUserSoftwareAccess({ _id, softwareAccess: null });
         }}
       >
         {isLoading ? (

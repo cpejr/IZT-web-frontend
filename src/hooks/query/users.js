@@ -8,6 +8,7 @@ import {
   verifyEmail,
   forgotPassword,
   redefinePassword,
+  updateSoftwareAccess,
 } from '../../services/api/endpoints';
 
 export function useGetUsers({
@@ -75,6 +76,17 @@ export function useUpdateUser({
 } = {}) {
   return useMutation({
     mutationFn: updateUser,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useUpdateSoftwareAccess({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: updateSoftwareAccess,
     onSuccess,
     onError,
   });

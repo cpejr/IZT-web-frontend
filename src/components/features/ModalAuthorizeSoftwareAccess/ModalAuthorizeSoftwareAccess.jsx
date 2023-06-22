@@ -8,8 +8,10 @@ import { Controller, useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useCreateSoftwareAccess } from '../../../hooks/query/userSoftware';
-import { useGetUsers } from '../../../hooks/query/users';
+import {
+  useGetUsers,
+  useUpdateSoftwareAccess,
+} from '../../../hooks/query/users';
 import { FormSelect, Loading } from '../../common';
 import {
   Container,
@@ -43,11 +45,8 @@ export default function ModalAuthorizeSoftwareAccess({ close }) {
     },
   });
 
-  const { mutate: createSoftwareAccess } = useCreateSoftwareAccess({
+  const { mutate: updateSoftwareAccess } = useUpdateSoftwareAccess({
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['users/user-software-access/${_id}'],
-      });
       queryClient.invalidateQueries({
         queryKey: ['users'],
       });
@@ -72,9 +71,9 @@ export default function ModalAuthorizeSoftwareAccess({ close }) {
     resolver: zodResolver(modalAuthorizeAccessValidationSchema),
   });
   const onSubmit = ({ userId, softwareAccess }) => {
-    createSoftwareAccess({
-      user: userId,
-      softwareAccess: softwareAccess,
+    updateSoftwareAccess({
+      _id: userId,
+      softwareAccess,
     });
     setIsPending(true);
     close();

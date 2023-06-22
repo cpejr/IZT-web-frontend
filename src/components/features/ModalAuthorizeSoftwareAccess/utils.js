@@ -6,7 +6,7 @@ import { ERROR_CODES } from '../../../utils/constants';
 // Form Validation
 export const modalAuthorizeAccessValidationSchema = z.object({
   userId: z.string({ required_error: 'Favor selecionar uma email' }), // Needs to be required_error because it is for a select component
-  expiresAt: z.coerce.date({
+  softwareAccess: z.coerce.date({
     errorMap: () => ({
       message: 'Favor inserir uma data',
     }),

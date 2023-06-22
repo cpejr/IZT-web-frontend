@@ -8,7 +8,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useUpdateSoftwareAccess } from '../../../hooks/query/userSoftware';
+import { useUpdateSoftwareAccess } from '../../../hooks/query/users';
 import {
   Container,
   Form,

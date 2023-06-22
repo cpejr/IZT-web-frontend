@@ -49,9 +49,6 @@ export default function SoftwareAuthorizationMobile() {
   const { mutate: createUserCourse } = useCreateUserCourse({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['user-courses'],
-      });
-      queryClient.invalidateQueries({
         queryKey: ['users'],
       });
 
