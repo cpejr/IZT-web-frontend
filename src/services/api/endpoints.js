@@ -34,6 +34,15 @@ export const getUsers = async (filters = {}) => {
 
   return data;
 };
+
+export const getUsersWithSoftwareAccess = async (filters = {}) => {
+  const { data } = await api.get('/users/user-software-access', {
+    params: filters,
+  });
+
+  return data;
+};
+
 export const createUser = async (newUser) => {
   const { data } = await api.post('/users', newUser);
 
@@ -159,12 +168,11 @@ export const updateSoftwareAccess = async ({ _id, softwareAccess }) => {
   return data;
 };
 
-export const deleteSoftwareAccess = async ({
-  _id,
-  UpdateSoftwareAccessData,
-}) => {
-  await api.put(`/users/user-software-access/${_id}`, UpdateSoftwareAccessData);
-  return null;
+export const deleteSoftwareAccess = async (_id) => {
+  const { data } = await api.put(`/users/user-software-access/${_id}`, {
+    softwareAccess: null,
+  });
+  return data;
 };
 
 // UserCourses

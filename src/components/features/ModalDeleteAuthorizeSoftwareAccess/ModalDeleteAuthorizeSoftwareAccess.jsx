@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useUpdateSoftwareAccess } from '../../../hooks/query/users';
+import { useDeleteSoftwareAccess } from '../../../hooks/query/users';
 import { Container, DeleteButton, Message } from './Styles';
 import { buildDeleteUserSoftwareAccessErrorMessage } from './utils';
 
@@ -14,10 +14,10 @@ export default function ModalDeleteUserSoftwareAccess({ _id, close }) {
   const queryClient = useQueryClient();
 
   const { mutate: deleteUserSoftwareAccess, isLoading } =
-    useUpdateSoftwareAccess({
+    useDeleteSoftwareAccess({
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: ['users'],
+          queryKey: ['users-with-software-access'],
         });
 
         toast.success('Autorização ao curso deletada com sucesso.');
@@ -42,7 +42,7 @@ export default function ModalDeleteUserSoftwareAccess({ _id, close }) {
         disabled={isPending || isLoading}
         onClick={() => {
           setIsPending(true);
-          deleteUserSoftwareAccess({ _id, softwareAccess: null });
+          deleteUserSoftwareAccess(_id);
         }}
       >
         {isLoading ? (

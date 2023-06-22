@@ -47,8 +47,14 @@ export const Date = styled(DatePicker)`
   .Mui-error .MuiOutlinedInput-notchedOutline {
     border-width: 0.2rem;
   }
-
+  .MuiInputBase-input {
+    height: 3.8rem;
+    padding: 0 0.5rem;
+    font-size: 1.4rem;
+    font-family: ${(props) => props.theme.fonts.montserrat};
+  }
   width: 100%;
+  height: 3.8rem;
 `;
 
 export const Picture = styled.img`

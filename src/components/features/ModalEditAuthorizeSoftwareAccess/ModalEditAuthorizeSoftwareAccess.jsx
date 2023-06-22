@@ -37,7 +37,7 @@ export default function ModalEditAuthorizeSoftwareAccess({
   const { mutate: updateSoftwareAccess } = useUpdateSoftwareAccess({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['users'],
+        queryKey: ['users-with-software-access'],
       });
       toast.success('Autorização de acesso ao software alterada com sucesso!');
       close();
@@ -127,5 +127,5 @@ export default function ModalEditAuthorizeSoftwareAccess({
 
 ModalEditAuthorizeSoftwareAccess.propTypes = {
   close: PropTypes.func.isRequired,
-  authorizeUser: PropTypes.object,
+  authorizeUser: PropTypes.object.isRequired,
 };

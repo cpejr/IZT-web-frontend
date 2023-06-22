@@ -12,7 +12,7 @@ import {
   ModalAuthorizeSoftwareAccess,
   ModalEditAuthorizeSoftwareAccess,
 } from '../../components/features';
-import { useGetUsers } from '../../hooks/query/users';
+import { useGetUsersWithSoftwareAccess } from '../../hooks/query/users';
 import formatDate from '../../utils/formatDate';
 import {
   Container,
@@ -47,13 +47,14 @@ export default function SoftwareAuthorization() {
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
   // Backend calls
-  const { data: users, isLoading: isLoadingUsers } = useGetUsers({
-    onError: (err) => {
-      const errorMessage = buildGetSoftwareAccessErrorMessage(err);
+  const { data: users, isLoading: isLoadingUsers } =
+    useGetUsersWithSoftwareAccess({
+      onError: (err) => {
+        const errorMessage = buildGetSoftwareAccessErrorMessage(err);
 
-      toast.error(errorMessage);
-    },
-  });
+        toast.error(errorMessage);
+      },
+    });
 
   // Modal Software Authorization Functions
   const openModalSoftwareAuthorization = (softwareAuth) => {

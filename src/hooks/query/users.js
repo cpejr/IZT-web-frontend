@@ -9,6 +9,8 @@ import {
   forgotPassword,
   redefinePassword,
   updateSoftwareAccess,
+  getUsersWithSoftwareAccess,
+  deleteSoftwareAccess,
 } from '../../services/api/endpoints';
 
 export function useGetUsers({
@@ -19,6 +21,19 @@ export function useGetUsers({
   return useQuery({
     queryKey: ['users', filters],
     queryFn: () => getUsers(filters),
+    onSuccess,
+    onError,
+  });
+}
+
+export function useGetUsersWithSoftwareAccess({
+  filters,
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['users-with-software-access', filters],
+    queryFn: () => getUsersWithSoftwareAccess(filters),
     onSuccess,
     onError,
   });
@@ -87,6 +102,17 @@ export function useUpdateSoftwareAccess({
 } = {}) {
   return useMutation({
     mutationFn: updateSoftwareAccess,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useDeleteSoftwareAccess({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: deleteSoftwareAccess,
     onSuccess,
     onError,
   });

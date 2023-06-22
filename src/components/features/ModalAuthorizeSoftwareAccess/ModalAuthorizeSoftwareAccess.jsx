@@ -48,7 +48,7 @@ export default function ModalAuthorizeSoftwareAccess({ close }) {
   const { mutate: updateSoftwareAccess } = useUpdateSoftwareAccess({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['users'],
+        queryKey: ['users-with-software-access'],
       });
 
       toast.success('Autorização ao software concedida com sucesso!');
@@ -130,6 +130,7 @@ export default function ModalAuthorizeSoftwareAccess({ close }) {
                           error: !!errors.softwareAccess,
                         },
                       }}
+                      sx={{ fontSize: 16 }}
                     />
                   )}
                 />
