@@ -28,7 +28,7 @@ import {
   themeDatePicker,
 } from './utils';
 
-export default function ModalAuthorizeAccess({ close }) {
+export default function ModalAuthorizeSoftwareAccess({ close }) {
   // Variables
 
   const [isPending, setIsPending] = useState(false); // Important for modal loading
@@ -46,7 +46,7 @@ export default function ModalAuthorizeAccess({ close }) {
   const { mutate: createSoftwareAccess } = useCreateSoftwareAccess({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['/users/user-software-access/${_id}'],
+        queryKey: ['users/user-software-access/${_id}'],
       });
       queryClient.invalidateQueries({
         queryKey: ['users'],
@@ -161,6 +161,6 @@ export default function ModalAuthorizeAccess({ close }) {
   );
 }
 
-ModalAuthorizeAccess.propTypes = {
+ModalAuthorizeSoftwareAccess.propTypes = {
   close: PropTypes.func.isRequired,
 };
