@@ -3,7 +3,6 @@ import React from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import './styles.css';
 import './Styles';
 
@@ -104,11 +103,8 @@ function AccordionDemo() {
   );
 }
 
-const AccordionTrigger = React.forwardRef(function AccordionTrigger(
-  { children, className, ...props },
-  forwardedRef
-) {
-  return (
+const AccordionTrigger = React.forwardRef(
+  ({ children, className, ...props }, forwardedRef) => (
     <Accordion.Header className="AccordionHeader">
       <Accordion.Trigger
         className={classNames('AccordionTrigger', className)}
@@ -119,14 +115,11 @@ const AccordionTrigger = React.forwardRef(function AccordionTrigger(
         <ChevronDownIcon className="AccordionChevron" aria-hidden />
       </Accordion.Trigger>
     </Accordion.Header>
-  );
-});
+  )
+);
 
-const AccordionContent = React.forwardRef(function AccordionContent(
-  { children, className, ...props },
-  forwardedRef
-) {
-  return (
+const AccordionContent = React.forwardRef(
+  ({ children, className, ...props }, forwardedRef) => (
     <Accordion.Content
       className={classNames('AccordionContent', className)}
       {...props}
@@ -134,20 +127,7 @@ const AccordionContent = React.forwardRef(function AccordionContent(
     >
       <div className="AccordionContentText">{children}</div>
     </Accordion.Content>
-  );
-});
-AccordionTrigger.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-};
-AccordionTrigger.defaultProps = {
-  className: '',
-};
-AccordionContent.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-};
-AccordionContent.defaultProps = {
-  className: '',
-};
+  )
+);
+
 export default AccordionDemo;

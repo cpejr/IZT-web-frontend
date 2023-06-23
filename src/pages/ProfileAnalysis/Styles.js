@@ -6,13 +6,13 @@ export const Boddy = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  //align-items: center;
+  align-items: center;
   flex-direction: row;
+  justify-content: center;
   background-color: #123645;
   width: 100%;
-  height: 950px;
+  height: 100%;
   gap: 40px;
-  margin-left: 300px;
 `;
 export const DataInput = styled.div`
   h1 {
@@ -29,6 +29,7 @@ export const DataInput = styled.div`
 export const Containerleft = styled.div`
   margin-left: 5%;
   width: 550px;
+  height: 100%;
   border-right: dashed;
   border-color: #ffffff;
   display: flex;
@@ -39,6 +40,7 @@ export const Containerleft = styled.div`
   flex-direction: column;
   gap: 50px;
   margin-top: 20px;
+  align-self: flex-start;
 `;
 
 export const Analysis = styled.div`
