@@ -35,7 +35,7 @@ import {
   Button,
   H1,
   Boddy
-} from './styles';
+} from './Styles';
 import AccordionDemo from './Arcoordeon';
 export default function ProfileAnalysis() {
   return (
