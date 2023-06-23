@@ -1,10 +1,18 @@
 import styled from 'styled-components';
 
+export const Boddy = styled.div`
+  background-color: #123645;
+`;
+
 export const Container = styled.div`
   display: flex;
   //align-items: center;
   flex-direction: row;
   background-color: #123645;
+  width: 100%;
+  height: 950px;
+  gap: 40px;
+  margin-left: 300px;
 `;
 export const DataInput = styled.div`
   h1 {
@@ -20,13 +28,21 @@ export const DataInput = styled.div`
 `;
 export const Containerleft = styled.div`
   margin-left: 5%;
-  height: 100%;
+  width: 550px;
   border-right: dashed;
   border-color: #ffffff;
   display: flex;
   //align-items: center;
   flex-direction: row;
   background-color: #123645;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-top: 20px;
+`;
+
+export const Analysis = styled.div`
+  margin-top: 20px;
 `;
 
 export const ContainerRight = styled.div`
@@ -38,29 +54,38 @@ export const ContainerRight = styled.div`
   //align-items: center;
   flex-direction: row;
   background-color: #123645;
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+  gap: 10px;
 `;
 
 export const Container2 = styled.div`
   margin: 5%;
   display: flex;
+  flex-direction: center;
   align-items: center;
   background-color: #ffffff;
   height: 360px;
   width: 640px;
 `;
 
-export const Analysis = styled.div`
-  h1 {
-    margin-top: 2%;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 29px;
-    margin-left: 5px;
+export const H1 = styled.div`
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  margin-left: 5px;
+  color: #ffffff;
+`;
 
-    color: #ffffff;
-  }
+export const Center = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
 `;
 
 export const OutputData = styled.div`
@@ -69,6 +94,7 @@ export const OutputData = styled.div`
   flex-direction: row;
   border-right: dashed;
   border-color: #ffffff;
+  width: 390px;
   h1 {
     font-family: 'Montserrat';
     font-style: normal;
@@ -130,10 +156,11 @@ export const RA = styled.div``;
 
 export const Text = styled.a`
   font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
 
   color: #ffffff;
 `;
@@ -166,4 +193,29 @@ export const Button = styled.button`
   border: solid;
   border-color: white;
   font-family: 'Montserrat';
+`;
+
+export const Button2 = styled.button`
+  display: inline-block;
+  margin-left: 5%;
+  padding: 5px, 20px, 5px, 20px;
+  font-size: 20px;
+  font-weight: normal;
+  text-align: center;
+  color: white;
+  background-color: #123645;
+  border-radius: 6px;
+  border: solid;
+  border-color: white;
+  font-family: 'Montserrat';
+`;
+
+export const Edit = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+`;
+export const Column = styled.div`
+  display: flex;
+  flex-direction: row;
 `;

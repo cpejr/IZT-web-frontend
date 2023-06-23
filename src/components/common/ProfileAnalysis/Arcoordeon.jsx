@@ -3,6 +3,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import classNames from 'classnames';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import './styles.css';
+import { Button2 } from './styles';
 
 
 
@@ -17,12 +18,15 @@ const AccordionDemo = () => (
         <br />Operação:___
         <br />Departamento:___
         <br />Responsável:___
+      <div className="Center">
+        <button className="Button2">Salvar</button>
+      </div>
       </AccordionContent>
     </Accordion.Item>
 
     <Accordion.Item className="AccordionItem" value="item-2">
       <AccordionTrigger>Dados da máquina</AccordionTrigger>
-      <AccordionContent>
+       <AccordionContent>
       Diametro do RC (máx):___ mm
         <br /> Diametro do RC (min): ___ mm
         <br />Diametro do RA: ___mm
@@ -32,7 +36,10 @@ const AccordionDemo = () => (
         <br />Rotação do RC: ___mm
         <br />Rotação do RA: ___mm
         <br />Rotação do RW: ___°
-      </AccordionContent>
+        <div className="Center">
+        <button className="Button2">Salvar</button>
+        </div>
+     </AccordionContent>
     </Accordion.Item>
     <Accordion.Item className="AccordionItem" value="item-3">
       <AccordionTrigger>Dados do produto</AccordionTrigger>
@@ -43,6 +50,9 @@ const AccordionDemo = () => (
         <br />Comprimento total:___ mm
         <br />Comprimento eletivo:___  mm
         <br />Sobremetal:___ mm
+        <div className="Center">
+        <button className="Button2">Salvar</button>
+        </div>
       </AccordionContent>
     </Accordion.Item>
     <Accordion.Item className="AccordionItem" value="item-4">
@@ -53,7 +63,11 @@ const AccordionDemo = () => (
         <br />Indicação do Dressador RA:___  mm
         <br />Altura do Dressador:___ mm
         <br />Posição do Dressador:___  
+        <div className="Center">
+        <button className="Button2">Salvar</button>
+        </div>
       </AccordionContent>
+       
     </Accordion.Item>
   </Accordion.Root>
 );

@@ -3,12 +3,8 @@ import {HiOutlinePencil} from 'react-icons/hi';
 
 import {
   Container,
-  DataInput,
-  Datas,
-  DataAnalysis,
-  MachineData,
-  ProductData,
-  RA,
+  Column,
+  Center,
   Text,
   Hw,
   Hd,
@@ -22,6 +18,7 @@ import {
   Nr2,
   Vp,
   Vfa,
+  Edit,
   Text2,
   Qp,
   Tc,
@@ -36,27 +33,35 @@ import {
   Containerleft,
   ContainerRight,
   Button,
-} from './Styles';
-import AccordionDemo from '../../components/common/ProfileAnalysis/Arcoordeon';
+  H1,
+  Boddy
+} from './styles';
+import AccordionDemo from './Arcoordeon';
 export default function ProfileAnalysis() {
   return (
+   <Boddy>
     <Container>
       <Containerleft>
-      <InputData>
-         <Text>Entrada de Dados</Text>
+        <Center>
+         <H1>Entrada de Dados</H1 >
            <Data>
               <AccordionDemo/>
                 </Data>
+                <Data>
               <Button> Calcular </Button>
-                </InputData>
+               </Data>  
+         </Center>
       </Containerleft>
-      <Container>
         <Analysis>
-        <h1>Analise #1 <HiOutlinePencil size={20} color="white"/> <Button>Salvar relatório</Button></h1> 
+        <H1>Analise #1 <HiOutlinePencil size={20} color="white"/> <Button>Salvar relatório</Button></H1> 
+        <Edit>
+          <Text>Vão de retificação centerless de passagem </Text>
         <Container2></Container2>
+          <Text>Dados de saída</Text>
+        </Edit>
         <ContainerRight>
+      <Column>
         <OutputData>
-          <h1>Dados de saída</h1>
           <Hw>
            <Text2> Altura entre centros (hw): ___ mm</Text2>
           </Hw>
@@ -110,12 +115,12 @@ export default function ProfileAnalysis() {
         <Yrc>
            <Text2> Ângulo de tangência RC (γrc) ___ °</Text2>
           </Yrc>
-          
         </OutputData>
+        </Column>
         </ContainerRight>
         </Analysis>
-      </Container>
     </Container>
+ </Boddy> 
   
   );
 }
