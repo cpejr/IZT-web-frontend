@@ -1,7 +1,6 @@
 import { HiOutlinePencil } from 'react-icons/hi';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
-import AccordionDemo from './Arcoordeon';
+import AccordionDemo from '../../components/features/Accordeon/Arcoordeon';
 import {
   Container,
   Column,
@@ -27,7 +26,6 @@ import {
   Qw,
   Hef,
   Y,
-  InputData,
   Yra,
   Yrc,
   Data,

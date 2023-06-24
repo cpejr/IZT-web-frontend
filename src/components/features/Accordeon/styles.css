@@ -10,9 +10,11 @@ h3 {
 
 .AccordionRoot {
   border-radius: 6px;
-  width: 300px;
+  width: 100%;
   background-color: transparent;
   box-shadow: transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 .AccordionItem {
@@ -21,6 +23,7 @@ h3 {
   background-color: #123645;
   width: 400px;
   flex-direction: center;
+  width: 100%;
 }
 
 .AccordionItem:first-child {
@@ -61,6 +64,7 @@ h3 {
   line-height: 20px;
   letter-spacing: 0em;
   text-align: left;
+  width: 100%;
 }
 
 .AccordionContent {
@@ -102,7 +106,7 @@ h3 {
   flex-direction: center;
   margin-left: 5%;
   padding: 5px 20px;
-  font-size: 20px;
+  font-size: 13px;
   font-weight: normal;
   text-align: center;
   color: white;
@@ -111,7 +115,6 @@ h3 {
   border: solid;
   border-color: white;
   font-family: 'Montserrat';
-  font-size: 15px;
 }
 
 .Center {

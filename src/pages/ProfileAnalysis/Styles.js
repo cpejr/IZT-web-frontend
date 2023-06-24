@@ -8,11 +8,12 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   background-color: #123645;
   width: 100%;
   height: 100%;
   gap: 40px;
+  flex-direction: flex-start;
 `;
 export const DataInput = styled.div`
   h1 {
@@ -27,8 +28,7 @@ export const DataInput = styled.div`
   }
 `;
 export const Containerleft = styled.div`
-  margin-left: 5%;
-  width: 550px;
+  width: 35%;
   height: 100%;
   border-right: dashed;
   border-color: #ffffff;
@@ -36,7 +36,7 @@ export const Containerleft = styled.div`
   //align-items: center;
   flex-direction: row;
   background-color: #123645;
-  display: flex;
+
   flex-direction: column;
   gap: 50px;
   margin-top: 20px;
@@ -45,31 +45,56 @@ export const Containerleft = styled.div`
 
 export const Analysis = styled.div`
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  width: auto;
 `;
 
 export const ContainerRight = styled.div`
-  margin-left: 10%;
   //height: 100%;
   //border-right: dashed;
   //border-color: #ffffff;
   display: flex;
   //align-items: center;
-  flex-direction: row;
   background-color: #123645;
+  width: 100%;
   display: flex;
+  margin-top: 5px;
   flex-direction: column;
-  margin-left: 100px;
+
   gap: 10px;
 `;
 
 export const Container2 = styled.div`
-  margin: 5%;
+  margin: 3%;
   display: flex;
   flex-direction: center;
   align-items: center;
   background-color: #ffffff;
   height: 360px;
   width: 640px;
+
+  @media (max-width: 1200px) {
+    height: 250px;
+    width: 540px;
+  }
+  @media (max-width: 1030px) {
+    height: 210px;
+    width: 500px;
+  }
+  @media (max-width: 950px) {
+    height: 180px;
+    width: 470px;
+  }
+  @media (max-width: 860px) {
+    height: 150px;
+    width: 440px;
+  }
+  @media (max-width: 730px) {
+    height: 130px;
+    width: 420px;
+  }
 `;
 
 export const H1 = styled.div`
@@ -80,6 +105,12 @@ export const H1 = styled.div`
   line-height: 29px;
   margin-left: 5px;
   color: #ffffff;
+  @media (max-width: 950px) {
+    font-size: 20px;
+  }
+  @media (max-width: 800px) {
+    font-size: 17px;
+  }
 `;
 
 export const Center = styled.div`
@@ -91,12 +122,19 @@ export const Center = styled.div`
 `;
 
 export const OutputData = styled.div`
-  margin-left: 5%;
   margin-bottom: 5%;
+  padding-right: 0.6rem;
   flex-direction: row;
   border-right: dashed;
   border-color: #ffffff;
-  width: 390px;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  white-space: nowrap;
+
   h1 {
     font-family: 'Montserrat';
     font-style: normal;
@@ -104,6 +142,9 @@ export const OutputData = styled.div`
     font-size: 15px;
     line-height: 29px;
     color: #ffffff;
+  }
+  @media (max-width: 800px) {
+    white-space: normal;
   }
 `;
 
@@ -145,7 +186,6 @@ export const Text2 = styled.a`
   font-weight: 300;
   font-size: 12px;
   line-height: 15px;
-  margin-left: 3%;
 
   color: #ffffff;
 `;
@@ -173,6 +213,7 @@ export const Data = styled.div`
   text-align: center;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 export const InputData = styled.div`
   width: 24%;
@@ -185,7 +226,7 @@ export const InputData = styled.div`
 export const Button = styled.button`
   display: inline-block;
   margin-left: 5%;
-  padding: 5px, 20px, 5px, 20px;
+  padding: 5px;
   font-size: 20px;
   font-weight: normal;
   text-align: center;
@@ -195,6 +236,10 @@ export const Button = styled.button`
   border: solid;
   border-color: white;
   font-family: 'Montserrat';
+  @media (max-width: 950px) {
+    font-size: 14px;
+    padding: 4px;
+  }
 `;
 
 export const Button2 = styled.button`
@@ -216,8 +261,12 @@ export const Edit = styled.div`
   margin-top: 10px;
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 export const Column = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 20px;
 `;
