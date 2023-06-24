@@ -12,7 +12,7 @@ export const Container = styled.div`
   background-color: #123645;
   width: 100%;
   height: 100%;
-  gap: 40px;
+  gap: 4rem;
   flex-direction: flex-start;
 `;
 export const DataInput = styled.div`
@@ -21,8 +21,8 @@ export const DataInput = styled.div`
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
-    font-size: 24px;
-    line-height: 29px;
+    font-size: 2.4rem;
+    line-height: 2.9rem;
 
     color: #ffffff;
   }
@@ -38,13 +38,13 @@ export const Containerleft = styled.div`
   background-color: #123645;
 
   flex-direction: column;
-  gap: 50px;
+  gap: 5rem;
   margin-top: 20px;
   align-self: flex-start;
 `;
 
 export const Analysis = styled.div`
-  margin-top: 20px;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-self: flex-start;
@@ -60,10 +60,10 @@ export const ContainerRight = styled.div`
   background-color: #123645;
   width: 100%;
   display: flex;
-  margin-top: 5px;
+  margin-top: 0.5rem;
   flex-direction: column;
 
-  gap: 10px;
+  gap: 1rem;
 `;
 
 export const Container2 = styled.div`
@@ -72,28 +72,28 @@ export const Container2 = styled.div`
   flex-direction: center;
   align-items: center;
   background-color: #ffffff;
-  height: 360px;
-  width: 640px;
+  height: 36rem;
+  width: 64rem;
 
   @media (max-width: 1200px) {
-    height: 250px;
-    width: 540px;
+    height: 25rem;
+    width: 54rem;
   }
   @media (max-width: 1030px) {
-    height: 210px;
-    width: 500px;
+    height: 21rem;
+    width: 50rem;
   }
   @media (max-width: 950px) {
-    height: 180px;
-    width: 470px;
+    height: 18rem;
+    width: 47rem;
   }
   @media (max-width: 860px) {
-    height: 150px;
-    width: 440px;
+    height: 15rem;
+    width: 44rem;
   }
   @media (max-width: 730px) {
-    height: 130px;
-    width: 420px;
+    height: 13rem;
+    width: 42rem;
   }
 `;
 
@@ -101,15 +101,15 @@ export const H1 = styled.div`
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
-  margin-left: 5px;
+  font-size: 2.4rem;
+  line-height: 2.9rem;
+  margin-left: 5rem;
   color: #ffffff;
   @media (max-width: 950px) {
-    font-size: 20px;
+    font-size: 2rem;
   }
   @media (max-width: 800px) {
-    font-size: 17px;
+    font-size: 1.7rem;
   }
 `;
 
@@ -118,7 +118,7 @@ export const Center = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
 `;
 
 export const OutputData = styled.div`
@@ -139,8 +139,8 @@ export const OutputData = styled.div`
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
-    font-size: 15px;
-    line-height: 29px;
+    font-size: 1.5rem;
+    line-height: 2.9rem;
     color: #ffffff;
   }
   @media (max-width: 800px) {
@@ -156,8 +156,8 @@ export const OutputData2 = styled.div`
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
-    font-size: 15px;
-    line-height: 29px;
+    font-size: 1.5rem;
+    line-height: 2.9rem;
     color: #ffffff;
   }
 `;
@@ -184,8 +184,8 @@ export const Text2 = styled.a`
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 300;
-  font-size: 12px;
-  line-height: 15px;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
 
   color: #ffffff;
 `;
@@ -198,9 +198,9 @@ export const RA = styled.div``;
 
 export const Text = styled.a`
   font-family: 'Montserrat';
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 2rem;
   letter-spacing: 0em;
   text-align: left;
 
@@ -226,39 +226,39 @@ export const InputData = styled.div`
 export const Button = styled.button`
   display: inline-block;
   margin-left: 5%;
-  padding: 5px;
-  font-size: 20px;
+  padding: 0.5rem;
+  font-size: 2rem;
   font-weight: normal;
   text-align: center;
   color: white;
   background-color: #123645;
-  border-radius: 6px;
+  border-radius: 0.6rem;
   border: solid;
   border-color: white;
   font-family: 'Montserrat';
   @media (max-width: 950px) {
-    font-size: 14px;
-    padding: 4px;
+    font-size: 1.4rem;
+    padding: 0.4rem;
   }
 `;
 
 export const Button2 = styled.button`
   display: inline-block;
   margin-left: 5%;
-  padding: 5px, 20px, 5px, 20px;
-  font-size: 20px;
+  padding: 0.5rem, 2rem, 0.5rem, 2rem;
+  font-size: 2rem;
   font-weight: normal;
   text-align: center;
   color: white;
   background-color: #123645;
-  border-radius: 6px;
+  border-radius: 0.6rem;
   border: solid;
   border-color: white;
   font-family: 'Montserrat';
 `;
 
 export const Edit = styled.div`
-  margin-top: 10px;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -268,5 +268,5 @@ export const Column = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   width: 100%;
-  gap: 20px;
+  gap: 2rem;
 `;

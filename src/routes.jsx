@@ -57,7 +57,7 @@ const router = createBrowserRouter(
         <Route path="login" element={<Login />} />
         <Route path="cadastro" element={<Register />} />
         <Route path="email-confirmado/:token" element={<ConfirmedEmail />} />
-        <Route path="profile-analysis" element={<ProfileAnalysis />} />
+        <Route path="analise-perfil" element={<ProfileAnalysis />} />
         <Route path="verificar-email" element={<VerifyEmail />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="produto/:_id" element={<Product />} />
