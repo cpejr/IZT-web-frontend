@@ -44,6 +44,7 @@ export const MenuItens = styled.div`
     padding-top: ${(props) => (props.opened ? '2rem' : '0rem')};
     align-items: center;
     justify-content: center;
+    transition: all 400ms ease-out;
   }
 `;
 
