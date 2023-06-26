@@ -29,7 +29,6 @@ import { buildLoginErrorMessage, loginValidationSchema } from './utils';
 
 export default function Login() {
   const [showModal, setShowModal] = useState(false);
-  const user = useAuthStore((store) => store.auth?.user);
   const navigate = useNavigate();
   const { state } = useLocation();
 
@@ -37,7 +36,9 @@ export default function Login() {
     onSuccess: () => {
       toast.success('Usuário logado com sucesso!');
 
-      const isAdminPath = user?.isAdmin ? '/administrador' : '/perfil';
+      const { auth } = useAuthStore.getState();
+      const isAdminPath = auth?.user?.isAdmin ? '/administrador' : '/perfil';
+
       const redirectTo = state?.from || isAdminPath;
       navigate(redirectTo);
     },
