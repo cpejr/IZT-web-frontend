@@ -142,7 +142,6 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
               <FormSelect
                 subtitle="País:"
                 name="country"
-                placeholder="Nome do país"
                 size="large"
                 control={control}
                 errors={errors}
@@ -157,7 +156,6 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
                 <FormSelect
                   subtitle="Estado:"
                   name="state"
-                  placeholder="Nome do estado"
                   size="large"
                   control={control}
                   errors={errors}
@@ -173,7 +171,6 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
                 <FormSelect
                   subtitle="Cidade:"
                   name="city"
-                  placeholder="Nome da cidade"
                   size="large"
                   control={control}
                   errors={errors}
