@@ -10,8 +10,32 @@ export const Page = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2.5rem 0rem;
-  font-size: 2.2rem;
+  padding: 25px 0px;
+  font-size: 22px;
+
+  .ant-select-single.ant-select-lg:not(.ant-select-customize-input)
+    .ant-select-selector {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+
+    width: 100%;
+    height: 4.5rem;
+    margin-top: 1rem;
+    margin-bottom: 3%;
+    padding: 0px 5%;
+
+    border-radius: 4px;
+
+    font-size: 2.2rem;
+    font-weight: 400;
+    font-family: ${(props) => props.theme.fonts.montserrat};
+
+    @media (max-width: 700px) {
+      height: 4rem;
+      padding: 0.5rem 2rem;
+    }
+  }
 `;
 
 export const Container = styled.div`
@@ -45,7 +69,6 @@ export const DataEntry = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 3.5rem;
 `;
 
 export const Title = styled.h1`
@@ -69,12 +92,26 @@ export const Subtitle = styled.h1`
   margin-bottom: 5%;
 `;
 
+export const Label = styled.p`
+  margin-bottom: 1rem;
+  font-size: 1em;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-weight: 400;
+`;
+
 export const FormColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
   max-width: 35rem;
+`;
+
+export const AddressSelect = styled.div`
+  width: 100%;
+  height: auto;
+
+  margin-bottom: 3%;
 `;
 
 export const Form = styled.form`
