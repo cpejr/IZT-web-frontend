@@ -96,10 +96,11 @@ export const Subsection = styled.div`
 `;
 
 export const AddressSelectDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+
   width: 100%;
   height: auto;
-
-  margin-bottom: 3%;
 `;
 
 export const Label = styled.p`

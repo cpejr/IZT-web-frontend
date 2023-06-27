@@ -47,7 +47,7 @@ export default function FormSelect({
           </StyledSelect>
         )}
       />
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      <ErrorMessage error={errorMessage ? 1 : 0}>{errorMessage}</ErrorMessage>
     </Container>
   );
 }
