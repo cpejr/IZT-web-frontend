@@ -34,6 +34,9 @@ export const Title = styled.p`
   font-size: 3rem;
   margin-bottom: 1rem;
 
+  overflow-wrap: break-word;
+  hyphens: manual;
+
   color: ${(props) => props.theme.colors.blue};
 
   @media (max-width: 500px) {

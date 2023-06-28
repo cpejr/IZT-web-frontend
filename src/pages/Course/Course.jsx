@@ -21,12 +21,12 @@ export default function Course() {
   const currVideoId = useVideoStore((state) => state.currVideoId);
   const user = useAuthStore((state) => state.auth?.user);
   const userHasAccess = user?.courses?.includes(
-    '646acfad1bae8cb3a56a05f4' || courseId
+    '649b66dd090a10350f3e341b' || courseId
   );
 
   const { data: course, isLoadingCourse } = useGetUserCourse({
     user: user?._id,
-    course: '646acfad1bae8cb3a56a05f4' || courseId,
+    course: '649b66dd090a10350f3e341b' || courseId,
     userHasAccess, // For enabiling the request or not
     onError: (err) => {
       const errorMessage = buildGetCourseInfoErrorMessage(err);
