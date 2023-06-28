@@ -217,6 +217,9 @@ export const MobileMenuButton = styled.button`
       transition: all 400ms ease-out;
     }
   }
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const ModalStyle = styled(Modal)`
