@@ -86,7 +86,7 @@ export const MenuLink = styled.div`
     content: '';
     position: absolute;
     top: 0%;
-    right: -6%;
+    right: -7%;
     transform: translateY(-50%) scaleX(-1);
     width: 0;
     height: 0;
@@ -102,8 +102,11 @@ export const MenuLink = styled.div`
   @media (max-width: 1330px) {
     font-size: 18px;
   }
-  @media (max-width: 1330px) {
-    font-size: 16px;
+
+  @media (max-width: 1000px) {
+    &:after {
+      right: -9%;
+    }
   }
   @media (max-width: 900px) {
     font-size: 15px;
