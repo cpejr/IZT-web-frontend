@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 
-import { FaCogs } from 'react-icons/fa';
-import { GiCarWheel, GiBackwardTime } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 
-import { Menu, MenuItem, MenuLink } from './Styles';
+import {
+  Menu,
+  MenuItem,
+  MenuLink,
+  CarWheel,
+  Cogs,
+  BackwardTime,
+} from './Styles';
 
 export default function SoftwareLateralMenu() {
   const [activeMenuItem, setActiveMenuItem] = useState(null);
@@ -16,7 +21,7 @@ export default function SoftwareLateralMenu() {
   return (
     <Menu>
       <MenuItem>
-        <FaCogs color="white" size={70} />
+        <Cogs />
         <MenuLink
           as={Link}
           to=""
@@ -27,7 +32,7 @@ export default function SoftwareLateralMenu() {
         </MenuLink>
       </MenuItem>
       <MenuItem>
-        <GiCarWheel color="white" size={70} />
+        <CarWheel />
         <MenuLink
           as={Link}
           to=""
@@ -38,7 +43,7 @@ export default function SoftwareLateralMenu() {
         </MenuLink>
       </MenuItem>
       <MenuItem>
-        <GiBackwardTime color="white" size={80} />
+        <BackwardTime />
         <MenuLink
           as={Link}
           to=""

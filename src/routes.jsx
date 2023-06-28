@@ -57,6 +57,7 @@ const router = createBrowserRouter(
         <Route path="email-confirmado/:token" element={<ConfirmedEmail />} />
         <Route path="verificar-email" element={<VerifyEmail />} />
         <Route path="catalogo" element={<Catalog />} />
+        <Route path="software" element={<SoftwareLayout />} />
         <Route path="produto/:_id" element={<Product />} />
         <Route
           path="acesso-negado-curso"
@@ -70,7 +71,7 @@ const router = createBrowserRouter(
         <Route element={<PrivateRoutes />}>
           <Route path="curso" element={<Course />} />
           <Route path="perfil" element={<Profile />} />
-          <Route path="software" element={<SoftwareLayout />} />
+
           <Route path="administrador" element={<AdminRoutes />}>
             <Route element={<AdminLayout />}>
               <Route index element={<h1>Área do Administrador</h1>} />
