@@ -77,17 +77,18 @@ export const Nav = styled.div`
     align-items: center;
     gap: 1rem;
     top: 10rem;
-    padding: ${(props) => (props.bar ? '1rem 0' : '0')};
-    height: ${(props) => (props.bar ? 'auto' : '0%')};
+    padding: ${(props) => (props.bar ? '1rem 0' : '0rem')};
+    height: auto;
+    max-height: ${(props) => (props.bar ? '50rem' : '0rem')};
     left: 0%;
     right: 0%;
     transition: all 400ms ease;
     font-weight: 600;
     z-index: 10000;
+    overflow-y: hidden;
     a {
       color: #fff;
-      display: ${(props) => (props.bar ? 'flex' : 'none')};
-      transition: all 700ms ease;
+      display: flex;
     }
     button {
       transition: all 700ms ease;
@@ -183,6 +184,16 @@ export const LanguageSelector = styled.div`
     :hover {
       cursor: pointer;
     }
+    p {
+      font-family: ${(props) => props.theme.fonts.montserrat};
+      font-weight: 700;
+      :hover {
+        cursor: pointer;
+        text-decoration: underline;
+        text-decoration-color: ${(props) => props.theme.colors.blue};
+        text-decoration-thickness: 0.2rem;
+      }
+    }
   }
   @media (max-width: ${menuBreak}) {
     flex-direction: row;
@@ -203,6 +214,16 @@ export const LanguageSelector = styled.div`
       background-color: ${(props) => props.theme.colors.darkGreenishBlue};
       color: white;
       font-weight: 600;
+      p {
+        font-family: ${(props) => props.theme.fonts.montserrat};
+        font-weight: 700;
+        :hover {
+          cursor: pointer;
+          text-decoration: underline;
+          text-decoration-color: white;
+          text-decoration-thickness: 0.2rem;
+        }
+      }
     }
   }
 `;
@@ -216,11 +237,19 @@ export const Select = styled.div`
   align-self: center;
   :hover {
     cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: ${(props) => props.theme.colors.blue};
+    text-decoration-thickness: 0.2rem;
   }
   @media (max-width: ${menuBreak}) {
-    display: ${(props) => (props.bar ? 'flex' : 'none')};
+    display: flex;
     flex-direction: row;
     font-weight: 600;
+    :hover {
+      text-decoration: underline;
+      text-decoration-color: white;
+      text-decoration-thickness: 0.2rem;
+    }
   }
   p {
     font-size: 1.5rem;
@@ -280,14 +309,15 @@ export const Welcome = styled.div`
 export const Divider = styled.div`
   background-color: white;
   height: 0.2rem;
-  display: ${(props) => (props.collapse ? 'flex' : 'none')};
-  max-height: ${(props) => (props.collapse ? 'none' : '0rem')};
+  display: flex;
+  max-height: ${(props) => (props.collapse ? '1rem' : '0rem')};
   align-self: stretch;
-  transition: all 0.5s ease-in-out 0.5s;
+  overflow-y: hidden;
+  transition: all 400ms ease-in-out;
 `;
 
 export const MenuProfile = styled.div`
-  display: ${(props) => (props.bar ? 'flex' : 'none')};
+  display: flex;
   width: 100%;
   flex-direction: column;
   align-items: center;
@@ -297,7 +327,7 @@ export const MenuProfile = styled.div`
     svg {
       transform: ${(props) =>
         props.collapse ? 'rotate(180deg)' : 'rotate(0deg)'};
-      transition: all 0.2s ease-in-out;
+      transition: all 400ms ease-in-out;
     }
   }
 `;
@@ -315,6 +345,15 @@ export const MyProfile = styled.div`
     color: white;
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-size: 1.8rem;
+    :hover {
+      cursor: pointer;
+      text-decoration: underline solid white 0.2rem;
+    }
+  }
+  svg {
+    :hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -341,8 +380,9 @@ export const LogoutBtn = styled.button`
     color: white;
     font-weight: 500;
     padding-left: 0rem;
-    display: ${(props) => (props.collapse ? 'flex' : 'none')};
-    max-height: ${(props) => (props.collapse ? 'none' : '0rem')};
+    display: flex;
+    max-height: ${(props) => (props.collapse ? '10rem' : '0rem')};
+    overflow-y: hidden;
     :hover {
       text-decoration-color: white;
       text-decoration-thickness: 0.1rem;
@@ -351,5 +391,5 @@ export const LogoutBtn = styled.button`
   @media (max-width: 1080px) {
     font-size: 1.8rem;
   }
-  transition: all 0.5s ease-in-out 0.5s;
+  transition: all 400ms ease-in-out;
 `;

@@ -193,8 +193,8 @@ export const MenuMobile = styled.div`
   overflow-y: hidden;
 
   @media (max-width: 700px) {
-    height: ${(props) => (props.opened ? 'auto' : '0')};
-    /* transition: height 700ms ease-in-out 5s; */
+    max-height: ${(props) => (props.opened ? '50rem' : '0rem')};
+    transition: all 400ms ease-out;
   }
 `;
 
@@ -214,6 +214,7 @@ export const MobileMenuButton = styled.button`
     svg {
       transform: ${(props) =>
         props.opened ? 'rotate(180deg)' : 'rotate(0deg)'};
+      transition: all 400ms ease-out;
     }
   }
 `;
