@@ -58,5 +58,5 @@ export default function AnalysisData({ collapse }) {
 }
 
 AnalysisData.propTypes = {
-  collapse: PropTypes.object.isRequired,
+  collapse: PropTypes.bool.isRequired,
 };

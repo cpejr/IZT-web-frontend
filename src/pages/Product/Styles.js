@@ -5,7 +5,9 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-items: center;
-  width: 100%;
+
+  width: 100vw;
+
   margin-top: 3.5rem;
 
   font-family: ${(props) => props.theme.fonts.montserrat};

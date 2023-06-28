@@ -65,5 +65,5 @@ export default function MachineData({ collapse }) {
 }
 
 MachineData.propTypes = {
-  collapse: PropTypes.object.isRequired,
+  collapse: PropTypes.bool.isRequired,
 };
