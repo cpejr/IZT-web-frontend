@@ -103,7 +103,6 @@ export const MiniText = styled.p`
 export const Input = styled.input`
   padding: 0.8rem 1.1rem;
   width: 100%;
-  top: 3.4rem;
 
   background: #ffffff;
   border-radius: 0.4rem;
@@ -120,7 +119,7 @@ export const Input = styled.input`
 `;
 
 export const ErrorMessage = styled.p`
-  font-weight: 700;
+  font-weight: 600;
   color: red;
 `;
 
