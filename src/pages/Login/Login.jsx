@@ -12,6 +12,7 @@ import IZTLogo from '../../assets/IZTLogo.svg';
 import { DataInput } from '../../components/common';
 import { ModalForgotPassword } from '../../components/features';
 import { useLogin } from '../../hooks/query/sessions';
+import useAuthStore from '../../stores/auth';
 import {
   Page,
   Container,
@@ -27,13 +28,18 @@ import {
 import { buildLoginErrorMessage, loginValidationSchema } from './utils';
 
 export default function Login() {
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
-  const redirectTo = state?.from || '/perfil';
 
   const { mutate: login, isLoading } = useLogin({
     onSuccess: () => {
       toast.success('Usuário logado com sucesso!');
+
+      const { auth } = useAuthStore.getState();
+      const isAdminPath = auth?.user?.isAdmin ? '/administrador' : '/perfil';
+
+      const redirectTo = state?.from || isAdminPath;
       navigate(redirectTo);
     },
     onError: (err) => {
@@ -50,10 +56,7 @@ export default function Login() {
   } = useForm({
     resolver: zodResolver(loginValidationSchema),
   });
-
   const onSubmit = (data) => login(data);
-
-  const [showModal, setShowModal] = useState(false);
 
   const openModalForgotPassword = () => setShowModal(true);
   const closeModalForgotPassword = () => setShowModal(false);

@@ -76,7 +76,6 @@ export default function ModalCreateCategory({ close }) {
           />
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <ModalButton disabled={isPending} type="submit">
-            <FiSave size={25} />
             {isPending ? (
               <>
                 <TailSpin

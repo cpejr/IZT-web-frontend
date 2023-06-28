@@ -41,5 +41,6 @@ export const ErrorMessage = styled.p`
   font-size: 1.5rem;
   color: red;
   font-family: ${(props) => props.theme.fonts.montserrat};
+  margin-top: 0.5rem;
   font-weight: 600;
 `;

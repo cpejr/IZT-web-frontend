@@ -12,6 +12,9 @@ export const Background = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+
+  width: 100%;
+
   background-color: ${(props) => props.theme.colors.darkBlue};
 `;
 export const Page = styled.div`
@@ -33,6 +36,7 @@ export const Body = styled.div`
   margin-bottom: 10%;
   width: 100%;
   height: auto;
+
   @media (max-width: 700px) {
     padding: 0rem;
     gap: 2rem;
@@ -71,6 +75,7 @@ export const Subtitle = styled.h3`
   color: #000000;
   width: 100%;
   height: auto;
+
   @media (max-width: 700px) {
     font-size: 1.8rem;
     line-height: 2.2rem;
@@ -86,6 +91,7 @@ export const Container = styled.div`
   align-items: flex-start;
   margin-top: 2rem;
   padding-left: 10%;
+
   @media (max-width: 900px) {
     display: flex;
     flex-direction: column;
@@ -100,6 +106,7 @@ export const DataContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   gap: 5%;
+
   @media (max-width: 900px) {
     display: flex;
     flex-direction: column;
@@ -114,6 +121,7 @@ export const FirstColumn = styled.div`
   flex-direction: column;
   gap: 2rem;
   width: 50%;
+
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;

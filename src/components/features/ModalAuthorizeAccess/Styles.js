@@ -39,7 +39,6 @@ export const AccessExpirationContainer = styled.div`
   display: flex;
   flex-direction: row;
   border-radius: 0.4rem;
-  height: 5.6rem;
   background-color: white;
 `;
 
@@ -48,6 +47,8 @@ export const Date = styled(DatePicker)`
   .Mui-error .MuiOutlinedInput-notchedOutline {
     border-width: 0.2rem;
   }
+
+  width: 100%;
 `;
 
 export const Picture = styled.img`
@@ -90,7 +91,7 @@ export const ModalButton = styled.button`
 export const ErrorMessage = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.4rem;
   color: red;
   margin-top: 0.5rem;
