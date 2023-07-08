@@ -8,10 +8,6 @@ export const TESTEContainer = styled.div`
   height: 100%;
   max-height: (100vh - 10rem);
 `;
-// apagar depois
-export const TESTEMenu = styled.div`
-  width: 20rem;
-`;
 
 export const Container = styled.div`
   background-color: ${(props) => props.theme.colors.darkBlue};

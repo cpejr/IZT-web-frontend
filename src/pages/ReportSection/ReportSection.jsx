@@ -12,6 +12,7 @@ import {
   SearchDiv,
   Search,
   Reports,
+  TESTEContainer,
 } from './Styles';
 
 const data = [
@@ -206,32 +207,34 @@ export default function ReportSection() {
   }
 
   return (
-    <Container>
-      <Title>Relatórios</Title>
-      <ReportsArea>
-        <ReportsHeader>
-          <ReportsTitle>Relatório</ReportsTitle>
-          <SearchDiv>
-            <HiSearch size={25} />
-            <Search
-              onChange={(e) => setName(e.target.value)}
-              placeholder={name || 'Pesquisar por nome'}
-            />
-          </SearchDiv>
-        </ReportsHeader>
-        <Reports>
-          {data.map((report) => {
-            return (
-              <Report
-                key={report.name}
-                data={report}
-                openedReport={opened}
-                handleOpened={handleOpened}
+    <TESTEContainer>
+      <Container>
+        <Title>Relatórios</Title>
+        <ReportsArea>
+          <ReportsHeader>
+            <ReportsTitle>Relatório</ReportsTitle>
+            <SearchDiv>
+              <HiSearch size={25} />
+              <Search
+                onChange={(e) => setName(e.target.value)}
+                placeholder={name || 'Pesquisar por nome'}
               />
-            );
-          })}
-        </Reports>
-      </ReportsArea>
-    </Container>
+            </SearchDiv>
+          </ReportsHeader>
+          <Reports>
+            {data.map((report) => {
+              return (
+                <Report
+                  key={report.name}
+                  data={report}
+                  openedReport={opened}
+                  handleOpened={handleOpened}
+                />
+              );
+            })}
+          </Reports>
+        </ReportsArea>
+      </Container>
+    </TESTEContainer>
   );
 }

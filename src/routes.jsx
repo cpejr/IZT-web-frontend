@@ -33,7 +33,7 @@ import {
   AccessDenied,
   VerifyEmail,
   StabilityAnalysis,
-  TESTE,
+  ReportSection,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -85,7 +85,7 @@ const router = createBrowserRouter(
         <Route element={<PrivateRoutes />}>
           <Route path="software" element={<SoftwareLayout />}>
             <Route index element={<StabilityAnalysis />} />
-            <Route path="secao-relatorio" element={<TESTE />} />
+            <Route path="secao-relatorio" element={<ReportSection />} />
           </Route>
           <Route path="administrador" element={<AdminLayout />}>
             <Route index element={<Profile />} />

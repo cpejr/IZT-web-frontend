@@ -21,4 +21,3 @@ export { default as AccessDenied } from './AccessDenied/AccessDenied';
 export { default as EditAuthorizeAccessMobile } from './EditAuthorizeAccessMobile/EditAuthorizeAccessMobile';
 export { default as StabilityAnalysis } from './StabilityAnalysis/StabilityAnalysis';
 export { default as ReportSection } from './ReportSection/ReportSection';
-export { default as TESTE } from './ReportSection/TESTE';
