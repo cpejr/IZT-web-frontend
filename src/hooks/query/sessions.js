@@ -2,7 +2,6 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { login, logout, refresh } from '../../services/api/endpoints';
 import useAuthStore from '../../stores/auth';
-import { getIsLoggedIn, removeIsLoggedIn } from '../../utils/isLoggedIn';
 
 export function useLogin({
   onSuccess = () => {},
@@ -33,7 +32,6 @@ export function useRefreshToken({ onSuccess = () => {} } = {}) {
   const onError = (err) => {
     console.error(err);
     clearAuth();
-    removeIsLoggedIn(); // In case the user did not logout and the cookie expire
   };
 
   return useQuery({
@@ -42,6 +40,5 @@ export function useRefreshToken({ onSuccess = () => {} } = {}) {
     onError,
     onSuccess,
     refetchInterval: expireIn * 1000, // Milliseconds
-    enabled: !!getIsLoggedIn(),
   });
 }

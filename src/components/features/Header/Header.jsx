@@ -158,7 +158,7 @@ export default function Header() {
                       }}
                       style={{ display: collapse ? 'flex' : 'none' }}
                     >
-                      {lang}
+                      <p>{lang}</p>
                     </button>
                   ))}
                 </LanguageSelector>

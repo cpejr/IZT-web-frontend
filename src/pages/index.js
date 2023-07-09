@@ -23,3 +23,5 @@ export { default as StabilityAnalysis } from './StabilityAnalysis/StabilityAnaly
 export { default as SoftwareAuthorization } from './SoftwareAuthorization/SoftwareAuthorization';
 export { default as SoftwareAuthorizationMobile } from './SoftwareAuthorizationMobile/SoftwareAuthorizationMobile';
 export { default as EditAuthorizeSoftwareAccessMobile } from './EditAuthorizeSoftwareAccessMobile/EditAuthorizeSoftwareAccessMobile';
+export { default as ReportSection } from './ReportSection/ReportSection';
+export { default as ProfileAnalysis } from './ProfileAnalysis/ProfileAnalysis';

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { SaveOutlined } from '@ant-design/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { City, Country, State } from 'country-state-city';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
@@ -9,7 +10,7 @@ import { toast } from 'react-toastify';
 
 import { useUpdateUser } from '../../../hooks/query/users';
 import useAuthStore from '../../../stores/auth';
-import { RegisterInput } from '../../common';
+import { FormSelect, RegisterInput } from '../../common';
 import {
   Container,
   Form,
@@ -21,10 +22,32 @@ import {
 import { buildUpdateUserErrorMessage, updateUserSchema } from './utils';
 
 export default function ModalChangeUserData({ close }) {
+  // States and variables
+  const countries = useMemo(() => Country.getAllCountries(), []);
+  const [states, setStates] = useState(null);
+  const [cities, setCities] = useState(null);
   const [isPending, setIsPending] = useState(false); // Important for modals usage
 
   const user = useAuthStore((state) => state.auth?.user);
   const setUser = useAuthStore((state) => state.setUser);
+
+  // Reusable functions
+  const selectFilter = useCallback(
+    (input, option) =>
+      option?.children?.toLowerCase()?.includes(input?.toLowerCase()),
+    []
+  );
+  const formatSelectData = useCallback(
+    ({ name, isoCode, countryCode }) => ({
+      label: name,
+      value: JSON.stringify({
+        name,
+        isoCode,
+        ...(!!countryCode && { countryCode }), // If countryCode exists, put it in the JSON
+      }),
+    }),
+    []
+  );
 
   const { mutate: updateUser } = useUpdateUser({
     onSuccess: (data) => {
@@ -44,7 +67,10 @@ export default function ModalChangeUserData({ close }) {
   const {
     register,
     handleSubmit,
+    setValue,
+    control,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: zodResolver(updateUserSchema),
   });
@@ -52,6 +78,36 @@ export default function ModalChangeUserData({ close }) {
     setIsPending(true);
     updateUser({ _id: user._id, newUserData: data });
   };
+
+  // Country, state and city selects handlers
+  const selectedContry = watch('country');
+  const selectedState = watch('state');
+
+  useEffect(() => {
+    setValue('state', '');
+    setValue('city', '');
+
+    if (selectedContry) {
+      const countryIsoCode = JSON.parse(selectedContry).isoCode;
+
+      setStates(State.getStatesOfCountry(countryIsoCode));
+    } else {
+      setStates(null);
+    }
+  }, [setValue, selectedContry]);
+
+  useEffect(() => {
+    setValue('city', '');
+
+    if (selectedState) {
+      const countryIsoCode = JSON.parse(selectedState).countryCode;
+      const stateIsoCode = JSON.parse(selectedState).isoCode;
+
+      setCities(City.getCitiesOfState(countryIsoCode, stateIsoCode));
+    } else {
+      setCities(null);
+    }
+  }, [setValue, selectedState]);
 
   return (
     <Container>
@@ -98,31 +154,48 @@ export default function ModalChangeUserData({ close }) {
           </FormColumn>
           <FormColumn>
             <Subtitle>Endereço</Subtitle>
-            <RegisterInput
-              label="País: "
+            <FormSelect
+              subtitle="País:"
               name="country"
               placeholder="Nome do país"
-              register={register}
+              size="large"
+              control={control}
               errors={errors}
-              type="text"
+              data={countries.map(formatSelectData)}
+              isBudget
+              showSearch
+              filterOption={selectFilter}
+              isProfile
               defaultValue={user.country}
             />
-            <RegisterInput
-              label="Estado: "
+            <FormSelect
+              subtitle="Estado:"
               name="state"
               placeholder="Nome do estado"
-              register={register}
+              size="large"
+              control={control}
               errors={errors}
-              type="text"
+              data={states?.map(formatSelectData)}
+              isBudget
+              showSearch
+              filterOption={selectFilter}
+              disabled={!states}
+              isProfile
               defaultValue={user.state}
             />
-            <RegisterInput
-              label="Cidade: "
+            <FormSelect
+              subtitle="Cidade:"
               name="city"
               placeholder="Nome da cidade"
-              register={register}
+              size="large"
+              control={control}
               errors={errors}
-              type="text"
+              data={cities?.map(formatSelectData)}
+              isBudget
+              showSearch
+              filterOption={selectFilter}
+              disabled={!cities}
+              isProfile
               defaultValue={user.city}
             />
             <RegisterInput

@@ -63,6 +63,10 @@ export default function ModalCreateProduct({ close }) {
         queryKey: ['products', 'searchByName'],
       });
 
+      queryClient.invalidateQueries({
+        queryKey: ['categories'], // Refresh catalog page
+      });
+
       toast.success('Produto criado com sucesso!');
       close();
     }, // insert toast

@@ -32,3 +32,4 @@ export { default as ProductData } from './ProductData/ProductData';
 export { default as ModalAuthorizeSoftwareAccess } from './ModalAuthorizeSoftwareAccess/ModalAuthorizeSoftwareAccess';
 export { default as ModalEditAuthorizeSoftwareAccess } from './ModalEditAuthorizeSoftwareAccess/ModalEditAuthorizeSoftwareAccess';
 export { default as ModalDeleteAuthorizeSoftwareAccess } from './ModalDeleteAuthorizeSoftwareAccess/ModalDeleteAuthorizeSoftwareAccess';
+export { default as SoftwareMenu } from './SoftwareMenu/SoftwareMenu';
