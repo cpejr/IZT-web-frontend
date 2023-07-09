@@ -30,10 +30,9 @@ export const DataInput = styled.div`
 export const Containerleft = styled.div`
   width: 35%;
   height: 100%;
-  border-right: dashed;
+  border-right: 1.7px dashed;
   border-color: #ffffff;
   display: flex;
-  //align-items: center;
   flex-direction: row;
   background-color: #123645;
 
@@ -52,11 +51,8 @@ export const Analysis = styled.div`
 `;
 
 export const ContainerRight = styled.div`
-  //height: 100%;
-  //border-right: dashed;
-  //border-color: #ffffff;
   display: flex;
-  //align-items: center;
+
   background-color: #123645;
   width: 100%;
   display: flex;
@@ -67,7 +63,7 @@ export const ContainerRight = styled.div`
 `;
 
 export const Container2 = styled.div`
-  margin: 3%;
+  margin: 3rem 0rem 3rem 0rem;
   display: flex;
   flex-direction: center;
   align-items: center;
@@ -103,8 +99,8 @@ export const H1 = styled.div`
   font-weight: 600;
   font-size: 2.4rem;
   line-height: 2.9rem;
-  margin-left: 5rem;
   color: #ffffff;
+
   @media (max-width: 950px) {
     font-size: 2rem;
   }
@@ -123,10 +119,11 @@ export const Center = styled.div`
 
 export const OutputData = styled.div`
   margin-bottom: 5%;
-  padding-right: 0.6rem;
+  padding-right: 3rem;
+  padding-left: ${(props) => (props.rightOutputData ? '0rem' : '3rem')};
   flex-direction: row;
-  border-right: dashed;
-  border-color: #ffffff;
+  border-right: ${(props) =>
+    props.rightOutputData ? 'none' : '1.7px dashed white'};
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
@@ -143,6 +140,10 @@ export const OutputData = styled.div`
     line-height: 2.9rem;
     color: #ffffff;
   }
+
+  .OutputDataRight {
+    background-color: black;
+  }
   @media (max-width: 800px) {
     white-space: normal;
   }
@@ -150,7 +151,6 @@ export const OutputData = styled.div`
 
 export const OutputData2 = styled.div`
   margin-bottom: 5%;
-  border-right: dashed;
   border-color: #ffffff;
   h1 {
     font-family: 'Montserrat';
@@ -226,16 +226,17 @@ export const InputData = styled.div`
 export const Button = styled.button`
   display: inline-block;
   margin-left: 5%;
-  padding: 0.5rem;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
   font-size: 2rem;
   font-weight: normal;
   text-align: center;
   color: white;
   background-color: #123645;
   border-radius: 0.6rem;
-  border: solid;
+  border: 1px solid;
   border-color: white;
   font-family: 'Montserrat';
+  cursor: pointer;
   @media (max-width: 950px) {
     font-size: 1.4rem;
     padding: 0.4rem;
@@ -258,7 +259,8 @@ export const Button2 = styled.button`
 `;
 
 export const Edit = styled.div`
-  margin-top: 1rem;
+  margin-top: 3rem;
+  padding-left: 2rem;
   display: flex;
   flex-direction: column;
   width: 100%;

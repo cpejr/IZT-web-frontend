@@ -6,6 +6,7 @@
 button,
 h3 {
   all: unset;
+  cursor: pointer;
 }
 
 .AccordionRoot {
@@ -112,7 +113,7 @@ h3 {
   color: white;
   background-color: #123645;
   border-radius: 6px;
-  border: solid;
+  border: 1px solid;
   border-color: white;
   font-family: 'Montserrat';
 }

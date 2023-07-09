@@ -92,7 +92,7 @@ export default function ProfileAnalysis() {
                   <Text2>Velocidade de passagem da peça (vfa): ___ m/min</Text2>
                 </Vfa>
               </OutputData>
-              <OutputData>
+              <OutputData rightOutputData>
                 <Qp>
                   <Text2> Quantidade de peça (Qp): ___ </Text2>
                 </Qp>
