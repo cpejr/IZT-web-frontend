@@ -1,11 +1,12 @@
 import { Outlet } from 'react-router-dom';
 
-import { Container, Menu } from './Styles';
+import { SoftwareMenu } from '../../components/features';
+import { Container } from './Styles';
 
-export default function SoftwareLayout() {
+export default function AdminLayout() {
   return (
     <Container>
-      <Menu />
+      <SoftwareMenu />
       <Outlet />
     </Container>
   );
