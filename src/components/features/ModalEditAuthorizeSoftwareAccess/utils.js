@@ -4,9 +4,8 @@ import { z } from 'zod';
 import { ERROR_CODES } from '../../../utils/constants';
 
 // Form Validation
-export const modalAuthorizeAccessValidationSchema = z.object({
-  userId: z.string({ required_error: 'Favor selecionar uma email' }), // Needs to be required_error because it is for a select component
-  expiresAt: z.coerce.date({
+export const modalUpdateAuthorizeAccessValidationSchema = z.object({
+  softwareAccess: z.coerce.date({
     errorMap: () => ({
       message: 'Favor inserir uma data',
     }),
@@ -85,31 +84,17 @@ export const themeDatePicker = createTheme({
 });
 
 // Error Handling
-
-// Get users for select
-const getUsersErrorMessages = {
-  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
-};
-const getUsersIdDefaultErrorMessage =
-  'Ocorreu um erro na listagem dos usuários. Tente novamente mais tarde';
-export function buildGetUsersErrorMessage(err) {
-  const code = err?.response?.data?.httpCode;
-  return getUsersErrorMessages[code] || getUsersIdDefaultErrorMessage;
-}
-
-// Create user course request
-const createUserCourseErrorMessages = {
-  [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',
+const updateSoftwareAccessErrorMessages = {
   [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',
-  [ERROR_CODES.FORBIDDEN]: 'Usuário não autorizado',
-  [ERROR_CODES.CONFLICT]: 'O usuário já tem acesso ao curso',
+  [ERROR_CODES.CONFLICT]: 'O usuário já tem acesso ao software',
 };
-const createUserCourseDefaultErrorMessage =
-  'Erro autorizar acesso do curso ao usuário. Tente novamente mais tarde';
+const updateSoftwareAccessDefaultErrorMessage =
+  'Erro autorizar acesso do software ao usuário. Tente novamente mais tarde';
 
-export function buildCreateUserCourseErrorMessage(err) {
+export function buildUpdateSoftwareAccessErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
   return (
-    createUserCourseErrorMessages[code] || createUserCourseDefaultErrorMessage
+    updateSoftwareAccessErrorMessages[code] ||
+    updateSoftwareAccessDefaultErrorMessage
   );
 }

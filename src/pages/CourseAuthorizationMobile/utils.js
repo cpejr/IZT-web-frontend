@@ -40,6 +40,49 @@ export const themeDatePicker = createTheme({
   typography: {
     fontFamily: 'Montserrat',
   },
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        input: {
+          paddingTop: 5,
+          paddingBottom: 5,
+          height: 40,
+          fontSize: 15,
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          fontSize: 20,
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontSize: 13,
+          fontWeight: 500,
+        },
+      },
+    },
+    MuiPickersDay: {
+      styleOverrides: {
+        root: {
+          fontSize: 12,
+          fontWeight: 500,
+        },
+      },
+    },
+    MuiPickersCalendarHeader: {
+      styleOverrides: {
+        label: {
+          fontSize: 12,
+          fontWeight: 500,
+        },
+      },
+    },
+  },
 });
 
 // Error Handling

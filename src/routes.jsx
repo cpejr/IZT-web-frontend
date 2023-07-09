@@ -33,6 +33,9 @@ import {
   AccessDenied,
   VerifyEmail,
   StabilityAnalysis,
+  SoftwareAuthorization,
+  SoftwareAuthorizationMobile,
+  EditAuthorizeSoftwareAccessMobile,
   ReportSection,
   ProfileAnalysis,
 } from './pages';
@@ -106,6 +109,18 @@ const router = createBrowserRouter(
               element={<EditAuthorizeAccessMobile />}
             />
             <Route path="liberacao-cursos" element={<CourseAuthorization />} />
+            <Route
+              path="autorizar-acesso-software"
+              element={<SoftwareAuthorizationMobile />}
+            />
+            <Route
+              path="editar-autorizacao-de-acesso-software"
+              element={<EditAuthorizeSoftwareAccessMobile />}
+            />
+            <Route
+              path="liberacao-software"
+              element={<SoftwareAuthorization />}
+            />
           </Route>
         </Route>
 

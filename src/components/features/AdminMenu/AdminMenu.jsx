@@ -92,7 +92,9 @@ export default function AdminMenu() {
             <StyledLink to="/administrador/liberacao-cursos">
               Liberação do curso
             </StyledLink>
-            <Text>Liberação do software</Text>
+            <StyledLink to="/administrador/liberacao-software">
+              Liberação do Software
+            </StyledLink>
           </Section>
         </MenuMobile>
         <MobileMenuButton
