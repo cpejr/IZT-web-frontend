@@ -34,6 +34,7 @@ import {
   VerifyEmail,
   StabilityAnalysis,
   ReportSection,
+  ProfileAnalysis,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -84,6 +85,7 @@ const router = createBrowserRouter(
 
         <Route element={<PrivateRoutes />}>
           <Route path="software" element={<SoftwareLayout />}>
+            <Route path="analise-perfil" element={<ProfileAnalysis />} />
             <Route index element={<StabilityAnalysis />} />
             <Route path="secao-relatorio" element={<ReportSection />} />
           </Route>
