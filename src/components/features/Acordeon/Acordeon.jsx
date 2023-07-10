@@ -12,7 +12,7 @@ function AccordionDemo() {
     <Accordion.Root
       className="AccordionRoot"
       type="single"
-      defaultValue="item-1"
+      defaultValue="none"
       collapsible
     >
       <Accordion.Item className="AccordionItem" value="item-1">
