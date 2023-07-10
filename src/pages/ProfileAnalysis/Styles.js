@@ -30,7 +30,7 @@ export const DataInput = styled.div`
 `;
 export const Containerleft = styled.div`
   width: 35%;
-  height: 85vh;
+  height: 95%;
   border-right: 1.7px dashed;
   border-color: #ffffff;
   display: flex;
@@ -68,7 +68,7 @@ export const Container2 = styled.div`
   display: flex;
   flex-direction: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #ffff;
   height: 36rem;
   width: 64rem;
 
@@ -163,24 +163,6 @@ export const OutputData2 = styled.div`
   }
 `;
 
-export const Hw = styled.div``;
-export const Hd = styled.div``;
-export const Adr = styled.div``;
-export const InclDresser = styled.div``;
-export const RullerDegree = styled.div``;
-export const Nr1 = styled.div``;
-export const Nr2 = styled.div``;
-export const Vp = styled.div``;
-export const Vfa = styled.div``;
-export const Qp = styled.div``;
-export const Tc = styled.div``;
-export const U = styled.div``;
-export const Qw = styled.div``;
-export const Hef = styled.div``;
-export const Y = styled.div``;
-export const Yra = styled.div``;
-export const Yrc = styled.div``;
-
 export const Text2 = styled.a`
   font-family: 'Montserrat';
   font-style: normal;
@@ -190,12 +172,6 @@ export const Text2 = styled.a`
 
   color: #ffffff;
 `;
-
-export const Datas = styled.div``;
-export const DataAnalysis = styled.div``;
-export const MachineData = styled.div``;
-export const ProductData = styled.div``;
-export const RA = styled.div``;
 
 export const Text = styled.a`
   font-family: 'Montserrat';

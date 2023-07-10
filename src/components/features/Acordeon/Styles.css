@@ -25,6 +25,7 @@ h3 {
   width: 400px;
   flex-direction: center;
   width: 100%;
+  margin-bottom: 0.5rem;
 }
 
 .AccordionItem:first-child {
@@ -76,6 +77,7 @@ h3 {
   color: var(--mauve11);
   background-color: #123645;
   text-align: left;
+  padding-bottom: 0.5rem;
 }
 .AccordionContent[data-state='open'] {
   animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
@@ -88,6 +90,12 @@ h3 {
 .AccordionContentText {
   padding: 15px 20px;
   color: #fff;
+}
+
+.AccordionContentText br {
+  display: block;
+  content: '';
+  margin-top: 0.5rem;
 }
 
 .AccordionChevron {
