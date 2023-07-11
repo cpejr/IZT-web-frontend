@@ -73,23 +73,23 @@ export const Container2 = styled.div`
   width: 64rem;
 
   @media (max-width: 1200px) {
-    height: 25rem;
+    height: 33rem;
     width: 54rem;
   }
   @media (max-width: 1030px) {
-    height: 21rem;
+    height: 31rem;
     width: 50rem;
   }
   @media (max-width: 950px) {
-    height: 18rem;
+    height: 28rem;
     width: 47rem;
   }
   @media (max-width: 860px) {
-    height: 15rem;
+    height: 25rem;
     width: 44rem;
   }
   @media (max-width: 730px) {
-    height: 13rem;
+    height: 23rem;
     width: 42rem;
   }
 `;
@@ -145,7 +145,7 @@ export const OutputData = styled.div`
   .OutputDataRight {
     background-color: black;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 850px) {
     white-space: normal;
   }
 `;
@@ -214,9 +214,10 @@ export const Button = styled.button`
   border-color: white;
   font-family: 'Montserrat';
   cursor: pointer;
+
   @media (max-width: 950px) {
     font-size: 1.4rem;
-    padding: 0.4rem;
+    padding: 0.4rem 1.5rem 0.4rem 1.5rem;
   }
 `;
 
