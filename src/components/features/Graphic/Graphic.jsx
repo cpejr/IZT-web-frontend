@@ -7,13 +7,16 @@ export default function Graphic() {
     <Plot
       data={[
         {
-          x: [1, 2, 3],
-          y: [2, 6, 3],
-          type: 'scatter',
-          mode: 'lines+markers',
-          marker: { color: 'red' },
+          z: [
+            [10, 10.625, 12.5, 15.625, 20],
+            [5.625, 6.25, 8.125, 11.25, 15.625],
+            [2.5, 3.125, 5, 8.125, 12.5],
+            [0.625, 1.25, 3.125, 6.25, 10.625],
+            [0, 0.625, 2.5, 5.625, 10],
+          ],
+          type: 'contour',
+          colorscale: 'Jet',
         },
-        { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
       ]}
       layout={{ autosize: true, title: 'Gráfico IZT' }}
       style={{ width: '100%', height: '100%' }}
