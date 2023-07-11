@@ -30,7 +30,7 @@ export const DataInput = styled.div`
 `;
 export const Containerleft = styled.div`
   width: 35%;
-  height: 100%;
+  height: 95%;
   border-right: 1.7px dashed;
   border-color: #ffffff;
   display: flex;
