@@ -25,3 +25,4 @@ export { default as SoftwareAuthorizationMobile } from './SoftwareAuthorizationM
 export { default as EditAuthorizeSoftwareAccessMobile } from './EditAuthorizeSoftwareAccessMobile/EditAuthorizeSoftwareAccessMobile';
 export { default as ReportSection } from './ReportSection/ReportSection';
 export { default as ProfileAnalysis } from './ProfileAnalysis/ProfileAnalysis';
+export { default as TestPagePDF } from './TestPagePDF/TestPagePDF';
