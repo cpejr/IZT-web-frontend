@@ -24,7 +24,7 @@ export default function SoftwareLateralMenu() {
         <Cogs />
         <MenuLink
           as={Link}
-          to=""
+          to="/software/analise-estabilidade"
           active={activeMenuItem === 0}
           onClick={() => handleMenuItemClick(0)}
         >
@@ -35,7 +35,7 @@ export default function SoftwareLateralMenu() {
         <CarWheel />
         <MenuLink
           as={Link}
-          to=""
+          to="/software/perfil"
           active={activeMenuItem === 1}
           onClick={() => handleMenuItemClick(1)}
         >
@@ -46,10 +46,11 @@ export default function SoftwareLateralMenu() {
         <BackwardTime />
         <MenuLink
           as={Link}
-          to=""
+          to="/software/secao-relatorio"
           active={activeMenuItem === 2}
           onClick={() => handleMenuItemClick(2)}
         >
+          
           Relatórios
         </MenuLink>
       </MenuItem>
