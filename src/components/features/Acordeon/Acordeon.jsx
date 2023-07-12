@@ -4,8 +4,8 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-// eslint-disable-next-line import/no-unresolved
-import './styles.css';
+
+import './Styles.css';
 
 function AccordionDemo() {
   return (
