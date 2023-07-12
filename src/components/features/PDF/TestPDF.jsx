@@ -15,6 +15,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
   },
+  div: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
+  },
   text: {
     margin: 12,
     fontSize: 14,
@@ -37,17 +42,27 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function TestPDF({ user }) {
+export default function TestPDF({ data }) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <Text style={styles.header} fixed>
-          TESTE PDF
-        </Text>
-        <Text style={styles.text}>Nome: {user.nome}</Text>
-        <Text style={styles.text}>Idade: {user.idade}</Text>
-        <Text style={styles.text}>Profissão: {user.profissao}</Text>
-        <Image style={styles.image} src={BGCourse} />
+        <div style={styles.div}>
+          <div>
+            <Text style={styles.title} fixed>
+              {data.title}
+            </Text>
+            <Text style={styles.text}>
+              Diâmetro do RC (máx): {data.diametroRC} mm
+            </Text>
+            <Text style={styles.text}>
+              Comprimento RC (máx): {data.comprimentoRC} mm
+            </Text>
+            <Text style={styles.text}>
+              Inclinação RW: {data.inclinacaoRW}°{' '}
+            </Text>
+          </div>
+          <Image style={styles.image} src={BGCourse} />
+        </div>
       </Page>
     </Document>
   );
