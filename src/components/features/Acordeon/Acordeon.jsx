@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/no-array-index-key */
+import React, { useState } from 'react';
 
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
@@ -6,6 +7,15 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import './Styles.css';
+
+const rectificationProcess = [
+  { label: 'Processo Retificação' },
+  { label: 'Máquina' },
+  { label: 'N° da máquina' },
+  { label: 'Operação' },
+  { label: 'Departamento' },
+  { label: 'Responsável' },
+];
 
 const machineData = [
   { label: 'Diametro do RC (máx)' },
@@ -20,6 +30,8 @@ const machineData = [
 ];
 
 const productData = [
+  { label: 'Produto' },
+  { label: 'Nº do produto' },
   { label: 'Diametro' },
   { label: 'Comprimento total' },
   { label: 'Comprimento eletivo' },
@@ -28,12 +40,30 @@ const productData = [
 
 const parametersRA = [
   { label: 'Altura entre centros hw' },
-  { label: 'Indicação do RA' },
-  { label: 'Altura do Dressador' },
+  { label: 'Inclinação do RA' },
+  { label: 'Altura do dressador' },
   { label: 'Sobremetal' },
+  { label: 'Posição do dressador' },
 ];
 
 function AccordionDemo() {
+  const [inputData, setInputData] = useState({
+    rectificationProcess: {},
+    machineData: {},
+    productData: {},
+    parametersRA: {},
+  });
+
+  const handleInputChange = (section, key, value) => {
+    setInputData((prevData) => ({
+      ...prevData,
+      [section]: {
+        ...prevData[section],
+        [key]: value,
+      },
+    }));
+  };
+
   return (
     <Accordion.Root
       className="AccordionRoot"
@@ -44,32 +74,23 @@ function AccordionDemo() {
       <Accordion.Item className="AccordionItem" value="item-1">
         <AccordionTrigger>Dados de análise</AccordionTrigger>
         <AccordionContent>
-          Processos Retificação:
-          <div className="AccordionLine">
-            <br /> Máquina:
-            <br />
-            <input className="AccordionInput" />
-          </div>
-          <div className="AccordionLine">
-            <br /> N° da máquina:
-            <br />
-            <input className="AccordionInput" />
-          </div>
-          <div className="AccordionLine">
-            <br /> Operação:
-            <br />
-            <input className="AccordionInput" />
-          </div>
-          <div className="AccordionLine">
-            <br /> Departamento:
-            <br />
-            <input className="AccordionInput" />
-          </div>
-          <div className="AccordionLine">
-            <br /> Responsável
-            <br />
-            <input className="AccordionInput" />
-          </div>
+          {rectificationProcess.map((data, index) => (
+            <div className="AccordionLine" key={index}>
+              <br /> {data.label}:
+              <br />
+              <input
+                className="AccordionInput"
+                value={inputData.rectificationProcess[data.label] || ''}
+                onChange={(e) =>
+                  handleInputChange(
+                    'rectificationProcess',
+                    data.label,
+                    e.target.value
+                  )
+                }
+              />
+            </div>
+          ))}
           <div className="Center">
             <button className="Button2" type="button">
               Salvar
@@ -85,7 +106,13 @@ function AccordionDemo() {
             <div className="AccordionLine" key={index}>
               <br /> {data.label}:
               <br />
-              <input className="AccordionMiniInput" />
+              <input
+                className="AccordionMiniInput"
+                value={inputData.machineData[data.label] || ''}
+                onChange={(e) =>
+                  handleInputChange('machineData', data.label, e.target.value)
+                }
+              />
               <p> mm </p>
             </div>
           ))}
@@ -100,14 +127,17 @@ function AccordionDemo() {
       <Accordion.Item className="AccordionItem" value="item-3">
         <AccordionTrigger>Dados do produto</AccordionTrigger>
         <AccordionContent>
-          Produto:___
-          <br /> N° do produto:___
-          <br />
           {productData.map((data, index) => (
             <div className="AccordionLine" key={index}>
               <br /> {data.label}:
               <br />
-              <input className="AccordionMiniInput" />
+              <input
+                className="AccordionMiniInput"
+                value={inputData.productData[data.label] || ''}
+                onChange={(e) =>
+                  handleInputChange('productData', data.label, e.target.value)
+                }
+              />
               <p> mm </p>
             </div>
           ))}
@@ -125,11 +155,16 @@ function AccordionDemo() {
             <div className="AccordionLine" key={index}>
               <br /> {data.label}:
               <br />
-              <input className="AccordionMiniInput" />
+              <input
+                className="AccordionMiniInput"
+                value={inputData.parametersRA[data.label] || ''}
+                onChange={(e) =>
+                  handleInputChange('parametersRA', data.label, e.target.value)
+                }
+              />
               <p> mm </p>
             </div>
           ))}
-          Posição do Dressador:___
           <div className="Center">
             <button className="Button2" type="button">
               Salvar
