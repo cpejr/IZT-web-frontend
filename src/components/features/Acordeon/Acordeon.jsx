@@ -7,6 +7,32 @@ import PropTypes from 'prop-types';
 
 import './Styles.css';
 
+const machineData = [
+  { label: 'Diametro do RC (máx)' },
+  { label: 'Diametro do RC (min)' },
+  { label: 'Diametro do RA' },
+  { label: 'Comprimento do RC' },
+  { label: 'Comprimento do RA' },
+  { label: 'Comprimento efetivo RC' },
+  { label: 'Rotação do RC' },
+  { label: 'Rotação do RA' },
+  { label: 'Rotação do RW' },
+];
+
+const productData = [
+  { label: 'Diametro' },
+  { label: 'Comprimento total' },
+  { label: 'Comprimento eletivo' },
+  { label: 'Sobremetal' },
+];
+
+const parametersRA = [
+  { label: 'Altura entre centros hw' },
+  { label: 'Indicação do RA' },
+  { label: 'Altura do Dressador' },
+  { label: 'Sobremetal' },
+];
+
 function AccordionDemo() {
   return (
     <Accordion.Root
@@ -18,16 +44,32 @@ function AccordionDemo() {
       <Accordion.Item className="AccordionItem" value="item-1">
         <AccordionTrigger>Dados de análise</AccordionTrigger>
         <AccordionContent>
-          Processos Retificação:___
-          <br /> Máquina:___
-          <br />
-          N° da máquina:___
-          <br />
-          Operação:___
-          <br />
-          Departamento:___
-          <br />
-          Responsável:___
+          Processos Retificação:
+          <div className="AccordionLine">
+            <br /> Máquina:
+            <br />
+            <input className="AccordionInput" />
+          </div>
+          <div className="AccordionLine">
+            <br /> N° da máquina:
+            <br />
+            <input className="AccordionInput" />
+          </div>
+          <div className="AccordionLine">
+            <br /> Operação:
+            <br />
+            <input className="AccordionInput" />
+          </div>
+          <div className="AccordionLine">
+            <br /> Departamento:
+            <br />
+            <input className="AccordionInput" />
+          </div>
+          <div className="AccordionLine">
+            <br /> Responsável
+            <br />
+            <input className="AccordionInput" />
+          </div>
           <div className="Center">
             <button className="Button2" type="button">
               Salvar
@@ -39,22 +81,15 @@ function AccordionDemo() {
       <Accordion.Item className="AccordionItem" value="item-2">
         <AccordionTrigger>Dados da máquina</AccordionTrigger>
         <AccordionContent>
-          Diametro do RC (máx):___ mm
-          <br /> Diametro do RC (min): ___ mm
-          <br />
-          Diametro do RA: ___mm
-          <br />
-          Comprimento do RC:___ mm
-          <br />
-          Comprimento do RA:___ mm
-          <br />
-          Comprimento efetivo RC: ___mm
-          <br />
-          Rotação do RC: ___mm
-          <br />
-          Rotação do RA: ___mm
-          <br />
-          Rotação do RW: ___°
+          {machineData.map((data, index) => (
+            <div className="AccordionLine" key={index}>
+              <br /> {data.label}:
+              <br />
+              <input className="AccordionMiniInput" />
+              <p> mm </p>
+            </div>
+          ))}
+
           <div className="Center">
             <button className="Button2" type="button">
               Salvar
@@ -68,13 +103,14 @@ function AccordionDemo() {
           Produto:___
           <br /> N° do produto:___
           <br />
-          Diametro :___ mm
-          <br />
-          Comprimento total:___ mm
-          <br />
-          Comprimento eletivo:___ mm
-          <br />
-          Sobremetal:___ mm
+          {productData.map((data, index) => (
+            <div className="AccordionLine" key={index}>
+              <br /> {data.label}:
+              <br />
+              <input className="AccordionMiniInput" />
+              <p> mm </p>
+            </div>
+          ))}
           <div className="Center">
             <button className="Button2" type="button">
               Salvar
@@ -85,13 +121,14 @@ function AccordionDemo() {
       <Accordion.Item className="AccordionItem" value="item-4">
         <AccordionTrigger>RA parâmetro de perfil</AccordionTrigger>
         <AccordionContent>
-          Altura entre centros hw:___ mm
-          <br /> Indicação do RA:___ mm
-          <br />
-          Indicação do Dressador RA:___ mm
-          <br />
-          Altura do Dressador:___ mm
-          <br />
+          {parametersRA.map((data, index) => (
+            <div className="AccordionLine" key={index}>
+              <br /> {data.label}:
+              <br />
+              <input className="AccordionMiniInput" />
+              <p> mm </p>
+            </div>
+          ))}
           Posição do Dressador:___
           <div className="Center">
             <button className="Button2" type="button">
