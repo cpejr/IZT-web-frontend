@@ -90,6 +90,11 @@ const router = createBrowserRouter(
           <Route path="analise-perfil" element={<ProfileAnalysis />} />
           <Route path="software" element={<SoftwareLayout />}>
             <Route index element={<StabilityAnalysis />} />
+            <Route
+              path="analise-estabilidade"
+              element={<StabilityAnalysis />}
+            />
+            <Route path="perfil" element={<ProfileAnalysis />} />
             <Route path="secao-relatorio" element={<ReportSection />} />
           </Route>
           <Route path="administrador" element={<AdminLayout />}>
