@@ -28,6 +28,7 @@ export const DataInput = styled.div`
     color: #ffffff;
   }
 `;
+
 export const Containerleft = styled.div`
   width: 35%;
   height: 95%;

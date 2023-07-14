@@ -58,7 +58,7 @@ export const Input = styled.input`
   margin-left: 1rem;
   border-bottom: 0.1rem solid white;
   font-size: 1.5rem;
-  width: 100%;
+  width: ${(props) => props.width || '100%'};
   height: 100%;
 `;
 

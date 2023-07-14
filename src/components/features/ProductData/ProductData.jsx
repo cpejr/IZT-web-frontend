@@ -23,22 +23,22 @@ export default function MachinProductData({ collapse }) {
         </Line>
         <Line>
           <Label>Diâmetro:</Label>
-          <Input />
+          <Input width="4rem" />
           <Label>mm</Label>
         </Line>
         <Line>
           <Label>Comprimento total:</Label>
-          <Input />
+          <Input width="4rem" />
           <Label>mm</Label>
         </Line>
         <Line>
           <Label>Comprimento eletivo:</Label>
-          <Input />
+          <Input width="4rem" />
           <Label>mm</Label>
         </Line>
         <Line>
           <Label>Sobremetal:</Label>
-          <Input />
+          <Input width="4rem" />
           <Label>mm</Label>
         </Line>
       </DataColumn>
