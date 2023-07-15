@@ -35,6 +35,7 @@ export default function Profile() {
 
   const openModalChangeUserData = () => setUpdateUserModalState(true);
   const closeModalChangeUserData = () => setUpdateUserModalState(false);
+  let accessGranted = false;
 
   return (
     <Background>
@@ -107,7 +108,10 @@ export default function Profile() {
                     <LessonInfo>
                       <h1>Validade de acesso: </h1>
                       {userCourses?.map((userCourse, index) => {
-                        if (userCourse.user._id === user?._id) {
+                        if (user?.isAdmin && !accessGranted) {
+                          accessGranted = true;
+                          return <h2 key={index}>Acesso Ilimitado</h2>;
+                        } else if (userCourse.user._id === user?._id) {
                           return (
                             <h2 key={index}>
                               {userCourse?.expiresAt
@@ -118,7 +122,10 @@ export default function Profile() {
                                 : 'Sem Acesso'}
                             </h2>
                           );
-                        } else if (index === userCourses.length - 1) {
+                        } else if (
+                          index === userCourses.length - 1 &&
+                          !accessGranted
+                        ) {
                           return <h2 key={index}>Sem Acesso</h2>;
                         }
                         return null;
@@ -130,7 +137,9 @@ export default function Profile() {
                     <LessonInfo>
                       <h1>Validade de acesso: </h1>
                       <h2>
-                        {user?.softwareAccess
+                        {user?.isAdmin
+                          ? 'Acesso Ilimitado'
+                          : user?.softwareAccess
                           ? new Date(user.softwareAccess).getTime() > Date.now()
                             ? formatDate({ value: user.softwareAccess })
                             : 'Sem Acesso'
