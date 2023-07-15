@@ -30,7 +30,9 @@ export default function ProfileAnalysis() {
             <Data>
               <AccordionDemo />
             </Data>
-            <Data>{/* <Button> Calcular </Button> */}</Data>
+            {/* <Data>
+              <Button> Calcular </Button>
+            </Data> */}
           </Center>
         </Containerleft>
         <Analysis>

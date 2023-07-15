@@ -8,10 +8,9 @@ import { useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { Form, useForm } from 'react-hook-form';
-// import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
-// import useCalculateProfileAnalysis from '../../../hooks/query/profileAnalysis';
+import { useCalculateProfileAnalysis } from '../../../hooks/query/profileAnalysis';
 
 import './Styles.css';
 import {
@@ -58,40 +57,36 @@ const parametersRA = [
 ];
 
 function AccordionDemo() {
-  // const [isLoading, setIsLoading] = useState(false);
-  // const queryClient = useQueryClient();
+  const [isLoading, setIsLoading] = useState(false);
 
-  // // Linkagem
+  // Linkagem
 
-  // const { mutate: calculateProfileAnalysis } = useCalculateProfileAnalysis({
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({
-  //       queryKey: ['profile-analysis'],
-  //     });
+  const { mutate: calculateProfileAnalysis } = useCalculateProfileAnalysis({
+    onSuccess: () => {
+      toast.success('Dados calculados com sucesso!');
+    },
+    onError: (err) => {
+      const errorMessage = buildCalculateProfileAnalysisErrorMessage(err);
 
-  //     toast.success('Dados calculados com sucesso!');
-  //   },
-  //   onError: (err) => {
-  //     const errorMessage = buildCalculateProfileAnalysisErrorMessage(err);
+      toast.error(errorMessage);
+      setIsLoading(false);
+    },
+  });
 
-  //     toast.error(errorMessage);
-  //     setIsLoading(false);
-  //   },
-  // });
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(calculateProfileAnalysisValidationSchema),
+  });
+  const onSubmit = (data) => {
+    calculateProfileAnalysis(data);
+    setIsLoading(true);
+    console.log('oiiiii');
+  };
 
-  // const {
-  //   handleSubmit,
-  //   register,
-  //   formState: { errors },
-  // } = useForm({
-  //   resolver: zodResolver(calculateProfileAnalysisValidationSchema),
-  // });
-  // const onSubmit = (data) => {
-  //   calculateProfileAnalysis(data);
-  //   setIsLoading(true);
-  // };
-
-  // const errorMessage = errors?.name?.message;
+  const errorMessage = errors?.name?.message;
 
   // Dados
   const [inputData, setInputData] = useState({
@@ -118,114 +113,138 @@ function AccordionDemo() {
       defaultValue="none"
       collapsible
     >
-      {/* <Form onSubmit={handleSubmit(onSubmit)}> */}
-      <Accordion.Item className="AccordionItem" value="item-1">
-        <AccordionTrigger>Dados de análise</AccordionTrigger>
-        <AccordionContent>
-          {rectificationProcess.map((data, index) => (
-            <div className="AccordionLine" key={index}>
-              <br /> {data.label}:
-              <br />
-              <input
-                className="AccordionInput"
-                value={inputData.rectificationProcess[data.label] || ''}
-                onChange={(e) =>
-                  handleInputChange(
-                    'rectificationProcess',
-                    data.label,
-                    e.target.value
-                  )
-                }
-              />
-            </div>
-          ))}
-          <div className="Center">
-            <button className="Button2" type="button">
-              Salvar
-            </button>
-          </div>
-        </AccordionContent>
-      </Accordion.Item>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Accordion.Item className="AccordionItem" value="item-1">
+          <AccordionTrigger>Dados de análise</AccordionTrigger>
+          <AccordionContent>
+            {rectificationProcess.map((data, index) => (
+              <div className="AccordionLine" key={index}>
+                <br /> {data.label}:
+                <br />
+                <input
+                  name={data.id}
+                  id={data.id}
+                  register={register}
+                  errors={errorMessage}
+                  className="AccordionInput"
+                  value={inputData.rectificationProcess[data.label] || ''}
+                  onChange={(e) =>
+                    handleInputChange(
+                      'rectificationProcess',
+                      data.label,
+                      e.target.value
+                    )
+                  }
+                />
+              </div>
+            ))}
+            {/* <div className="Center">
+              <button className="Button2" type="button">
+                Salvar
+              </button>
+            </div> */}
+          </AccordionContent>
+        </Accordion.Item>
 
-      <Accordion.Item className="AccordionItem" value="item-2">
-        <AccordionTrigger>Dados da máquina</AccordionTrigger>
-        <AccordionContent>
-          {machineData.map((data, index) => (
-            <div className="AccordionLine" key={index}>
-              <br /> {data.label}:
-              <br />
-              <input
-                className="AccordionMiniInput"
-                value={inputData.machineData[data.label] || ''}
-                onChange={(e) =>
-                  handleInputChange('machineData', data.label, e.target.value)
-                }
-              />
-              <p> {data.unit} </p>
-            </div>
-          ))}
+        <Accordion.Item className="AccordionItem" value="item-2">
+          <AccordionTrigger>Dados da máquina</AccordionTrigger>
+          <AccordionContent>
+            {machineData.map((data, index) => (
+              <div className="AccordionLine" key={index}>
+                <br /> {data.label}:
+                <br />
+                <input
+                  name={data.id}
+                  id={data.id}
+                  register={register}
+                  errors={errorMessage}
+                  className="AccordionMiniInput"
+                  value={inputData.machineData[data.label] || ''}
+                  onChange={(e) =>
+                    handleInputChange('machineData', data.label, e.target.value)
+                  }
+                />
+                <p> {data.unit} </p>
+              </div>
+            ))}
 
-          <div className="Center">
-            <button className="Button2" type="button">
-              Salvar
-            </button>
-          </div>
-        </AccordionContent>
-      </Accordion.Item>
-      <Accordion.Item className="AccordionItem" value="item-3">
-        <AccordionTrigger>Dados do produto</AccordionTrigger>
-        <AccordionContent>
-          {productData.map((data, index) => (
-            <div className="AccordionLine" key={index}>
-              <br /> {data.label}:
-              <br />
-              <input
-                className="AccordionMiniInput"
-                value={inputData.productData[data.label] || ''}
-                onChange={(e) =>
-                  handleInputChange('productData', data.label, e.target.value)
-                }
-              />
-              <p> {data.unit} </p>
+            {/* <div className="Center">
+              <button className="Button2" type="button">
+                Salvar
+              </button>
+            </div> */}
+          </AccordionContent>
+        </Accordion.Item>
+        <Accordion.Item className="AccordionItem" value="item-3">
+          <AccordionTrigger>Dados do produto</AccordionTrigger>
+          <AccordionContent>
+            {productData.map((data, index) => (
+              <div className="AccordionLine" key={index}>
+                <br /> {data.label}:
+                <br />
+                <input
+                  name={data.id}
+                  id={data.id}
+                  register={register}
+                  errors={errorMessage}
+                  className="AccordionMiniInput"
+                  value={inputData.productData[data.label] || ''}
+                  onChange={(e) =>
+                    handleInputChange('productData', data.label, e.target.value)
+                  }
+                />
+                <p> {data.unit} </p>
+              </div>
+            ))}
+            {/* <div className="Center">
+              <button className="Button2" type="button">
+                Salvar
+              </button>
+            </div> */}
+          </AccordionContent>
+        </Accordion.Item>
+        <Accordion.Item className="AccordionItem" value="item-4">
+          <AccordionTrigger>RA parâmetro de perfil</AccordionTrigger>
+          <AccordionContent>
+            {parametersRA.map((data, index) => (
+              <div className="AccordionLine" key={index}>
+                <br /> {data.label}:
+                <br />
+                <input
+                  name={data.id}
+                  id={data.id}
+                  register={register}
+                  errors={errorMessage}
+                  className="AccordionMiniInput"
+                  value={inputData.parametersRA[data.label] || ''}
+                  onChange={(e) =>
+                    handleInputChange(
+                      'parametersRA',
+                      data.label,
+                      e.target.value
+                    )
+                  }
+                />
+                <p> mm </p>
+              </div>
+            ))}
+            <div className="Center">
+              {/* <button className="Button2" type="button">
+                Salvar
+              </button> */}
             </div>
-          ))}
-          <div className="Center">
-            <button className="Button2" type="button">
-              Salvar
-            </button>
-          </div>
-        </AccordionContent>
-      </Accordion.Item>
-      <Accordion.Item className="AccordionItem" value="item-4">
-        <AccordionTrigger>RA parâmetro de perfil</AccordionTrigger>
-        <AccordionContent>
-          {parametersRA.map((data, index) => (
-            <div className="AccordionLine" key={index}>
-              <br /> {data.label}:
-              <br />
-              <input
-                className="AccordionMiniInput"
-                value={inputData.parametersRA[data.label] || ''}
-                onChange={(e) =>
-                  handleInputChange('parametersRA', data.label, e.target.value)
-                }
-              />
-              <p> mm </p>
-            </div>
-          ))}
-          <div className="Center">
-            <button className="Button2" type="button">
-              Salvar
-            </button>
-          </div>
-        </AccordionContent>
-      </Accordion.Item>
-      <div className="Center">
-        <button className="ButtonCalculate" type="button">
-          Calcular
-        </button>
-      </div>
-      {/* </Form> */}
+          </AccordionContent>
+        </Accordion.Item>
+        <div className="Center">
+          <button
+            className="ButtonCalculate"
+            disabled={isLoading}
+            type="submit"
+          >
+            {isLoading ? <p>Carregando</p> : <p>Calcular</p>}
+          </button>
+        </div>
+      </form>
     </Accordion.Root>
   );
 }
