@@ -1,5 +1,6 @@
 /* esTextnt-disable react/prop-types */
 import React from 'react';
+import ImageLogo from '../../../assets/IZTLogo.png';
 
 import {
   Page,
@@ -30,18 +31,19 @@ const styles = StyleSheet.create({
     paddingTop: 35,
     paddingBottom: 65,
     paddingHorizontal: 35,
-    display: 'grid',
+    display: 'flex',
   },
   title: {
     fontSize: 24,
     textATextgn: 'center',
+    textAlign: 'left',
+    alignSelf: 'flex-start',
   },
   div: {
     display: 'flex',
     flexDirection: 'row',
   },
   text: {
-    margin: 12,
     fontSize: 14,
     textATextgn: 'justify',
   },
@@ -51,21 +53,24 @@ const styles = StyleSheet.create({
     fontWeight: 600,
   },
   header: {
-    display: 'grid',
+    display: 'flex',
     fontSize: 12,
-    marginBottom: 20,
+    flexDirection: 'row',
     textATextgn: 'center',
     color: 'black',
     fontFamily: 'Montserrat',
     fontWeight: 600,
+    height: 'auto',
+    justifyContent: 'flex-start',
+    gap: 250,
   },
   image: {
-    marginVertical: 15,
-    marginHorizontal: 100,
+    width: 200,
+    height: 200,
   },
   item: {
     paddingLeft: 20,
-    fontSize: 17,
+    fontSize: 16,
     fontFamily: 'Montserrat',
   },
   space: {
@@ -76,10 +81,42 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 20,
+    alignItems: 'flex-start',
+    width: 370,
+  },
+  collumn2: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 70,
+    width: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   hr: {
     borderWidth: 1,
     borderColor: 'black',
+    marginBottom: 10,
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  izt: {
+    width: 55,
+    height: 35,
+  },
+  iztDiv: {
+    display: 'grid',
+    flexDirection: 'row',
+    gap: 5,
+    height: 35,
+  },
+  iztText: {
+    fontFamily: 'Montserrat',
+    fontWeight: 600,
+    alignSelf: 'center',
+    color: 'rgb(32, 54, 153)',
+    fontSize: 15,
   },
 });
 
@@ -87,12 +124,18 @@ export default function TestPDF({ data }) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <div style={styles.header}>
+        <div style={styles.header} fixed>
           <Text style={styles.title} fixed>
             {data.title}
           </Text>
+          <div style={styles.iztDiv}>
+            <Image style={styles.izt} src={ImageLogo} />
+            <Text style={styles.iztText} fixed>
+              iZT Core
+            </Text>
+          </div>
         </div>
-        <View style={styles.hr} />
+        <View style={styles.hr} fixed />
         <div style={styles.row}>
           <div style={styles.collumn}>
             <Text style={styles.section}>Dados Da Máquina</Text>
@@ -132,7 +175,7 @@ export default function TestPDF({ data }) {
 
             <div style={styles.space}>
               <Text style={styles.item}>
-                Processo retificação:{data.processoRetificacao}
+                Processo retificação: {data.processoRetificacao}
               </Text>
               <Text style={styles.item}>Máquina: {data.maquina} </Text>
               <Text style={styles.item}>Operação: {data.operacao}</Text>
@@ -157,6 +200,7 @@ export default function TestPDF({ data }) {
             </div>
           </div>
           <div style={styles.collumn2}>
+            <Image style={styles.image} src={BGCourse} />
             <Image style={styles.image} src={BGCourse} />
           </div>
         </div>
