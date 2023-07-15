@@ -1,52 +1,99 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
+import { useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { Form, useForm } from 'react-hook-form';
+// import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
+
+// import useCalculateProfileAnalysis from '../../../hooks/query/profileAnalysis';
 
 import './Styles.css';
+import {
+  buildCalculateProfileAnalysisErrorMessage,
+  calculateProfileAnalysisValidationSchema,
+} from './utils';
 
 const rectificationProcess = [
-  { label: 'Processo Retificação' },
-  { label: 'Máquina' },
-  { label: 'N° da máquina' },
-  { label: 'Operação' },
-  { label: 'Departamento' },
-  { label: 'Responsável' },
+  { label: 'Processo Retificação', id: 'rectificationProcess' },
+  { label: 'Máquina', id: 'machine' },
+  { label: 'N° da máquina', id: 'machineNumber' },
+  { label: 'Operação', id: 'operation' },
+  { label: 'Departamento', id: 'department' },
+  { label: 'Responsável', id: 'responsiblePerson' },
 ];
 
 const machineData = [
-  { label: 'Diametro do RC (máx)' },
-  { label: 'Diametro do RC (min)' },
-  { label: 'Diametro do RA' },
-  { label: 'Comprimento do RC' },
-  { label: 'Comprimento do RA' },
-  { label: 'Comprimento efetivo RC' },
-  { label: 'Rotação do RC' },
-  { label: 'Rotação do RA' },
-  { label: 'Rotação do RW' },
+  { label: 'Diametro do RC (máx)', unit: 'mm', id: 'rcMaxDiameter' },
+  { label: 'Diametro do RC (min)', unit: 'mm', id: 'rcMinDiameter' },
+  { label: 'Diametro do RA', unit: 'mm', id: 'raDiameter' },
+  { label: 'Comprimento do RC', unit: 'mm', id: 'rcLength' },
+  { label: 'Comprimento do RA', unit: 'mm', id: 'raLength' },
+  { label: 'Comprimento efetivo RC', unit: 'mm', id: 'rcEffectiveLength' },
+  { label: 'Rotação do RC', unit: 'mm', id: 'rcRotation' },
+  { label: 'Rotação do RA', unit: 'mm', id: 'raRotation' },
+  { label: 'Inclinação do RW', unit: '°', id: 'rwInclination' },
 ];
 
 const productData = [
-  { label: 'Produto' },
-  { label: 'Nº do produto' },
-  { label: 'Diametro' },
-  { label: 'Comprimento total' },
-  { label: 'Comprimento eletivo' },
-  { label: 'Sobremetal' },
+  { label: 'Produto', unit: '', id: 'product' },
+  { label: 'Nº do produto', unit: '', id: 'productNumber' },
+  { label: 'Diametro', unit: 'mm', id: 'diameter' },
+  { label: 'Comprimento total', unit: 'mm', id: 'totalLength' },
+  { label: 'Comprimento eletivo', unit: 'mm', id: 'electiveLength' },
+  // { label: 'Sobremetal', unit: 'mm', id: '' },
 ];
 
 const parametersRA = [
-  { label: 'Altura entre centros hw' },
-  { label: 'Inclinação do RA' },
-  { label: 'Altura do dressador' },
-  { label: 'Sobremetal' },
-  { label: 'Posição do dressador' },
+  { label: 'Altura entre centros hw', id: 'hwCenterHeight' },
+  { label: 'Inclinação do RA', id: 'raInclination' },
+  { label: 'Inclinação do dressador RA', id: 'raDresserInclination' },
+  { label: 'Altura do dressador', id: 'dresserHeight' },
+  { label: 'Posição do dressador', id: 'dresserPosition' },
 ];
 
 function AccordionDemo() {
+  // const [isLoading, setIsLoading] = useState(false);
+  // const queryClient = useQueryClient();
+
+  // // Linkagem
+
+  // const { mutate: calculateProfileAnalysis } = useCalculateProfileAnalysis({
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({
+  //       queryKey: ['profile-analysis'],
+  //     });
+
+  //     toast.success('Dados calculados com sucesso!');
+  //   },
+  //   onError: (err) => {
+  //     const errorMessage = buildCalculateProfileAnalysisErrorMessage(err);
+
+  //     toast.error(errorMessage);
+  //     setIsLoading(false);
+  //   },
+  // });
+
+  // const {
+  //   handleSubmit,
+  //   register,
+  //   formState: { errors },
+  // } = useForm({
+  //   resolver: zodResolver(calculateProfileAnalysisValidationSchema),
+  // });
+  // const onSubmit = (data) => {
+  //   calculateProfileAnalysis(data);
+  //   setIsLoading(true);
+  // };
+
+  // const errorMessage = errors?.name?.message;
+
+  // Dados
   const [inputData, setInputData] = useState({
     rectificationProcess: {},
     machineData: {},
@@ -71,6 +118,7 @@ function AccordionDemo() {
       defaultValue="none"
       collapsible
     >
+      {/* <Form onSubmit={handleSubmit(onSubmit)}> */}
       <Accordion.Item className="AccordionItem" value="item-1">
         <AccordionTrigger>Dados de análise</AccordionTrigger>
         <AccordionContent>
@@ -113,7 +161,7 @@ function AccordionDemo() {
                   handleInputChange('machineData', data.label, e.target.value)
                 }
               />
-              <p> mm </p>
+              <p> {data.unit} </p>
             </div>
           ))}
 
@@ -138,7 +186,7 @@ function AccordionDemo() {
                   handleInputChange('productData', data.label, e.target.value)
                 }
               />
-              <p> mm </p>
+              <p> {data.unit} </p>
             </div>
           ))}
           <div className="Center">
@@ -172,6 +220,12 @@ function AccordionDemo() {
           </div>
         </AccordionContent>
       </Accordion.Item>
+      <div className="Center">
+        <button className="ButtonCalculate" type="button">
+          Calcular
+        </button>
+      </div>
+      {/* </Form> */}
     </Accordion.Root>
   );
 }

@@ -223,3 +223,10 @@ export const saveVideoProgress = async ({ video, progress, isCompleted }) => {
 
   return data;
 };
+
+// Profile Analisys - Software
+export const calculateProfileAnalysis = async (caughtData) => {
+  const { data } = await api.post('/profile-analysis/diagrams', caughtData);
+
+  return data;
+};

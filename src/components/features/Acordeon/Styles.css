@@ -174,3 +174,23 @@ h3 {
   display: flex;
   flex-direction: row;
 }
+.ButtonCalculate{
+  display: inline-block;
+  margin-left: 5%;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  font-size: 2rem;
+  font-weight: normal;
+  text-align: center;
+  color: white;
+  background-color: #123645;
+  border-radius: 0.6rem;
+  border: 1px solid;
+  border-color: white;
+  font-family: 'Montserrat';
+  cursor: pointer;
+
+  @media (max-width: 950px) {
+    font-size: 1.4rem;
+    padding: 0.4rem 1.5rem 0.4rem 1.5rem;
+  }
+}
