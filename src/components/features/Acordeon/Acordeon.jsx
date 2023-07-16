@@ -4,14 +4,12 @@ import React, { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
-import { useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { Form, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { useCalculateProfileAnalysis } from '../../../hooks/query/profileAnalysis';
-
 import './Styles.css';
 import {
   buildCalculateProfileAnalysisErrorMessage,
@@ -56,11 +54,10 @@ const parametersRA = [
   { label: 'Posição do dressador', id: 'dresserPosition' },
 ];
 
-function AccordionDemo() {
+export default function AccordionDemo() {
   const [isLoading, setIsLoading] = useState(false);
 
-  // Linkagem
-
+  // Backend calls
   const { mutate: calculateProfileAnalysis } = useCalculateProfileAnalysis({
     onSuccess: () => {
       toast.success('Dados calculados com sucesso!');
@@ -73,6 +70,7 @@ function AccordionDemo() {
     },
   });
 
+  // Form handlers
   const {
     handleSubmit,
     register,
@@ -83,7 +81,7 @@ function AccordionDemo() {
   const onSubmit = (data) => {
     calculateProfileAnalysis(data);
     setIsLoading(true);
-    console.log('oiiiii');
+    console.log('deu certo');
   };
 
   const errorMessage = errors?.name?.message;
@@ -109,7 +107,7 @@ function AccordionDemo() {
   return (
     <Accordion.Root
       className="AccordionRoot"
-      type="single"
+      type="multiple"
       defaultValue="none"
       collapsible
     >
@@ -118,24 +116,28 @@ function AccordionDemo() {
           <AccordionTrigger>Dados de análise</AccordionTrigger>
           <AccordionContent>
             {rectificationProcess.map((data, index) => (
-              <div className="AccordionLine" key={index}>
-                <br /> {data.label}:
-                <br />
-                <input
-                  name={data.id}
-                  id={data.id}
-                  register={register}
-                  errors={errorMessage}
-                  className="AccordionInput"
-                  value={inputData.rectificationProcess[data.label] || ''}
-                  onChange={(e) =>
-                    handleInputChange(
-                      'rectificationProcess',
-                      data.label,
-                      e.target.value
-                    )
-                  }
-                />
+              <div key={index}>
+                <div className="AccordionLine">
+                  <br /> {data.label}:
+                  <br />
+                  <input
+                    id={data.id}
+                    name={data.id}
+                    error={!!errorMessage}
+                    {...register(data.id)}
+                    className="AccordionInput"
+                    // Makes the function not lose the input content
+                    value={inputData.rectificationProcess[data.label] || ''}
+                    onChange={(e) =>
+                      handleInputChange(
+                        'rectificationProcess',
+                        data.label,
+                        e.target.value
+                      )
+                    }
+                  />
+                </div>
+                {errorMessage && <p className="ErrorMessage">{errorMessage}</p>}
               </div>
             ))}
             {/* <div className="Center">
@@ -150,21 +152,29 @@ function AccordionDemo() {
           <AccordionTrigger>Dados da máquina</AccordionTrigger>
           <AccordionContent>
             {machineData.map((data, index) => (
-              <div className="AccordionLine" key={index}>
-                <br /> {data.label}:
-                <br />
-                <input
-                  name={data.id}
-                  id={data.id}
-                  register={register}
-                  errors={errorMessage}
-                  className="AccordionMiniInput"
-                  value={inputData.machineData[data.label] || ''}
-                  onChange={(e) =>
-                    handleInputChange('machineData', data.label, e.target.value)
-                  }
-                />
-                <p> {data.unit} </p>
+              <div key={index}>
+                <div className="AccordionLine">
+                  <br /> {data.label}:
+                  <br />
+                  <input
+                    id={data.id}
+                    name={data.id}
+                    error={!!errorMessage}
+                    {...register(data.id)}
+                    className="AccordionMiniInput"
+                    // Makes the function not lose the input content
+                    value={inputData.machineData[data.label] || ''}
+                    onChange={(e) =>
+                      handleInputChange(
+                        'machineData',
+                        data.label,
+                        e.target.value
+                      )
+                    }
+                  />
+                  <p> {data.unit} </p>
+                </div>
+                {errorMessage && <p className="ErrorMessage">{errorMessage}</p>}
               </div>
             ))}
 
@@ -179,21 +189,28 @@ function AccordionDemo() {
           <AccordionTrigger>Dados do produto</AccordionTrigger>
           <AccordionContent>
             {productData.map((data, index) => (
-              <div className="AccordionLine" key={index}>
-                <br /> {data.label}:
-                <br />
-                <input
-                  name={data.id}
-                  id={data.id}
-                  register={register}
-                  errors={errorMessage}
-                  className="AccordionMiniInput"
-                  value={inputData.productData[data.label] || ''}
-                  onChange={(e) =>
-                    handleInputChange('productData', data.label, e.target.value)
-                  }
-                />
-                <p> {data.unit} </p>
+              <div key={index}>
+                <div className="AccordionLine">
+                  <br /> {data.label}:
+                  <br />
+                  <input
+                    id={data.id}
+                    name={data.id}
+                    error={!!errorMessage}
+                    {...register(data.id)}
+                    className="AccordionMiniInput"
+                    value={inputData.productData[data.label] || ''}
+                    onChange={(e) =>
+                      handleInputChange(
+                        'productData',
+                        data.label,
+                        e.target.value
+                      )
+                    }
+                  />
+                  <p> {data.unit} </p>
+                </div>
+                {errorMessage && <p className="ErrorMessage">{errorMessage}</p>}
               </div>
             ))}
             {/* <div className="Center">
@@ -207,25 +224,28 @@ function AccordionDemo() {
           <AccordionTrigger>RA parâmetro de perfil</AccordionTrigger>
           <AccordionContent>
             {parametersRA.map((data, index) => (
-              <div className="AccordionLine" key={index}>
-                <br /> {data.label}:
-                <br />
-                <input
-                  name={data.id}
-                  id={data.id}
-                  register={register}
-                  errors={errorMessage}
-                  className="AccordionMiniInput"
-                  value={inputData.parametersRA[data.label] || ''}
-                  onChange={(e) =>
-                    handleInputChange(
-                      'parametersRA',
-                      data.label,
-                      e.target.value
-                    )
-                  }
-                />
-                <p> mm </p>
+              <div key={index}>
+                <div className="AccordionLine">
+                  <br /> {data.label}:
+                  <br />
+                  <input
+                    id={data.id}
+                    name={data.id}
+                    error={!!errorMessage}
+                    {...register(data.id)}
+                    className="AccordionMiniInput"
+                    value={inputData.parametersRA[data.label] || ''}
+                    onChange={(e) =>
+                      handleInputChange(
+                        'parametersRA',
+                        data.label,
+                        e.target.value
+                      )
+                    }
+                  />
+                  <p> mm </p>
+                </div>
+                {errorMessage && <p className="ErrorMessage">{errorMessage}</p>}
               </div>
             ))}
             <div className="Center">
@@ -295,4 +315,3 @@ AccordionContent.propTypes = {
 AccordionContent.defaultProps = {
   className: '',
 };
-export default AccordionDemo;

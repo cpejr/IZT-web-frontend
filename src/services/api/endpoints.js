@@ -224,9 +224,9 @@ export const saveVideoProgress = async ({ video, progress, isCompleted }) => {
   return data;
 };
 
-// Profile Analisys - Software
-export const calculateProfileAnalysis = async (caughtData) => {
-  const { data } = await api.post('/profile-analysis/diagrams', caughtData);
+// Profile Analysis - Software
+export const calculateProfileAnalysis = async (inputData) => {
+  const { data } = await api.post('/profile-analysis/diagrams', inputData);
 
   return data;
 };

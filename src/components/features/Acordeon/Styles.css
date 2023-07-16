@@ -173,6 +173,7 @@ h3 {
   width: 100%;
   display: flex;
   flex-direction: row;
+  margin-bottom: 1rem;
 }
 .ButtonCalculate{
   display: inline-block;
@@ -193,4 +194,11 @@ h3 {
     font-size: 1.4rem;
     padding: 0.4rem 1.5rem 0.4rem 1.5rem;
   }
+}
+.ErrorMessage{
+  font-weight: 500;
+  color: red;
+
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
 }
