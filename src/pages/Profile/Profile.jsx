@@ -111,7 +111,10 @@ export default function Profile() {
                         if (user?.isAdmin && !accessGranted) {
                           accessGranted = true;
                           return <h2 key={index}>Acesso Ilimitado</h2>;
-                        } else if (userCourse.user._id === user?._id) {
+                        } else if (
+                          !user?.isAdmin &&
+                          userCourse.user._id === user?._id
+                        ) {
                           return (
                             <h2 key={index}>
                               {userCourse?.expiresAt
