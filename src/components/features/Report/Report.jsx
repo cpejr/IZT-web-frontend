@@ -139,7 +139,6 @@ export default function Report({ data, openedReport, handleOpened }) {
           </DataColumn>
         </Columns>
         <ButtonRow>
-          <button type="button">Baixar diagrama</button>
           <button type="button">Baixar relatório</button>
           <button type="button">Excluir</button>
         </ButtonRow>
