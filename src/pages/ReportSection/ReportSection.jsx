@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { HiSearch } from 'react-icons/hi';
 
-import Report from '../../components/features/Report/Report';
+import StabilityAnalysisReport from '../../components/features/Report/StabilityAnalysisReport';
 import {
   Container,
   Title,
@@ -224,7 +224,7 @@ export default function ReportSection() {
           <Reports>
             {data.map((report) => {
               return (
-                <Report
+                <StabilityAnalysisReport
                   key={report.name}
                   data={report}
                   openedReport={opened}

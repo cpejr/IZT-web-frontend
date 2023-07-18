@@ -17,7 +17,11 @@ import {
   DashedBar,
 } from './Styles';
 
-export default function Report({ data, openedReport, handleOpened }) {
+export default function StabilityAnalysisReport({
+  data,
+  openedReport,
+  handleOpened,
+}) {
   const [isOpened, setIsOpened] = useState(openedReport === data.name);
 
   const analysisDataList = data.analysis;
@@ -147,7 +151,7 @@ export default function Report({ data, openedReport, handleOpened }) {
   );
 }
 
-Report.propTypes = {
+StabilityAnalysisReport.propTypes = {
   data: PropTypes.object.isRequired,
   openedReport: PropTypes.string.isRequired,
   handleOpened: PropTypes.func.isRequired,
