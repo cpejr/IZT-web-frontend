@@ -76,47 +76,25 @@ export default function AccordionDemo({ onCalculate }) {
     handleSubmit,
     register,
     formState: { errors },
+    setValue,
     watch,
   } = useForm({
     resolver: zodResolver(calculateProfileAnalysisValidationSchema),
   });
   const onSubmit = (data) => {
-    calculateProfileAnalysis(data);
     setIsLoading(true);
-
     console.log('deu certo');
-  };
-  const handleOnClick = () => {
-    // Perform your calculations here and get new x and y values
+    calculateProfileAnalysis(data);
+
     const xData = [1, 2, 3, 4]; // Replace with your actual x data
     const yData = [10, 15, 13, 17]; // Replace with your actual y data
 
-    // Call the onCalculate function to pass the new data to the parent component
     onCalculate({ x: xData, y: yData });
-    setIsLoading(true);
 
     setIsLoading(false);
   };
 
   console.log(watch());
-
-  // Dados
-  const [inputData, setInputData] = useState({
-    rectificationProcess: {},
-    machineData: {},
-    productData: {},
-    parametersRA: {},
-  });
-
-  const handleInputChange = (section, key, value) => {
-    setInputData((prevData) => ({
-      ...prevData,
-      [section]: {
-        ...prevData[section],
-        [key]: value,
-      },
-    }));
-  };
 
   return (
     <Accordion.Root
@@ -134,12 +112,34 @@ export default function AccordionDemo({ onCalculate }) {
                 <div className="AccordionLine">
                   <br /> {data.label}:
                   <br />
-                  <input
-                    id={data.id}
-                    name={data.id}
-                    {...register(data.id)}
-                    className="AccordionInput"
-                  />
+                  {data.id === 'machineNumber' ? (
+                    <input
+                      id={data.id}
+                      name={data.id}
+                      value={watch(data.id) || ''}
+                      onChange={(e) => {
+                        const newValue = parseFloat(e.target.value);
+                        if (!Number.isNaN(newValue)) {
+                          setValue(data.id, newValue);
+                        } else {
+                          setValue(data.id, '');
+                        }
+                      }}
+                      step="any"
+                      className={`AccordionMiniInput ${
+                        errors[data.id] ? 'error' : ''
+                      }`}
+                    />
+                  ) : (
+                    <input
+                      id={data.id}
+                      name={data.id}
+                      {...register(data.id)}
+                      className={`AccordionInput ${
+                        errors[data.id] ? 'error' : ''
+                      }`}
+                    />
+                  )}
                 </div>
                 {errors[data.id]?.message && (
                   <p className="ErrorMessage">{errors[data.id]?.message}</p>
@@ -160,17 +160,19 @@ export default function AccordionDemo({ onCalculate }) {
                   <input
                     id={data.id}
                     name={data.id}
-                    {...register(data.id)}
-                    className="AccordionMiniInput"
-                    // Makes the function not lose the input content
-                    value={inputData.machineData[data.label] || ''}
-                    onChange={(e) =>
-                      handleInputChange(
-                        'machineData',
-                        data.label,
-                        e.target.value
-                      )
-                    }
+                    value={watch(data.id) || ''}
+                    onChange={(e) => {
+                      const newValue = parseFloat(e.target.value);
+                      if (!Number.isNaN(newValue)) {
+                        setValue(data.id, newValue);
+                      } else {
+                        setValue(data.id, '');
+                      }
+                    }}
+                    step="any"
+                    className={`AccordionMiniInput ${
+                      errors[data.id] ? 'error' : ''
+                    }`}
                   />
                   <p> {data.unit} </p>
                 </div>
@@ -189,20 +191,34 @@ export default function AccordionDemo({ onCalculate }) {
                 <div className="AccordionLine">
                   <br /> {data.label}:
                   <br />
-                  <input
-                    id={data.id}
-                    name={data.id}
-                    {...register(data.id)}
-                    className="AccordionMiniInput"
-                    value={inputData.productData[data.label] || ''}
-                    onChange={(e) =>
-                      handleInputChange(
-                        'productData',
-                        data.label,
-                        e.target.value
-                      )
-                    }
-                  />
+                  {data.id !== 'product' ? (
+                    <input
+                      id={data.id}
+                      name={data.id}
+                      value={watch(data.id) || ''}
+                      onChange={(e) => {
+                        const newValue = parseFloat(e.target.value);
+                        if (!Number.isNaN(newValue)) {
+                          setValue(data.id, newValue);
+                        } else {
+                          setValue(data.id, '');
+                        }
+                      }}
+                      step="any"
+                      className={`AccordionMiniInput ${
+                        errors[data.id] ? 'error' : ''
+                      }`}
+                    />
+                  ) : (
+                    <input
+                      id={data.id}
+                      name={data.id}
+                      {...register(data.id)}
+                      className={`AccordionInput ${
+                        errors[data.id] ? 'error' : ''
+                      }`}
+                    />
+                  )}
                   <p> {data.unit} </p>
                 </div>
                 {errors[data.id]?.message && (
@@ -220,21 +236,34 @@ export default function AccordionDemo({ onCalculate }) {
                 <div className="AccordionLine">
                   <br /> {data.label}:
                   <br />
-                  <input
-                    id={data.id}
-                    name={data.id}
-                    {...register(data.id)}
-                    className="AccordionMiniInput"
-                    value={inputData.parametersRA[data.label] || ''}
-                    onChange={(e) =>
-                      handleInputChange(
-                        'parametersRA',
-                        data.label,
-                        e.target.value
-                      )
-                    }
-                  />
-                  <p> mm </p>
+                  {data.id !== 'dresserPosition' ? (
+                    <input
+                      id={data.id}
+                      name={data.id}
+                      value={watch(data.id) || ''}
+                      onChange={(e) => {
+                        const newValue = parseFloat(e.target.value);
+                        if (!Number.isNaN(newValue)) {
+                          setValue(data.id, newValue);
+                        } else {
+                          setValue(data.id, '');
+                        }
+                      }}
+                      step="any"
+                      className={`AccordionMiniInput ${
+                        errors[data.id] ? 'error' : ''
+                      }`}
+                    />
+                  ) : (
+                    <input
+                      id={data.id}
+                      name={data.id}
+                      {...register(data.id)}
+                      className={`AccordionInput ${
+                        errors[data.id] ? 'error' : ''
+                      }`}
+                    />
+                  )}
                 </div>
                 {errors[data.id]?.message && (
                   <p className="ErrorMessage">{errors[data.id]?.message}</p>
@@ -248,7 +277,6 @@ export default function AccordionDemo({ onCalculate }) {
             className="ButtonCalculate"
             disabled={isLoading}
             type="submit"
-            onClick={handleOnClick}
           >
             {isLoading ? <p>Carregando</p> : <p>Calcular</p>}
           </button>

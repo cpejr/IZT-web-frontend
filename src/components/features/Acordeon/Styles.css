@@ -165,9 +165,13 @@ h3 {
 .AccordionInput{
   width: 100%;
 }
+
 .AccordionMiniInput{
   width: 4rem;
   margin-right: 1rem;
+}
+.AccordionInput.error,.AccordionMiniInput.error {
+  border-bottom-color: red;
 }
 .AccordionLine{
   width: 100%;
@@ -199,6 +203,5 @@ h3 {
   font-weight: 500;
   color: red;
 
-  margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 2rem;
 }
