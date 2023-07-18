@@ -24,13 +24,18 @@ import {
   Body,
   DataContainer,
 } from './Styles';
+import formatDate from '../../utils/formatDate';
+import { useGetUserCourses } from '../../hooks/query/userCourse';
 
 export default function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
   const user = useAuthStore((store) => store.auth?.user);
+  const { data: userCourses } = useGetUserCourses({});
+  console.log(userCourses);
 
   const openModalChangeUserData = () => setUpdateUserModalState(true);
   const closeModalChangeUserData = () => setUpdateUserModalState(false);
+  let accessGranted = false;
 
   return (
     <Background>
@@ -98,22 +103,51 @@ export default function Profile() {
                   </Infos>
                 </Contact>
                 <Lessons>
-                  <Subtitle>Lições</Subtitle>
+                  <Subtitle>Curso:</Subtitle>
                   <Infos>
                     <LessonInfo>
-                      <h1>Curso: </h1>
-                      <h2>Ratificação 3D</h2>
-                    </LessonInfo>
-                    <LessonInfo>
                       <h1>Validade de acesso: </h1>
-                      <h2>07/03/2025</h2>
+                      {userCourses?.map((userCourse, index) => {
+                        if (user?.isAdmin && !accessGranted) {
+                          accessGranted = true;
+                          return <h2 key={index}>Acesso Ilimitado</h2>;
+                        } else if (
+                          !user?.isAdmin &&
+                          userCourse.user._id === user?._id
+                        ) {
+                          return (
+                            <h2 key={index}>
+                              {userCourse?.expiresAt
+                                ? new Date(userCourse?.expiresAt).getTime() >
+                                  Date.now()
+                                  ? formatDate({ value: userCourse?.expiresAt })
+                                  : 'Sem Acesso'
+                                : 'Sem Acesso'}
+                            </h2>
+                          );
+                        } else if (
+                          index === userCourses.length - 1 &&
+                          !accessGranted
+                        ) {
+                          return <h2 key={index}>Sem Acesso</h2>;
+                        }
+                        return null;
+                      })}
                     </LessonInfo>
                   </Infos>
                   <Subtitle>Software</Subtitle>
                   <Infos>
                     <LessonInfo>
                       <h1>Validade de acesso: </h1>
-                      <h2>21/06/2025</h2>
+                      <h2>
+                        {user?.isAdmin
+                          ? 'Acesso Ilimitado'
+                          : user?.softwareAccess
+                          ? new Date(user.softwareAccess).getTime() > Date.now()
+                            ? formatDate({ value: user.softwareAccess })
+                            : 'Sem Acesso'
+                          : 'Sem Acesso'}
+                      </h2>
                     </LessonInfo>
                   </Infos>
                 </Lessons>
