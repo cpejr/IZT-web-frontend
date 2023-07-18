@@ -38,6 +38,7 @@ import {
   EditAuthorizeSoftwareAccessMobile,
   ReportSection,
   ProfileAnalysis,
+  PDFPage,
 } from './pages';
 import useAuthStore from './stores/auth';
 
@@ -64,6 +65,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<AppLayout />}>
         <Route element={<HasFooterRoutes />}>
           <Route index element={<Home />} /> {/* This is the / route */}
+          <Route path="PDFDownload" element={<PDFPage />} />
           <Route path="email-confirmado/:token" element={<ConfirmedEmail />} />
           <Route path="verificar-email" element={<VerifyEmail />} />
           <Route path="catalogo" element={<Catalog />} />
