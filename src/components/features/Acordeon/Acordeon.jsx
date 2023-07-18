@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
 
@@ -75,6 +76,7 @@ export default function AccordionDemo({ onCalculate }) {
     handleSubmit,
     register,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: zodResolver(calculateProfileAnalysisValidationSchema),
   });
@@ -85,18 +87,18 @@ export default function AccordionDemo({ onCalculate }) {
     console.log('deu certo');
   };
   const handleOnClick = () => {
-    setIsLoading(true);
-
     // Perform your calculations here and get new x and y values
     const xData = [1, 2, 3, 4]; // Replace with your actual x data
     const yData = [10, 15, 13, 17]; // Replace with your actual y data
 
     // Call the onCalculate function to pass the new data to the parent component
     onCalculate({ x: xData, y: yData });
+    setIsLoading(true);
+
     setIsLoading(false);
   };
 
-  const errorMessage = errors?.name?.message;
+  console.log(watch());
 
   // Dados
   const [inputData, setInputData] = useState({
@@ -119,7 +121,7 @@ export default function AccordionDemo({ onCalculate }) {
   return (
     <Accordion.Root
       className="AccordionRoot"
-      type="multiple"
+      type="single"
       defaultValue="none"
       collapsible
     >
@@ -135,28 +137,15 @@ export default function AccordionDemo({ onCalculate }) {
                   <input
                     id={data.id}
                     name={data.id}
-                    error={!!errorMessage}
                     {...register(data.id)}
                     className="AccordionInput"
-                    // Makes the function not lose the input content
-                    value={inputData.rectificationProcess[data.label] || ''}
-                    onChange={(e) =>
-                      handleInputChange(
-                        'rectificationProcess',
-                        data.label,
-                        e.target.value
-                      )
-                    }
                   />
                 </div>
-                {errorMessage && <p className="ErrorMessage">{errorMessage}</p>}
+                {errors[data.id]?.message && (
+                  <p className="ErrorMessage">{errors[data.id]?.message}</p>
+                )}
               </div>
             ))}
-            {/* <div className="Center">
-              <button className="Button2" type="button">
-                Salvar
-              </button>
-            </div> */}
           </AccordionContent>
         </Accordion.Item>
 
@@ -171,7 +160,6 @@ export default function AccordionDemo({ onCalculate }) {
                   <input
                     id={data.id}
                     name={data.id}
-                    error={!!errorMessage}
                     {...register(data.id)}
                     className="AccordionMiniInput"
                     // Makes the function not lose the input content
@@ -186,15 +174,11 @@ export default function AccordionDemo({ onCalculate }) {
                   />
                   <p> {data.unit} </p>
                 </div>
-                {errorMessage && <p className="ErrorMessage">{errorMessage}</p>}
+                {errors[data.id]?.message && (
+                  <p className="ErrorMessage">{errors[data.id]?.message}</p>
+                )}{' '}
               </div>
             ))}
-
-            {/* <div className="Center">
-              <button className="Button2" type="button">
-                Salvar
-              </button>
-            </div> */}
           </AccordionContent>
         </Accordion.Item>
         <Accordion.Item className="AccordionItem" value="item-3">
@@ -208,7 +192,6 @@ export default function AccordionDemo({ onCalculate }) {
                   <input
                     id={data.id}
                     name={data.id}
-                    error={!!errorMessage}
                     {...register(data.id)}
                     className="AccordionMiniInput"
                     value={inputData.productData[data.label] || ''}
@@ -222,14 +205,11 @@ export default function AccordionDemo({ onCalculate }) {
                   />
                   <p> {data.unit} </p>
                 </div>
-                {errorMessage && <p className="ErrorMessage">{errorMessage}</p>}
+                {errors[data.id]?.message && (
+                  <p className="ErrorMessage">{errors[data.id]?.message}</p>
+                )}{' '}
               </div>
             ))}
-            {/* <div className="Center">
-              <button className="Button2" type="button">
-                Salvar
-              </button>
-            </div> */}
           </AccordionContent>
         </Accordion.Item>
         <Accordion.Item className="AccordionItem" value="item-4">
@@ -243,7 +223,6 @@ export default function AccordionDemo({ onCalculate }) {
                   <input
                     id={data.id}
                     name={data.id}
-                    error={!!errorMessage}
                     {...register(data.id)}
                     className="AccordionMiniInput"
                     value={inputData.parametersRA[data.label] || ''}
@@ -257,14 +236,11 @@ export default function AccordionDemo({ onCalculate }) {
                   />
                   <p> mm </p>
                 </div>
-                {errorMessage && <p className="ErrorMessage">{errorMessage}</p>}
+                {errors[data.id]?.message && (
+                  <p className="ErrorMessage">{errors[data.id]?.message}</p>
+                )}{' '}
               </div>
             ))}
-            <div className="Center">
-              {/* <button className="Button2" type="button">
-                Salvar
-              </button> */}
-            </div>
           </AccordionContent>
         </Accordion.Item>
         <div className="Center">

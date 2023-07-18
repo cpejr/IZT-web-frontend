@@ -40,9 +40,6 @@ export default function ProfileAnalysis() {
             <Data>
               <AccordionDemo onCalculate={handleCalculate} />
             </Data>
-            {/* <Data>
-              <Button> Calcular </Button>
-            </Data> */}
           </Center>
         </Containerleft>
         <Analysis>
