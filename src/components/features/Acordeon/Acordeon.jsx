@@ -54,7 +54,7 @@ const parametersRA = [
   { label: 'Posição do dressador', id: 'dresserPosition' },
 ];
 
-export default function AccordionDemo() {
+export default function AccordionDemo({ onCalculate }) {
   const [isLoading, setIsLoading] = useState(false);
 
   // Backend calls
@@ -81,7 +81,19 @@ export default function AccordionDemo() {
   const onSubmit = (data) => {
     calculateProfileAnalysis(data);
     setIsLoading(true);
+
     console.log('deu certo');
+  };
+  const handleOnClick = () => {
+    setIsLoading(true);
+
+    // Perform your calculations here and get new x and y values
+    const xData = [1, 2, 3, 4]; // Replace with your actual x data
+    const yData = [10, 15, 13, 17]; // Replace with your actual y data
+
+    // Call the onCalculate function to pass the new data to the parent component
+    onCalculate({ x: xData, y: yData });
+    setIsLoading(false);
   };
 
   const errorMessage = errors?.name?.message;
@@ -260,6 +272,7 @@ export default function AccordionDemo() {
             className="ButtonCalculate"
             disabled={isLoading}
             type="submit"
+            onClick={handleOnClick}
           >
             {isLoading ? <p>Carregando</p> : <p>Calcular</p>}
           </button>
