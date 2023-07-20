@@ -31,7 +31,6 @@ export default function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
   const user = useAuthStore((store) => store.auth?.user);
   const { data: userCourses } = useGetUserCourses({});
-  console.log(userCourses);
 
   const openModalChangeUserData = () => setUpdateUserModalState(true);
   const closeModalChangeUserData = () => setUpdateUserModalState(false);

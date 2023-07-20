@@ -18,7 +18,6 @@ import {
   ModalStyle,
 } from './Styles';
 import ModalDeleteStabilityAnalysis from '../ModalDeleteStabilityAnalysis/ModalDeleteStabilityAnalysis';
-import useAuthStore from '../../../stores/auth';
 
 export default function StabilityAnalysisReport({
   data,
@@ -30,10 +29,12 @@ export default function StabilityAnalysisReport({
   useEffect(() => {
     setIsOpened(openedReport === data);
   }, [openedReport, data]);
+  const [stabilityId, setStabilityId] = useState('');
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   const [modalDeleteStabilityAnalysis, setModalDeleteStabilityAnalysis] =
     useState(false);
-  const openModalDeleteStabilityAnalysis = () => {
+  const openModalDeleteStabilityAnalysis = (_id) => {
+    setStabilityId(_id);
     setModalDeleteStabilityAnalysis(true);
   };
   const closeModalDeleteStabilityAnalysis = () => {
@@ -173,6 +174,7 @@ export default function StabilityAnalysisReport({
           }}
         >
           <ModalDeleteStabilityAnalysis
+            _id={stabilityId}
             close={closeModalDeleteStabilityAnalysis}
           />
         </ModalStyle>

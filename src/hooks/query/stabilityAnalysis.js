@@ -17,6 +17,7 @@ export function useGetStabilityAnalysis({
     onError,
   });
 }
+
 export function useDeleteStabilityAnalysis({
   onSuccess = () => {},
   onError = (err) => console.log(err),
