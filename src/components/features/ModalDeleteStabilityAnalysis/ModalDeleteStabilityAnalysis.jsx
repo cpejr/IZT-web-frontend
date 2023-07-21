@@ -12,7 +12,6 @@ import { buildDeleteStabilityAnalysisErrorMessage } from './utils';
 export default function ModalDeleteStabilityAnalysis({ _id, close }) {
   const [isPending, setIsPending] = useState(false); // Important for modals usage
   const queryClient = useQueryClient();
-  console.log(_id);
 
   const { mutate: deleteStabilityAnalysis, isLoading } =
     useDeleteStabilityAnalysis({
