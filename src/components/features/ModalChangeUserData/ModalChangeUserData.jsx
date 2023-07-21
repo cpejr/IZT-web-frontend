@@ -76,9 +76,16 @@ export default function ModalChangeUserData({ close }) {
   });
   const onSubmit = (data) => {
     setIsPending(true);
-    updateUser({ _id: user._id, newUserData: data });
-  };
 
+    const newUserData = {
+      ...data,
+      city: JSON.parse(data.city).name,
+      country: JSON.parse(data.country).name,
+      state: JSON.parse(data.state).name,
+    };
+
+    updateUser({ _id: user._id, newUserData });
+  };
   // Country, state and city selects handlers
   const selectedContry = watch('country');
   const selectedState = watch('state');
