@@ -20,7 +20,7 @@ export default function ModalDeleteStabilityAnalysis({ _id, close }) {
           queryKey: ['stability-analysis'],
         });
 
-        toast.success('Relatório delatado com sucesso.');
+        toast.success('Relatório deletado com sucesso.');
         close();
       },
       onError: (err) => {
@@ -33,7 +33,7 @@ export default function ModalDeleteStabilityAnalysis({ _id, close }) {
 
   return (
     <Container>
-      <Message>Tem certeza que deseja apagar o(a) relatório?</Message>
+      <Message>Tem certeza que deseja apagar o relatório?</Message>
 
       <DeleteButton
         type="button"

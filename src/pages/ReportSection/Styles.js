@@ -12,7 +12,10 @@ export const TESTEContainer = styled.div`
 export const Container = styled.div`
   background-color: ${(props) => props.theme.colors.darkBlue};
   width: 100%;
-  padding: 3rem;
+  padding-top: 3rem;
+  padding-right: 3rem;
+  padding-bottom: 0rem;
+  padding-left: 3rem;
 `;
 
 export const Title = styled.div`
@@ -23,14 +26,20 @@ export const Title = styled.div`
 `;
 
 export const ReportsArea = styled.div`
-  margin: 4rem;
+  margin-top: 4rem;
+  margin-right: 4rem;
+  margin-bottom: 0rem;
+  margin-left: 4rem;
   max-width: 110rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  max-height: calc(90vh - 17rem);
+  max-height: calc(96vh - 18rem);
   height: auto;
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0rem;
+  padding-left: 1rem;
   @media (max-width: 1100px) {
     margin: 3rem;
   }
@@ -49,7 +58,7 @@ export const Reports = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
   gap: 0.5rem;
   ::-webkit-scrollbar {
     width: 0.5rem;
