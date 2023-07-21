@@ -155,7 +155,7 @@ export default function StabilityAnalysisReport({
           <button type="button">Baixar relatório</button>
           <button
             type="button"
-            onClick={() => openModalDeleteStabilityAnalysis()}
+            onClick={() => openModalDeleteStabilityAnalysis(data?._id)}
           >
             Excluir
           </button>
