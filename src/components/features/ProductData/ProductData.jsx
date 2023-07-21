@@ -1,13 +1,6 @@
 import PropTypes from 'prop-types';
 
-import {
-  Button,
-  CollapsableData,
-  DataColumn,
-  Input,
-  Label,
-  Line,
-} from './Styles';
+import { CollapsableData, DataColumn, Input, Label, Line } from './Styles';
 
 export default function MachinProductData({ collapse }) {
   return (
@@ -42,7 +35,6 @@ export default function MachinProductData({ collapse }) {
           <Label>mm</Label>
         </Line>
       </DataColumn>
-      <Button>Salvar</Button>
     </CollapsableData>
   );
 }

@@ -22,6 +22,7 @@ export const DataColumn = styled.div`
   flex-direction: column;
   gap: 1.3vh;
   width: 100%;
+  margin-bottom: 4rem;
 `;
 
 export const Label = styled.label`
@@ -60,21 +61,4 @@ export const Input = styled.input`
   font-size: 1.5rem;
   width: 4rem;
   height: 100%;
-`;
-
-export const Button = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 6.4rem;
-  height: 2.7rem;
-
-  color: white;
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  font-weight: 600;
-  font-size: 1.4rem;
-  border: 1px solid white;
-  background-color: transparent;
-  border-radius: 5px;
-  margin: 1rem;
 `;
