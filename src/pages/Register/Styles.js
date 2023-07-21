@@ -97,6 +97,7 @@ export const Label = styled.p`
   font-size: 1em;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 400;
+  margin-bottom: 4px;
 `;
 
 export const FormColumn = styled.div`
@@ -112,6 +113,7 @@ export const AddressSelect = styled.div`
   height: auto;
 
   margin-bottom: 3%;
+  /* margin-top: -10px; */
 `;
 
 export const Form = styled.form`
