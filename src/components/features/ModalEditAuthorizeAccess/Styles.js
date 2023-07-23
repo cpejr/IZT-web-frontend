@@ -60,7 +60,7 @@ export const Picture = styled.img`
 export const ModalButton = styled.button`
   cursor: pointer;
   gap: 7px;
-  align-self: flex-end;
+  align-self: center;
 
   display: flex;
   flex-direction: row;

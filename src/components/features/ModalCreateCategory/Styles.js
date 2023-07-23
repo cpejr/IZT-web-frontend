@@ -60,7 +60,7 @@ export const ErrorMessage = styled.p`
 export const ModalButton = styled.button`
   cursor: pointer;
   gap: 0.7rem;
-  align-self: flex-end;
+  align-self: center;
 
   display: flex;
   flex-direction: row;

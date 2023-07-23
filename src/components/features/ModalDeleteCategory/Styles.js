@@ -27,14 +27,31 @@ export const Message = styled.h1`
 export const DeleteButton = styled.button`
   cursor: pointer;
 
-  width: 14rem;
-  height: 4.2rem;
+  gap: 0.7rem;
+  align-self: center;
 
-  border-radius: 1rem;
-  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
-  font-size: 1.5rem;
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  font-weight: 700;
-  text-align: center;
+  flex-direction: row;
+  align-items: center;
+
+  width: 21.2rem;
+  height: 4.5rem;
+
+  background-color: transparent;
+  border: 0.1rem solid white;
+  border-radius: 0.5rem;
+  color: white;
+
+  margin-top: 1.5rem;
+
+  p {
+    font-family: ${(props) => props.theme.fonts.montserrat};
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.8rem;
+  }
 `;

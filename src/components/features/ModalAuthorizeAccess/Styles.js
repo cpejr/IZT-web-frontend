@@ -61,8 +61,9 @@ export const Picture = styled.img`
 
 export const ModalButton = styled.button`
   cursor: pointer;
+
   gap: 0.7rem;
-  align-self: flex-end;
+  align-self: center;
 
   display: flex;
   flex-direction: row;
@@ -79,6 +80,8 @@ export const ModalButton = styled.button`
   border: 0.1rem solid white;
   border-radius: 0.5rem;
   color: white;
+
+  margin-top: 1.5rem;
 
   p {
     font-family: ${(props) => props.theme.fonts.montserrat};
