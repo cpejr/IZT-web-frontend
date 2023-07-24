@@ -27,8 +27,8 @@ export const Message = styled.h1`
 export const DeleteButton = styled.button`
   cursor: pointer;
 
-  gap: 0.7rem;
-  align-self: center;
+  width: 15rem;
+  height: 5rem;
 
   display: flex;
   flex-direction: row;
@@ -38,20 +38,27 @@ export const DeleteButton = styled.button`
   flex-direction: row;
   align-items: center;
 
-  width: 21.2rem;
-  height: 4.5rem;
-
   background-color: transparent;
-  border: 0.1rem solid white;
+  border: 1px solid white;
   border-radius: 0.5rem;
   color: white;
 
   margin-top: 1.5rem;
 
-  p {
-    font-family: ${(props) => props.theme.fonts.montserrat};
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.8rem;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+
+  :hover {
+    transition-duration: 0.5s;
+    //colocar hover quando desclicar do botão
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  svg {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
   }
 `;

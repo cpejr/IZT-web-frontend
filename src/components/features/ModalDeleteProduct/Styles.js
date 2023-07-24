@@ -44,10 +44,15 @@ export const DeleteButton = styled.button`
 
   margin-top: 1.5rem;
 
-  p {
-    font-family: ${(props) => props.theme.fonts.montserrat};
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.8rem;
+  :hover {
+    transition-duration: 0.5s;
+    //colocar hover quando desclicar do botão
+    background-color: rgba(255, 255, 255, 0.2);
   }
+
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
 `;

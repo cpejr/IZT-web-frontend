@@ -85,6 +85,12 @@ export const ModalButton = styled.button`
 
   margin-top: 1.5rem;
 
+  :hover {
+    transition-duration: 0.5s;
+    //colocar hover quando desclicar do botão
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
   p {
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-style: normal;
