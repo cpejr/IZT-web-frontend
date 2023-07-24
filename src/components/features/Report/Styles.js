@@ -82,7 +82,7 @@ export const DataContainer2 = styled.div`
     max-height: 25rem;
   }
   @media (max-width: 910px) {
-    margin-left: 0rem;
+    mar: 0rem;
   }
 `;
 
@@ -146,9 +146,6 @@ export const Label = styled.div`
   @media (max-width: 1390px) {
     font-size: 1.08rem;
   }
-  @media (max-width: 1350px) {
-    font-size: 1.4rem;
-  }
   @media (max-width: 1270px) {
     font-size: 1.45rem;
   }
@@ -181,9 +178,6 @@ export const Data = styled.div`
   }
   @media (max-width: 1390px) {
     font-size: 1.08rem;
-  }
-  @media (max-width: 1350px) {
-    font-size: 1.4rem;
   }
   @media (max-width: 1270px) {
     font-size: 1.45rem;
