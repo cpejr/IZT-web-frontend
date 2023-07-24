@@ -87,10 +87,10 @@ export default function ModalCreateProduct({ close }) {
   const picsIsLesserThanLimit =
     pictureFieldArray?.fields?.length < PICTURES_CONFIG.filesQuantityLimit;
 
-  const onSubmit = async (updatedProductData) => {
+  const onSubmit = async (productData) => {
     setIsPending(true);
 
-    const formData = serialize(updatedProductData, {
+    const formData = serialize(productData, {
       allowEmptyArrays: true,
       noFilesWithArrayNotation: true,
       indices: true,
