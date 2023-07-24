@@ -68,7 +68,7 @@ export const DataRow = styled.div`
 
 export const DataContainer = styled.div`
   display: flex;
-  flex-direction: column; // o problema pode estar aqui
+  flex-direction: column;
   justify-content: flex-start;
   margin-right: 1.5rem;
   flex-wrap: wrap;
