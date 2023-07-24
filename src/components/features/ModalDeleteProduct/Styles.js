@@ -23,14 +23,36 @@ export const Message = styled.h1`
 export const DeleteButton = styled.button`
   cursor: pointer;
 
-  width: 10rem;
-  height: 4rem;
+  gap: 0.7rem;
+  align-self: center;
 
-  border-radius: 0.8rem;
-  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
-  font-size: 1.7rem;
+  flex-direction: row;
+  align-items: center;
+
+  width: 15rem;
+  height: 4.5rem;
+
+  background-color: transparent;
+  border: 0.1rem solid white;
+  border-radius: 0.5rem;
+  color: white;
+
+  margin-top: 1.5rem;
+
+  :hover {
+    transition-duration: 0.5s;
+    //colocar hover quando desclicar do botão
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-weight: 700;
-  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
 `;

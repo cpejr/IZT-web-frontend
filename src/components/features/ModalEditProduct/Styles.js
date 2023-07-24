@@ -151,7 +151,7 @@ export const ModalButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: flex-end;
+  align-self: center;
   cursor: pointer;
 
   border: 0.1rem solid white;
