@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { HiSearch } from 'react-icons/hi';
 
+import ProfileAnalysisReport from '../../components/features/ProfileAnalysisReport/ProfileAnalysisReport';
 import StabilityAnalysisReport from '../../components/features/Report/StabilityAnalysisReport';
 import {
   Container,
@@ -46,164 +47,29 @@ const data = [
       RWinclination: '2',
     },
   },
-  {
-    name: 'Relatório#2',
-    analysis: {
-      rectification: 'centerless',
-      machine: 'robot',
-      machineNumber: '724',
-      operation: '554',
-      department: 'Engenharia',
-      accountable: 'Alexandre',
-    },
-    product: {
-      product: 'produto7',
-      productNumber: '5',
-      diameter: '10',
-      totalLength: '10',
-      electiveLength: '8',
-      allowance: '2', // sobremetal
-    },
-    machineData: {
-      RCdiameterMax: '140',
-      RCdiameterMin: '140',
-      RAdiameter: '100',
-      RClength: '50',
-      RAlength: '50',
-      RCefectiveLength: '10',
-      RCrotation: '45',
-      RArotation: '7',
-      RWinclination: '2',
-    },
-  },
-  {
-    name: 'Relatório#3',
-    analysis: {
-      rectification: 'centerless',
-      machine: 'robot',
-      machineNumber: '724',
-      operation: '554',
-      department: 'Engenharia',
-      accountable: 'Thiago',
-    },
-    product: {
-      product: 'produto1',
-      productNumber: '5',
-      diameter: '10',
-      totalLength: '10',
-      electiveLength: '8',
-      allowance: '2', // sobremetal
-    },
-    machineData: {
-      RCdiameterMax: '140',
-      RCdiameterMin: '140',
-      RAdiameter: '100',
-      RClength: '50',
-      RAlength: '50',
-      RCefectiveLength: '10',
-      RCrotation: '45',
-      RArotation: '7',
-      RWinclination: '2',
-    },
-  },
-  {
-    name: 'Relatório#4',
-    analysis: {
-      rectification: 'centerless',
-      machine: 'robot',
-      machineNumber: '724',
-      operation: '554',
-      department: 'Engenharia',
-      accountable: 'Alexandre',
-    },
-    product: {
-      product: 'produto7',
-      productNumber: '5',
-      diameter: '10',
-      totalLength: '10',
-      electiveLength: '8',
-      allowance: '2', // sobremetal
-    },
-    machineData: {
-      RCdiameterMax: '140',
-      RCdiameterMin: '140',
-      RAdiameter: '100',
-      RClength: '50',
-      RAlength: '50',
-      RCefectiveLength: '10',
-      RCrotation: '45',
-      RArotation: '7',
-      RWinclination: '2',
-    },
-  },
-  {
-    name: 'Relatório#5',
-    analysis: {
-      rectification: 'centerless',
-      machine: 'robot',
-      machineNumber: '724',
-      operation: '554',
-      department: 'Engenharia',
-      accountable: 'Thiago',
-    },
-    product: {
-      product: 'produto1',
-      productNumber: '5',
-      diameter: '10',
-      totalLength: '10',
-      electiveLength: '8',
-      allowance: '2', // sobremetal
-    },
-    machineData: {
-      RCdiameterMax: '140',
-      RCdiameterMin: '140',
-      RAdiameter: '100',
-      RClength: '50',
-      RAlength: '50',
-      RCefectiveLength: '10',
-      RCrotation: '45',
-      RArotation: '7',
-      RWinclination: '2',
-    },
-  },
-  {
-    name: 'Relatório#6',
-    analysis: {
-      rectification: 'centerless',
-      machine: 'robot',
-      machineNumber: '724',
-      operation: '554',
-      department: 'Engenharia',
-      accountable: 'Alexandre',
-    },
-    product: {
-      product: 'produto7',
-      productNumber: '5',
-      diameter: '10',
-      totalLength: '10',
-      electiveLength: '8',
-      allowance: '2', // sobremetal
-    },
-    machineData: {
-      RCdiameterMax: '140',
-      RCdiameterMin: '140',
-      RAdiameter: '100',
-      RClength: '50',
-      RAlength: '50',
-      RCefectiveLength: '10',
-      RCrotation: '45',
-      RArotation: '7',
-      RWinclination: '2',
-    },
-  },
 ];
 
 export default function ReportSection() {
   const [name, setName] = useState('');
-  const [opened, setOpened] = useState('');
+  const [openedStabilityAnalysis, setOpenedStabilityAnalysis] = useState('');
+  const [openedProfileAnalysis, setOpenedProfileAnalysis] = useState('');
 
-  async function handleOpened(openedName) {
-    setOpened(openedName === opened ? '' : openedName);
+  function handleOpenedStabilityAnalysis(openedName) {
+    if (openedStabilityAnalysis === openedName) {
+      setOpenedStabilityAnalysis('');
+    } else {
+      setOpenedStabilityAnalysis(openedName);
+      setOpenedProfileAnalysis(''); // Close the other dropdown if it's open
+    }
+  }
+
+  function handleOpenedProfileAnalysis(openedName) {
+    if (openedProfileAnalysis === openedName) {
+      setOpenedProfileAnalysis('');
+    } else {
+      setOpenedProfileAnalysis(openedName);
+      setOpenedStabilityAnalysis(''); // Close the other dropdown if it's open
+    }
   }
 
   return (
@@ -227,8 +93,18 @@ export default function ReportSection() {
                 <StabilityAnalysisReport
                   key={report.name}
                   data={report}
-                  openedReport={opened}
-                  handleOpened={handleOpened}
+                  openedReport={openedStabilityAnalysis}
+                  handleOpened={handleOpenedStabilityAnalysis}
+                />
+              );
+            })}
+            {data.map((report) => {
+              return (
+                <ProfileAnalysisReport
+                  key={report.name}
+                  data={report}
+                  openedReport={openedProfileAnalysis}
+                  handleOpened={handleOpenedProfileAnalysis}
                 />
               );
             })}

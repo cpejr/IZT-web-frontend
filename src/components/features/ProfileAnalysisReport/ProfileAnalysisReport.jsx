@@ -8,18 +8,18 @@ import {
   Columns,
   Container,
   ButtonRow,
-  DataRow,
   Row,
+  DataRow,
   Label,
   Title,
+  Icon,
   Data,
   DataContainer,
   ReportName,
   DashedBar,
-  DataContainer2,
 } from './Styles';
 
-export default function StabilityAnalysisReport({
+export default function ProfileAnalysisReport({
   data,
   openedReport,
   handleOpened,
@@ -38,7 +38,9 @@ export default function StabilityAnalysisReport({
     <div>
       <ReportName isOpened={isOpened} onClick={() => handleOpened(data.name)}>
         {data.name}
-        <DownOutlined />
+        <Icon>
+          <DownOutlined />
+        </Icon>
       </ReportName>
       <Container isOpened={isOpened}>
         <Columns>
@@ -132,10 +134,6 @@ export default function StabilityAnalysisReport({
                   <Label>Comprimento efetivo RC:</Label>
                   <Data>{machineDataList.RCefectiveLength} mm</Data>
                 </DataRow>
-              </DataContainer>
-            </DataColumn>
-            <DataColumn>
-              <DataContainer2>
                 <DataRow>
                   <Label>Rotação do RC:</Label>
                   <Data>{machineDataList.RCrotation} mm</Data>
@@ -148,7 +146,34 @@ export default function StabilityAnalysisReport({
                   <Label>Inclinação RW:</Label>
                   <Data>{machineDataList.RWinclination}</Data>
                 </DataRow>
-              </DataContainer2>
+                <DashedBar />
+              </DataContainer>
+            </DataColumn>
+            <DashedBar />
+            <DataColumn>
+              <Title>RA parâmetro de perfil</Title>
+              <DataContainer>
+                <DataRow>
+                  <Label>Altura entre centros hw: (min):</Label>
+                  <Data>{machineDataList.RCdiameterMax} mm</Data>
+                </DataRow>
+                <DataRow>
+                  <Label>Inclinação do RA: (min):</Label>
+                  <Data>{machineDataList.RCdiameterMin} mm</Data>
+                </DataRow>
+                <DataRow>
+                  <Label>Altura do dressador:</Label>
+                  <Data>{machineDataList.RAdiameter} mm</Data>
+                </DataRow>
+                <DataRow>
+                  <Label>Sobremetal:</Label>
+                  <Data>{machineDataList.RClength} mm</Data>
+                </DataRow>
+                <DataRow>
+                  <Label>Posição do dressador:</Label>
+                  <Data>{machineDataList.RAlength} mm</Data>
+                </DataRow>
+              </DataContainer>
             </DataColumn>
           </Row>
         </Columns>
@@ -161,7 +186,7 @@ export default function StabilityAnalysisReport({
   );
 }
 
-StabilityAnalysisReport.propTypes = {
+ProfileAnalysisReport.propTypes = {
   data: PropTypes.object.isRequired,
   openedReport: PropTypes.string.isRequired,
   handleOpened: PropTypes.func.isRequired,
