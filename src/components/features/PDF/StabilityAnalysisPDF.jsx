@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* esTextnt-disable react/prop-types */
 import React from 'react';
-import ImageLogo from '../../../assets/IZTLogo.png';
 
 import {
   Page,
@@ -13,7 +13,7 @@ import {
 } from '@react-pdf/renderer';
 
 import BGCourse from '../../../assets/accessDeniedPage/BGCourse.png';
-
+import ImageLogo from '../../../assets/IZTLogo.png';
 import montserratLight from './fonts/Montserrat-Light.ttf';
 import montserratSemiBold from './fonts/Montserrat-SemiBold.ttf';
 
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
   header: {
     display: 'flex',
     fontSize: 12,
+    paddingBottom: 10,
     flexDirection: 'row',
     textATextgn: 'center',
     color: 'black',
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function PDF({ data }) {
+export default function StabilityAnalysisPDF({ data }) {
   return (
     <Document
       fileName="Relatorio.pdf"
@@ -142,6 +143,21 @@ export default function PDF({ data }) {
         <View style={styles.hr} fixed />
         <div style={styles.row}>
           <div style={styles.collumn}>
+            <Text style={styles.section}>Dados da análise</Text>
+
+            <div style={styles.space}>
+              <Text style={styles.item}>
+                Processo retificação: {data.processoRetificacao}
+              </Text>
+              <Text style={styles.item}>Máquina: {data.maquina} </Text>
+              <Text style={styles.item}>
+                Número da Máquina: {data.numMaquina}
+              </Text>
+              <Text style={styles.item}>Operação: {data.operacao}</Text>
+              <Text style={styles.item}>Departamento: {data.departamento}</Text>
+              <Text style={styles.item}>Responsável: {data.responsavel}</Text>
+            </div>
+
             <Text style={styles.section}>Dados Da Máquina</Text>
 
             <div style={styles.space}>
@@ -174,20 +190,6 @@ export default function PDF({ data }) {
               </Text>
             </div>
 
-            {/* Espaco */}
-            <Text style={styles.section}>Dados da análise</Text>
-
-            <div style={styles.space}>
-              <Text style={styles.item}>
-                Processo retificação: {data.processoRetificacao}
-              </Text>
-              <Text style={styles.item}>Máquina: {data.maquina} </Text>
-              <Text style={styles.item}>Operação: {data.operacao}</Text>
-              <Text style={styles.item}>Departamento: {data.departamento}</Text>
-              <Text style={styles.item}>Responsável: {data.responsavel}</Text>
-            </div>
-
-            {/* Espaco */}
             <Text style={styles.section}>Dados do Produto</Text>
 
             <div style={styles.space}>

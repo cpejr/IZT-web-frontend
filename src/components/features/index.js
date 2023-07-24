@@ -33,4 +33,4 @@ export { default as ModalAuthorizeSoftwareAccess } from './ModalAuthorizeSoftwar
 export { default as ModalEditAuthorizeSoftwareAccess } from './ModalEditAuthorizeSoftwareAccess/ModalEditAuthorizeSoftwareAccess';
 export { default as ModalDeleteAuthorizeSoftwareAccess } from './ModalDeleteAuthorizeSoftwareAccess/ModalDeleteAuthorizeSoftwareAccess';
 export { default as SoftwareMenu } from './SoftwareMenu/SoftwareMenu';
-export { default as PDF } from './PDF/PDF';
+export { default as StabilityAnalysisPDF } from './PDF/StabilityAnalysisPDF';
