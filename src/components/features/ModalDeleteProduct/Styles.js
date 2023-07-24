@@ -34,7 +34,7 @@ export const DeleteButton = styled.button`
   flex-direction: row;
   align-items: center;
 
-  width: 21.2rem;
+  width: 15rem;
   height: 4.5rem;
 
   background-color: transparent;
