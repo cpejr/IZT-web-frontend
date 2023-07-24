@@ -151,7 +151,8 @@ h3 {
   }
 }
 
-.AccordionInput, .AccordionMiniInput{
+.AccordionInput,
+.AccordionMiniInput {
   background-color: rgb(18, 54, 69);
   border: none;
   color: white;
@@ -162,14 +163,14 @@ h3 {
   font-size: 1.5rem;
   height: 100%;
 }
-.AccordionInput{
+.AccordionInput {
   width: 100%;
 }
-.AccordionMiniInput{
+.AccordionMiniInput {
   width: 4rem;
   margin-right: 1rem;
 }
-.AccordionLine{
+.AccordionLine {
   width: 100%;
   display: flex;
   flex-direction: row;
