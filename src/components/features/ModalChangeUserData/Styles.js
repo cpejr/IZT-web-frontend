@@ -99,3 +99,11 @@ export const Subtitle = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   margin-bottom: 8%;
 `;
+
+export const FormColumn2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 35rem;
+`;
