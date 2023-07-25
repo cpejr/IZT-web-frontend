@@ -31,22 +31,22 @@ export default function ReportSection() {
     (stability) => stability?.user === user?._id
   );
 
-  if (user?.isAdmin) {
-    return (
-      <TESTEContainer>
-        <Container>
-          <Title>Relatórios</Title>
-          <ReportsArea>
-            <ReportsHeader>
-              <ReportsTitle>Relatório</ReportsTitle>
-              <SearchDiv>
-                <HiSearch size={25} />
-                <Search
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder={name || 'Pesquisar por nome'}
-                />
-              </SearchDiv>
-            </ReportsHeader>
+  return (
+    <TESTEContainer>
+      <Container>
+        <Title>Relatórios</Title>
+        <ReportsArea>
+          <ReportsHeader>
+            <ReportsTitle>Relatório</ReportsTitle>
+            <SearchDiv>
+              <HiSearch size={25} />
+              <Search
+                onChange={(e) => setName(e.target.value)}
+                placeholder={name || 'Pesquisar por nome'}
+              />
+            </SearchDiv>
+          </ReportsHeader>
+          {user?.isAdmin ? (
             <Reports>
               {data?.map((report) => {
                 return (
@@ -59,38 +59,20 @@ export default function ReportSection() {
                 );
               })}
             </Reports>
-          </ReportsArea>
-        </Container>
-      </TESTEContainer>
-    );
-  }
-  return (
-    <TESTEContainer>
-      <Container>
-        <Title>Relatórios</Title>
-        <ReportsArea>
-          <ReportsHeader>
-            <ReportsTitle>Relatório</ReportsTitle>
-            <SearchDiv>
-              <HiSearch size={25} />
-              <SearchDiv
-                onChange={(e) => setName(e.target.value)}
-                placeholder={name || 'Pesquisar por nome'}
-              />
-            </SearchDiv>
-          </ReportsHeader>
-          <Reports>
-            {userStabilityAnalysis?.map((report) => {
-              return (
-                <StabilityAnalysisReport
-                  key={report}
-                  data={report}
-                  openedReport={opened}
-                  handleOpened={handleOpened}
-                />
-              );
-            })}
-          </Reports>
+          ) : (
+            <Reports>
+              {userStabilityAnalysis?.map((report) => {
+                return (
+                  <StabilityAnalysisReport
+                    key={report}
+                    data={report}
+                    openedReport={opened}
+                    handleOpened={handleOpened}
+                  />
+                );
+              })}
+            </Reports>
+          )}
         </ReportsArea>
       </Container>
     </TESTEContainer>
