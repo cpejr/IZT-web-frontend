@@ -23,17 +23,17 @@ export const updateUserSchema = z.object({
     .string()
     .nonempty('Informe um telefone')
     .min(3, 'User country must be atleast 3 characters')
-    .max(30, 'User country must be a maximum of 30 characters'),
+    .max(90, 'User country must be a maximum of 30 characters'),
   state: z
     .string()
     .nonempty('Informe um estado')
     .min(3, 'User state must be atleast 3 characters')
-    .max(30, 'User state must be a maximum of 30 characters'),
+    .max(90, 'User state must be a maximum of 30 characters'),
   city: z
     .string()
     .nonempty('Informe uma cidade')
     .min(3, 'User city must be atleast 3 characters')
-    .max(30, 'User city must be a maximum of 30 characters'),
+    .max(90, 'User city must be a maximum of 30 characters'),
 
   address: z
     .string()
