@@ -10,6 +10,7 @@ export const SubmitSpace = styled.div`
 `;
 
 export const Button = styled.button`
+  text-align: center;
   color: white;
   background-color: ${(props) => props.theme.colors.blue};
   border-radius: 1rem;

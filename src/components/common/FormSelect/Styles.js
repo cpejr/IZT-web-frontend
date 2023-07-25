@@ -35,21 +35,6 @@ const isBudgetStyle = css`
   }
 `;
 
-const isBudgetLabelStyle = css`
-  color: #ffffff;
-  font-size: 2.4rem;
-  font-weight: 500 !important;
-  margin-bottom: 0.5rem !important;
-
-  @media (max-width: 700px) {
-    font-size: 2rem;
-    padding-bottom: 9px;
-  }
-  @media (max-width: 370px) {
-    font-size: 1.5rem;
-  }
-`;
-
 const isProfileStyle = css`
   .ant-select-selector {
     border: ${(props) =>
@@ -62,7 +47,7 @@ const isProfileStyle = css`
     font-family: ${(props) => props.theme.fonts.montserrat} !important;
     font-size: 2.2rem !important;
     font-weight: 600 !important;
-    margin-top: 1rem !important;
+    margin-bottom: 0.9rem !important;
   }
 
   .ant-select-selection-placeholder {
@@ -125,11 +110,5 @@ export const ErrorMessage = styled.p`
 export const Label = styled.label`
   font-size: 2.2rem;
   font-family: ${(props) => props.theme.fonts.montserrat};
-  ${({ isBudget }) => (isBudget ? isBudgetLabelStyle : '')};
-  @media (max-width: 700px) {
-    ${({ isBudget }) => (isBudget ? isBudgetLabelStyle : '')};
-  }
-  @media (max-width: 370px) {
-    ${({ isBudget }) => (isBudget ? isBudgetLabelStyle : '')};
-  }
+  font-weight: 400;
 `;

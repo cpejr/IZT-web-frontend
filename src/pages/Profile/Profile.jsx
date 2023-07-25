@@ -96,10 +96,6 @@ export default function Profile() {
                       <h1>Email: </h1>
                       <h2>{user?.email}</h2>
                     </Info>
-                    <Info>
-                      <h1>Telefone: </h1>
-                      <h2>{user?.email}</h2>
-                    </Info>
                   </Infos>
                 </Contact>
                 <Lessons>
