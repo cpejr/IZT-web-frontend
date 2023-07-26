@@ -97,6 +97,7 @@ export const Label = styled.p`
   font-size: 1em;
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 400;
+  margin-bottom: 0rem;
 `;
 
 export const FormColumn = styled.div`
