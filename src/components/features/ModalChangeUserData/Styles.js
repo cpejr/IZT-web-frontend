@@ -33,7 +33,7 @@ export const FormColumn = styled.div`
   max-width: 35rem;
 `;
 
-export const DivSeparacao = styled.div`
+export const SeparationDiv = styled.div`
   width: 100%;
 
   margin-top: 5px;

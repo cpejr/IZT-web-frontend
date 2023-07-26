@@ -18,8 +18,8 @@ import {
   FormColumn,
   SaveChanges,
   Subtitle,
-  DivSeparacao,
-  FormColumn2
+  SeparationDiv,
+  FormColumn2,
 } from './Styles';
 import { buildUpdateUserErrorMessage, updateUserSchema } from './utils';
 
@@ -176,7 +176,6 @@ export default function ModalChangeUserData({ close }) {
               filterOption={selectFilter}
               isProfile
               defaultValue={user.country}
-            
             />
             <FormSelect
               subtitle="Estado:"
@@ -208,18 +207,17 @@ export default function ModalChangeUserData({ close }) {
               isProfile
               defaultValue={user.city}
             />
-            <DivSeparacao>
-            <RegisterInput
-              label="Endereço: "
-              name="address"
-              placeholder="Endereço"
-              register={register}
-              errors={errors}
-              type="text"
-              defaultValue={user.address}
-              
-            />
-            </DivSeparacao>
+            <SeparationDiv>
+              <RegisterInput
+                label="Endereço: "
+                name="address"
+                placeholder="Endereço"
+                register={register}
+                errors={errors}
+                type="text"
+                defaultValue={user.address}
+              />
+            </SeparationDiv>
           </FormColumn2>
         </DataEntry>
 
