@@ -223,3 +223,17 @@ export const saveVideoProgress = async ({ video, progress, isCompleted }) => {
 
   return data;
 };
+
+// StabilityAnalysis
+export const getStabilityAnalysis = async (filters = {}) => {
+  const { data } = await api.get(`/stability-analysis`, {
+    params: filters,
+  });
+
+  return data;
+};
+export const deleteStabilityAnalysis = async (_id) => {
+  const { data } = await api.delete(`/stability-analysis/${_id}`);
+
+  return data;
+};
