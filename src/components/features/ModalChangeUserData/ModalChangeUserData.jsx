@@ -18,6 +18,8 @@ import {
   FormColumn,
   SaveChanges,
   Subtitle,
+  SeparationDiv,
+  FormColumn2,
 } from './Styles';
 import { buildUpdateUserErrorMessage, updateUserSchema } from './utils';
 
@@ -76,9 +78,16 @@ export default function ModalChangeUserData({ close }) {
   });
   const onSubmit = (data) => {
     setIsPending(true);
-    updateUser({ _id: user._id, newUserData: data });
-  };
 
+    const newUserData = {
+      ...data,
+      city: JSON.parse(data.city).name,
+      country: JSON.parse(data.country).name,
+      state: JSON.parse(data.state).name,
+    };
+
+    updateUser({ _id: user._id, newUserData });
+  };
   // Country, state and city selects handlers
   const selectedContry = watch('country');
   const selectedState = watch('state');
@@ -152,7 +161,7 @@ export default function ModalChangeUserData({ close }) {
               defaultValue={user.role}
             />
           </FormColumn>
-          <FormColumn>
+          <FormColumn2>
             <Subtitle>Endereço</Subtitle>
             <FormSelect
               subtitle="País:"
@@ -162,10 +171,9 @@ export default function ModalChangeUserData({ close }) {
               control={control}
               errors={errors}
               data={countries.map(formatSelectData)}
-              isBudget
+              isProfile
               showSearch
               filterOption={selectFilter}
-              isProfile
               defaultValue={user.country}
             />
             <FormSelect
@@ -176,7 +184,6 @@ export default function ModalChangeUserData({ close }) {
               control={control}
               errors={errors}
               data={states?.map(formatSelectData)}
-              isBudget
               showSearch
               filterOption={selectFilter}
               disabled={!states}
@@ -191,23 +198,24 @@ export default function ModalChangeUserData({ close }) {
               control={control}
               errors={errors}
               data={cities?.map(formatSelectData)}
-              isBudget
               showSearch
               filterOption={selectFilter}
               disabled={!cities}
               isProfile
               defaultValue={user.city}
             />
-            <RegisterInput
-              label="Endereço: "
-              name="address"
-              placeholder="Endereço"
-              register={register}
-              errors={errors}
-              type="text"
-              defaultValue={user.address}
-            />
-          </FormColumn>
+            <SeparationDiv>
+              <RegisterInput
+                label="Endereço: "
+                name="address"
+                placeholder="Endereço"
+                register={register}
+                errors={errors}
+                type="text"
+                defaultValue={user.address}
+              />
+            </SeparationDiv>
+          </FormColumn2>
         </DataEntry>
 
         <SaveChanges

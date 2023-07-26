@@ -18,6 +18,7 @@ import {
   ModalButton,
   ErrorMessage,
   Date,
+  EmailText
 } from './Styles';
 import {
   buildUpdateUserCourseErrorMessage,
@@ -68,8 +69,9 @@ export default function ModalEditAuthorizeAccess({ authorizeUser, close }) {
         <ModalContent>
           <div>
             <Label>Email:</Label>
-            <h1>{authorizeUser?.user?.email}</h1>
+            <EmailText>{authorizeUser?.user?.email}</EmailText>
           </div>
+          
           <div>
             <Label>Validade do acesso:</Label>
             <AccessExpirationContainer>

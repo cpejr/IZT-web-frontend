@@ -16,9 +16,10 @@ export const DataEntry = styled.div`
   width: 90%;
   display: flex;
   justify-content: center;
+
   gap: 2rem;
 
-  @media (max-width: 730px) {
+  @media (max-width: 927px) {
     flex-direction: column;
     align-items: center;
   }
@@ -30,6 +31,12 @@ export const FormColumn = styled.div`
   align-items: center;
   width: 100%;
   max-width: 35rem;
+`;
+
+export const SeparationDiv = styled.div`
+  width: 100%;
+
+  margin-top: 5px;
 `;
 
 export const Form = styled.form`
@@ -91,4 +98,12 @@ export const Subtitle = styled.p`
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
   margin-bottom: 8%;
+`;
+
+export const FormColumn2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 35rem;
 `;

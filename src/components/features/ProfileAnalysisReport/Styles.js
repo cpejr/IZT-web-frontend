@@ -1,4 +1,3 @@
-import { Modal } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -32,8 +31,6 @@ export const Columns = styled.div`
 export const DataColumn = styled.div`
   align-items: flex-start;
   gap: 0.5rem;
-  display: flex;
-  flex-direction: column;
   width: 50%;
   height: 100%;
   max-height: 25rem;
@@ -50,47 +47,9 @@ export const DataColumn = styled.div`
   }
 `;
 
-export const DataContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  width: 100%;
-  height: 100%;
-  max-height: 15rem;
-  max-width: 28rem;
-  padding-left: 1.5rem;
-  @media (max-width: 1350px) {
-    max-height: 25rem;
-  }
-`;
-
-export const DataContainer2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex;
-  margin-left: 1rem;
-  flex-wrap: wrap;
-  margin-top: 4rem;
-  gap: 0.5rem;
-  width: 100%;
-  height: 100%;
-  max-height: 15rem;
-  max-width: 28rem;
-  padding-left: 1.5rem;
-  @media (max-width: 1350px) {
-    max-height: 25rem;
-  }
-  @media (max-width: 910px) {
-    mar: 0rem;
-  }
-`;
-
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 1rem;
 `;
 
 export const DataRow = styled.div`
@@ -100,10 +59,26 @@ export const DataRow = styled.div`
   justify-content: flex-start;
   gap: 1rem;
   width: 100%;
-  //height: 100%; // tá aquiii
+  height: 100%;
   margin-left: 1rem;
   @media (max-width: 1075px) {
     gap: 0.5rem;
+  }
+`;
+
+export const DataContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
+  max-height: 25rem;
+  max-width: 28rem;
+  padding-left: 1.5rem;
+  @media (max-width: 1350px) {
+    max-height: 25rem;
   }
 `;
 
@@ -232,11 +207,6 @@ export const DashedBar = styled.div`
   height: auto;
   width: 0.1rem;
   border-right: 0.1rem dashed white;
-`;
-export const ModalStyle = styled(Modal)`
-  .ant-modal-content {
-    background-color: ${(props) => props.theme.colors.darkBlue} !important;
-  }
 `;
 
 export const ConstDashedBar = styled.div`

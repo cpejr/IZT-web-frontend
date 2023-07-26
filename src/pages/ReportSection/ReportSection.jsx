@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { HiSearch } from 'react-icons/hi';
 
+import ProfileAnalysisReport from '../../components/features/ProfileAnalysisReport/ProfileAnalysisReport';
 import StabilityAnalysisReport from '../../components/features/Report/StabilityAnalysisReport';
 import { useGetStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
 import useAuthStore from '../../stores/auth';
@@ -19,10 +20,16 @@ import {
 
 export default function ReportSection() {
   const [name, setName] = useState('');
-  const [opened, setOpened] = useState('');
+  const [openedStabilityAnalysis, setOpenedStabilityAnalysis] = useState('');
+  const [openedProfileAnalysis, setOpenedProfileAnalysis] = useState('');
 
-  async function handleOpened(openedName) {
-    setOpened(openedName === opened ? '' : openedName);
+  function handleOpenedStabilityAnalysis(openedName) {
+    if (openedStabilityAnalysis === openedName) {
+      setOpenedStabilityAnalysis('');
+    } else {
+      setOpenedStabilityAnalysis(openedName);
+      setOpenedProfileAnalysis(''); // Close the other dropdown if it's open
+    }
   }
   const user = useAuthStore((state) => state.auth?.user);
   const { data } = useGetStabilityAnalysis({});

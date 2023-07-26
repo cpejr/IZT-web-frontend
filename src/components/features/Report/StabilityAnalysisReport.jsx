@@ -9,6 +9,7 @@ import {
   Container,
   ButtonRow,
   DataRow,
+  Row,
   Label,
   Title,
   Data,
