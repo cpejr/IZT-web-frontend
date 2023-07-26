@@ -237,3 +237,8 @@ export const deleteStabilityAnalysis = async (_id) => {
 
   return data;
 };
+
+export const calculateStabilityAnalysis = async (inputData) => {
+  const { data } = await api.post('/stability-analysis/diagrams', inputData);
+  return data;
+};
