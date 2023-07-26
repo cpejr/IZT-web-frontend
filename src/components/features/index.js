@@ -34,3 +34,4 @@ export { default as ModalEditAuthorizeSoftwareAccess } from './ModalEditAuthoriz
 export { default as ModalDeleteAuthorizeSoftwareAccess } from './ModalDeleteAuthorizeSoftwareAccess/ModalDeleteAuthorizeSoftwareAccess';
 export { default as SoftwareMenu } from './SoftwareMenu/SoftwareMenu';
 export { default as StabilityAnalysisPDF } from './PDF/StabilityAnalysisPDF';
+export { default as ModalDeleteStabilityAnalysis } from './ModalDeleteStabilityAnalysis/ModalDeleteStabilityAnalysis';
