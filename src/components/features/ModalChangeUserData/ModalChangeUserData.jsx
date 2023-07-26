@@ -171,10 +171,9 @@ export default function ModalChangeUserData({ close }) {
               control={control}
               errors={errors}
               data={countries.map(formatSelectData)}
-              isBudget
+              isProfile
               showSearch
               filterOption={selectFilter}
-              isProfile
               defaultValue={user.country}
             />
             <FormSelect
@@ -185,7 +184,6 @@ export default function ModalChangeUserData({ close }) {
               control={control}
               errors={errors}
               data={states?.map(formatSelectData)}
-              isBudget
               showSearch
               filterOption={selectFilter}
               disabled={!states}
@@ -200,7 +198,6 @@ export default function ModalChangeUserData({ close }) {
               control={control}
               errors={errors}
               data={cities?.map(formatSelectData)}
-              isBudget
               showSearch
               filterOption={selectFilter}
               disabled={!cities}
