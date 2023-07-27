@@ -1,10 +1,13 @@
 import { useState } from 'react';
-
+import { useParams } from 'react-router-dom';
 import { HiSearch } from 'react-icons/hi';
 
 import ProfileAnalysisReport from '../../components/features/ProfileAnalysisReport/ProfileAnalysisReport';
 import StabilityAnalysisReport from '../../components/features/Report/StabilityAnalysisReport';
-import { useGetStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
+import {
+  useGetStabilityAnalysis,
+  useGetNormalStabilityAnalysis,
+} from '../../hooks/query/stabilityAnalysis';
 import useAuthStore from '../../stores/auth';
 import {
   Container,
@@ -76,12 +79,14 @@ export default function ReportSection() {
     }
   }
 
-  const user = useAuthStore((state) => state.auth?.user);
   const { data } = useGetStabilityAnalysis({});
+  const user = useAuthStore((state) => state.auth?.user);
+  const { data: normal } = useGetNormalStabilityAnalysis({ user: user?._id });
 
   const userStabilityAnalysis = data?.filter(
     (stability) => stability?.user === user?._id
   );
+  console.log(normal);
 
   return (
     <TESTEContainer>
@@ -110,7 +115,7 @@ export default function ReportSection() {
                   />
                 );
               })}
-              {profileReport.map((report) => {
+              {profileReport?.map((report) => {
                 return (
                   <ProfileAnalysisReport
                     key={report.name}
@@ -133,7 +138,7 @@ export default function ReportSection() {
                   />
                 );
               })}
-              {profileReport.map((report) => {
+              {profileReport?.map((report) => {
                 return (
                   <ProfileAnalysisReport
                     key={report.name}
