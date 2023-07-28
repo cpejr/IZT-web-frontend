@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import { DownOutlined, CloseOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 
+import ModalDeleteStabilityAnalysis from '../ModalDeleteStabilityAnalysis/ModalDeleteStabilityAnalysis';
 import {
   DataColumn,
   Columns,
   Container,
   ButtonRow,
   DataRow,
-  Row,
   Label,
   Title,
   Data,
@@ -18,7 +18,6 @@ import {
   DashedBar,
   ModalStyle,
 } from './Styles';
-import ModalDeleteStabilityAnalysis from '../ModalDeleteStabilityAnalysis/ModalDeleteStabilityAnalysis';
 
 export default function StabilityAnalysisReport({
   data,

@@ -1,3 +1,4 @@
+import { Modal } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -214,4 +215,10 @@ export const ConstDashedBar = styled.div`
   height: auto;
   width: 0.1rem;
   border-right: 0.1rem dashed white;
+`;
+
+export const ModalStyle = styled(Modal)`
+  .ant-modal-content {
+    background-color: ${(props) => props.theme.colors.darkBlue} !important;
+  }
 `;

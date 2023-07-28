@@ -4,10 +4,9 @@ import { HiSearch } from 'react-icons/hi';
 
 import ProfileAnalysisReport from '../../components/features/ProfileAnalysisReport/ProfileAnalysisReport';
 import StabilityAnalysisReport from '../../components/features/Report/StabilityAnalysisReport';
-import {
-  useGetStabilityAnalysis,
-  useGetNormalStabilityAnalysis,
-} from '../../hooks/query/stabilityAnalysis';
+import { useSearchByNameProfileAnalysis } from '../../hooks/query/profileAnalysis';
+import { useSearchByNameStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
+import useDebounce from '../../hooks/useDebounce';
 import useAuthStore from '../../stores/auth';
 import {
   Container,
@@ -21,42 +20,9 @@ import {
   TESTEContainer,
 } from './Styles';
 
-// Dados apenas para teste
-const profileReport = [
-  {
-    name: 'Relatório#1',
-    analysis: {
-      rectification: 'centerless',
-      machine: 'robot',
-      machineNumber: '724',
-      operation: '554',
-      department: 'Engenharia',
-      accountable: 'Thiago',
-    },
-    product: {
-      product: 'produto1',
-      productNumber: '5',
-      diameter: '10',
-      totalLength: '10',
-      electiveLength: '8',
-      allowance: '2', // sobremetal
-    },
-    machineData: {
-      RCdiameterMax: '140',
-      RCdiameterMin: '140',
-      RAdiameter: '100',
-      RClength: '50',
-      RAlength: '50',
-      RCefectiveLength: '10',
-      RCrotation: '45',
-      RArotation: '7',
-      RWinclination: '2',
-    },
-  },
-];
-
 export default function ReportSection() {
   const [name, setName] = useState('');
+  const debouncedName = useDebounce(name);
 
   const [openedStabilityAnalysis, setOpenedStabilityAnalysis] = useState('');
   const [openedProfileAnalysis, setOpenedProfileAnalysis] = useState('');
@@ -79,14 +45,21 @@ export default function ReportSection() {
     }
   }
 
-  const { data } = useGetStabilityAnalysis({});
+  const { data: stabilityAnalysisData } = useSearchByNameStabilityAnalysis({
+    name: debouncedName,
+  });
+  const { data: profileAnalysisData } = useSearchByNameProfileAnalysis({
+    name: debouncedName,
+  });
 
   const user = useAuthStore((state) => state.auth?.user);
 
-  const { data: normalUser } = useGetNormalStabilityAnalysis({
-    user: user?._id,
-  });
-
+  const userStabilityAnalysis = stabilityAnalysisData?.filter(
+    (stability) => stability?.user === user?._id
+  );
+  const userProfileAnalysis = profileAnalysisData?.filter(
+    (profile) => profile?.userId === user?._id
+  );
   return (
     <TESTEContainer>
       <Container>
@@ -104,7 +77,7 @@ export default function ReportSection() {
           </ReportsHeader>
           {user?.isAdmin ? (
             <Reports>
-              {data?.map((report) => {
+              {stabilityAnalysisData?.map((report) => {
                 return (
                   <StabilityAnalysisReport
                     key={report.name}
@@ -114,7 +87,7 @@ export default function ReportSection() {
                   />
                 );
               })}
-              {profileReport?.map((report) => {
+              {profileAnalysisData?.map((report) => {
                 return (
                   <ProfileAnalysisReport
                     key={report.name}
@@ -127,7 +100,7 @@ export default function ReportSection() {
             </Reports>
           ) : (
             <Reports>
-              {normalUser?.map((report) => {
+              {userStabilityAnalysis?.map((report) => {
                 return (
                   <StabilityAnalysisReport
                     key={report.name}
@@ -137,7 +110,7 @@ export default function ReportSection() {
                   />
                 );
               })}
-              {profileReport?.map((report) => {
+              {userProfileAnalysis?.map((report) => {
                 return (
                   <ProfileAnalysisReport
                     key={report.name}
