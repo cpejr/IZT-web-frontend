@@ -24,8 +24,8 @@ export function useGetNormalStabilityAnalysis({
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
-    queryKey: ['stability-analysis', { user }],
-    queryFn: () => getNormalStabilityAnalysis({ user }),
+    queryKey: ['stability-analysis', user],
+    queryFn: () => getNormalStabilityAnalysis(user),
     onSuccess,
     onError,
   });

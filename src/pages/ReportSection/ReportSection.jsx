@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+
 import { HiSearch } from 'react-icons/hi';
 
 import ProfileAnalysisReport from '../../components/features/ProfileAnalysisReport/ProfileAnalysisReport';
@@ -80,12 +80,15 @@ export default function ReportSection() {
   }
 
   const { data } = useGetStabilityAnalysis({});
+
   const user = useAuthStore((state) => state.auth?.user);
+
   const { data: normal } = useGetNormalStabilityAnalysis({ user: user?._id });
 
   const userStabilityAnalysis = data?.filter(
     (stability) => stability?.user === user?._id
   );
+
   console.log(normal);
 
   return (
@@ -128,7 +131,7 @@ export default function ReportSection() {
             </Reports>
           ) : (
             <Reports>
-              {userStabilityAnalysis?.map((report) => {
+              {normal?.map((report) => {
                 return (
                   <StabilityAnalysisReport
                     key={report.name}
