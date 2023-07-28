@@ -4,7 +4,10 @@ import { HiSearch } from 'react-icons/hi';
 
 import ProfileAnalysisReport from '../../components/features/ProfileAnalysisReport/ProfileAnalysisReport';
 import StabilityAnalysisReport from '../../components/features/Report/StabilityAnalysisReport';
-import { useGetStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
+import {
+  useGetStabilityAnalysis,
+  useGetNormalStabilityAnalysis,
+} from '../../hooks/query/stabilityAnalysis';
 import useAuthStore from '../../stores/auth';
 import {
   Container,
@@ -76,12 +79,13 @@ export default function ReportSection() {
     }
   }
 
-  const user = useAuthStore((state) => state.auth?.user);
   const { data } = useGetStabilityAnalysis({});
 
-  const userStabilityAnalysis = data?.filter(
-    (stability) => stability?.user === user?._id
-  );
+  const user = useAuthStore((state) => state.auth?.user);
+
+  const { data: normalUser } = useGetNormalStabilityAnalysis({
+    user: user?._id,
+  });
 
   return (
     <TESTEContainer>
@@ -110,7 +114,7 @@ export default function ReportSection() {
                   />
                 );
               })}
-              {profileReport.map((report) => {
+              {profileReport?.map((report) => {
                 return (
                   <ProfileAnalysisReport
                     key={report.name}
@@ -123,7 +127,7 @@ export default function ReportSection() {
             </Reports>
           ) : (
             <Reports>
-              {userStabilityAnalysis?.map((report) => {
+              {normalUser?.map((report) => {
                 return (
                   <StabilityAnalysisReport
                     key={report.name}
@@ -133,7 +137,7 @@ export default function ReportSection() {
                   />
                 );
               })}
-              {profileReport.map((report) => {
+              {profileReport?.map((report) => {
                 return (
                   <ProfileAnalysisReport
                     key={report.name}

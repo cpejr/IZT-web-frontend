@@ -232,6 +232,11 @@ export const getStabilityAnalysis = async (filters = {}) => {
 
   return data;
 };
+export const getNormalStabilityAnalysis = async (user) => {
+  const { data } = await api.get(`/stability-analysis/user/${user}`);
+  return data;
+};
+
 export const deleteStabilityAnalysis = async (_id) => {
   const { data } = await api.delete(`/stability-analysis/${_id}`);
 
