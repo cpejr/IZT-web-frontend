@@ -68,6 +68,7 @@ export default function ModalCreateProduct({ close }) {
       });
 
       toast.success('Produto criado com sucesso!');
+
       close();
     }, // insert toast
     onError: (err) => {
@@ -217,6 +218,7 @@ export default function ModalCreateProduct({ close }) {
                   sizeLimitInMB={DOCUMENTS_CONFIG.sizeLimitInMB}
                 />
               )}
+              <ErrorMessage>{errors?.documents?.message}</ErrorMessage>
             </Subsection>
 
             <CategorySubsection>

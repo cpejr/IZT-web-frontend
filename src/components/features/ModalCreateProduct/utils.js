@@ -24,7 +24,7 @@ export const createProductValidationSchema = z.object({
     .transform((pictures) => pictures.map(({ file }) => file)),
   documents: z
     .array(z.object({ file: z.instanceof(File) }))
-    .default([])
+    .nonempty('Você deve inserir ao menos um documento')
     .transform((documents) => documents.map(({ file }) => file)),
 });
 
