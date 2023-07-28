@@ -117,6 +117,8 @@ export const calculateStabilityAnalysisValidationSchema = z.object({
       invalid_type_error: 'Comprimento Eletivo deve ser um número',
     })
     .positive(),
+
+  allowance: z,
 });
 
 // Error Handling

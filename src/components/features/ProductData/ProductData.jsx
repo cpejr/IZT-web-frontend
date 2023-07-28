@@ -8,30 +8,48 @@ export default function MachinProductData({ collapse }) {
       <DataColumn>
         <Line>
           <Label>Produto:</Label>
-          <Input />
+          <Input 
+          id= 'product'
+          {...register("product")}
+          />
         </Line>
         <Line>
           <Label>N° do produto:</Label>
-          <Input />
+          <Input 
+          id= 'productNumber'
+          {...register("productNumber")}
+          />
         </Line>
         <Line>
           <Label>Diâmetro:</Label>
-          <Input width="4rem" />
+          <Input width="4rem" 
+          id= 'diameter'
+          {...register("diameter")}
+          />
           <Label>mm</Label>
         </Line>
         <Line>
           <Label>Comprimento total:</Label>
-          <Input width="4rem" />
+          <Input width="4rem"
+          id= 'totalLength'
+          {...register("totalLength")}
+          />
           <Label>mm</Label>
         </Line>
         <Line>
           <Label>Comprimento eletivo:</Label>
-          <Input width="4rem" />
+          <Input width="4rem"
+          id= 'electiveLength'
+          {...register("electiveLength")}
+          />
           <Label>mm</Label>
         </Line>
         <Line>
           <Label>Sobremetal:</Label>
-          <Input width="4rem" />
+          <Input width="4rem" 
+          id= 'allowance'
+          {...register("allowance")}
+          />
           <Label>mm</Label>
         </Line>
       </DataColumn>

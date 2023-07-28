@@ -15,7 +15,10 @@ export default function AnalysisData({ collapse }) {
       <DataColumn>
         <Line>
           <Label>Processo de retificação:</Label>
-          <SelectInput>
+          <SelectInput
+          id= 'rectificationProcess'
+          {...register("rectificationProcess")}
+          >
             <option value="">Selecionar</option>
             <option value="Centerless de Mergulho">
               Centerless de Mergulho
@@ -27,15 +30,24 @@ export default function AnalysisData({ collapse }) {
         </Line>
         <Line>
           <Label>Maquina:</Label>
-          <Input />
+          <Input 
+          id= 'machine'
+          {...register("machine")}
+          />
         </Line>
         <Line>
           <Label>N° da Maquina:</Label>
-          <Input />
+          <Input 
+          id= 'machineNumber'
+          {...register("machineNumber")}
+          />
         </Line>
         <Line>
           <Label>Operação:</Label>
-          <SelectInput>
+          <SelectInput
+          id= 'operation'
+          {...register("operation")}
+          >
             <option value="">Selecionar</option>
             <option value="Desbaste">Desbaste</option>
             <option value="Pré Desbaste">Pré Desbaste</option>
@@ -44,11 +56,17 @@ export default function AnalysisData({ collapse }) {
         </Line>
         <Line>
           <Label>Departamento:</Label>
-          <Input />
+          <Input 
+          id= 'department'
+          {...register("department")}
+          />
         </Line>
         <Line>
           <Label>Responsável:</Label>
-          <Input />
+          <Input 
+          id= 'responsiblePerson'
+          {...register("responsiblePerson")}
+          />
         </Line>
       </DataColumn>
     </CollapsableData>

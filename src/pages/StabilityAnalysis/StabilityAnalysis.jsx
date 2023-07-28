@@ -65,7 +65,7 @@ export default function StabilityAnalysis() {
     <Container>
       <DataEntryDiv>
         <Title>Entrada de Dados</Title>
-        <DataEntry>
+        <DataEntry onSubmit={handleSubmit(onSubmit)}>
           <Collapsable>
             <CollapsableHeader
               collapse={collapse === 'analysis'}
