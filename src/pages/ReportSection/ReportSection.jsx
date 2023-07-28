@@ -83,7 +83,9 @@ export default function ReportSection() {
 
   const user = useAuthStore((state) => state.auth?.user);
 
-  const { data: normal } = useGetNormalStabilityAnalysis({ user: user?._id });
+  const { data: normalUser } = useGetNormalStabilityAnalysis({
+    user: user?._id,
+  });
 
   return (
     <TESTEContainer>
@@ -125,7 +127,7 @@ export default function ReportSection() {
             </Reports>
           ) : (
             <Reports>
-              {normal?.map((report) => {
+              {normalUser?.map((report) => {
                 return (
                   <StabilityAnalysisReport
                     key={report.name}
