@@ -85,12 +85,6 @@ export default function ReportSection() {
 
   const { data: normal } = useGetNormalStabilityAnalysis({ user: user?._id });
 
-  const userStabilityAnalysis = data?.filter(
-    (stability) => stability?.user === user?._id
-  );
-
-  console.log(normal);
-
   return (
     <TESTEContainer>
       <Container>
