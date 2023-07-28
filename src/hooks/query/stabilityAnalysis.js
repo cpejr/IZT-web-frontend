@@ -3,7 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   getStabilityAnalysis,
   deleteStabilityAnalysis,
-  calculateStabilityAnalysis
+  calculateStabilityAnalysis,
 } from '../../services/api/endpoints';
 
 export function useGetStabilityAnalysis({
@@ -30,7 +30,6 @@ export function useDeleteStabilityAnalysis({
   });
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export function useCalculateStabilityAnalysis({
   onSuccess = () => {},
   onError = (err) => console.log(err),
