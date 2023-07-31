@@ -260,7 +260,7 @@ export const getProfileAnalysis = async (filters = {}) => {
 
   return data;
 };
-export const getNormalProfileAnalysis = async (user) => {
+export const getByUserProfileAnalysis = async (user) => {
   const { data } = await api.get(`/profile-analysis/user/${user}`);
   return data;
 };

@@ -3,8 +3,8 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   getProfileAnalysis,
   deleteProfileAnalysis,
-  getNormalProfileAnalysis,
   searchByNameProfileAnalysis,
+  getByUserProfileAnalysis,
 } from '../../services/api/endpoints';
 
 export function useGetProfileAnalysis({
@@ -19,14 +19,14 @@ export function useGetProfileAnalysis({
     onError,
   });
 }
-export function useGetNormalProfileAnalysis({
+export function useGetByUserProfileAnalysis({
   user,
   onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
     queryKey: ['profile-analysis', user],
-    queryFn: () => getNormalProfileAnalysis(user),
+    queryFn: () => getByUserProfileAnalysis(user),
     onSuccess,
     onError,
   });
