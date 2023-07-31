@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 import { AiOutlineDown } from 'react-icons/ai';
 import { TbPencil } from 'react-icons/tb';
+import { toast } from 'react-toastify';
 
 import {
   AnalysisData,
@@ -25,15 +28,14 @@ import {
   ContourMap,
 } from './Styles';
 
-// import { useForm } from 'react-hook-form';
-// import { toast } from 'react-toastify';
-// import { useCalculateStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
-// import {
-//   buildCalculateStabilityAnalysisErrorMessage,
-//   calculateStabilityAnalysisValidationSchema,
-// } from './utils';
+import { useCalculateStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
 
-const data = [
+import {
+  buildCalculateStabilityAnalysisErrorMessage,
+  calculateStabilityAnalysisValidationSchema,
+} from './utils';
+
+const graphData = [
   {
     z: [
       [10, 10.625, 12.5, 15.625, 20],
@@ -49,16 +51,50 @@ const data = [
 ];
 
 export default function StabilityAnalysis() {
+  const [isLoading, setIsLoading] = useState(false);
   const [plotData, setPlotData] = useState([]);
   const [collapse, setCollapse] = useState('');
 
+  // Open/Close dropdown
   const handleCollapse = (sectionName) => {
     if (collapse === sectionName) setCollapse('');
     else setCollapse(sectionName);
   };
 
+  // Gerenate Graph
   const handlePlot = () => {
-    setPlotData(data);
+    setPlotData(graphData);
+  };
+
+  // Backend calls
+  const { mutate: calculateStabilityAnalysis } = useCalculateStabilityAnalysis({
+    onSuccess: () => {
+      toast.success('Dados calculados com sucesso!');
+    },
+    onError: (err) => {
+      const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+
+      toast.error(errorMessage);
+      setIsLoading(false);
+    },
+  });
+
+  // Form handlers
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+		setValue,
+    watch,
+  } = useForm({
+    resolver: zodResolver(calculateStabilityAnalysisValidationSchema),
+  });
+
+  const onSubmit = (data) =>{ 
+    setIsLoading(true);
+    console.log('enviou');
+    calculateStabilityAnalysis(data);
+    setIsLoading(false);
   };
 
   return (
@@ -97,7 +133,9 @@ export default function StabilityAnalysis() {
             <ProductData collapse={collapse === 'product'} />
           </Collapsable>
         </DataEntry>
-        <Button onClick={handlePlot}>Calcular</Button>
+        <Button onSubmit={handlePlot} type="submit">
+          Calcular
+        </Button>
       </DataEntryDiv>
       <Analysis>
         <TitleRow>
