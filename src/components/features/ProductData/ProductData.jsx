@@ -18,6 +18,8 @@ export default function MachinProductData({ collapse }) {
           <Input 
           id= 'productNumber'
           {...register("productNumber")}
+          type='number'
+          step="any"
           />
         </Line>
         <Line>
@@ -25,6 +27,8 @@ export default function MachinProductData({ collapse }) {
           <Input width="4rem" 
           id= 'diameter'
           {...register("diameter")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>
@@ -33,6 +37,8 @@ export default function MachinProductData({ collapse }) {
           <Input width="4rem"
           id= 'totalLength'
           {...register("totalLength")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>
@@ -41,6 +47,8 @@ export default function MachinProductData({ collapse }) {
           <Input width="4rem"
           id= 'electiveLength'
           {...register("electiveLength")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>
@@ -49,6 +57,8 @@ export default function MachinProductData({ collapse }) {
           <Input width="4rem" 
           id= 'allowance'
           {...register("allowance")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>

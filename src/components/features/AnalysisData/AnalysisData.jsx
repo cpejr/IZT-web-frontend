@@ -40,6 +40,8 @@ export default function AnalysisData({ collapse }) {
           <Input 
           id= 'machineNumber'
           {...register("machineNumber")}
+          type='number'
+          step="any"
           />
         </Line>
         <Line>

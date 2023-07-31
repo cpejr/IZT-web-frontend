@@ -11,6 +11,8 @@ export default function MachineData({ collapse }) {
           <Input 
           id= 'rcMaxDiameter'
           {...register("rcMaxDiameter")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>
@@ -19,6 +21,8 @@ export default function MachineData({ collapse }) {
           <Input 
           id= 'rcMinDiameter'
           {...register("rcMinDiameter")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>
@@ -27,6 +31,8 @@ export default function MachineData({ collapse }) {
           <Input 
           id= 'raDiameter'
           {...register("raDiameter")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>
@@ -35,6 +41,8 @@ export default function MachineData({ collapse }) {
           <Input 
           id= 'rcLength'
           {...register("rcLength")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>
@@ -43,6 +51,8 @@ export default function MachineData({ collapse }) {
           <Input 
           id= 'raLength'
           {...register("raLength")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>
@@ -51,6 +61,8 @@ export default function MachineData({ collapse }) {
           <Input 
           id= 'rcEffectiveLength'
           {...register("rcEffectiveLength")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>
@@ -59,6 +71,8 @@ export default function MachineData({ collapse }) {
           <Input 
           id= 'rcRotation'
           {...register("rcRotation")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>
@@ -67,6 +81,8 @@ export default function MachineData({ collapse }) {
           <Input 
           id= 'raRotation'
           {...register("raRotation")}
+          type='number'
+          step="any"
           />
           <Label>mm</Label>
         </Line>
@@ -75,6 +91,8 @@ export default function MachineData({ collapse }) {
           <Input 
           id= 'rwInclination'
           {...register("rwInclination")}
+          type='number'
+          step="any"
           />
           <Label>°</Label>
         </Line>
