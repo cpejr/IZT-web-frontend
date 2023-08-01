@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { AiOutlineDown } from 'react-icons/ai';
 import { TbPencil } from 'react-icons/tb';
+import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import {
@@ -11,6 +12,7 @@ import {
   MachineData,
   ProductData,
 } from '../../components/features';
+import { useCalculateStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
 import {
   Container,
   DataEntryDiv,
@@ -27,9 +29,6 @@ import {
   Canvas,
   ContourMap,
 } from './Styles';
-
-import { useCalculateStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
-
 import {
   buildCalculateStabilityAnalysisErrorMessage,
   calculateStabilityAnalysisValidationSchema,
@@ -51,7 +50,6 @@ const graphData = [
 ];
 
 export default function StabilityAnalysis() {
-  const [isLoading, setIsLoading] = useState(false);
   const [plotData, setPlotData] = useState([]);
   const [collapse, setCollapse] = useState('');
 
@@ -67,34 +65,29 @@ export default function StabilityAnalysis() {
   };
 
   // Backend calls
-  const { mutate: calculateStabilityAnalysis } = useCalculateStabilityAnalysis({
-    onSuccess: () => {
-      toast.success('Dados calculados com sucesso!');
-    },
-    onError: (err) => {
-      const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+  const { mutate: calculateStabilityAnalysis, isLoading } =
+    useCalculateStabilityAnalysis({
+      onSuccess: () => {
+        toast.success('Dados calculados com sucesso!');
+      },
+      onError: (err) => {
+        const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
 
-      toast.error(errorMessage);
-      setIsLoading(false);
-    },
-  });
+        toast.error(errorMessage);
+      },
+    });
 
   // Form handlers
   const {
     handleSubmit,
     register,
     formState: { errors },
-		setValue,
-    watch,
   } = useForm({
     resolver: zodResolver(calculateStabilityAnalysisValidationSchema),
   });
 
-  const onSubmit = (data) =>{ 
-    setIsLoading(true);
-    console.log('enviou');
+  const onSubmit = (data) => {
     calculateStabilityAnalysis(data);
-    setIsLoading(false);
   };
 
   return (
@@ -110,7 +103,11 @@ export default function StabilityAnalysis() {
               <DataTitle>Dados da Análise</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
-            <AnalysisData collapse={collapse === 'analysis'} />
+            <AnalysisData
+              collapse={collapse === 'analysis'}
+              register={register}
+              errors={errors}
+            />
           </Collapsable>
           <Collapsable>
             <CollapsableHeader
@@ -120,7 +117,11 @@ export default function StabilityAnalysis() {
               <DataTitle>Dados da Maquina</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
-            <MachineData collapse={collapse === 'machine'} />
+            <MachineData
+              collapse={collapse === 'machine'}
+              register={register}
+              errors={errors}
+            />
           </Collapsable>
           <Collapsable>
             <CollapsableHeader
@@ -130,11 +131,28 @@ export default function StabilityAnalysis() {
               <DataTitle>Dados do Produto</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
-            <ProductData collapse={collapse === 'product'} />
+            <ProductData
+              collapse={collapse === 'product'}
+              register={register}
+              errors={errors}
+            />
           </Collapsable>
         </DataEntry>
-        <Button onSubmit={handlePlot} type="submit">
-          Calcular
+        <Button disabled={isLoading} onSubmit={handlePlot} type="submit">
+          {isLoading ? (
+            <>
+              <TailSpin
+                height="15"
+                width="15"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="5"
+              />
+              <p>Carregando</p>
+            </>
+          ) : (
+            <p>Calcular</p>
+          )}
         </Button>
       </DataEntryDiv>
       <Analysis>

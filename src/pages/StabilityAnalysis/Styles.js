@@ -42,6 +42,11 @@ export const DataEntry = styled.form`
   justify-content: flex-start;
 `;
 
+export const ErrorMessage = styled.p`
+  font-weight: 700;
+  color: red;
+`;
+
 export const Collapsable = styled.div`
   width: 100%;
   display: flex;
