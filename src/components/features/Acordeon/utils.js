@@ -14,7 +14,10 @@ export const calculateProfileAnalysisValidationSchema = z.object({
     .min(3, 'Máquina deve ter pelo menos 3 caracteres')
     .max(40, 'Máquina deve ter no máximo 40 caracteres'),
   machineNumber: z
-    .number({ required_error: 'Número da máquina é obrigatório' })
+    .number({
+      required_error: 'Número da máquina é obrigatório',
+      invalid_type_error: 'Número da máquina deve ser um número',
+    })
     .positive(),
   operation: z
     .string({ required_error: 'Operação é obrigatória' })
@@ -115,6 +118,12 @@ export const calculateProfileAnalysisValidationSchema = z.object({
     .number({
       required_error: 'Comprimento Eletivo é obrigatório',
       invalid_type_error: 'Comprimento Eletivo deve ser um número',
+    })
+    .positive(),
+  allowance: z
+    .number({
+      required_error: 'Sobremetal é obrigatório',
+      invalid_type_error: 'Sobremetal deve ser um número',
     })
     .positive(),
 

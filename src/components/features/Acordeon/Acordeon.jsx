@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -44,7 +42,7 @@ const productData = [
   { label: 'Diametro', unit: 'mm', id: 'diameter' },
   { label: 'Comprimento total', unit: 'mm', id: 'totalLength' },
   { label: 'Comprimento eletivo', unit: 'mm', id: 'electiveLength' },
-  // { label: 'Sobremetal', unit: 'mm', id: '' },
+  { label: 'Sobremetal', unit: 'mm', id: 'allowance' },
 ];
 
 const parametersRA = [
@@ -55,6 +53,7 @@ const parametersRA = [
   { label: 'Posição do dressador', id: 'dresserPosition' },
 ];
 
+// eslint-disable-next-line react/prop-types
 export default function AccordionDemo({ onCalculate }) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -83,7 +82,6 @@ export default function AccordionDemo({ onCalculate }) {
   });
   const onSubmit = (data) => {
     setIsLoading(true);
-    console.log('deu certo');
     calculateProfileAnalysis(data);
 
     const xData = [1, 2, 3, 4]; // Replace with your actual x data
@@ -93,8 +91,6 @@ export default function AccordionDemo({ onCalculate }) {
 
     setIsLoading(false);
   };
-
-  console.log(watch());
 
   return (
     <Accordion.Root
@@ -107,8 +103,8 @@ export default function AccordionDemo({ onCalculate }) {
         <Accordion.Item className="AccordionItem" value="item-1">
           <AccordionTrigger>Dados de análise</AccordionTrigger>
           <AccordionContent>
-            {rectificationProcess.map((data, index) => (
-              <div key={index}>
+            {rectificationProcess.map((data) => (
+              <div key={data}>
                 <div className="AccordionLine">
                   <br /> {data.label}:
                   <br />
@@ -126,6 +122,7 @@ export default function AccordionDemo({ onCalculate }) {
                         }
                       }}
                       step="any"
+                      type="number"
                       className={`AccordionMiniInput ${
                         errors[data.id] ? 'error' : ''
                       }`}
@@ -152,8 +149,8 @@ export default function AccordionDemo({ onCalculate }) {
         <Accordion.Item className="AccordionItem" value="item-2">
           <AccordionTrigger>Dados da máquina</AccordionTrigger>
           <AccordionContent>
-            {machineData.map((data, index) => (
-              <div key={index}>
+            {machineData.map((data) => (
+              <div key={data}>
                 <div className="AccordionLine">
                   <br /> {data.label}:
                   <br />
@@ -170,6 +167,7 @@ export default function AccordionDemo({ onCalculate }) {
                       }
                     }}
                     step="any"
+                    type="number"
                     className={`AccordionMiniInput ${
                       errors[data.id] ? 'error' : ''
                     }`}
@@ -186,8 +184,8 @@ export default function AccordionDemo({ onCalculate }) {
         <Accordion.Item className="AccordionItem" value="item-3">
           <AccordionTrigger>Dados do produto</AccordionTrigger>
           <AccordionContent>
-            {productData.map((data, index) => (
-              <div key={index}>
+            {productData.map((data) => (
+              <div key={data}>
                 <div className="AccordionLine">
                   <br /> {data.label}:
                   <br />
@@ -205,6 +203,7 @@ export default function AccordionDemo({ onCalculate }) {
                         }
                       }}
                       step="any"
+                      type="number"
                       className={`AccordionMiniInput ${
                         errors[data.id] ? 'error' : ''
                       }`}
@@ -231,8 +230,8 @@ export default function AccordionDemo({ onCalculate }) {
         <Accordion.Item className="AccordionItem" value="item-4">
           <AccordionTrigger>RA parâmetro de perfil</AccordionTrigger>
           <AccordionContent>
-            {parametersRA.map((data, index) => (
-              <div key={index}>
+            {parametersRA.map((data) => (
+              <div key={data}>
                 <div className="AccordionLine">
                   <br /> {data.label}:
                   <br />
@@ -250,6 +249,7 @@ export default function AccordionDemo({ onCalculate }) {
                         }
                       }}
                       step="any"
+                      type="number"
                       className={`AccordionMiniInput ${
                         errors[data.id] ? 'error' : ''
                       }`}
@@ -328,6 +328,7 @@ AccordionTrigger.defaultProps = {
 AccordionContent.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
+  onCalculate: PropTypes.func.isRequired,
 };
 AccordionContent.defaultProps = {
   className: '',
