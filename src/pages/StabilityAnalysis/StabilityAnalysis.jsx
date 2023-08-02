@@ -12,7 +12,7 @@ import {
   MachineData,
   ProductData,
 } from '../../components/features';
-// import { useCalculateStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
+import { useCalculateStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
 import {
   Container,
   DataEntryDiv,
@@ -65,17 +65,17 @@ export default function StabilityAnalysis() {
   };
 
   // Backend calls
-  // const { mutate: calculateStabilityAnalysis, isLoading } =
-  //   useCalculateStabilityAnalysis({
-  //     onSuccess: () => {
-  //       toast.success('Dados calculados com sucesso!');
-  //     },
-  //     onError: (err) => {
-  //       const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+  const { mutate: calculateStabilityAnalysis, isLoading } =
+    useCalculateStabilityAnalysis({
+      onSuccess: () => {
+        toast.success('Dados calculados com sucesso!');
+      },
+      onError: (err) => {
+        const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
 
-  //       toast.error(errorMessage);
-  //     },
-  //   });
+        toast.error(errorMessage);
+      },
+    });
 
   // Form handlers
   const {
@@ -139,13 +139,8 @@ export default function StabilityAnalysis() {
             />
           </Collapsable>
         </DataEntry>
-        <Button
-          // disabled={isLoading}
-          onSubmit={handlePlot}
-          type="submit"
-        >
-          <p>TESTE</p>
-          {/* {isLoading ? (
+        <Button disabled={isLoading} onSubmit={handlePlot} type="submit">
+          {isLoading ? (
             <>
               <TailSpin
                 height="15"
@@ -158,7 +153,7 @@ export default function StabilityAnalysis() {
             </>
           ) : (
             <p>Calcular</p>
-          )} */}
+          )}
         </Button>
       </DataEntryDiv>
       <Analysis>
