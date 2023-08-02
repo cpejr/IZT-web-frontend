@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
 
 import { ModalChangeUserData } from '../../components/features';
+import { useGetUserCourses } from '../../hooks/query/userCourse';
 import useAuthStore from '../../stores/auth';
+import formatDate from '../../utils/formatDate';
 import {
   ModalStyle,
   Container,
@@ -24,14 +26,11 @@ import {
   Body,
   DataContainer,
 } from './Styles';
-import formatDate from '../../utils/formatDate';
-import { useGetUserCourses } from '../../hooks/query/userCourse';
 
 export default function Profile() {
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
   const user = useAuthStore((store) => store.auth?.user);
   const { data: userCourses } = useGetUserCourses({});
-  console.log(userCourses);
 
   const openModalChangeUserData = () => setUpdateUserModalState(true);
   const closeModalChangeUserData = () => setUpdateUserModalState(false);
@@ -94,10 +93,6 @@ export default function Profile() {
                   <Infos>
                     <Info>
                       <h1>Email: </h1>
-                      <h2>{user?.email}</h2>
-                    </Info>
-                    <Info>
-                      <h1>Telefone: </h1>
                       <h2>{user?.email}</h2>
                     </Info>
                   </Infos>

@@ -25,11 +25,10 @@ export const Input = styled.input`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-size: 2.2rem;
   font-weight: 600;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   border: ${(props) =>
     props.error ? '0.2rem red solid' : '0.1rem black solid'};
   ::placeholder {
-    color: black;
     font-weight: 400;
   }
   @media (max-width: ${mobileBreakpoint}) {

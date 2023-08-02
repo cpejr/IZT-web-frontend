@@ -47,12 +47,6 @@ export const DeleteButton = styled.button`
     font-size: 1.2em;
   }
 
-  :hover {
-    transition-duration: 0.5s;
-    //colocar hover quando desclicar do botão
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-
   svg {
     margin-right: 0.5rem;
     margin-left: 0.5rem;
