@@ -18,7 +18,7 @@ export const calculateProfileAnalysisValidationSchema = z.object({
       required_error: 'Número da máquina é obrigatório',
       invalid_type_error: 'Número da máquina deve ser um número',
     })
-    .positive(),
+    .positive('Número da máquina deve ser positivo'),
   operation: z
     .string({ required_error: 'Operação é obrigatória' })
     .min(3, 'Operação deve ter pelo menos 3 caracteres')
@@ -38,37 +38,37 @@ export const calculateProfileAnalysisValidationSchema = z.object({
       required_error: 'Diâmetro Máximo do RC é obrigatório',
       invalid_type_error: 'Diâmetro Máximo do RC deve ser um número',
     })
-    .positive(),
+    .positive('Diâmetro Máximo do RC deve ser positivo'),
   rcMinDiameter: z
     .number({
       required_error: 'Diâmetro Mínimo do RC é obrigatório',
       invalid_type_error: 'Diâmetro Mínimo do RC deve ser um número',
     })
-    .positive(),
+    .positive('Diâmetro Mínimo do RC deve ser positivo'),
   raDiameter: z
     .number({
       required_error: 'Diâmetro do RA é obrigatório',
       invalid_type_error: 'Diâmetro do RA deve ser um número',
     })
-    .positive(),
+    .positive('Diâmetro do RA deve ser positivo'),
   rcLength: z
     .number({
       required_error: 'Comprimento do RC é obrigatório',
       invalid_type_error: 'Comprimento do RC deve ser um número',
     })
-    .positive(),
+    .positive('Comprimento do RC deve ser positivo'),
   raLength: z
     .number({
       required_error: 'Comprimento do RA é obrigatório',
       invalid_type_error: 'Comprimento do RA deve ser um número',
     })
-    .positive(),
+    .positive('Comprimento do RA deve ser positivo'),
   rcEffectiveLength: z
     .number({
       required_error: 'Comprimento Efetivo do RC é obrigatório',
       invalid_type_error: 'Comprimento Efetivo do RC deve ser um número',
     })
-    .positive(),
+    .positive('Comprimento Efetivo do RC deve ser positivo'),
   rcRotation: z
     .number({
       required_error: 'Rotação do RC é obrigatória',
@@ -101,31 +101,31 @@ export const calculateProfileAnalysisValidationSchema = z.object({
       required_error: 'Número do Produto é obrigatório',
       invalid_type_error: 'Número do Produto deve ser um número',
     })
-    .positive(),
+    .positive('Número do Produto deve ser positivo'),
   diameter: z
     .number({
       required_error: 'Diâmetro é obrigatório',
       invalid_type_error: 'Diâmetro deve ser um número',
     })
-    .positive(),
+    .positive('Diâmetro deve ser positivo'),
   totalLength: z
     .number({
       required_error: 'Comprimento Total é obrigatório',
       invalid_type_error: 'Comprimento Total deve ser um número',
     })
-    .positive(),
+    .positive('Comprimento Total deve ser positivo'),
   electiveLength: z
     .number({
       required_error: 'Comprimento Eletivo é obrigatório',
       invalid_type_error: 'Comprimento Eletivo deve ser um número',
     })
-    .positive(),
+    .positive('Comprimento Eletivo deve ser positivo'),
   allowance: z
     .number({
       required_error: 'Sobremetal é obrigatório',
       invalid_type_error: 'Sobremetal deve ser um número',
     })
-    .positive(),
+    .positive('Sobremetal deve ser positivo'),
 
   // Análise de Perfil RA
   hwCenterHeight: z
@@ -133,32 +133,32 @@ export const calculateProfileAnalysisValidationSchema = z.object({
       required_error: 'Altura do Centro RA é obrigatória',
       invalid_type_error: 'Altura do Centro RA deve ser um número',
     })
-    .positive(),
+    .positive('Altura do Centro RA deve ser positivo'),
   raInclination: z
     .number({
       required_error: 'Inclinação do RA é obrigatória',
       invalid_type_error: 'Inclinação do RA deve ser um número',
     })
-    .positive(),
+    .positive('Inclinação do RA deve ser positivo'),
   raDresserInclination: z
     .number({
-      required_error: 'Inclinação do Dresser RA é obrigatória',
-      invalid_type_error: 'Inclinação do Dresser RA deve ser um número',
+      required_error: 'Inclinação do Dressador RA é obrigatória',
+      invalid_type_error: 'Inclinação do Dressador RA deve ser um número',
     })
-    .positive(),
+    .positive('Inclinação do Dressador RA deve ser positivo'),
   dresserHeight: z
     .number({
-      required_error: 'Altura do Dresser é obrigatória',
-      invalid_type_error: 'Altura do Dresser deve ser um número',
+      required_error: 'Altura do Dressador é obrigatória',
+      invalid_type_error: 'Altura do Dressador deve ser um número',
     })
-    .positive(),
+    .positive('Altura do Dressador deve ser positivo'),
   dresserPosition: z
     .string({
-      required_error: 'Posição do Dresser é obrigatória',
-      invalid_type_error: 'Posição do Dresser deve ser uma string',
+      required_error: 'Posição do Dressador é obrigatória',
+      invalid_type_error: 'Posição do Dressador deve ser uma string',
     })
-    .min(3)
-    .max(20),
+    .min(3, 'Posição do Dressador deve ter pelo menos 3 caracteres')
+    .max(20, 'Posição do Dressador deve ter pelo menos 20 caracteres'),
 });
 
 // Error Handling

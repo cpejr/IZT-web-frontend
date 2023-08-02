@@ -76,6 +76,7 @@ export default function AccordionDemo({ onCalculate }) {
     register,
     formState: { errors },
     setValue,
+    trigger,
     watch,
   } = useForm({
     resolver: zodResolver(calculateProfileAnalysisValidationSchema),
@@ -94,10 +95,12 @@ export default function AccordionDemo({ onCalculate }) {
 
   const covertStringToNumber = (fieldId, inputValue) => {
     const convertedNumber = parseFloat(inputValue);
-    if (!Number.isNaN(convertedNumber) && convertedNumber >= 0) {
+    if (!Number.isNaN(convertedNumber)) {
       setValue(fieldId, convertedNumber);
+      trigger(fieldId);
     } else {
       setValue(fieldId, '');
+      trigger(fieldId);
     }
   };
 
@@ -113,7 +116,7 @@ export default function AccordionDemo({ onCalculate }) {
           <AccordionTrigger>Dados de análise</AccordionTrigger>
           <AccordionContent>
             {rectificationProcess.map((data) => (
-              <div key={data}>
+              <div key={data.id}>
                 <div className="AccordionLine">
                   <br /> {data.label}:
                   <br />
@@ -154,7 +157,7 @@ export default function AccordionDemo({ onCalculate }) {
           <AccordionTrigger>Dados da máquina</AccordionTrigger>
           <AccordionContent>
             {machineData.map((data) => (
-              <div key={data}>
+              <div key={data.id}>
                 <div className="AccordionLine">
                   <br /> {data.label}:
                   <br />
@@ -184,7 +187,7 @@ export default function AccordionDemo({ onCalculate }) {
           <AccordionTrigger>Dados do produto</AccordionTrigger>
           <AccordionContent>
             {productData.map((data) => (
-              <div key={data}>
+              <div key={data.id}>
                 <div className="AccordionLine">
                   <br /> {data.label}:
                   <br />
@@ -225,7 +228,7 @@ export default function AccordionDemo({ onCalculate }) {
           <AccordionTrigger>RA parâmetro de perfil</AccordionTrigger>
           <AccordionContent>
             {parametersRA.map((data) => (
-              <div key={data}>
+              <div key={data.id}>
                 <div className="AccordionLine">
                   <br /> {data.label}:
                   <br />
@@ -317,7 +320,6 @@ AccordionTrigger.defaultProps = {
 AccordionContent.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  onCalculate: PropTypes.func.isRequired,
 };
 AccordionContent.defaultProps = {
   className: '',
