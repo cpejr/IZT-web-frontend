@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { HiOutlinePencil } from 'react-icons/hi';
 
 import AccordionDemo from '../../components/features/Acordeon/Acordeon';
@@ -21,6 +22,15 @@ import {
 } from './Styles';
 
 export default function ProfileAnalysis() {
+  const [graphData, setGraphData] = useState({ x: [], y: [] });
+
+  const handleCalculate = (data) => {
+    const xData = data.x;
+    const yData = data.y;
+
+    setGraphData({ x: xData, y: yData });
+  };
+
   return (
     <Boddy>
       <Container>
@@ -28,10 +38,7 @@ export default function ProfileAnalysis() {
           <Center>
             <H1>Entrada de Dados</H1>
             <Data>
-              <AccordionDemo />
-            </Data>
-            <Data>
-              <Button> Calcular </Button>
+              <AccordionDemo onCalculate={handleCalculate} />
             </Data>
           </Center>
         </Containerleft>
@@ -43,7 +50,7 @@ export default function ProfileAnalysis() {
           <Edit>
             <Text>Vão de retificação centerless de passagem </Text>
             <Container2>
-              <Graphic />
+              <Graphic data={graphData} />
             </Container2>
             <Text>Dados de saída</Text>
           </Edit>

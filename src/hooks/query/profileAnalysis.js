@@ -5,6 +5,7 @@ import {
   deleteProfileAnalysis,
   searchByNameProfileAnalysis,
   getByUserProfileAnalysis,
+  calculateProfileAnalysis,
 } from '../../services/api/endpoints';
 
 export function useGetProfileAnalysis({
@@ -51,6 +52,17 @@ export function useSearchByNameProfileAnalysis({
   return useQuery({
     queryKey: ['profile-analysis', 'searchByName', name],
     queryFn: () => searchByNameProfileAnalysis(name),
+    onSuccess,
+    onError,
+  });
+}
+
+export function useCalculateProfileAnalysis({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: calculateProfileAnalysis,
     onSuccess,
     onError,
   });
