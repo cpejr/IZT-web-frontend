@@ -36,7 +36,7 @@ export const registerValidationSchema = z
     address: z
       .string()
       .nonempty('Informe um endereço')
-      .min(3, 'User address must be atleast 3 characters')
+      .min(3, 'User address must be at least 3 characters')
       .max(50, 'User address must be a maximum of 50 characters'),
     email: z
       .string()
