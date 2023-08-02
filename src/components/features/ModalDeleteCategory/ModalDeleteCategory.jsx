@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
+import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useDeleteCategory } from '../../../hooks/query/categories';
@@ -40,8 +41,20 @@ export default function ModalDeleteCategory({ _id, close }) {
           deleteCategory(_id);
         }}
       >
-        {/* Put proper loading here */}
-        {isPending ? 'Carregando...' : 'Excluir'}
+        {isPending ? (
+          <>
+            <TailSpin
+              height="15"
+              width="15"
+              color="white"
+              ariaLabel="tail-spin-loading"
+              radius="5"
+            />
+            <p>Carregando</p>
+          </>
+        ) : (
+          'Excluir'
+        )}
       </DeleteButton>
     </Container>
   );

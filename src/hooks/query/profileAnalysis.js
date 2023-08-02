@@ -1,8 +1,62 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { calculateProfileAnalysis } from '../../services/api/endpoints';
+import {
+  getProfileAnalysis,
+  deleteProfileAnalysis,
+  searchByNameProfileAnalysis,
+  getByUserProfileAnalysis,
+  calculateProfileAnalysis,
+} from '../../services/api/endpoints';
 
-// eslint-disable-next-line import/prefer-default-export
+export function useGetProfileAnalysis({
+  filters,
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['profile-analysis', filters],
+    queryFn: () => getProfileAnalysis(filters),
+    onSuccess,
+    onError,
+  });
+}
+export function useGetByUserProfileAnalysis({
+  user,
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['profile-analysis', user],
+    queryFn: () => getByUserProfileAnalysis(user),
+    onSuccess,
+    onError,
+  });
+}
+
+export function useDeleteProfileAnalysis({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: deleteProfileAnalysis,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useSearchByNameProfileAnalysis({
+  name,
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useQuery({
+    queryKey: ['profile-analysis', 'searchByName', name],
+    queryFn: () => searchByNameProfileAnalysis(name),
+    onSuccess,
+    onError,
+  });
+}
+
 export function useCalculateProfileAnalysis({
   onSuccess = () => {},
   onError = (err) => console.log(err),

@@ -60,7 +60,7 @@ export const ErrorMessage = styled.p`
 export const ModalButton = styled.button`
   cursor: pointer;
   gap: 0.7rem;
-  align-self: flex-end;
+  align-self: center;
 
   display: flex;
   flex-direction: row;
@@ -79,6 +79,12 @@ export const ModalButton = styled.button`
   color: white;
 
   margin-top: 1.5rem;
+
+  :hover {
+    transition-duration: 0.5s;
+    //colocar hover quando desclicar do botão
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 
   p {
     font-family: ${(props) => props.theme.fonts.montserrat};

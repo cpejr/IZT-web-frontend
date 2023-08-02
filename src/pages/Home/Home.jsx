@@ -49,7 +49,7 @@ export default function Home() {
             image={Software}
             imageAlt="Software image"
             pictureTopMedia1000
-            linkTo="/curso"
+            linkTo="/software"
           />
         </CardsContainer>
         <FormsContact />

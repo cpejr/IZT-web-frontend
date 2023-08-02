@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 
-// apagar depois
 export const TESTEContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
   height: 100%;
-  max-height: (100vh - 10rem);
+  max-height: calc(100vh - 10rem);
 `;
 
 export const Container = styled.div`
   background-color: ${(props) => props.theme.colors.darkBlue};
   width: 100%;
-  padding: 3rem;
+  padding: 4.8rem;
 `;
 
 export const Title = styled.div`
@@ -24,24 +23,30 @@ export const Title = styled.div`
 
 export const ReportsArea = styled.div`
   margin: 4rem;
-  max-width: 110rem;
+  max-width: 120rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.8rem;
   max-height: calc(90vh - 17rem);
   height: auto;
-  padding: 1rem;
+  padding: 1.6rem;
   @media (max-width: 1100px) {
-    margin: 3rem;
+    margin: 3.2rem;
   }
-  @media (max-width: 970px) {
-    margin: 2rem;
+  @media (max-width: 1380px) {
+    width: 105rem;
   }
-  @media (max-width: 880px) {
-    margin: 2rem;
+  @media (max-width: 1270px) {
+    width: 75rem;
   }
-  @media (max-width: 820px) {
-    margin: 1rem;
+  @media (max-width: 1000px) {
+    width: 65rem;
+  }
+  @media (max-width: 910px) {
+    width: 60rem;
+  }
+  @media (max-width: 800px) {
+    width: 50rem;
   }
 `;
 
@@ -50,23 +55,22 @@ export const Reports = styled.div`
   flex-direction: column;
   width: 100%;
   overflow-y: auto;
-  gap: 0.5rem;
+  gap: 0.8rem;
+
+  /* Scrollbar style */
   ::-webkit-scrollbar {
-    width: 0.5rem;
+    width: 0.8rem;
   }
 
-  /* Track */
   ::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     background: ${(props) => props.theme.colors.gray.darkGray};
-    border-radius: 0.5rem;
+    border-radius: 0.8rem;
   }
 
-  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
@@ -81,8 +85,8 @@ export const ReportsHeader = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-left: 3rem;
-  padding-right: 1rem;
+  padding-left: 4.8rem;
+  padding-right: 1.6rem;
 `;
 
 export const ReportsTitle = styled.div`
@@ -101,8 +105,8 @@ export const SearchDiv = styled.div`
   background-color: ${(props) => props.theme.colors.darkGreenishBlue};
   width: 23rem;
   height: 3.5rem;
-  padding: 0rem 1rem;
-  gap: 1rem;
+  padding: 0rem 1.6rem;
+  gap: 1.6rem;
   svg {
     color: white;
   }

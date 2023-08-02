@@ -5,43 +5,46 @@ import PropTypes from 'prop-types';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useDeleteProducts } from '../../../hooks/query/products';
+import { useDeleteProfileAnalysis } from '../../../hooks/query/profileAnalysis';
 import { Container, DeleteButton, Message } from './Styles';
-import { buildDeleteProductErrorMessage } from './utils';
+import { buildDeleteProfileAnalysisErrorMessage } from './utils';
 
-export default function ModalDeleteProduct({ _id, close }) {
+export default function ModalDeleteProfileAnalysis({ _id, close }) {
   const [isPending, setIsPending] = useState(false); // Important for modals usage
   const queryClient = useQueryClient();
 
-  const { mutate: deleteProduct, isLoading } = useDeleteProducts({
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['products'],
-      });
+  const { mutate: deleteProfileAnalysis, isLoading } = useDeleteProfileAnalysis(
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['profile-analysis'],
+        });
 
-      toast.success('Produto deletado com sucesso.');
-      close();
-    },
-    onError: (err) => {
-      const errorMessage = buildDeleteProductErrorMessage(err);
+        toast.success('Relatório deletado com sucesso.');
+        close();
+      },
+      onError: (err) => {
+        const errorMessage = buildDeleteProfileAnalysisErrorMessage(err);
 
-      toast.error(errorMessage);
-      setIsPending(false);
-    },
-  });
+        toast.error(errorMessage);
+        setIsPending(false);
+      },
+    }
+  );
 
   return (
     <Container>
-      <Message>Tem certeza que deseja excluir o produto?</Message>
+      <Message>Tem certeza que deseja apagar o relatório?</Message>
+
       <DeleteButton
         type="button"
         disabled={isPending || isLoading}
         onClick={() => {
           setIsPending(true);
-          deleteProduct(_id);
+          deleteProfileAnalysis(_id);
         }}
       >
-        {isPending ? (
+        {isLoading ? (
           <>
             <TailSpin
               height="15"
@@ -49,18 +52,20 @@ export default function ModalDeleteProduct({ _id, close }) {
               color="white"
               ariaLabel="tail-spin-loading"
               radius="5"
+              wrapperStyle={{}}
+              wrapperClass=""
             />
             <p>Carregando</p>
           </>
         ) : (
-          'Excluir'
+          <p>Excluir</p>
         )}
       </DeleteButton>
     </Container>
   );
 }
 
-ModalDeleteProduct.propTypes = {
+ModalDeleteProfileAnalysis.propTypes = {
   _id: PropTypes.string.isRequired,
   close: PropTypes.func.isRequired,
 };

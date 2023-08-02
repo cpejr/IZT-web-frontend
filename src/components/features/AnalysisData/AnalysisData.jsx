@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 import {
-  Button,
   CollapsableData,
   DataColumn,
   Input,
@@ -52,7 +51,6 @@ export default function AnalysisData({ collapse }) {
           <Input />
         </Line>
       </DataColumn>
-      <Button>Salvar</Button>
     </CollapsableData>
   );
 }
