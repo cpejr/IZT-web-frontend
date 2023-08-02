@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { DownOutlined } from '@ant-design/icons';
+import { CloseOutlined, DownOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 
+import ModalDeleteProfileAnalysis from '../ModalDeleteProfileAnalysis/ModalDeleteProfileAnalysis';
 import {
   DataColumn,
   Columns,
@@ -17,6 +18,7 @@ import {
   DataContainer,
   ReportName,
   DashedBar,
+  ModalStyle,
 } from './Styles';
 
 export default function ProfileAnalysisReport({
@@ -24,20 +26,27 @@ export default function ProfileAnalysisReport({
   openedReport,
   handleOpened,
 }) {
-  const [isOpened, setIsOpened] = useState(openedReport === data.name);
-
-  const analysisDataList = data.analysis;
-  const productDataList = data.product;
-  const machineDataList = data.machineData;
+  const [isOpened, setIsOpened] = useState(openedReport === data._id);
 
   useEffect(() => {
-    setIsOpened(openedReport === data.name);
-  }, [openedReport, data.name]);
+    setIsOpened(openedReport === data._id);
+  }, [openedReport, data._id]);
+  const [profileId, setProfileId] = useState('');
+  const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
+  const [modalDeleteProfileAnalysis, setModalDeleteProfileAnalysis] =
+    useState(false);
+  const openModalDeleteProfileAnalysis = (_id) => {
+    setProfileId(_id);
+    setModalDeleteProfileAnalysis(true);
+  };
+  const closeModalDeleteProfileAnalysis = () => {
+    setModalDeleteProfileAnalysis(false);
+  };
 
   return (
     <div>
-      <ReportName isOpened={isOpened} onClick={() => handleOpened(data.name)}>
-        {data.name}
+      <ReportName isOpened={isOpened} onClick={() => handleOpened(data._id)}>
+        {data?.name}
         <Icon>
           <DownOutlined />
         </Icon>
@@ -50,27 +59,27 @@ export default function ProfileAnalysisReport({
               <DataContainer>
                 <DataRow>
                   <Label>Processo retificação:</Label>
-                  <Data>{analysisDataList.rectification}</Data>
+                  <Data>{data?.rectificationProcess}</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Máquina:</Label>
-                  <Data>{analysisDataList.machine}</Data>
+                  <Data>{data?.machine}</Data>
                 </DataRow>
                 <DataRow>
                   <Label>N° da máquina:</Label>
-                  <Data>{analysisDataList.machineNumber}</Data>
+                  <Data>{data?.machineNumber}</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Operação:</Label>
-                  <Data>{analysisDataList.operation}</Data>
+                  <Data>{data?.operation}</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Departamento:</Label>
-                  <Data>{analysisDataList.department}</Data>
+                  <Data>{data?.department}</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Responsável:</Label>
-                  <Data>{analysisDataList.accountable}</Data>
+                  <Data>{data?.responsiblePerson}</Data>
                 </DataRow>
               </DataContainer>
             </DataColumn>
@@ -80,27 +89,27 @@ export default function ProfileAnalysisReport({
               <DataContainer>
                 <DataRow>
                   <Label>Produto:</Label>
-                  <Data>{productDataList.product}</Data>
+                  <Data>{data?.product}</Data>
                 </DataRow>
                 <DataRow>
                   <Label>N do produto:</Label>
-                  <Data>{productDataList.productNumber}</Data>
+                  <Data>{data?.productNumber}</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Diâmetro:</Label>
-                  <Data>{productDataList.diameter} mm</Data>
+                  <Data>{data?.diameter} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Compriment total:</Label>
-                  <Data>{productDataList.totalLength} mm</Data>
+                  <Data>{data?.totalLength} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Comprimeto eletivo:</Label>
-                  <Data>{productDataList.electiveLength} mm</Data>
+                  <Data>{data?.electiveLength} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Sobremetal:</Label>
-                  <Data>{productDataList.allowance} mm</Data>
+                  <Data>{data?.allowance} mm</Data>
                 </DataRow>
               </DataContainer>
             </DataColumn>
@@ -112,39 +121,39 @@ export default function ProfileAnalysisReport({
               <DataContainer>
                 <DataRow>
                   <Label>Diâmetro do RC (min):</Label>
-                  <Data>{machineDataList.RCdiameterMax} mm</Data>
+                  <Data>{data?.rcMaxDiameter} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Diâmetro do RC (min):</Label>
-                  <Data>{machineDataList.RCdiameterMin} mm</Data>
+                  <Data>{data?.rcMinDiameter} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Diâmetro do RA:</Label>
-                  <Data>{machineDataList.RAdiameter} mm</Data>
+                  <Data>{data?.raDiameter} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Comprimento RC:</Label>
-                  <Data>{machineDataList.RClength} mm</Data>
+                  <Data>{data?.rcLength} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Comprimento RA:</Label>
-                  <Data>{machineDataList.RAlength} mm</Data>
+                  <Data>{data?.raLength} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Comprimento efetivo RC:</Label>
-                  <Data>{machineDataList.RCefectiveLength} mm</Data>
+                  <Data>{data?.rcEffectiveLength} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Rotação do RC:</Label>
-                  <Data>{machineDataList.RCrotation} mm</Data>
+                  <Data>{data?.rcRotation} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Rotação do RA:</Label>
-                  <Data>{machineDataList.RArotation} mm</Data>
+                  <Data>{data?.raRotation} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Inclinação RW:</Label>
-                  <Data>{machineDataList.RWinclination}</Data>
+                  <Data>{data?.rwInclination}</Data>
                 </DataRow>
                 <DashedBar />
               </DataContainer>
@@ -155,23 +164,23 @@ export default function ProfileAnalysisReport({
               <DataContainer>
                 <DataRow>
                   <Label>Altura entre centros hw: (min):</Label>
-                  <Data>{machineDataList.RCdiameterMax} mm</Data>
+                  <Data>{data?.hwCenterHeight} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Inclinação do RA: (min):</Label>
-                  <Data>{machineDataList.RCdiameterMin} mm</Data>
+                  <Data>{data?.raInclination} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Altura do dressador:</Label>
-                  <Data>{machineDataList.RAdiameter} mm</Data>
+                  <Data>{data?.dresserHeight} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Sobremetal:</Label>
-                  <Data>{machineDataList.RClength} mm</Data>
+                  <Data>{data?.allowance} mm</Data>
                 </DataRow>
                 <DataRow>
                   <Label>Posição do dressador:</Label>
-                  <Data>{machineDataList.RAlength} mm</Data>
+                  <Data>{data?.dresserPosition} mm</Data>
                 </DataRow>
               </DataContainer>
             </DataColumn>
@@ -179,8 +188,31 @@ export default function ProfileAnalysisReport({
         </Columns>
         <ButtonRow>
           <button type="button">Baixar relatório</button>
-          <button type="button">Excluir</button>
+          <button
+            type="button"
+            onClick={() => openModalDeleteProfileAnalysis(data?._id)}
+          >
+            Excluir
+          </button>
         </ButtonRow>
+        <ModalStyle
+          open={modalDeleteProfileAnalysis}
+          onCancel={closeModalDeleteProfileAnalysis}
+          footer={null}
+          width={500}
+          closeIcon={modalCloseButton}
+          destroyOnClose
+          centered
+          bodyStyle={{
+            background: '#123645',
+            color: 'white',
+          }}
+        >
+          <ModalDeleteProfileAnalysis
+            _id={profileId}
+            close={closeModalDeleteProfileAnalysis}
+          />
+        </ModalStyle>
       </Container>
     </div>
   );
