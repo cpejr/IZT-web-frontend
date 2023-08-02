@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useUpdateProducts } from '../../../hooks/query/products';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../../utils/constants';
-import putIndexIntoFiles from '../../../utils/putIndexIntoFiles';
+import separateFileTypes from '../../../utils/separateFileTypes';
 import { FormSelect } from '../../common';
 import AddFileButton from '../AddFileButton/AddFileButton';
 import DocumentFile from '../DocumentFile/DocumentFile';
@@ -121,15 +121,15 @@ export default function ModalEditProduct({ product, close }) {
     setIsPending(true);
     const { pictures, documents, ...data } = inputData;
 
-    const [newPictures, savedPictures] = putIndexIntoFiles(pictures);
-    const [newDocuments, savedDocuments] = putIndexIntoFiles(documents);
+    const [oldPictures, newPictures] = separateFileTypes(pictures);
+    const [oldDocuments, newDocuments] = separateFileTypes(documents);
 
     const dataObject = {
       ...data,
+      oldPictures,
       newPictures,
-      savedPictures,
+      oldDocuments,
       newDocuments,
-      savedDocuments,
     };
 
     const formData = objToFormData.serialize(dataObject, {

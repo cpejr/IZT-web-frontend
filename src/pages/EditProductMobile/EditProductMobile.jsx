@@ -17,7 +17,7 @@ import {
 import { useGetCategories } from '../../hooks/query/categories';
 import { useUpdateProducts } from '../../hooks/query/products';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../utils/constants';
-import putIndexIntoFiles from '../../utils/putIndexIntoFiles';
+import separateFileTypes from '../../utils/separateFileTypes';
 import {
   Container,
   Title,
@@ -121,8 +121,8 @@ export default function EditProductMobile() {
   const onSubmit = (inputData) => {
     const { pictures, documents, ...data } = inputData;
 
-    const [newPictures, savedPictures] = putIndexIntoFiles(pictures);
-    const [newDocuments, savedDocuments] = putIndexIntoFiles(documents);
+    const [newPictures, savedPictures] = separateFileTypes(pictures);
+    const [newDocuments, savedDocuments] = separateFileTypes(documents);
 
     const dataObject = {
       ...data,
