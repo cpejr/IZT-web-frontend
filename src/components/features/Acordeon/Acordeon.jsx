@@ -92,6 +92,15 @@ export default function AccordionDemo({ onCalculate }) {
     setIsLoading(false);
   };
 
+  const covertStringToNumber = (fieldId, inputValue) => {
+    const convertedNumber = parseFloat(inputValue);
+    if (!Number.isNaN(convertedNumber) && convertedNumber >= 0) {
+      setValue(fieldId, convertedNumber);
+    } else {
+      setValue(fieldId, '');
+    }
+  };
+
   return (
     <Accordion.Root
       className="AccordionRoot"
@@ -113,14 +122,9 @@ export default function AccordionDemo({ onCalculate }) {
                       id={data.id}
                       name={data.id}
                       value={watch(data.id) || ''}
-                      onChange={(e) => {
-                        const newValue = parseFloat(e.target.value);
-                        if (!Number.isNaN(newValue)) {
-                          setValue(data.id, newValue);
-                        } else {
-                          setValue(data.id, '');
-                        }
-                      }}
+                      onChange={(e) =>
+                        covertStringToNumber(data.id, e.target.value)
+                      }
                       step="any"
                       type="number"
                       className={`AccordionMiniInput ${
@@ -158,14 +162,9 @@ export default function AccordionDemo({ onCalculate }) {
                     id={data.id}
                     name={data.id}
                     value={watch(data.id) || ''}
-                    onChange={(e) => {
-                      const newValue = parseFloat(e.target.value);
-                      if (!Number.isNaN(newValue)) {
-                        setValue(data.id, newValue);
-                      } else {
-                        setValue(data.id, '');
-                      }
-                    }}
+                    onChange={(e) =>
+                      covertStringToNumber(data.id, e.target.value)
+                    }
                     step="any"
                     type="number"
                     className={`AccordionMiniInput ${
@@ -194,14 +193,9 @@ export default function AccordionDemo({ onCalculate }) {
                       id={data.id}
                       name={data.id}
                       value={watch(data.id) || ''}
-                      onChange={(e) => {
-                        const newValue = parseFloat(e.target.value);
-                        if (!Number.isNaN(newValue)) {
-                          setValue(data.id, newValue);
-                        } else {
-                          setValue(data.id, '');
-                        }
-                      }}
+                      onChange={(e) =>
+                        covertStringToNumber(data.id, e.target.value)
+                      }
                       step="any"
                       type="number"
                       className={`AccordionMiniInput ${
@@ -240,14 +234,9 @@ export default function AccordionDemo({ onCalculate }) {
                       id={data.id}
                       name={data.id}
                       value={watch(data.id) || ''}
-                      onChange={(e) => {
-                        const newValue = parseFloat(e.target.value);
-                        if (!Number.isNaN(newValue)) {
-                          setValue(data.id, newValue);
-                        } else {
-                          setValue(data.id, '');
-                        }
-                      }}
+                      onChange={(e) =>
+                        covertStringToNumber(data.id, e.target.value)
+                      }
                       step="any"
                       type="number"
                       className={`AccordionMiniInput ${
