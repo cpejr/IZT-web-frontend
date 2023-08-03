@@ -138,23 +138,23 @@ export default function StabilityAnalysis() {
               errors={errors}
             />
           </Collapsable>
+          <Button disabled={isLoading} onSubmit={handlePlot} type="submit">
+            {isLoading ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                />
+                <p>Carregando</p>
+              </>
+            ) : (
+              <p>Calcular</p>
+            )}
+          </Button>
         </DataEntry>
-        <Button disabled={isLoading} onSubmit={handlePlot} type="submit">
-          {isLoading ? (
-            <>
-              <TailSpin
-                height="15"
-                width="15"
-                color="white"
-                ariaLabel="tail-spin-loading"
-                radius="5"
-              />
-              <p>Carregando</p>
-            </>
-          ) : (
-            <p>Calcular</p>
-          )}
-        </Button>
       </DataEntryDiv>
       <Analysis>
         <TitleRow>
