@@ -87,8 +87,7 @@ export default function StabilityAnalysis() {
   });
 
   const onSubmit = (data) => {
-    console.log('deu bom');
-    // calculateStabilityAnalysis(data);
+    calculateStabilityAnalysis(data);
   };
 
   return (
