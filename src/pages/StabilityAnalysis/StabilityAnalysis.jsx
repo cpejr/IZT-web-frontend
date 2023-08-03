@@ -59,11 +59,6 @@ export default function StabilityAnalysis() {
     else setCollapse(sectionName);
   };
 
-  // Gerenate Graph
-  const handlePlot = () => {
-    setPlotData(graphData);
-  };
-
   // Backend calls
   const { mutate: calculateStabilityAnalysis, isLoading } =
     useCalculateStabilityAnalysis({
@@ -87,6 +82,7 @@ export default function StabilityAnalysis() {
   });
 
   const onSubmit = (data) => {
+    setPlotData(graphData);
     calculateStabilityAnalysis(data);
   };
 
@@ -137,7 +133,7 @@ export default function StabilityAnalysis() {
               errors={errors}
             />
           </Collapsable>
-          <Button disabled={isLoading} onSubmit={handlePlot} type="submit">
+          <Button disabled={isLoading} type="submit">
             {isLoading ? (
               <>
                 <TailSpin

@@ -10,18 +10,21 @@ export const calculateStabilityAnalysisValidationSchema = z.object({
   // Analysis Data
   rectificationProcess: z
     .string({ required_error: 'Processo de Retificação é obrigatório' })
-    .min(3, 'Processo de Retificação deve ter pelo menos 3 caracteres')
+    .min(3, 'Selecione uma opção válida da operação')
     .max(40, 'Processo de Retificação deve ter no máximo 40 caracteres'),
   machine: z
     .string({ required_error: 'Máquina é obrigatória' })
     .min(3, 'Máquina deve ter pelo menos 3 caracteres')
     .max(40, 'Máquina deve ter no máximo 40 caracteres'),
   machineNumber: z
-    .number({ required_error: 'Número da máquina é obrigatório' })
-    .positive(),
+  .number({
+    required_error: 'Número da máquina é obrigatório',
+    invalid_type_error: 'Número da máquina deve ser um número',
+  })
+  .positive('Número da máquina deve ser positivo'),
   operation: z
     .string({ required_error: 'Operação é obrigatória' })
-    .min(3, 'Operação deve ter pelo menos 3 caracteres')
+    .min(3, 'Selecione uma opção válida da operação')
     .max(40, 'Operação deve ter no máximo 40 caracteres'),
   department: z
     .string({ required_error: 'Departamento é obrigatório' })
@@ -38,37 +41,37 @@ export const calculateStabilityAnalysisValidationSchema = z.object({
       required_error: 'Diâmetro Máximo do RC é obrigatório',
       invalid_type_error: 'Diâmetro Máximo do RC deve ser um número',
     })
-    .positive(),
+    .positive('Diâmetro Máximo deve ser positivo'),
   rcMinDiameter: z
     .number({
       required_error: 'Diâmetro Mínimo do RC é obrigatório',
       invalid_type_error: 'Diâmetro Mínimo do RC deve ser um número',
     })
-    .positive(),
+    .positive('Diâmetro Mínimo deve ser positivo'),
   raDiameter: z
     .number({
       required_error: 'Diâmetro do RA é obrigatório',
       invalid_type_error: 'Diâmetro do RA deve ser um número',
     })
-    .positive(),
+    .positive('Diâmetro do RA deve ser positivo'),
   rcLength: z
     .number({
       required_error: 'Comprimento do RC é obrigatório',
       invalid_type_error: 'Comprimento do RC deve ser um número',
     })
-    .positive(),
+    .positive('Comprimento do RC deve ser positivo'),
   raLength: z
     .number({
       required_error: 'Comprimento do RA é obrigatório',
       invalid_type_error: 'Comprimento do RA deve ser um número',
     })
-    .positive(),
+    .positive('Comprimento do RA deve ser positivo'),
   rcEffectiveLength: z
     .number({
       required_error: 'Comprimento Efetivo do RC é obrigatório',
       invalid_type_error: 'Comprimento Efetivo do RC deve ser um número',
     })
-    .positive(),
+    .positive('Comprimento Efetivo do RC deve ser positivo'),
   rcRotation: z
     .number({
       required_error: 'Rotação do RC é obrigatória',
@@ -101,25 +104,25 @@ export const calculateStabilityAnalysisValidationSchema = z.object({
       required_error: 'Número do Produto é obrigatório',
       invalid_type_error: 'Número do Produto deve ser um número',
     })
-    .positive(),
+    .positive('Número do Produto deve ser positivo'),
   diameter: z
     .number({
       required_error: 'Diâmetro é obrigatório',
       invalid_type_error: 'Diâmetro deve ser um número',
     })
-    .positive(),
+    .positive('Diâmetro deve ser positivo'),
   totalLength: z
     .number({
       required_error: 'Comprimento Total é obrigatório',
       invalid_type_error: 'Comprimento Total deve ser um número',
     })
-    .positive(),
+    .positive('Comprimento Total deve ser positivo'),
   electiveLength: z
     .number({
       required_error: 'Comprimento Eletivo é obrigatório',
       invalid_type_error: 'Comprimento Eletivo deve ser um número',
     })
-    .positive(),
+    .positive('Comprimento Eletivo deve ser positivo'),
 
   allowance: z
     .number({

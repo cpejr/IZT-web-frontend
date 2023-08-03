@@ -17,7 +17,7 @@ export default function MachinProductData({ collapse, register, errors }) {
           <Label>N° do produto:</Label>
           <Input
             id="productNumber"
-            {...register('productNumber')}
+            {...register('productNumber', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -29,7 +29,7 @@ export default function MachinProductData({ collapse, register, errors }) {
           <Input
             width="4rem"
             id="diameter"
-            {...register('diameter')}
+            {...register('diameter', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -42,7 +42,7 @@ export default function MachinProductData({ collapse, register, errors }) {
           <Input
             width="4rem"
             id="totalLength"
-            {...register('totalLength')}
+            {...register('totalLength', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -55,7 +55,7 @@ export default function MachinProductData({ collapse, register, errors }) {
           <Input
             width="4rem"
             id="electiveLength"
-            {...register('electiveLength')}
+            {...register('electiveLength', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -68,7 +68,7 @@ export default function MachinProductData({ collapse, register, errors }) {
           <Input
             width="4rem"
             id="allowance"
-            {...register('allowance')}
+            {...register('allowance', { valueAsNumber: true })} 
             type="number"
             step="any"
           />

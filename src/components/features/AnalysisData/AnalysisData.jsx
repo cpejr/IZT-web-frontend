@@ -41,7 +41,7 @@ export default function AnalysisData({ collapse, register, errors }) {
           <Label>N° da Maquina:</Label>
           <Input
             id="machineNumber"
-            {...register('machineNumber')}
+            {...register('machineNumber', { valueAsNumber: true })} 
             type="number"
             step="any"
           />

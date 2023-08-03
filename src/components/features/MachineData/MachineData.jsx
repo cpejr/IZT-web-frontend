@@ -11,7 +11,7 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Diâmetro do RC (máx):</Label>
           <Input
             id="rcMaxDiameter"
-            {...register('rcMaxDiameter')}
+            {...register('rcMaxDiameter', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -23,7 +23,7 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Diâmetro do RC (min):</Label>
           <Input
             id="rcMinDiameter"
-            {...register('rcMinDiameter')}
+            {...register('rcMinDiameter', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -35,7 +35,7 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Diâmetro do RA:</Label>
           <Input
             id="raDiameter"
-            {...register('raDiameter')}
+            {...register('raDiameter', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -47,7 +47,7 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Comprimento RC:</Label>
           <Input
             id="rcLength"
-            {...register('rcLength')}
+            {...register('rcLength', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -59,7 +59,7 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Comprimento RA:</Label>
           <Input
             id="raLength"
-            {...register('raLength')}
+            {...register('raLength', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -71,7 +71,7 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Comprimento efetivo RC:</Label>
           <Input
             id="rcEffectiveLength"
-            {...register('rcEffectiveLength')}
+            {...register('rcEffectiveLength', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -83,7 +83,7 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Rotação do RC</Label>
           <Input
             id="rcRotation"
-            {...register('rcRotation')}
+            {...register('rcRotation', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -95,7 +95,7 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Rotação do RA:</Label>
           <Input
             id="raRotation"
-            {...register('raRotation')}
+            {...register('raRotation', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
@@ -107,7 +107,7 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Inclinação RW:</Label>
           <Input
             id="rwInclination"
-            {...register('rwInclination')}
+            {...register('rwInclination', { valueAsNumber: true })} 
             type="number"
             step="any"
           />
