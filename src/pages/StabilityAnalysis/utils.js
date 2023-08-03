@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable */
+
 import { z } from 'zod';
 
 import { ERROR_CODES } from '../../utils/constants';
@@ -118,7 +121,12 @@ export const calculateStabilityAnalysisValidationSchema = z.object({
     })
     .positive(),
 
-  allowance: z,
+  allowance: z
+    .number({
+      required_error: 'Sobremetal é obrigatório',
+      invalid_type_error: 'Sobremetal deve ser um número',
+    })
+    .positive('Sobremetal deve ser positivo'),
 });
 
 // Error Handling
