@@ -9,7 +9,11 @@ export default function MachinProductData({ collapse, register, errors }) {
       <DataColumn>
         <Line>
           <Label>Produto:</Label>
-          <Input id="product" {...register('product')} />
+          <Input
+            id="product"
+            {...register('product')}
+            hasError={errors?.product?.message}
+          />
         </Line>
         <ErrorMessage>{errors?.product?.message}</ErrorMessage>
 
@@ -17,7 +21,8 @@ export default function MachinProductData({ collapse, register, errors }) {
           <Label>N° do produto:</Label>
           <Input
             id="productNumber"
-            {...register('productNumber', { valueAsNumber: true })} 
+            {...register('productNumber', { valueAsNumber: true })}
+            hasError={errors?.productNumber?.message}
             type="number"
             step="any"
           />
@@ -29,7 +34,8 @@ export default function MachinProductData({ collapse, register, errors }) {
           <Input
             width="4rem"
             id="diameter"
-            {...register('diameter', { valueAsNumber: true })} 
+            {...register('diameter', { valueAsNumber: true })}
+            hasError={errors?.diameter?.message}
             type="number"
             step="any"
           />
@@ -42,7 +48,8 @@ export default function MachinProductData({ collapse, register, errors }) {
           <Input
             width="4rem"
             id="totalLength"
-            {...register('totalLength', { valueAsNumber: true })} 
+            {...register('totalLength', { valueAsNumber: true })}
+            hasError={errors?.totalLength?.message}
             type="number"
             step="any"
           />
@@ -55,7 +62,8 @@ export default function MachinProductData({ collapse, register, errors }) {
           <Input
             width="4rem"
             id="electiveLength"
-            {...register('electiveLength', { valueAsNumber: true })} 
+            {...register('electiveLength', { valueAsNumber: true })}
+            hasError={errors?.electiveLength?.message}
             type="number"
             step="any"
           />
@@ -68,7 +76,8 @@ export default function MachinProductData({ collapse, register, errors }) {
           <Input
             width="4rem"
             id="allowance"
-            {...register('allowance', { valueAsNumber: true })} 
+            {...register('allowance', { valueAsNumber: true })}
+            hasError={errors?.allowance?.message}
             type="number"
             step="any"
           />

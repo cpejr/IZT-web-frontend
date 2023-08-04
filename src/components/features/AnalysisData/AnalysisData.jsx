@@ -19,6 +19,7 @@ export default function AnalysisData({ collapse, register, errors }) {
           <SelectInput
             id="rectificationProcess"
             {...register('rectificationProcess')}
+            hasError={errors?.rectificationProcess?.message}
           >
             <option value="">Selecionar</option>
             <option value="Centerless de Mergulho">
@@ -33,7 +34,11 @@ export default function AnalysisData({ collapse, register, errors }) {
 
         <Line>
           <Label>Maquina:</Label>
-          <Input id="machine" {...register('machine')} />
+          <Input
+            id="machine"
+            {...register('machine')}
+            hasError={errors?.machine?.message}
+          />
         </Line>
         <ErrorMessage>{errors?.machine?.message}</ErrorMessage>
 
@@ -41,7 +46,8 @@ export default function AnalysisData({ collapse, register, errors }) {
           <Label>N° da Maquina:</Label>
           <Input
             id="machineNumber"
-            {...register('machineNumber', { valueAsNumber: true })} 
+            {...register('machineNumber', { valueAsNumber: true })}
+            hasError={errors?.machineNumber?.message}
             type="number"
             step="any"
           />
@@ -50,7 +56,11 @@ export default function AnalysisData({ collapse, register, errors }) {
 
         <Line>
           <Label>Operação:</Label>
-          <SelectInput id="operation" {...register('operation')}>
+          <SelectInput
+            id="operation"
+            {...register('operation')}
+            hasError={errors?.operation?.message}
+          >
             <option value="">Selecionar</option>
             <option value="Desbaste">Desbaste</option>
             <option value="Pré Desbaste">Pré Desbaste</option>
@@ -61,13 +71,21 @@ export default function AnalysisData({ collapse, register, errors }) {
 
         <Line>
           <Label>Departamento:</Label>
-          <Input id="department" {...register('department')} />
+          <Input
+            id="department"
+            {...register('department')}
+            hasError={errors?.department?.message}
+          />
         </Line>
         <ErrorMessage>{errors?.department?.message}</ErrorMessage>
 
         <Line>
           <Label>Responsável:</Label>
-          <Input id="responsiblePerson" {...register('responsiblePerson')} />
+          <Input
+            id="responsiblePerson"
+            {...register('responsiblePerson')}
+            hasError={errors?.responsiblePerson?.message}
+          />
         </Line>
         <ErrorMessage>{errors?.responsiblePerson?.message}</ErrorMessage>
       </DataColumn>

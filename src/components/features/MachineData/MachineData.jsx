@@ -11,7 +11,8 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Diâmetro do RC (máx):</Label>
           <Input
             id="rcMaxDiameter"
-            {...register('rcMaxDiameter', { valueAsNumber: true })} 
+            {...register('rcMaxDiameter', { valueAsNumber: true })}
+            hasError={errors?.rcMaxDiameter?.message}
             type="number"
             step="any"
           />
@@ -23,7 +24,8 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Diâmetro do RC (min):</Label>
           <Input
             id="rcMinDiameter"
-            {...register('rcMinDiameter', { valueAsNumber: true })} 
+            {...register('rcMinDiameter', { valueAsNumber: true })}
+            hasError={errors?.rcMinDiameter?.message}
             type="number"
             step="any"
           />
@@ -35,7 +37,8 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Diâmetro do RA:</Label>
           <Input
             id="raDiameter"
-            {...register('raDiameter', { valueAsNumber: true })} 
+            {...register('raDiameter', { valueAsNumber: true })}
+            hasError={errors?.raDiameter?.message}
             type="number"
             step="any"
           />
@@ -47,7 +50,8 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Comprimento RC:</Label>
           <Input
             id="rcLength"
-            {...register('rcLength', { valueAsNumber: true })} 
+            {...register('rcLength', { valueAsNumber: true })}
+            hasError={errors?.rcLength?.message}
             type="number"
             step="any"
           />
@@ -59,7 +63,8 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Comprimento RA:</Label>
           <Input
             id="raLength"
-            {...register('raLength', { valueAsNumber: true })} 
+            {...register('raLength', { valueAsNumber: true })}
+            hasError={errors?.raLength?.message}
             type="number"
             step="any"
           />
@@ -71,7 +76,8 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Comprimento efetivo RC:</Label>
           <Input
             id="rcEffectiveLength"
-            {...register('rcEffectiveLength', { valueAsNumber: true })} 
+            {...register('rcEffectiveLength', { valueAsNumber: true })}
+            hasError={errors?.rcEffectiveLength?.message}
             type="number"
             step="any"
           />
@@ -83,7 +89,8 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Rotação do RC</Label>
           <Input
             id="rcRotation"
-            {...register('rcRotation', { valueAsNumber: true })} 
+            {...register('rcRotation', { valueAsNumber: true })}
+            hasError={errors?.rcRotation?.message}
             type="number"
             step="any"
           />
@@ -95,7 +102,8 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Rotação do RA:</Label>
           <Input
             id="raRotation"
-            {...register('raRotation', { valueAsNumber: true })} 
+            {...register('raRotation', { valueAsNumber: true })}
+            hasError={errors?.raRotation?.message}
             type="number"
             step="any"
           />
@@ -107,7 +115,8 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>Inclinação RW:</Label>
           <Input
             id="rwInclination"
-            {...register('rwInclination', { valueAsNumber: true })} 
+            {...register('rwInclination', { valueAsNumber: true })}
+            hasError={errors?.rwInclination?.message}
             type="number"
             step="any"
           />
