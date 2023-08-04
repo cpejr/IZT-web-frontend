@@ -251,6 +251,11 @@ export const searchByNameStabilityAnalysis = async (name) => {
   return data;
 };
 
+export const calculateStabilityAnalysis = async (inputData) => {
+  const { data } = await api.post('/stability-analysis/diagrams', inputData);
+  return data;
+};
+
 // Profile Analysis
 export const getProfileAnalysis = async (filters = {}) => {
   const { data } = await api.get(`/profile-analysis`, {

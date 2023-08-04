@@ -5,6 +5,7 @@ import {
   deleteStabilityAnalysis,
   getNormalStabilityAnalysis,
   searchByNameStabilityAnalysis,
+  calculateStabilityAnalysis,
 } from '../../services/api/endpoints';
 
 export function useGetStabilityAnalysis({
@@ -51,6 +52,16 @@ export function useSearchByNameStabilityAnalysis({
   return useQuery({
     queryKey: ['stability-analysis', 'searchByName', name],
     queryFn: () => searchByNameStabilityAnalysis(name),
+    onSuccess,
+    onError,
+  });
+}
+export function useCalculateStabilityAnalysis({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: calculateStabilityAnalysis,
     onSuccess,
     onError,
   });
