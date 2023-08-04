@@ -220,6 +220,11 @@ export const Button = styled.button`
     font-size: 1.4rem;
     padding: 0.4rem 1.5rem 0.4rem 1.5rem;
   }
+
+  &:hover {
+    opacity: 0.8;
+  }
+  
 `;
 
 export const Button2 = styled.button`

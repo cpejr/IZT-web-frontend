@@ -23,6 +23,7 @@ import {
   DataTitle,
   Analysis,
   Button,
+  Button2,
   TitleRow,
   Diagram,
   DiagramTitle,
@@ -155,7 +156,7 @@ export default function StabilityAnalysis() {
         <TitleRow>
           <Title>Análise #1</Title>
           <TbPencil size={20} style={{ color: 'white' }} />
-          <Button>Salvar relatório</Button>
+          <Button2>Salvar relatório</Button2>
         </TitleRow>
         <Diagram>
           <DiagramTitle>Diagrama - Estabilidade de processo</DiagramTitle>

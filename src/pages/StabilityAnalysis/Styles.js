@@ -59,6 +59,8 @@ export const CollapsableHeader = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  margin-top: 1.5rem;
   :hover {
     cursor: pointer;
   }
@@ -115,30 +117,74 @@ export const Analysis = styled.div`
 `;
 
 export const Button = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 2rem 0.5rem 2rem;
-  width: auto;
-  height: auto;
-
-  color: white;
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  font-weight: 600;
-  border: 0.1rem solid white;
-  background-color: transparent;
-  border-radius: 0.5rem;
+  display: inline-block;
+  margin-left: 5%;
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
   font-size: 2rem;
+  font-weight: normal;
+  text-align: center;
+  color: white;
+  background-color: #123645;
+  border-radius: 0.6rem;
+  border: 1px solid;
+  border-color: white;
+  font-family: 'Montserrat';
+  cursor: pointer;
 
-  @media (max-width: 1100px) {
-    font-size: 1.6rem;
+  width: 8.4rem;
+  margin-left: 17rem;
+
+
+  @media (max-width: 1600px) {
+    font-size: 1.7rem;
+    padding: 0.4rem 1.5rem 0.4rem 1.5rem;
+    margin-left: 10rem;
+    
+  }
+
+  @media (max-width: 950px) {
+    font-size: 1.4rem;
+    padding: 0.4rem 1.5rem 0.4rem 1.5rem;
+    margin-left: 7rem;
+    
   }
 
   &:hover {
     opacity: 0.8;
   }
 
+`;
+
+export const Button2 = styled.button`
+  display: inline-block;
+  margin-left: 5%;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  font-size: 2rem;
+  font-weight: normal;
+  text-align: center;
+  color: white;
+  background-color: #123645;
+  border-radius: 0.6rem;
+  border: 1px solid;
+  border-color: white;
+  font-family: 'Montserrat';
+
+  width: 15rem;
+
+
   cursor: pointer;
+
+
+  @media (max-width: 950px) {
+    font-size: 1.4rem;
+    padding: 0.4rem 1.5rem 0.4rem 1.5rem;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
 `;
 
 export const TitleRow = styled.div`
