@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { DownOutlined, CloseOutlined } from '@ant-design/icons';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import PropTypes from 'prop-types';
 
 import ModalDeleteStabilityAnalysis from '../ModalDeleteStabilityAnalysis/ModalDeleteStabilityAnalysis';
+import StabilityPDF from '../PDF/StabilityAnalysisPDF';
 import {
   DataColumn,
   Columns,
@@ -152,7 +154,22 @@ export default function StabilityAnalysisReport({
           </DataColumn>
         </Columns>
         <ButtonRow>
-          <button type="button">Baixar relatório</button>
+          <PDFDownloadLink
+            document={<StabilityPDF data={data} />}
+            filename="PDF"
+            download="PDF"
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            {({ loading }) =>
+              loading ? (
+                <button type="button"> Loading Document...</button>
+              ) : (
+                <button type="button">Download</button>
+              )
+            }
+          </PDFDownloadLink>
           <button
             type="button"
             onClick={() => openModalDeleteStabilityAnalysis(data?._id)}

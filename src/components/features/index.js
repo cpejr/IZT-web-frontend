@@ -36,3 +36,4 @@ export { default as SoftwareMenu } from './SoftwareMenu/SoftwareMenu';
 export { default as StabilityAnalysisPDF } from './PDF/StabilityAnalysisPDF';
 export { default as ModalDeleteStabilityAnalysis } from './ModalDeleteStabilityAnalysis/ModalDeleteStabilityAnalysis';
 export { default as ModalDeleteProfileAnalysis } from './ModalDeleteProfileAnalysis/ModalDeleteProfileAnalysis';
+export { default as ProfileAnalysisPDF } from './PDF/ProfileAnalysisPDF';

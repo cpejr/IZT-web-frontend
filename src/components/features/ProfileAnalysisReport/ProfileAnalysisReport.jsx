@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { CloseOutlined, DownOutlined } from '@ant-design/icons';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import PropTypes from 'prop-types';
 
 import ModalDeleteProfileAnalysis from '../ModalDeleteProfileAnalysis/ModalDeleteProfileAnalysis';
+import ProfilePDF from '../PDF/StabilityAnalysisPDF';
 import {
   DataColumn,
   Columns,
@@ -187,7 +189,22 @@ export default function ProfileAnalysisReport({
           </Row>
         </Columns>
         <ButtonRow>
-          <button type="button">Baixar relatório</button>
+          <PDFDownloadLink
+            document={<ProfilePDF data={data} />}
+            filename="PDF"
+            download="PDF"
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            {({ loading }) =>
+              loading ? (
+                <button type="button"> Loading Document...</button>
+              ) : (
+                <button type="button">Download</button>
+              )
+            }
+          </PDFDownloadLink>
           <button
             type="button"
             onClick={() => openModalDeleteProfileAnalysis(data?._id)}

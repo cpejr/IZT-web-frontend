@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   collumn: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 13,
+    gap: 15,
     alignItems: 'flex-start',
     width: 370,
   },
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function StabilityAnalysisPDF({ data }) {
+export default function ProfileAnalysisPDF({ data }) {
   return (
     <Document
       fileName="Relatorio.pdf"
@@ -205,24 +205,6 @@ export default function StabilityAnalysisPDF({ data }) {
               </Text>
               <Text style={styles.item}>
                 Comprimento eletivo: {data?.electiveLength} mm
-              </Text>
-              <Text style={styles.item}>Sobremetal: {data?.allowance} mm</Text>
-            </div>
-
-            <Text style={styles.section}>RA parâmetro de perfil</Text>
-
-            <div style={styles.space}>
-              <Text style={styles.item}>
-                Altura entre centros hw: (min): {data?.hwCenterHeight} mm{' '}
-              </Text>
-              <Text style={styles.item}>
-                Inclinação do RA: (min): {data?.raInclination} mm
-              </Text>
-              <Text style={styles.item}>
-                Altura do dressador: {data?.raDresserInclination} mm
-              </Text>
-              <Text style={styles.item}>
-                Posição do dressador: {data?.dresserPosition} mm
               </Text>
               <Text style={styles.item}>Sobremetal: {data?.allowance} mm</Text>
             </div>
