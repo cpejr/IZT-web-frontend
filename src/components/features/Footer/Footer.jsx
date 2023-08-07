@@ -19,6 +19,17 @@ import {
 } from './Styles';
 
 export default function Footer() {
+  const handleContactButtonClick = () => {
+    const currentURL = window.location.href;
+    const isHomePage = currentURL === 'http://localhost:5173/';
+
+    if (isHomePage) {
+      window.location.href = '/#contact';
+    } else {
+      window.location.href = 'http://localhost:5173/';
+    }
+  };
+
   return (
     <Container>
       <SideContainer>
@@ -29,14 +40,16 @@ export default function Footer() {
           Inovação, tecnologia, precisão, qualidade e sustentabilidade.
         </Text>
       </SideContainer>
-
       <MiddleContainer>
         <Tittle>Contato</Tittle>
         <Text>
           Entre em contato agora para sanar todas dúvidas sobre nossos produtos,
           nossos softwares ou nossos cursos.
         </Text>
-        <ContactButton>Fale Conosco</ContactButton>
+
+        <ContactButton onClick={handleContactButtonClick}>
+          Fale Conosco
+        </ContactButton>
       </MiddleContainer>
 
       <SideContainer>

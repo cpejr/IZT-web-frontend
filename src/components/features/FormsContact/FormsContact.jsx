@@ -41,7 +41,7 @@ export default function FormsContact({ title, smallTitle }) {
   const onSubmit = (formInput) => sendFormContact(formInput);
 
   return (
-    <ContactUs>
+    <ContactUs id="contact">
       <Title>{isSmallScreen ? smallTitle : title}</Title>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
