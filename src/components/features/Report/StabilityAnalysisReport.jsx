@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { DownOutlined, CloseOutlined } from '@ant-design/icons';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import { pdf } from '@react-pdf/renderer';
+import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
 
 import ModalDeleteStabilityAnalysis from '../ModalDeleteStabilityAnalysis/ModalDeleteStabilityAnalysis';
@@ -41,6 +42,12 @@ export default function StabilityAnalysisReport({
   };
   const closeModalDeleteStabilityAnalysis = () => {
     setModalDeleteStabilityAnalysis(false);
+  };
+
+  const saveFile = () => {
+    pdf(<StabilityPDF />)
+      .toBlob()
+      .then((blob) => saveAs(blob, 'Análise de Estabilidade.pdf'));
   };
 
   return (
@@ -154,22 +161,9 @@ export default function StabilityAnalysisReport({
           </DataColumn>
         </Columns>
         <ButtonRow>
-          <PDFDownloadLink
-            document={<StabilityPDF data={data} />}
-            filename="PDF"
-            download="PDF"
-            style={{
-              textDecoration: 'none',
-            }}
-          >
-            {({ loading }) =>
-              loading ? (
-                <button type="button"> Loading Document...</button>
-              ) : (
-                <button type="button">Download</button>
-              )
-            }
-          </PDFDownloadLink>
+          <button type="button" onClick={saveFile}>
+            Download
+          </button>
           <button
             type="button"
             onClick={() => openModalDeleteStabilityAnalysis(data?._id)}

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { CloseOutlined, DownOutlined } from '@ant-design/icons';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import { pdf } from '@react-pdf/renderer';
+import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
 
 import ModalDeleteProfileAnalysis from '../ModalDeleteProfileAnalysis/ModalDeleteProfileAnalysis';
@@ -43,6 +44,12 @@ export default function ProfileAnalysisReport({
   };
   const closeModalDeleteProfileAnalysis = () => {
     setModalDeleteProfileAnalysis(false);
+  };
+
+  const saveFile = () => {
+    pdf(<ProfilePDF />)
+      .toBlob()
+      .then((blob) => saveAs(blob, 'Análise de Perfil.pdf'));
   };
 
   return (
@@ -189,22 +196,9 @@ export default function ProfileAnalysisReport({
           </Row>
         </Columns>
         <ButtonRow>
-          <PDFDownloadLink
-            document={<ProfilePDF data={data} />}
-            filename="PDF"
-            download="PDF"
-            style={{
-              textDecoration: 'none',
-            }}
-          >
-            {({ loading }) =>
-              loading ? (
-                <button type="button"> Loading Document...</button>
-              ) : (
-                <button type="button">Download</button>
-              )
-            }
-          </PDFDownloadLink>
+          <button type="button" onClick={saveFile}>
+            Download
+          </button>
           <button
             type="button"
             onClick={() => openModalDeleteProfileAnalysis(data?._id)}
