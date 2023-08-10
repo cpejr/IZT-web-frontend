@@ -121,15 +121,15 @@ export default function EditProductMobile() {
   const onSubmit = (inputData) => {
     const { pictures, documents, ...data } = inputData;
 
-    const [newPictures, savedPictures] = separateFileTypes(pictures);
-    const [newDocuments, savedDocuments] = separateFileTypes(documents);
+    const [newPictures, oldPictures] = separateFileTypes(pictures);
+    const [newDocuments, oldDocuments] = separateFileTypes(documents);
 
     const dataObject = {
       ...data,
       newPictures,
-      savedPictures,
+      oldPictures,
       newDocuments,
-      savedDocuments,
+      oldDocuments,
     };
 
     const formData = objToFormData.serialize(dataObject, {
@@ -230,6 +230,7 @@ export default function EditProductMobile() {
                 removeDocument={removeDocument}
               />
             ))}
+            <ErrorMessage>{errors?.documents?.message}</ErrorMessage>
           </DocumentsContainer>
           {fieldsDocuments.length < documentsLimit && (
             <AddFileButton

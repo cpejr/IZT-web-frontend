@@ -45,7 +45,7 @@ export const editProductValidationSchema = z.object({
         ),
       })
     )
-    .default([])
+    .nonempty('Você deve inserir ao menos uma foto')
     .transform((documents) => documents.map(({ file }) => file)),
 });
 

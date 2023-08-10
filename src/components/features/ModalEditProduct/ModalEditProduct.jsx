@@ -229,6 +229,7 @@ export default function ModalEditProduct({ product, close }) {
                     removeDocument={removeDocument}
                   />
                 ))}
+                <ErrorMessage>{errors?.pictures?.message}</ErrorMessage>
               </DocumentsContainer>
 
               {fieldsDocuments.length < documentsLimit && (
@@ -289,8 +290,3 @@ export default function ModalEditProduct({ product, close }) {
     </Container>
   );
 }
-
-ModalEditProduct.propTypes = {
-  product: PropTypes.object.isRequired,
-  close: PropTypes.func.isRequired,
-};
