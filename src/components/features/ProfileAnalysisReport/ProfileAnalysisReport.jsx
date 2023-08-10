@@ -6,7 +6,7 @@ import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
 
 import ModalDeleteProfileAnalysis from '../ModalDeleteProfileAnalysis/ModalDeleteProfileAnalysis';
-import ProfilePDF from '../PDF/StabilityAnalysisPDF';
+import ProfilePDF from '../PDF/ProfileAnalysisPDF';
 import {
   DataColumn,
   Columns,
@@ -47,9 +47,9 @@ export default function ProfileAnalysisReport({
   };
 
   const saveFile = () => {
-    pdf(<ProfilePDF />)
+    pdf(<ProfilePDF data={data} />)
       .toBlob()
-      .then((blob) => saveAs(blob, 'Análise de Perfil.pdf'));
+      .then((blob) => saveAs(blob, `${data?.name}.pdf`));
   };
 
   return (
@@ -197,7 +197,7 @@ export default function ProfileAnalysisReport({
         </Columns>
         <ButtonRow>
           <button type="button" onClick={saveFile}>
-            Download
+            Baixar Relatório
           </button>
           <button
             type="button"

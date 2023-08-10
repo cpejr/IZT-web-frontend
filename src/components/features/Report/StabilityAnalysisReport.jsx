@@ -45,9 +45,9 @@ export default function StabilityAnalysisReport({
   };
 
   const saveFile = () => {
-    pdf(<StabilityPDF />)
+    pdf(<StabilityPDF data={data} />)
       .toBlob()
-      .then((blob) => saveAs(blob, 'Análise de Estabilidade.pdf'));
+      .then((blob) => saveAs(blob, `${data?.name}.pdf`));
   };
 
   return (
@@ -162,7 +162,7 @@ export default function StabilityAnalysisReport({
         </Columns>
         <ButtonRow>
           <button type="button" onClick={saveFile}>
-            Download
+            Baixar Relatório
           </button>
           <button
             type="button"
