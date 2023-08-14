@@ -37,6 +37,20 @@ import {
 
 const graphData = [
   {
+    x: [
+      [10, 10.625, 12.5, 15.625, 20],
+      [5.625, 6.25, 8.125, 11.25, 15.625],
+      [2.5, 3.125, 5.0, 8.125, 12.5],
+      [0.625, 1.25, 3.125, 6.25, 10.625],
+      [0, 0.625, 2.5, 5.625, 10],
+    ],
+    y: [
+      [10, 10.625, 12.5, 15.625, 20],
+      [5.625, 6.25, 8.125, 11.25, 15.625],
+      [2.5, 3.125, 5.0, 8.125, 12.5],
+      [0.625, 1.25, 3.125, 6.25, 10.625],
+      [0, 0.625, 2.5, 5.625, 10],
+    ],
     z: [
       [10, 10.625, 12.5, 15.625, 20],
       [5.625, 6.25, 8.125, 11.25, 15.625],
@@ -51,7 +65,10 @@ const graphData = [
 ];
 
 export default function StabilityAnalysis() {
-  const [plotData, setPlotData] = useState([]);
+  const [processStabilityDiagramData, setProcessStabilityDiagramData] =
+    useState([]);
+  const [partHeightStabilityDiagramData, setPartHeightStabilityDiagramData] =
+    useState([]);
   const [collapse, setCollapse] = useState('');
 
   // Open/Close dropdown
@@ -63,7 +80,19 @@ export default function StabilityAnalysis() {
   // Backend calls
   const { mutate: calculateStabilityAnalysis, isLoading } =
     useCalculateStabilityAnalysis({
-      onSuccess: () => {
+      onSuccess: (result) => {
+        const newProcessStabilityGraphData = [
+          {
+            x: result.processStabilityDiagram.x,
+            y: result.processStabilityDiagram.y,
+            z: result.processStabilityDiagram.z,
+            type: 'contour',
+            size: 2,
+            marker: { color: 'red' },
+          },
+        ];
+        setProcessStabilityDiagramData(newProcessStabilityGraphData);
+
         toast.success('Dados calculados com sucesso!');
       },
       onError: (err) => {
@@ -83,7 +112,7 @@ export default function StabilityAnalysis() {
   });
 
   const onSubmit = (data) => {
-    setPlotData(graphData);
+    setPartHeightStabilityDiagramData(graphData);
     calculateStabilityAnalysis(data);
   };
 
@@ -162,7 +191,7 @@ export default function StabilityAnalysis() {
           <DiagramTitle>Diagrama - Estabilidade de processo</DiagramTitle>
           <Canvas>
             <ContourMap
-              data={plotData}
+              data={processStabilityDiagramData}
               layout={{ autosize: true }}
               config={{ responsive: true }}
               useResizeHandler
@@ -173,7 +202,7 @@ export default function StabilityAnalysis() {
           <DiagramTitle>Diagrama - Estabilidade de altura da peça</DiagramTitle>
           <Canvas>
             <ContourMap
-              data={plotData}
+              data={partHeightStabilityDiagramData}
               layout={{ autosize: true }}
               config={{ responsive: true }}
               useResizeHandler
