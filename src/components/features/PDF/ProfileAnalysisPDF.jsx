@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   iztDiv: {
     display: 'grid',
     flexDirection: 'row',
-    gap: 5,
+    gap: 4,
     height: 35,
   },
   iztText: {
@@ -121,9 +121,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function StabilityAnalysisPDF({ data }) {
+export default function ProfileAnalysisPDF({ data }) {
   return (
-    <Document>
+    <Document
+      fileName="Relatorio.pdf"
+      file="relatorio.pdf"
+      download="relatorio.pdf"
+    >
       <Page size="A4" style={styles.page}>
         <div style={styles.header} fixed>
           <Text style={styles.title} fixed>
@@ -201,6 +205,24 @@ export default function StabilityAnalysisPDF({ data }) {
               </Text>
               <Text style={styles.item}>
                 Comprimento eletivo: {data?.electiveLength} mm
+              </Text>
+              <Text style={styles.item}>Sobremetal: {data?.allowance} mm</Text>
+            </div>
+
+            <Text style={styles.section}>RA parâmetro de perfil</Text>
+
+            <div style={styles.space}>
+              <Text style={styles.item}>
+                Altura entre centros hw: (min): {data?.hwCenterHeight} mm
+              </Text>
+              <Text style={styles.item}>
+                Inclinação do RA: (min): {data?.raInclination} mm
+              </Text>
+              <Text style={styles.item}>
+                Altura do dressador: {data?.raDresserInclination} mm
+              </Text>
+              <Text style={styles.item}>
+                Posição do dressador: {data?.dresserPosition}
               </Text>
               <Text style={styles.item}>Sobremetal: {data?.allowance} mm</Text>
             </div>

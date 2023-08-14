@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { CloseOutlined, DownOutlined } from '@ant-design/icons';
+import { pdf } from '@react-pdf/renderer';
+import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
 
 import ModalDeleteProfileAnalysis from '../ModalDeleteProfileAnalysis/ModalDeleteProfileAnalysis';
+import ProfilePDF from '../PDF/ProfileAnalysisPDF';
 import {
   DataColumn,
   Columns,
@@ -41,6 +44,12 @@ export default function ProfileAnalysisReport({
   };
   const closeModalDeleteProfileAnalysis = () => {
     setModalDeleteProfileAnalysis(false);
+  };
+
+  const saveFile = () => {
+    pdf(<ProfilePDF data={data} />)
+      .toBlob()
+      .then((blob) => saveAs(blob, `${data?.name}.pdf`));
   };
 
   return (
@@ -187,7 +196,9 @@ export default function ProfileAnalysisReport({
           </Row>
         </Columns>
         <ButtonRow>
-          <button type="button">Baixar relatório</button>
+          <button type="button" onClick={saveFile}>
+            Baixar Relatório
+          </button>
           <button
             type="button"
             onClick={() => openModalDeleteProfileAnalysis(data?._id)}
