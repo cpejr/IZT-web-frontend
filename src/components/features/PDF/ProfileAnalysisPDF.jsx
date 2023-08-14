@@ -213,7 +213,7 @@ export default function ProfileAnalysisPDF({ data }) {
 
             <div style={styles.space}>
               <Text style={styles.item}>
-                Altura entre centros hw: (min): {data?.hwCenterHeight} mm{' '}
+                Altura entre centros hw: (min): {data?.hwCenterHeight} mm
               </Text>
               <Text style={styles.item}>
                 Inclinação do RA: (min): {data?.raInclination} mm
@@ -222,7 +222,7 @@ export default function ProfileAnalysisPDF({ data }) {
                 Altura do dressador: {data?.raDresserInclination} mm
               </Text>
               <Text style={styles.item}>
-                Posição do dressador: {data?.dresserPosition} mm
+                Posição do dressador: {data?.dresserPosition}
               </Text>
               <Text style={styles.item}>Sobremetal: {data?.allowance} mm</Text>
             </div>
