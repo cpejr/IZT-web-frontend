@@ -17,7 +17,7 @@ import {
 import { useGetCategories } from '../../hooks/query/categories';
 import { useUpdateProducts } from '../../hooks/query/products';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../utils/constants';
-import putIndexIntoFiles from '../../utils/putIndexIntoFiles';
+import separateFileTypes from '../../utils/separateFileTypes';
 import {
   Container,
   Title,
@@ -67,7 +67,7 @@ export default function EditProductMobile() {
         });
 
         toast.success('Produto atualizado com sucesso!');
-        navigate('/administrador');
+        navigate('/administrador/listar-produtos');
       },
       onError: (err) => {
         const errorMessage = buildEditProductErrorMessage(err);
@@ -120,16 +120,15 @@ export default function EditProductMobile() {
   });
   const onSubmit = (inputData) => {
     const { pictures, documents, ...data } = inputData;
-
-    const [newPictures, savedPictures] = putIndexIntoFiles(pictures);
-    const [newDocuments, savedDocuments] = putIndexIntoFiles(documents);
+    const [oldPictures, newPictures] = separateFileTypes(pictures);
+    const [oldDocuments, newDocuments] = separateFileTypes(documents);
 
     const dataObject = {
       ...data,
+      oldPictures,
       newPictures,
-      savedPictures,
+      oldDocuments,
       newDocuments,
-      savedDocuments,
     };
 
     const formData = objToFormData.serialize(dataObject, {
@@ -230,6 +229,7 @@ export default function EditProductMobile() {
                 removeDocument={removeDocument}
               />
             ))}
+            <ErrorMessage>{errors?.documents?.message}</ErrorMessage>
           </DocumentsContainer>
           {fieldsDocuments.length < documentsLimit && (
             <AddFileButton

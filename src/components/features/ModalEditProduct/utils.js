@@ -26,8 +26,6 @@ export const editProductValidationSchema = z.object({
             mimeType: z.string(),
             url: z.string(),
             key: z.string(),
-            size: z.number(),
-            orderPosition: z.number(),
           })
         ),
       })
@@ -43,13 +41,11 @@ export const editProductValidationSchema = z.object({
             mimeType: z.string(),
             url: z.string(),
             key: z.string(),
-            size: z.number(),
-            orderPosition: z.number(),
           })
         ),
       })
     )
-    .default([])
+    .nonempty('Você deve inserir ao menos uma foto')
     .transform((documents) => documents.map(({ file }) => file)),
 });
 
