@@ -290,3 +290,8 @@ export default function ModalEditProduct({ product, close }) {
     </Container>
   );
 }
+
+ModalEditProduct.propTypes = {
+  product: PropTypes.object.isRequired,
+  close: PropTypes.func.isRequired,
+};
