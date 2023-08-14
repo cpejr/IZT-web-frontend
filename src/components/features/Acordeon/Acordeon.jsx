@@ -59,7 +59,12 @@ export default function AccordionDemo({ onCalculate }) {
 
   // Backend calls
   const { mutate: calculateProfileAnalysis } = useCalculateProfileAnalysis({
-    onSuccess: () => {
+    onSuccess: (result) => {
+      const xData = result.retificationCenterlessDiagram.x;
+      const yData = result.retificationCenterlessDiagram.y;
+
+      onCalculate({ x: xData, y: yData });
+
       toast.success('Dados calculados com sucesso!');
     },
     onError: (err) => {
@@ -84,12 +89,6 @@ export default function AccordionDemo({ onCalculate }) {
   const onSubmit = (data) => {
     setIsLoading(true);
     calculateProfileAnalysis(data);
-
-    const xData = [1, 2, 3, 4]; // Replace with your actual x data
-    const yData = [10, 15, 13, 17]; // Replace with your actual y data
-
-    onCalculate({ x: xData, y: yData });
-
     setIsLoading(false);
   };
 
