@@ -67,7 +67,7 @@ export default function EditProductMobile() {
         });
 
         toast.success('Produto atualizado com sucesso!');
-        navigate('/administrador');
+        navigate('/administrador/listar-produtos');
       },
       onError: (err) => {
         const errorMessage = buildEditProductErrorMessage(err);
