@@ -1,67 +1,68 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import {
-  getStabilityAnalysis,
-  deleteStabilityAnalysis,
-  getNormalStabilityAnalysis,
-  searchByNameStabilityAnalysis,
-  calculateStabilityAnalysis,
+  getProfileAnalysis,
+  deleteProfileAnalysis,
+  searchByNameProfileAnalysis,
+  getByUserProfileAnalysis,
+  calculateProfileAnalysis,
 } from '../../services/api/endpoints';
 
-export function useGetStabilityAnalysis({
+export function useGetProfileAnalysis({
   filters,
   onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
-    queryKey: ['stability-analysis', filters],
-    queryFn: () => getStabilityAnalysis(filters),
+    queryKey: ['profile-analysis', filters],
+    queryFn: () => getProfileAnalysis(filters),
     onSuccess,
     onError,
   });
 }
-export function useGetNormalStabilityAnalysis({
+export function useGetByUserProfileAnalysis({
   user,
   onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
-    queryKey: ['stability-analysis', user],
-    queryFn: () => getNormalStabilityAnalysis(user),
+    queryKey: ['profile-analysis', user],
+    queryFn: () => getByUserProfileAnalysis(user),
     onSuccess,
     onError,
   });
 }
 
-export function useDeleteStabilityAnalysis({
+export function useDeleteProfileAnalysis({
   onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useMutation({
-    mutationFn: deleteStabilityAnalysis,
+    mutationFn: deleteProfileAnalysis,
     onSuccess,
     onError,
   });
 }
 
-export function useSearchByNameStabilityAnalysis({
+export function useSearchByNameProfileAnalysis({
   name,
   onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useQuery({
-    queryKey: ['stability-analysis', 'searchByName', name],
-    queryFn: () => searchByNameStabilityAnalysis(name),
+    queryKey: ['profile-analysis', 'searchByName', name],
+    queryFn: () => searchByNameProfileAnalysis(name),
     onSuccess,
     onError,
   });
 }
-export function useCalculateStabilityAnalysis({
+
+export function useCalculateProfileAnalysis({
   onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useMutation({
-    mutationFn: calculateStabilityAnalysis,
+    mutationFn: calculateProfileAnalysis,
     onSuccess,
     onError,
   });

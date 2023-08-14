@@ -126,6 +126,10 @@ export const ButtonRow = styled.div`
       cursor: pointer;
     }
   }
+  PDFDownloadLink {
+    text-decoration: none;
+    text-decoration-line: none;
+  }
 `;
 
 export const Label = styled.div`

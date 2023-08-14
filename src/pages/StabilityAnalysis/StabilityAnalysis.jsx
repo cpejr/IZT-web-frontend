@@ -1,13 +1,18 @@
 import { useState } from 'react';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 import { AiOutlineDown } from 'react-icons/ai';
 import { TbPencil } from 'react-icons/tb';
+import { TailSpin } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 
 import {
   AnalysisData,
   MachineData,
   ProductData,
 } from '../../components/features';
+import { useCalculateStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
 import {
   Container,
   DataEntryDiv,
@@ -18,15 +23,34 @@ import {
   DataTitle,
   Analysis,
   Button,
+  Button2,
   TitleRow,
   Diagram,
   DiagramTitle,
   Canvas,
   ContourMap,
 } from './Styles';
+import {
+  buildCalculateStabilityAnalysisErrorMessage,
+  calculateStabilityAnalysisValidationSchema,
+} from './utils';
 
-const data = [
+const graphData = [
   {
+    x: [
+      [10, 10.625, 12.5, 15.625, 20],
+      [5.625, 6.25, 8.125, 11.25, 15.625],
+      [2.5, 3.125, 5.0, 8.125, 12.5],
+      [0.625, 1.25, 3.125, 6.25, 10.625],
+      [0, 0.625, 2.5, 5.625, 10],
+    ],
+    y: [
+      [10, 10.625, 12.5, 15.625, 20],
+      [5.625, 6.25, 8.125, 11.25, 15.625],
+      [2.5, 3.125, 5.0, 8.125, 12.5],
+      [0.625, 1.25, 3.125, 6.25, 10.625],
+      [0, 0.625, 2.5, 5.625, 10],
+    ],
     z: [
       [10, 10.625, 12.5, 15.625, 20],
       [5.625, 6.25, 8.125, 11.25, 15.625],
@@ -41,23 +65,62 @@ const data = [
 ];
 
 export default function StabilityAnalysis() {
-  const [plotData, setPlotData] = useState([]);
+  const [processStabilityDiagramData, setProcessStabilityDiagramData] =
+    useState([]);
+  const [partHeightStabilityDiagramData, setPartHeightStabilityDiagramData] =
+    useState([]);
   const [collapse, setCollapse] = useState('');
 
+  // Open/Close dropdown
   const handleCollapse = (sectionName) => {
     if (collapse === sectionName) setCollapse('');
     else setCollapse(sectionName);
   };
 
-  const handlePlot = () => {
-    setPlotData(data);
+  // Backend calls
+  const { mutate: calculateStabilityAnalysis, isLoading } =
+    useCalculateStabilityAnalysis({
+      onSuccess: (result) => {
+        const newProcessStabilityGraphData = [
+          {
+            x: result.processStabilityDiagram.x,
+            y: result.processStabilityDiagram.y,
+            z: result.processStabilityDiagram.z,
+            type: 'contour',
+            size: 2,
+            marker: { color: 'red' },
+          },
+        ];
+        setProcessStabilityDiagramData(newProcessStabilityGraphData);
+
+        toast.success('Dados calculados com sucesso!');
+      },
+      onError: (err) => {
+        const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+
+        toast.error(errorMessage);
+      },
+    });
+
+  // Form handlers
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(calculateStabilityAnalysisValidationSchema),
+  });
+
+  const onSubmit = (data) => {
+    setPartHeightStabilityDiagramData(graphData);
+    calculateStabilityAnalysis(data);
   };
 
   return (
     <Container>
       <DataEntryDiv>
         <Title>Entrada de Dados</Title>
-        <DataEntry>
+        <DataEntry onSubmit={handleSubmit(onSubmit)}>
           <Collapsable>
             <CollapsableHeader
               collapse={collapse === 'analysis'}
@@ -66,7 +129,11 @@ export default function StabilityAnalysis() {
               <DataTitle>Dados da Análise</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
-            <AnalysisData collapse={collapse === 'analysis'} />
+            <AnalysisData
+              collapse={collapse === 'analysis'}
+              register={register}
+              errors={errors}
+            />
           </Collapsable>
           <Collapsable>
             <CollapsableHeader
@@ -76,7 +143,11 @@ export default function StabilityAnalysis() {
               <DataTitle>Dados da Maquina</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
-            <MachineData collapse={collapse === 'machine'} />
+            <MachineData
+              collapse={collapse === 'machine'}
+              register={register}
+              errors={errors}
+            />
           </Collapsable>
           <Collapsable>
             <CollapsableHeader
@@ -86,22 +157,41 @@ export default function StabilityAnalysis() {
               <DataTitle>Dados do Produto</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
-            <ProductData collapse={collapse === 'product'} />
+            <ProductData
+              collapse={collapse === 'product'}
+              register={register}
+              errors={errors}
+            />
           </Collapsable>
+          <Button disabled={isLoading} type="submit">
+            {isLoading ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                />
+                <p>Carregando</p>
+              </>
+            ) : (
+              <p>Calcular</p>
+            )}
+          </Button>
         </DataEntry>
-        <Button onClick={handlePlot}>Calcular</Button>
       </DataEntryDiv>
       <Analysis>
         <TitleRow>
           <Title>Análise #1</Title>
           <TbPencil size={20} style={{ color: 'white' }} />
-          <Button>Salvar relatório</Button>
+          <Button2>Salvar relatório</Button2>
         </TitleRow>
         <Diagram>
           <DiagramTitle>Diagrama - Estabilidade de processo</DiagramTitle>
           <Canvas>
             <ContourMap
-              data={plotData}
+              data={processStabilityDiagramData}
               layout={{ autosize: true }}
               config={{ responsive: true }}
               useResizeHandler
@@ -112,7 +202,7 @@ export default function StabilityAnalysis() {
           <DiagramTitle>Diagrama - Estabilidade de altura da peça</DiagramTitle>
           <Canvas>
             <ContourMap
-              data={plotData}
+              data={partHeightStabilityDiagramData}
               layout={{ autosize: true }}
               config={{ responsive: true }}
               useResizeHandler

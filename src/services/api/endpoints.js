@@ -242,3 +242,49 @@ export const deleteStabilityAnalysis = async (_id) => {
 
   return data;
 };
+
+export const searchByNameStabilityAnalysis = async (name) => {
+  const { data } = await api.get('/stability-analysis/search-by-name', {
+    params: { name },
+  });
+
+  return data;
+};
+
+export const calculateStabilityAnalysis = async (inputData) => {
+  const { data } = await api.post('/stability-analysis/diagrams', inputData);
+  return data;
+};
+
+// Profile Analysis
+export const getProfileAnalysis = async (filters = {}) => {
+  const { data } = await api.get(`/profile-analysis`, {
+    params: filters,
+  });
+
+  return data;
+};
+export const getByUserProfileAnalysis = async (user) => {
+  const { data } = await api.get(`/profile-analysis/user/${user}`);
+  return data;
+};
+
+export const deleteProfileAnalysis = async (_id) => {
+  const { data } = await api.delete(`/profile-analysis/${_id}`);
+
+  return data;
+};
+
+export const searchByNameProfileAnalysis = async (name) => {
+  const { data } = await api.get('/profile-analysis/search-by-name', {
+    params: { name },
+  });
+
+  return data;
+};
+
+export const calculateProfileAnalysis = async (inputData) => {
+  const { data } = await api.post('/profile-analysis/diagrams', inputData);
+
+  return data;
+};
