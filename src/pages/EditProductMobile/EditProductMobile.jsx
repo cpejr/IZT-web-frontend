@@ -120,16 +120,15 @@ export default function EditProductMobile() {
   });
   const onSubmit = (inputData) => {
     const { pictures, documents, ...data } = inputData;
-
-    const [newPictures, oldPictures] = separateFileTypes(pictures);
-    const [newDocuments, oldDocuments] = separateFileTypes(documents);
+    const [oldPictures, newPictures] = separateFileTypes(pictures);
+    const [oldDocuments, newDocuments] = separateFileTypes(documents);
 
     const dataObject = {
       ...data,
-      newPictures,
       oldPictures,
-      newDocuments,
+      newPictures,
       oldDocuments,
+      newDocuments,
     };
 
     const formData = objToFormData.serialize(dataObject, {
