@@ -25,6 +25,8 @@ export default function Footer() {
 
     if (isHomePage) {
       window.location.href = '/#contact';
+    } else if (currentURL === 'http://localhost:5173/#contact') {
+      window.location.href = '/#contact';
     } else {
       window.location.href = 'http://localhost:5173/';
     }
