@@ -1,3 +1,7 @@
+import React, { useEffect } from 'react';
+
+import { useLocation } from 'react-router-dom';
+
 import Catalog from '../../assets/homePage/cards/catalog.png';
 import Software from '../../assets/homePage/cards/software.png';
 import Training from '../../assets/homePage/cards/training.png';
@@ -16,6 +20,30 @@ import {
 } from './Styles';
 
 export default function Home() {
+  const location = useLocation();
+
+  window.history.replaceState(
+    {},
+    document.title,
+    location.pathname + location.search
+  );
+
+  useEffect(() => {
+    const scrollToFormsContact = () => {
+      const formsContactElement = document.getElementById('contact');
+      if (formsContactElement) {
+        window.scrollTo(0, 0);
+
+        formsContactElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    if (location.hash === '#contact') {
+      scrollToFormsContact();
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
   return (
     <OuterDiv>
       <Container>
@@ -52,7 +80,7 @@ export default function Home() {
             linkTo="/software"
           />
         </CardsContainer>
-        <FormsContact />
+        <FormsContact id="contact" />
         <AboutUs>
           <OurHistoryTitle>Conheça a nossa história</OurHistoryTitle>
           <OurHistory>

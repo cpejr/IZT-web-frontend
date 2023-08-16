@@ -1,6 +1,7 @@
 import { AiOutlineLinkedin, AiOutlineFacebook } from 'react-icons/ai';
 import { BsInstagram, BsWhatsapp } from 'react-icons/bs';
 import { HiOutlineMail } from 'react-icons/hi';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Logo } from '../../common';
 import {
@@ -19,16 +20,32 @@ import {
 } from './Styles';
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleContactButtonClick = () => {
     const currentURL = window.location.href;
-    const isHomePage = currentURL === 'http://localhost:5173/';
+    const isHomePage = !currentURL.includes('/');
+    function changeUrl() {
+      window.history.replaceState(
+        {},
+        document.title,
+        location.pathname + location.search
+      );
+    }
 
     if (isHomePage) {
       window.location.href = '/#contact';
-    } else if (currentURL === 'http://localhost:5173/#contact') {
+      window.location.href = '/#home';
+      changeUrl();
+    } else if (currentURL.includes('#contact')) {
       window.location.href = '/#contact';
+      window.location.href = '/#home';
+      changeUrl();
     } else {
-      window.location.href = 'http://localhost:5173/';
+      navigate('/');
+      window.location.href = '/#contact';
+      changeUrl();
     }
   };
 
