@@ -92,7 +92,9 @@ export default function Footer() {
         </SocialMedias>
 
         <ButtonMobile>
-          <ContactButton>Fale Conosco</ContactButton>
+          <ContactButton onClick={handleContactButtonClick}>
+            Fale Conosco
+          </ContactButton>
         </ButtonMobile>
 
         <SectionGoTo>
