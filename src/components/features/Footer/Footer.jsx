@@ -1,6 +1,7 @@
 import { AiOutlineLinkedin, AiOutlineFacebook } from 'react-icons/ai';
 import { BsInstagram, BsWhatsapp } from 'react-icons/bs';
 import { HiOutlineMail } from 'react-icons/hi';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Logo } from '../../common';
 import {
@@ -19,6 +20,35 @@ import {
 } from './Styles';
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleContactButtonClick = () => {
+    const currentURL = window.location.href;
+    const isHomePage = !currentURL.includes('/');
+    function changeUrl() {
+      window.history.replaceState(
+        {},
+        document.title,
+        location.pathname + location.search
+      );
+    }
+
+    if (isHomePage) {
+      window.location.href = '/#contact';
+      window.location.href = '/#home';
+      changeUrl();
+    } else if (currentURL.includes('#contact')) {
+      window.location.href = '/#contact';
+      window.location.href = '/#home';
+      changeUrl();
+    } else {
+      navigate('/');
+      window.location.href = '/#contact';
+      changeUrl();
+    }
+  };
+
   return (
     <Container>
       <SideContainer>
@@ -29,14 +59,16 @@ export default function Footer() {
           Inovação, tecnologia, precisão, qualidade e sustentabilidade.
         </Text>
       </SideContainer>
-
       <MiddleContainer>
         <Tittle>Contato</Tittle>
         <Text>
           Entre em contato agora para sanar todas dúvidas sobre nossos produtos,
           nossos softwares ou nossos cursos.
         </Text>
-        <ContactButton>Fale Conosco</ContactButton>
+
+        <ContactButton onClick={handleContactButtonClick}>
+          Fale Conosco
+        </ContactButton>
       </MiddleContainer>
 
       <SideContainer>
@@ -60,7 +92,9 @@ export default function Footer() {
         </SocialMedias>
 
         <ButtonMobile>
-          <ContactButton>Fale Conosco</ContactButton>
+          <ContactButton onClick={handleContactButtonClick}>
+            Fale Conosco
+          </ContactButton>
         </ButtonMobile>
 
         <SectionGoTo>
