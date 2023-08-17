@@ -17,6 +17,7 @@ import {
   Container,
   DataEntryDiv,
   Title,
+  InputName,
   DataEntry,
   Collapsable,
   CollapsableHeader,
@@ -25,44 +26,17 @@ import {
   Button,
   Button2,
   TitleRow,
+  DivName,
   Diagram,
   DiagramTitle,
   Canvas,
   ContourMap,
+  ErrorMessage,
 } from './Styles';
 import {
   buildCalculateStabilityAnalysisErrorMessage,
   calculateStabilityAnalysisValidationSchema,
 } from './utils';
-
-const graphData = [
-  {
-    x: [
-      [10, 10.625, 12.5, 15.625, 20],
-      [5.625, 6.25, 8.125, 11.25, 15.625],
-      [2.5, 3.125, 5.0, 8.125, 12.5],
-      [0.625, 1.25, 3.125, 6.25, 10.625],
-      [0, 0.625, 2.5, 5.625, 10],
-    ],
-    y: [
-      [10, 10.625, 12.5, 15.625, 20],
-      [5.625, 6.25, 8.125, 11.25, 15.625],
-      [2.5, 3.125, 5.0, 8.125, 12.5],
-      [0.625, 1.25, 3.125, 6.25, 10.625],
-      [0, 0.625, 2.5, 5.625, 10],
-    ],
-    z: [
-      [10, 10.625, 12.5, 15.625, 20],
-      [5.625, 6.25, 8.125, 11.25, 15.625],
-      [2.5, 3.125, 5.0, 8.125, 12.5],
-      [0.625, 1.25, 3.125, 6.25, 10.625],
-      [0, 0.625, 2.5, 5.625, 10],
-    ],
-    type: 'contour',
-    size: 2,
-    marker: { color: 'red' },
-  },
-];
 
 export default function StabilityAnalysis() {
   const [processStabilityDiagramData, setProcessStabilityDiagramData] =
@@ -93,6 +67,18 @@ export default function StabilityAnalysis() {
         ];
         setProcessStabilityDiagramData(newProcessStabilityGraphData);
 
+        const newPartHeightStabilityDiagramData = [
+          {
+            x: result.partHeightStabilityDiagram.x,
+            y: result.partHeightStabilityDiagram.y,
+            z: result.partHeightStabilityDiagram.z,
+            type: 'contour',
+            size: 2,
+            marker: { color: 'red' },
+          },
+        ];
+        setPartHeightStabilityDiagramData(newPartHeightStabilityDiagramData);
+
         toast.success('Dados calculados com sucesso!');
       },
       onError: (err) => {
@@ -112,7 +98,6 @@ export default function StabilityAnalysis() {
   });
 
   const onSubmit = (data) => {
-    setPartHeightStabilityDiagramData(graphData);
     calculateStabilityAnalysis(data);
   };
 
@@ -183,10 +168,22 @@ export default function StabilityAnalysis() {
       </DataEntryDiv>
       <Analysis>
         <TitleRow>
-          <Title>Análise #1</Title>
-          <TbPencil size={20} style={{ color: 'white' }} />
+          <DivName>
+            <TbPencil size={25} style={{ color: 'white' }} />
+            <InputName
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Insira o nome do relatório"
+              error={errors?.name?.message}
+              {...register('name')}
+            />
+          </DivName>
+
           <Button2>Salvar relatório</Button2>
         </TitleRow>
+        <ErrorMessage>{errors?.name?.message}</ErrorMessage>
+
         <Diagram>
           <DiagramTitle>Diagrama - Estabilidade de processo</DiagramTitle>
           <Canvas>
