@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { HiOutlinePencil } from 'react-icons/hi';
+import { TbPencil } from 'react-icons/tb';
 
 import AccordionDemo from '../../components/features/Acordeon/Acordeon';
 import Graphic from '../../components/features/Graphic/Graphic';
@@ -21,6 +21,7 @@ import {
   H1,
   Boddy,
 } from './Styles';
+import { DivName, ErrorMessage, InputName } from '../StabilityAnalysis/Styles';
 
 export default function ProfileAnalysis() {
   const [graphData, setGraphData] = useState({ x: [], y: [] });
@@ -45,9 +46,20 @@ export default function ProfileAnalysis() {
         </Containerleft>
         <Analysis>
           <H1>
-            Analise #1 <HiOutlinePencil size={20} color="white" />{' '}
+            <DivName>
+              <TbPencil size={25} style={{ color: 'white' }} />
+              <InputName
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Insira o nome do relatório"
+                // error={errors?.name?.message}
+                // {...register('name')}
+              />
+            </DivName>
             <Button>Salvar relatório</Button>
           </H1>
+          <ErrorMessage>{/* {errors?.name?.message} */}</ErrorMessage>
           <Edit>
             <Text>Vão de retificação centerless de passagem </Text>
             <Container2>

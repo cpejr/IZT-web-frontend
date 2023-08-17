@@ -17,6 +17,7 @@ import {
   Container,
   DataEntryDiv,
   Title,
+  InputName,
   DataEntry,
   Collapsable,
   CollapsableHeader,
@@ -25,10 +26,12 @@ import {
   Button,
   Button2,
   TitleRow,
+  DivName,
   Diagram,
   DiagramTitle,
   Canvas,
   ContourMap,
+  ErrorMessage,
 } from './Styles';
 import {
   buildCalculateStabilityAnalysisErrorMessage,
@@ -165,10 +168,22 @@ export default function StabilityAnalysis() {
       </DataEntryDiv>
       <Analysis>
         <TitleRow>
-          <Title>Análise #1</Title>
-          <TbPencil size={20} style={{ color: 'white' }} />
+          <DivName>
+            <TbPencil size={25} style={{ color: 'white' }} />
+            <InputName
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Insira o nome do relatório"
+              error={errors?.name?.message}
+              {...register('name')}
+            />
+          </DivName>
+
           <Button2>Salvar relatório</Button2>
         </TitleRow>
+        <ErrorMessage>{errors?.name?.message}</ErrorMessage>
+
         <Diagram>
           <DiagramTitle>Diagrama - Estabilidade de processo</DiagramTitle>
           <Canvas>

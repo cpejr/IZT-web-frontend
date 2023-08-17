@@ -96,6 +96,9 @@ export const Container2 = styled.div`
 `;
 
 export const H1 = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;

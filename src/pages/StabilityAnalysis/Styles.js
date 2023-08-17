@@ -33,6 +33,19 @@ export const Title = styled.h1`
   }
 `;
 
+export const InputName = styled.input`
+  font-weight: 600;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  color: white;
+  background-color: transparent;
+  font-size: 2.2rem;
+  border: 0 solid;
+  width: 30rem;
+  @media (max-width: 1100px) {
+    font-size: 1.8rem;
+  }
+`;
+
 export const DataEntry = styled.form`
   width: 100%;
   height: 100%;
@@ -182,10 +195,17 @@ export const Button2 = styled.button`
 export const TitleRow = styled.div`
   display: flex;
   width: 100%;
+  height: 100rem;
   text-align: start;
   align-items: center;
   gap: 1.4vw;
 `;
+
+export const DivName = styled.div`
+  display: flex;
+  gap: 1.5rem;
+`;
+
 export const Diagram = styled.div`
   display: flex;
   flex-direction: column;
