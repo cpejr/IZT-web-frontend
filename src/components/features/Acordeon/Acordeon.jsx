@@ -90,7 +90,7 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
   const onSubmit = (data) => {
     calculateProfileAnalysis(data);
     setInputData(data);
-    onCalculate(data);
+    dataInput(data);
   };
 
   const covertStringToNumber = (fieldId, inputValue) => {

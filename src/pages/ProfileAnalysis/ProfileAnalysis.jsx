@@ -25,7 +25,7 @@ import {
 
 export default function ProfileAnalysis() {
   const [graphData, setGraphData] = useState({ x: [], y: [] });
-  const [inputData, setInputData] = useState({}); // Novo estado para os dados do AccordionDemo
+  const [inputData, setInputData] = useState({});
 
   const handleCalculate = (data) => {
     const xData = data.x;
@@ -35,7 +35,6 @@ export default function ProfileAnalysis() {
     setInputData(data);
   };
 
-  // Função para receber os dados do AccordionDemo
   const handleInputData = (data) => {
     setInputData(data);
   };
