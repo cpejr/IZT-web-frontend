@@ -25,12 +25,19 @@ import {
 
 export default function ProfileAnalysis() {
   const [graphData, setGraphData] = useState({ x: [], y: [] });
+  const [inputData, setInputData] = useState({}); // Novo estado para os dados do AccordionDemo
 
   const handleCalculate = (data) => {
     const xData = data.x;
     const yData = data.y;
 
     setGraphData({ x: xData, y: yData });
+    setInputData(data);
+  };
+
+  // Função para receber os dados do AccordionDemo
+  const handleInputData = (data) => {
+    setInputData(data);
   };
 
   return (
@@ -40,7 +47,10 @@ export default function ProfileAnalysis() {
           <Center>
             <H1>Entrada de Dados</H1>
             <Data>
-              <AccordionDemo onCalculate={handleCalculate} />
+              <AccordionDemo
+                onCalculate={handleCalculate}
+                dataInput={handleInputData}
+              />
             </Data>
           </Center>
         </Containerleft>
@@ -70,8 +80,10 @@ export default function ProfileAnalysis() {
           <ContainerRight>
             <Column>
               <OutputData>
-                <Text2> Altura entre centros (hw): ___ mm</Text2>
-
+                <Text2>
+                  Altura entre centros (hw):{' '}
+                  {inputData?.hwCenterHeight || '___'} mm
+                </Text2>
                 <Text2>Altura do dessador (hd): ___ mm</Text2>
 
                 <Text2>Inclinação do RA (adr): ___ °</Text2>

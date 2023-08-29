@@ -54,7 +54,7 @@ const parametersRA = [
 ];
 
 // eslint-disable-next-line react/prop-types
-export default function AccordionDemo({ onCalculate }) {
+export default function AccordionDemo({ onCalculate, dataInput }) {
   const [inputData, setInputData] = useState({});
 
   // Backend calls
@@ -65,6 +65,7 @@ export default function AccordionDemo({ onCalculate }) {
         const yData = result.retificationCenterlessDiagram.y;
 
         onCalculate({ x: xData, y: yData });
+        dataInput(inputData);
 
         toast.success('Dados calculados com sucesso!');
       },
@@ -89,6 +90,7 @@ export default function AccordionDemo({ onCalculate }) {
   const onSubmit = (data) => {
     calculateProfileAnalysis(data);
     setInputData(data);
+    onCalculate(data);
   };
 
   const covertStringToNumber = (fieldId, inputValue) => {
