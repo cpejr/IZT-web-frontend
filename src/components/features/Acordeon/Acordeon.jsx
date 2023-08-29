@@ -55,25 +55,25 @@ const parametersRA = [
 
 // eslint-disable-next-line react/prop-types
 export default function AccordionDemo({ onCalculate }) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [inputData, setInputData] = useState({});
 
   // Backend calls
-  const { mutate: calculateProfileAnalysis } = useCalculateProfileAnalysis({
-    onSuccess: (result) => {
-      const xData = result.retificationCenterlessDiagram.x;
-      const yData = result.retificationCenterlessDiagram.y;
+  const { mutate: calculateProfileAnalysis, isLoading } =
+    useCalculateProfileAnalysis({
+      onSuccess: (result) => {
+        const xData = result.retificationCenterlessDiagram.x;
+        const yData = result.retificationCenterlessDiagram.y;
 
-      onCalculate({ x: xData, y: yData });
+        onCalculate({ x: xData, y: yData });
 
-      toast.success('Dados calculados com sucesso!');
-    },
-    onError: (err) => {
-      const errorMessage = buildCalculateProfileAnalysisErrorMessage(err);
+        toast.success('Dados calculados com sucesso!');
+      },
+      onError: (err) => {
+        const errorMessage = buildCalculateProfileAnalysisErrorMessage(err);
 
-      toast.error(errorMessage);
-      setIsLoading(false);
-    },
-  });
+        toast.error(errorMessage);
+      },
+    });
 
   // Form handlers
   const {
@@ -87,9 +87,8 @@ export default function AccordionDemo({ onCalculate }) {
     resolver: zodResolver(calculateProfileAnalysisValidationSchema),
   });
   const onSubmit = (data) => {
-    setIsLoading(true);
     calculateProfileAnalysis(data);
-    setIsLoading(false);
+    setInputData(data);
   };
 
   const covertStringToNumber = (fieldId, inputValue) => {
