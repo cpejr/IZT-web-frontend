@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as Accordion from '@radix-ui/react-accordion';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { AiOutlineDown } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 import { useCalculateProfileAnalysis } from '../../../hooks/query/profileAnalysis';
@@ -112,10 +112,9 @@ export default function AccordionDemo({ onCalculate }) {
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <Accordion.Item className="AccordionItem" value="item-1">
-          <AccordionTrigger>Dados de análise</AccordionTrigger>
+          <AccordionTrigger>Dados da Análise</AccordionTrigger>
           <AccordionContent>
             <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
-              {' '}
               <br /> Processo de Retificação:
               <br />
               <select
@@ -180,7 +179,7 @@ export default function AccordionDemo({ onCalculate }) {
         </Accordion.Item>
 
         <Accordion.Item className="AccordionItem" value="item-2">
-          <AccordionTrigger>Dados da máquina</AccordionTrigger>
+          <AccordionTrigger>Dados da Máquina</AccordionTrigger>
           <AccordionContent>
             {machineData.map((data) => (
               <div key={data.id}>
@@ -210,7 +209,7 @@ export default function AccordionDemo({ onCalculate }) {
           </AccordionContent>
         </Accordion.Item>
         <Accordion.Item className="AccordionItem" value="item-3">
-          <AccordionTrigger>Dados do produto</AccordionTrigger>
+          <AccordionTrigger>Dados do Produto</AccordionTrigger>
           <AccordionContent>
             {productData.map((data) => (
               <div key={data.id}>
@@ -319,7 +318,7 @@ const AccordionTrigger = React.forwardRef(function AccordionTrigger(
         ref={forwardedRef}
       >
         {children}
-        <ChevronDownIcon className="AccordionChevron" aria-hidden />
+        <AiOutlineDown className="AccordionChevron" aria-hidden />
       </Accordion.Trigger>
     </Accordion.Header>
   );

@@ -64,7 +64,7 @@ export default function ProfileAnalysisReport({
         <Columns>
           <Row>
             <DataColumn>
-              <Title>Dados da análise</Title>
+              <Title>Dados da Análise</Title>
               <DataContainer>
                 <DataRow>
                   <Label>Processo retificação:</Label>

@@ -51,8 +51,7 @@ h3 {
 .AccordionTrigger {
   font-family: 'Montserrat';
   background-color: transparent;
-  padding: 0 20px;
-  height: 45px;
+  height: 5.15rem;
   flex: 1;
   display: flex;
   align-items: center;
@@ -61,7 +60,7 @@ h3 {
   line-height: 1;
   color: #ffff;
   background-color: #123645;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 20px;
   letter-spacing: 0em;
   text-align: left;
@@ -100,10 +99,10 @@ h3 {
 
 .AccordionChevron {
   color: #ffff;
-  height: 60px;
-  width: 25px;
+  height: 2.5vh;
+  width: 2.5vh;
   font-weight: bold;
-  transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  transition: all 200ms ease-in-out 200ms;
 }
 .AccordionTrigger[data-state='open'] > .AccordionChevron {
   transform: rotate(180deg);

@@ -125,7 +125,7 @@ export default function StabilityAnalysis() {
               collapse={collapse === 'machine'}
               onClick={() => handleCollapse('machine')}
             >
-              <DataTitle>Dados da Maquina</DataTitle>
+              <DataTitle>Dados da Máquina</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
             <MachineData

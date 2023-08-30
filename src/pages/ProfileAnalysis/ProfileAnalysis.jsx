@@ -1,14 +1,10 @@
 import { useState } from 'react';
 
 import { TbPencil } from 'react-icons/tb';
-import {
-  AnalysisData,
-  MachineData,
-  ProductData,
-} from '../../components/features';
 
 import AccordionDemo from '../../components/features/Acordeon/Acordeon';
 import Graphic from '../../components/features/Graphic/Graphic';
+import { ErrorMessage, InputName } from '../StabilityAnalysis/Styles';
 import {
   Container,
   Column,
@@ -25,8 +21,9 @@ import {
   Button,
   H1,
   Boddy,
+  TittleRow,
+  DivName,
 } from './Styles';
-import { DivName, ErrorMessage, InputName } from '../StabilityAnalysis/Styles';
 
 export default function ProfileAnalysis() {
   const [graphData, setGraphData] = useState({ x: [], y: [] });
@@ -43,14 +40,14 @@ export default function ProfileAnalysis() {
       <Container>
         <Containerleft>
           <Center>
-            <H1>Entrada de Dados (editar essa)</H1>
+            <H1>Entrada de Dados</H1>
             <Data>
               <AccordionDemo onCalculate={handleCalculate} />
             </Data>
           </Center>
         </Containerleft>
         <Analysis>
-          <H1>
+          <TittleRow>
             <DivName>
               <TbPencil size={25} style={{ color: 'white' }} />
               <InputName
@@ -63,7 +60,7 @@ export default function ProfileAnalysis() {
               />
             </DivName>
             <Button>Salvar relatório</Button>
-          </H1>
+          </TittleRow>
           <ErrorMessage>{/* {errors?.name?.message} */}</ErrorMessage>
           <Edit>
             <Text>Vão de retificação centerless de passagem </Text>
