@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
 import { TbPencil } from 'react-icons/tb';
+import {
+  AnalysisData,
+  MachineData,
+  ProductData,
+} from '../../components/features';
 
 import AccordionDemo from '../../components/features/Acordeon/Acordeon';
 import Graphic from '../../components/features/Graphic/Graphic';
@@ -38,7 +43,7 @@ export default function ProfileAnalysis() {
       <Container>
         <Containerleft>
           <Center>
-            <H1>Entrada de Dados</H1>
+            <H1>Entrada de Dados (editar essa)</H1>
             <Data>
               <AccordionDemo onCalculate={handleCalculate} />
             </Data>

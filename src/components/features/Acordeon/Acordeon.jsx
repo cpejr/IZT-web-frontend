@@ -114,9 +114,36 @@ export default function AccordionDemo({ onCalculate }) {
         <Accordion.Item className="AccordionItem" value="item-1">
           <AccordionTrigger>Dados de análise</AccordionTrigger>
           <AccordionContent>
-            {rectificationProcess.map((data) => (
+            <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
+              {' '}
+              <br /> Processo de Retificação:
+              <br />
+              <select
+                id="rectificationProcess"
+                {...register('rectificationProcess')}
+                className={`AccordionInput ${
+                  errors?.rectificationProcess?.message ? 'error' : ''
+                }`}
+              >
+                <option value="">Selecionar</option>
+                <option value="Centerless de Mergulho">
+                  Centerless de Mergulho
+                </option>
+                <option value="Centerless de Passagem">
+                  Centerless de Passagem
+                </option>
+              </select>
+            </div>
+
+            {errors.rectificationProcess?.message && (
+              <p className="ErrorMessage">
+                {errors.rectificationProcess?.message}
+              </p>
+            )}
+
+            {rectificationProcess.slice(1).map((data) => (
               <div key={data.id}>
-                <div className="AccordionLine">
+                <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
                   <br /> {data.label}:
                   <br />
                   {data.id === 'machineNumber' ? (
@@ -129,7 +156,7 @@ export default function AccordionDemo({ onCalculate }) {
                       }
                       step="any"
                       type="number"
-                      className={`AccordionMiniInput ${
+                      className={`AccordionInput ${
                         errors[data.id] ? 'error' : ''
                       }`}
                     />
@@ -157,7 +184,7 @@ export default function AccordionDemo({ onCalculate }) {
           <AccordionContent>
             {machineData.map((data) => (
               <div key={data.id}>
-                <div className="AccordionLine">
+                <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
                   <br /> {data.label}:
                   <br />
                   <input
@@ -187,10 +214,19 @@ export default function AccordionDemo({ onCalculate }) {
           <AccordionContent>
             {productData.map((data) => (
               <div key={data.id}>
-                <div className="AccordionLine">
+                <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
                   <br /> {data.label}:
                   <br />
-                  {data.id !== 'product' ? (
+                  {data.id === 'product' ? (
+                    <input
+                      id={data.id}
+                      name={data.id}
+                      {...register(data.id)}
+                      className={`AccordionInput ${
+                        errors[data.id] ? 'error' : ''
+                      }`}
+                    />
+                  ) : (
                     <input
                       id={data.id}
                       name={data.id}
@@ -203,22 +239,16 @@ export default function AccordionDemo({ onCalculate }) {
                       className={`AccordionMiniInput ${
                         errors[data.id] ? 'error' : ''
                       }`}
-                    />
-                  ) : (
-                    <input
-                      id={data.id}
-                      name={data.id}
-                      {...register(data.id)}
-                      className={`AccordionInput ${
-                        errors[data.id] ? 'error' : ''
-                      }`}
+                      style={
+                        data.id === 'productNumber' ? { width: '100%' } : {}
+                      }
                     />
                   )}
                   <p> {data.unit} </p>
                 </div>
                 {errors[data.id]?.message && (
                   <p className="ErrorMessage">{errors[data.id]?.message}</p>
-                )}{' '}
+                )}
               </div>
             ))}
           </AccordionContent>
@@ -228,7 +258,7 @@ export default function AccordionDemo({ onCalculate }) {
           <AccordionContent>
             {parametersRA.map((data) => (
               <div key={data.id}>
-                <div className="AccordionLine">
+                <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
                   <br /> {data.label}:
                   <br />
                   {data.id !== 'dresserPosition' ? (

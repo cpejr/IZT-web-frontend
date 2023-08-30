@@ -163,24 +163,37 @@ h3 {
   font-size: 1.5rem;
   height: 100%;
 }
+
+.AccordionInput {
+  background-color: rgb(18, 54, 69);
+  border: none;
+  color: white;
+  font-family: 'Montserrat';
+  word-wrap: none;
+  margin-left: 1rem;
+  border-bottom: 0.1rem solid white;
+  font-size: 1.5rem;
+  height: 100%;
+}
 .AccordionInput {
   width: 100%;
 }
 
-.AccordionMiniInput{
+.AccordionMiniInput {
   width: 4rem;
   margin-right: 1rem;
 }
-.AccordionInput.error,.AccordionMiniInput.error {
+.AccordionInput.error,
+.AccordionMiniInput.error {
   border-bottom-color: red;
 }
-.AccordionLine{
+.AccordionLine {
   width: 100%;
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
 }
-.ButtonCalculate{
+.ButtonCalculate {
   display: inline-block;
   margin-left: 5%;
   padding: 0.5rem 1.5rem 0.5rem 1.5rem;
@@ -200,7 +213,7 @@ h3 {
     padding: 0.4rem 1.5rem 0.4rem 1.5rem;
   }
 }
-.ErrorMessage{
+.ErrorMessage {
   font-weight: 500;
   color: red;
 
