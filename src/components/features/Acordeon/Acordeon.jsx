@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as Accordion from '@radix-ui/react-accordion';
 import classNames from 'classnames';
@@ -74,7 +73,7 @@ export default function AccordionDemo({ onCalculate }) {
       setIsLoading(false);
     },
   });
-
+  const [selectedOperation, setSelectedOperation] = useState('');
   // Form handlers
   const {
     handleSubmit,
@@ -159,6 +158,22 @@ export default function AccordionDemo({ onCalculate }) {
                         errors[data.id] ? 'error' : ''
                       }`}
                     />
+                  ) : data.id === 'operation' ? (
+                    <select
+                      id={data.id}
+                      name={data.id}
+                      {...register(data.id)}
+                      className={`AccordionInput ${
+                        errors[data.id] ? 'error' : ''
+                      }`}
+                    >
+                      <option value="">Selecionar</option>
+                      <option value="Opção 1"> Desbaste </option>
+                      <option value="Opção 2">Pré Desbate</option>
+                      <option value="Opção 3">Acabamento</option>
+
+                      {/* Adicione outras opções aqui */}
+                    </select>
                   ) : (
                     <input
                       id={data.id}
@@ -170,6 +185,7 @@ export default function AccordionDemo({ onCalculate }) {
                     />
                   )}
                 </div>
+
                 {errors[data.id]?.message && (
                   <p className="ErrorMessage">{errors[data.id]?.message}</p>
                 )}
@@ -177,7 +193,6 @@ export default function AccordionDemo({ onCalculate }) {
             ))}
           </AccordionContent>
         </Accordion.Item>
-
         <Accordion.Item className="AccordionItem" value="item-2">
           <AccordionTrigger>Dados da Máquina</AccordionTrigger>
           <AccordionContent>
@@ -239,7 +254,9 @@ export default function AccordionDemo({ onCalculate }) {
                         errors[data.id] ? 'error' : ''
                       }`}
                       style={
-                        data.id === 'productNumber' ? { width: '100%' } : {}
+                        data.id === 'productNumber'
+                          ? { width: '100%', marginRight: '0' }
+                          : {}
                       }
                     />
                   )}
