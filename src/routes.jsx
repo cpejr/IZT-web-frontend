@@ -58,7 +58,7 @@ function HasFooterRoutes() {
   );
 }
 
-const language = 'EN';
+const language = 'DE';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
