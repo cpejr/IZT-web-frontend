@@ -12,7 +12,6 @@ import {
   View,
 } from '@react-pdf/renderer';
 
-import BGCourse from '../../../assets/accessDeniedPage/BGCourse.png';
 import ImageLogo from '../../../assets/IZTLogo.png';
 import montserratLight from './fonts/Montserrat-Light.ttf';
 import montserratSemiBold from './fonts/Montserrat-SemiBold.ttf';
@@ -206,8 +205,8 @@ export default function StabilityAnalysisPDF({ data }) {
             </div>
           </div>
           <div style={styles.collumn2}>
-            <Image style={styles.image} src={BGCourse} />
-            <Image style={styles.image} src={BGCourse} />
+            <Image style={styles.image} src={data?.processImage[0].url} />
+            <Image style={styles.image} src={data?.partHeightImage[0].url} />
           </div>
         </div>
       </Page>

@@ -8,7 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   max-width: 600rem;
   padding-left: 1.5rem;
-  max-height: ${(props) => (props.isOpened ? '100rem' : '0rem')};
+  max-height: ${(props) => (props.isOpened ? 'auto' : '0rem')};
   overflow-y: hidden;
   transition: all 0.5s ease-in-out 0.3s;
 `;
@@ -248,4 +248,11 @@ export const ConstDashedBar = styled.div`
   height: auto;
   width: 0.1rem;
   border-right: 0.1rem dashed white;
+`;
+
+export const TestDivImages = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  margin-bottom: 3rem;
 `;

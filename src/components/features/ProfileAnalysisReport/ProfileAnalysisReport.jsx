@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import { useEffect, useState } from 'react';
 
 import { CloseOutlined, DownOutlined } from '@ant-design/icons';
@@ -56,6 +57,13 @@ export default function ProfileAnalysisReport({
     <div>
       <ReportName isOpened={isOpened} onClick={() => handleOpened(data._id)}>
         {data?.name}
+        {/* Testando visualização das imagens --> Apagar quando estiver funcionando no PDF */}
+        <img
+          width={500}
+          height={300}
+          src={data?.graphImage[0].url}
+          alt="Graph Image"
+        />
         <Icon>
           <DownOutlined />
         </Icon>
