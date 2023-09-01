@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import { useEffect, useState } from 'react';
 
 import { DownOutlined, CloseOutlined } from '@ant-design/icons';
@@ -20,6 +21,7 @@ import {
   ReportName,
   DashedBar,
   ModalStyle,
+  TestDivImages,
 } from './Styles';
 
 export default function StabilityAnalysisReport({
@@ -160,6 +162,22 @@ export default function StabilityAnalysisReport({
             </DataContainer>
           </DataColumn>
         </Columns>
+        <TestDivImages>
+          {/* Testando visualização das imagens --> Apagar quando estiver funcionando no PDF */}
+          <img
+            width={500}
+            height={300}
+            src={data?.processImage[0].url}
+            alt="Process Image Graph"
+          />
+          <img
+            width={500}
+            height={300}
+            src={data?.partHeightImage[0].url}
+            alt="Part Height Image graph"
+          />
+        </TestDivImages>
+
         <ButtonRow>
           <button type="button" onClick={saveFile}>
             Baixar Relatório
@@ -171,6 +189,7 @@ export default function StabilityAnalysisReport({
             Excluir
           </button>
         </ButtonRow>
+
         <ModalStyle
           open={modalDeleteStabilityAnalysis}
           onCancel={closeModalDeleteStabilityAnalysis}
