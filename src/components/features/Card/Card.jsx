@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, CardText, CardTitle, Button, Picture } from './Styles';
 
 export default function Card({
+  language,
   title,
   image,
   imageAlt,
@@ -17,6 +18,17 @@ export default function Card({
   linkTo,
 }) {
   const navigate = useNavigate();
+
+  let buttonText;
+
+  if (language === 'EN') {
+    buttonText = 'Learn more';
+  } else if (language === 'PT') {
+    buttonText = 'Saiba mais';
+  } else if (language === 'DE') {
+    buttonText = 'Erfahren Sie mehr';
+  }
+
   return (
     <Container isMiddle={isMiddle}>
       <CardTitle
@@ -41,7 +53,7 @@ export default function Card({
         linkTo={linkTo}
         onClick={() => navigate(linkTo)}
       >
-        Saiba mais
+        {buttonText}
       </Button>
     </Container>
   );
@@ -58,6 +70,7 @@ Card.defaultProps = {
 };
 
 Card.propTypes = {
+  language: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   imageAlt: PropTypes.string.isRequired,

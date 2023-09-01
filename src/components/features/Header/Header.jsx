@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { IoIosArrowDown } from 'react-icons/io';
 import { useMediaQuery } from 'react-responsive';
@@ -39,6 +39,10 @@ export default function Header() {
   const isSmallScreen = useMediaQuery({ maxWidth: 900 });
   const user = useAuthStore((state) => state.auth?.user);
   const availableLaguages = ['EN', 'PT', 'DE'];
+
+  useEffect(() => {
+    console.log('Language changed:', language);
+  }, [language]);
 
   const closeHeader = () => {
     setBar(false);
