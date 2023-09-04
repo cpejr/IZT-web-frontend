@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+import PropTypes from 'prop-types';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useMediaQuery } from 'react-responsive';
 import { Link, useNavigate } from 'react-router-dom';
@@ -27,12 +28,17 @@ import {
   MyProfile,
 } from './Styles';
 
-export default function Header() {
+export default function Header({ setCurrentLanguage }) {
   // State variables
   const [bar, setBar] = useState(false);
   const [collapse, setCollapse] = useState(false);
   const [collapseLogout, setCollapseLogout] = useState(false);
   const [language, setLanguage] = useState('EN'); // default language is EN
+
+  // Atualize a língua no componente Home quando a língua mudar
+  useEffect(() => {
+    setCurrentLanguage(language);
+  }, [language, setCurrentLanguage]);
 
   const theme = useTheme();
   const navigate = useNavigate();
@@ -178,3 +184,7 @@ export default function Header() {
     </Content>
   );
 }
+
+Header.propTypes = {
+  setCurrentLanguage: PropTypes.func.isRequired,
+};
