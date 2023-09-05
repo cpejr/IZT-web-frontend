@@ -52,8 +52,46 @@ export default function StabilityAnalysisReport({
       .then((blob) => saveAs(blob, `${data?.name}.pdf`));
   };
 
+  const [baseImage, setBaseImage] = useState('');
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      console.log('O link eh', fileReader);
+
+      fileReader.onload = () => {
+        resolve(fileReader.readyState);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setBaseImage(base64);
+    console.log(baseImage);
+  };
+
+  const imageUrl = data?.processImage[0].url;
+
+  // console.log('A URL da imagem eh:', imageUrl);
+
   return (
     <div>
+      <input
+        type="file"
+        onChange={(e) => {
+          uploadImage(e);
+        }}
+      />
+      <br />
+      <img src={baseImage} height="200px" alt="oizim" />
+
       <ReportName isOpened={isOpened} onClick={() => handleOpened(data)}>
         {data.name}
         <DownOutlined />
