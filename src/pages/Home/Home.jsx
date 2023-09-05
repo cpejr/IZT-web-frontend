@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 
 import Catalog from '../../assets/homePage/cards/catalog.png';
@@ -27,12 +25,12 @@ import {
 } from './Styles';
 import { TranslateText } from './translations';
 
-export default function Home({ language }) {
-  const [currentLanguage, setCurrentLanguage] = useState('EN');
+export default function Home() {
+  const [currentLanguage, setCurrentLanguage] = useState('PT');
 
   const location = useLocation();
 
-  const translations = TranslateText({ language });
+  const translations = TranslateText({ currentLanguage });
 
   window.history.replaceState(
     {},
@@ -63,13 +61,12 @@ export default function Home({ language }) {
 
       <OuterDiv>
         <Container>
-          <h1>Língua Atual: {currentLanguage}</h1>
           <CarouselContainer>
             <Carousel carouselData={carouselData} />
           </CarouselContainer>
           <CardsContainer>
             <Card
-              language={language}
+              currentLanguage={currentLanguage}
               title={translations.cardTitle1}
               text={translations.cardText1}
               mediaTopWeb
@@ -81,7 +78,7 @@ export default function Home({ language }) {
               linkTo="/curso"
             />
             <Card
-              language={language}
+              currentLanguage={currentLanguage}
               isMiddle
               title={translations.cardTitle2}
               text={translations.cardText2}
@@ -90,7 +87,7 @@ export default function Home({ language }) {
               linkTo="/catalogo"
             />
             <Card
-              language={language}
+              currentLanguage={currentLanguage}
               title={translations.cardTitle3}
               text={translations.cardText3}
               image={Software}
@@ -99,7 +96,7 @@ export default function Home({ language }) {
               linkTo="/software"
             />
           </CardsContainer>
-          <FormsContact id="contact" language={language} />
+          <FormsContact id="contact" language={currentLanguage} />
           <AboutUs>
             <OurHistoryTitle>{translations.ourHistoryTitle}</OurHistoryTitle>
             <OurHistory>
@@ -113,6 +110,3 @@ export default function Home({ language }) {
     </>
   );
 }
-Home.propTypes = {
-  language: PropTypes.string.isRequired,
-};

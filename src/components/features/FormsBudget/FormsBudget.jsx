@@ -20,13 +20,20 @@ import {
   ButtonDiv,
   AddressSelectDiv,
 } from './Styles';
+import { TranslateText } from './translations';
 import { budgetEmailSchema, buildBudgetEmailErrorMessage } from './utils';
 
-export default function FormsBudget({ productId, isLoadingProduct = false }) {
+export default function FormsBudget({
+  currentLanguage,
+  productId,
+  isLoadingProduct = false,
+}) {
   // States and variables
   const countries = useMemo(() => Country.getAllCountries(), []);
   const [states, setStates] = useState(null);
   const [cities, setCities] = useState(null);
+
+  const translations = TranslateText({ currentLanguage });
 
   // Reusable functions
   const selectFilter = useCallback(
@@ -101,33 +108,33 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
 
   return (
     <ContactUs>
-      <Title>Requisite um orçamento</Title>
+      <Title>{translations.title}</Title>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Container>
           <Section>
             <FormInput
-              label="Nome:"
+              label={translations.label1}
               name="name"
-              placeholder="Nome completo"
+              placeholder={translations.placeholder1}
               errors={errors}
               register={register}
             />
             <FormInput
-              label="Empresa:"
+              label={translations.label2}
               name="company"
-              placeholder="Nome da empresa"
+              placeholder={translations.placeholder2}
               errors={errors}
               register={register}
             />
             <FormInput
-              label="E-mail:"
+              label={translations.label3}
               name="email"
-              placeholder="email@email.com"
+              placeholder={translations.label3}
               errors={errors}
               register={register}
             />
             <FormMask
-              label="Telefone:"
+              label={translations.label4}
               name="telephone"
               defaultValue=""
               control={control}
@@ -140,7 +147,7 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
           <Section>
             <AddressSelectDiv>
               <FormSelect
-                subtitle="País:"
+                subtitle={translations.label5}
                 name="country"
                 size="large"
                 control={control}
@@ -154,7 +161,7 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
             <Subsection>
               <AddressSelectDiv>
                 <FormSelect
-                  subtitle="Estado:"
+                  subtitle={translations.label6}
                   name="state"
                   size="large"
                   control={control}
@@ -169,7 +176,7 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
 
               <AddressSelectDiv>
                 <FormSelect
-                  subtitle="Cidade:"
+                  subtitle={translations.label7}
                   name="city"
                   size="large"
                   control={control}
@@ -183,7 +190,7 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
               </AddressSelectDiv>
             </Subsection>
             <FormMask
-              label="CEP:"
+              label={translations.label8}
               name="ZIPcode"
               placeholder="99999-999"
               defaultValue=""
@@ -192,7 +199,7 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
               errors={errors}
             />
             <FormInput
-              label="Endereço:"
+              label={translations.label9}
               name="address"
               placeholder="Av. Maranhão, 54"
               errors={errors}
@@ -210,10 +217,10 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
                 ariaLabel="tail-spin-loading"
                 radius="5"
               />
-              Carregando
+              {translations.loading}
             </ButtonDiv>
           ) : (
-            'Enviar'
+            <p>{translations.label10}</p>
           )}
         </SubmitButton>
       </Form>
@@ -228,4 +235,5 @@ FormsBudget.defaultProps = {
 FormsBudget.propTypes = {
   productId: PropTypes.string.isRequired,
   isLoadingProduct: PropTypes.bool,
+  currentLanguage: PropTypes.string.isRequired,
 };

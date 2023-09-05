@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
@@ -9,7 +9,12 @@ import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
 import step4 from '../../assets/productPage/steps/Group78.png';
-import { FilesList, FormsBudget, Carousel } from '../../components/features';
+import {
+  FilesList,
+  FormsBudget,
+  Carousel,
+  Header,
+} from '../../components/features';
 import { useGetProductById } from '../../hooks/query/products';
 import {
   Container,
@@ -37,9 +42,13 @@ import {
   StepsDescription,
   StepsImages,
 } from './Styles';
+import { TranslateText } from './translations';
 import buildGetProducErrorMessage from './utils';
 
 export default function Product() {
+  const [currentLanguage, setCurrentLanguage] = useState('PT');
+  const translations = TranslateText({ currentLanguage });
+
   const { _id } = useParams();
   const navigate = useNavigate();
   const isMediumScreen = useMediaQuery({ minWidth: 700 });
@@ -74,100 +83,119 @@ export default function Product() {
   );
 
   return (
-    <Container>
-      <ProductData>
-        {isLoading ? (
-          <h1
-            style={{
-              height: '66rem',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            Carregando...
-          </h1>
-        ) : (
-          <>
-            <ProductName>{product.name}</ProductName>
-            <ProductInfo>
-              <CarouselContainer>
-                <Carousel
-                  carouselData={pictures}
-                  maxHeight="53.717rem"
-                  maxWidth="54.375rem"
-                  aspectRatio="12 / 9"
-                  miniImages
-                />
-              </CarouselContainer>
-              <TextInfoContainer>
-                <ProductDescription>
-                  <DescriptionTitle>Descrição do produto</DescriptionTitle>
-                  <Description>{product?.description}</Description>
-                </ProductDescription>
-                <ProductBenefits>
-                  <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
-                  <Benefits>{product?.advantages}</Benefits>
-                </ProductBenefits>
-                <ProductInfos>
-                  <InfoTitle>Mais informações</InfoTitle>
-                  <InfoDescription>
-                    <FilesList files={documents} />
-                  </InfoDescription>
-                </ProductInfos>
-              </TextInfoContainer>
-            </ProductInfo>
-          </>
-        )}
-      </ProductData>
-      <FormsBudget productId={_id} isLoadingProduct={isLoading} />
-      <ProcessSteps>
-        <Title>Como processamos seu orçamento?</Title>
-        <Steps>
-          <StepsImages>
-            <Image src={step1} alt="1 Step" />
+    <>
+      <Header setCurrentLanguage={setCurrentLanguage} />
+      <Container>
+        <ProductData>
+          {isLoading ? (
+            <h1
+              style={{
+                height: '66rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              {translations.cardTitle1}
+            </h1>
+          ) : (
+            <>
+              <ProductName>{product.name}</ProductName>
+              <ProductInfo>
+                <CarouselContainer>
+                  <Carousel
+                    carouselData={pictures}
+                    maxHeight="53.717rem"
+                    maxWidth="54.375rem"
+                    aspectRatio="12 / 9"
+                    miniImages
+                  />
+                </CarouselContainer>
+                <TextInfoContainer>
+                  <ProductDescription>
+                    <DescriptionTitle>{translations.text1}</DescriptionTitle>
+                    <Description>{product?.description}</Description>
+                  </ProductDescription>
+                  <ProductBenefits>
+                    <BenefitsTitle>{translations.text2}</BenefitsTitle>
+                    <Benefits>{product?.advantages}</Benefits>
+                  </ProductBenefits>
+                  <ProductInfos>
+                    <InfoTitle>{translations.text3}</InfoTitle>
+                    <InfoDescription>
+                      <FilesList files={documents} />
+                    </InfoDescription>
+                  </ProductInfos>
+                </TextInfoContainer>
+              </ProductInfo>
+            </>
+          )}
+        </ProductData>
+        <FormsBudget
+          productId={_id}
+          isLoadingProduct={isLoading}
+          currentLanguage={currentLanguage}
+        />
+        <ProcessSteps>
+          <Title>{translations.text4}</Title>
+          <Steps>
+            <StepsImages>
+              <Image src={step1} alt="1 Step" />
 
-            <Arrow>
-              {isMediumScreen ? (
-                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
-              ) : (
-                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
-              )}
-            </Arrow>
+              <Arrow>
+                {isMediumScreen ? (
+                  <AiOutlineRight
+                    color="#123645"
+                    size="4rem"
+                    strokeWidth={20}
+                  />
+                ) : (
+                  <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
+                )}
+              </Arrow>
 
-            <Image src={step2} alt="2 Step" />
+              <Image src={step2} alt="2 Step" />
 
-            <Arrow>
-              {isMediumScreen ? (
-                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
-              ) : (
-                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
-              )}
-            </Arrow>
+              <Arrow>
+                {isMediumScreen ? (
+                  <AiOutlineRight
+                    color="#123645"
+                    size="4rem"
+                    strokeWidth={20}
+                  />
+                ) : (
+                  <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
+                )}
+              </Arrow>
 
-            <Image src={step3} alt="3 Step" />
+              <Image src={step3} alt="3 Step" />
 
-            <Arrow>
-              {isMediumScreen ? (
-                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
-              ) : (
-                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
-              )}
-            </Arrow>
+              <Arrow>
+                {isMediumScreen ? (
+                  <AiOutlineRight
+                    color="#123645"
+                    size="4rem"
+                    strokeWidth={20}
+                  />
+                ) : (
+                  <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
+                )}
+              </Arrow>
 
-            <Image src={step4} alt="4 Step" />
-          </StepsImages>
-          <StepsDescription>
-            <StepsText>Entramos em contato para planejar o produto</StepsText>
-            <EmptyCell />
-            <StepsText>Produzimos a sua peça</StepsText>
-            <EmptyCell />
-            <StepsText>Realizamos a inspeção do produto</StepsText>
-            <EmptyCell />
-            <StepsText>Enviamos para você</StepsText>
-          </StepsDescription>
-        </Steps>
-      </ProcessSteps>
-    </Container>
+              <Image src={step4} alt="4 Step" />
+            </StepsImages>
+            <StepsDescription>
+              <StepsText>{translations.text5}</StepsText>
+              <EmptyCell />
+              <StepsText>{translations.text6}</StepsText>
+              <EmptyCell />
+              <StepsText>{translations.text7}</StepsText>
+              <EmptyCell />
+              <StepsText>{translations.text8}</StepsText>
+            </StepsDescription>
+          </Steps>
+        </ProcessSteps>
+      </Container>
+    </>
   );
 }

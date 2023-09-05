@@ -33,7 +33,7 @@ export default function Header({ setCurrentLanguage }) {
   const [bar, setBar] = useState(false);
   const [collapse, setCollapse] = useState(false);
   const [collapseLogout, setCollapseLogout] = useState(false);
-  const [language, setLanguage] = useState('EN'); // default language is EN
+  const [language, setLanguage] = useState('PT'); // default language is EN
 
   // Atualize a língua no componente Home quando a língua mudar
   useEffect(() => {

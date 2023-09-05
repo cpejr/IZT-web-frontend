@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, CardText, CardTitle, Button, Picture } from './Styles';
 
 export default function Card({
-  language,
+  currentLanguage,
   title,
   image,
   imageAlt,
@@ -21,11 +21,11 @@ export default function Card({
 
   let buttonText;
 
-  if (language === 'EN') {
+  if (currentLanguage === 'EN') {
     buttonText = 'Learn more';
-  } else if (language === 'PT') {
+  } else if (currentLanguage === 'PT') {
     buttonText = 'Saiba mais';
-  } else if (language === 'DE') {
+  } else if (currentLanguage === 'DE') {
     buttonText = 'Erfahren Sie mehr';
   }
 
@@ -70,7 +70,7 @@ Card.defaultProps = {
 };
 
 Card.propTypes = {
-  language: PropTypes.string.isRequired,
+  currentLanguage: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   imageAlt: PropTypes.string.isRequired,
