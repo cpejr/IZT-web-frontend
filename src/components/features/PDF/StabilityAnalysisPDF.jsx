@@ -205,8 +205,8 @@ export default function StabilityAnalysisPDF({ data }) {
             </div>
           </div>
           <div style={styles.collumn2}>
-            <Image style={styles.image} src={data?.processImage[0].url} />
-            <Image style={styles.image} src={data?.partHeightImage[0].url} />
+            {/* <Image style={styles.image} src={data?.processImage[0].url} />
+            <Image style={styles.image} src={data?.partHeightImage[0].url} /> */}
           </div>
         </div>
       </Page>

@@ -227,7 +227,7 @@ export default function ProfileAnalysisPDF({ data }) {
             </div>
           </div>
           <div style={styles.collumn2}>
-            <Image style={styles.image} src={data?.graphImage[0].url} />
+            {/* <Image style={styles.image} src={data?.graphImage[0].url} /> */}
           </div>
         </div>
       </Page>

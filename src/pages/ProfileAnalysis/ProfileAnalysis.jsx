@@ -4,6 +4,7 @@ import { TbPencil } from 'react-icons/tb';
 
 import AccordionDemo from '../../components/features/Acordeon/Acordeon';
 import Graphic from '../../components/features/Graphic/Graphic';
+import { DivName, ErrorMessage, InputName } from '../StabilityAnalysis/Styles';
 import {
   Container,
   Column,
@@ -21,7 +22,6 @@ import {
   H1,
   Boddy,
 } from './Styles';
-import { DivName, ErrorMessage, InputName } from '../StabilityAnalysis/Styles';
 
 export default function ProfileAnalysis() {
   const [graphData, setGraphData] = useState({ x: [], y: [] });

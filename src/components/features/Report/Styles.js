@@ -249,10 +249,3 @@ export const ConstDashedBar = styled.div`
   width: 0.1rem;
   border-right: 0.1rem dashed white;
 `;
-
-export const TestDivImages = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-  margin-bottom: 3rem;
-`;
