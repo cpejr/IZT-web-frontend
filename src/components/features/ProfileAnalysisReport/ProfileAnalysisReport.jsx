@@ -6,7 +6,7 @@ import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
 
-import Graphic from '../Graphic/Graphic';
+import ProfileAnalysisGraph from '../Graphic/ProfileAnalysisGraph';
 import ModalDeleteProfileAnalysis from '../ModalDeleteProfileAnalysis/ModalDeleteProfileAnalysis';
 import ProfilePDF from '../PDF/ProfileAnalysisPDF';
 import {
@@ -197,7 +197,10 @@ export default function ProfileAnalysisReport({
             </DataColumn>
           </Row>
         </Columns>
-        <Graphic data={data} />
+        <div>
+          <Title>Vão de retificação centerless de passagem</Title>
+          <ProfileAnalysisGraph data={data?.profileAnalysisDiagram} />
+        </div>
         <ButtonRow>
           <button type="button" onClick={saveFile}>
             Baixar Relatório
