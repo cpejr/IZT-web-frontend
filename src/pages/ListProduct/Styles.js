@@ -34,6 +34,12 @@ export const Container = styled.div`
   }
 `;
 
+export const DivPage = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`;
+
 export const Title = styled.p`
   width: 100%;
   height: 3.9rem;

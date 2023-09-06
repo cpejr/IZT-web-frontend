@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 
 import { Select, Loading } from '../../components/common';
 import {
+  AdminMenu,
+  Header,
   ModalDeleteProduct,
   ModalEditProduct,
 } from '../../components/features';
@@ -15,6 +17,7 @@ import { useGetCategories } from '../../hooks/query/categories';
 import { useSearchProductByName } from '../../hooks/query/products';
 import useDebounce from '../../hooks/useDebounce';
 import {
+  DivPage,
   Container,
   Title,
   CategoryFilterContainer,
@@ -31,6 +34,7 @@ import {
   ModalStyle,
   DeleteButton,
 } from './Styles';
+import { TranslateText } from './trasnaltions';
 import {
   buildGetProductsErrorMessage,
   buildGetCategoriesErrorMessage,
@@ -44,6 +48,11 @@ export default function ListProduct() {
   const [modalEditProduct, setModalEditProduct] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
   const [name, setName] = useState('');
+
+  // Translation
+  const [currentLanguage, setCurrentLanguage] = useState('PT');
+  const translations = TranslateText({ currentLanguage });
+
   const debouncedName = useDebounce(name);
 
   const { data: categories } = useGetCategories({
@@ -79,97 +88,109 @@ export default function ListProduct() {
 
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
-    <Container>
-      <Title>Lista de produtos</Title>
+    <div>
+      <Header setCurrentLanguage={setCurrentLanguage} />
+      <DivPage>
+        <AdminMenu />
+        <Container>
+          <Title>Lista de produtos</Title>
 
-      <CategoryFilterContainer>
-        <Subsection>
-          <CategoryText>Filtrar por categoria:</CategoryText>
-          <Select
-            standart="Selecionar"
-            data={categories}
-            getValue={setSelectedCategory}
-            maxWidth="25rem"
-          />
-        </Subsection>
+          <CategoryFilterContainer>
+            <Subsection>
+              <CategoryText>Filtrar por categoria:</CategoryText>
+              <Select
+                standart="Selecionar"
+                data={categories}
+                getValue={setSelectedCategory}
+                maxWidth="25rem"
+              />
+            </Subsection>
 
-        <SearchSection>
-          <SearchIconButton>
-            <HiSearch size={25} />
-          </SearchIconButton>
-          <SearchProduct
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Pesquisar Produto"
-          />
-        </SearchSection>
-      </CategoryFilterContainer>
+            <SearchSection>
+              <SearchIconButton>
+                <HiSearch size={25} />
+              </SearchIconButton>
+              <SearchProduct
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Pesquisar Produto"
+              />
+            </SearchSection>
+          </CategoryFilterContainer>
 
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <ProductList>
-          {products?.map((product) => (
-            <Row key={product._id}>
-              <Text>{product.name}</Text>
-              <Text>{product.category.name}</Text>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <ProductList>
+              {products?.map((product) => (
+                <Row key={product._id}>
+                  <Text>{product.name}</Text>
+                  <Text>{product.category.name}</Text>
 
-              {isSmallScreen ? (
-                <StyledLink to="/administrador/editar-produto" state={product}>
-                  <TbPencil size={30} />
-                </StyledLink>
-              ) : (
-                <EditButton>
-                  <TbPencil
-                    onClick={() => openModalEditProduct(product)}
-                    size={30}
-                  />
-                </EditButton>
-              )}
-              <DeleteButton>
-                <DeleteOutlined
-                  onClick={() => openModalDeleteProduct(product._id)}
-                  size={30}
-                />
-              </DeleteButton>
-            </Row>
-          ))}
-        </ProductList>
-      )}
+                  {isSmallScreen ? (
+                    <StyledLink
+                      to="/administrador/editar-produto"
+                      state={product}
+                    >
+                      <TbPencil size={30} />
+                    </StyledLink>
+                  ) : (
+                    <EditButton>
+                      <TbPencil
+                        onClick={() => openModalEditProduct(product)}
+                        size={30}
+                      />
+                    </EditButton>
+                  )}
+                  <DeleteButton>
+                    <DeleteOutlined
+                      onClick={() => openModalDeleteProduct(product._id)}
+                      size={30}
+                    />
+                  </DeleteButton>
+                </Row>
+              ))}
+            </ProductList>
+          )}
 
-      <ModalStyle
-        open={modalEditProduct}
-        onCancel={closeModalEditProduct}
-        width={1100}
-        padding={0}
-        footer={null}
-        closeIcon={modalCloseButton}
-        bodyStyle={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#123645',
-          color: 'white',
-          padding: 0,
-          borderRadius: 'none',
-        }}
-        centered
-        destroyOnClose
-      >
-        <ModalEditProduct
-          product={selectedProduct}
-          close={closeModalEditProduct}
-        />
-      </ModalStyle>
-      <ModalStyle
-        open={modalDeleteProduct}
-        onCancel={closeModalDeleteProduct}
-        footer={null}
-        width={500}
-        closeIcon={modalCloseButton}
-        destroyOnClose
-        centered
-      >
-        <ModalDeleteProduct _id={productId} close={closeModalDeleteProduct} />
-      </ModalStyle>
-    </Container>
+          <ModalStyle
+            open={modalEditProduct}
+            onCancel={closeModalEditProduct}
+            width={1100}
+            padding={0}
+            footer={null}
+            closeIcon={modalCloseButton}
+            bodyStyle={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: '#123645',
+              color: 'white',
+              padding: 0,
+              borderRadius: 'none',
+            }}
+            centered
+            destroyOnClose
+          >
+            <ModalEditProduct
+              product={selectedProduct}
+              close={closeModalEditProduct}
+            />
+          </ModalStyle>
+          <ModalStyle
+            open={modalDeleteProduct}
+            onCancel={closeModalDeleteProduct}
+            footer={null}
+            width={500}
+            closeIcon={modalCloseButton}
+            destroyOnClose
+            centered
+          >
+            <ModalDeleteProduct
+              _id={productId}
+              close={closeModalDeleteProduct}
+            />
+          </ModalStyle>
+        </Container>
+      </DivPage>
+    </div>
   );
 }

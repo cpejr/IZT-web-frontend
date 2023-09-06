@@ -46,10 +46,6 @@ export default function Header({ setCurrentLanguage }) {
   const user = useAuthStore((state) => state.auth?.user);
   const availableLaguages = ['EN', 'PT', 'DE'];
 
-  useEffect(() => {
-    console.log('Language changed:', language);
-  }, [language]);
-
   const closeHeader = () => {
     setBar(false);
     setCollapseLogout(false);

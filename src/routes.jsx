@@ -58,14 +58,12 @@ function HasFooterRoutes() {
   );
 }
 
-const language = 'DE';
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<AppLayout />}>
         <Route element={<HasFooterRoutes />}>
-          <Route index element={<Home language={language} />} />
+          <Route index element={<Home />} />
           <Route path="email-confirmado/:token" element={<ConfirmedEmail />} />
           <Route path="verificar-email" element={<VerifyEmail />} />
           <Route path="catalogo" element={<Catalog />} />
