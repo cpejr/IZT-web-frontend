@@ -76,6 +76,8 @@ export default function AccordionDemo({ onCalculate }) {
   });
 
   // Form handlers
+  const [formDataStorage, setFormDataStorage] = useState({});
+
   const {
     handleSubmit,
     register,
@@ -87,6 +89,7 @@ export default function AccordionDemo({ onCalculate }) {
     resolver: zodResolver(calculateProfileAnalysisValidationSchema),
   });
   const onSubmit = (data) => {
+    setFormDataStorage(data);
     setIsLoading(true);
     calculateProfileAnalysis(data);
     setIsLoading(false);
@@ -102,7 +105,6 @@ export default function AccordionDemo({ onCalculate }) {
       trigger(fieldId);
     }
   };
-
   return (
     <Accordion.Root
       className="AccordionRoot"
