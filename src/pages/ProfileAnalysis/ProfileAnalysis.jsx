@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
 import { TbPencil } from 'react-icons/tb';
+import { toast } from 'react-toastify';
 
 import AccordionDemo from '../../components/features/Acordeon/Acordeon';
 import Graphic from '../../components/features/Graphic/Graphic';
+import { useCreateProfileAnalysis } from '../../hooks/query/profileAnalysis';
+import useAuthStore from '../../stores/auth';
 import { DivName, ErrorMessage, InputName } from '../StabilityAnalysis/Styles';
 import {
   Container,
@@ -21,12 +27,17 @@ import {
   Button,
   H1,
   Boddy,
-  // DataEntry,
+  DataEntry,
 } from './Styles';
+import {
+  buildCalculateStabilityAnalysisErrorMessage,
+  saveProfileAnalysisValidationSchema,
+} from './utilsSave';
 
 export default function ProfileAnalysis() {
   const [graphData, setGraphData] = useState({ x: [], y: [] });
   const [formDataStorage, setFormDataStorage] = useState({});
+  const queryClient = useQueryClient();
 
   const handleCalculate = (data) => {
     const xData = data.x;
@@ -35,14 +46,50 @@ export default function ProfileAnalysis() {
     setGraphData({ x: xData, y: yData });
   };
 
+  // backend calls
+
+  const { mutate: createProfileAnalysis } = useCreateProfileAnalysis({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['profile-analysis', 'searchByName'],
+      });
+
+      toast.success('Relatório criado com sucesso!');
+    },
+    onError: (err) => {
+      const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
+  });
+
   const handleformDataStorage = (data) => {
     setFormDataStorage(data);
-    console.log(formDataStorage);
+  };
+  useEffect(() => {}, [formDataStorage]);
+  const user = useAuthStore((state) => state.auth?.user);
+
+  const {
+    handleSubmit: save,
+    register,
+    formState: { errors: error },
+  } = useForm({
+    defaultValues: formDataStorage,
+    resolver: zodResolver(saveProfileAnalysisValidationSchema),
+  });
+
+  const onSubmit2 = (data) => {
+    const combinedData = {
+      ...formDataStorage,
+      ...data,
+      user: user?._id,
+    };
+    createProfileAnalysis(combinedData);
+    setFormDataStorage({});
   };
 
   return (
     <Boddy>
-      {/* <DataEntry> */}
       <Container>
         <Containerleft>
           <Center>
@@ -56,21 +103,23 @@ export default function ProfileAnalysis() {
           </Center>
         </Containerleft>
         <Analysis>
-          <H1>
-            <DivName>
-              <TbPencil size={25} style={{ color: 'white' }} />
-              <InputName
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Insira o nome do relatório"
-                // error={errors?.name?.message}
-                // {...register('name')}
-              />
-            </DivName>
-            <Button>Salvar relatório</Button>
-          </H1>
-          <ErrorMessage>{/* {errors?.name?.message} */}</ErrorMessage>
+          <DataEntry onSubmit={save(onSubmit2)}>
+            <H1>
+              <DivName>
+                <TbPencil size={25} style={{ color: 'white' }} />
+                <InputName
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Insira o nome do relatório"
+                  error={error?.name?.message}
+                  {...register('name')}
+                />
+              </DivName>
+              <Button>Salvar relatório</Button>
+            </H1>
+            <ErrorMessage>{error?.name?.message}</ErrorMessage>
+          </DataEntry>
           <Edit>
             <Text>Vão de retificação centerless de passagem </Text>
             <Container2>
@@ -105,7 +154,6 @@ export default function ProfileAnalysis() {
           </ContainerRight>
         </Analysis>
       </Container>
-      {/* </DataEntry> */}
     </Boddy>
   );
 }
