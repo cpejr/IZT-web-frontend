@@ -54,30 +54,29 @@ const parametersRA = [
 ];
 
 // eslint-disable-next-line react/prop-types
-export default function AccordionDemo({ onCalculate }) {
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Backend calls
-  const { mutate: calculateProfileAnalysis } = useCalculateProfileAnalysis({
-    onSuccess: (result) => {
-      const xData = result.retificationCenterlessDiagram.x;
-      const yData = result.retificationCenterlessDiagram.y;
-
-      onCalculate({ x: xData, y: yData });
-
-      toast.success('Dados calculados com sucesso!');
-    },
-    onError: (err) => {
-      const errorMessage = buildCalculateProfileAnalysisErrorMessage(err);
-
-      toast.error(errorMessage);
-      setIsLoading(false);
-    },
-  });
-
-  // Form handlers
+export default function AccordionDemo({ onCalculate, dataInput }) {
   const [formDataStorage, setFormDataStorage] = useState({});
 
+  // Backend calls
+  const { mutate: calculateProfileAnalysis, isLoading } =
+    useCalculateProfileAnalysis({
+      onSuccess: (result) => {
+        const xData = result.retificationCenterlessDiagram.x;
+        const yData = result.retificationCenterlessDiagram.y;
+
+        onCalculate({ x: xData, y: yData });
+        dataInput(formDataStorage);
+
+        toast.success('Dados calculados com sucesso!');
+      },
+      onError: (err) => {
+        const errorMessage = buildCalculateProfileAnalysisErrorMessage(err);
+
+        toast.error(errorMessage);
+      },
+    });
+
+  // Form handlers
   const {
     handleSubmit,
     register,
@@ -90,9 +89,7 @@ export default function AccordionDemo({ onCalculate }) {
   });
   const onSubmit = (data) => {
     setFormDataStorage(data);
-    setIsLoading(true);
     calculateProfileAnalysis(data);
-    setIsLoading(false);
   };
 
   const covertStringToNumber = (fieldId, inputValue) => {

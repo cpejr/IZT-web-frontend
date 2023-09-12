@@ -21,17 +21,23 @@ import {
   Button,
   H1,
   Boddy,
-  DataEntry,
+  // DataEntry,
 } from './Styles';
 
 export default function ProfileAnalysis() {
   const [graphData, setGraphData] = useState({ x: [], y: [] });
+  const [formDataStorage, setFormDataStorage] = useState({});
 
   const handleCalculate = (data) => {
     const xData = data.x;
     const yData = data.y;
 
     setGraphData({ x: xData, y: yData });
+  };
+
+  const handleformDataStorage = (data) => {
+    setFormDataStorage(data);
+    console.log(formDataStorage);
   };
 
   return (
@@ -42,7 +48,10 @@ export default function ProfileAnalysis() {
           <Center>
             <H1>Entrada de Dados</H1>
             <Data>
-              <AccordionDemo onCalculate={handleCalculate} />
+              <AccordionDemo
+                onCalculate={handleCalculate}
+                dataInput={handleformDataStorage}
+              />
             </Data>
           </Center>
         </Containerleft>
