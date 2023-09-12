@@ -143,6 +143,7 @@ export default function StabilityAnalysis() {
       user: user?._id,
     };
     createStabilityAnalysis(combinedData);
+    setFormDataStorage({});
   };
 
   return (
