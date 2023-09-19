@@ -29,6 +29,18 @@ export const Columns = styled.div`
   }
 `;
 
+export const GraphsDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 5rem;
+
+  div {
+    width: 100%;
+  }
+`;
+
 export const DataColumn = styled.div`
   align-items: flex-start;
   gap: 0.5rem;
@@ -248,11 +260,4 @@ export const ConstDashedBar = styled.div`
   height: auto;
   width: 0.1rem;
   border-right: 0.1rem dashed white;
-`;
-
-export const TestDivImages = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-  margin-bottom: 3rem;
 `;

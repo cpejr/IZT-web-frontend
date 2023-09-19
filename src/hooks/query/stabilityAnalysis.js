@@ -6,6 +6,7 @@ import {
   getNormalStabilityAnalysis,
   searchByNameStabilityAnalysis,
   calculateStabilityAnalysis,
+  createStabilityAnalysis,
 } from '../../services/api/endpoints';
 
 export function useGetStabilityAnalysis({
@@ -62,6 +63,16 @@ export function useCalculateStabilityAnalysis({
 } = {}) {
   return useMutation({
     mutationFn: calculateStabilityAnalysis,
+    onSuccess,
+    onError,
+  });
+}
+export function useCreateStabilityAnalysis({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: createStabilityAnalysis,
     onSuccess,
     onError,
   });

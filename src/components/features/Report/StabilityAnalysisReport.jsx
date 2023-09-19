@@ -6,11 +6,13 @@ import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
 
+import StabilityGraph from '../Graphic/StabilityGraph';
 import ModalDeleteStabilityAnalysis from '../ModalDeleteStabilityAnalysis/ModalDeleteStabilityAnalysis';
 import StabilityPDF from '../PDF/StabilityAnalysisPDF';
 import {
   DataColumn,
   Columns,
+  GraphsDiv,
   Container,
   ButtonRow,
   DataRow,
@@ -21,7 +23,6 @@ import {
   ReportName,
   DashedBar,
   ModalStyle,
-  TestDivImages,
 } from './Styles';
 
 export default function StabilityAnalysisReport({
@@ -162,22 +163,16 @@ export default function StabilityAnalysisReport({
             </DataContainer>
           </DataColumn>
         </Columns>
-        <TestDivImages>
-          {/* Testando visualização das imagens --> Apagar quando estiver funcionando no PDF */}
-          <img
-            width={500}
-            height={300}
-            src={data?.processImage[0].url}
-            alt="Process Image Graph"
-          />
-          <img
-            width={500}
-            height={300}
-            src={data?.partHeightImage[0].url}
-            alt="Part Height Image graph"
-          />
-        </TestDivImages>
-
+        <GraphsDiv>
+          <div>
+            <Title>Diagrama - Estabilidade de processo</Title>
+            <StabilityGraph data={data?.processStabilityDiagram} />
+          </div>
+          <div>
+            <Title>Diagrama - Estabilidade de altura da peça</Title>
+            <StabilityGraph data={data?.partHeightStabilityDiagram} />
+          </div>
+        </GraphsDiv>
         <ButtonRow>
           <button type="button" onClick={saveFile}>
             Baixar Relatório

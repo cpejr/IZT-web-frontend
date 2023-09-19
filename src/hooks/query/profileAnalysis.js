@@ -6,6 +6,7 @@ import {
   searchByNameProfileAnalysis,
   getByUserProfileAnalysis,
   calculateProfileAnalysis,
+  createProfileAnalysis,
 } from '../../services/api/endpoints';
 
 export function useGetProfileAnalysis({
@@ -63,6 +64,16 @@ export function useCalculateProfileAnalysis({
 } = {}) {
   return useMutation({
     mutationFn: calculateProfileAnalysis,
+    onSuccess,
+    onError,
+  });
+}
+export function useCreateProfileAnalysis({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: createProfileAnalysis,
     onSuccess,
     onError,
   });
