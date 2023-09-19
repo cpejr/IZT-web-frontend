@@ -199,7 +199,9 @@ export default function ProfileAnalysisReport({
         </Columns>
         <div>
           <Title>Vão de retificação centerless de passagem</Title>
-          <ProfileAnalysisGraph data={data?.profileAnalysisDiagram} />
+          <ProfileAnalysisGraph
+            data={data?.profileAnalysisDiagram?.retificationCenterlessDiagram}
+          />
         </div>
         <ButtonRow>
           <button type="button" onClick={saveFile}>

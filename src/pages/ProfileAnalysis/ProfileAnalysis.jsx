@@ -47,7 +47,6 @@ export default function ProfileAnalysis() {
   };
 
   // backend calls
-
   const { mutate: createProfileAnalysis } = useCreateProfileAnalysis({
     onSuccess: () => {
       queryClient.invalidateQueries({

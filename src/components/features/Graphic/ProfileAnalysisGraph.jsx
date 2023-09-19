@@ -4,18 +4,16 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 
 export default function ProfileAnalysisGraph({ data }) {
-  if (!data || !data.retificationCenterlessDiagram) {
+  if (!data) {
     return null;
   }
-
-  const { x, y } = data.retificationCenterlessDiagram;
 
   return (
     <Plot
       data={[
         {
-          x,
-          y,
+          x: data.x,
+          y: data.y,
           mode: 'lines',
           line: {
             color: 'black',
