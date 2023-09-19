@@ -1,22 +1,21 @@
 import PropTypes from 'prop-types';
 import Plot from 'react-plotly.js';
 
-export default function ProfileAnalysisGraph({ data }) {
+export default function StabilityGraph({ data }) {
   return (
     <Plot
       data={[
         {
           x: data.x,
           y: data.y,
-          mode: 'lines',
-          line: {
-            color: 'black',
-          },
+          z: data.z,
+          type: 'contour',
+          size: 2,
+          marker: { color: 'red' },
         },
       ]}
       layout={{
         autosize: true,
-        title: 'Gráfico IZT',
         xaxis: {
           title: 'X Axis',
         },
@@ -24,12 +23,12 @@ export default function ProfileAnalysisGraph({ data }) {
           title: 'Y Axis',
         },
       }}
-      style={{ width: '40%', height: '300px' }}
+      style={{ width: '50rem', height: '300px' }}
       useResizeHandler="true"
     />
   );
 }
 
-ProfileAnalysisGraph.propTypes = {
+StabilityGraph.propTypes = {
   data: PropTypes.object.isRequired,
 };
