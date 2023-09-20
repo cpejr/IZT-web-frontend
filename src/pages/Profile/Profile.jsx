@@ -1,8 +1,10 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/no-array-index-key */
 import { useState } from 'react';
 
 import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
 
-import { ModalChangeUserData } from '../../components/features';
+import { Header, ModalChangeUserData } from '../../components/features';
 import { useGetUserCourses } from '../../hooks/query/userCourse';
 import useAuthStore from '../../stores/auth';
 import formatDate from '../../utils/formatDate';
@@ -26,8 +28,13 @@ import {
   Body,
   DataContainer,
 } from './Styles';
+import { TranslateText } from './translations';
 
 export default function Profile() {
+  const [currentLanguage, setCurrentLanguage] = useState('PT');
+
+  const translations = TranslateText({ currentLanguage });
+
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
   const user = useAuthStore((store) => store.auth?.user);
   const { data: userCourses } = useGetUserCourses({});
@@ -37,135 +44,153 @@ export default function Profile() {
   let accessGranted = false;
 
   return (
-    <Background>
-      <Page>
-        <Body>
-          <Title>Informações do usuário</Title>
-          <Container>
-            <DataContainer>
-              <FirstColumn>
-                <PersonalData>
-                  <Subtitle>Informações Pessoais</Subtitle>
-                  <Infos>
-                    <Info>
-                      <h1>Empresa: </h1>
-                      <h2>{user?.company}</h2>
-                    </Info>
-                    <Info>
-                      <h1>Nome: </h1>
-                      <h2>{user?.name}</h2>
-                    </Info>
-                    <Info>
-                      <h1>Sobrenome: </h1>
-                      <h2>{user?.surname}</h2>
-                    </Info>
-                    <Info>
-                      <h1>Cargo: </h1>
-                      <h2>{user?.role}</h2>
-                    </Info>
-                  </Infos>
-                </PersonalData>
-                <Address>
-                  <Subtitle>Endereço</Subtitle>
-                  <Infos>
-                    <Info>
-                      <h1>Pais: </h1>
-                      <h2>{user?.country}</h2>
-                    </Info>
-                    <Info>
-                      <h1>Estado: </h1>
-                      <h2>{user?.state}</h2>
-                    </Info>
-                    <Info>
-                      <h1>Cidade: </h1>
-                      <h2>{user?.city}</h2>
-                    </Info>
-                    <Info>
-                      <h1>Rua: </h1>
-                      <h2>{user?.address}</h2>
-                    </Info>
-                  </Infos>
-                </Address>
-              </FirstColumn>
-              <SecondColumn>
-                <Contact>
-                  <Subtitle>Informações de contato</Subtitle>
-                  <Infos>
-                    <Info>
-                      <h1>Email: </h1>
-                      <h2>{user?.email}</h2>
-                    </Info>
-                  </Infos>
-                </Contact>
-                <Lessons>
-                  <Subtitle>Curso:</Subtitle>
-                  <Infos>
-                    <LessonInfo>
-                      <h1>Validade de acesso: </h1>
-                      {userCourses?.map((userCourse, index) => {
-                        if (user?.isAdmin && !accessGranted) {
-                          accessGranted = true;
-                          return <h2 key={index}>Acesso Ilimitado</h2>;
-                        } else if (
-                          !user?.isAdmin &&
-                          userCourse.user._id === user?._id
-                        ) {
-                          return (
-                            <h2 key={index}>
-                              {userCourse?.expiresAt
-                                ? new Date(userCourse?.expiresAt).getTime() >
-                                  Date.now()
-                                  ? formatDate({ value: userCourse?.expiresAt })
-                                  : 'Sem Acesso'
-                                : 'Sem Acesso'}
-                            </h2>
-                          );
-                        } else if (
-                          index === userCourses.length - 1 &&
-                          !accessGranted
-                        ) {
-                          return <h2 key={index}>Sem Acesso</h2>;
-                        }
-                        return null;
-                      })}
-                    </LessonInfo>
-                  </Infos>
-                  <Subtitle>Software</Subtitle>
-                  <Infos>
-                    <LessonInfo>
-                      <h1>Validade de acesso: </h1>
-                      <h2>
-                        {user?.isAdmin
-                          ? 'Acesso Ilimitado'
-                          : user?.softwareAccess
-                          ? new Date(user.softwareAccess).getTime() > Date.now()
-                            ? formatDate({ value: user.softwareAccess })
-                            : 'Sem Acesso'
-                          : 'Sem Acesso'}
-                      </h2>
-                    </LessonInfo>
-                  </Infos>
-                </Lessons>
-              </SecondColumn>
-            </DataContainer>
-            <ChangeInfo onClick={openModalChangeUserData}>
-              <SettingOutlined />
-              Alterar Informações
-            </ChangeInfo>
-          </Container>
-        </Body>
-      </Page>
-      <ModalStyle
-        open={updateUserModalState}
-        onCancel={closeModalChangeUserData}
-        footer={null}
-        width={1000}
-        closeIcon={<CloseOutlined />}
-        destroyOnClose
-        centered
-      >
-        <ModalChangeUserData close={closeModalChangeUserData} />
-      </ModalStyle>
-    </Background>
+    <>
+      <Header setCurrentLanguage={setCurrentLanguage} />
+      <Background>
+        <Page>
+          <Body>
+            <Title currentLanguage={currentLanguage}>
+              {translations.profileTitle1}
+            </Title>
+            <Container>
+              <DataContainer>
+                <FirstColumn>
+                  <PersonalData>
+                    <Subtitle>{translations.profilePersonalInfo}</Subtitle>
+                    <Infos>
+                      <Info>
+                        <h1>{translations.profileCompany}</h1>
+                        <h2>{user?.company}</h2>
+                      </Info>
+                      <Info>
+                        <h1>{translations.profileName}</h1>
+                        <h2>{user?.name}</h2>
+                      </Info>
+                      <Info>
+                        <h1>{translations.profileLastName}</h1>
+                        <h2>{user?.surname}</h2>
+                      </Info>
+                      <Info>
+                        <h1>{translations.profileRole}</h1>
+                        <h2>{user?.role}</h2>
+                      </Info>
+                    </Infos>
+                  </PersonalData>
+                  <Address>
+                    <Subtitle>{translations.profileAdress}</Subtitle>
+                    <Infos>
+                      <Info>
+                        <h1>{translations.profileCoutry}</h1>
+                        <h2>{user?.country}</h2>
+                      </Info>
+                      <Info>
+                        <h1>{translations.profileState}</h1>
+                        <h2>{user?.state}</h2>
+                      </Info>
+                      <Info>
+                        <h1>{translations.profileCity}</h1>
+                        <h2>{user?.city}</h2>
+                      </Info>
+                      <Info>
+                        <h1>{translations.profileStreet}</h1>
+                        <h2>{user?.address}</h2>
+                      </Info>
+                    </Infos>
+                  </Address>
+                </FirstColumn>
+                <SecondColumn>
+                  <Contact>
+                    <Subtitle>{translations.profileContactInfo}</Subtitle>
+                    <Infos>
+                      <Info>
+                        <h1>Email: </h1>
+                        <h2>{user?.email}</h2>
+                      </Info>
+                    </Infos>
+                  </Contact>
+                  <Lessons>
+                    <Subtitle>{translations.profileCourse}</Subtitle>
+                    <Infos>
+                      <LessonInfo>
+                        <h1>{translations.profileAccess}</h1>
+                        {userCourses?.map((userCourse, index) => {
+                          if (user?.isAdmin && !accessGranted) {
+                            accessGranted = true;
+                            return (
+                              <h2 key={index}>
+                                {translations.profileUnlimitedAccess}
+                              </h2>
+                            );
+                          }
+                          if (
+                            !user?.isAdmin &&
+                            userCourse.user._id === user?._id
+                          ) {
+                            return (
+                              <h2 key={index}>
+                                {userCourse?.expiresAt
+                                  ? new Date(userCourse?.expiresAt).getTime() >
+                                    Date.now()
+                                    ? formatDate({
+                                        value: userCourse?.expiresAt,
+                                      })
+                                    : 'Sem Acesso'
+                                  : 'Sem Acesso'}
+                              </h2>
+                            );
+                          }
+                          if (
+                            index === userCourses.length - 1 &&
+                            !accessGranted
+                          ) {
+                            return (
+                              <h2 key={index}>
+                                {translations.profileNoAccess}
+                              </h2>
+                            );
+                          }
+                          return null;
+                        })}
+                      </LessonInfo>
+                    </Infos>
+                    <Subtitle>Software</Subtitle>
+                    <Infos>
+                      <LessonInfo>
+                        <h1>{translations.profileAccess}</h1>
+                        <h2>
+                          {user?.isAdmin
+                            ? 'Acesso Ilimitado'
+                            : user?.softwareAccess
+                            ? new Date(user.softwareAccess).getTime() >
+                              Date.now()
+                              ? formatDate({ value: user.softwareAccess })
+                              : 'Sem Acesso'
+                            : 'Sem Acesso'}
+                        </h2>
+                      </LessonInfo>
+                    </Infos>
+                  </Lessons>
+                </SecondColumn>
+              </DataContainer>
+              <ChangeInfo onClick={openModalChangeUserData}>
+                <SettingOutlined />
+                {translations.profileChangeInformation}
+              </ChangeInfo>
+            </Container>
+          </Body>
+        </Page>
+        <ModalStyle
+          open={updateUserModalState}
+          onCancel={closeModalChangeUserData}
+          footer={null}
+          width={1000}
+          closeIcon={<CloseOutlined />}
+          destroyOnClose
+          centered
+        >
+          <ModalChangeUserData close={closeModalChangeUserData} />
+        </ModalStyle>
+      </Background>
+    </>
   );
 }
