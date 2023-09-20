@@ -49,9 +49,7 @@ export default function Profile() {
       <Background>
         <Page>
           <Body>
-            <Title currentLanguage={currentLanguage}>
-              {translations.profileTitle1}
-            </Title>
+            <Title>{translations.profileTitle1}</Title>
             <Container>
               <DataContainer>
                 <FirstColumn>
@@ -134,8 +132,8 @@ export default function Profile() {
                                     ? formatDate({
                                         value: userCourse?.expiresAt,
                                       })
-                                    : 'Sem Acesso'
-                                  : 'Sem Acesso'}
+                                    : translations.profileNoAccess
+                                  : translations.profileNoAccess}
                               </h2>
                             );
                           }
@@ -159,13 +157,13 @@ export default function Profile() {
                         <h1>{translations.profileAccess}</h1>
                         <h2>
                           {user?.isAdmin
-                            ? 'Acesso Ilimitado'
+                            ? translations.profileUnlimitedAccess
                             : user?.softwareAccess
                             ? new Date(user.softwareAccess).getTime() >
                               Date.now()
                               ? formatDate({ value: user.softwareAccess })
-                              : 'Sem Acesso'
-                            : 'Sem Acesso'}
+                              : translations.profileNoAccess
+                            : translations.profileNoAccess}
                         </h2>
                       </LessonInfo>
                     </Infos>
@@ -188,7 +186,10 @@ export default function Profile() {
           destroyOnClose
           centered
         >
-          <ModalChangeUserData close={closeModalChangeUserData} />
+          <ModalChangeUserData
+            language={currentLanguage}
+            close={closeModalChangeUserData}
+          />
         </ModalStyle>
       </Background>
     </>

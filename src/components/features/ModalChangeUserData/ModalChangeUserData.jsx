@@ -20,11 +20,87 @@ import {
   Subtitle,
   SeparationDiv,
   FormColumn2,
+  Subtitle2,
+  SaveChanges2,
 } from './Styles';
 import { buildUpdateUserErrorMessage, updateUserSchema } from './utils';
 
-export default function ModalChangeUserData({ close }) {
+export default function ModalChangeUserData({ close, language }) {
+  let profilePersonalInfo;
+  let profileCompany;
+  let phCompany;
+  let profileName;
+  let profileLastName;
+  let profileRole;
+  let phRole;
+  let profileAdress;
+  let profileCoutry;
+  let phCountry;
+  let profileState;
+  let phState;
+  let profileCity;
+  let phCity;
+  let profileStreet;
+  let profileChangeInformation;
+  let profileLoading;
+
+  if (language === 'EN') {
+    profilePersonalInfo = 'Personal information';
+    profileCompany = 'Company: ';
+    phCompany = 'Company name';
+    profileName = 'Name: ';
+    profileLastName = 'Last Name: ';
+    profileRole = 'Job: ';
+    phRole = 'Job Title';
+    profileAdress = 'Adress: ';
+    profileCoutry = 'Country: ';
+    phCountry = 'Country name';
+    profileState = 'State: ';
+    phState = 'State name';
+    profileCity = 'City: ';
+    phCity = 'City name';
+    profileStreet = 'Street: ';
+    profileChangeInformation = 'Save Information';
+    profileLoading = 'Loading';
+  } else if (language === 'PT') {
+    profilePersonalInfo = 'Informações Pessoais';
+    profileCompany = 'Empresa: ';
+    phCompany = 'Nome da empresa';
+    profileName = 'Nome: ';
+    profileLastName = 'Sobrenome: ';
+    profileRole = 'Cargo: ';
+    phRole = 'Nome do Cargo';
+    profileAdress = 'Endereço: ';
+    profileCoutry = 'País: ';
+    phCountry = 'Nome do País';
+    profileState = 'Estado: ';
+    phState = 'Nome do Estado';
+    profileCity = 'Cidade: ';
+    phCity = 'Nome da Cidade';
+    profileStreet = 'Rua: ';
+    profileChangeInformation = 'Salvar Infomações';
+    profileLoading = 'Carregando';
+  } else if (language === 'DE') {
+    profilePersonalInfo = 'Persönliche Informationen';
+    profileCompany = 'Unternehmen: ';
+    phCompany = 'Firmenname';
+    profileName = 'Name: ';
+    profileLastName = 'Nachname: ';
+    profileRole = 'Position oder Job: ';
+    phRole = 'Berufsbezeichnung';
+    profileAdress = 'Adresse: ';
+    profileCoutry = 'Land: ';
+    phCountry = 'Landesname';
+    profileState = 'Bundesland: ';
+    phState = 'Bundeslandname';
+    profileCity = 'Stadt: ';
+    phCity = 'Stadtname';
+    profileStreet = 'Straße: ';
+    profileChangeInformation = 'Informationen speichern';
+    profileLoading = 'Laden';
+  }
   // States and variables
+
   const countries = useMemo(() => Country.getAllCountries(), []);
   const [states, setStates] = useState(null);
   const [cities, setCities] = useState(null);
@@ -123,38 +199,42 @@ export default function ModalChangeUserData({ close }) {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <DataEntry>
           <FormColumn>
-            <Subtitle>Informações pessoais</Subtitle>
+            {language === 'DE' ? (
+              <Subtitle2>{profilePersonalInfo}</Subtitle2>
+            ) : (
+              <Subtitle>{profilePersonalInfo}</Subtitle>
+            )}
             <RegisterInput
-              label="Empresa: "
+              label={profileCompany}
               name="company"
-              placeholder="Nome da empresa"
+              placeholder={phCompany}
               register={register}
               errors={errors}
               type="text"
               defaultValue={user.company}
             />
             <RegisterInput
-              label="Nome: "
+              label={profileName}
               name="name"
-              placeholder="Nome"
+              placeholder={profileName}
               register={register}
               errors={errors}
               type="text"
               defaultValue={user.name}
             />
             <RegisterInput
-              label="Sobrenome: "
+              label={profileLastName}
               name="surname"
-              placeholder="Sobrenome"
+              placeholder={profileLastName}
               register={register}
               errors={errors}
               type="text"
               defaultValue={user.surname}
             />
             <RegisterInput
-              label="Cargo: "
+              label={profileRole}
               name="role"
-              placeholder="Nome do cargo"
+              placeholder={phRole}
               register={register}
               errors={errors}
               type="text"
@@ -162,11 +242,15 @@ export default function ModalChangeUserData({ close }) {
             />
           </FormColumn>
           <FormColumn2>
-            <Subtitle>Endereço</Subtitle>
+            {language === 'DE' ? (
+              <Subtitle2>{profileAdress}</Subtitle2>
+            ) : (
+              <Subtitle>{profileAdress}</Subtitle>
+            )}
             <FormSelect
-              subtitle="País:"
+              subtitle={profileCoutry}
               name="country"
-              placeholder="Nome do país"
+              placeholder={phCountry}
               size="large"
               control={control}
               errors={errors}
@@ -177,9 +261,9 @@ export default function ModalChangeUserData({ close }) {
               defaultValue={user.country}
             />
             <FormSelect
-              subtitle="Estado:"
+              subtitle={profileState}
               name="state"
-              placeholder="Nome do estado"
+              placeholder={phState}
               size="large"
               control={control}
               errors={errors}
@@ -191,9 +275,9 @@ export default function ModalChangeUserData({ close }) {
               defaultValue={user.state}
             />
             <FormSelect
-              subtitle="Cidade:"
+              subtitle={profileCity}
               name="city"
-              placeholder="Nome da cidade"
+              placeholder={phCity}
               size="large"
               control={control}
               errors={errors}
@@ -204,11 +288,12 @@ export default function ModalChangeUserData({ close }) {
               isProfile
               defaultValue={user.city}
             />
+
             <SeparationDiv>
               <RegisterInput
-                label="Endereço: "
+                label={profileStreet}
                 name="address"
-                placeholder="Endereço"
+                placeholder={profileStreet}
                 register={register}
                 errors={errors}
                 type="text"
@@ -217,31 +302,57 @@ export default function ModalChangeUserData({ close }) {
             </SeparationDiv>
           </FormColumn2>
         </DataEntry>
-
-        <SaveChanges
-          disabled={isPending}
-          type="submit"
-          name="Salvar Alterações"
-          relativeWidth="70%"
-        >
-          {isPending ? (
-            <>
-              <TailSpin
-                height="15"
-                width="15"
-                color="white"
-                ariaLabel="tail-spin-loading"
-                radius="5"
-              />
-              Carregando
-            </>
-          ) : (
-            <>
-              <SaveOutlined />
-              Salvar Alterações
-            </>
-          )}
-        </SaveChanges>
+        {language === 'DE' ? (
+          <SaveChanges2
+            disabled={isPending}
+            type="submit"
+            name="Salvar Alterações"
+            relativeWidth="70%"
+          >
+            {isPending ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                />
+                {profileLoading}
+              </>
+            ) : (
+              <>
+                <SaveOutlined />
+                {profileChangeInformation}
+              </>
+            )}
+          </SaveChanges2>
+        ) : (
+          <SaveChanges
+            disabled={isPending}
+            type="submit"
+            name="Salvar Alterações"
+            relativeWidth="70%"
+          >
+            {isPending ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                />
+                {profileLoading}
+              </>
+            ) : (
+              <>
+                <SaveOutlined />
+                {profileChangeInformation}
+              </>
+            )}
+          </SaveChanges>
+        )}
       </Form>
     </Container>
   );
@@ -249,4 +360,5 @@ export default function ModalChangeUserData({ close }) {
 
 ModalChangeUserData.propTypes = {
   close: PropTypes.func.isRequired,
+  language: PropTypes.string.isRequired,
 };

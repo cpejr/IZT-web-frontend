@@ -35,7 +35,7 @@ export function TranslateText({ currentLanguage }) {
     profileAccess = 'Access Validity: ';
     profileUnlimitedAccess = 'Unlimited Access: ';
     profileNoAccess = 'No access: ';
-    profileChangeInformation = 'Change Information: ';
+    profileChangeInformation = 'Change Information';
   } else if (currentLanguage === 'PT') {
     profileTitle1 = 'Informações do Usuário';
     profilePersonalInfo = 'Informações Pessoais';
@@ -51,9 +51,9 @@ export function TranslateText({ currentLanguage }) {
     profileContactInfo = 'Informações de Contato';
     profileCourse = 'Curso: ';
     profileAccess = 'Validade de Acesso: ';
-    profileUnlimitedAccess = 'Acesso Ilimitado: ';
+    profileUnlimitedAccess = 'Acesso Ilimitado ';
     profileNoAccess = 'Sem Acesso: ';
-    profileChangeInformation = 'Alterar Infomações: ';
+    profileChangeInformation = 'Alterar Infomações';
   } else if (currentLanguage === 'DE') {
     profileTitle1 = 'Benutzerinformationen';
     profilePersonalInfo = 'Persönliche Informationen';
@@ -69,9 +69,9 @@ export function TranslateText({ currentLanguage }) {
     profileContactInfo = 'Kontaktinformationen';
     profileCourse = 'Kurs: ';
     profileAccess = 'Zugriffsberechtigung: ';
-    profileUnlimitedAccess = 'Unbegrenzter Zugriff: ';
-    profileNoAccess = 'Kein Zugriff: ';
-    profileChangeInformation = 'Informationen ändern: ';
+    profileUnlimitedAccess = 'Unbegrenzter Zugriff';
+    profileNoAccess = 'Kein Zugriff';
+    profileChangeInformation = 'Informationen ändern';
   }
   return {
     profileTitle1,
