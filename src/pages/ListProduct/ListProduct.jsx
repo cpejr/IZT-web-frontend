@@ -34,7 +34,7 @@ import {
   ModalStyle,
   DeleteButton,
 } from './Styles';
-import { TranslateText } from './trasnaltions';
+import { TranslateText } from './translations';
 import {
   buildGetProductsErrorMessage,
   buildGetCategoriesErrorMessage,
@@ -93,11 +93,11 @@ export default function ListProduct() {
       <DivPage>
         <AdminMenu />
         <Container>
-          <Title>Lista de produtos</Title>
+          <Title>{translations.productTitle}</Title>
 
           <CategoryFilterContainer>
             <Subsection>
-              <CategoryText>Filtrar por categoria:</CategoryText>
+              <CategoryText>{translations.categoryFilterText}</CategoryText>
               <Select
                 standart="Selecionar"
                 data={categories}
@@ -112,7 +112,7 @@ export default function ListProduct() {
               </SearchIconButton>
               <SearchProduct
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Pesquisar Produto"
+                placeholder={translations.searchProductPlaceholder}
               />
             </SearchSection>
           </CategoryFilterContainer>
