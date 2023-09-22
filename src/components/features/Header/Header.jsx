@@ -8,6 +8,7 @@ import { useTheme } from 'styled-components';
 
 import { useLogout } from '../../../hooks/query/sessions';
 import useAuthStore from '../../../stores/auth';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { Logo } from '../../common';
 import {
   Content,
@@ -28,11 +29,12 @@ import {
 } from './Styles';
 
 export default function Header() {
+  const { globalLanguage, setGlobalLanguage } = useGlobalLanguage();
+
   // State variables
   const [bar, setBar] = useState(false);
   const [collapse, setCollapse] = useState(false);
   const [collapseLogout, setCollapseLogout] = useState(false);
-  const [language, setLanguage] = useState('EN'); // default language is EN
 
   const theme = useTheme();
   const navigate = useNavigate();
@@ -61,7 +63,6 @@ export default function Header() {
   });
 
   // Component
-
   const welcomeSectionComponent = (() => {
     if (isSmallScreen)
       return (
@@ -144,7 +145,7 @@ export default function Header() {
               )}
               <Select bar={bar}>
                 <Selected onClick={() => setCollapse((prev) => !prev)}>
-                  <p>{language}</p>
+                  <p>{globalLanguage}</p>
                   <IoIosArrowDown />
                 </Selected>
                 <LanguageSelector collapse={+collapse}>
@@ -153,7 +154,7 @@ export default function Header() {
                       type="button"
                       key={lang}
                       onClick={() => {
-                        setLanguage(lang);
+                        setGlobalLanguage(lang);
                         setCollapse((prev) => !prev);
                       }}
                       style={{ display: collapse ? 'flex' : 'none' }}
