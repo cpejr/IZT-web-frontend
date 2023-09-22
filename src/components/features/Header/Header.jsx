@@ -36,7 +36,8 @@ export default function Header({ setCurrentLanguage }) {
   const [bar, setBar] = useState(false);
   const [collapse, setCollapse] = useState(false);
   const [collapseLogout, setCollapseLogout] = useState(false);
-  const [language, setLanguage] = useState('PT'); // default language is EN
+  // eslint-disable-next-line no-unused-vars
+  const [language, setLanguage] = useState(globalLanguage || 'PT'); // default language is EN
 
   // Atualize a língua no componente Home quando a língua mudar
   useEffect(() => {
@@ -160,7 +161,7 @@ export default function Header({ setCurrentLanguage }) {
               )}
               <Select bar={bar}>
                 <Selected onClick={() => setCollapse((prev) => !prev)}>
-                  <p>{language}</p>
+                  <p>{globalLanguage}</p>
                   <IoIosArrowDown />
                 </Selected>
                 <LanguageSelector collapse={+collapse}>
@@ -169,7 +170,7 @@ export default function Header({ setCurrentLanguage }) {
                       type="button"
                       key={lang}
                       onClick={() => {
-                        setLanguage(lang);
+                        setGlobalLanguage(lang);
                         setCollapse((prev) => !prev);
                       }}
                       style={{ display: collapse ? 'flex' : 'none' }}
