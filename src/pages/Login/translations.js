@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export function TranslateText({ currentLanguage }) {
+export function TranslateText({ globalLanguage }) {
   let loginJoin;
   let loginPassword;
   let loginLog;
@@ -8,7 +8,7 @@ export function TranslateText({ currentLanguage }) {
   let loginHere;
   let loading;
 
-  if (currentLanguage === 'EN') {
+  if (globalLanguage === 'EN') {
     loginJoin = 'Log in to your account';
     loginPassword = 'Password:';
     loginLog = 'Log-In';
@@ -16,7 +16,7 @@ export function TranslateText({ currentLanguage }) {
     loginNotAccount = 'Do not have an account yet? ';
     loginHere = 'Sign up here!';
     loading = 'Loading';
-  } else if (currentLanguage === 'PT') {
+  } else if (globalLanguage === 'PT') {
     loginJoin = 'Entre na sua conta';
     loginPassword = 'Senha:';
     loginLog = 'Entrar';
@@ -24,7 +24,7 @@ export function TranslateText({ currentLanguage }) {
     loginNotAccount = 'Ainda não tem uma conta? ';
     loginHere = 'Cadastre-se aqui!';
     loading = 'Carregando';
-  } else if (currentLanguage === 'DE') {
+  } else if (globalLanguage === 'DE') {
     loginJoin = 'Melden Sie sich an Ihrem Konto an';
     loginPassword = 'Passwort:';
     loginLog = 'anmelden';

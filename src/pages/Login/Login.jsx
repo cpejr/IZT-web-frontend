@@ -10,9 +10,10 @@ import { toast } from 'react-toastify';
 
 import IZTLogo from '../../assets/IZTLogo.svg';
 import { DataInput } from '../../components/common';
-import { Header, ModalForgotPassword } from '../../components/features';
+import { ModalForgotPassword } from '../../components/features';
 import { useLogin } from '../../hooks/query/sessions';
 import useAuthStore from '../../stores/auth';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Page,
   Container,
@@ -29,8 +30,10 @@ import { TranslateText } from './translations';
 import { buildLoginErrorMessage, loginValidationSchema } from './utils';
 
 export default function Login() {
-  const [currentLanguage, setCurrentLanguage] = useState('PT');
-  const translations = TranslateText({ currentLanguage });
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -65,77 +68,74 @@ export default function Login() {
   const closeModalForgotPassword = () => setShowModal(false);
 
   return (
-    <>
-      <Header setCurrentLanguage={setCurrentLanguage} />
-      <Page>
-        <Container>
-          <Logo
-            src={IZTLogo}
-            alt="Logo da IZT: Um I atravessando um Z dentro de um circulo"
-          />
-          <DataEntry>
-            <Title>{translations.loginJoin}</Title>
-            <Form onSubmit={handleSubmit(onSubmit)}>
-              <DataInput
-                label="E-mail: "
-                name="email"
-                placeholder="email@email.com"
-                register={register}
-                errors={errors}
-                type="text"
-              />
-              <DataInput
-                label={translations.loginPassword}
-                name="password"
-                placeholder="********"
-                register={register}
-                errors={errors}
-                type="password"
-              />
-              <SubmitButton disabled={isLoading} type="submit">
-                {isLoading ? (
-                  <>
-                    <TailSpin
-                      height="15"
-                      width="15"
-                      color="white"
-                      ariaLabel="tail-spin-loading"
-                      radius="5"
-                    />
-                    {translations.loading}
-                  </>
-                ) : (
-                  translations.loginLog
-                )}
-              </SubmitButton>
-            </Form>
-          </DataEntry>
-          <Links>
-            <ForgotPassword onClick={openModalForgotPassword}>
-              {translations.loginForgotPassword}
-            </ForgotPassword>
-            <Modal
-              open={showModal}
-              onCancel={closeModalForgotPassword}
-              footer={null}
-              width={700}
-              closeIcon={<CloseOutlined />}
-              destroyOnClose
-              centered
-            >
-              <ModalForgotPassword
-                language={currentLanguage}
-                close={closeModalForgotPassword}
-              />
-            </Modal>
+    <Page>
+      <Container>
+        <Logo
+          src={IZTLogo}
+          alt="Logo da IZT: Um I atravessando um Z dentro de um circulo"
+        />
+        <DataEntry>
+          <Title>{translations.loginJoin}</Title>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <DataInput
+              label="E-mail: "
+              name="email"
+              placeholder="email@email.com"
+              register={register}
+              errors={errors}
+              type="text"
+            />
+            <DataInput
+              label={translations.loginPassword}
+              name="password"
+              placeholder="********"
+              register={register}
+              errors={errors}
+              type="password"
+            />
+            <SubmitButton disabled={isLoading} type="submit">
+              {isLoading ? (
+                <>
+                  <TailSpin
+                    height="15"
+                    width="15"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="5"
+                  />
+                  {translations.loading}
+                </>
+              ) : (
+                translations.loginLog
+              )}
+            </SubmitButton>
+          </Form>
+        </DataEntry>
+        <Links>
+          <ForgotPassword onClick={openModalForgotPassword}>
+            {translations.loginForgotPassword}
+          </ForgotPassword>
+          <Modal
+            open={showModal}
+            onCancel={closeModalForgotPassword}
+            footer={null}
+            width={700}
+            closeIcon={<CloseOutlined />}
+            destroyOnClose
+            centered
+          >
+            <ModalForgotPassword
+              language={globalLanguage}
+              close={closeModalForgotPassword}
+            />
+          </Modal>
 
-            <SignUpLink>
-              {translations.loginNotAccount}
-              <Link to="/cadastro">{translations.loginHere}</Link>
-            </SignUpLink>
-          </Links>
-        </Container>
-      </Page>
-    </>
+          <SignUpLink>
+            {translations.loginNotAccount}
+            <Link to="/cadastro">{translations.loginHere}</Link>
+          </SignUpLink>
+        </Links>
+      </Container>
+    </Page>
   );
 }
