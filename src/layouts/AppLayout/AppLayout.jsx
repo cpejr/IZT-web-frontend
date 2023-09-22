@@ -31,7 +31,7 @@ export default function AppLayout() {
     <SystemLoading />
   ) : (
     <Container>
-      {/* <Header /> */}
+      <Header />
       <Outlet />
       <AddToast />
     </Container>

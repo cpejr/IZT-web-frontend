@@ -7,8 +7,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactDOM from 'react-dom/client';
 
-import { LanguageProvider } from './components/features/globalLanguage';
 import Routes from './routes';
+import { LanguageProvider } from './stores/globalLanguage';
 import GlobalStyles from './styles/GlobalStyles';
 import Theme from './styles/Theme';
 

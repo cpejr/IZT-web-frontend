@@ -13,8 +13,8 @@ import {
   RegisterInput,
   SubmitButton,
 } from '../../components/common';
-import { Header } from '../../components/features';
 import { useCreateUser } from '../../hooks/query/users';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Page,
   Container,
@@ -40,9 +40,11 @@ import {
 } from './utilsEN';
 
 export default function Register() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   // States and variables
-  const [currentLanguage, setCurrentLanguage] = useState('PT');
-  const translations = TranslateText({ currentLanguage });
   const countries = useMemo(() => Country.getAllCountries(), []);
   const [states, setStates] = useState(null);
   const [cities, setCities] = useState(null);
@@ -72,11 +74,11 @@ export default function Register() {
       navigate('/verificar-email', { state: user.email });
     },
     onError: (err) => {
-      if (currentLanguage === 'DE') {
+      if (globalLanguage === 'DE') {
         const errorMessageDE = buildRegisterErrorMessageDE(err);
 
         toast.error(errorMessageDE);
-      } else if (currentLanguage === 'EN') {
+      } else if (globalLanguage === 'EN') {
         const errorMessageEN = buildRegisterErrorMessageEN(err);
 
         toast.error(errorMessageEN);
@@ -91,9 +93,9 @@ export default function Register() {
   // Form handlers
   let resolver;
 
-  if (currentLanguage === 'DE') {
+  if (globalLanguage === 'DE') {
     resolver = zodResolver(registerValidationSchemaDE);
-  } else if (currentLanguage === 'EN') {
+  } else if (globalLanguage === 'EN') {
     resolver = zodResolver(registerValidationSchemaEN);
   } else {
     resolver = zodResolver(registerValidationSchema);
@@ -139,156 +141,153 @@ export default function Register() {
   }, [setValue, selectedState]);
 
   return (
-    <>
-      <Header setCurrentLanguage={setCurrentLanguage} />
-      <Page>
-        <Container>
-          <Logo
-            src={IZTLogo}
-            alt="Logo da IZT: Um I atravessando um Z dentro de um circulo"
-          />
-          <Title>{translations.registerCreate}</Title>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <DataEntry>
-              <FormColumn>
-                <Subtitle>{translations.registerPersonalInfo}</Subtitle>
-                <RegisterInput
-                  label={translations.registerCompany}
-                  name="company"
-                  placeholder={translations.phCompany}
-                  register={register}
+    <Page>
+      <Container>
+        <Logo
+          src={IZTLogo}
+          alt="Logo da IZT: Um I atravessando um Z dentro de um circulo"
+        />
+        <Title>{translations.registerCreate}</Title>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <DataEntry>
+            <FormColumn>
+              <Subtitle>{translations.registerPersonalInfo}</Subtitle>
+              <RegisterInput
+                label={translations.registerCompany}
+                name="company"
+                placeholder={translations.phCompany}
+                register={register}
+                errors={errors}
+                type="text"
+              />
+              <RegisterInput
+                label={translations.registerName}
+                name="name"
+                placeholder={translations.phName}
+                register={register}
+                errors={errors}
+                type="text"
+              />
+              <RegisterInput
+                label={translations.registerLastName}
+                name="surname"
+                placeholder={translations.phLastName}
+                register={register}
+                errors={errors}
+                type="text"
+              />
+              <RegisterInput
+                label={translations.registerRole}
+                name="role"
+                placeholder={translations.phRole}
+                register={register}
+                errors={errors}
+                type="text"
+              />
+            </FormColumn>
+            <FormColumn>
+              <Subtitle>{translations.registerAdress}</Subtitle>
+              <AddressSelect>
+                <Label>{translations.registerCoutry}</Label>
+                <FormSelect
+                  name="country"
+                  size="large"
+                  control={control}
                   errors={errors}
-                  type="text"
+                  data={countries.map(formatSelectData)}
+                  showSearch
+                  isRegister
+                  filterOption={selectFilter}
                 />
-                <RegisterInput
-                  label={translations.registerName}
-                  name="name"
-                  placeholder={translations.phName}
-                  register={register}
-                  errors={errors}
-                  type="text"
-                />
-                <RegisterInput
-                  label={translations.registerLastName}
-                  name="surname"
-                  placeholder={translations.phLastName}
-                  register={register}
-                  errors={errors}
-                  type="text"
-                />
-                <RegisterInput
-                  label={translations.registerRole}
-                  name="role"
-                  placeholder={translations.phRole}
-                  register={register}
-                  errors={errors}
-                  type="text"
-                />
-              </FormColumn>
-              <FormColumn>
-                <Subtitle>{translations.registerAdress}</Subtitle>
-                <AddressSelect>
-                  <Label>{translations.registerCoutry}</Label>
-                  <FormSelect
-                    name="country"
-                    size="large"
-                    control={control}
-                    errors={errors}
-                    data={countries.map(formatSelectData)}
-                    showSearch
-                    isRegister
-                    filterOption={selectFilter}
-                  />
-                </AddressSelect>
+              </AddressSelect>
 
-                <AddressSelect>
-                  <Label>{translations.registerState}</Label>
-                  <FormSelect
-                    name="state"
-                    size="large"
-                    control={control}
-                    errors={errors}
-                    data={states?.map(formatSelectData)}
-                    showSearch
-                    isRegister
-                    filterOption={selectFilter}
-                    disabled={!states}
-                  />
-                </AddressSelect>
+              <AddressSelect>
+                <Label>{translations.registerState}</Label>
+                <FormSelect
+                  name="state"
+                  size="large"
+                  control={control}
+                  errors={errors}
+                  data={states?.map(formatSelectData)}
+                  showSearch
+                  isRegister
+                  filterOption={selectFilter}
+                  disabled={!states}
+                />
+              </AddressSelect>
 
-                <AddressSelect>
-                  <Label>{translations.registerCity}</Label>
-                  <FormSelect
-                    name="city"
-                    size="large"
-                    control={control}
-                    errors={errors}
-                    data={cities?.map(formatSelectData)}
-                    showSearch
-                    isRegister
-                    filterOption={selectFilter}
-                    disabled={!cities}
-                  />
-                </AddressSelect>
+              <AddressSelect>
+                <Label>{translations.registerCity}</Label>
+                <FormSelect
+                  name="city"
+                  size="large"
+                  control={control}
+                  errors={errors}
+                  data={cities?.map(formatSelectData)}
+                  showSearch
+                  isRegister
+                  filterOption={selectFilter}
+                  disabled={!cities}
+                />
+              </AddressSelect>
 
-                <RegisterInput
-                  label={translations.registerStreet}
-                  name="address"
-                  placeholder={translations.phStreet}
-                  register={register}
-                  errors={errors}
-                  type="text"
-                />
-              </FormColumn>
-              <FormColumn>
-                <Subtitle>{translations.registerCredentials}</Subtitle>
-                <RegisterInput
-                  label="E-mail: "
-                  name="email"
-                  placeholder="email@email.com"
-                  register={register}
-                  errors={errors}
-                  type="text"
-                />
-                <RegisterInput
-                  label={translations.registerPassword}
-                  name="password"
-                  placeholder="********"
-                  register={register}
-                  errors={errors}
-                  type="password"
-                />
-                <RegisterInput
-                  label={translations.registerConfirmPassword}
-                  name="confirmPassword"
-                  placeholder="********"
-                  register={register}
-                  errors={errors}
-                  type="password"
-                />
-              </FormColumn>
-            </DataEntry>
-            <ButtonDiv>
-              <SubmitButton disabled={isLoading} type="submit">
-                {isLoading ? (
-                  <>
-                    <TailSpin
-                      height="15"
-                      width="15"
-                      color="white"
-                      ariaLabel="tail-spin-loading"
-                      radius="5"
-                    />
-                    {translations.loading}
-                  </>
-                ) : (
-                  translations.registerCreateAccount
-                )}
-              </SubmitButton>
-            </ButtonDiv>
-          </Form>
-        </Container>
-      </Page>
-    </>
+              <RegisterInput
+                label={translations.registerStreet}
+                name="address"
+                placeholder={translations.phStreet}
+                register={register}
+                errors={errors}
+                type="text"
+              />
+            </FormColumn>
+            <FormColumn>
+              <Subtitle>{translations.registerCredentials}</Subtitle>
+              <RegisterInput
+                label="E-mail: "
+                name="email"
+                placeholder="email@email.com"
+                register={register}
+                errors={errors}
+                type="text"
+              />
+              <RegisterInput
+                label={translations.registerPassword}
+                name="password"
+                placeholder="********"
+                register={register}
+                errors={errors}
+                type="password"
+              />
+              <RegisterInput
+                label={translations.registerConfirmPassword}
+                name="confirmPassword"
+                placeholder="********"
+                register={register}
+                errors={errors}
+                type="password"
+              />
+            </FormColumn>
+          </DataEntry>
+          <ButtonDiv>
+            <SubmitButton disabled={isLoading} type="submit">
+              {isLoading ? (
+                <>
+                  <TailSpin
+                    height="15"
+                    width="15"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="5"
+                  />
+                  {translations.loading}
+                </>
+              ) : (
+                translations.registerCreateAccount
+              )}
+            </SubmitButton>
+          </ButtonDiv>
+        </Form>
+      </Container>
+    </Page>
   );
 }

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export function TranslateText({ currentLanguage }) {
+export function TranslateText({ globalLanguage }) {
   let registerCreate;
   let registerPersonalInfo;
   let registerCompany;
@@ -24,7 +24,7 @@ export function TranslateText({ currentLanguage }) {
   let phRole;
   let phName;
 
-  if (currentLanguage === 'EN') {
+  if (globalLanguage === 'EN') {
     registerCreate = 'Create your account';
     registerPersonalInfo = 'Personal information';
     registerCompany = 'Company: ';
@@ -48,7 +48,7 @@ export function TranslateText({ currentLanguage }) {
     loading = 'Loading';
     registerCreateAccount = 'Create Account';
     registerCredentials = 'Credentials';
-  } else if (currentLanguage === 'PT') {
+  } else if (globalLanguage === 'PT') {
     registerCreate = 'Crie sua conta';
     registerPersonalInfo = 'Informações Pessoais';
     registerCompany = 'Empresa: ';
@@ -72,7 +72,7 @@ export function TranslateText({ currentLanguage }) {
     loading = 'Carregando';
     registerCreateAccount = 'Criar Conta';
     registerCredentials = 'Credenciais';
-  } else if (currentLanguage === 'DE') {
+  } else if (globalLanguage === 'DE') {
     registerCreate = 'Erstellen Sie Ihr Konto';
     registerPersonalInfo = 'Persönliche Informationen';
     registerCompany = 'Unternehmen: ';

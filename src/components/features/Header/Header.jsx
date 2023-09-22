@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import PropTypes from 'prop-types';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useMediaQuery } from 'react-responsive';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,8 +8,8 @@ import { useTheme } from 'styled-components';
 
 import { useLogout } from '../../../hooks/query/sessions';
 import useAuthStore from '../../../stores/auth';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { Logo } from '../../common';
-import { useGlobalLanguage } from '../globalLanguage';
 import {
   Content,
   Menu,
@@ -29,20 +28,13 @@ import {
   MyProfile,
 } from './Styles';
 
-export default function Header({ setCurrentLanguage }) {
+export default function Header() {
   const { globalLanguage, setGlobalLanguage } = useGlobalLanguage();
-  console.log(globalLanguage);
+
   // State variables
   const [bar, setBar] = useState(false);
   const [collapse, setCollapse] = useState(false);
   const [collapseLogout, setCollapseLogout] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [language, setLanguage] = useState(globalLanguage || 'PT'); // default language is EN
-
-  // Atualize a língua no componente Home quando a língua mudar
-  useEffect(() => {
-    setCurrentLanguage(language);
-  }, [language, setCurrentLanguage]);
 
   const theme = useTheme();
   const navigate = useNavigate();
@@ -53,10 +45,6 @@ export default function Header({ setCurrentLanguage }) {
   const closeHeader = () => {
     setBar(false);
     setCollapseLogout(false);
-  };
-
-  const executeGlobal = () => {
-    setGlobalLanguage('EN');
   };
 
   // Backend call
@@ -75,7 +63,6 @@ export default function Header({ setCurrentLanguage }) {
   });
 
   // Component
-
   const welcomeSectionComponent = (() => {
     if (isSmallScreen)
       return (
@@ -126,9 +113,6 @@ export default function Header({ setCurrentLanguage }) {
       <InternContainer>
         <Logo />
         <Menu>
-          <button type="button" onClick={executeGlobal}>
-            Executar Global
-          </button>
           <Nav bar={bar} collapse={collapse}>
             <Link to="/catalogo" onClick={closeHeader}>
               Produtos
@@ -191,7 +175,3 @@ export default function Header({ setCurrentLanguage }) {
     </Content>
   );
 }
-
-Header.propTypes = {
-  setCurrentLanguage: PropTypes.func.isRequired,
-};
