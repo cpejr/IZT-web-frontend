@@ -54,6 +54,10 @@ export const DataEntry = styled.form`
   align-items: stretch;
   justify-content: flex-start;
 `;
+export const DataEntry2 = styled.form`
+  width: 100%;
+  height: 100%;
+`;
 
 export const ErrorMessage = styled.p`
   font-weight: 700;
@@ -204,6 +208,8 @@ export const TitleRow = styled.div`
 export const DivName = styled.div`
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
+  align-content: center;
 `;
 
 export const Diagram = styled.div`

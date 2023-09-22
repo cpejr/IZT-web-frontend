@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { AiOutlineDown } from 'react-icons/ai';
 import { TbPencil } from 'react-icons/tb';
@@ -12,13 +13,18 @@ import {
   MachineData,
   ProductData,
 } from '../../components/features';
-import { useCalculateStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
+import {
+  useCalculateStabilityAnalysis,
+  useCreateStabilityAnalysis,
+} from '../../hooks/query/stabilityAnalysis';
+import useAuthStore from '../../stores/auth';
 import {
   Container,
   DataEntryDiv,
   Title,
   InputName,
   DataEntry,
+  DataEntry2,
   Collapsable,
   CollapsableHeader,
   DataTitle,
@@ -37,8 +43,10 @@ import {
   buildCalculateStabilityAnalysisErrorMessage,
   calculateStabilityAnalysisValidationSchema,
 } from './utils';
+import { saveStabilityAnalysisValidationSchema } from './utilsSave';
 
 export default function StabilityAnalysis() {
+  const queryClient = useQueryClient();
   const [processStabilityDiagramData, setProcessStabilityDiagramData] =
     useState([]);
   const [partHeightStabilityDiagramData, setPartHeightStabilityDiagramData] =
@@ -52,6 +60,21 @@ export default function StabilityAnalysis() {
   };
 
   // Backend calls
+  const { mutate: createStabilityAnalysis } = useCreateStabilityAnalysis({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['stability-analysis', 'searchByName'],
+      });
+
+      toast.success('Relatório criado com sucesso!');
+    },
+    onError: (err) => {
+      const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+
+      toast.error(errorMessage);
+    },
+  });
+
   const { mutate: calculateStabilityAnalysis, isLoading } =
     useCalculateStabilityAnalysis({
       onSuccess: (result) => {
@@ -89,8 +112,10 @@ export default function StabilityAnalysis() {
     });
 
   // Form handlers
+  const user = useAuthStore((state) => state.auth?.user);
+  const [formDataStorage, setFormDataStorage] = useState({});
   const {
-    handleSubmit,
+    handleSubmit: calculate,
     register,
     formState: { errors },
   } = useForm({
@@ -98,14 +123,34 @@ export default function StabilityAnalysis() {
   });
 
   const onSubmit = (data) => {
+    setFormDataStorage(data);
     calculateStabilityAnalysis(data);
+  };
+
+  const {
+    handleSubmit: save,
+    register: register2,
+    formState: { errors: error },
+  } = useForm({
+    defaultValues: formDataStorage,
+    resolver: zodResolver(saveStabilityAnalysisValidationSchema),
+  });
+
+  const onSubmit2 = (data) => {
+    const combinedData = {
+      ...formDataStorage,
+      ...data,
+      user: user?._id,
+    };
+    createStabilityAnalysis(combinedData);
+    setFormDataStorage({});
   };
 
   return (
     <Container>
       <DataEntryDiv>
         <Title>Entrada de Dados</Title>
-        <DataEntry onSubmit={handleSubmit(onSubmit)}>
+        <DataEntry onSubmit={calculate(onSubmit)}>
           <Collapsable>
             <CollapsableHeader
               collapse={collapse === 'analysis'}
@@ -125,7 +170,7 @@ export default function StabilityAnalysis() {
               collapse={collapse === 'machine'}
               onClick={() => handleCollapse('machine')}
             >
-              <DataTitle>Dados da Maquina</DataTitle>
+              <DataTitle>Dados da Máquina</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
             <MachineData
@@ -166,47 +211,49 @@ export default function StabilityAnalysis() {
           </Button>
         </DataEntry>
       </DataEntryDiv>
-      <Analysis>
-        <TitleRow>
-          <DivName>
-            <TbPencil size={25} style={{ color: 'white' }} />
-            <InputName
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Insira o nome do relatório"
-              error={errors?.name?.message}
-              {...register('name')}
-            />
-          </DivName>
-
-          <Button2>Salvar relatório</Button2>
-        </TitleRow>
-        <ErrorMessage>{errors?.name?.message}</ErrorMessage>
-
-        <Diagram>
-          <DiagramTitle>Diagrama - Estabilidade de processo</DiagramTitle>
-          <Canvas>
-            <ContourMap
-              data={processStabilityDiagramData}
-              layout={{ autosize: true }}
-              config={{ responsive: true }}
-              useResizeHandler
-            />
-          </Canvas>
-        </Diagram>
-        <Diagram>
-          <DiagramTitle>Diagrama - Estabilidade de altura da peça</DiagramTitle>
-          <Canvas>
-            <ContourMap
-              data={partHeightStabilityDiagramData}
-              layout={{ autosize: true }}
-              config={{ responsive: true }}
-              useResizeHandler
-            />
-          </Canvas>
-        </Diagram>
-      </Analysis>
+      <DataEntry2 onSubmit={save(onSubmit2)}>
+        <Analysis>
+          <TitleRow>
+            <DivName>
+              <TbPencil size={25} style={{ color: 'white' }} />
+              <InputName
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Insira o nome do relatório"
+                error={error?.name?.message}
+                {...register2('name')}
+              />
+            </DivName>
+            <Button2 type="submit">Salvar relatório</Button2>
+          </TitleRow>
+          <ErrorMessage>{error?.name?.message}</ErrorMessage>
+          <Diagram>
+            <DiagramTitle>Diagrama - Estabilidade de processo</DiagramTitle>
+            <Canvas>
+              <ContourMap
+                data={processStabilityDiagramData}
+                layout={{ autosize: true }}
+                config={{ responsive: true }}
+                useResizeHandler
+              />
+            </Canvas>
+          </Diagram>
+          <Diagram>
+            <DiagramTitle>
+              Diagrama - Estabilidade de altura da peça
+            </DiagramTitle>
+            <Canvas>
+              <ContourMap
+                data={partHeightStabilityDiagramData}
+                layout={{ autosize: true }}
+                config={{ responsive: true }}
+                useResizeHandler
+              />
+            </Canvas>
+          </Diagram>
+        </Analysis>
+      </DataEntry2>
     </Container>
   );
 }

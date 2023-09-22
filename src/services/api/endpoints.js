@@ -255,6 +255,11 @@ export const calculateStabilityAnalysis = async (inputData) => {
   const { data } = await api.post('/stability-analysis/diagrams', inputData);
   return data;
 };
+export const createStabilityAnalysis = async (newStabilityAnalysis) => {
+  const { data } = await api.post('/stability-analysis', newStabilityAnalysis);
+
+  return data;
+};
 
 // Profile Analysis
 export const getProfileAnalysis = async (filters = {}) => {
@@ -285,6 +290,11 @@ export const searchByNameProfileAnalysis = async (name) => {
 
 export const calculateProfileAnalysis = async (inputData) => {
   const { data } = await api.post('/profile-analysis/diagrams', inputData);
+
+  return data;
+};
+export const createProfileAnalysis = async (newProfileAnalysis) => {
+  const { data } = await api.post('/profile-analysis', newProfileAnalysis);
 
   return data;
 };

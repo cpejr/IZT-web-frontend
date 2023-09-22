@@ -8,7 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   max-width: 600rem;
   padding-left: 1.5rem;
-  max-height: ${(props) => (props.isOpened ? '100rem' : '0rem')};
+  max-height: ${(props) => (props.isOpened ? 'auto' : '0rem')};
   overflow-y: hidden;
   transition: all 0.5s ease-in-out 0.3s;
 `;
@@ -29,6 +29,18 @@ export const Columns = styled.div`
   }
 `;
 
+export const GraphsDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 5rem;
+
+  div {
+    width: 100%;
+  }
+`;
+
 export const DataColumn = styled.div`
   align-items: flex-start;
   gap: 0.5rem;
@@ -38,9 +50,7 @@ export const DataColumn = styled.div`
   height: 100%;
   max-height: 25rem;
   max-width: 28rem;
-  /* margin: auto; erro na posição do título /*
-  /*margin: 0.5rem;  Adicione o valor de margem que desejar (estava dando erro no alinhamento do pontilhado) */
-  padding: 0.5rem; /* Opcional: Adiciona preenchimento interno para a div */
+  padding: 0.5rem;
 
   @media (max-width: 1350px) {
     max-height: 30rem;
@@ -55,6 +65,7 @@ export const DataContainer = styled.div`
   flex-direction: column;
   justify-content: flex;
   flex-wrap: wrap;
+  padding: 15px 20px;
   gap: 0.5rem;
   width: 100%;
   height: 100%;

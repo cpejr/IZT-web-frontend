@@ -51,8 +51,7 @@ h3 {
 .AccordionTrigger {
   font-family: 'Montserrat';
   background-color: transparent;
-  padding: 0 20px;
-  height: 45px;
+  height: 5.15rem;
   flex: 1;
   display: flex;
   align-items: center;
@@ -61,7 +60,7 @@ h3 {
   line-height: 1;
   color: #ffff;
   background-color: #123645;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 20px;
   letter-spacing: 0em;
   text-align: left;
@@ -100,10 +99,10 @@ h3 {
 
 .AccordionChevron {
   color: #ffff;
-  height: 60px;
-  width: 25px;
+  height: 2.5vh;
+  width: 2.5vh;
   font-weight: bold;
-  transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  transition: all 200ms ease-in-out 200ms;
 }
 .AccordionTrigger[data-state='open'] > .AccordionChevron {
   transform: rotate(180deg);
@@ -163,24 +162,37 @@ h3 {
   font-size: 1.5rem;
   height: 100%;
 }
+
+.AccordionInput {
+  background-color: rgb(18, 54, 69);
+  border: none;
+  color: white;
+  font-family: 'Montserrat';
+  word-wrap: none;
+  margin-left: 1rem;
+  border-bottom: 0.1rem solid white;
+  font-size: 1.5rem;
+  height: 100%;
+}
 .AccordionInput {
   width: 100%;
 }
 
-.AccordionMiniInput{
+.AccordionMiniInput {
   width: 4rem;
   margin-right: 1rem;
 }
-.AccordionInput.error,.AccordionMiniInput.error {
+.AccordionInput.error,
+.AccordionMiniInput.error {
   border-bottom-color: red;
 }
-.AccordionLine{
+.AccordionLine {
   width: 100%;
   display: flex;
   flex-direction: row;
-  margin-bottom: 1rem;
+  margin-bottom: 3vh;
 }
-.ButtonCalculate{
+.ButtonCalculate {
   display: inline-block;
   margin-left: 5%;
   padding: 0.5rem 1.5rem 0.5rem 1.5rem;
@@ -200,7 +212,7 @@ h3 {
     padding: 0.4rem 1.5rem 0.4rem 1.5rem;
   }
 }
-.ErrorMessage{
+.ErrorMessage {
   font-weight: 500;
   color: red;
 

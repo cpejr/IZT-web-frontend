@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
 export const Boddy = styled.div`
-  background-color: #123645;
+  background-color: ${(props) => props.theme.colors.darkBlue};
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 `;
 
 export const Container = styled.div`
@@ -15,6 +18,10 @@ export const Container = styled.div`
   height: 100%;
   gap: 4rem;
   flex-direction: flex-start;
+`;
+export const DataEntry = styled.form`
+  width: 100%;
+  height: 100%;
 `;
 export const DataInput = styled.div`
   h1 {
@@ -30,26 +37,55 @@ export const DataInput = styled.div`
 `;
 
 export const Containerleft = styled.div`
-  width: 35%;
+  width: 47%;
   height: 95%;
-  border-right: 1.7px dashed;
+  border-right: 0.1vw dashed white;
   border-color: #ffffff;
   display: flex;
   flex-direction: row;
   background-color: #123645;
-
+  padding: 3vh 1.3vw;
   flex-direction: column;
   gap: 5rem;
-  margin-top: 20px;
   align-self: flex-start;
+  max-width: 28vw;
+`;
+export const DivName = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 1.5rem;
 `;
 
 export const Analysis = styled.div`
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  align-self: flex-start;
-  width: auto;
+  padding: 1.3vw 0vw;
+  padding-left: 0.7vw;
+  width: 100%;
+  text-align: start;
+  max-height: 83vh;
+  overflow-y: scroll;
+  margin-bottom: 2.9rem;
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.colors.gray.darkGray};
+    border-radius: 0.5rem;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
 
 export const ContainerRight = styled.div`
@@ -65,13 +101,9 @@ export const ContainerRight = styled.div`
 `;
 
 export const Container2 = styled.div`
-  margin: 3rem 0rem 3rem 0rem;
-  display: flex;
-  flex-direction: center;
-  align-items: center;
-  background-color: #ffff;
-  height: 36rem;
-  width: 64rem;
+  width: 95%;
+  aspect-ratio: 16 / 9;
+  background-color: white;
 
   @media (max-width: 1200px) {
     height: 33rem;
@@ -98,19 +130,27 @@ export const Container2 = styled.div`
 export const H1 = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  font-family: 'Montserrat';
-  font-style: normal;
   font-weight: 600;
-  font-size: 2.4rem;
-  line-height: 2.9rem;
-  color: #ffffff;
-
-  @media (max-width: 950px) {
-    font-size: 2rem;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  color: white;
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+  @media (max-width: 1100px) {
+    font-size: 1.8rem;
   }
-  @media (max-width: 800px) {
-    font-size: 1.7rem;
+`;
+export const TittleRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-weight: 600;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  color: white;
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+  @media (max-width: 1100px) {
+    font-size: 1.8rem;
   }
 `;
 
@@ -178,14 +218,17 @@ export const Text2 = styled.a`
 `;
 
 export const Text = styled.a`
-  font-family: 'Montserrat';
-  font-size: 1.6rem;
+  display: flex;
+  width: 100%;
+  text-align: start;
+  align-items: center;
+  color: white;
+  font-family: ${(props) => props.theme.fonts.montserrat};
   font-weight: 600;
-  line-height: 2rem;
-  letter-spacing: 0em;
-  text-align: left;
-
-  color: #ffffff;
+  font-size: 2rem;
+  @media (max-width: 1100px) {
+    font-size: 1.6rem;
+  }
 `;
 
 export const Data = styled.div`
@@ -241,11 +284,12 @@ export const Button2 = styled.button`
 `;
 
 export const Edit = styled.div`
-  margin-top: 3rem;
-  padding-left: 2rem;
+  margin-top: 4rem;
+  padding-left: 0rem;
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: 2.5vh;
 `;
 export const Column = styled.div`
   display: flex;

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import { useEffect, useState } from 'react';
 
 import { DownOutlined, CloseOutlined } from '@ant-design/icons';
@@ -5,11 +6,13 @@ import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
 
+import StabilityGraph from '../Graphic/StabilityGraph';
 import ModalDeleteStabilityAnalysis from '../ModalDeleteStabilityAnalysis/ModalDeleteStabilityAnalysis';
 import StabilityPDF from '../PDF/StabilityAnalysisPDF';
 import {
   DataColumn,
   Columns,
+  GraphsDiv,
   Container,
   ButtonRow,
   DataRow,
@@ -160,6 +163,16 @@ export default function StabilityAnalysisReport({
             </DataContainer>
           </DataColumn>
         </Columns>
+        <GraphsDiv>
+          <div>
+            <Title>Diagrama - Estabilidade de processo</Title>
+            <StabilityGraph data={data?.processStabilityDiagram} />
+          </div>
+          <div>
+            <Title>Diagrama - Estabilidade de altura da peça</Title>
+            <StabilityGraph data={data?.partHeightStabilityDiagram} />
+          </div>
+        </GraphsDiv>
         <ButtonRow>
           <button type="button" onClick={saveFile}>
             Baixar Relatório
@@ -171,6 +184,7 @@ export default function StabilityAnalysisReport({
             Excluir
           </button>
         </ButtonRow>
+
         <ModalStyle
           open={modalDeleteStabilityAnalysis}
           onCancel={closeModalDeleteStabilityAnalysis}
