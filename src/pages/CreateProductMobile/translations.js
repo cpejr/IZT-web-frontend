@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export function TranslateText({ currentLanguage }) {
+export function TranslateText({ globalLanguage }) {
   let pageTitle;
   let nameLabel;
   let descriptionLabel;
@@ -14,9 +14,9 @@ export function TranslateText({ currentLanguage }) {
   let cancelButtonLabel;
   let loadingText1;
   let loadingText2;
-  let selectCategoryLabel; // Adicionado aqui
+  let selectCategoryLabel;
 
-  if (currentLanguage === 'EN') {
+  if (globalLanguage === 'EN') {
     pageTitle = 'Add Product';
     nameLabel = 'Product Name:';
     descriptionLabel = 'Description:';
@@ -32,7 +32,7 @@ export function TranslateText({ currentLanguage }) {
     loadingText1 = 'Loading...';
     loadingText2 = 'Loading';
     selectCategoryLabel = 'Select the category';
-  } else if (currentLanguage === 'PT') {
+  } else if (globalLanguage === 'PT') {
     pageTitle = 'Adicionar Produto';
     nameLabel = 'Nome do Produto:';
     descriptionLabel = 'Descrição:';
@@ -48,7 +48,7 @@ export function TranslateText({ currentLanguage }) {
     loadingText1 = 'Carregando...';
     loadingText2 = 'Carregando';
     selectCategoryLabel = 'Selecione a categoria';
-  } else if (currentLanguage === 'DE') {
+  } else if (globalLanguage === 'DE') {
     pageTitle = 'Produkt hinzufügen';
     nameLabel = 'Produktname:';
     descriptionLabel = 'Beschreibung:';
@@ -63,7 +63,7 @@ export function TranslateText({ currentLanguage }) {
     cancelButtonLabel = 'Abbrechen';
     loadingText1 = 'Laden...';
     loadingText2 = 'Laden';
-    selectCategoryLabel = 'Kategorie auswählen'; //
+    selectCategoryLabel = 'Kategorie auswählen';
   }
 
   return {

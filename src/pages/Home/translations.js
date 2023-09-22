@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export function TranslateText({ currentLanguage }) {
+export function TranslateText({ globalLanguage }) {
   let cardTitle1;
   let cardText1;
   let cardTitle2;
@@ -10,7 +10,7 @@ export function TranslateText({ currentLanguage }) {
   let ourHistoryText1;
   let ourHistoryText2;
 
-  if (currentLanguage === 'EN') {
+  if (globalLanguage === 'EN') {
     cardTitle1 = 'Training in Centerless Grinding';
     cardText1 =
       'Come learn all about centerless grinding with our intensive course!';
@@ -24,7 +24,7 @@ export function TranslateText({ currentLanguage }) {
       'IZT emerged to meet the demand for technologies and solutions in the machining areas, with a focus on productivity and sustainable engineering. We specialize in enhancing and customizing lubricoolant supply systems for machining machines suitable for technical, financial, and environmental needs. We develop cleaning systems for grinding wheels and nozzles (or jets) for fluid application in internal cylindrical grinders, external cylindrical grinders, plunge grinders, surface grinders, and especially centerless grinders. To maximize the technical capacity of professionals in the industry, we have developed centerless grinding training, applying the knowledge of professionals who have been in the market for over 20 years. In addition, we offer advanced software for simulating grinding and surface finishing (honing) processes to define their main parameters.';
     ourHistoryText2 =
       'When we started working in this sector, we noticed that many companies faced problems in the manufacturing processes, such as difficulty in defining parameters and long setup times for machines, as well as a lack of computational resources for process simulation. It was in this context that our team decided to dedicate itself to developing innovative machining solutions that could exceed customer expectations and help drive the industry forward. Since then, we have been working to provide the most advanced solutions and continue to innovate in our field. We look forward to continuing to provide high-quality machining solutions and helping drive innovation, progress, and the reduction of environmental impacts worldwide.';
-  } else if (currentLanguage === 'PT') {
+  } else if (globalLanguage === 'PT') {
     cardTitle1 = 'Treinamento em Retificação Centerless';
     cardText1 =
       'Venha aprender tudo sobre retificação centerless com o nosso curso intensivo!';
@@ -38,7 +38,7 @@ export function TranslateText({ currentLanguage }) {
       'A IZT surgiu para atender a demanda por tecnologias e soluções nas áreas de usinagem, com foco em produtividade e engenharia sustentável. Nós somos especialistas em aprimorar e personalizar sistemas de fornecimento de lubrirrefigerantes para máquinas de usinagem adequados às necessidades técnicas, financeiras e ambientais. Desenvolvemos sistemas de limpeza de rebolos e bocais (ou bicos) para aplicação de fluidos em retificadoras cilíndricas internas, retificadoras cilíndricas externas, retificadoras de passagem, retificadoras de superfícies e, principalmente, retificadoras centerless. Visando maximizar a capacidade técnica dos profissionais do setor, elaboramos um treinamento em retificação centerless, aplicando o conhecimento de profissionais, os quais atuam por mais de 20 anos no mercado. Além disso, oferecemos softwares avançados de simulação de processos de retificação e acabamento superficial (brunimento/Honing) para definir os seus principais parâmetros.';
     ourHistoryText2 =
       'Quando começamos a trabalhar nesse setor, percebemos que muitas empresas enfrentavam problemas nos processos de fabricação, como dificuldade na definição de parâmetros e tempo elevado para o setup de maquinas, além da falta de recursos computacionais para simulação de processos. Foi nesse contexto que nossa equipe decidiu se dedicar a desenvolver soluções de usinagem inovadoras, que pudessem superar as expectativas dos clientes e ajudar a impulsionar a indústria. Desde então, temos trabalhado para fornecer as soluções mais avançadas e continuar a inovar em nossa área de atuação. Estamos ansiosos para continuar fornecendo soluções de usinagem de alta qualidade e ajudando a impulsionar a inovação, o progresso e a redução de impactos ambientais em todo o mundo.';
-  } else if (currentLanguage === 'DE') {
+  } else if (globalLanguage === 'DE') {
     cardTitle1 = 'Schulung in der Centerless-Schleiftechnik';
     cardText1 =
       'Kommen Sie und lernen Sie alles über Centerless-Schleiftechnik in unserem Intensivkurs!';

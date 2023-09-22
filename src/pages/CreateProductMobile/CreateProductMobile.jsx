@@ -19,9 +19,11 @@ import {
 } from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
 import { useCreateProduct } from '../../hooks/query/products';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../utils/constants';
 import {
   Form,
+  Container,
   Title,
   Subtitle,
   Input,
@@ -49,8 +51,8 @@ export default function CreateProductMobile() {
   const documentsLimit = 3;
   const picturesLimit = 4;
 
-  const [currentLanguage, setCurrentLanguage] = useState('PT');
-  const translations = TranslateText({ currentLanguage });
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   // Backend calls
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
@@ -122,9 +124,7 @@ export default function CreateProductMobile() {
 
   if (isMediumScreen) return <Navigate to="/administrador" />;
   return (
-    <>
-      <Header setCurrentLanguage={setCurrentLanguage} />
-
+    <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Title>{translations.pageTitle}</Title>
 
@@ -280,6 +280,6 @@ export default function CreateProductMobile() {
           <p>{translations.cancelButtonLabel}</p>
         </CancelButton>
       </Form>
-    </>
+    </Container>
   );
 }

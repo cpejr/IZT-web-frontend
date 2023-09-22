@@ -16,6 +16,7 @@ import {
 import { useGetCategories } from '../../hooks/query/categories';
 import { useSearchProductByName } from '../../hooks/query/products';
 import useDebounce from '../../hooks/useDebounce';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   DivPage,
   Container,
@@ -50,8 +51,8 @@ export default function ListProduct() {
   const [name, setName] = useState('');
 
   // Translation
-  const [currentLanguage, setCurrentLanguage] = useState('PT');
-  const translations = TranslateText({ currentLanguage });
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   const debouncedName = useDebounce(name);
 
@@ -88,8 +89,7 @@ export default function ListProduct() {
 
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
-    <div>
-      <Header setCurrentLanguage={setCurrentLanguage} />
+    <Container>
       <DivPage>
         <AdminMenu />
         <Container>
@@ -191,6 +191,6 @@ export default function ListProduct() {
           </ModalStyle>
         </Container>
       </DivPage>
-    </div>
+    </Container>
   );
 }

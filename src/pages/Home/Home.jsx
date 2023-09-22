@@ -13,6 +13,7 @@ import {
   Carousel,
   Header,
 } from '../../components/features';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   AboutUs,
   Container,
@@ -26,11 +27,10 @@ import {
 import { TranslateText } from './translations';
 
 export default function Home() {
-  const [currentLanguage, setCurrentLanguage] = useState('PT');
+  const { globalLanguage } = useGlobalLanguage;
+  const translations = TranslateText({ globalLanguage });
 
   const location = useLocation();
-
-  const translations = TranslateText({ currentLanguage });
 
   window.history.replaceState(
     {},
@@ -56,9 +56,7 @@ export default function Home() {
   }, [location]);
 
   return (
-    <>
-      <Header setCurrentLanguage={setCurrentLanguage} />
-
+    <Container>
       <OuterDiv>
         <Container>
           <CarouselContainer>
@@ -66,7 +64,7 @@ export default function Home() {
           </CarouselContainer>
           <CardsContainer>
             <Card
-              currentLanguage={currentLanguage}
+              currentLanguage={globalLanguage}
               title={translations.cardTitle1}
               text={translations.cardText1}
               mediaTopWeb
@@ -78,7 +76,7 @@ export default function Home() {
               linkTo="/curso"
             />
             <Card
-              currentLanguage={currentLanguage}
+              currentLanguage={globalLanguage}
               isMiddle
               title={translations.cardTitle2}
               text={translations.cardText2}
@@ -87,7 +85,7 @@ export default function Home() {
               linkTo="/catalogo"
             />
             <Card
-              currentLanguage={currentLanguage}
+              currentLanguage={globalLanguage}
               title={translations.cardTitle3}
               text={translations.cardText3}
               image={Software}
@@ -96,7 +94,7 @@ export default function Home() {
               linkTo="/software"
             />
           </CardsContainer>
-          <FormsContact id="contact" language={currentLanguage} />
+          <FormsContact id="contact" language={globalLanguage} />
           <AboutUs>
             <OurHistoryTitle>{translations.ourHistoryTitle}</OurHistoryTitle>
             <OurHistory>
@@ -107,6 +105,6 @@ export default function Home() {
           </AboutUs>
         </Container>
       </OuterDiv>
-    </>
+    </Container>
   );
 }
