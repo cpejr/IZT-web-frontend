@@ -10,6 +10,7 @@ import { useTheme } from 'styled-components';
 import { useLogout } from '../../../hooks/query/sessions';
 import useAuthStore from '../../../stores/auth';
 import { Logo } from '../../common';
+import { useGlobalLanguage } from '../globalLanguage';
 import {
   Content,
   Menu,
@@ -29,6 +30,8 @@ import {
 } from './Styles';
 
 export default function Header({ setCurrentLanguage }) {
+  const { globalLanguage, setGlobalLanguage } = useGlobalLanguage();
+  console.log(globalLanguage);
   // State variables
   const [bar, setBar] = useState(false);
   const [collapse, setCollapse] = useState(false);
@@ -49,6 +52,10 @@ export default function Header({ setCurrentLanguage }) {
   const closeHeader = () => {
     setBar(false);
     setCollapseLogout(false);
+  };
+
+  const executeGlobal = () => {
+    setGlobalLanguage('EN');
   };
 
   // Backend call
@@ -118,6 +125,9 @@ export default function Header({ setCurrentLanguage }) {
       <InternContainer>
         <Logo />
         <Menu>
+          <button type="button" onClick={executeGlobal}>
+            Executar Global
+          </button>
           <Nav bar={bar} collapse={collapse}>
             <Link to="/catalogo" onClick={closeHeader}>
               Produtos
