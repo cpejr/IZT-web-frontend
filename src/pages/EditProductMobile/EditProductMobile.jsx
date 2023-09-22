@@ -16,6 +16,7 @@ import {
 } from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
 import { useUpdateProducts } from '../../hooks/query/products';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../utils/constants';
 import separateFileTypes from '../../utils/separateFileTypes';
 import {
@@ -34,6 +35,7 @@ import {
   DocumentsContainer,
   ErrorMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildEditProductErrorMessage,
   editProductValidationSchema,
@@ -48,6 +50,10 @@ export default function EditProductMobile() {
 
   const documentsLimit = 3;
   const picturesLimit = 5;
+
+  //Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   // Backend calls
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
@@ -144,15 +150,15 @@ export default function EditProductMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Editar produto</Title>
+        <Title>{translations.title}</Title>
 
         <Section>
-          <Subtitle>Nome do produto:</Subtitle>
+          <Subtitle>{translations.subtitleName}</Subtitle>
           <Input
             id="name"
             name="name"
             type="text"
-            placeholder="Digite o nome do produto"
+            placeholder={translations.placeholderName}
             error={errors?.name?.message}
             {...register('name')}
           />
@@ -160,7 +166,7 @@ export default function EditProductMobile() {
         </Section>
 
         <Section>
-          <Subtitle>Descrição:</Subtitle>
+          <Subtitle>{translations.subtitleDescription}</Subtitle>
           <TextArea
             id="description"
             name="description"
@@ -172,11 +178,11 @@ export default function EditProductMobile() {
         </Section>
 
         <Section>
-          <Subtitle>Vantagens:</Subtitle>
+          <Subtitle>{translations.subtitleAdvantages}</Subtitle>
           <TextArea
             id="advantages"
             type="advantages"
-            placeholder="Descreva as vantagens do produto"
+            placeholder={translations.placeholderAdvantages}
             error={errors?.advantages?.message}
             {...register('advantages')}
           />
@@ -184,9 +190,9 @@ export default function EditProductMobile() {
         </Section>
 
         <Section>
-          <Title>Imagens:</Title>
+          <Title>{translations.imagesTitle}</Title>
           {fieldsPictures.length < picturesLimit && (
-            <MiniText>Anexe as imagens do produto</MiniText>
+            <MiniText>{translations.imagesMiniText}</MiniText>
           )}
           <PicturesContainer>
             {fieldsPictures.map(({ id, file: picture }, index) => (
@@ -204,7 +210,7 @@ export default function EditProductMobile() {
           {fieldsPictures.length < picturesLimit && (
             <AddFileButton
               color="black"
-              label="Novo Imagem"
+              label={translations.newImageLabel}
               appendFn={appendPicture}
               allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
               sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
@@ -214,7 +220,7 @@ export default function EditProductMobile() {
         </Section>
 
         <Section>
-          <Title>Documentos:</Title>
+          <Title>{translations.documentsTitle}</Title>
           <DocumentsContainer>
             {fieldsDocuments.map(({ id, file: document }, index) => (
               <DocumentFile
@@ -234,7 +240,7 @@ export default function EditProductMobile() {
           {fieldsDocuments.length < documentsLimit && (
             <AddFileButton
               color="black"
-              label="Novo Documento"
+              label={translations.newDocumentLabel}
               appendFn={appendDocument}
               allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(', ')}
               sizeLimitInMB={DOCUMENTS_CONFIG.sizeLimitInMB}
@@ -243,9 +249,9 @@ export default function EditProductMobile() {
         </Section>
 
         <CategorySection>
-          <Title>Categoria:</Title>
+          <Title>{translations.categoryTitle}</Title>
           {isLoadingCategories ? (
-            <p>Carregando...</p>
+            <p>{translations.loadingLabel1}</p>
           ) : (
             <FormSelect
               name="category"
@@ -264,7 +270,7 @@ export default function EditProductMobile() {
                     }
                   : {}
               }
-              placeholder="Selecione a categoria"
+              placeholder={translations.selectCategoryLabel}
             />
           )}
         </CategorySection>
@@ -282,18 +288,18 @@ export default function EditProductMobile() {
                 ariaLabel="tail-spin-loading"
                 radius="5"
               />
-              <p>Carregando</p>
+              <p>{translations.loadingLabel2}</p>
             </>
           ) : (
             <>
               <FiSave size={25} />
-              <p>Editar Produto</p>
+              <p>{translations.saveButtonLabel}</p>
             </>
           )}
         </SaveButton>
 
         <CancelButton to="/administrador/listar-produtos">
-          <p>Cancelar</p>
+          <p>{translations.cancelButtonLabel}</p>
         </CancelButton>
       </Form>
     </Container>
