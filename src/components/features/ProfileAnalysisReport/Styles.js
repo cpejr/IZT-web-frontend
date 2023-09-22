@@ -71,7 +71,7 @@ export const DataContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-right: 1.5rem;
+  padding: 15px 20px;
   flex-wrap: wrap;
   gap: 0.5rem;
   width: 100%;

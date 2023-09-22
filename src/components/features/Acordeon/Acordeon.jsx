@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as Accordion from '@radix-ui/react-accordion';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { AiOutlineDown } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 import { useCalculateProfileAnalysis } from '../../../hooks/query/profileAnalysis';
@@ -111,11 +110,37 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <Accordion.Item className="AccordionItem" value="item-1">
-          <AccordionTrigger>Dados de análise</AccordionTrigger>
+          <AccordionTrigger>Dados da Análise</AccordionTrigger>
           <AccordionContent>
-            {rectificationProcess.map((data) => (
+            <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
+              <br /> Processo de Retificação:
+              <br />
+              <select
+                id="rectificationProcess"
+                {...register('rectificationProcess')}
+                className={`AccordionInput ${
+                  errors?.rectificationProcess?.message ? 'error' : ''
+                }`}
+              >
+                <option value="">Selecionar</option>
+                <option value="Centerless de Mergulho">
+                  Centerless de Mergulho
+                </option>
+                <option value="Centerless de Passagem">
+                  Centerless de Passagem
+                </option>
+              </select>
+            </div>
+
+            {errors.rectificationProcess?.message && (
+              <p className="ErrorMessage">
+                {errors.rectificationProcess?.message}
+              </p>
+            )}
+
+            {rectificationProcess.slice(1).map((data) => (
               <div key={data.id}>
-                <div className="AccordionLine">
+                <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
                   <br /> {data.label}:
                   <br />
                   {data.id === 'machineNumber' ? (
@@ -128,10 +153,26 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
                       }
                       step="any"
                       type="number"
-                      className={`AccordionMiniInput ${
+                      className={`AccordionInput ${
                         errors[data.id] ? 'error' : ''
                       }`}
                     />
+                  ) : data.id === 'operation' ? (
+                    <select
+                      id={data.id}
+                      name={data.id}
+                      {...register(data.id)}
+                      className={`AccordionInput ${
+                        errors[data.id] ? 'error' : ''
+                      }`}
+                    >
+                      <option value="">Selecionar</option>
+                      <option value="Opção 1"> Desbaste </option>
+                      <option value="Opção 2">Pré Desbate</option>
+                      <option value="Opção 3">Acabamento</option>
+
+                      {/* Adicione outras opções aqui */}
+                    </select>
                   ) : (
                     <input
                       id={data.id}
@@ -143,6 +184,7 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
                     />
                   )}
                 </div>
+
                 {errors[data.id]?.message && (
                   <p className="ErrorMessage">{errors[data.id]?.message}</p>
                 )}
@@ -150,13 +192,12 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
             ))}
           </AccordionContent>
         </Accordion.Item>
-
         <Accordion.Item className="AccordionItem" value="item-2">
-          <AccordionTrigger>Dados da máquina</AccordionTrigger>
+          <AccordionTrigger>Dados da Máquina</AccordionTrigger>
           <AccordionContent>
             {machineData.map((data) => (
               <div key={data.id}>
-                <div className="AccordionLine">
+                <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
                   <br /> {data.label}:
                   <br />
                   <input
@@ -182,14 +223,23 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
           </AccordionContent>
         </Accordion.Item>
         <Accordion.Item className="AccordionItem" value="item-3">
-          <AccordionTrigger>Dados do produto</AccordionTrigger>
+          <AccordionTrigger>Dados do Produto</AccordionTrigger>
           <AccordionContent>
             {productData.map((data) => (
               <div key={data.id}>
-                <div className="AccordionLine">
+                <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
                   <br /> {data.label}:
                   <br />
-                  {data.id !== 'product' ? (
+                  {data.id === 'product' ? (
+                    <input
+                      id={data.id}
+                      name={data.id}
+                      {...register(data.id)}
+                      className={`AccordionInput ${
+                        errors[data.id] ? 'error' : ''
+                      }`}
+                    />
+                  ) : (
                     <input
                       id={data.id}
                       name={data.id}
@@ -202,22 +252,18 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
                       className={`AccordionMiniInput ${
                         errors[data.id] ? 'error' : ''
                       }`}
-                    />
-                  ) : (
-                    <input
-                      id={data.id}
-                      name={data.id}
-                      {...register(data.id)}
-                      className={`AccordionInput ${
-                        errors[data.id] ? 'error' : ''
-                      }`}
+                      style={
+                        data.id === 'productNumber'
+                          ? { width: '100%', marginRight: '0' }
+                          : {}
+                      }
                     />
                   )}
                   <p> {data.unit} </p>
                 </div>
                 {errors[data.id]?.message && (
                   <p className="ErrorMessage">{errors[data.id]?.message}</p>
-                )}{' '}
+                )}
               </div>
             ))}
           </AccordionContent>
@@ -227,7 +273,7 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
           <AccordionContent>
             {parametersRA.map((data) => (
               <div key={data.id}>
-                <div className="AccordionLine">
+                <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
                   <br /> {data.label}:
                   <br />
                   {data.id !== 'dresserPosition' ? (
@@ -288,7 +334,7 @@ const AccordionTrigger = React.forwardRef(function AccordionTrigger(
         ref={forwardedRef}
       >
         {children}
-        <ChevronDownIcon className="AccordionChevron" aria-hidden />
+        <AiOutlineDown className="AccordionChevron" aria-hidden />
       </Accordion.Trigger>
     </Accordion.Header>
   );
