@@ -6,7 +6,7 @@ import { useMediaQuery } from 'react-responsive';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTheme } from 'styled-components';
-
+import { TranslateTextHeader } from './translations';
 import { useLogout } from '../../../hooks/query/sessions';
 import useAuthStore from '../../../stores/auth';
 import { Logo } from '../../common';
@@ -34,6 +34,7 @@ export default function Header({ setCurrentLanguage }) {
   const [collapse, setCollapse] = useState(false);
   const [collapseLogout, setCollapseLogout] = useState(false);
   const [language, setLanguage] = useState('PT'); // default language is EN
+  const translations = TranslateTextHeader({ language });
 
   // Atualize a língua no componente Home quando a língua mudar
   useEffect(() => {
@@ -120,13 +121,13 @@ export default function Header({ setCurrentLanguage }) {
         <Menu>
           <Nav bar={bar} collapse={collapse}>
             <Link to="/catalogo" onClick={closeHeader}>
-              Produtos
+              {translations.cardTitle1}
             </Link>
             <Link to="/curso" onClick={closeHeader}>
-              Cursos
+              {translations.cardText1}
             </Link>
             <Link to="/software" onClick={closeHeader}>
-              Software
+              {translations.cardTitle2}
             </Link>
             <InvertItems>
               {user ? (
@@ -145,7 +146,7 @@ export default function Header({ setCurrentLanguage }) {
                     navigate('/login');
                   }}
                 >
-                  Entrar
+                  {translations.cardText2}
                 </ButtonLogin>
               )}
               <Select bar={bar}>
