@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactDOM from 'react-dom/client';
 
 import Routes from './routes';
+import { LanguageProvider } from './stores/globalLanguage';
 import GlobalStyles from './styles/GlobalStyles';
 import Theme from './styles/Theme';
 
@@ -30,7 +31,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <QueryClientProvider client={queryClient}>
         <Theme>
           <GlobalStyles />
-          <Routes />
+          <LanguageProvider>
+            <Routes />
+          </LanguageProvider>
         </Theme>
         <ReactQueryDevtools />
       </QueryClientProvider>

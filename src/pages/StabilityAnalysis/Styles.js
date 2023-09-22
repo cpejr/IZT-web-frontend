@@ -54,6 +54,10 @@ export const DataEntry = styled.form`
   align-items: stretch;
   justify-content: flex-start;
 `;
+export const DataEntry2 = styled.form`
+  width: 100%;
+  height: 100%;
+`;
 
 export const ErrorMessage = styled.p`
   font-weight: 700;

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import { useEffect, useState } from 'react';
 
 import { CloseOutlined, DownOutlined } from '@ant-design/icons';
@@ -5,6 +6,7 @@ import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
 
+import ProfileAnalysisGraph from '../Graphic/ProfileAnalysisGraph';
 import ModalDeleteProfileAnalysis from '../ModalDeleteProfileAnalysis/ModalDeleteProfileAnalysis';
 import ProfilePDF from '../PDF/ProfileAnalysisPDF';
 import {
@@ -195,6 +197,12 @@ export default function ProfileAnalysisReport({
             </DataColumn>
           </Row>
         </Columns>
+        <div>
+          <Title>Vão de retificação centerless de passagem</Title>
+          <ProfileAnalysisGraph
+            data={data?.profileAnalysisDiagram?.retificationCenterlessDiagram}
+          />
+        </div>
         <ButtonRow>
           <button type="button" onClick={saveFile}>
             Baixar Relatório

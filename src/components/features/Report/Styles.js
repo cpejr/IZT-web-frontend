@@ -8,7 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   max-width: 600rem;
   padding-left: 1.5rem;
-  max-height: ${(props) => (props.isOpened ? '100rem' : '0rem')};
+  max-height: ${(props) => (props.isOpened ? 'auto' : '0rem')};
   overflow-y: hidden;
   transition: all 0.5s ease-in-out 0.3s;
 `;
@@ -26,6 +26,18 @@ export const Columns = styled.div`
   @media (max-width: 1270px) {
     display: flex;
     flex-direction: column;
+  }
+`;
+
+export const GraphsDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 5rem;
+
+  div {
+    width: 100%;
   }
 `;
 

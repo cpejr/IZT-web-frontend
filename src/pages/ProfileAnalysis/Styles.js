@@ -19,6 +19,10 @@ export const Container = styled.div`
   gap: 4rem;
   flex-direction: flex-start;
 `;
+export const DataEntry = styled.form`
+  width: 100%;
+  height: 100%;
+`;
 export const DataInput = styled.div`
   h1 {
     margin-top: 5%;
