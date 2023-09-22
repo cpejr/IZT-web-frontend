@@ -127,7 +127,9 @@ export const Container2 = styled.div`
   }
 `;
 
-export const H1 = styled.h1`
+export const H1 = styled.div`
+  display: flex;
+  flex-direction: row;
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
   color: white;
