@@ -7,7 +7,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { FiSave } from 'react-icons/fi';
 import { TailSpin } from 'react-loader-spinner';
 import { useMediaQuery } from 'react-responsive';
-import { Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { FormSelect } from '../../components/common';
