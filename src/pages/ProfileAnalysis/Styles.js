@@ -48,6 +48,8 @@ export const Containerleft = styled.div`
 `;
 export const DivName = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  align-content: center;
   gap: 1.5rem;
 `;
 
@@ -58,6 +60,7 @@ export const Analysis = styled.div`
   padding-left: 0.7vw;
   width: 100%;
   text-align: start;
+  max-height: 83vh;
   overflow-y: scroll;
   margin-bottom: 2.9rem;
   ::-webkit-scrollbar {
