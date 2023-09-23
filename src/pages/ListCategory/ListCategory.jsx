@@ -13,6 +13,7 @@ import {
 } from '../../components/features';
 import { useSearchByNameCategories } from '../../hooks/query/categories';
 import useDebounce from '../../hooks/useDebounce';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   Title,
@@ -28,6 +29,7 @@ import {
   ModalStyle,
   DeleteButton,
 } from './Styles';
+import { TranslateText } from './translations';
 import { buildGetCategoriesErrorMessage } from './utils';
 
 export default function ListCategory() {
@@ -38,6 +40,9 @@ export default function ListCategory() {
   const [categoryId, setCategoryId] = useState('');
   const [name, setName] = useState('');
   const debouncedName = useDebounce(name);
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   const { data: categories, isLoading } = useSearchByNameCategories({
     name: debouncedName,
@@ -63,7 +68,7 @@ export default function ListCategory() {
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
-      <Title>Lista de categorias</Title>
+      <Title>{translations.title}</Title>
 
       <CategoryFilterContainer>
         <SearchSection>
@@ -72,7 +77,7 @@ export default function ListCategory() {
           </SearchIconButton>
           <SearchProduct
             onChange={(e) => setName(e.target.value)}
-            placeholder="Pesquisar categoria"
+            placeholder={translations.searchPlaceholder}
           />
         </SearchSection>
       </CategoryFilterContainer>
