@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 
 import { RegisterInput } from '../../components/common';
 import { useCreateCategory } from '../../hooks/query/categories';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -17,6 +18,7 @@ import {
   SaveButton,
   CancelButton,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildCreateCategoryErrorMessage,
   createCategoryValidationSchema,
@@ -26,6 +28,9 @@ export default function CreateCategoryMobile() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const isMediumScreen = useMediaQuery({ minWidth: 700 });
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   const { mutate: createCategory, isLoading } = useCreateCategory({
     onSuccess: () => {
@@ -56,7 +61,7 @@ export default function CreateCategoryMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Adicionar Categoria</Title>
+        <Title>{translations.title}</Title>
 
         <RegisterInput
           label="Nome da categoria:"
@@ -78,18 +83,18 @@ export default function CreateCategoryMobile() {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loadingText}</p>
               </>
             ) : (
               <>
                 <FiSave size={25} />
-                <p>Adicionar Categoria</p>
+                <p>{translations.saveButtonLabel}</p>
               </>
             )}
           </SaveButton>
 
           <CancelButton to="/administrador/listar-categorias">
-            <p>Cancelar</p>
+            <p>{translations.cancelButtonLabel}</p>
           </CancelButton>
         </ButtonsDiv>
       </Form>
