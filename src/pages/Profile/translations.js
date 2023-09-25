@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export function TranslateText({ currentLanguage }) {
+export function TranslateText({ globalLanguage }) {
   let profileTitle1;
   let profilePersonalInfo;
   let profileCompany;
@@ -18,7 +18,7 @@ export function TranslateText({ currentLanguage }) {
   let profileNoAccess;
   let profileChangeInformation;
 
-  if (currentLanguage === 'EN') {
+  if (globalLanguage === 'EN') {
     profileTitle1 = 'User information';
     profilePersonalInfo = 'Personal information';
     profileCompany = 'Company: ';
@@ -36,7 +36,7 @@ export function TranslateText({ currentLanguage }) {
     profileUnlimitedAccess = 'Unlimited Access: ';
     profileNoAccess = 'No access: ';
     profileChangeInformation = 'Change Information';
-  } else if (currentLanguage === 'PT') {
+  } else if (globalLanguage === 'PT') {
     profileTitle1 = 'Informações do Usuário';
     profilePersonalInfo = 'Informações Pessoais';
     profileCompany = 'Empresa: ';
@@ -54,7 +54,7 @@ export function TranslateText({ currentLanguage }) {
     profileUnlimitedAccess = 'Acesso Ilimitado ';
     profileNoAccess = 'Sem Acesso: ';
     profileChangeInformation = 'Alterar Infomações';
-  } else if (currentLanguage === 'DE') {
+  } else if (globalLanguage === 'DE') {
     profileTitle1 = 'Benutzerinformationen';
     profilePersonalInfo = 'Persönliche Informationen';
     profileCompany = 'Unternehmen: ';
