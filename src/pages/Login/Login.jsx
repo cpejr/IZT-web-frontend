@@ -28,6 +28,8 @@ import {
 } from './Styles';
 import { TranslateText } from './translations';
 import { buildLoginErrorMessage, loginValidationSchema } from './utils';
+import { buildLoginErrorMessageDE, loginValidationSchemaDE } from './utilsDE';
+import { buildLoginErrorMessageEN, loginValidationSchemaEN } from './utilsEN';
 
 export default function Login() {
   // Translation
@@ -49,19 +51,38 @@ export default function Login() {
       navigate(redirectTo);
     },
     onError: (err) => {
-      const errorMessage = buildLoginErrorMessage(err);
+      if (globalLanguage === 'DE') {
+        const errorMessageDE = buildLoginErrorMessageDE(err);
 
-      toast.error(errorMessage);
+        toast.error(errorMessageDE);
+      } else if (globalLanguage === 'EN') {
+        const errorMessageEN = buildLoginErrorMessageEN(err);
+
+        toast.error(errorMessageEN);
+      } else {
+        const errorMessage = buildLoginErrorMessage(err);
+
+        toast.error(errorMessage);
+      }
     },
   });
 
+  // Forms Handlers
+
+  let resolver;
+  if (globalLanguage === 'DE') {
+    resolver = zodResolver(loginValidationSchemaDE);
+  } else if (globalLanguage === 'EN') {
+    resolver = zodResolver(loginValidationSchemaEN);
+  } else {
+    resolver = zodResolver(loginValidationSchema);
+  }
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(loginValidationSchema),
-  });
+  } = useForm({ resolver });
+
   const onSubmit = (data) => login(data);
 
   const openModalForgotPassword = () => setShowModal(true);
