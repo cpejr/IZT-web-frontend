@@ -13,6 +13,7 @@ import { DataInput } from '../../components/common';
 import { ModalForgotPassword } from '../../components/features';
 import { useLogin } from '../../hooks/query/sessions';
 import useAuthStore from '../../stores/auth';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Page,
   Container,
@@ -28,6 +29,10 @@ import {
 import { buildLoginErrorMessage, loginValidationSchema } from './utils';
 
 export default function Login() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -69,7 +74,7 @@ export default function Login() {
           alt="Logo da IZT: Um I atravessando um Z dentro de um circulo"
         />
         <DataEntry>
-          <Title>Entre na sua conta</Title>
+          <Title>{translations.loginJoin}</Title>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <DataInput
               label="E-mail: "
@@ -80,7 +85,7 @@ export default function Login() {
               type="text"
             />
             <DataInput
-              label="Senha: "
+              label={translations.loginPassword}
               name="password"
               placeholder="********"
               register={register}
@@ -97,17 +102,17 @@ export default function Login() {
                     ariaLabel="tail-spin-loading"
                     radius="5"
                   />
-                  Carregando
+                  {translations.loading}
                 </>
               ) : (
-                'Entrar'
+                translations.loginLog
               )}
             </SubmitButton>
           </Form>
         </DataEntry>
         <Links>
           <ForgotPassword onClick={openModalForgotPassword}>
-            Esqueceu a sua senha? Clique aqui!
+            {translations.loginForgotPassword}
           </ForgotPassword>
           <Modal
             open={showModal}
@@ -118,12 +123,15 @@ export default function Login() {
             destroyOnClose
             centered
           >
-            <ModalForgotPassword close={closeModalForgotPassword} />
+            <ModalForgotPassword
+              language={globalLanguage}
+              close={closeModalForgotPassword}
+            />
           </Modal>
 
           <SignUpLink>
-            Ainda não tem uma conta?{' '}
-            <Link to="/cadastro">Cadastre-se aqui!</Link>
+            {translations.loginNotAccount}
+            <Link to="/cadastro">{translations.loginHere}</Link>
           </SignUpLink>
         </Links>
       </Container>

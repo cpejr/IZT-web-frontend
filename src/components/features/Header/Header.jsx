@@ -101,10 +101,12 @@ export default function Header() {
           to={user?.isAdmin ? '/administrador' : '/perfil'}
           onClick={() => setBar(false)}
         >
-          {isLessThanEqualLimit ? `Olá, ${firstName}!` : 'Meu Perfil'}
+          {isLessThanEqualLimit
+            ? `${translations.cardText3}, ${firstName}!`
+            : 'Meu Perfil'}
         </Link>
         <LogoutBtn onClick={logout} collapse={collapseLogout}>
-          Deslogar
+          {translations.cardTitle3}
         </LogoutBtn>
       </>
     );

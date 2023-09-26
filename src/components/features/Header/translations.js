@@ -11,17 +11,22 @@ export function TranslateTextHeader({ globalLanguage }) {
     cardTitle1 = 'Products';
     cardText1 = 'Courses';
     cardTitle2 = 'Software';
-    cardText2 = 'Log in';
+    cardTitle3 = 'Log in';
+    cardText3 = 'Hello';
   } else if (globalLanguage === 'PT') {
     cardTitle1 = 'Produtos';
     cardText1 = 'Cursos';
     cardTitle2 = 'Software';
     cardText2 = 'Entrar';
+    cardTitle3 = 'Deslogar';
+    cardText3 = 'Olá';
   } else if (globalLanguage === 'DE') {
     cardTitle1 = 'Produkte';
     cardText1 = 'Kurse';
     cardTitle2 = 'Software';
     cardText2 = 'Einloggen';
+    cardTitle3 = 'Abmelden';
+    cardText3 = 'Hallo';
   }
   return {
     cardTitle1,
