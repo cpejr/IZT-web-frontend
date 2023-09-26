@@ -379,7 +379,7 @@ export const LogoutBtn = styled.button`
     border-left: none;
     color: white;
     font-weight: 500;
-    padding-left: 0rem;
+    padding-left: 0rem; /* Correção: removi o caractere 's' extra */
     display: flex;
     max-height: ${(props) => (props.collapse ? '10rem' : '0rem')};
     overflow-y: hidden;
@@ -388,8 +388,10 @@ export const LogoutBtn = styled.button`
       text-decoration-thickness: 0.1rem;
     }
   }
+
   @media (max-width: 1080px) {
     font-size: 1.8rem;
   }
+
   transition: all 400ms ease-in-out;
 `;

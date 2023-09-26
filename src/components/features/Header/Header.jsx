@@ -10,6 +10,7 @@ import { useLogout } from '../../../hooks/query/sessions';
 import useAuthStore from '../../../stores/auth';
 import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { Logo } from '../../common';
+import { TranslateTextHeader } from './translations';
 import {
   Content,
   Menu,
@@ -30,6 +31,7 @@ import {
 
 export default function Header() {
   const { globalLanguage, setGlobalLanguage } = useGlobalLanguage();
+  const translations = TranslateTextHeader({ globalLanguage });
 
   // State variables
   const [bar, setBar] = useState(false);
@@ -115,13 +117,13 @@ export default function Header() {
         <Menu>
           <Nav bar={bar} collapse={collapse}>
             <Link to="/catalogo" onClick={closeHeader}>
-              Produtos
+              {translations.cardTitle1}
             </Link>
             <Link to="/curso" onClick={closeHeader}>
-              Cursos
+              {translations.cardText1}
             </Link>
             <Link to="/software" onClick={closeHeader}>
-              Software
+              {translations.cardTitle2}
             </Link>
             <InvertItems>
               {user ? (
@@ -140,7 +142,7 @@ export default function Header() {
                     navigate('/login');
                   }}
                 >
-                  Entrar
+                  {translations.cardText2}
                 </ButtonLogin>
               )}
               <Select bar={bar}>
