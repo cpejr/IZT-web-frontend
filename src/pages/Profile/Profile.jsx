@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
 
-import { Header, ModalChangeUserData } from '../../components/features';
+import { ModalChangeUserData } from '../../components/features';
 import { useGetUserCourses } from '../../hooks/query/userCourse';
 import useAuthStore from '../../stores/auth';
 import { useGlobalLanguage } from '../../stores/globalLanguage';
