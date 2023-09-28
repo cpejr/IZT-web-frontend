@@ -23,6 +23,7 @@ export const DataColumn = styled.div`
   gap: 1.5vh;
   width: 100%;
   margin-bottom: 2rem;
+  padding: 15px 20px;
 `;
 
 export const Label = styled.label`

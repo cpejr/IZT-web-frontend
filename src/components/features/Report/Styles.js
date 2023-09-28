@@ -50,9 +50,7 @@ export const DataColumn = styled.div`
   height: 100%;
   max-height: 25rem;
   max-width: 28rem;
-  /* margin: auto; erro na posição do título /*
-  /*margin: 0.5rem;  Adicione o valor de margem que desejar (estava dando erro no alinhamento do pontilhado) */
-  padding: 0.5rem; /* Opcional: Adiciona preenchimento interno para a div */
+  padding: 0.5rem;
 
   @media (max-width: 1350px) {
     max-height: 30rem;
@@ -67,6 +65,7 @@ export const DataContainer = styled.div`
   flex-direction: column;
   justify-content: flex;
   flex-wrap: wrap;
+  padding: 15px 20px;
   gap: 0.5rem;
   width: 100%;
   height: 100%;

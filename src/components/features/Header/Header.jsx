@@ -27,9 +27,11 @@ import {
   Divider,
   MyProfile,
 } from './Styles';
+import { TranslateTextHeader } from './translations';
 
 export default function Header() {
   const { globalLanguage, setGlobalLanguage } = useGlobalLanguage();
+  const translations = TranslateTextHeader({ globalLanguage });
 
   // State variables
   const [bar, setBar] = useState(false);
@@ -51,14 +53,11 @@ export default function Header() {
   const { mutate: logout } = useLogout({
     onSuccess: () => {
       closeHeader();
-      toast.success('Usuário deslogado com sucesso!');
+      toast.success(translations.toastMessage);
       navigate('/');
     },
     onError: () => {
-      const errorMessage =
-        'Ocorreu um erro ao realizar o logout. Tente novamente mais tarde';
-
-      toast.error(errorMessage);
+      toast.error(translations.errorMessage);
     },
   });
 
@@ -75,7 +74,7 @@ export default function Header() {
                 navigate(user?.isAdmin ? '/administrador' : '/perfil');
               }}
             >
-              Meu Perfil
+              {translations.cardTitle4}
             </button>
             <IoIosArrowDown
               color="white"
@@ -84,7 +83,7 @@ export default function Header() {
           </MyProfile>
           <Divider collapse={collapseLogout && bar} />
           <LogoutBtn onClick={logout} collapse={collapseLogout && bar}>
-            Deslogar
+            {translations.cardTitle3}
           </LogoutBtn>
         </MenuProfile>
       );
@@ -99,10 +98,12 @@ export default function Header() {
           to={user?.isAdmin ? '/administrador' : '/perfil'}
           onClick={() => setBar(false)}
         >
-          {isLessThanEqualLimit ? `Olá, ${firstName}!` : 'Meu Perfil'}
+          {isLessThanEqualLimit
+            ? `${translations.cardText3}, ${firstName}!`
+            : 'Meu Perfil'}
         </Link>
         <LogoutBtn onClick={logout} collapse={collapseLogout}>
-          Deslogar
+          {translations.cardTitle3}
         </LogoutBtn>
       </>
     );
@@ -115,13 +116,13 @@ export default function Header() {
         <Menu>
           <Nav bar={bar} collapse={collapse}>
             <Link to="/catalogo" onClick={closeHeader}>
-              Produtos
+              {translations.cardTitle1}
             </Link>
             <Link to="/curso" onClick={closeHeader}>
-              Cursos
+              {translations.cardText1}
             </Link>
             <Link to="/software" onClick={closeHeader}>
-              Software
+              {translations.cardTitle2}
             </Link>
             <InvertItems>
               {user ? (
@@ -140,7 +141,7 @@ export default function Header() {
                     navigate('/login');
                   }}
                 >
-                  Entrar
+                  {translations.cardText2}
                 </ButtonLogin>
               )}
               <Select bar={bar}>

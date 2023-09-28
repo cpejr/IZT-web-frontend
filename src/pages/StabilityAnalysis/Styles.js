@@ -208,6 +208,8 @@ export const TitleRow = styled.div`
 export const DivName = styled.div`
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
+  align-content: center;
 `;
 
 export const Diagram = styled.div`
