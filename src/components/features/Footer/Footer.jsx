@@ -3,6 +3,7 @@ import { BsInstagram, BsWhatsapp } from 'react-icons/bs';
 import { HiOutlineMail } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { Logo } from '../../common';
 import {
   Container,
@@ -17,9 +18,15 @@ import {
   ButtonMobile,
   SectionGoTo,
   ContactButton,
+  Centralize,
 } from './Styles';
+import { TranslateText } from './translations';
 
 export default function Footer() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -55,24 +62,21 @@ export default function Footer() {
         <LogoSection>
           <Logo />
         </LogoSection>
-        <Text>
-          Inovação, tecnologia, precisão, qualidade e sustentabilidade.
-        </Text>
+        <Text> {translations.IZTDescription} </Text>
       </SideContainer>
       <MiddleContainer>
-        <Tittle>Contato</Tittle>
-        <Text>
-          Entre em contato agora para sanar todas dúvidas sobre nossos produtos,
-          nossos softwares ou nossos cursos.
-        </Text>
+        <Tittle>{translations.contact}</Tittle>
+        <Text>{translations.contactDescription}</Text>
 
         <ContactButton onClick={handleContactButtonClick}>
-          Fale Conosco
+          {translations.button}
         </ContactButton>
       </MiddleContainer>
 
       <SideContainer>
-        <Tittle>Nossas Redes</Tittle>
+        <Tittle>
+          <Centralize>{translations.socialMedia}</Centralize>
+        </Tittle>
         <SocialMedias>
           <SocialMediaButton href="https://cpejr.com/">
             <BsInstagram size={30} />
@@ -93,14 +97,14 @@ export default function Footer() {
 
         <ButtonMobile>
           <ContactButton onClick={handleContactButtonClick}>
-            Fale Conosco
+            {translations.button}
           </ContactButton>
         </ButtonMobile>
 
         <SectionGoTo>
-          <Tittle>Ir para</Tittle>
-          <GoTo to="/catalogo">Produtos</GoTo>
-          <GoTo to="/curso">Cursos</GoTo>
+          <Tittle>{translations.goTo}</Tittle>
+          <GoTo to="/catalogo">{translations.products}</GoTo>
+          <GoTo to="/curso">{translations.courses}</GoTo>
           <GoTo to="/software">Software</GoTo>
         </SectionGoTo>
       </SideContainer>

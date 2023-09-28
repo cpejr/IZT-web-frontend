@@ -206,3 +206,7 @@ export const ContactButton = styled.button`
     max-width: 95%;
   }
 `;
+
+export const Centralize = styled.div`
+  text-align: center;
+`;
