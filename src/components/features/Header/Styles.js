@@ -379,7 +379,7 @@ export const LogoutBtn = styled.button`
     border-left: none;
     color: white;
     font-weight: 500;
-    padding-left: 0rem; /* Correção: removi o caractere 's' extra */
+    padding-left: 0rem;
     display: flex;
     max-height: ${(props) => (props.collapse ? '10rem' : '0rem')};
     overflow-y: hidden;

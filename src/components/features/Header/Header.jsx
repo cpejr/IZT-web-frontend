@@ -10,7 +10,6 @@ import { useLogout } from '../../../hooks/query/sessions';
 import useAuthStore from '../../../stores/auth';
 import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { Logo } from '../../common';
-import { TranslateTextHeader } from './translations';
 import {
   Content,
   Menu,
@@ -28,6 +27,7 @@ import {
   Divider,
   MyProfile,
 } from './Styles';
+import { TranslateTextHeader } from './translations';
 
 export default function Header() {
   const { globalLanguage, setGlobalLanguage } = useGlobalLanguage();
@@ -53,14 +53,11 @@ export default function Header() {
   const { mutate: logout } = useLogout({
     onSuccess: () => {
       closeHeader();
-      toast.success('Usuário deslogado com sucesso!');
+      toast.success(translations.toastMessage);
       navigate('/');
     },
     onError: () => {
-      const errorMessage =
-        'Ocorreu um erro ao realizar o logout. Tente novamente mais tarde';
-
-      toast.error(errorMessage);
+      toast.error(translations.errorMessage);
     },
   });
 
@@ -77,7 +74,7 @@ export default function Header() {
                 navigate(user?.isAdmin ? '/administrador' : '/perfil');
               }}
             >
-              Meu Perfil
+              {translations.cardTitle4}
             </button>
             <IoIosArrowDown
               color="white"
@@ -86,7 +83,7 @@ export default function Header() {
           </MyProfile>
           <Divider collapse={collapseLogout && bar} />
           <LogoutBtn onClick={logout} collapse={collapseLogout && bar}>
-            Deslogar
+            {translations.cardTitle3}
           </LogoutBtn>
         </MenuProfile>
       );
