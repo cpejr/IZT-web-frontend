@@ -14,6 +14,7 @@ import {
   SubmitButton,
 } from '../../components/common';
 import { useCreateUser } from '../../hooks/query/users';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Page,
   Container,
@@ -27,9 +28,22 @@ import {
   AddressSelect,
   ButtonDiv,
 } from './Styles';
+import { TranslateText } from './translations';
 import { buildRegisterErrorMessage, registerValidationSchema } from './utils';
+import {
+  buildRegisterErrorMessageDE,
+  registerValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildRegisterErrorMessageEN,
+  registerValidationSchemaEN,
+} from './utilsEN';
 
 export default function Register() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   // States and variables
   const countries = useMemo(() => Country.getAllCountries(), []);
   const [states, setStates] = useState(null);
@@ -60,13 +74,32 @@ export default function Register() {
       navigate('/verificar-email', { state: user.email });
     },
     onError: (err) => {
-      const errorMessage = buildRegisterErrorMessage(err);
+      if (globalLanguage === 'DE') {
+        const errorMessageDE = buildRegisterErrorMessageDE(err);
 
-      toast.error(errorMessage);
+        toast.error(errorMessageDE);
+      } else if (globalLanguage === 'EN') {
+        const errorMessageEN = buildRegisterErrorMessageEN(err);
+
+        toast.error(errorMessageEN);
+      } else {
+        const errorMessage = buildRegisterErrorMessage(err);
+
+        toast.error(errorMessage);
+      }
     },
   });
 
   // Form handlers
+  let resolver;
+
+  if (globalLanguage === 'DE') {
+    resolver = zodResolver(registerValidationSchemaDE);
+  } else if (globalLanguage === 'EN') {
+    resolver = zodResolver(registerValidationSchemaEN);
+  } else {
+    resolver = zodResolver(registerValidationSchema);
+  }
   const {
     register,
     handleSubmit,
@@ -74,9 +107,7 @@ export default function Register() {
     formState: { errors },
     setValue,
     watch,
-  } = useForm({
-    resolver: zodResolver(registerValidationSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = (data) => createUser(data);
 
   // Country, state and city selects handlers
@@ -116,48 +147,48 @@ export default function Register() {
           src={IZTLogo}
           alt="Logo da IZT: Um I atravessando um Z dentro de um circulo"
         />
-        <Title>Crie sua conta</Title>
+        <Title>{translations.registerCreate}</Title>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <DataEntry>
             <FormColumn>
-              <Subtitle>Informações pessoais</Subtitle>
+              <Subtitle>{translations.registerPersonalInfo}</Subtitle>
               <RegisterInput
-                label="Empresa: "
+                label={translations.registerCompany}
                 name="company"
-                placeholder="Nome da empresa"
+                placeholder={translations.phCompany}
                 register={register}
                 errors={errors}
                 type="text"
               />
               <RegisterInput
-                label="Nome: "
+                label={translations.registerName}
                 name="name"
-                placeholder="Nome"
+                placeholder={translations.phName}
                 register={register}
                 errors={errors}
                 type="text"
               />
               <RegisterInput
-                label="Sobrenome: "
+                label={translations.registerLastName}
                 name="surname"
-                placeholder="Sobrenome"
+                placeholder={translations.phLastName}
                 register={register}
                 errors={errors}
                 type="text"
               />
               <RegisterInput
-                label="Cargo: "
+                label={translations.registerRole}
                 name="role"
-                placeholder="Nome do cargo"
+                placeholder={translations.phRole}
                 register={register}
                 errors={errors}
                 type="text"
               />
             </FormColumn>
             <FormColumn>
-              <Subtitle>Endereço</Subtitle>
+              <Subtitle>{translations.registerAdress}</Subtitle>
               <AddressSelect>
-                <Label>País:</Label>
+                <Label>{translations.registerCoutry}</Label>
                 <FormSelect
                   name="country"
                   size="large"
@@ -171,7 +202,7 @@ export default function Register() {
               </AddressSelect>
 
               <AddressSelect>
-                <Label>Estado:</Label>
+                <Label>{translations.registerState}</Label>
                 <FormSelect
                   name="state"
                   size="large"
@@ -186,7 +217,7 @@ export default function Register() {
               </AddressSelect>
 
               <AddressSelect>
-                <Label>Cidade:</Label>
+                <Label>{translations.registerCity}</Label>
                 <FormSelect
                   name="city"
                   size="large"
@@ -201,16 +232,16 @@ export default function Register() {
               </AddressSelect>
 
               <RegisterInput
-                label="Endereço: "
+                label={translations.registerStreet}
                 name="address"
-                placeholder="Endereço"
+                placeholder={translations.phStreet}
                 register={register}
                 errors={errors}
                 type="text"
               />
             </FormColumn>
             <FormColumn>
-              <Subtitle>Credenciais</Subtitle>
+              <Subtitle>{translations.registerCredentials}</Subtitle>
               <RegisterInput
                 label="E-mail: "
                 name="email"
@@ -220,7 +251,7 @@ export default function Register() {
                 type="text"
               />
               <RegisterInput
-                label="Senha: "
+                label={translations.registerPassword}
                 name="password"
                 placeholder="********"
                 register={register}
@@ -228,7 +259,7 @@ export default function Register() {
                 type="password"
               />
               <RegisterInput
-                label="Confirme sua senha: "
+                label={translations.registerConfirmPassword}
                 name="confirmPassword"
                 placeholder="********"
                 register={register}
@@ -248,10 +279,10 @@ export default function Register() {
                     ariaLabel="tail-spin-loading"
                     radius="5"
                   />
-                  Carregando
+                  {translations.loading}
                 </>
               ) : (
-                'Criar Conta'
+                translations.registerCreateAccount
               )}
             </SubmitButton>
           </ButtonDiv>

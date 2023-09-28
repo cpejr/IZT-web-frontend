@@ -20,12 +20,41 @@ import {
 } from './Styles';
 import { buildForgotPasswordErrorMessage, forgotPasswordSchema } from './utils';
 
-export default function ModalForgotPassword({ close }) {
+export default function ModalForgotPassword({ close, language }) {
+  let modalAccount;
+  let modalLink;
+  let modalEmail;
+  let modalSend;
+  let loading;
+  let modalEmailSent;
+
+  if (language === 'EN') {
+    modalAccount = 'Account Recovery';
+    modalLink = 'We will send you a link to recover your account';
+    modalEmail = 'Enter your Email: ';
+    modalSend = 'Send';
+    loading = 'Loading';
+    modalEmailSent = 'Email sent successfully';
+  } else if (language === 'PT') {
+    modalAccount = 'Recuperação de Conta';
+    modalLink = 'Enviaremos um link para você recuperar sua conta';
+    modalEmail = 'Insira seu Email: ';
+    modalSend = 'Enviar';
+    loading = 'Carregando';
+    modalEmailSent = 'Email enviado com sucesso';
+  } else if (language === 'DE') {
+    modalAccount = 'Kontowiederherstellung';
+    modalLink = 'Wir senden Ihnen einen Link, um Ihr Konto wiederherzustellen';
+    modalEmail = 'Geben Sie Ihre E-Mail ein:';
+    modalSend = 'Senden';
+    loading = 'Wird geladen';
+    modalEmailSent = 'E-Mail erfolgreich versendet';
+  }
   const [isPending, setIsPending] = useState(false);
 
   const { mutate: forgotPassword } = useForgotPassword({
     onSuccess: () => {
-      toast.success('Email enviado com sucesso');
+      toast.success({ modalEmailSent });
       close();
     },
     onError: (err) => {
@@ -54,12 +83,10 @@ export default function ModalForgotPassword({ close }) {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <DataEntry>
           <FormColumn>
-            <Title>Recuperação de Conta</Title>
-            <Subtitle>
-              Enviaremos um link para você recuperar sua conta
-            </Subtitle>
+            <Title>{modalAccount}</Title>
+            <Subtitle>{modalLink}</Subtitle>
             <RegisterInput
-              label="Insira seu Email: "
+              label={modalEmail}
               name="email"
               placeholder="Email"
               register={register}
@@ -85,12 +112,12 @@ export default function ModalForgotPassword({ close }) {
                 ariaLabel="tail-spin-loading"
                 radius="5"
               />
-              Carregando
+              {loading}
             </>
           ) : (
             <>
               <SendOutlined />
-              Enviar
+              {modalSend}
             </>
           )}
         </SaveChanges>
@@ -101,4 +128,5 @@ export default function ModalForgotPassword({ close }) {
 
 ModalForgotPassword.propTypes = {
   close: PropTypes.func.isRequired,
+  language: PropTypes.string.isRequired,
 };
