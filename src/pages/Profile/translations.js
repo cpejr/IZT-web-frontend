@@ -31,9 +31,9 @@ export function TranslateText({ globalLanguage }) {
     profileCity = 'City: ';
     profileStreet = 'Street: ';
     profileContactInfo = 'Contact Information';
-    profileCourse = 'Course: ';
+    profileCourse = 'Course ';
     profileAccess = 'Access Validity: ';
-    profileUnlimitedAccess = 'Unlimited Access: ';
+    profileUnlimitedAccess = 'Unlimited Access ';
     profileNoAccess = 'No access: ';
     profileChangeInformation = 'Change Information';
   } else if (globalLanguage === 'PT') {
@@ -49,7 +49,7 @@ export function TranslateText({ globalLanguage }) {
     profileCity = 'Cidade: ';
     profileStreet = 'Rua: ';
     profileContactInfo = 'Informações de Contato';
-    profileCourse = 'Curso: ';
+    profileCourse = 'Curso ';
     profileAccess = 'Validade de Acesso: ';
     profileUnlimitedAccess = 'Acesso Ilimitado ';
     profileNoAccess = 'Sem Acesso: ';
@@ -67,7 +67,7 @@ export function TranslateText({ globalLanguage }) {
     profileCity = 'Stadt: ';
     profileStreet = 'Straße: ';
     profileContactInfo = 'Kontaktinformationen';
-    profileCourse = 'Kurs: ';
+    profileCourse = 'Kurs ';
     profileAccess = 'Zugriffsberechtigung: ';
     profileUnlimitedAccess = 'Unbegrenzter Zugriff';
     profileNoAccess = 'Kein Zugriff';
