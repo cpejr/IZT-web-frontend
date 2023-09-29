@@ -40,6 +40,7 @@ export default function ModalChangeUserData({ close, language }) {
   let profileStreet;
   let profileChangeInformation;
   let profileLoading;
+  let toastMessage;
 
   if (language === 'EN') {
     profilePersonalInfo = 'Personal information';
@@ -59,6 +60,7 @@ export default function ModalChangeUserData({ close, language }) {
     profileStreet = 'Street: ';
     profileChangeInformation = 'Save Information';
     profileLoading = 'Loading';
+    toastMessage = 'Data modified successfully!';
   } else if (language === 'PT') {
     profilePersonalInfo = 'Informações Pessoais';
     profileCompany = 'Empresa: ';
@@ -77,6 +79,7 @@ export default function ModalChangeUserData({ close, language }) {
     profileStreet = 'Rua: ';
     profileChangeInformation = 'Salvar Infomações';
     profileLoading = 'Carregando';
+    toastMessage = 'Dados modificados com sucesso!';
   } else if (language === 'DE') {
     profilePersonalInfo = 'Persönliche Informationen';
     profileCompany = 'Unternehmen: ';
@@ -95,6 +98,7 @@ export default function ModalChangeUserData({ close, language }) {
     profileStreet = 'Straße: ';
     profileChangeInformation = 'Informationen speichern';
     profileLoading = 'Laden';
+    toastMessage = 'Daten erfolgreich geändert!';
   }
 
   // States and variables
@@ -128,7 +132,7 @@ export default function ModalChangeUserData({ close, language }) {
     onSuccess: (data) => {
       setUser(data);
 
-      toast.success('Dados modificados com sucesso!');
+      toast.success(toastMessage);
       close();
     },
     onError: (err) => {
