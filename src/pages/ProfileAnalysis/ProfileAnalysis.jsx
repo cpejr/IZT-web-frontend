@@ -10,6 +10,7 @@ import AccordionDemo from '../../components/features/Acordeon/Acordeon';
 import Graphic from '../../components/features/Graphic/Graphic';
 import { useCreateProfileAnalysis } from '../../hooks/query/profileAnalysis';
 import useAuthStore from '../../stores/auth';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import { DivName, ErrorMessage, InputName } from '../StabilityAnalysis/Styles';
 import {
   Container,
@@ -29,12 +30,25 @@ import {
   Boddy,
   DataEntry,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildCalculateStabilityAnalysisErrorMessage,
   saveProfileAnalysisValidationSchema,
 } from './utilsSave';
+import {
+  buildCalculateStabilityAnalysisErrorMessageDE,
+  saveProfileAnalysisValidationSchemaDE,
+} from './utilsSaveDE';
+import {
+  buildCalculateStabilityAnalysisErrorMessageEN,
+  saveProfileAnalysisValidationSchemaEN,
+} from './utilsSaveEN';
 
 export default function ProfileAnalysis() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [graphData, setGraphData] = useState({ x: [], y: [] });
   const [formDataStorage, setFormDataStorage] = useState({});
   const queryClient = useQueryClient();
@@ -56,25 +70,46 @@ export default function ProfileAnalysis() {
       toast.success('Relatório criado com sucesso!');
     },
     onError: (err) => {
-      const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+      if (globalLanguage === 'DE') {
+        const errorMessageDE =
+          buildCalculateStabilityAnalysisErrorMessageDE(err);
 
-      toast.error(errorMessage);
+        toast.error(errorMessageDE);
+      } else if (globalLanguage === 'EN') {
+        const errorMessageEN =
+          buildCalculateStabilityAnalysisErrorMessageEN(err);
+
+        toast.error(errorMessageEN);
+      } else {
+        const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+
+        toast.error(errorMessage);
+      }
     },
   });
 
+  // Não sei o que fazer
   const handleformDataStorage = (data) => {
     setFormDataStorage(data);
   };
   useEffect(() => {}, [formDataStorage]);
   const user = useAuthStore((state) => state.auth?.user);
 
+  let resolver1;
+  if (globalLanguage === 'DE') {
+    zodResolver(saveProfileAnalysisValidationSchemaDE);
+  } else if (globalLanguage === 'EN') {
+    zodResolver(saveProfileAnalysisValidationSchemaEN);
+  } else {
+    zodResolver(saveProfileAnalysisValidationSchema);
+  }
   const {
     handleSubmit: save,
     register,
     formState: { errors: error },
   } = useForm({
     defaultValues: formDataStorage,
-    resolver: zodResolver(saveProfileAnalysisValidationSchema),
+    resolver: resolver1,
   });
 
   const onSubmit2 = (data) => {
@@ -92,7 +127,7 @@ export default function ProfileAnalysis() {
       <Container>
         <Containerleft>
           <Center>
-            <H1>Entrada de Dados</H1>
+            <H1>{translations.DataEntry}</H1>
             <Data>
               <AccordionDemo
                 onCalculate={handleCalculate}
@@ -110,44 +145,44 @@ export default function ProfileAnalysis() {
                   id="name"
                   name="name"
                   type="text"
-                  placeholder="Insira o nome do relatório"
+                  placeholder={translations.ReportName}
                   error={error?.name?.message}
                   {...register('name')}
                 />
               </DivName>
-              <Button>Salvar relatório</Button>
+              <Button>{translations.SaveReport}</Button>
             </H1>
             <ErrorMessage>{error?.name?.message}</ErrorMessage>
           </DataEntry>
           <Edit>
-            <Text>Vão de retificação centerless de passagem </Text>
+            <Text>{translations.GrindingClearance} </Text>
             <Container2>
               <Graphic data={graphData} />
             </Container2>
-            <Text>Dados de saída</Text>
+            <Text>{translations.OutputData}</Text>
           </Edit>
           <ContainerRight>
             <Column>
               <OutputData>
-                <Text2> Altura entre centros (hw): ___ mm</Text2>
-                <Text2>Altura do dessador (hd): ___ mm</Text2>
-                <Text2>Inclinação do RA (adr): ___ °</Text2>
-                <Text2>Inclinação do dressador: ___ °</Text2>
-                <Text2>Ângulo da régua (β): ___ °</Text2>
-                <Text2>Rotação do rebolo de arraste (nr): ___ rpm</Text2>
-                <Text2>Rotação do rebolo de arraste (nr): ___ rps</Text2>
-                <Text2>Velocidade periférica da peça (vp): ___ m/s</Text2>
-                <Text2>Velocidade de passagem da peça (vfa): ___ m/min</Text2>
+                <Text2> {translations.HeightBetweenCenters} (hw): ___ mm</Text2>
+                <Text2>{translations.DresserHeight} (hd): ___ mm</Text2>
+                <Text2>{translations.RAInclination} (adr): ___ °</Text2>
+                <Text2>{translations.DresserInclination}: ___ °</Text2>
+                <Text2>{translations.RulerAngle} (β): ___ °</Text2>
+                <Text2>{translations.GrindingRotation} (nr): ___ rpm</Text2>
+                <Text2>{translations.GrindingRotation} (nr): ___ rps</Text2>
+                <Text2>{translations.PeripheralSpeed} (vp): ___ m/s</Text2>
+                <Text2>{translations.FeedSpeed} (vfa): ___ m/min</Text2>
               </OutputData>
               <OutputData rightOutputData>
-                <Text2> Quantidade de peça (Qp): ___ </Text2>
-                <Text2> Tempo de ciclo (tc): ___ min/pc</Text2>
-                <Text2> Nr. revoluções da peça (U): ___ </Text2>
-                <Text2> Taxa de remoção (Qw’): ___ mm3/mm.s</Text2>
-                <Text2> Espessura de corte (hef): ___ mm</Text2>
-                <Text2> Ângulo de tangêcia (γ): ___ °</Text2>
-                <Text2> Ângulo de tangência RA (γra): ___ °</Text2>
-                <Text2> Ângulo de tangência RC (γrc) ___ °</Text2>
+                <Text2> {translations.PieceQuantity} (Qp): ___ </Text2>
+                <Text2> {translations.CycleTime} (tc): ___ min/pc</Text2>
+                <Text2> {translations.RevolutionsNumbers} (U): ___ </Text2>
+                <Text2> {translations.RemovalRate} (Qw’): ___ mm3/mm.s</Text2>
+                <Text2> {translations.CuttingThickness} (hef): ___ mm</Text2>
+                <Text2> {translations.TangentAngle} (γ): ___ °</Text2>
+                <Text2> {translations.TangentAngle} RA (γra): ___ °</Text2>
+                <Text2> {translations.TangentAngle} RC (γrc) ___ °</Text2>
               </OutputData>
             </Column>
           </ContainerRight>

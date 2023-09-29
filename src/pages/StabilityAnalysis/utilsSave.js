@@ -17,7 +17,7 @@ const calculateStabilityAnalysisErrorMessages = {
 const calculateStabilityAnalysisDefaultErrorMessage =
   'Ocorreu um erro no cálculo da Análise de Estabilidade. Tente novamente mais tarde';
 
-export function buildCalculateStabilityAnalysisErrorMessage(err) {
+export function buildSaveStabilityAnalysisErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
   return (
     calculateStabilityAnalysisErrorMessages[code] ||

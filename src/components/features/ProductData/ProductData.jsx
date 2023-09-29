@@ -1,14 +1,19 @@
 import PropTypes from 'prop-types';
 
 import { ErrorMessage } from '../../../pages/StabilityAnalysis/Styles';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { CollapsableData, DataColumn, Input, Label, Line } from './Styles';
+import { TranslateText } from './translations';
 
 export default function MachinProductData({ collapse, register, errors }) {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
   return (
     <CollapsableData collapse={collapse}>
       <DataColumn>
         <Line>
-          <Label>Produto:</Label>
+          <Label>{translations.product}:</Label>
           <Input
             id="product"
             {...register('product')}
@@ -18,7 +23,7 @@ export default function MachinProductData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.product?.message}</ErrorMessage>
 
         <Line>
-          <Label>N° do produto:</Label>
+          <Label>{translations.productNumber}:</Label>
           <Input
             id="productNumber"
             {...register('productNumber', { valueAsNumber: true })}
@@ -30,7 +35,7 @@ export default function MachinProductData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.productNumber?.message}</ErrorMessage>
 
         <Line>
-          <Label>Diâmetro:</Label>
+          <Label>{translations.diameter}:</Label>
           <Input
             width="4rem"
             id="diameter"
@@ -44,7 +49,7 @@ export default function MachinProductData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.diameter?.message}</ErrorMessage>
 
         <Line>
-          <Label>Comprimento total:</Label>
+          <Label>{translations.totalLength}:</Label>
           <Input
             width="4rem"
             id="totalLength"
@@ -58,7 +63,7 @@ export default function MachinProductData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.totalLength?.message}</ErrorMessage>
 
         <Line>
-          <Label>Comprimento eletivo:</Label>
+          <Label>{translations.electiveLength}:</Label>
           <Input
             width="4rem"
             id="electiveLength"
@@ -72,7 +77,7 @@ export default function MachinProductData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.electiveLength?.message}</ErrorMessage>
 
         <Line>
-          <Label>Sobremetal:</Label>
+          <Label>{translations.allowance}:</Label>
           <Input
             width="4rem"
             id="allowance"

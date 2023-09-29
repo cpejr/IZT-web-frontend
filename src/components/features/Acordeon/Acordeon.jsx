@@ -8,7 +8,9 @@ import { AiOutlineDown } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 import { useCalculateProfileAnalysis } from '../../../hooks/query/profileAnalysis';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import './Styles.css';
+import { TranslateText } from './translations';
 import {
   buildCalculateProfileAnalysisErrorMessage,
   calculateProfileAnalysisValidationSchema,
@@ -54,6 +56,10 @@ const parametersRA = [
 
 // eslint-disable-next-line react/prop-types
 export default function AccordionDemo({ onCalculate, dataInput }) {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [formDataStorage, setFormDataStorage] = useState({});
 
   // Backend calls
@@ -110,10 +116,10 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <Accordion.Item className="AccordionItem" value="item-1">
-          <AccordionTrigger>Dados da Análise</AccordionTrigger>
+          <AccordionTrigger>{translations.AnalysisData}</AccordionTrigger>
           <AccordionContent>
             <div style={{ whiteSpace: 'nowrap' }} className="AccordionLine">
-              <br /> Processo de Retificação:
+              <br /> {translations.rectificationProcess}:
               <br />
               <select
                 id="rectificationProcess"
@@ -122,12 +128,12 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
                   errors?.rectificationProcess?.message ? 'error' : ''
                 }`}
               >
-                <option value="">Selecionar</option>
+                <option value="">{translations.Select}</option>
                 <option value="Centerless de Mergulho">
-                  Centerless de Mergulho
+                  {translations.PlungeCenterless}
                 </option>
                 <option value="Centerless de Passagem">
-                  Centerless de Passagem
+                  {translations.TFCenterless}
                 </option>
               </select>
             </div>
@@ -166,10 +172,17 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
                         errors[data.id] ? 'error' : ''
                       }`}
                     >
-                      <option value="">Selecionar</option>
-                      <option value="Opção 1"> Desbaste </option>
-                      <option value="Opção 2">Pré Desbate</option>
-                      <option value="Opção 3">Acabamento</option>
+                      <option value="">{translations.Select}</option>
+                      <option value="Opção 1">
+                        {' '}
+                        {translations.RoughGrinding}{' '}
+                      </option>
+                      <option value="Opção 2">
+                        {translations.PRoughGrinding}
+                      </option>
+                      <option value="Opção 3">
+                        {translations.FinishGrinding}
+                      </option>
 
                       {/* Adicione outras opções aqui */}
                     </select>
@@ -193,7 +206,7 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
           </AccordionContent>
         </Accordion.Item>
         <Accordion.Item className="AccordionItem" value="item-2">
-          <AccordionTrigger>Dados da Máquina</AccordionTrigger>
+          <AccordionTrigger>{translations.MachineData}</AccordionTrigger>
           <AccordionContent>
             {machineData.map((data) => (
               <div key={data.id}>
@@ -223,7 +236,7 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
           </AccordionContent>
         </Accordion.Item>
         <Accordion.Item className="AccordionItem" value="item-3">
-          <AccordionTrigger>Dados do Produto</AccordionTrigger>
+          <AccordionTrigger>{translations.ProductData}</AccordionTrigger>
           <AccordionContent>
             {productData.map((data) => (
               <div key={data.id}>
@@ -269,7 +282,7 @@ export default function AccordionDemo({ onCalculate, dataInput }) {
           </AccordionContent>
         </Accordion.Item>
         <Accordion.Item className="AccordionItem" value="item-4">
-          <AccordionTrigger>RA parâmetro de perfil</AccordionTrigger>
+          <AccordionTrigger>{translations.RAProfileparameter}</AccordionTrigger>
           <AccordionContent>
             {parametersRA.map((data) => (
               <div key={data.id}>

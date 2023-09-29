@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import {
   Menu,
   MenuItem,
@@ -10,8 +11,13 @@ import {
   Cogs,
   BackwardTime,
 } from './Styles';
+import { TranslateText } from './translations';
 
 export default function SoftwareLateralMenu() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [activeMenuItem, setActiveMenuItem] = useState(null);
 
   const handleMenuItemClick = (index) => {
@@ -28,7 +34,7 @@ export default function SoftwareLateralMenu() {
           active={activeMenuItem === 0}
           onClick={() => handleMenuItemClick(0)}
         >
-          Análise de Estabilidade
+          {translations.StabilityAnalysis}
         </MenuLink>
       </MenuItem>
       <MenuItem>
@@ -39,7 +45,7 @@ export default function SoftwareLateralMenu() {
           active={activeMenuItem === 1}
           onClick={() => handleMenuItemClick(1)}
         >
-          Perfil
+          {translations.Profile}
         </MenuLink>
       </MenuItem>
       <MenuItem>
@@ -50,7 +56,7 @@ export default function SoftwareLateralMenu() {
           active={activeMenuItem === 2}
           onClick={() => handleMenuItemClick(2)}
         >
-          Relatórios
+          {translations.Reports}
         </MenuLink>
       </MenuItem>
     </Menu>
