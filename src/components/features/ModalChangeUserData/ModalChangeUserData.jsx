@@ -50,7 +50,7 @@ export default function ModalChangeUserData({ close, language }) {
     profileLastName = 'Last Name: ';
     profileRole = 'Job: ';
     phRole = 'Job Title';
-    profileAdress = 'Adress: ';
+    profileAdress = 'Adress';
     profileCoutry = 'Country: ';
     phCountry = 'Country name';
     profileState = 'State: ';
@@ -69,7 +69,7 @@ export default function ModalChangeUserData({ close, language }) {
     profileLastName = 'Sobrenome: ';
     profileRole = 'Cargo: ';
     phRole = 'Nome do Cargo';
-    profileAdress = 'Endereço: ';
+    profileAdress = 'Endereço';
     profileCoutry = 'País: ';
     phCountry = 'Nome do País';
     profileState = 'Estado: ';
@@ -88,7 +88,7 @@ export default function ModalChangeUserData({ close, language }) {
     profileLastName = 'Nachname: ';
     profileRole = 'Position oder Job: ';
     phRole = 'Berufsbezeichnung';
-    profileAdress = 'Adresse: ';
+    profileAdress = 'Adresse';
     profileCoutry = 'Land: ';
     phCountry = 'Landesname';
     profileState = 'Bundesland: ';
