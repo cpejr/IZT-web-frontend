@@ -20,88 +20,14 @@ import {
   Subtitle,
   SeparationDiv,
 } from './Styles';
+import { TranslateText } from './translations';
 import { buildUpdateUserErrorMessage, updateUserSchema } from './utils';
+import { buildUpdateUserErrorMessageDE, updateUserSchemaDE } from './utilsDE';
+import { buildUpdateUserErrorMessageEN, updateUserSchemaEN } from './utilsEN';
 
 export default function ModalChangeUserData({ close, language }) {
-  let profilePersonalInfo;
-  let profileCompany;
-  let phCompany;
-  let profileName;
-  let profileLastName;
-  let profileRole;
-  let phRole;
-  let profileAdress;
-  let profileCoutry;
-  let phCountry;
-  let profileState;
-  let phState;
-  let profileCity;
-  let phCity;
-  let profileStreet;
-  let profileChangeInformation;
-  let profileLoading;
-  let toastMessage;
-
-  if (language === 'EN') {
-    profilePersonalInfo = 'Personal information';
-    profileCompany = 'Company: ';
-    phCompany = 'Company name';
-    profileName = 'Name: ';
-    profileLastName = 'Last Name: ';
-    profileRole = 'Job: ';
-    phRole = 'Job Title';
-    profileAdress = 'Adress';
-    profileCoutry = 'Country: ';
-    phCountry = 'Country name';
-    profileState = 'State: ';
-    phState = 'State name';
-    profileCity = 'City: ';
-    phCity = 'City name';
-    profileStreet = 'Street: ';
-    profileChangeInformation = 'Save Information';
-    profileLoading = 'Loading';
-    toastMessage = 'Data modified successfully!';
-  } else if (language === 'PT') {
-    profilePersonalInfo = 'Informações Pessoais';
-    profileCompany = 'Empresa: ';
-    phCompany = 'Nome da empresa';
-    profileName = 'Nome: ';
-    profileLastName = 'Sobrenome: ';
-    profileRole = 'Cargo: ';
-    phRole = 'Nome do Cargo';
-    profileAdress = 'Endereço';
-    profileCoutry = 'País: ';
-    phCountry = 'Nome do País';
-    profileState = 'Estado: ';
-    phState = 'Nome do Estado';
-    profileCity = 'Cidade: ';
-    phCity = 'Nome da Cidade';
-    profileStreet = 'Rua: ';
-    profileChangeInformation = 'Salvar Infomações';
-    profileLoading = 'Carregando';
-    toastMessage = 'Dados modificados com sucesso!';
-  } else if (language === 'DE') {
-    profilePersonalInfo = 'Persönliche Informationen';
-    profileCompany = 'Unternehmen: ';
-    phCompany = 'Firmenname';
-    profileName = 'Name: ';
-    profileLastName = 'Nachname: ';
-    profileRole = 'Position oder Job: ';
-    phRole = 'Berufsbezeichnung';
-    profileAdress = 'Adresse';
-    profileCoutry = 'Land: ';
-    phCountry = 'Landesname';
-    profileState = 'Bundesland: ';
-    phState = 'Bundeslandname';
-    profileCity = 'Stadt: ';
-    phCity = 'Stadtname';
-    profileStreet = 'Straße: ';
-    profileChangeInformation = 'Informationen speichern';
-    profileLoading = 'Laden';
-    toastMessage = 'Daten erfolgreich geändert!';
-  }
-
   // States and variables
+
   const countries = useMemo(() => Country.getAllCountries(), []);
   const [states, setStates] = useState(null);
   const [cities, setCities] = useState(null);
@@ -109,6 +35,7 @@ export default function ModalChangeUserData({ close, language }) {
 
   const user = useAuthStore((state) => state.auth?.user);
   const setUser = useAuthStore((state) => state.setUser);
+  const translations = TranslateText({ language });
 
   // Reusable functions
   const selectFilter = useCallback(
@@ -132,17 +59,36 @@ export default function ModalChangeUserData({ close, language }) {
     onSuccess: (data) => {
       setUser(data);
 
-      toast.success(toastMessage);
+      toast.success('Dados Alterados com Sucesso');
       close();
     },
     onError: (err) => {
-      const errorMessage = buildUpdateUserErrorMessage(err);
+      if (language === 'PT') {
+        const errorMessage = buildUpdateUserErrorMessage(err);
 
-      toast.error(errorMessage);
+        toast.error(errorMessage);
+      } else if (language === 'DE') {
+        const errorMessage = buildUpdateUserErrorMessageDE(err);
+
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildUpdateUserErrorMessageEN(err);
+
+        toast.error(errorMessage);
+      }
+
       setIsPending(false);
     },
   });
 
+  let resolver;
+  if (language === 'PT') {
+    resolver = zodResolver(updateUserSchema);
+  } else if (language === 'EN') {
+    resolver = zodResolver(updateUserSchemaEN);
+  } else {
+    resolver = zodResolver(updateUserSchemaDE);
+  }
   const {
     register,
     handleSubmit,
@@ -150,9 +96,7 @@ export default function ModalChangeUserData({ close, language }) {
     control,
     formState: { errors },
     watch,
-  } = useForm({
-    resolver: zodResolver(updateUserSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = (data) => {
     setIsPending(true);
 
@@ -202,41 +146,43 @@ export default function ModalChangeUserData({ close, language }) {
         <DataEntry>
           <FormColumn>
             {language === 'DE' ? (
-              <Subtitle fontSize="2.5rem">{profilePersonalInfo}</Subtitle>
+              <Subtitle fontSize="2.5rem">
+                {translations.profilePersonalInfo}
+              </Subtitle>
             ) : (
-              <Subtitle>{profilePersonalInfo}</Subtitle>
+              <Subtitle>{translations.profilePersonalInfo}</Subtitle>
             )}
             <RegisterInput
-              label={profileCompany}
+              label={translations.profileCompany}
               name="company"
-              placeholder={phCompany}
+              placeholder={translations.phCompany}
               register={register}
               errors={errors}
               type="text"
               defaultValue={user.company}
             />
             <RegisterInput
-              label={profileName}
+              label={translations.profileName}
               name="name"
-              placeholder={profileName}
+              placeholder={translations.profileName}
               register={register}
               errors={errors}
               type="text"
               defaultValue={user.name}
             />
             <RegisterInput
-              label={profileLastName}
+              label={translations.profileLastName}
               name="surname"
-              placeholder={profileLastName}
+              placeholder={translations.profileLastName}
               register={register}
               errors={errors}
               type="text"
               defaultValue={user.surname}
             />
             <RegisterInput
-              label={profileRole}
+              label={translations.profileRole}
               name="role"
-              placeholder={phRole}
+              placeholder={translations.phRole}
               register={register}
               errors={errors}
               type="text"
@@ -245,14 +191,16 @@ export default function ModalChangeUserData({ close, language }) {
           </FormColumn>
           <FormColumn>
             {language === 'DE' ? (
-              <Subtitle fontSize="2.5rem">{profileAdress}</Subtitle>
+              <Subtitle fontSize="2.5rem">
+                {translations.profileAdress}
+              </Subtitle>
             ) : (
-              <Subtitle>{profileAdress}</Subtitle>
+              <Subtitle>{translations.profileAdress}</Subtitle>
             )}
             <FormSelect
-              subtitle={profileCoutry}
+              subtitle={translations.profileCoutry}
               name="country"
-              placeholder={phCountry}
+              placeholder={translations.phCountry}
               size="large"
               control={control}
               errors={errors}
@@ -263,9 +211,9 @@ export default function ModalChangeUserData({ close, language }) {
               defaultValue={user.country}
             />
             <FormSelect
-              subtitle={profileState}
+              subtitle={translations.profileState}
               name="state"
-              placeholder={phState}
+              placeholder={translations.phState}
               size="large"
               control={control}
               errors={errors}
@@ -277,9 +225,9 @@ export default function ModalChangeUserData({ close, language }) {
               defaultValue={user.state}
             />
             <FormSelect
-              subtitle={profileCity}
+              subtitle={translations.profileCity}
               name="city"
-              placeholder={phCity}
+              placeholder={translations.phCity}
               size="large"
               control={control}
               errors={errors}
@@ -293,9 +241,9 @@ export default function ModalChangeUserData({ close, language }) {
 
             <SeparationDiv>
               <RegisterInput
-                label={profileStreet}
+                label={translations.profileStreet}
                 name="address"
-                placeholder={profileStreet}
+                placeholder={translations.profileStreet}
                 register={register}
                 errors={errors}
                 type="text"
@@ -323,12 +271,12 @@ export default function ModalChangeUserData({ close, language }) {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                {profileLoading}
+                {translations.profileLoading}
               </>
             ) : (
               <>
                 <SaveOutlined />
-                {profileChangeInformation}
+                {translations.profileChangeInformation}
               </>
             )}
           </SaveChanges>
@@ -348,12 +296,12 @@ export default function ModalChangeUserData({ close, language }) {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                {profileLoading}
+                {translations.profileLoading}
               </>
             ) : (
               <>
                 <SaveOutlined />
-                {profileChangeInformation}
+                {translations.profileChangeInformation}
               </>
             )}
           </SaveChanges>
