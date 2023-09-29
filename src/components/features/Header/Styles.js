@@ -388,8 +388,10 @@ export const LogoutBtn = styled.button`
       text-decoration-thickness: 0.1rem;
     }
   }
+
   @media (max-width: 1080px) {
     font-size: 1.8rem;
   }
+
   transition: all 400ms ease-in-out;
 `;

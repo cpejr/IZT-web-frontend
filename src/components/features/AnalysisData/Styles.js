@@ -21,6 +21,7 @@ export const DataColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5vh;
+  padding: 15px 20px;
   width: 100%;
 `;
 
