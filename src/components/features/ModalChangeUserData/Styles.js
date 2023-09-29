@@ -72,7 +72,8 @@ export const SaveChanges = styled.button`
   margin-top: 2%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 2rem;
+  font-size: ${(props) => props.fontSize || '2rem'};
+
   font-weight: 600;
   color: ${(props) => props.theme.colors.blue};
 
@@ -87,67 +88,19 @@ export const SaveChanges = styled.button`
     align-items: center;
     justify-content: center;
     width: 90%;
-    font-size: 1.5rem;
+    font-size: ${(props) => props.fontSizeMobile || '1.5rem'};
 
     max-width: 20rem;
   }
-`;
-export const SaveChanges2 = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
 
-  width: 100%;
-  max-width: 25rem;
-  height: 5rem;
-
-  border: 0.1rem solid #000000;
-  border-radius: 0.5rem;
-  background-color: transparent;
-
-  padding: 0 1.1rem;
-  margin-top: 2%;
-
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 1.7rem;
-  font-weight: 600;
-  color: ${(props) => props.theme.colors.blue};
-
-  cursor: pointer;
-  transition-duration: 0.3s;
-  :hover {
-    background-color: ${(props) => props.theme.colors.blue};
-    color: white;
-  }
-
-  @media (max-width: 700px) {
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    font-size: 0.9rem;
-
-    max-width: 20rem;
+  @media (max-width: 320px) {
+    font-size: ${(props) => props.fontSizeMiniMobile};
   }
 `;
 
 export const Subtitle = styled.p`
-  font-size: 3rem;
+  font-size: ${(props) => props.fontSize || '3rem'};
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
   margin-bottom: 8%;
-`;
-export const Subtitle2 = styled.p`
-  font-size: 2.5rem;
-  font-weight: 600;
-  font-family: ${(props) => props.theme.fonts.montserrat};
-  margin-bottom: 8%;
-`;
-
-export const FormColumn2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 35rem;
 `;

@@ -19,9 +19,6 @@ import {
   SaveChanges,
   Subtitle,
   SeparationDiv,
-  FormColumn2,
-  Subtitle2,
-  SaveChanges2,
 } from './Styles';
 import { buildUpdateUserErrorMessage, updateUserSchema } from './utils';
 
@@ -99,8 +96,8 @@ export default function ModalChangeUserData({ close, language }) {
     profileChangeInformation = 'Informationen speichern';
     profileLoading = 'Laden';
   }
-  // States and variables
 
+  // States and variables
   const countries = useMemo(() => Country.getAllCountries(), []);
   const [states, setStates] = useState(null);
   const [cities, setCities] = useState(null);
@@ -164,6 +161,7 @@ export default function ModalChangeUserData({ close, language }) {
 
     updateUser({ _id: user._id, newUserData });
   };
+
   // Country, state and city selects handlers
   const selectedContry = watch('country');
   const selectedState = watch('state');
@@ -200,7 +198,7 @@ export default function ModalChangeUserData({ close, language }) {
         <DataEntry>
           <FormColumn>
             {language === 'DE' ? (
-              <Subtitle2>{profilePersonalInfo}</Subtitle2>
+              <Subtitle fontSize="2.5rem">{profilePersonalInfo}</Subtitle>
             ) : (
               <Subtitle>{profilePersonalInfo}</Subtitle>
             )}
@@ -241,9 +239,9 @@ export default function ModalChangeUserData({ close, language }) {
               defaultValue={user.role}
             />
           </FormColumn>
-          <FormColumn2>
+          <FormColumn>
             {language === 'DE' ? (
-              <Subtitle2>{profileAdress}</Subtitle2>
+              <Subtitle fontSize="2.5rem">{profileAdress}</Subtitle>
             ) : (
               <Subtitle>{profileAdress}</Subtitle>
             )}
@@ -300,14 +298,17 @@ export default function ModalChangeUserData({ close, language }) {
                 defaultValue={user.address}
               />
             </SeparationDiv>
-          </FormColumn2>
+          </FormColumn>
         </DataEntry>
         {language === 'DE' ? (
-          <SaveChanges2
+          <SaveChanges
             disabled={isPending}
             type="submit"
             name="Salvar Alterações"
             relativeWidth="70%"
+            fontSize="1.7rem"
+            fontSizeMobile="1.3rem"
+            fontSizeMiniMobile="0.9rem"
           >
             {isPending ? (
               <>
@@ -326,7 +327,7 @@ export default function ModalChangeUserData({ close, language }) {
                 {profileChangeInformation}
               </>
             )}
-          </SaveChanges2>
+          </SaveChanges>
         ) : (
           <SaveChanges
             disabled={isPending}
