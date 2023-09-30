@@ -4,7 +4,9 @@ export function TranslateText({ language }) {
   let profileCompany;
   let phCompany;
   let profileName;
+  let namePlaceholder;
   let profileLastName;
+  let lastNamePlaceholder;
   let profileRole;
   let phRole;
   let profileAdress;
@@ -23,7 +25,9 @@ export function TranslateText({ language }) {
     profileCompany = 'Company: ';
     phCompany = 'Company name';
     profileName = 'Name: ';
+    namePlaceholder = 'Name';
     profileLastName = 'Last Name: ';
+    lastNamePlaceholder = 'Last Name';
     profileRole = 'Job: ';
     phRole = 'Job Title';
     profileAdress = 'Adress: ';
@@ -41,7 +45,9 @@ export function TranslateText({ language }) {
     profileCompany = 'Empresa: ';
     phCompany = 'Nome da empresa';
     profileName = 'Nome: ';
+    namePlaceholder = 'Nome';
     profileLastName = 'Sobrenome: ';
+    lastNamePlaceholder = 'Sobrenome';
     profileRole = 'Cargo: ';
     phRole = 'Nome do Cargo';
     profileAdress = 'Endereço: ';
@@ -59,7 +65,9 @@ export function TranslateText({ language }) {
     profileCompany = 'Unternehmen: ';
     phCompany = 'Firmenname';
     profileName = 'Name: ';
+    namePlaceholder = 'Name';
     profileLastName = 'Nachname: ';
+    lastNamePlaceholder = 'Nachname';
     profileRole = 'Position oder Job: ';
     phRole = 'Berufsbezeichnung';
     profileAdress = 'Adresse: ';
@@ -78,7 +86,9 @@ export function TranslateText({ language }) {
     profileCompany,
     phCompany,
     profileName,
+    namePlaceholder,
     profileLastName,
+    lastNamePlaceholder,
     profileRole,
     phRole,
     profileAdress,

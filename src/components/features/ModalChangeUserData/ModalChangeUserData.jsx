@@ -164,7 +164,7 @@ export default function ModalChangeUserData({ close, language }) {
             <RegisterInput
               label={translations.profileName}
               name="name"
-              placeholder={translations.profileName}
+              placeholder={translations.namePlaceholder}
               register={register}
               errors={errors}
               type="text"
@@ -173,7 +173,7 @@ export default function ModalChangeUserData({ close, language }) {
             <RegisterInput
               label={translations.profileLastName}
               name="surname"
-              placeholder={translations.profileLastName}
+              placeholder={translations.lastNamePlaceholder}
               register={register}
               errors={errors}
               type="text"
