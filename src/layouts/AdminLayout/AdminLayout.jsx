@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-// import { AdminMenu } from '../../components/features';
+import { AdminMenu } from '../../components/features';
 import { NotFound } from '../../pages';
 import useAuthStore from '../../stores/auth';
 import { Container } from './Styles';
@@ -12,7 +12,7 @@ export default function AdminLayout() {
     <NotFound />
   ) : (
     <Container>
-      {/* <AdminMenu /> */}
+      <AdminMenu />
       <Outlet />
     </Container>
   );
