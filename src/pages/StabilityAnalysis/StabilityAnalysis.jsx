@@ -62,6 +62,26 @@ export default function StabilityAnalysis() {
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
 
+  let validationSchema;
+
+  if (globalLanguage === 'DE') {
+    validationSchema = calculateStabilityAnalysisValidationSchemaDE;
+  } else if (globalLanguage === 'PT') {
+    validationSchema = calculateStabilityAnalysisValidationSchema;
+  } else {
+    validationSchema = calculateStabilityAnalysisValidationSchemaEN;
+  }
+
+  let saveValidationSchema;
+
+  if (globalLanguage === 'DE') {
+    saveValidationSchema = saveStabilityAnalysisValidationSchemaDE;
+  } else if (globalLanguage === 'PT') {
+    saveValidationSchema = saveStabilityAnalysisValidationSchema;
+  } else {
+    saveValidationSchema = saveStabilityAnalysisValidationSchemaEN;
+  }
+
   const queryClient = useQueryClient();
   const [processStabilityDiagramData, setProcessStabilityDiagramData] =
     useState([]);
@@ -86,18 +106,13 @@ export default function StabilityAnalysis() {
     },
     onError: (err) => {
       if (globalLanguage === 'DE') {
-        const errorMessageDE =
-          buildCalculateStabilityAnalysisErrorMessageDE(err);
-
-        toast.error(errorMessageDE);
-      } else if (globalLanguage === 'EN') {
-        const errorMessageEN =
-          buildCalculateStabilityAnalysisErrorMessageEN(err);
-
-        toast.error(errorMessageEN);
-      } else {
+        const errorMessage = buildCalculateStabilityAnalysisErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'PT') {
         const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
-
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildCalculateStabilityAnalysisErrorMessageEN(err);
         toast.error(errorMessage);
       }
     },
@@ -134,18 +149,15 @@ export default function StabilityAnalysis() {
       },
       onError: (err) => {
         if (globalLanguage === 'DE') {
-          const errorMessageDE =
+          const errorMessage =
             buildCalculateStabilityAnalysisErrorMessageDE(err);
-
-          toast.error(errorMessageDE);
-        } else if (globalLanguage === 'EN') {
-          const errorMessageEN =
-            buildCalculateStabilityAnalysisErrorMessageEN(err);
-
-          toast.error(errorMessageEN);
-        } else {
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'PT') {
           const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
-
+          toast.error(errorMessage);
+        } else {
+          const errorMessage =
+            buildCalculateStabilityAnalysisErrorMessageEN(err);
           toast.error(errorMessage);
         }
       },
@@ -154,30 +166,14 @@ export default function StabilityAnalysis() {
   // Form handlers
   const user = useAuthStore((state) => state.auth?.user);
   const [formDataStorage, setFormDataStorage] = useState({});
-  let resolver1;
-  if (globalLanguage === 'DE') {
-    zodResolver(calculateStabilityAnalysisValidationSchemaDE);
-  } else if (globalLanguage === 'EN') {
-    zodResolver(calculateStabilityAnalysisValidationSchemaEN);
-  } else {
-    zodResolver(calculateStabilityAnalysisValidationSchema);
-  }
   const {
     handleSubmit: calculate,
     register,
     formState: { errors },
   } = useForm({
-    resolver: resolver1,
+    resolver: zodResolver(validationSchema),
   });
 
-  let resolver2;
-  if (globalLanguage === 'DE') {
-    zodResolver(saveStabilityAnalysisValidationSchemaDE);
-  } else if (globalLanguage === 'EN') {
-    zodResolver(saveStabilityAnalysisValidationSchemaEN);
-  } else {
-    zodResolver(saveStabilityAnalysisValidationSchema);
-  }
   const onSubmit = (data) => {
     setFormDataStorage(data);
     calculateStabilityAnalysis(data);
@@ -189,7 +185,7 @@ export default function StabilityAnalysis() {
     formState: { errors: error },
   } = useForm({
     defaultValues: formDataStorage,
-    resolver: resolver2,
+    resolver: zodResolver(saveValidationSchema),
   });
 
   const onSubmit2 = (data) => {
