@@ -10,7 +10,7 @@ export function TranslateText({ globalLanguage }) {
   let stabilityChart;
   let heightStabilityChart;
   let reportName;
-  let success;
+  let successCalculate;
   let reportSuccess;
 
   if (globalLanguage === 'EN') {
@@ -24,7 +24,7 @@ export function TranslateText({ globalLanguage }) {
     stabilityChart = 'Process Stability Chart';
     heightStabilityChart = 'Piece Height Stability Chart';
     reportName = 'Enter the report name';
-    success = 'Data calculated successfully!';
+    successCalculate = 'Data calculated successfully!';
     reportSuccess = 'Report created successfully';
   } else if (globalLanguage === 'PT') {
     dataEntry = 'Entrada de Dados';
@@ -37,7 +37,7 @@ export function TranslateText({ globalLanguage }) {
     stabilityChart = 'Diagrama - Estabilidade de processo';
     heightStabilityChart = 'Diagrama - Estabilidade de altura da peça';
     reportName = 'Insira o nome do relatório';
-    success = 'Dados calculados com sucesso!';
+    successCalculate = 'Dados calculados com sucesso!';
     reportSuccess = 'Relatório criado com sucesso!';
   } else if (globalLanguage === 'DE') {
     dataEntry = 'Dateneingabe';
@@ -50,7 +50,7 @@ export function TranslateText({ globalLanguage }) {
     stabilityChart = 'Prozessstabilitätsdiagramm';
     heightStabilityChart = 'Höhensstabilitätsdiagramm für das Werkstück';
     reportName = 'Geben Sie den Berichtsnamen ein';
-    success = 'Daten erfolgreich berechnet!';
+    successCalculate = 'Daten erfolgreich berechnet!';
     reportSuccess = 'Bericht erfolgreich erstellt!';
   }
   return {
@@ -64,7 +64,7 @@ export function TranslateText({ globalLanguage }) {
     stabilityChart,
     heightStabilityChart,
     reportName,
-    success,
+    successCalculate,
     reportSuccess,
   };
 }

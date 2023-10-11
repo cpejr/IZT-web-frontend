@@ -53,9 +53,18 @@ import {
   buildCalculateStabilityAnalysisErrorMessageEN,
   calculateStabilityAnalysisValidationSchemaEN,
 } from './utilsEN';
-import { saveStabilityAnalysisValidationSchema } from './utilsSave';
-import { saveStabilityAnalysisValidationSchemaDE } from './utilsSaveDE';
-import { saveStabilityAnalysisValidationSchemaEN } from './utilsSaveEN';
+import {
+  saveStabilityAnalysisValidationSchema,
+  buildSaveStabilityAnalysisErrorMessage,
+} from './utilsSave';
+import {
+  saveStabilityAnalysisValidationSchemaDE,
+  buildSaveStabilityAnalysisErrorMessageDE,
+} from './utilsSaveDE';
+import {
+  saveStabilityAnalysisValidationSchemaEN,
+  buildSaveStabilityAnalysisErrorMessageEN,
+} from './utilsSaveEN';
 
 export default function StabilityAnalysis() {
   // Translation
@@ -101,23 +110,24 @@ export default function StabilityAnalysis() {
       queryClient.invalidateQueries({
         queryKey: ['stability-analysis', 'searchByName'],
       });
+
       if (globalLanguage === 'DE') {
-        toast.success('Bericht erfolgreich erstellt!');
+        toast.success(translations.reportSuccess);
       } else if (globalLanguage === 'EN') {
-        toast.success('Report created successfully');
+        toast.success(translations.reportSuccess);
       } else {
-        toast.success('Relatório criado com sucesso!');
+        toast.success(translations.reportSuccess);
       }
     },
     onError: (err) => {
       if (globalLanguage === 'DE') {
-        const errorMessage = buildCalculateStabilityAnalysisErrorMessageDE(err);
+        const errorMessage = buildSaveStabilityAnalysisErrorMessageDE(err);
         toast.error(errorMessage);
       } else if (globalLanguage === 'PT') {
-        const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+        const errorMessage = buildSaveStabilityAnalysisErrorMessage(err);
         toast.error(errorMessage);
       } else {
-        const errorMessage = buildCalculateStabilityAnalysisErrorMessageEN(err);
+        const errorMessage = buildSaveStabilityAnalysisErrorMessageEN(err);
         toast.error(errorMessage);
       }
     },
@@ -151,11 +161,11 @@ export default function StabilityAnalysis() {
         setPartHeightStabilityDiagramData(newPartHeightStabilityDiagramData);
 
         if (globalLanguage === 'DE') {
-          toast.success('Daten erfolgreich berechnet!');
+          toast.success(translations.successCalculate);
         } else if (globalLanguage === 'EN') {
-          toast.success('Data calculated successfully!');
+          toast.success(translations.successCalculate);
         } else {
-          toast.success('Dados calculados com sucesso!');
+          toast.success(translations.successCalculate);
         }
       },
       onError: (err) => {
