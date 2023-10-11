@@ -162,7 +162,6 @@ export default function StabilityAnalysis() {
         if (globalLanguage === 'DE') {
           const errorMessage =
             buildCalculateStabilityAnalysisErrorMessageDE(err);
-
           toast.error(errorMessage);
         } else if (globalLanguage === 'PT') {
           const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
@@ -178,7 +177,6 @@ export default function StabilityAnalysis() {
   // Form handlers
   const user = useAuthStore((state) => state.auth?.user);
   const [formDataStorage, setFormDataStorage] = useState({});
-
   const {
     handleSubmit: calculate,
     register,
