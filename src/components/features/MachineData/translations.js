@@ -1,19 +1,19 @@
 // eslint-disable-next-line import/prefer-default-export
 export function TranslateText({ globalLanguage }) {
-  let AnalysisData;
+  let analysisData;
   let rectificationProcess;
   let machine;
   let machineNumber;
   let operation;
   let department;
   let responsiblePerson;
-  let ProductData;
+  let productData;
   let product;
   let productNumber;
   let diameter;
   let totalLength;
   let electiveLength;
-  let MachineData;
+  let machineData;
   let allowance;
   let rcMaxDiameter;
   let rcMinDiameter;
@@ -24,22 +24,22 @@ export function TranslateText({ globalLanguage }) {
   let rcRotation;
   let raRotation;
   let rwInclination;
-  let StabilityChart;
-  let HeightStabilityChart;
-  let Download;
-  let Delete;
+  let stabilityChart;
+  let heightStabilityChart;
+  let download;
+  let destroy;
   let ReportName;
 
   if (globalLanguage === 'EN') {
-    AnalysisData = 'Analysis Data';
-    MachineData = 'Machine Data';
+    analysisData = 'Analysis Data';
+    machineData = 'Machine Data';
     rectificationProcess = 'Grinding Process';
     machine = 'Machine';
     machineNumber = 'Machine Number';
     operation = 'Operation';
     department = 'Department';
     responsiblePerson = 'Responsible';
-    ProductData = 'Product Data';
+    productData = 'Product Data';
     product = 'Product';
     productNumber = 'Product Number';
     diameter = 'Diameter';
@@ -55,21 +55,21 @@ export function TranslateText({ globalLanguage }) {
     rcRotation = 'RC Rotation';
     raRotation = 'RA Rotation';
     rwInclination = 'Grinding Wheel Inclination';
-    StabilityChart = 'Process Stability Chart';
-    HeightStabilityChart = 'Piece Height Stability Chart';
-    Download = 'Download Report';
-    Delete = 'Delete';
+    stabilityChart = 'Process Stability Chart';
+    heightStabilityChart = 'Piece Height Stability Chart';
+    download = 'Download Report';
+    destroy = 'Delete';
     ReportName = 'Enter the report name';
   } else if (globalLanguage === 'PT') {
-    AnalysisData = 'Dados da Análise';
-    MachineData = 'Dados da Máquina';
+    analysisData = 'Dados da Análise';
+    machineData = 'Dados da Máquina';
     rectificationProcess = 'Processo de retificação';
     machine = 'Máquina';
     machineNumber = 'Número da máquina';
     operation = 'Operação';
     department = 'Departamento';
     responsiblePerson = 'Responsável';
-    ProductData = 'Dados do Produto';
+    productData = 'Dados do Produto';
     product = 'Produto';
     productNumber = 'Número do produto';
     diameter = 'Diâmetro';
@@ -85,21 +85,21 @@ export function TranslateText({ globalLanguage }) {
     rcRotation = 'Rotação do RC';
     raRotation = 'Rotação do RA';
     rwInclination = 'Inclinação da Roda de Retificação';
-    StabilityChart = 'Diagrama - Estabilidade de processo';
-    HeightStabilityChart = 'Diagrama - Estabilidade de altura da peça';
-    Download = 'Baixar Relatório';
-    Delete = 'Excluir';
+    stabilityChart = 'Diagrama - Estabilidade de processo';
+    heightStabilityChart = 'Diagrama - Estabilidade de altura da peça';
+    download = 'Baixar Relatório';
+    destroy = 'Excluir';
     ReportName = 'Insira o nome do relatório';
   } else if (globalLanguage === 'DE') {
-    AnalysisData = 'Analyse-Daten';
-    MachineData = 'Maschinendaten';
+    analysisData = 'Analyse-Daten';
+    machineData = 'Maschinendaten';
     rectificationProcess = 'Schleifprozess';
     machine = 'Maschine';
     machineNumber = 'Maschinennummer';
     operation = 'Betrieb';
     department = 'Abteilung';
     responsiblePerson = 'Verantwortlicher';
-    ProductData = 'Produktinformationen';
+    productData = 'Produktinformationen';
     product = 'Produkt';
     productNumber = 'Produktnummer';
     diameter = 'Durchmesser';
@@ -115,16 +115,16 @@ export function TranslateText({ globalLanguage }) {
     rcRotation = 'RC-Rotation';
     raRotation = 'RA-Rotation';
     rwInclination = 'Schleifscheibenneigung';
-    StabilityChart = 'Prozessstabilitätsdiagramm';
-    HeightStabilityChart = 'Höhensstabilitätsdiagramm für das Werkstück';
-    Download = 'Bericht herunterladen';
-    Delete = 'Löschen';
+    stabilityChart = 'Prozessstabilitätsdiagramm';
+    heightStabilityChart = 'Höhensstabilitätsdiagramm für das Werkstück';
+    download = 'Bericht herunterladen';
+    destroy = 'Löschen';
     ReportName = 'Geben Sie den Berichtsnamen ein';
   }
   return {
-    AnalysisData,
-    StabilityChart,
-    HeightStabilityChart,
+    analysisData,
+    stabilityChart,
+    heightStabilityChart,
     ReportName,
     rectificationProcess,
     machine,
@@ -132,13 +132,13 @@ export function TranslateText({ globalLanguage }) {
     operation,
     department,
     responsiblePerson,
-    ProductData,
+    productData,
     product,
     productNumber,
     diameter,
     totalLength,
     electiveLength,
-    MachineData,
+    machineData,
     allowance,
     rcMaxDiameter,
     rcMinDiameter,
@@ -149,7 +149,7 @@ export function TranslateText({ globalLanguage }) {
     rcRotation,
     raRotation,
     rwInclination,
-    Download,
-    Delete,
+    download,
+    destroy,
   };
 }

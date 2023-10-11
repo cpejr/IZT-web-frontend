@@ -13,7 +13,7 @@ export function TranslateText({ globalLanguage }) {
   let diameter;
   let totalLength;
   let electiveLength;
-  let MachineData;
+  let machineData;
   let allowance;
   let rcMaxDiameter;
   let rcMinDiameter;
@@ -29,10 +29,15 @@ export function TranslateText({ globalLanguage }) {
   let download;
   let destroy;
   let reportName;
+  let rAprofileparameter;
+  let raInclination;
+  let dresserHeight;
+  let dresserPosition;
+  let tfCenterlessGrindingGap;
 
   if (globalLanguage === 'EN') {
     analysisData = 'Analysis Data';
-    MachineData = 'Machine Data';
+    machineData = 'Machine Data';
     rectificationProcess = 'Grinding Process';
     machine = 'Machine';
     machineNumber = 'Machine Number';
@@ -60,9 +65,14 @@ export function TranslateText({ globalLanguage }) {
     download = 'Download Report';
     destroy = 'Delete';
     reportName = 'Enter the report name';
+    rAprofileparameter = 'RA profile parameter';
+    raInclination = 'RA Inclination';
+    dresserHeight = 'Dresser Height';
+    dresserPosition = 'Dresser Position';
+    tfCenterlessGrindingGap = 'Through-Feed Centerless Grinding Gap';
   } else if (globalLanguage === 'PT') {
     analysisData = 'Dados da Análise';
-    MachineData = 'Dados da Máquina';
+    machineData = 'Dados da Máquina';
     rectificationProcess = 'Processo de retificação';
     machine = 'Máquina';
     machineNumber = 'Número da máquina';
@@ -90,9 +100,14 @@ export function TranslateText({ globalLanguage }) {
     download = 'Baixar Relatório';
     destroy = 'Excluir';
     reportName = 'Insira o nome do relatório';
+    rAprofileparameter = 'Parâmetro de perfil RA';
+    raInclination = 'Inclinação do RA';
+    dresserHeight = 'Altura do dressador';
+    dresserPosition = 'Posição do dressador';
+    tfCenterlessGrindingGap = 'Vão de retificação centerless de passagem';
   } else if (globalLanguage === 'DE') {
     analysisData = 'Analyse-Daten';
-    MachineData = 'Maschinendaten';
+    machineData = 'Maschinendaten';
     rectificationProcess = 'Schleifprozess';
     machine = 'Maschine';
     machineNumber = 'Maschinennummer';
@@ -120,6 +135,11 @@ export function TranslateText({ globalLanguage }) {
     download = 'Bericht herunterladen';
     destroy = 'Löschen';
     reportName = 'Geben Sie den Berichtsnamen ein';
+    rAprofileparameter = 'RA Profilparameter';
+    raInclination = 'RA Neigung';
+    dresserHeight = 'Dresser-Höhe';
+    dresserPosition = 'Dresser-Position';
+    tfCenterlessGrindingGap = 'Durchlauf-Centerless-Schleifspalt';
   }
   return {
     analysisData,
@@ -138,7 +158,7 @@ export function TranslateText({ globalLanguage }) {
     diameter,
     totalLength,
     electiveLength,
-    MachineData,
+    machineData,
     allowance,
     rcMaxDiameter,
     rcMinDiameter,
@@ -151,5 +171,10 @@ export function TranslateText({ globalLanguage }) {
     rwInclination,
     download,
     destroy,
+    rAprofileparameter,
+    raInclination,
+    dresserHeight,
+    dresserPosition,
+    tfCenterlessGrindingGap,
   };
 }

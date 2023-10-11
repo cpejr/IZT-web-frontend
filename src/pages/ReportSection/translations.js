@@ -1,19 +1,24 @@
 // eslint-disable-next-line import/prefer-default-export
 export function TranslateText({ globalLanguage }) {
-  let Reports;
-  let Report;
+  let reports;
+  let report;
+  let search;
   if (globalLanguage === 'EN') {
-    Report = 'Report';
-    Reports = 'Reports';
+    report = 'Report';
+    reports = 'Reports';
+    search = 'Search by name';
   } else if (globalLanguage === 'PT') {
-    Report = 'Relatório';
-    Reports = 'Relatórios';
+    report = 'Relatório';
+    reports = 'Relatórios';
+    search = 'Pesquisar por nome';
   } else if (globalLanguage === 'DE') {
-    Report = 'Bericht';
-    Reports = 'Berichte';
+    report = 'Bericht';
+    reports = 'Berichte';
+    search = 'Nach Namen suchen';
   }
   return {
-    Reports,
-    Report,
+    reports,
+    report,
+    search,
   };
 }

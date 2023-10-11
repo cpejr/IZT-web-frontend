@@ -34,7 +34,7 @@ export default function SoftwareLateralMenu() {
           active={activeMenuItem === 0}
           onClick={() => handleMenuItemClick(0)}
         >
-          {translations.StabilityAnalysis}
+          {translations.stabilityAnalysis}
         </MenuLink>
       </MenuItem>
       <MenuItem>
@@ -45,7 +45,7 @@ export default function SoftwareLateralMenu() {
           active={activeMenuItem === 1}
           onClick={() => handleMenuItemClick(1)}
         >
-          {translations.Profile}
+          {translations.profile}
         </MenuLink>
       </MenuItem>
       <MenuItem>
@@ -56,7 +56,7 @@ export default function SoftwareLateralMenu() {
           active={activeMenuItem === 2}
           onClick={() => handleMenuItemClick(2)}
         >
-          {translations.Reports}
+          {translations.reports}
         </MenuLink>
       </MenuItem>
     </Menu>

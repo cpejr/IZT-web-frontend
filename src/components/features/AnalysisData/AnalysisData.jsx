@@ -27,12 +27,12 @@ export default function AnalysisData({ collapse, register, errors }) {
             {...register('rectificationProcess')}
             hasError={errors?.rectificationProcess?.message}
           >
-            <option value="">{translations.Select}</option>
+            <option value="">{translations.select}</option>
             <option value="Centerless de Mergulho">
-              {translations.PlungeCenterless}
+              {translations.plungeCenterless}
             </option>
             <option value="Centerless de Passagem">
-              {translations.TFCenterless}
+              {translations.tFCenterless}
             </option>
           </SelectInput>
         </Line>
@@ -67,10 +67,10 @@ export default function AnalysisData({ collapse, register, errors }) {
             {...register('operation')}
             hasError={errors?.operation?.message}
           >
-            <option value="">{translations.Select}</option>
-            <option value="Desbaste">{translations.RoughGrinding}</option>
-            <option value="Pré Desbaste">{translations.PRoughGrinding}</option>
-            <option value="Acabamento">{translations.FinishGrinding}</option>
+            <option value="">{translations.select}</option>
+            <option value="Desbaste">{translations.roughGrinding}</option>
+            <option value="Pré Desbaste">{translations.pRoughGrinding}</option>
+            <option value="Acabamento">{translations.finishGrinding}</option>
           </SelectInput>
         </Line>
         <ErrorMessage>{errors?.operation?.message}</ErrorMessage>

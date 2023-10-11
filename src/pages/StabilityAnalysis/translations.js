@@ -1,65 +1,70 @@
 // eslint-disable-next-line import/prefer-default-export
 export function TranslateText({ globalLanguage }) {
-  let DataEntry;
-  let AnalysisData;
-  let MachineData;
-  let ProductData;
-  let Loading;
-  let Calculate;
-  let SaveReport;
-  let StabilityChart;
-  let HeightStabilityChart;
-  let ReportName;
-  let Success;
+  let dataEntry;
+  let analysisData;
+  let machineData;
+  let productData;
+  let loading;
+  let calculate;
+  let saveReport;
+  let stabilityChart;
+  let heightStabilityChart;
+  let reportName;
+  let success;
+  let reportSuccess;
 
   if (globalLanguage === 'EN') {
-    DataEntry = 'Data Entry';
-    AnalysisData = 'Analysis Data';
-    MachineData = 'Machine Data';
-    ProductData = 'Product Data';
-    Loading = 'Loading';
-    Calculate = 'Calculate';
-    SaveReport = 'Save Report';
-    StabilityChart = 'Process Stability Chart';
-    HeightStabilityChart = 'Piece Height Stability Chart';
-    ReportName = 'Enter the report name';
-    Success = 'Data calculated successfully!';
+    dataEntry = 'Data Entry';
+    analysisData = 'Analysis Data';
+    machineData = 'Machine Data';
+    productData = 'Product Data';
+    loading = 'Loading';
+    calculate = 'Calculate';
+    saveReport = 'Save Report';
+    stabilityChart = 'Process Stability Chart';
+    heightStabilityChart = 'Piece Height Stability Chart';
+    reportName = 'Enter the report name';
+    success = 'Data calculated successfully!';
+    reportSuccess = 'Report created successfully';
   } else if (globalLanguage === 'PT') {
-    DataEntry = 'Entrada de Dados';
-    AnalysisData = 'Dados da Análise';
-    MachineData = 'Dados da Máquina';
-    ProductData = 'Dados do Produto';
-    Loading = 'Carregando';
-    Calculate = 'Calcular';
-    SaveReport = 'Salvar relatório';
-    StabilityChart = 'Diagrama - Estabilidade de processo';
-    HeightStabilityChart = 'Diagrama - Estabilidade de altura da peça';
-    ReportName = 'Insira o nome do relatório';
-    Success = 'Dados calculados com sucesso!';
+    dataEntry = 'Entrada de Dados';
+    analysisData = 'Dados da Análise';
+    machineData = 'Dados da Máquina';
+    productData = 'Dados do Produto';
+    loading = 'Carregando';
+    calculate = 'Calcular';
+    saveReport = 'Salvar relatório';
+    stabilityChart = 'Diagrama - Estabilidade de processo';
+    heightStabilityChart = 'Diagrama - Estabilidade de altura da peça';
+    reportName = 'Insira o nome do relatório';
+    success = 'Dados calculados com sucesso!';
+    reportSuccess = 'Relatório criado com sucesso!';
   } else if (globalLanguage === 'DE') {
-    DataEntry = 'Dateneingabe';
-    AnalysisData = 'Analyse-Daten';
-    MachineData = 'Maschinendaten';
-    ProductData = 'Produktinformationen';
-    Loading = 'Laden';
-    Calculate = 'Berechnen';
-    SaveReport = 'Bericht speichern';
-    StabilityChart = 'Prozessstabilitätsdiagramm';
-    HeightStabilityChart = 'Höhensstabilitätsdiagramm für das Werkstück';
-    ReportName = 'Geben Sie den Berichtsnamen ein';
-    Success = 'Daten erfolgreich berechnet!';
+    dataEntry = 'Dateneingabe';
+    analysisData = 'Analyse-Daten';
+    machineData = 'Maschinendaten';
+    productData = 'Produktinformationen';
+    loading = 'Laden';
+    calculate = 'Berechnen';
+    saveReport = 'Bericht speichern';
+    stabilityChart = 'Prozessstabilitätsdiagramm';
+    heightStabilityChart = 'Höhensstabilitätsdiagramm für das Werkstück';
+    reportName = 'Geben Sie den Berichtsnamen ein';
+    success = 'Daten erfolgreich berechnet!';
+    reportSuccess = 'Bericht erfolgreich erstellt!';
   }
   return {
-    DataEntry,
-    AnalysisData,
-    MachineData,
-    ProductData,
-    Loading,
-    Calculate,
-    SaveReport,
-    StabilityChart,
-    HeightStabilityChart,
-    ReportName,
-    Success,
+    dataEntry,
+    analysisData,
+    machineData,
+    productData,
+    loading,
+    calculate,
+    saveReport,
+    stabilityChart,
+    heightStabilityChart,
+    reportName,
+    success,
+    reportSuccess,
   };
 }

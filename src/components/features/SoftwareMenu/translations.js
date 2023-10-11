@@ -1,25 +1,25 @@
 // eslint-disable-next-line import/prefer-default-export
 export function TranslateText({ globalLanguage }) {
-  let StabilityAnalysis;
-  let Profile;
-  let Reports;
+  let stabilityAnalysis;
+  let profile;
+  let reports;
 
   if (globalLanguage === 'EN') {
-    StabilityAnalysis = 'Stability Analysis';
-    Profile = 'Profile';
-    Reports = 'Reports';
+    stabilityAnalysis = 'Stability Analysis';
+    profile = 'Profile';
+    reports = 'Reports';
   } else if (globalLanguage === 'PT') {
-    StabilityAnalysis = 'Análise de Estabilidade';
-    Profile = 'Perfil';
-    Reports = 'Relatórios';
+    stabilityAnalysis = 'Análise de Estabilidade';
+    profile = 'Perfil';
+    reports = 'Relatórios';
   } else if (globalLanguage === 'DE') {
-    StabilityAnalysis = 'Stabilitätsanalyse';
-    Profile = 'Profil';
-    Reports = 'Berichte';
+    stabilityAnalysis = 'Stabilitätsanalyse';
+    profile = 'Profil';
+    reports = 'Berichte';
   }
   return {
-    StabilityAnalysis,
-    Profile,
-    Reports,
+    stabilityAnalysis,
+    profile,
+    reports,
   };
 }

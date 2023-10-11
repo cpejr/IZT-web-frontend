@@ -69,15 +69,15 @@ export default function ReportSection() {
   return (
     <TESTEContainer>
       <Container>
-        <Title>{translations.Reports}</Title>
+        <Title>{translations.reports}</Title>
         <ReportsArea>
           <ReportsHeader>
-            <ReportsTitle>{translations.Report}</ReportsTitle>
+            <ReportsTitle>{translations.report}</ReportsTitle>
             <SearchDiv>
               <HiSearch size={25} />
               <Search
                 onChange={(e) => setName(e.target.value)}
-                placeholder={name || 'Pesquisar por nome'}
+                placeholder={name || translations.search}
               />
             </SearchDiv>
           </ReportsHeader>

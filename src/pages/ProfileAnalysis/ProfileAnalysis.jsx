@@ -67,7 +67,13 @@ export default function ProfileAnalysis() {
         queryKey: ['profile-analysis', 'searchByName'],
       });
 
-      toast.success('Relatório criado com sucesso!');
+      if (globalLanguage === 'DE') {
+        toast.success('Bericht erfolgreich erstellt!');
+      } else if (globalLanguage === 'EN') {
+        toast.success('Report created successfully');
+      } else {
+        toast.success('Relatório criado com sucesso!');
+      }
     },
     onError: (err) => {
       if (globalLanguage === 'DE') {
@@ -88,7 +94,6 @@ export default function ProfileAnalysis() {
     },
   });
 
-  // Não sei o que fazer
   const handleformDataStorage = (data) => {
     setFormDataStorage(data);
   };
@@ -127,7 +132,7 @@ export default function ProfileAnalysis() {
       <Container>
         <Containerleft>
           <Center>
-            <H1>{translations.DataEntry}</H1>
+            <H1>{translations.dataEntry}</H1>
             <Data>
               <AccordionDemo
                 onCalculate={handleCalculate}
@@ -145,44 +150,44 @@ export default function ProfileAnalysis() {
                   id="name"
                   name="name"
                   type="text"
-                  placeholder={translations.ReportName}
+                  placeholder={translations.reportName}
                   error={error?.name?.message}
                   {...register('name')}
                 />
               </DivName>
-              <Button>{translations.SaveReport}</Button>
+              <Button>{translations.saveReport}</Button>
             </H1>
             <ErrorMessage>{error?.name?.message}</ErrorMessage>
           </DataEntry>
           <Edit>
-            <Text>{translations.GrindingClearance} </Text>
+            <Text>{translations.grindingClearance} </Text>
             <Container2>
               <Graphic data={graphData} />
             </Container2>
-            <Text>{translations.OutputData}</Text>
+            <Text>{translations.outputData}</Text>
           </Edit>
           <ContainerRight>
             <Column>
               <OutputData>
-                <Text2> {translations.HeightBetweenCenters} (hw): ___ mm</Text2>
-                <Text2>{translations.DresserHeight} (hd): ___ mm</Text2>
-                <Text2>{translations.RAInclination} (adr): ___ °</Text2>
-                <Text2>{translations.DresserInclination}: ___ °</Text2>
-                <Text2>{translations.RulerAngle} (β): ___ °</Text2>
-                <Text2>{translations.GrindingRotation} (nr): ___ rpm</Text2>
-                <Text2>{translations.GrindingRotation} (nr): ___ rps</Text2>
-                <Text2>{translations.PeripheralSpeed} (vp): ___ m/s</Text2>
-                <Text2>{translations.FeedSpeed} (vfa): ___ m/min</Text2>
+                <Text2> {translations.heightBetweenCenters} (hw): ___ mm</Text2>
+                <Text2>{translations.dresserHeight} (hd): ___ mm</Text2>
+                <Text2>{translations.raInclination} (adr): ___ °</Text2>
+                <Text2>{translations.dresserInclination}: ___ °</Text2>
+                <Text2>{translations.rulerAngle} (β): ___ °</Text2>
+                <Text2>{translations.grindingRotation} (nr): ___ rpm</Text2>
+                <Text2>{translations.grindingRotation} (nr): ___ rps</Text2>
+                <Text2>{translations.peripheralSpeed} (vp): ___ m/s</Text2>
+                <Text2>{translations.feedSpeed} (vfa): ___ m/min</Text2>
               </OutputData>
               <OutputData rightOutputData>
-                <Text2> {translations.PieceQuantity} (Qp): ___ </Text2>
-                <Text2> {translations.CycleTime} (tc): ___ min/pc</Text2>
-                <Text2> {translations.RevolutionsNumbers} (U): ___ </Text2>
-                <Text2> {translations.RemovalRate} (Qw’): ___ mm3/mm.s</Text2>
-                <Text2> {translations.CuttingThickness} (hef): ___ mm</Text2>
-                <Text2> {translations.TangentAngle} (γ): ___ °</Text2>
-                <Text2> {translations.TangentAngle} RA (γra): ___ °</Text2>
-                <Text2> {translations.TangentAngle} RC (γrc) ___ °</Text2>
+                <Text2> {translations.pieceQuantity} (Qp): ___ </Text2>
+                <Text2> {translations.cycleTime} (tc): ___ min/pc</Text2>
+                <Text2> {translations.revolutionsNumbers} (U): ___ </Text2>
+                <Text2> {translations.removalRate} (Qw’): ___ mm3/mm.s</Text2>
+                <Text2> {translations.cuttingThickness} (hef): ___ mm</Text2>
+                <Text2> {translations.tangentAngle} (γ): ___ °</Text2>
+                <Text2> {translations.tangentAngle} RA (γra): ___ °</Text2>
+                <Text2> {translations.tangentAngle} RC (γrc) ___ °</Text2>
               </OutputData>
             </Column>
           </ContainerRight>

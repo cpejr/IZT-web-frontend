@@ -68,7 +68,7 @@ export default function StabilityAnalysisReport({
       <Container isOpened={isOpened}>
         <Columns>
           <DataColumn>
-            <Title>{translations.AnalysisData}</Title>
+            <Title>{translations.analysisData}</Title>
             <DataContainer>
               <DataRow>
                 <Label>{translations.rectificationProcess}:</Label>
@@ -98,7 +98,7 @@ export default function StabilityAnalysisReport({
           </DataColumn>
           <DashedBar />
           <DataColumn>
-            <Title>{translations.ProductData}</Title>
+            <Title>{translations.productData}</Title>
             <DataContainer>
               <DataRow>
                 <Label>{translations.product}:</Label>
@@ -128,7 +128,7 @@ export default function StabilityAnalysisReport({
           </DataColumn>
           <DashedBar />
           <DataColumn>
-            <Title>{translations.MachineData}</Title>
+            <Title>{translations.machineData}</Title>
             <DataContainer>
               <DataRow>
                 <Label>{translations.rcMaxDiameter} (max):</Label>
@@ -171,23 +171,23 @@ export default function StabilityAnalysisReport({
         </Columns>
         <GraphsDiv>
           <div>
-            <Title>{translations.StabilityChart}</Title>
+            <Title>{translations.stabilityChart}</Title>
             <StabilityGraph data={data?.processStabilityDiagram} />
           </div>
           <div>
-            <Title>{translations.HeightStabilityChart}</Title>
+            <Title>{translations.heightStabilityChart}</Title>
             <StabilityGraph data={data?.partHeightStabilityDiagram} />
           </div>
         </GraphsDiv>
         <ButtonRow>
           <button type="button" onClick={saveFile}>
-            {translations.Download}
+            {translations.download}
           </button>
           <button
             type="button"
             onClick={() => openModalDeleteStabilityAnalysis(data?._id)}
           >
-            {translations.Delete}
+            {translations.destroy}
           </button>
         </ButtonRow>
 

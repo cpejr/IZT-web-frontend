@@ -1,75 +1,75 @@
 // eslint-disable-next-line import/prefer-default-export
 export function TranslateText({ globalLanguage }) {
-  let AnalysisData;
+  let analysisData;
   let rectificationProcess;
   let machine;
   let machineNumber;
   let operation;
   let department;
   let responsiblePerson;
-  let Select;
-  let PlungeCenterless;
-  let TFCenterless;
-  let RoughGrinding;
-  let PRoughGrinding;
-  let FinishGrinding;
+  let select;
+  let plungeCenterless;
+  let tFCenterless;
+  let roughGrinding;
+  let pRoughGrinding;
+  let finishGrinding;
 
   if (globalLanguage === 'EN') {
-    AnalysisData = 'Analysis Data';
+    analysisData = 'Analysis Data';
     rectificationProcess = 'Grinding Process';
     machine = 'Machine';
     machineNumber = 'Machine Number';
     operation = 'Operation';
     department = 'Department';
     responsiblePerson = 'Responsible';
-    Select = 'Select';
-    PlungeCenterless = 'Plunge Centerless';
-    TFCenterless = 'Through-Feed Centerless';
-    RoughGrinding = 'Rough Grinding';
-    PRoughGrinding = 'Pre-Rough Grinding';
-    FinishGrinding = 'Finish Grinding';
+    select = 'Select';
+    plungeCenterless = 'Plunge Centerless';
+    tFCenterless = 'Through-Feed Centerless';
+    roughGrinding = 'Rough Grinding';
+    pRoughGrinding = 'Pre-Rough Grinding';
+    finishGrinding = 'Finish Grinding';
   } else if (globalLanguage === 'PT') {
-    AnalysisData = 'Dados da Análise';
+    analysisData = 'Dados da Análise';
     rectificationProcess = 'Processo de retificação';
     machine = 'Máquina';
     machineNumber = 'Número da máquina';
     operation = 'Operação';
     department = 'Departamento';
     responsiblePerson = 'Responsável';
-    Select = 'Selecionar';
-    PlungeCenterless = 'Centerless de Mergulho';
-    TFCenterless = 'Centerless de Passagem';
-    RoughGrinding = 'Desbaste';
-    PRoughGrinding = 'Pré Desbaste';
-    FinishGrinding = 'Acabamento';
+    select = 'Selecionar';
+    plungeCenterless = 'Centerless de Mergulho';
+    tFCenterless = 'Centerless de Passagem';
+    roughGrinding = 'Desbaste';
+    pRoughGrinding = 'Pré Desbaste';
+    finishGrinding = 'Acabamento';
   } else if (globalLanguage === 'DE') {
-    AnalysisData = 'Analyse-Daten';
+    analysisData = 'Analyse-Daten';
     rectificationProcess = 'Schleifprozess';
     machine = 'Maschine';
     machineNumber = 'Maschinennummer';
     operation = 'Betrieb';
     department = 'Abteilung';
     responsiblePerson = 'Verantwortlicher';
-    Select = 'Auswählen';
-    PlungeCenterless = 'Eintauchen Centerless';
-    TFCenterless = 'Durchlauf Centerless';
-    RoughGrinding = 'Grobschleifen';
-    PRoughGrinding = 'Vor-Grobschleifen';
-    FinishGrinding = 'Feinschleifen';
+    select = 'Auswählen';
+    plungeCenterless = 'Eintauchen Centerless';
+    tFCenterless = 'Durchlauf Centerless';
+    roughGrinding = 'Grobschleifen';
+    pRoughGrinding = 'Vor-Grobschleifen';
+    finishGrinding = 'Feinschleifen';
   }
   return {
-    AnalysisData,
+    analysisData,
     rectificationProcess,
     machine,
     machineNumber,
     operation,
     department,
     responsiblePerson,
-    Select,
-    PlungeCenterless,
-    TFCenterless,
-    RoughGrinding,
-    PRoughGrinding,
-    FinishGrinding,
+    select,
+    plungeCenterless,
+    tFCenterless,
+    roughGrinding,
+    pRoughGrinding,
+    finishGrinding,
   };
 }
