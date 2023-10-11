@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/no-array-index-key */
 import { useState } from 'react';
 
 import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
@@ -5,6 +7,7 @@ import { SettingOutlined, CloseOutlined } from '@ant-design/icons';
 import { ModalChangeUserData } from '../../components/features';
 import { useGetUserCourses } from '../../hooks/query/userCourse';
 import useAuthStore from '../../stores/auth';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import formatDate from '../../utils/formatDate';
 import {
   ModalStyle,
@@ -26,8 +29,13 @@ import {
   Body,
   DataContainer,
 } from './Styles';
+import { TranslateText } from './translations';
 
 export default function Profile() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [updateUserModalState, setUpdateUserModalState] = useState(false);
   const user = useAuthStore((store) => store.auth?.user);
   const { data: userCourses } = useGetUserCourses({});
@@ -40,48 +48,48 @@ export default function Profile() {
     <Background>
       <Page>
         <Body>
-          <Title>Informações do usuário</Title>
+          <Title>{translations.profileTitle1}</Title>
           <Container>
             <DataContainer>
               <FirstColumn>
                 <PersonalData>
-                  <Subtitle>Informações Pessoais</Subtitle>
+                  <Subtitle>{translations.profilePersonalInfo}</Subtitle>
                   <Infos>
                     <Info>
-                      <h1>Empresa: </h1>
+                      <h1>{translations.profileCompany}</h1>
                       <h2>{user?.company}</h2>
                     </Info>
                     <Info>
-                      <h1>Nome: </h1>
+                      <h1>{translations.profileName}</h1>
                       <h2>{user?.name}</h2>
                     </Info>
                     <Info>
-                      <h1>Sobrenome: </h1>
+                      <h1>{translations.profileLastName}</h1>
                       <h2>{user?.surname}</h2>
                     </Info>
                     <Info>
-                      <h1>Cargo: </h1>
+                      <h1>{translations.profileRole}</h1>
                       <h2>{user?.role}</h2>
                     </Info>
                   </Infos>
                 </PersonalData>
                 <Address>
-                  <Subtitle>Endereço</Subtitle>
+                  <Subtitle>{translations.profileAdress}</Subtitle>
                   <Infos>
                     <Info>
-                      <h1>Pais: </h1>
+                      <h1>{translations.profileCoutry}</h1>
                       <h2>{user?.country}</h2>
                     </Info>
                     <Info>
-                      <h1>Estado: </h1>
+                      <h1>{translations.profileState}</h1>
                       <h2>{user?.state}</h2>
                     </Info>
                     <Info>
-                      <h1>Cidade: </h1>
+                      <h1>{translations.profileCity}</h1>
                       <h2>{user?.city}</h2>
                     </Info>
                     <Info>
-                      <h1>Rua: </h1>
+                      <h1>{translations.profileStreet}</h1>
                       <h2>{user?.address}</h2>
                     </Info>
                   </Infos>
@@ -89,7 +97,7 @@ export default function Profile() {
               </FirstColumn>
               <SecondColumn>
                 <Contact>
-                  <Subtitle>Informações de contato</Subtitle>
+                  <Subtitle>{translations.profileContactInfo}</Subtitle>
                   <Infos>
                     <Info>
                       <h1>Email: </h1>
@@ -98,15 +106,20 @@ export default function Profile() {
                   </Infos>
                 </Contact>
                 <Lessons>
-                  <Subtitle>Curso:</Subtitle>
+                  <Subtitle>{translations.profileCourse}</Subtitle>
                   <Infos>
                     <LessonInfo>
-                      <h1>Validade de acesso: </h1>
+                      <h1>{translations.profileAccess}</h1>
                       {userCourses?.map((userCourse, index) => {
                         if (user?.isAdmin && !accessGranted) {
                           accessGranted = true;
-                          return <h2 key={index}>Acesso Ilimitado</h2>;
-                        } else if (
+                          return (
+                            <h2 key={index}>
+                              {translations.profileUnlimitedAccess}
+                            </h2>
+                          );
+                        }
+                        if (
                           !user?.isAdmin &&
                           userCourse.user._id === user?._id
                         ) {
@@ -115,16 +128,21 @@ export default function Profile() {
                               {userCourse?.expiresAt
                                 ? new Date(userCourse?.expiresAt).getTime() >
                                   Date.now()
-                                  ? formatDate({ value: userCourse?.expiresAt })
-                                  : 'Sem Acesso'
-                                : 'Sem Acesso'}
+                                  ? formatDate({
+                                      value: userCourse?.expiresAt,
+                                    })
+                                  : translations.profileNoAccess
+                                : translations.profileNoAccess}
                             </h2>
                           );
-                        } else if (
+                        }
+                        if (
                           index === userCourses.length - 1 &&
                           !accessGranted
                         ) {
-                          return <h2 key={index}>Sem Acesso</h2>;
+                          return (
+                            <h2 key={index}>{translations.profileNoAccess}</h2>
+                          );
                         }
                         return null;
                       })}
@@ -133,15 +151,15 @@ export default function Profile() {
                   <Subtitle>Software</Subtitle>
                   <Infos>
                     <LessonInfo>
-                      <h1>Validade de acesso: </h1>
+                      <h1>{translations.profileAccess}</h1>
                       <h2>
                         {user?.isAdmin
-                          ? 'Acesso Ilimitado'
+                          ? translations.profileUnlimitedAccess
                           : user?.softwareAccess
                           ? new Date(user.softwareAccess).getTime() > Date.now()
                             ? formatDate({ value: user.softwareAccess })
-                            : 'Sem Acesso'
-                          : 'Sem Acesso'}
+                            : translations.profileNoAccess
+                          : translations.profileNoAccess}
                       </h2>
                     </LessonInfo>
                   </Infos>
@@ -150,7 +168,7 @@ export default function Profile() {
             </DataContainer>
             <ChangeInfo onClick={openModalChangeUserData}>
               <SettingOutlined />
-              Alterar Informações
+              {translations.profileChangeInformation}
             </ChangeInfo>
           </Container>
         </Body>
@@ -164,7 +182,10 @@ export default function Profile() {
         destroyOnClose
         centered
       >
-        <ModalChangeUserData close={closeModalChangeUserData} />
+        <ModalChangeUserData
+          language={globalLanguage}
+          close={closeModalChangeUserData}
+        />
       </ModalStyle>
     </Background>
   );
