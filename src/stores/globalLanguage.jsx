@@ -1,11 +1,22 @@
-import React, { createContext, useContext, useMemo, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useEffect,
+} from 'react';
 
 import PropTypes from 'prop-types';
 
 const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
-  const [globalLanguage, setGlobalLanguage] = useState('PT');
+  const storedLanguage = localStorage.getItem('globalLanguage');
+  const [globalLanguage, setGlobalLanguage] = useState(storedLanguage || 'PT');
+
+  useEffect(() => {
+    localStorage.setItem('globalLanguage', globalLanguage);
+  }, [globalLanguage]);
 
   const value = useMemo(
     () => ({ globalLanguage, setGlobalLanguage }),

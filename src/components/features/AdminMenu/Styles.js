@@ -2,14 +2,13 @@ import { Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-// eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
   width: 29.8rem;
-  height: 91.4rem;
+  height: 100%;
   left: 0rem;
   top: 11rem;
 

@@ -72,7 +72,8 @@ export const SaveChanges = styled.button`
   margin-top: 2%;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
-  font-size: 2rem;
+  font-size: ${(props) => props.fontSize || '2rem'};
+
   font-weight: 600;
   color: ${(props) => props.theme.colors.blue};
 
@@ -87,23 +88,19 @@ export const SaveChanges = styled.button`
     align-items: center;
     justify-content: center;
     width: 90%;
-    font-size: 1.5rem;
+    font-size: ${(props) => props.fontSizeMobile || '1.5rem'};
 
     max-width: 20rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: ${(props) => props.fontSizeMiniMobile};
   }
 `;
 
 export const Subtitle = styled.p`
-  font-size: 3rem;
+  font-size: ${(props) => props.fontSize || '3rem'};
   font-weight: 600;
   font-family: ${(props) => props.theme.fonts.montserrat};
   margin-bottom: 8%;
-`;
-
-export const FormColumn2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 35rem;
 `;

@@ -19,12 +19,15 @@ import {
   SaveChanges,
   Subtitle,
   SeparationDiv,
-  FormColumn2,
 } from './Styles';
+import { TranslateText } from './translations';
 import { buildUpdateUserErrorMessage, updateUserSchema } from './utils';
+import { buildUpdateUserErrorMessageDE, updateUserSchemaDE } from './utilsDE';
+import { buildUpdateUserErrorMessageEN, updateUserSchemaEN } from './utilsEN';
 
-export default function ModalChangeUserData({ close }) {
+export default function ModalChangeUserData({ close, language }) {
   // States and variables
+
   const countries = useMemo(() => Country.getAllCountries(), []);
   const [states, setStates] = useState(null);
   const [cities, setCities] = useState(null);
@@ -32,6 +35,7 @@ export default function ModalChangeUserData({ close }) {
 
   const user = useAuthStore((state) => state.auth?.user);
   const setUser = useAuthStore((state) => state.setUser);
+  const translations = TranslateText({ language });
 
   // Reusable functions
   const selectFilter = useCallback(
@@ -55,17 +59,36 @@ export default function ModalChangeUserData({ close }) {
     onSuccess: (data) => {
       setUser(data);
 
-      toast.success('Dados modificados com sucesso!');
+      toast.success('Dados Alterados com Sucesso');
       close();
     },
     onError: (err) => {
-      const errorMessage = buildUpdateUserErrorMessage(err);
+      if (language === 'PT') {
+        const errorMessage = buildUpdateUserErrorMessage(err);
 
-      toast.error(errorMessage);
+        toast.error(errorMessage);
+      } else if (language === 'DE') {
+        const errorMessage = buildUpdateUserErrorMessageDE(err);
+
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildUpdateUserErrorMessageEN(err);
+
+        toast.error(errorMessage);
+      }
+
       setIsPending(false);
     },
   });
 
+  let resolver;
+  if (language === 'PT') {
+    resolver = zodResolver(updateUserSchema);
+  } else if (language === 'EN') {
+    resolver = zodResolver(updateUserSchemaEN);
+  } else {
+    resolver = zodResolver(updateUserSchemaDE);
+  }
   const {
     register,
     handleSubmit,
@@ -73,9 +96,7 @@ export default function ModalChangeUserData({ close }) {
     control,
     formState: { errors },
     watch,
-  } = useForm({
-    resolver: zodResolver(updateUserSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = (data) => {
     setIsPending(true);
 
@@ -88,6 +109,7 @@ export default function ModalChangeUserData({ close }) {
 
     updateUser({ _id: user._id, newUserData });
   };
+
   // Country, state and city selects handlers
   const selectedContry = watch('country');
   const selectedState = watch('state');
@@ -123,50 +145,62 @@ export default function ModalChangeUserData({ close }) {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <DataEntry>
           <FormColumn>
-            <Subtitle>Informações pessoais</Subtitle>
+            {language === 'DE' ? (
+              <Subtitle fontSize="2.5rem">
+                {translations.profilePersonalInfo}
+              </Subtitle>
+            ) : (
+              <Subtitle>{translations.profilePersonalInfo}</Subtitle>
+            )}
             <RegisterInput
-              label="Empresa: "
+              label={translations.profileCompany}
               name="company"
-              placeholder="Nome da empresa"
+              placeholder={translations.phCompany}
               register={register}
               errors={errors}
               type="text"
               defaultValue={user.company}
             />
             <RegisterInput
-              label="Nome: "
+              label={translations.profileName}
               name="name"
-              placeholder="Nome"
+              placeholder={translations.namePlaceholder}
               register={register}
               errors={errors}
               type="text"
               defaultValue={user.name}
             />
             <RegisterInput
-              label="Sobrenome: "
+              label={translations.profileLastName}
               name="surname"
-              placeholder="Sobrenome"
+              placeholder={translations.lastNamePlaceholder}
               register={register}
               errors={errors}
               type="text"
               defaultValue={user.surname}
             />
             <RegisterInput
-              label="Cargo: "
+              label={translations.profileRole}
               name="role"
-              placeholder="Nome do cargo"
+              placeholder={translations.phRole}
               register={register}
               errors={errors}
               type="text"
               defaultValue={user.role}
             />
           </FormColumn>
-          <FormColumn2>
-            <Subtitle>Endereço</Subtitle>
+          <FormColumn>
+            {language === 'DE' ? (
+              <Subtitle fontSize="2.5rem">
+                {translations.profileAdress}
+              </Subtitle>
+            ) : (
+              <Subtitle>{translations.profileAdress}</Subtitle>
+            )}
             <FormSelect
-              subtitle="País:"
+              subtitle={translations.profileCoutry}
               name="country"
-              placeholder="Nome do país"
+              placeholder={translations.phCountry}
               size="large"
               control={control}
               errors={errors}
@@ -177,9 +211,9 @@ export default function ModalChangeUserData({ close }) {
               defaultValue={user.country}
             />
             <FormSelect
-              subtitle="Estado:"
+              subtitle={translations.profileState}
               name="state"
-              placeholder="Nome do estado"
+              placeholder={translations.phState}
               size="large"
               control={control}
               errors={errors}
@@ -191,9 +225,9 @@ export default function ModalChangeUserData({ close }) {
               defaultValue={user.state}
             />
             <FormSelect
-              subtitle="Cidade:"
+              subtitle={translations.profileCity}
               name="city"
-              placeholder="Nome da cidade"
+              placeholder={translations.phCity}
               size="large"
               control={control}
               errors={errors}
@@ -204,44 +238,74 @@ export default function ModalChangeUserData({ close }) {
               isProfile
               defaultValue={user.city}
             />
+
             <SeparationDiv>
               <RegisterInput
-                label="Endereço: "
+                label={translations.profileStreet}
                 name="address"
-                placeholder="Endereço"
+                placeholder={translations.profileStreet}
                 register={register}
                 errors={errors}
                 type="text"
                 defaultValue={user.address}
               />
             </SeparationDiv>
-          </FormColumn2>
+          </FormColumn>
         </DataEntry>
-
-        <SaveChanges
-          disabled={isPending}
-          type="submit"
-          name="Salvar Alterações"
-          relativeWidth="70%"
-        >
-          {isPending ? (
-            <>
-              <TailSpin
-                height="15"
-                width="15"
-                color="white"
-                ariaLabel="tail-spin-loading"
-                radius="5"
-              />
-              Carregando
-            </>
-          ) : (
-            <>
-              <SaveOutlined />
-              Salvar Alterações
-            </>
-          )}
-        </SaveChanges>
+        {language === 'DE' ? (
+          <SaveChanges
+            disabled={isPending}
+            type="submit"
+            name="Salvar Alterações"
+            relativeWidth="70%"
+            fontSize="1.7rem"
+            fontSizeMobile="1.3rem"
+            fontSizeMiniMobile="0.9rem"
+          >
+            {isPending ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                />
+                {translations.profileLoading}
+              </>
+            ) : (
+              <>
+                <SaveOutlined />
+                {translations.profileChangeInformation}
+              </>
+            )}
+          </SaveChanges>
+        ) : (
+          <SaveChanges
+            disabled={isPending}
+            type="submit"
+            name="Salvar Alterações"
+            relativeWidth="70%"
+          >
+            {isPending ? (
+              <>
+                <TailSpin
+                  height="15"
+                  width="15"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="5"
+                />
+                {translations.profileLoading}
+              </>
+            ) : (
+              <>
+                <SaveOutlined />
+                {translations.profileChangeInformation}
+              </>
+            )}
+          </SaveChanges>
+        )}
       </Form>
     </Container>
   );
@@ -249,4 +313,5 @@ export default function ModalChangeUserData({ close }) {
 
 ModalChangeUserData.propTypes = {
   close: PropTypes.func.isRequired,
+  language: PropTypes.string.isRequired,
 };
