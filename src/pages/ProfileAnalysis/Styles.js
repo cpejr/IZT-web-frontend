@@ -298,3 +298,41 @@ export const Column = styled.div`
   width: 100%;
   gap: 2rem;
 `;
+
+export const Collapsable = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8vh;
+`;
+
+export const CollapsableHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 1.5rem;
+  :hover {
+    cursor: pointer;
+  }
+  svg {
+    color: white;
+    font-weight: 700;
+    transform: ${(props) =>
+      props.collapse ? 'rotate(180deg)' : 'rotate(0deg)'};
+    transition: all 200ms ease-in-out 200ms;
+    height: 2.5vh;
+    width: 2.5vh;
+  }
+`;
+
+export const DataTitle = styled.div`
+  color: white;
+  font-family: ${(props) => props.theme.fonts.montserrat};
+  font-weight: 500;
+  font-size: 2rem;
+  @media (max-width: 1100px) {
+    font-size: 1.6rem;
+  }
+`;

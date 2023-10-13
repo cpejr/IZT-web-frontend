@@ -19,6 +19,14 @@ export function TranslateText({ globalLanguage }) {
   let cuttingThickness;
   let tangentAngle;
   let reportName;
+  let analysisData;
+  let machineData;
+  let productData;
+  let calculate;
+  let loading;
+  let successCalculate;
+  let reportSuccess;
+  let parametersRA;
 
   if (globalLanguage === 'EN') {
     dataEntry = 'Data Entry';
@@ -40,6 +48,14 @@ export function TranslateText({ globalLanguage }) {
     cuttingThickness = 'Cutting Thickness';
     tangentAngle = 'Tangent Angle';
     reportName = 'Enter the report name';
+    analysisData = 'Analysis Data';
+    machineData = 'Machine Data';
+    productData = 'Product Data';
+    calculate = 'Calculate';
+    loading = 'Loading';
+    successCalculate = 'Data calculated successfully!';
+    reportSuccess = 'Report created successfully';
+    parametersRA = 'RA profile parameter';
   } else if (globalLanguage === 'PT') {
     dataEntry = 'Entrada de Dados';
     saveReport = 'Salvar relatório';
@@ -60,6 +76,14 @@ export function TranslateText({ globalLanguage }) {
     cuttingThickness = 'Espessura de corte';
     tangentAngle = 'Ângulo de tangência';
     reportName = 'Insira o nome do relatório';
+    analysisData = 'Dados da Análise';
+    machineData = 'Dados da Máquina';
+    productData = 'Dados do Produto';
+    calculate = 'Calcular';
+    loading = 'Carregando';
+    successCalculate = 'Dados calculados com sucesso!';
+    reportSuccess = 'Relatório criado com sucesso!';
+    parametersRA = 'Parâmetro de perfil RA';
   } else if (globalLanguage === 'DE') {
     dataEntry = 'Dateneingabe';
     saveReport = 'Bericht speichern';
@@ -80,6 +104,14 @@ export function TranslateText({ globalLanguage }) {
     cuttingThickness = 'Schnittdicke';
     tangentAngle = 'Tangentenwinkel';
     reportName = 'Geben Sie den Berichtsnamen ein';
+    analysisData = 'Analyse-Daten';
+    machineData = 'Maschinendaten';
+    productData = 'Produktinformationen';
+    calculate = 'Berechnen';
+    loading = 'Laden';
+    successCalculate = 'Daten erfolgreich berechnet!';
+    reportSuccess = 'Bericht erfolgreich erstellt!';
+    parametersRA = 'RA Profilparameter';
   }
   return {
     dataEntry,
@@ -101,5 +133,13 @@ export function TranslateText({ globalLanguage }) {
     cuttingThickness,
     tangentAngle,
     reportName,
+    analysisData,
+    machineData,
+    productData,
+    calculate,
+    loading,
+    successCalculate,
+    reportSuccess,
+    parametersRA,
   };
 }
