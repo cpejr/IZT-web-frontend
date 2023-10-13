@@ -6,6 +6,7 @@ import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
 
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import ProfileAnalysisGraph from '../Graphic/ProfileAnalysisGraph';
 import ModalDeleteProfileAnalysis from '../ModalDeleteProfileAnalysis/ModalDeleteProfileAnalysis';
 import ProfilePDF from '../PDF/ProfileAnalysisPDF';
@@ -25,12 +26,17 @@ import {
   DashedBar,
   ModalStyle,
 } from './Styles';
+import { TranslateText } from './translations';
 
 export default function ProfileAnalysisReport({
   data,
   openedReport,
   handleOpened,
 }) {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [isOpened, setIsOpened] = useState(openedReport === data._id);
 
   useEffect(() => {
@@ -66,60 +72,60 @@ export default function ProfileAnalysisReport({
         <Columns>
           <Row>
             <DataColumn>
-              <Title>Dados da Análise</Title>
+              <Title>{translations.analysisData}</Title>
               <DataContainer>
                 <DataRow>
-                  <Label>Processo retificação:</Label>
+                  <Label>{translations.rectificationProcess}:</Label>
                   <Data>{data?.rectificationProcess}</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Máquina:</Label>
+                  <Label>{translations.machine}:</Label>
                   <Data>{data?.machine}</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>N° da máquina:</Label>
+                  <Label>{translations.machineNumber}:</Label>
                   <Data>{data?.machineNumber}</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Operação:</Label>
+                  <Label>{translations.operation}:</Label>
                   <Data>{data?.operation}</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Departamento:</Label>
+                  <Label>{translations.department}:</Label>
                   <Data>{data?.department}</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Responsável:</Label>
+                  <Label>{translations.responsiblePerson}:</Label>
                   <Data>{data?.responsiblePerson}</Data>
                 </DataRow>
               </DataContainer>
             </DataColumn>
             <DashedBar />
             <DataColumn>
-              <Title>Dados do produto</Title>
+              <Title>{translations.productData}</Title>
               <DataContainer>
                 <DataRow>
-                  <Label>Produto:</Label>
+                  <Label>{translations.product}:</Label>
                   <Data>{data?.product}</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>N do produto:</Label>
+                  <Label>{translations.productNumber}:</Label>
                   <Data>{data?.productNumber}</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Diâmetro:</Label>
+                  <Label>{translations.diameter}:</Label>
                   <Data>{data?.diameter} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Compriment total:</Label>
+                  <Label>{translations.totalLength}:</Label>
                   <Data>{data?.totalLength} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Comprimeto eletivo:</Label>
+                  <Label>{translations.electiveLength}:</Label>
                   <Data>{data?.electiveLength} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Sobremetal:</Label>
+                  <Label>{translations.allowance}:</Label>
                   <Data>{data?.allowance} mm</Data>
                 </DataRow>
               </DataContainer>
@@ -128,42 +134,42 @@ export default function ProfileAnalysisReport({
           <DashedBar />
           <Row>
             <DataColumn>
-              <Title>Dados da máquina</Title>
+              <Title>{translations.machineData}</Title>
               <DataContainer>
                 <DataRow>
-                  <Label>Diâmetro do RC (min):</Label>
+                  <Label>{translations.rcMaxDiameter} (min):</Label>
                   <Data>{data?.rcMaxDiameter} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Diâmetro do RC (min):</Label>
+                  <Label>{translations.rcMinDiameter} (min):</Label>
                   <Data>{data?.rcMinDiameter} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Diâmetro do RA:</Label>
+                  <Label>{translations.raDiameter}:</Label>
                   <Data>{data?.raDiameter} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Comprimento RC:</Label>
+                  <Label>{translations.rcLength}:</Label>
                   <Data>{data?.rcLength} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Comprimento RA:</Label>
+                  <Label>{translations.raLength}:</Label>
                   <Data>{data?.raLength} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Comprimento efetivo RC:</Label>
+                  <Label>{translations.rcEffectiveLength}:</Label>
                   <Data>{data?.rcEffectiveLength} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Rotação do RC:</Label>
+                  <Label>{translations.rcRotation}:</Label>
                   <Data>{data?.rcRotation} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Rotação do RA:</Label>
+                  <Label>{translations.raRotation}:</Label>
                   <Data>{data?.raRotation} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Inclinação RW:</Label>
+                  <Label>{translations.rwInclination}:</Label>
                   <Data>{data?.rwInclination}</Data>
                 </DataRow>
                 <DashedBar />
@@ -171,26 +177,26 @@ export default function ProfileAnalysisReport({
             </DataColumn>
             <DashedBar />
             <DataColumn>
-              <Title>RA parâmetro de perfil</Title>
+              <Title>{translations.rAprofileparameter}</Title>
               <DataContainer>
                 <DataRow>
-                  <Label>Altura entre centros hw: (min):</Label>
+                  <Label>{translations.rwInclination}: (min):</Label>
                   <Data>{data?.hwCenterHeight} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Inclinação do RA: (min):</Label>
+                  <Label>{translations.raInclination}: (min):</Label>
                   <Data>{data?.raInclination} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Altura do dressador:</Label>
+                  <Label>{translations.dresserHeight}:</Label>
                   <Data>{data?.dresserHeight} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Sobremetal:</Label>
+                  <Label>{translations.allowance}:</Label>
                   <Data>{data?.allowance} mm</Data>
                 </DataRow>
                 <DataRow>
-                  <Label>Posição do dressador:</Label>
+                  <Label>{translations.dresserPosition}:</Label>
                   <Data>{data?.dresserPosition} mm</Data>
                 </DataRow>
               </DataContainer>
@@ -198,20 +204,20 @@ export default function ProfileAnalysisReport({
           </Row>
         </Columns>
         <div>
-          <Title>Vão de retificação centerless de passagem</Title>
+          <Title>{translations.tfCenterlessGrindingGap}</Title>
           <ProfileAnalysisGraph
             data={data?.profileAnalysisDiagram?.retificationCenterlessDiagram}
           />
         </div>
         <ButtonRow>
           <button type="button" onClick={saveFile}>
-            Baixar Relatório
+            {translations.download}
           </button>
           <button
             type="button"
             onClick={() => openModalDeleteProfileAnalysis(data?._id)}
           >
-            Excluir
+            {translations.destroy}
           </button>
         </ButtonRow>
         <ModalStyle

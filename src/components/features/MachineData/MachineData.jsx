@@ -1,14 +1,19 @@
 import PropTypes from 'prop-types';
 
 import { ErrorMessage } from '../../../pages/StabilityAnalysis/Styles';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { CollapsableData, DataColumn, Input, Label, Line } from './Styles';
+import { TranslateText } from './translations';
 
 export default function MachineData({ collapse, register, errors }) {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
   return (
     <CollapsableData collapse={collapse}>
       <DataColumn>
         <Line>
-          <Label>Diâmetro do RC (máx):</Label>
+          <Label>{translations.rcMaxDiameter} (máx):</Label>
           <Input
             id="rcMaxDiameter"
             {...register('rcMaxDiameter', { valueAsNumber: true })}
@@ -21,7 +26,7 @@ export default function MachineData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.rcMaxDiameter?.message}</ErrorMessage>
 
         <Line>
-          <Label>Diâmetro do RC (min):</Label>
+          <Label>{translations.rcMinDiameter} (min):</Label>
           <Input
             id="rcMinDiameter"
             {...register('rcMinDiameter', { valueAsNumber: true })}
@@ -34,7 +39,7 @@ export default function MachineData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.rcMinDiameter?.message}</ErrorMessage>
 
         <Line>
-          <Label>Diâmetro do RA:</Label>
+          <Label>{translations.raDiameter}:</Label>
           <Input
             id="raDiameter"
             {...register('raDiameter', { valueAsNumber: true })}
@@ -47,7 +52,7 @@ export default function MachineData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.raDiameter?.message}</ErrorMessage>
 
         <Line>
-          <Label>Comprimento RC:</Label>
+          <Label>{translations.rcLength}:</Label>
           <Input
             id="rcLength"
             {...register('rcLength', { valueAsNumber: true })}
@@ -60,7 +65,7 @@ export default function MachineData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.rcLength?.message}</ErrorMessage>
 
         <Line>
-          <Label>Comprimento RA:</Label>
+          <Label>{translations.raLength}:</Label>
           <Input
             id="raLength"
             {...register('raLength', { valueAsNumber: true })}
@@ -73,7 +78,7 @@ export default function MachineData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.raLength?.message}</ErrorMessage>
 
         <Line>
-          <Label>Comprimento efetivo RC:</Label>
+          <Label>{translations.rcEffectiveLength}:</Label>
           <Input
             id="rcEffectiveLength"
             {...register('rcEffectiveLength', { valueAsNumber: true })}
@@ -86,7 +91,7 @@ export default function MachineData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.rcEffectiveLength?.message}</ErrorMessage>
 
         <Line>
-          <Label>Rotação do RC</Label>
+          <Label>{translations.rcRotation}</Label>
           <Input
             id="rcRotation"
             {...register('rcRotation', { valueAsNumber: true })}
@@ -99,7 +104,7 @@ export default function MachineData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.rcRotation?.message}</ErrorMessage>
 
         <Line>
-          <Label>Rotação do RA:</Label>
+          <Label>{translations.raRotation}:</Label>
           <Input
             id="raRotation"
             {...register('raRotation', { valueAsNumber: true })}
@@ -112,7 +117,7 @@ export default function MachineData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.raRotation?.message}</ErrorMessage>
 
         <Line>
-          <Label>Inclinação RW:</Label>
+          <Label>{translations.rwInclination}:</Label>
           <Input
             id="rwInclination"
             {...register('rwInclination', { valueAsNumber: true })}

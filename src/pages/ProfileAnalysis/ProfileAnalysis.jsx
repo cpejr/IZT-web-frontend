@@ -10,6 +10,7 @@ import AccordionDemo from '../../components/features/Acordeon/Acordeon';
 import Graphic from '../../components/features/Graphic/Graphic';
 import { useCreateProfileAnalysis } from '../../hooks/query/profileAnalysis';
 import useAuthStore from '../../stores/auth';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import { DivName, ErrorMessage, InputName } from '../StabilityAnalysis/Styles';
 import {
   Container,
@@ -29,12 +30,25 @@ import {
   Boddy,
   DataEntry,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildCalculateStabilityAnalysisErrorMessage,
   saveProfileAnalysisValidationSchema,
 } from './utilsSave';
+import {
+  buildCalculateStabilityAnalysisErrorMessageDE,
+  saveProfileAnalysisValidationSchemaDE,
+} from './utilsSaveDE';
+import {
+  buildCalculateStabilityAnalysisErrorMessageEN,
+  saveProfileAnalysisValidationSchemaEN,
+} from './utilsSaveEN';
 
 export default function ProfileAnalysis() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [graphData, setGraphData] = useState({ x: [], y: [] });
   const [formDataStorage, setFormDataStorage] = useState({});
   const queryClient = useQueryClient();
@@ -53,12 +67,30 @@ export default function ProfileAnalysis() {
         queryKey: ['profile-analysis', 'searchByName'],
       });
 
-      toast.success('Relatório criado com sucesso!');
+      if (globalLanguage === 'DE') {
+        toast.success('Bericht erfolgreich erstellt!');
+      } else if (globalLanguage === 'EN') {
+        toast.success('Report created successfully');
+      } else {
+        toast.success('Relatório criado com sucesso!');
+      }
     },
     onError: (err) => {
-      const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+      if (globalLanguage === 'DE') {
+        const errorMessageDE =
+          buildCalculateStabilityAnalysisErrorMessageDE(err);
 
-      toast.error(errorMessage);
+        toast.error(errorMessageDE);
+      } else if (globalLanguage === 'EN') {
+        const errorMessageEN =
+          buildCalculateStabilityAnalysisErrorMessageEN(err);
+
+        toast.error(errorMessageEN);
+      } else {
+        const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+
+        toast.error(errorMessage);
+      }
     },
   });
 
@@ -68,13 +100,21 @@ export default function ProfileAnalysis() {
   useEffect(() => {}, [formDataStorage]);
   const user = useAuthStore((state) => state.auth?.user);
 
+  let resolver1;
+  if (globalLanguage === 'DE') {
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchemaDE);
+  } else if (globalLanguage === 'EN') {
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchemaEN);
+  } else {
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchema);
+  }
   const {
     handleSubmit: save,
     register,
     formState: { errors: error },
   } = useForm({
     defaultValues: formDataStorage,
-    resolver: zodResolver(saveProfileAnalysisValidationSchema),
+    resolver: resolver1,
   });
 
   const onSubmit2 = (data) => {
@@ -92,7 +132,7 @@ export default function ProfileAnalysis() {
       <Container>
         <Containerleft>
           <Center>
-            <H1>Entrada de Dados</H1>
+            <H1>{translations.dataEntry}</H1>
             <Data>
               <AccordionDemo
                 onCalculate={handleCalculate}
@@ -110,44 +150,44 @@ export default function ProfileAnalysis() {
                   id="name"
                   name="name"
                   type="text"
-                  placeholder="Insira o nome do relatório"
+                  placeholder={translations.reportName}
                   error={error?.name?.message}
                   {...register('name')}
                 />
               </DivName>
-              <Button>Salvar relatório</Button>
+              <Button>{translations.saveReport}</Button>
             </H1>
             <ErrorMessage>{error?.name?.message}</ErrorMessage>
           </DataEntry>
           <Edit>
-            <Text>Vão de retificação centerless de passagem </Text>
+            <Text>{translations.grindingClearance} </Text>
             <Container2>
               <Graphic data={graphData} />
             </Container2>
-            <Text>Dados de saída</Text>
+            <Text>{translations.outputData}</Text>
           </Edit>
           <ContainerRight>
             <Column>
               <OutputData>
-                <Text2> Altura entre centros (hw): ___ mm</Text2>
-                <Text2>Altura do dessador (hd): ___ mm</Text2>
-                <Text2>Inclinação do RA (adr): ___ °</Text2>
-                <Text2>Inclinação do dressador: ___ °</Text2>
-                <Text2>Ângulo da régua (β): ___ °</Text2>
-                <Text2>Rotação do rebolo de arraste (nr): ___ rpm</Text2>
-                <Text2>Rotação do rebolo de arraste (nr): ___ rps</Text2>
-                <Text2>Velocidade periférica da peça (vp): ___ m/s</Text2>
-                <Text2>Velocidade de passagem da peça (vfa): ___ m/min</Text2>
+                <Text2> {translations.heightBetweenCenters} (hw): ___ mm</Text2>
+                <Text2>{translations.dresserHeight} (hd): ___ mm</Text2>
+                <Text2>{translations.raInclination} (adr): ___ °</Text2>
+                <Text2>{translations.dresserInclination}: ___ °</Text2>
+                <Text2>{translations.rulerAngle} (β): ___ °</Text2>
+                <Text2>{translations.grindingRotation} (nr): ___ rpm</Text2>
+                <Text2>{translations.grindingRotation} (nr): ___ rps</Text2>
+                <Text2>{translations.peripheralSpeed} (vp): ___ m/s</Text2>
+                <Text2>{translations.feedSpeed} (vfa): ___ m/min</Text2>
               </OutputData>
               <OutputData rightOutputData>
-                <Text2> Quantidade de peça (Qp): ___ </Text2>
-                <Text2> Tempo de ciclo (tc): ___ min/pc</Text2>
-                <Text2> Nr. revoluções da peça (U): ___ </Text2>
-                <Text2> Taxa de remoção (Qw’): ___ mm3/mm.s</Text2>
-                <Text2> Espessura de corte (hef): ___ mm</Text2>
-                <Text2> Ângulo de tangêcia (γ): ___ °</Text2>
-                <Text2> Ângulo de tangência RA (γra): ___ °</Text2>
-                <Text2> Ângulo de tangência RC (γrc) ___ °</Text2>
+                <Text2> {translations.pieceQuantity} (Qp): ___ </Text2>
+                <Text2> {translations.cycleTime} (tc): ___ min/pc</Text2>
+                <Text2> {translations.revolutionsNumbers} (U): ___ </Text2>
+                <Text2> {translations.removalRate} (Qw’): ___ mm3/mm.s</Text2>
+                <Text2> {translations.cuttingThickness} (hef): ___ mm</Text2>
+                <Text2> {translations.tangentAngle} (γ): ___ °</Text2>
+                <Text2> {translations.tangentAngle} RA (γra): ___ °</Text2>
+                <Text2> {translations.tangentAngle} RC (γrc) ___ °</Text2>
               </OutputData>
             </Column>
           </ContainerRight>

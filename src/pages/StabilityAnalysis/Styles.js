@@ -149,7 +149,8 @@ export const Button = styled.button`
   font-family: ${(props) => props.theme.fonts.montserrat};
   cursor: pointer;
 
-  width: 8.4rem;
+  //width: 8.4rem;
+  width: fit-content;
   margin-left: 17rem;
 
   @media (max-width: 1600px) {
@@ -182,7 +183,8 @@ export const Button2 = styled.button`
   border-color: white;
   font-family: ${(props) => props.theme.fonts.montserrat};
 
-  width: 15rem;
+  //width: 15rem;
+  width: fit-content;
 
   cursor: pointer;
 

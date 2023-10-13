@@ -8,6 +8,7 @@ import { useSearchByNameProfileAnalysis } from '../../hooks/query/profileAnalysi
 import { useSearchByNameStabilityAnalysis } from '../../hooks/query/stabilityAnalysis';
 import useDebounce from '../../hooks/useDebounce';
 import useAuthStore from '../../stores/auth';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   Title,
@@ -19,8 +20,13 @@ import {
   Reports,
   TESTEContainer,
 } from './Styles';
+import { TranslateText } from './translations';
 
 export default function ReportSection() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [name, setName] = useState('');
   const debouncedName = useDebounce(name);
 
@@ -63,15 +69,15 @@ export default function ReportSection() {
   return (
     <TESTEContainer>
       <Container>
-        <Title>Relatórios</Title>
+        <Title>{translations.reports}</Title>
         <ReportsArea>
           <ReportsHeader>
-            <ReportsTitle>Relatório</ReportsTitle>
+            <ReportsTitle>{translations.report}</ReportsTitle>
             <SearchDiv>
               <HiSearch size={25} />
               <Search
                 onChange={(e) => setName(e.target.value)}
-                placeholder={name || 'Pesquisar por nome'}
+                placeholder={name || translations.search}
               />
             </SearchDiv>
           </ReportsHeader>

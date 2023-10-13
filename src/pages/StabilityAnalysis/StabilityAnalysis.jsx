@@ -18,6 +18,7 @@ import {
   useCreateStabilityAnalysis,
 } from '../../hooks/query/stabilityAnalysis';
 import useAuthStore from '../../stores/auth';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   DataEntryDiv,
@@ -39,13 +40,57 @@ import {
   ContourMap,
   ErrorMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildCalculateStabilityAnalysisErrorMessage,
   calculateStabilityAnalysisValidationSchema,
 } from './utils';
-import { saveStabilityAnalysisValidationSchema } from './utilsSave';
+import {
+  buildCalculateStabilityAnalysisErrorMessageDE,
+  calculateStabilityAnalysisValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildCalculateStabilityAnalysisErrorMessageEN,
+  calculateStabilityAnalysisValidationSchemaEN,
+} from './utilsEN';
+import {
+  saveStabilityAnalysisValidationSchema,
+  buildSaveStabilityAnalysisErrorMessage,
+} from './utilsSave';
+import {
+  saveStabilityAnalysisValidationSchemaDE,
+  buildSaveStabilityAnalysisErrorMessageDE,
+} from './utilsSaveDE';
+import {
+  saveStabilityAnalysisValidationSchemaEN,
+  buildSaveStabilityAnalysisErrorMessageEN,
+} from './utilsSaveEN';
 
 export default function StabilityAnalysis() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
+  let validationSchema;
+
+  if (globalLanguage === 'DE') {
+    validationSchema = calculateStabilityAnalysisValidationSchemaDE;
+  } else if (globalLanguage === 'PT') {
+    validationSchema = calculateStabilityAnalysisValidationSchema;
+  } else {
+    validationSchema = calculateStabilityAnalysisValidationSchemaEN;
+  }
+
+  let saveValidationSchema;
+
+  if (globalLanguage === 'DE') {
+    saveValidationSchema = saveStabilityAnalysisValidationSchemaDE;
+  } else if (globalLanguage === 'PT') {
+    saveValidationSchema = saveStabilityAnalysisValidationSchema;
+  } else {
+    saveValidationSchema = saveStabilityAnalysisValidationSchemaEN;
+  }
+
   const queryClient = useQueryClient();
   const [processStabilityDiagramData, setProcessStabilityDiagramData] =
     useState([]);
@@ -66,12 +111,25 @@ export default function StabilityAnalysis() {
         queryKey: ['stability-analysis', 'searchByName'],
       });
 
-      toast.success('Relatório criado com sucesso!');
+      if (globalLanguage === 'DE') {
+        toast.success(translations.reportSuccess);
+      } else if (globalLanguage === 'EN') {
+        toast.success(translations.reportSuccess);
+      } else {
+        toast.success(translations.reportSuccess);
+      }
     },
     onError: (err) => {
-      const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'DE') {
+        const errorMessage = buildSaveStabilityAnalysisErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'PT') {
+        const errorMessage = buildSaveStabilityAnalysisErrorMessage(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildSaveStabilityAnalysisErrorMessageEN(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
@@ -102,12 +160,27 @@ export default function StabilityAnalysis() {
         ];
         setPartHeightStabilityDiagramData(newPartHeightStabilityDiagramData);
 
-        toast.success('Dados calculados com sucesso!');
+        if (globalLanguage === 'DE') {
+          toast.success(translations.successCalculate);
+        } else if (globalLanguage === 'EN') {
+          toast.success(translations.successCalculate);
+        } else {
+          toast.success(translations.successCalculate);
+        }
       },
       onError: (err) => {
-        const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
-
-        toast.error(errorMessage);
+        if (globalLanguage === 'DE') {
+          const errorMessage =
+            buildCalculateStabilityAnalysisErrorMessageDE(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'PT') {
+          const errorMessage = buildCalculateStabilityAnalysisErrorMessage(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage =
+            buildCalculateStabilityAnalysisErrorMessageEN(err);
+          toast.error(errorMessage);
+        }
       },
     });
 
@@ -119,7 +192,7 @@ export default function StabilityAnalysis() {
     register,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(calculateStabilityAnalysisValidationSchema),
+    resolver: zodResolver(validationSchema),
   });
 
   const onSubmit = (data) => {
@@ -133,7 +206,7 @@ export default function StabilityAnalysis() {
     formState: { errors: error },
   } = useForm({
     defaultValues: formDataStorage,
-    resolver: zodResolver(saveStabilityAnalysisValidationSchema),
+    resolver: zodResolver(saveValidationSchema),
   });
 
   const onSubmit2 = (data) => {
@@ -149,14 +222,14 @@ export default function StabilityAnalysis() {
   return (
     <Container>
       <DataEntryDiv>
-        <Title>Entrada de Dados</Title>
+        <Title>{translations.dataEntry}</Title>
         <DataEntry onSubmit={calculate(onSubmit)}>
           <Collapsable>
             <CollapsableHeader
               collapse={collapse === 'analysis'}
               onClick={() => handleCollapse('analysis')}
             >
-              <DataTitle>Dados da Análise</DataTitle>
+              <DataTitle>{translations.analysisData}</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
             <AnalysisData
@@ -170,7 +243,7 @@ export default function StabilityAnalysis() {
               collapse={collapse === 'machine'}
               onClick={() => handleCollapse('machine')}
             >
-              <DataTitle>Dados da Máquina</DataTitle>
+              <DataTitle>{translations.machineData}</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
             <MachineData
@@ -184,7 +257,7 @@ export default function StabilityAnalysis() {
               collapse={collapse === 'product'}
               onClick={() => handleCollapse('product')}
             >
-              <DataTitle>Dados do Produto</DataTitle>
+              <DataTitle>{translations.productData}</DataTitle>
               <AiOutlineDown />
             </CollapsableHeader>
             <ProductData
@@ -203,10 +276,10 @@ export default function StabilityAnalysis() {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loading}</p>
               </>
             ) : (
-              <p>Calcular</p>
+              <p>{translations.calculate}</p>
             )}
           </Button>
         </DataEntry>
@@ -220,16 +293,16 @@ export default function StabilityAnalysis() {
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Insira o nome do relatório"
+                placeholder={translations.reportName}
                 error={error?.name?.message}
                 {...register2('name')}
               />
             </DivName>
-            <Button2 type="submit">Salvar relatório</Button2>
+            <Button2 type="submit">{translations.saveReport}</Button2>
           </TitleRow>
           <ErrorMessage>{error?.name?.message}</ErrorMessage>
           <Diagram>
-            <DiagramTitle>Diagrama - Estabilidade de processo</DiagramTitle>
+            <DiagramTitle>{translations.stabilityChart}</DiagramTitle>
             <Canvas>
               <ContourMap
                 data={processStabilityDiagramData}
@@ -240,9 +313,7 @@ export default function StabilityAnalysis() {
             </Canvas>
           </Diagram>
           <Diagram>
-            <DiagramTitle>
-              Diagrama - Estabilidade de altura da peça
-            </DiagramTitle>
+            <DiagramTitle>{translations.heightStabilityChart}</DiagramTitle>
             <Canvas>
               <ContourMap
                 data={partHeightStabilityDiagramData}

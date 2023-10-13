@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { ErrorMessage } from '../../../pages/StabilityAnalysis/Styles';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import {
   CollapsableData,
   DataColumn,
@@ -9,31 +10,36 @@ import {
   Line,
   SelectInput,
 } from './Styles';
+import { TranslateText } from './translations';
 
 export default function AnalysisData({ collapse, register, errors }) {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   return (
     <CollapsableData collapse={collapse}>
       <DataColumn>
         <Line>
-          <Label>Processo de retificação:</Label>
+          <Label>{translations.rectificationProcess}:</Label>
           <SelectInput
             id="rectificationProcess"
             {...register('rectificationProcess')}
             hasError={errors?.rectificationProcess?.message}
           >
-            <option value="">Selecionar</option>
+            <option value="">{translations.select}</option>
             <option value="Centerless de Mergulho">
-              Centerless de Mergulho
+              {translations.plungeCenterless}
             </option>
             <option value="Centerless de Passagem">
-              Centerless de Passagem
+              {translations.tFCenterless}
             </option>
           </SelectInput>
         </Line>
         <ErrorMessage>{errors?.rectificationProcess?.message}</ErrorMessage>
 
         <Line>
-          <Label>Maquina:</Label>
+          <Label>{translations.machine}:</Label>
           <Input
             id="machine"
             {...register('machine')}
@@ -43,7 +49,7 @@ export default function AnalysisData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.machine?.message}</ErrorMessage>
 
         <Line>
-          <Label>N° da Maquina:</Label>
+          <Label>{translations.machineNumber}:</Label>
           <Input
             id="machineNumber"
             {...register('machineNumber', { valueAsNumber: true })}
@@ -55,22 +61,22 @@ export default function AnalysisData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.machineNumber?.message}</ErrorMessage>
 
         <Line>
-          <Label>Operação:</Label>
+          <Label>{translations.operation}:</Label>
           <SelectInput
             id="operation"
             {...register('operation')}
             hasError={errors?.operation?.message}
           >
-            <option value="">Selecionar</option>
-            <option value="Desbaste">Desbaste</option>
-            <option value="Pré Desbaste">Pré Desbaste</option>
-            <option value="Acabamento">Acabamento</option>
+            <option value="">{translations.select}</option>
+            <option value="Desbaste">{translations.roughGrinding}</option>
+            <option value="Pré Desbaste">{translations.pRoughGrinding}</option>
+            <option value="Acabamento">{translations.finishGrinding}</option>
           </SelectInput>
         </Line>
         <ErrorMessage>{errors?.operation?.message}</ErrorMessage>
 
         <Line>
-          <Label>Departamento:</Label>
+          <Label>{translations.department}:</Label>
           <Input
             id="department"
             {...register('department')}
@@ -80,7 +86,7 @@ export default function AnalysisData({ collapse, register, errors }) {
         <ErrorMessage>{errors?.department?.message}</ErrorMessage>
 
         <Line>
-          <Label>Responsável:</Label>
+          <Label>{translations.responsiblePerson}:</Label>
           <Input
             id="responsiblePerson"
             {...register('responsiblePerson')}
