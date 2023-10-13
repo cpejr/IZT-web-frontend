@@ -16,7 +16,6 @@ import { useSearchProductByName } from '../../hooks/query/products';
 import useDebounce from '../../hooks/useDebounce';
 import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
-  DivPage,
   Container,
   Title,
   CategoryFilterContainer,
