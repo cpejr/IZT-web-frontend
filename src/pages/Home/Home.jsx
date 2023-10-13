@@ -51,8 +51,8 @@ export default function Home() {
   }, [location]);
 
   return (
-    <Container>
-      <OuterDiv>
+    <OuterDiv>
+      <Container>
         <Container>
           <CarouselContainer>
             <Carousel carouselData={carouselData} />
@@ -99,7 +99,7 @@ export default function Home() {
             <OurHistory>{translations.ourHistoryText2}</OurHistory>
           </AboutUs>
         </Container>
-      </OuterDiv>
-    </Container>
+      </Container>
+    </OuterDiv>
   );
 }
