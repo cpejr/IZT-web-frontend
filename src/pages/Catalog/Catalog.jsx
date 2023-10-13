@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../hooks/query/categories';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Page,
   Container,
@@ -19,9 +20,14 @@ import {
   ProductImage,
   ProductName,
 } from './Styles';
+import { TranslateText } from './translations';
 import buildGetCategoriesErrorMessage from './utils';
 
 export default function Catalog() {
+  // Translations
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const navigate = useNavigate();
 
   const { data: categories, isLoading } = useGetCategories({
@@ -36,13 +42,8 @@ export default function Catalog() {
     <Page>
       <Container>
         <Introduction>
-          <Title>Tudo o que você precisa está aqui!</Title>
-          <Description>
-            Bem-vindo ao catálogo da IZT Core! Aqui você encontrará uma ampla
-            seleção de bocais de alta qualidade, projetados para atender a todas
-            as suas necessidades.Navegue em nosso catálogo de produtos e
-            encontre o bocal perfeito para sua aplicação.
-          </Description>
+          <Title>{translations.title}</Title>
+          <Description>{translations.description}</Description>
         </Introduction>
         {isLoading ? (
           <h1
@@ -53,7 +54,7 @@ export default function Catalog() {
               alignItems: 'center',
             }}
           >
-            Carregando...
+            {translations.loading}
           </h1>
         ) : (
           <>
