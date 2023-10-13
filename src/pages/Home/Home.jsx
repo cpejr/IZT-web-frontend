@@ -22,6 +22,7 @@ import {
 import { TranslateText } from './translations';
 
 export default function Home() {
+  // Translations
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
 

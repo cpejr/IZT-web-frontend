@@ -8,6 +8,7 @@ import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useSendProductBudget } from '../../../hooks/query/products';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { FormInput, FormMask, FormSelect } from '../../common';
 import {
   ContactUs,
@@ -22,18 +23,28 @@ import {
 } from './Styles';
 import { TranslateText } from './translations';
 import { budgetEmailSchema, buildBudgetEmailErrorMessage } from './utils';
+import { budgetEmailSchemaDE, buildBudgetEmailErrorMessageDE } from './utilsDE';
+import { budgetEmailSchemaEN, buildBudgetEmailErrorMessageEN } from './utilsEN';
 
-export default function FormsBudget({
-  currentLanguage,
-  productId,
-  isLoadingProduct = false,
-}) {
+export default function FormsBudget({ productId, isLoadingProduct = false }) {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   // States and variables
   const countries = useMemo(() => Country.getAllCountries(), []);
   const [states, setStates] = useState(null);
   const [cities, setCities] = useState(null);
 
-  const translations = TranslateText({ currentLanguage });
+  let validationSchema;
+
+  if (globalLanguage === 'DE') {
+    validationSchema = budgetEmailSchemaDE;
+  } else if (globalLanguage === 'PT') {
+    validationSchema = budgetEmailSchema;
+  } else {
+    validationSchema = budgetEmailSchemaEN;
+  }
 
   // Reusable functions
   const selectFilter = useCallback(
@@ -55,11 +66,18 @@ export default function FormsBudget({
 
   // Backend calls
   const { mutate: sendProductBudget, isLoading } = useSendProductBudget({
-    onSuccess: () => toast.success('Pedido enviado com sucesso!'),
+    onSuccess: () => toast.success(translations.succesToast),
     onError: (err) => {
-      const errorMessage = buildBudgetEmailErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'DE') {
+        const errorMessage = buildBudgetEmailErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'PT') {
+        const errorMessage = buildBudgetEmailErrorMessage(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildBudgetEmailErrorMessageEN(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
@@ -72,7 +90,7 @@ export default function FormsBudget({
     setValue,
     watch,
   } = useForm({
-    resolver: zodResolver(budgetEmailSchema),
+    resolver: zodResolver(validationSchema),
   });
   const onSubmit = (formInput) => sendProductBudget({ productId, formInput });
 

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export function TranslateText({ currentLanguage }) {
+export function TranslateText({ globalLanguage }) {
   let loading;
   let label1;
   let placeholder1;
@@ -14,8 +14,9 @@ export function TranslateText({ currentLanguage }) {
   let label8;
   let label9;
   let label10;
+  let succesToast;
 
-  if (currentLanguage === 'PT') {
+  if (globalLanguage === 'PT') {
     loading = 'Carregando';
     label1 = 'Nome:';
     placeholder1 = 'Nome completo';
@@ -30,7 +31,8 @@ export function TranslateText({ currentLanguage }) {
     label8 = 'CEP:';
     label9 = 'Endereço:';
     label10 = 'Enviar';
-  } else if (currentLanguage === 'EN') {
+    succesToast = 'Pedido enviado com sucesso!';
+  } else if (globalLanguage === 'EN') {
     loading = 'Loading';
     label1 = 'Name:';
     placeholder1 = 'Full name';
@@ -45,7 +47,8 @@ export function TranslateText({ currentLanguage }) {
     label8 = 'ZIP Code:';
     label9 = 'Address:';
     label10 = 'Send';
-  } else if (currentLanguage === 'DE') {
+    succesToast = 'Order sent successfully!';
+  } else if (globalLanguage === 'DE') {
     loading = 'Laden';
     label1 = 'Name:';
     placeholder1 = 'Vollständiger Name';
@@ -60,6 +63,7 @@ export function TranslateText({ currentLanguage }) {
     label8 = 'PLZ:';
     label9 = 'Adresse:';
     label10 = 'Senden';
+    succesToast = 'Bestellung erfolgreich versandt!';
   }
 
   return {
@@ -77,5 +81,6 @@ export function TranslateText({ currentLanguage }) {
     label8,
     label9,
     label10,
+    succesToast,
   };
 }

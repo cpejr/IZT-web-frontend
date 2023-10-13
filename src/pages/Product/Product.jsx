@@ -16,6 +16,7 @@ import {
   Header,
 } from '../../components/features';
 import { useGetProductById } from '../../hooks/query/products';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   ProductData,
@@ -46,8 +47,9 @@ import { TranslateText } from './translations';
 import buildGetProducErrorMessage from './utils';
 
 export default function Product() {
-  const [currentLanguage, setCurrentLanguage] = useState('PT');
-  const translations = TranslateText({ currentLanguage });
+  // Translations
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   const { _id } = useParams();
   const navigate = useNavigate();
@@ -83,119 +85,104 @@ export default function Product() {
   );
 
   return (
-    <>
-      <Header setCurrentLanguage={setCurrentLanguage} />
-      <Container>
-        <ProductData>
-          {isLoading ? (
-            <h1
-              style={{
-                height: '66rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              {translations.cardTitle1}
-            </h1>
-          ) : (
-            <>
-              <ProductName>{product.name}</ProductName>
-              <ProductInfo>
-                <CarouselContainer>
-                  <Carousel
-                    carouselData={pictures}
-                    maxHeight="53.717rem"
-                    maxWidth="54.375rem"
-                    aspectRatio="12 / 9"
-                    miniImages
-                  />
-                </CarouselContainer>
-                <TextInfoContainer>
-                  <ProductDescription>
-                    <DescriptionTitle>{translations.text1}</DescriptionTitle>
-                    <Description>{product?.description}</Description>
-                  </ProductDescription>
-                  <ProductBenefits>
-                    <BenefitsTitle>{translations.text2}</BenefitsTitle>
-                    <Benefits>{product?.advantages}</Benefits>
-                  </ProductBenefits>
-                  <ProductInfos>
-                    <InfoTitle>{translations.text3}</InfoTitle>
-                    <InfoDescription>
-                      <FilesList files={documents} />
-                    </InfoDescription>
-                  </ProductInfos>
-                </TextInfoContainer>
-              </ProductInfo>
-            </>
-          )}
-        </ProductData>
-        <FormsBudget
-          productId={_id}
-          isLoadingProduct={isLoading}
-          currentLanguage={currentLanguage}
-        />
-        <ProcessSteps>
-          <Title>{translations.text4}</Title>
-          <Steps>
-            <StepsImages>
-              <Image src={step1} alt="1 Step" />
+    <Container>
+      <ProductData>
+        {isLoading ? (
+          <h1
+            style={{
+              height: '66rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            {translations.cardTitle1}
+          </h1>
+        ) : (
+          <>
+            <ProductName>{product.name}</ProductName>
+            <ProductInfo>
+              <CarouselContainer>
+                <Carousel
+                  carouselData={pictures}
+                  maxHeight="53.717rem"
+                  maxWidth="54.375rem"
+                  aspectRatio="12 / 9"
+                  miniImages
+                />
+              </CarouselContainer>
+              <TextInfoContainer>
+                <ProductDescription>
+                  <DescriptionTitle>{translations.text1}</DescriptionTitle>
+                  <Description>{product?.description}</Description>
+                </ProductDescription>
+                <ProductBenefits>
+                  <BenefitsTitle>{translations.text2}</BenefitsTitle>
+                  <Benefits>{product?.advantages}</Benefits>
+                </ProductBenefits>
+                <ProductInfos>
+                  <InfoTitle>{translations.text3}</InfoTitle>
+                  <InfoDescription>
+                    <FilesList files={documents} />
+                  </InfoDescription>
+                </ProductInfos>
+              </TextInfoContainer>
+            </ProductInfo>
+          </>
+        )}
+      </ProductData>
+      <FormsBudget
+        productId={_id}
+        isLoadingProduct={isLoading}
+        language={globalLanguage}
+      />
+      <ProcessSteps>
+        <Title>{translations.text4}</Title>
+        <Steps>
+          <StepsImages>
+            <Image src={step1} alt="1 Step" />
 
-              <Arrow>
-                {isMediumScreen ? (
-                  <AiOutlineRight
-                    color="#123645"
-                    size="4rem"
-                    strokeWidth={20}
-                  />
-                ) : (
-                  <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
-                )}
-              </Arrow>
+            <Arrow>
+              {isMediumScreen ? (
+                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
+              ) : (
+                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
+              )}
+            </Arrow>
 
-              <Image src={step2} alt="2 Step" />
+            <Image src={step2} alt="2 Step" />
 
-              <Arrow>
-                {isMediumScreen ? (
-                  <AiOutlineRight
-                    color="#123645"
-                    size="4rem"
-                    strokeWidth={20}
-                  />
-                ) : (
-                  <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
-                )}
-              </Arrow>
+            <Arrow>
+              {isMediumScreen ? (
+                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
+              ) : (
+                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
+              )}
+            </Arrow>
 
-              <Image src={step3} alt="3 Step" />
+            <Image src={step3} alt="3 Step" />
 
-              <Arrow>
-                {isMediumScreen ? (
-                  <AiOutlineRight
-                    color="#123645"
-                    size="4rem"
-                    strokeWidth={20}
-                  />
-                ) : (
-                  <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
-                )}
-              </Arrow>
+            <Arrow>
+              {isMediumScreen ? (
+                <AiOutlineRight color="#123645" size="4rem" strokeWidth={20} />
+              ) : (
+                <AiOutlineDown color="#123645" size="4rem" strokeWidth={20} />
+              )}
+            </Arrow>
 
-              <Image src={step4} alt="4 Step" />
-            </StepsImages>
-            <StepsDescription>
-              <StepsText>{translations.text5}</StepsText>
-              <EmptyCell />
-              <StepsText>{translations.text6}</StepsText>
-              <EmptyCell />
-              <StepsText>{translations.text7}</StepsText>
-              <EmptyCell />
-              <StepsText>{translations.text8}</StepsText>
-            </StepsDescription>
-          </Steps>
-        </ProcessSteps>
-      </Container>
-    </>
+            <Image src={step4} alt="4 Step" />
+          </StepsImages>
+          <StepsDescription>
+            <StepsText>{translations.text5}</StepsText>
+            <EmptyCell />
+            <StepsText>{translations.text6}</StepsText>
+            <EmptyCell />
+            <StepsText>{translations.text7}</StepsText>
+            <EmptyCell />
+            <StepsText>{translations.text8}</StepsText>
+          </StepsDescription>
+        </Steps>
+      </ProcessSteps>
+    </Container>
   );
 }
