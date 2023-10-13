@@ -116,10 +116,13 @@ export default function ProfileAnalysis() {
   const { mutate: calculateProfileAnalysis, isLoading } =
     useCalculateProfileAnalysis({
       onSuccess: (result) => {
-        const newGraphData = [
+        const newgraphData = [
           {
             x: result.retificationCenterlessDiagram.x,
             y: result.retificationCenterlessDiagram.y,
+            type: 'contour',
+            size: 2,
+            marker: { color: 'red' },
           },
         ];
         // const xData = result.retificationCenterlessDiagram.x;
@@ -127,7 +130,7 @@ export default function ProfileAnalysis() {
         // onCalculate({ x: xData, y: yData });
         // dataInput(formDataStorage);
 
-        setGraphData(newGraphData);
+        setGraphData(newgraphData);
 
         if (globalLanguage === 'DE') {
           toast.success(translations.successCalculate);

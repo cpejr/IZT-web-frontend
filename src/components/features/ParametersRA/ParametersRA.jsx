@@ -68,12 +68,9 @@ export default function ParametersRA({ collapse, register, errors }) {
           <Label>{translations.dresserPosition}:</Label>
           <Input
             id="dresserPosition"
-            {...register('dresserPosition', { valueAsNumber: true })}
+            {...register('dresserPosition')}
             hasError={errors?.dresserPosition?.message}
-            type="string"
-            step="any"
           />
-          <Label>°</Label>
         </Line>
         <ErrorMessage>{errors?.dresserPosition?.message}</ErrorMessage>
       </DataColumn>
