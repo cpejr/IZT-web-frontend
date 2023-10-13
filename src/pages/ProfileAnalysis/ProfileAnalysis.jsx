@@ -102,11 +102,11 @@ export default function ProfileAnalysis() {
 
   let resolver1;
   if (globalLanguage === 'DE') {
-    zodResolver(saveProfileAnalysisValidationSchemaDE);
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchemaDE);
   } else if (globalLanguage === 'EN') {
-    zodResolver(saveProfileAnalysisValidationSchemaEN);
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchemaEN);
   } else {
-    zodResolver(saveProfileAnalysisValidationSchema);
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchema);
   }
   const {
     handleSubmit: save,
