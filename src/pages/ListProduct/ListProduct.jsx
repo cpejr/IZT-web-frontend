@@ -14,6 +14,7 @@ import {
 import { useGetCategories } from '../../hooks/query/categories';
 import { useSearchProductByName } from '../../hooks/query/products';
 import useDebounce from '../../hooks/useDebounce';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   Title,
@@ -31,6 +32,7 @@ import {
   ModalStyle,
   DeleteButton,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildGetProductsErrorMessage,
   buildGetCategoriesErrorMessage,
@@ -44,6 +46,11 @@ export default function ListProduct() {
   const [modalEditProduct, setModalEditProduct] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
   const [name, setName] = useState('');
+
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const debouncedName = useDebounce(name);
 
   const { data: categories } = useGetCategories({
@@ -80,11 +87,11 @@ export default function ListProduct() {
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
-      <Title>Lista de produtos</Title>
+      <Title>{translations.productTitle}</Title>
 
       <CategoryFilterContainer>
         <Subsection>
-          <CategoryText>Filtrar por categoria:</CategoryText>
+          <CategoryText>{translations.categoryFilterText}</CategoryText>
           <Select
             standart="Selecionar"
             data={categories}
@@ -99,7 +106,7 @@ export default function ListProduct() {
           </SearchIconButton>
           <SearchProduct
             onChange={(e) => setName(e.target.value)}
-            placeholder="Pesquisar Produto"
+            placeholder={translations.searchProductPlaceholder}
           />
         </SearchSection>
       </CategoryFilterContainer>

@@ -13,6 +13,7 @@ import {
   ModalEditAuthorizeSoftwareAccess,
 } from '../../components/features';
 import { useGetUsersWithSoftwareAccess } from '../../hooks/query/users';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import formatDate from '../../utils/formatDate';
 import {
   Container,
@@ -31,6 +32,7 @@ import {
   EditBtn,
   DeleteButton,
 } from './Styles';
+import { TranslateText } from './translations';
 import { buildGetSoftwareAccessErrorMessage } from './utils';
 
 export default function SoftwareAuthorization() {
@@ -45,6 +47,9 @@ export default function SoftwareAuthorization() {
   const [userSoftwareId, setUserSoftwareId] = useState('');
   const [authorizeUser, setAuthorizeUser] = useState({});
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   // Backend calls
   const { data: users, isLoading: isLoadingUsers } =
@@ -86,29 +91,29 @@ export default function SoftwareAuthorization() {
 
   return (
     <Container>
-      <PageTitle>Liberação do Software</PageTitle>
+      <PageTitle>{translations.pageTitle}</PageTitle>
       <AuthorizationDiv>
         {isSmallScreen ? (
           <StyledLink to="/administrador/autorizar-acesso-software">
             <PlusOutlined size="2rem" />
             {'   '}
-            Autorizar acesso
+            {translations.authorizeAccess}
           </StyledLink>
         ) : (
           <AuthorizeButton onClick={openModalSoftwareAuthorization}>
             <PlusOutlined size="2rem" />
             {'   '}
-            Autorizar acesso
+            {translations.authorizeAccess}
           </AuthorizeButton>
         )}
 
         <Table>
           <TableHeader>
-            <h2>Email</h2>
-            <h2>Validade do Acesso</h2>
+            <h2>{translations.emailLabel}</h2>
+            <h2>{translations.accessValidityLabel}</h2>
             <SearchContainer>
               <HiSearch size="2rem" />
-              <SearchBox placeholder="Pesquisar Email" />
+              <SearchBox placeholder={translations.searchPlaceholder} />
             </SearchContainer>
           </TableHeader>
 

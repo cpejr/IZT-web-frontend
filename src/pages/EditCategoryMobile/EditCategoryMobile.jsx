@@ -9,7 +9,9 @@ import { toast } from 'react-toastify';
 
 import { RegisterInput } from '../../components/common';
 import { useUpdateCategory } from '../../hooks/query/categories';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import { Container, Title, SaveButton, CancelButton, Form } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildupdateCategoryErrorMessage,
   updateCategoryValidationSchema,
@@ -20,6 +22,9 @@ export default function EditCategoryMobile() {
   const queryClient = useQueryClient();
   const category = useLocation().state;
   const isMediumScreen = useMediaQuery({ minWidth: 700 });
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   const { mutate: updateCategory, isLoading } = useUpdateCategory({
     onSuccess: () => {
@@ -57,10 +62,10 @@ export default function EditCategoryMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Editar Categoria</Title>
+        <Title>{translations.title}</Title>
 
         <RegisterInput
-          label="Nome da categoria:"
+          label={translations.nameLabel}
           labelStyle={{ fontSize: '1.5em' }}
           errorStyle={{ fontSize: '1em' }}
           name="name"
@@ -79,19 +84,19 @@ export default function EditCategoryMobile() {
                 ariaLabel="tail-spin-loading"
                 radius="5"
               />
-              <p>Carregando</p>
+              <p>{translations.loadingText}</p>
             </>
           ) : (
             <>
               <FiSave size={20} />
-              <p>Editar Categoria</p>
+              <p>{translations.saveButtonLabel}</p>
             </>
           )}
         </SaveButton>
       </Form>
 
       <CancelButton to="/administrador/listar-categorias">
-        <p>Cancelar</p>
+        <p>{translations.cancelButtonLabel}</p>
       </CancelButton>
     </Container>
   );

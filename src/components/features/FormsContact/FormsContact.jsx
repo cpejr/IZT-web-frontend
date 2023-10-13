@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
 import { useSendFormContact } from '../../../hooks/query/contact';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { FormInput, FormsTextArea, FormMask } from '../../common';
 import {
   ContactUs,
@@ -16,17 +16,48 @@ import {
   SubmitButton,
   InputMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import { buildFormContactErrorMessage, formsValidationSchema } from './utils';
+import {
+  buildFormContactErrorMessageDE,
+  formsValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildFormContactErrorMessageEN,
+  formsValidationSchemaEN,
+} from './utilsEN';
 
-export default function FormsContact({ title, smallTitle }) {
+export default function FormsContact() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
+  let validationSchema;
+
+  if (globalLanguage === 'DE') {
+    validationSchema = formsValidationSchemaDE;
+  } else if (globalLanguage === 'PT') {
+    validationSchema = formsValidationSchema;
+  } else {
+    validationSchema = formsValidationSchemaEN;
+  }
+
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
   const { mutate: sendFormContact, isLoading } = useSendFormContact({
-    onSuccess: () =>
-      toast.success('Formulário de contato enviado com sucesso!'),
+    onSuccess: () => toast.success(translations.successToast),
+
     onError: (err) => {
-      const errorMessage = buildFormContactErrorMessage(err);
-      toast.error(errorMessage);
+      if (globalLanguage === 'DE') {
+        const errorMessage = buildFormContactErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'PT') {
+        const errorMessage = buildFormContactErrorMessage(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildFormContactErrorMessageEN(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
@@ -36,46 +67,48 @@ export default function FormsContact({ title, smallTitle }) {
     formState: { errors },
     control,
   } = useForm({
-    resolver: zodResolver(formsValidationSchema),
+    resolver: zodResolver(validationSchema),
   });
   const onSubmit = (formInput) => sendFormContact(formInput);
 
   return (
     <ContactUs id="contact">
-      <Title>{isSmallScreen ? smallTitle : title}</Title>
+      <Title>
+        {isSmallScreen ? translations.smallTitle : translations.title}
+      </Title>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Section>
           <FormInput
-            label="Empresa:"
+            label={translations.label1}
             name="company"
-            placeholder="Nome da empresa"
+            placeholder={translations.placeholder1}
             errors={errors}
             register={register}
           />
 
           <FormInput
-            label="Representante:"
+            label={translations.label2}
             name="representative"
-            placeholder="Nome do representante"
+            placeholder={translations.placeholder2}
             errors={errors}
             register={register}
           />
 
           <FormInput
-            label="E-mail:"
+            label={translations.label3}
             name="email"
-            placeholder="email@email.com"
+            placeholder={translations.placeholder3}
             errors={errors}
             register={register}
           />
 
           <FormMask
-            label="Telefone:"
+            label={translations.label4}
             name="telephone"
             defaultValue=""
             control={control}
-            placeholder="(99) 99999-9999"
+            placeholder={translations.placeholder4}
             mask="+99 (99) 99999-9999"
             errors={errors}
           />
@@ -86,9 +119,9 @@ export default function FormsContact({ title, smallTitle }) {
             <Mensagem>
               <FormsTextArea
                 name="message"
-                label="Mensagem:"
+                label={translations.label5}
                 rows={11}
-                placeholder="Escreva aqui sua mensagem"
+                placeholder={translations.placeholder5}
                 errors={errors}
                 register={register}
               />
@@ -102,10 +135,10 @@ export default function FormsContact({ title, smallTitle }) {
                       ariaLabel="tail-spin-loading"
                       radius="5"
                     />
-                    Carregando
+                    <p>{translations.loading}</p>
                   </>
                 ) : (
-                  'Enviar'
+                  <p> {translations.buttonLabel}</p>
                 )}
               </SubmitButton>
             </Mensagem>
@@ -115,13 +148,3 @@ export default function FormsContact({ title, smallTitle }) {
     </ContactUs>
   );
 }
-
-FormsContact.propTypes = {
-  title: PropTypes.string,
-  smallTitle: PropTypes.string,
-};
-
-FormsContact.defaultProps = {
-  title: 'Entre em Contato Conosco',
-  smallTitle: 'Entre em Contato',
-};

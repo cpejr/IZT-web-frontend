@@ -8,6 +8,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useUpdateUserCourse } from '../../hooks/query/userCourse';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -22,6 +23,7 @@ import {
   Date,
   Field,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   updateAuthorizeAccessValidationSchema,
   themeDatePicker,
@@ -33,6 +35,9 @@ export default function EditAuthorizeAccessMobile() {
   const queryClient = useQueryClient();
   const authorizeUser = useLocation().state;
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   // Backend calls
   const { mutate: updateUserCourse, isLoading } = useUpdateUserCourse({
@@ -69,14 +74,14 @@ export default function EditAuthorizeAccessMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Editar Autorização de Acesso</Title>
+        <Title>{translations.title}</Title>
 
         <Field>
-          <Label>Email:</Label>
+          <Label>{translations.emailLabel}</Label>
           <EmailText>{authorizeUser?.user?.email}</EmailText>
         </Field>
         <Field>
-          <Label>Validade do acesso:</Label>
+          <Label>{translations.validityLabel}</Label>
           <AccessExpirationContainer>
             <ThemeProvider theme={themeDatePicker}>
               <Controller
@@ -113,15 +118,15 @@ export default function EditAuthorizeAccessMobile() {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loadingText}</p>
               </>
             ) : (
-              <p>Salvar Alterações</p>
+              <p>{translations.saveChangesLabel}</p>
             )}
           </SaveButton>
 
           <CancelButton to="/administrador/liberacao-cursos">
-            <p>Cancelar</p>
+            <p>{translations.cancelButtonLabel}</p>
           </CancelButton>
         </Buttons>
       </Form>

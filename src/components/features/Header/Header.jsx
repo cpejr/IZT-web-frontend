@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
+import PropTypes from 'prop-types';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useMediaQuery } from 'react-responsive';
 import { Link, useNavigate } from 'react-router-dom';
@@ -176,3 +177,7 @@ export default function Header() {
     </Content>
   );
 }
+
+Header.propTypes = {
+  setCurrentLanguage: PropTypes.func.isRequired,
+};

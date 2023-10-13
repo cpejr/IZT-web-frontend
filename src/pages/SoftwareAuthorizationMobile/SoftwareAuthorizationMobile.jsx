@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 
 import { FormSelect } from '../../components/common';
 import { useGetUsers, useUpdateSoftwareAccess } from '../../hooks/query/users';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -23,6 +24,7 @@ import {
   ErrorMessage,
   Date,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   authorizeAccessValidationSchema,
   themeDatePicker,
@@ -34,6 +36,9 @@ export default function SoftwareAuthorizationMobile() {
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   // Backend calls
   const { data: users } = useGetUsers({
@@ -83,10 +88,10 @@ export default function SoftwareAuthorizationMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Autorizar Acesso</Title>
+        <Title>{translations.pageTitle}</Title>
 
         <div>
-          <Label>Email:</Label>
+          <Label>{translations.emailLabel}</Label>
           <FormSelect
             id="userId"
             name="userId"
@@ -96,7 +101,7 @@ export default function SoftwareAuthorizationMobile() {
               label: email,
               value: _id,
             }))}
-            placeholder="Selecione o email"
+            placeholder={translations.searchPlaceholder}
             filterOption={(input, option) =>
               option?.children?.toLowerCase()?.includes(input?.toLowerCase())
             }
@@ -106,7 +111,7 @@ export default function SoftwareAuthorizationMobile() {
           />
         </div>
         <div>
-          <Label>Validade do acesso:</Label>
+          <Label>{translations.accessValidityLabel}</Label>
           <AccessExpirationContainer>
             <ThemeProvider theme={themeDatePicker}>
               <Controller
@@ -143,15 +148,15 @@ export default function SoftwareAuthorizationMobile() {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loadingText}</p>
               </>
             ) : (
-              <p>+ Autorizar</p>
+              <p>{translations.authorizeButton}</p>
             )}
           </SaveButton>
 
           <CancelButton to="/administrador/liberacao-software">
-            <p>Cancelar</p>
+            <p>{translations.cancelButton}</p>
           </CancelButton>
         </ButtonsDiv>
       </Form>

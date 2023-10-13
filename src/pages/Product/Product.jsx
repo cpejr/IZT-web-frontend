@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
@@ -9,8 +9,14 @@ import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
 import step4 from '../../assets/productPage/steps/Group78.png';
-import { FilesList, FormsBudget, Carousel } from '../../components/features';
+import {
+  FilesList,
+  FormsBudget,
+  Carousel,
+  Header,
+} from '../../components/features';
 import { useGetProductById } from '../../hooks/query/products';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   ProductData,
@@ -37,9 +43,14 @@ import {
   StepsDescription,
   StepsImages,
 } from './Styles';
+import { TranslateText } from './translations';
 import buildGetProducErrorMessage from './utils';
 
 export default function Product() {
+  // Translations
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const { _id } = useParams();
   const navigate = useNavigate();
   const isMediumScreen = useMediaQuery({ minWidth: 700 });
@@ -85,7 +96,7 @@ export default function Product() {
               alignItems: 'center',
             }}
           >
-            Carregando...
+            {translations.cardTitle1}
           </h1>
         ) : (
           <>
@@ -102,15 +113,15 @@ export default function Product() {
               </CarouselContainer>
               <TextInfoContainer>
                 <ProductDescription>
-                  <DescriptionTitle>Descrição do produto</DescriptionTitle>
+                  <DescriptionTitle>{translations.text1}</DescriptionTitle>
                   <Description>{product?.description}</Description>
                 </ProductDescription>
                 <ProductBenefits>
-                  <BenefitsTitle>Vantagens do Produto</BenefitsTitle>
+                  <BenefitsTitle>{translations.text2}</BenefitsTitle>
                   <Benefits>{product?.advantages}</Benefits>
                 </ProductBenefits>
                 <ProductInfos>
-                  <InfoTitle>Mais informações</InfoTitle>
+                  <InfoTitle>{translations.text3}</InfoTitle>
                   <InfoDescription>
                     <FilesList files={documents} />
                   </InfoDescription>
@@ -120,9 +131,13 @@ export default function Product() {
           </>
         )}
       </ProductData>
-      <FormsBudget productId={_id} isLoadingProduct={isLoading} />
+      <FormsBudget
+        productId={_id}
+        isLoadingProduct={isLoading}
+        language={globalLanguage}
+      />
       <ProcessSteps>
-        <Title>Como processamos seu orçamento?</Title>
+        <Title>{translations.text4}</Title>
         <Steps>
           <StepsImages>
             <Image src={step1} alt="1 Step" />
@@ -158,13 +173,13 @@ export default function Product() {
             <Image src={step4} alt="4 Step" />
           </StepsImages>
           <StepsDescription>
-            <StepsText>Entramos em contato para planejar o produto</StepsText>
+            <StepsText>{translations.text5}</StepsText>
             <EmptyCell />
-            <StepsText>Produzimos a sua peça</StepsText>
+            <StepsText>{translations.text6}</StepsText>
             <EmptyCell />
-            <StepsText>Realizamos a inspeção do produto</StepsText>
+            <StepsText>{translations.text7}</StepsText>
             <EmptyCell />
-            <StepsText>Enviamos para você</StepsText>
+            <StepsText>{translations.text8}</StepsText>
           </StepsDescription>
         </Steps>
       </ProcessSteps>

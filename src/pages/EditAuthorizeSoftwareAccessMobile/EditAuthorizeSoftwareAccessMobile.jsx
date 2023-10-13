@@ -8,6 +8,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useUpdateSoftwareAccess } from '../../hooks/query/users';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -22,6 +23,7 @@ import {
   Date,
   Field,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   updateAuthorizeAccessValidationSchema,
   themeDatePicker,
@@ -33,6 +35,9 @@ export default function EditAuthorizeSofwareAccessMobile() {
   const queryClient = useQueryClient();
   const authorizeUser = useLocation().state;
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   // Backend calls
   const { mutate: updateSoftwareAccess, isLoading } = useUpdateSoftwareAccess({
@@ -70,14 +75,14 @@ export default function EditAuthorizeSofwareAccessMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Editar Autorização de Acesso</Title>
+        <Title>{translations.pageTitle}</Title>
 
         <Field>
-          <Label>Email:</Label>
+          <Label>{translations.emailLabel}</Label>
           <EmailText>{authorizeUser.email}</EmailText>
         </Field>
         <Field>
-          <Label>Validade do acesso:</Label>
+          <Label>{translations.accessValidityLabel}</Label>
           <AccessExpirationContainer>
             <ThemeProvider theme={themeDatePicker}>
               <Controller
@@ -114,15 +119,15 @@ export default function EditAuthorizeSofwareAccessMobile() {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loadingText}</p>
               </>
             ) : (
-              <p>Salvar Alterações</p>
+              <p>{translations.saveChangesButton}</p>
             )}
           </SaveButton>
 
           <CancelButton to="/administrador/liberacao-software">
-            <p>Cancelar</p>
+            <p>{translations.cancelButton}</p>
           </CancelButton>
         </Buttons>
       </Form>

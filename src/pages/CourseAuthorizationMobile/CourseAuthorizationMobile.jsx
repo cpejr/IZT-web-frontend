@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import { FormSelect } from '../../components/common';
 import { useCreateUserCourse } from '../../hooks/query/userCourse';
 import { useGetUsers } from '../../hooks/query/users';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -24,6 +25,7 @@ import {
   ErrorMessage,
   Date,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   authorizeAccessValidationSchema,
   themeDatePicker,
@@ -37,6 +39,9 @@ export default function CourseAuthorizationMobile() {
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   // Backend calls
   const { data: users } = useGetUsers({
@@ -88,10 +93,10 @@ export default function CourseAuthorizationMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Autorizar Acesso</Title>
+        <Title>{translations.title}</Title>
 
         <div>
-          <Label>Email:</Label>
+          <Label>{translations.emailLabel}</Label>
           <FormSelect
             id="userId"
             name="userId"
@@ -103,7 +108,7 @@ export default function CourseAuthorizationMobile() {
                 label: email,
                 value: _id,
               }))}
-            placeholder="Selecione o email"
+            placeholder={translations.placeholderEmail}
             filterOption={(input, option) =>
               option?.children?.toLowerCase()?.includes(input?.toLowerCase())
             }
@@ -113,7 +118,7 @@ export default function CourseAuthorizationMobile() {
           />
         </div>
         <div>
-          <Label>Validade do acesso:</Label>
+          <Label>{translations.validityLabel}</Label>
           <AccessExpirationContainer>
             <ThemeProvider theme={themeDatePicker}>
               <Controller
@@ -150,15 +155,15 @@ export default function CourseAuthorizationMobile() {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loadingText}</p>
               </>
             ) : (
-              <p>+ Autorizar</p>
+              <p>{translations.authorizeButtonLabel}</p>
             )}
           </SaveButton>
 
           <CancelButton to="/administrador/liberacao-cursos">
-            <p>Cancelar</p>
+            <p>{translations.cancelButtonLabel}</p>
           </CancelButton>
         </ButtonsDiv>
       </Form>

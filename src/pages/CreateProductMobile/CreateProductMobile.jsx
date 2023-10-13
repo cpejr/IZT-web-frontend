@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import objToFormData from 'object-to-formdata';
@@ -12,14 +14,16 @@ import { FormSelect } from '../../components/common';
 import {
   AddFileButton,
   DocumentFile,
+  Header,
   PictureFile,
 } from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
 import { useCreateProduct } from '../../hooks/query/products';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../utils/constants';
 import {
-  Container,
   Form,
+  Container,
   Title,
   Subtitle,
   Input,
@@ -33,6 +37,7 @@ import {
   Section,
   ErrorMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildCreateProductErrorMessage,
   buildGetCategoriesErrorMessage,
@@ -45,6 +50,9 @@ export default function CreateProductMobile() {
   const navigate = useNavigate();
   const documentsLimit = 3;
   const picturesLimit = 4;
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   // Backend calls
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
@@ -118,10 +126,10 @@ export default function CreateProductMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Adicionar produto</Title>
+        <Title>{translations.pageTitle}</Title>
 
         <Section>
-          <Subtitle>Nome do produto:</Subtitle>
+          <Subtitle>{translations.nameLabel}</Subtitle>
           <Input
             id="name"
             name="name"
@@ -134,7 +142,7 @@ export default function CreateProductMobile() {
         </Section>
 
         <Section>
-          <Subtitle>Descrição:</Subtitle>
+          <Subtitle>{translations.descriptionLabel}</Subtitle>
           <TextArea
             id="description"
             name="description"
@@ -146,7 +154,7 @@ export default function CreateProductMobile() {
         </Section>
 
         <Section>
-          <Subtitle>Vantagens:</Subtitle>
+          <Subtitle>{translations.advantagesLabel}</Subtitle>
           <TextArea
             id="advantages"
             type="advantages"
@@ -158,9 +166,9 @@ export default function CreateProductMobile() {
         </Section>
 
         <Section>
-          <Title>Imagens:</Title>
+          <Title>{translations.imagesTitle}</Title>
           {fieldsPictures.length < picturesLimit && (
-            <MiniText>Anexe as imagens do produto</MiniText>
+            <MiniText>{translations.addImageHint}</MiniText>
           )}
           <PicturesContainer>
             {fieldsPictures.map(({ id, file: picture }, index) => (
@@ -178,7 +186,7 @@ export default function CreateProductMobile() {
           {fieldsPictures.length < picturesLimit && (
             <AddFileButton
               color="black"
-              label="Novo Imagem"
+              label={translations.addImageButtonLabel}
               appendFn={appendPicture}
               allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
               sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
@@ -188,7 +196,7 @@ export default function CreateProductMobile() {
         </Section>
 
         <Section>
-          <Title>Documentos:</Title>
+          <Title>{translations.documentsTitle}</Title>
           <DocumentsContainer>
             {fieldsDocuments.map(({ id, file: document }, index) => (
               <DocumentFile
@@ -207,7 +215,7 @@ export default function CreateProductMobile() {
           {fieldsDocuments.length < documentsLimit && (
             <AddFileButton
               color="black"
-              label="Novo Documento"
+              label={translations.newDocumentButtonLabel}
               appendFn={appendDocument}
               allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(', ')}
               sizeLimitInMB={DOCUMENTS_CONFIG.sizeLimitInMB}
@@ -216,9 +224,9 @@ export default function CreateProductMobile() {
         </Section>
 
         <CategorySection>
-          <Title>Categoria:</Title>
+          <Title>{translations.categoryLabel}</Title>
           {isLoadingCategories ? (
-            <p>Carregando...</p>
+            <p>{translations.loadingText1}</p>
           ) : (
             <FormSelect
               name="category"
@@ -237,7 +245,7 @@ export default function CreateProductMobile() {
                     }
                   : {}
               }
-              placeholder="Selecione a categoria"
+              placeholder={translations.selectCategoryLabel}
             />
           )}
         </CategorySection>
@@ -255,12 +263,12 @@ export default function CreateProductMobile() {
                 ariaLabel="tail-spin-loading"
                 radius="5"
               />
-              <p>Carregando</p>
+              <p>{translations.loadingText2}</p>
             </>
           ) : (
             <>
               <FiSave size={25} />
-              <p>Criar Produto</p>
+              <p>{translations.saveButtonLabel}</p>
             </>
           )}
         </SaveButton>
@@ -269,7 +277,7 @@ export default function CreateProductMobile() {
           to="/administrador/listar-produtos"
           disabled={isLoadingCreate || isLoadingCategories}
         >
-          <p>Cancelar</p>
+          <p>{translations.cancelButtonLabel}</p>
         </CancelButton>
       </Form>
     </Container>

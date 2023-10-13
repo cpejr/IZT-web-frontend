@@ -27,6 +27,7 @@ const formContactErrorMessages = {
 };
 const defaultFormContactErrorMessage =
   'Erro ao enviar a mensagem. Tente novamente mais tarde';
+
 export function buildFormContactErrorMessage(err) {
   const code = err?.response?.data?.httpCode;
   return formContactErrorMessages[code] || defaultFormContactErrorMessage;
