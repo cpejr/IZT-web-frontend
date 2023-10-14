@@ -97,6 +97,11 @@ export function buildGetUsersErrorMessage(err) {
   return getUsersErrorMessages[code] || getUsersIdDefaultErrorMessage;
 }
 
+// toast success
+
+export const toastSuccessMessage =
+  'Autorização ao curso concedida com sucesso!';
+
 // Create user course request
 const createUserCourseErrorMessages = {
   [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',

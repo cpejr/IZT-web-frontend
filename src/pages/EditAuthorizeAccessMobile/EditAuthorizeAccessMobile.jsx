@@ -28,7 +28,18 @@ import {
   updateAuthorizeAccessValidationSchema,
   themeDatePicker,
   buildUpdateUserCourseErrorMessage,
+  toastSuccessMessage,
 } from './utils';
+import {
+  updateAuthorizeAccessValidationSchemaDE,
+  buildUpdateUserCourseErrorMessageDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  updateAuthorizeAccessValidationSchemaEN,
+  buildUpdateUserCourseErrorMessageEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
 export default function EditAuthorizeAccessMobile() {
   const navigate = useNavigate();
@@ -45,24 +56,39 @@ export default function EditAuthorizeAccessMobile() {
       queryClient.invalidateQueries({
         queryKey: ['user-courses'],
       });
-      toast.success('Autorização de acesso ao curso alterada com sucesso!');
+      if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+      else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+      else toast.success(toastSuccessMessage);
       navigate('/administrador/liberacao-cursos');
     },
     onError: (err) => {
-      const errorMessage = buildUpdateUserCourseErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildUpdateUserCourseErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildUpdateUserCourseErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildUpdateUserCourseErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
   // Form handlers
+  let resolver;
+  if (globalLanguage === 'DE') {
+    resolver = zodResolver(updateAuthorizeAccessValidationSchemaEN);
+  } else if (globalLanguage === 'EN') {
+    resolver = zodResolver(updateAuthorizeAccessValidationSchemaDE);
+  } else {
+    resolver = zodResolver(updateAuthorizeAccessValidationSchema);
+  }
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(updateAuthorizeAccessValidationSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = ({ expiresAt }) =>
     updateUserCourse({
       _id: authorizeUser?._id,

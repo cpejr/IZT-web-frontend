@@ -39,7 +39,18 @@ import { TranslateText } from './translations';
 import {
   buildEditProductErrorMessage,
   editProductValidationSchema,
+  toastSuccessMessage,
 } from './utils';
+import {
+  buildEditProductErrorMessageDE,
+  editProductValidationSchemaDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  buildEditProductErrorMessageEN,
+  editProductValidationSchemaEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
 export default function EditProductMobile() {
   // Variables
@@ -51,7 +62,7 @@ export default function EditProductMobile() {
   const documentsLimit = 3;
   const picturesLimit = 5;
 
-  //Translation
+  // Translation
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
 
@@ -59,9 +70,16 @@ export default function EditProductMobile() {
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
     {
       onError: (err) => {
-        const errorMessage = buildEditProductErrorMessage(err);
-
-        toast.error(errorMessage);
+        if (globalLanguage === 'EN') {
+          const errorMessage = buildEditProductErrorMessageEN(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'DE') {
+          const errorMessage = buildEditProductErrorMessageDE(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage = buildEditProductErrorMessage(err);
+          toast.error(errorMessage);
+        }
       },
     }
   );
@@ -71,25 +89,39 @@ export default function EditProductMobile() {
         queryClient.invalidateQueries({
           queryKey: ['products', 'searchByName'],
         });
-
-        toast.success('Produto atualizado com sucesso!');
+        if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+        else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+        else toast.success(toastSuccessMessage);
         navigate('/administrador/listar-produtos');
       },
       onError: (err) => {
-        const errorMessage = buildEditProductErrorMessage(err);
-
-        toast.error(errorMessage);
+        if (globalLanguage === 'EN') {
+          const errorMessage = buildEditProductErrorMessageEN(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'DE') {
+          const errorMessage = buildEditProductErrorMessageDE(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage = buildEditProductErrorMessage(err);
+          toast.error(errorMessage);
+        }
       },
     });
 
   // Form handlers
+  let resolver;
+  if (globalLanguage === 'EN')
+    resolver = zodResolver(editProductValidationSchemaEN);
+  else if (globalLanguage === 'DE')
+    resolver = zodResolver(editProductValidationSchemaDE);
+  else resolver = zodResolver(editProductValidationSchema);
   const {
     handleSubmit,
     register,
     control,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(editProductValidationSchema),
+    resolver,
     defaultValues: {
       name: product?.name,
       description: product?.description,
@@ -170,7 +202,7 @@ export default function EditProductMobile() {
           <TextArea
             id="description"
             name="description"
-            placeholder="Descreva o produto"
+            placeholder={translations.placeholderDescription}
             error={errors?.description?.message}
             {...register('description')}
           />

@@ -83,6 +83,11 @@ export const themeDatePicker = createTheme({
   },
 });
 
+// Toast Success
+
+export const toastSuccessMessage =
+  'Autorização de acesso ao software alterada com sucesso!';
+
 // Error Handling
 const updateSoftwareAccessErrorMessages = {
   [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',

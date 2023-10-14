@@ -97,6 +97,11 @@ export function buildGetUsersErrorMessage(err) {
   return getUsersErrorMessages[code] || getUsersIdDefaultErrorMessage;
 }
 
+// toast success
+
+export const toastSuccessMessage =
+  'Erfolgreiche Softwarezugriffsberechtigung erteilt!';
+
 // Create user softwareAccess request
 const createUserSoftwareAccessErrorMessages = {
   [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',

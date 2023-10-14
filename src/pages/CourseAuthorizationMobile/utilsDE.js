@@ -4,11 +4,13 @@ import { z } from 'zod';
 import { ERROR_CODES } from '../../utils/constants';
 
 // Form Validation
-export const authorizeAccessValidationSchema = z.object({
-  userId: z.string({ required_error: 'Favor selecionar uma email' }).trim(),
+export const authorizeAccessValidationSchemaDE = z.object({
+  userId: z
+    .string({ required_error: 'Bitte wählen Sie eine E-Mail aus' })
+    .trim(),
   expiresAt: z.coerce.date({
     errorMap: () => ({
-      message: 'Favor inserir uma data',
+      message: 'Bitte geben Sie ein Datum ein',
     }),
   }),
 });
@@ -86,34 +88,34 @@ export const themeDatePicker = createTheme({
 });
 
 // Toast Success
-
-export const toastSuccessMessage =
-  'Autorização ao curso concedida com sucesso!';
+export const toastSuccessMessageDE =
+  'Zugriff auf den Kurs erfolgreich autorisiert!';
 
 // Error Handling
-const createUserCourseErrorMessages = {
-  [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',
-  [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',
-  [ERROR_CODES.FORBIDDEN]: 'Usuário não autorizado',
-  [ERROR_CODES.CONFLICT]: 'O usuário já tem acesso ao curso',
+const createUserCourseErrorMessagesDE = {
+  [ERROR_CODES.NOT_FOUND]: 'Ungültige Daten',
+  [ERROR_CODES.UNAUTHORIZED]: 'Benutzer nicht authentifiziert',
+  [ERROR_CODES.FORBIDDEN]: 'Benutzer nicht autorisiert',
+  [ERROR_CODES.CONFLICT]: 'Der Benutzer hat bereits Zugriff auf den Kurs',
 };
-const createUserCourseDefaultErrorMessage =
-  'Erro autorizar acesso do curso ao usuário. Tente novamente mais tarde';
+const createUserCourseDefaultErrorMessageDE =
+  'Fehler beim Autorisieren des Kurszugriffs für den Benutzer. Bitte versuchen Sie es später erneut';
 
-export function buildCreateUserCourseErrorMessage(err) {
+export function buildCreateUserCourseErrorMessageDE(err) {
   const code = err?.response?.data?.httpCode;
   return (
-    createUserCourseErrorMessages[code] || createUserCourseDefaultErrorMessage
+    createUserCourseErrorMessagesDE[code] ||
+    createUserCourseDefaultErrorMessageDE
   );
 }
 
 // Get users for select
-const getUsersErrorMessages = {
-  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
+const getUsersErrorMessagesDE = {
+  [ERROR_CODES.BAD_REQUEST]: 'Ungültige Daten',
 };
-const getUsersIdDefaultErrorMessage =
-  'Ocorreu um erro na listagem dos usuários. Tente novamente mais tarde';
-export function buildGetUsersErrorMessage(err) {
+const getUsersIdDefaultErrorMessageDE =
+  'Beim Auflisten der Benutzer ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut';
+export function buildGetUsersErrorMessageDE(err) {
   const code = err?.response?.data?.httpCode;
-  return getUsersErrorMessages[code] || getUsersIdDefaultErrorMessage;
+  return getUsersErrorMessagesDE[code] || getUsersIdDefaultErrorMessageDE;
 }
