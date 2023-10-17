@@ -98,9 +98,8 @@ export function buildGetUsersErrorMessage(err) {
 }
 
 // toast success
-
 export const toastSuccessMessage =
-  'Erfolgreiche Softwarezugriffsberechtigung erteilt!';
+  'Autorização de acesso ao software concedida com sucesso!';
 
 // Create user softwareAccess request
 const createUserSoftwareAccessErrorMessages = {
