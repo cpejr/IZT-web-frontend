@@ -15,6 +15,11 @@ export const Container = styled.div`
     margin-left: 0rem;
     margin-top: 0rem;
   }
+
+  .kqQsej {
+    background-color: blue;
+    display: flex;
+  }
 `;
 
 export const Form = styled.form`
