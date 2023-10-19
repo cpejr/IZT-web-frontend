@@ -84,6 +84,7 @@ export const Section = styled.div`
 
 export const Title = styled.p`
   font-weight: 700;
+  padding-left: 5px;
 
   @media (max-width: 420px) {
     font-size: 1.8rem;
