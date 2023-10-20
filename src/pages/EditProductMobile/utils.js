@@ -49,6 +49,10 @@ export const editProductValidationSchema = z.object({
     .transform((documents) => documents.map(({ file }) => file)),
 });
 
+// Toast Success
+
+export const toastSuccessMessage = 'Produto atualizado com sucesso!';
+
 // Error Handling
 const editProductErrorMessages = {
   [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',

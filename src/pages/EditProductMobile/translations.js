@@ -15,7 +15,6 @@ export function TranslateText({ globalLanguage }) {
   let loadingLabel1;
   let loadingLabel2;
   let selectCategoryLabel;
-
   let placeholderName;
   let placeholderDescription;
   let placeholderAdvantages;

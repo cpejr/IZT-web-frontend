@@ -21,25 +21,47 @@ import {
   ErrorMessage,
   Date,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildCreateUserCourseErrorMessage,
   buildGetUsersErrorMessage,
   modalAuthorizeAccessValidationSchema,
   themeDatePicker,
+  toastSuccessMessage,
 } from './utils';
+import {
+  buildCreateUserCourseErrorMessageDE,
+  buildGetUsersErrorMessageDE,
+  modalAuthorizeAccessValidationSchemaDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  buildCreateUserCourseErrorMessageEN,
+  buildGetUsersErrorMessageEN,
+  modalAuthorizeAccessValidationSchemaEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
-export default function ModalAuthorizeAccess({ close }) {
+export default function ModalAuthorizeAccess({ close, language }) {
   // Variables
   const courseId = '646acfad1bae8cb3a56a05f4';
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const queryClient = useQueryClient();
+  const translations = TranslateText({ language });
 
   // Backend calls
   const { data: users, isLoading } = useGetUsers({
     onError: (err) => {
-      const errorMessage = buildGetUsersErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (language === 'EN') {
+        const errorMessage = buildGetUsersErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (language === 'DE') {
+        const errorMessage = buildGetUsersErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMesage = buildGetUsersErrorMessage(err);
+        toast.error(errorMesage);
+      }
     },
   });
 
@@ -51,26 +73,42 @@ export default function ModalAuthorizeAccess({ close }) {
       queryClient.invalidateQueries({
         queryKey: ['users'],
       });
-
-      toast.success('Autorização ao curso concedida com sucesso!');
+      if (language === 'EN') toast.success(toastSuccessMessageEN);
+      else if (language === 'DE') toast.success(toastSuccessMessageDE);
+      else toast.success(toastSuccessMessage);
       close();
     },
     onError: (err) => {
-      const errorMessage = buildCreateUserCourseErrorMessage(err);
-
-      toast.error(errorMessage);
-      setIsPending(false);
+      if (language === 'DE') {
+        const errorMessage = buildCreateUserCourseErrorMessageDE(err);
+        toast.error(errorMessage);
+        setIsPending(false);
+      } else if (language === 'EN') {
+        const errorMessage = buildCreateUserCourseErrorMessageEN(err);
+        toast.error(errorMessage);
+        setIsPending(false);
+      } else {
+        const errorMessage = buildCreateUserCourseErrorMessage(err);
+        toast.error(errorMessage);
+        setIsPending(false);
+      }
     },
   });
 
   // Form handlers
+  let resolver;
+  if (language === 'DE') {
+    resolver = zodResolver(modalAuthorizeAccessValidationSchemaDE);
+  } else if (language === 'EN') {
+    resolver = zodResolver(modalAuthorizeAccessValidationSchemaEN);
+  } else {
+    resolver = zodResolver(modalAuthorizeAccessValidationSchema);
+  }
   const {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm({
-    resolver: zodResolver(modalAuthorizeAccessValidationSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = ({ userId, expiresAt }) => {
     createUserCourse({
       user: userId,
@@ -105,7 +143,7 @@ export default function ModalAuthorizeAccess({ close }) {
                   label: email,
                   value: _id,
                 }))}
-              placeholder="Selecione o email"
+              placeholder={translations.phEmail}
               filterOption={(input, option) =>
                 option?.children?.toLowerCase()?.includes(input?.toLowerCase())
               }
@@ -115,7 +153,7 @@ export default function ModalAuthorizeAccess({ close }) {
             />
           </div>
           <div>
-            <Label>Validade do acesso:</Label>
+            <Label>{translations.accessExpiration}</Label>
             <AccessExpirationContainer>
               <ThemeProvider theme={themeDatePicker}>
                 <Controller
@@ -151,10 +189,10 @@ export default function ModalAuthorizeAccess({ close }) {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loading}</p>
               </>
             ) : (
-              <p>+ Autorizar</p>
+              <p>{translations.authorize}</p>
             )}
           </ModalButton>
         </ModalContent>
@@ -165,4 +203,7 @@ export default function ModalAuthorizeAccess({ close }) {
 
 ModalAuthorizeAccess.propTypes = {
   close: PropTypes.func.isRequired,
+};
+ModalAuthorizeAccess.propTypes = {
+  language: PropTypes.string.isRequired,
 };

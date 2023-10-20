@@ -84,6 +84,10 @@ export const themeDatePicker = createTheme({
   },
 });
 
+// Toast Success
+
+export const toastSuccessMessage =
+  'Autorização de acesso ao curso alterada com sucesso!';
 // Error Handling
 const updateUserCourseErrorMessages = {
   [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',

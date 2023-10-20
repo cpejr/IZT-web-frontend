@@ -4,11 +4,11 @@ import { z } from 'zod';
 import { ERROR_CODES } from '../../utils/constants';
 
 // Form Validation
-export const authorizeAccessValidationSchema = z.object({
-  userId: z.string({ required_error: 'Favor selecionar uma email' }).trim(),
+export const authorizeAccessValidationSchemaEN = z.object({
+  userId: z.string({ required_error: 'Please select an email' }).trim(),
   expiresAt: z.coerce.date({
     errorMap: () => ({
-      message: 'Favor inserir uma data',
+      message: 'Please enter a date',
     }),
   }),
 });
@@ -87,33 +87,34 @@ export const themeDatePicker = createTheme({
 
 // Toast Success
 
-export const toastSuccessMessage =
-  'Autorização ao curso concedida com sucesso!';
+export const toastSuccessMessageEN =
+  'Authorization to the course granted successfully!';
 
 // Error Handling
-const createUserCourseErrorMessages = {
-  [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',
-  [ERROR_CODES.UNAUTHORIZED]: 'Usuário não autenticado',
-  [ERROR_CODES.FORBIDDEN]: 'Usuário não autorizado',
-  [ERROR_CODES.CONFLICT]: 'O usuário já tem acesso ao curso',
+const createUserCourseErrorMessagesEN = {
+  [ERROR_CODES.NOT_FOUND]: 'Invalid data',
+  [ERROR_CODES.UNAUTHORIZED]: 'User not authenticated',
+  [ERROR_CODES.FORBIDDEN]: 'User not authorized',
+  [ERROR_CODES.CONFLICT]: 'The user already has access to the course',
 };
-const createUserCourseDefaultErrorMessage =
-  'Erro autorizar acesso do curso ao usuário. Tente novamente mais tarde';
+const createUserCourseDefaultErrorMessageEN =
+  'Error authorizing course access to the user. Please try again later';
 
-export function buildCreateUserCourseErrorMessage(err) {
+export function buildCreateUserCourseErrorMessageEN(err) {
   const code = err?.response?.data?.httpCode;
   return (
-    createUserCourseErrorMessages[code] || createUserCourseDefaultErrorMessage
+    createUserCourseErrorMessagesEN[code] ||
+    createUserCourseDefaultErrorMessageEN
   );
 }
 
 // Get users for select
-const getUsersErrorMessages = {
-  [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',
+const getUsersErrorMessagesEN = {
+  [ERROR_CODES.BAD_REQUEST]: 'Invalid data',
 };
-const getUsersIdDefaultErrorMessage =
-  'Ocorreu um erro na listagem dos usuários. Tente novamente mais tarde';
-export function buildGetUsersErrorMessage(err) {
+const getUsersIdDefaultErrorMessageEN =
+  'An error occurred while listing users. Please try again later';
+export function buildGetUsersErrorMessageEN(err) {
   const code = err?.response?.data?.httpCode;
-  return getUsersErrorMessages[code] || getUsersIdDefaultErrorMessage;
+  return getUsersErrorMessagesEN[code] || getUsersIdDefaultErrorMessageEN;
 }

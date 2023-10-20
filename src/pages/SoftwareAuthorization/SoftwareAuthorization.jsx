@@ -34,6 +34,8 @@ import {
 } from './Styles';
 import { TranslateText } from './translations';
 import { buildGetSoftwareAccessErrorMessage } from './utils';
+import { buildGetSoftwareAccessErrorMessageDE } from './utilsDE';
+import { buildGetSoftwareAccessErrorMessageEN } from './utilsEN';
 
 export default function SoftwareAuthorization() {
   const [modalSoftwareAccessAuthorization, setModalSoftwareAuthorization] =
@@ -55,9 +57,16 @@ export default function SoftwareAuthorization() {
   const { data: users, isLoading: isLoadingUsers } =
     useGetUsersWithSoftwareAccess({
       onError: (err) => {
-        const errorMessage = buildGetSoftwareAccessErrorMessage(err);
-
-        toast.error(errorMessage);
+        if (globalLanguage === 'EN') {
+          const errorMessage = buildGetSoftwareAccessErrorMessageEN(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'DE') {
+          const errorMessage = buildGetSoftwareAccessErrorMessageDE(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage = buildGetSoftwareAccessErrorMessage(err);
+          toast.error(errorMessage);
+        }
       },
     });
 
@@ -184,7 +193,10 @@ export default function SoftwareAuthorization() {
         centered
         destroyOnClose
       >
-        <ModalAuthorizeSoftwareAccess close={closeModalSoftwareAuthorization} />
+        <ModalAuthorizeSoftwareAccess
+          language={globalLanguage}
+          close={closeModalSoftwareAuthorization}
+        />
       </ModalStyle>
 
       <ModalStyle

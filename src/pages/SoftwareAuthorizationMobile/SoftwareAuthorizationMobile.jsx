@@ -29,7 +29,18 @@ import {
   authorizeAccessValidationSchema,
   themeDatePicker,
   buildCreateUserSoftwareAccessErrorMessage,
+  toastSuccessMessage,
 } from './utils';
+import {
+  authorizeAccessValidationSchemaDE,
+  buildCreateUserSoftwareAccessErrorMessageDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  authorizeAccessValidationSchemaEN,
+  buildCreateUserSoftwareAccessErrorMessageEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
 export default function SoftwareAuthorizationMobile() {
   const navigate = useNavigate();
@@ -43,9 +54,16 @@ export default function SoftwareAuthorizationMobile() {
   // Backend calls
   const { data: users } = useGetUsers({
     onError: (err) => {
-      const errorMessage = buildCreateUserSoftwareAccessErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
   const { mutate: updateSoftwareAccess } = useUpdateSoftwareAccess({
@@ -53,26 +71,38 @@ export default function SoftwareAuthorizationMobile() {
       queryClient.invalidateQueries({
         queryKey: ['users-with-software-access'],
       });
-
-      toast.success('Autorização ao software concedida com sucesso!');
-      close();
+      if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+      else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+      else toast.success(toastSuccessMessage);
     },
     onError: (err) => {
-      const errorMessage = buildCreateUserSoftwareAccessErrorMessage(err);
-
-      toast.error(errorMessage);
-      setIsPending(false);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
   // Form handlers
+  let resolver;
+  if (globalLanguage === 'EN') {
+    resolver = zodResolver(authorizeAccessValidationSchemaEN);
+  } else if (globalLanguage === 'DE') {
+    resolver = zodResolver(authorizeAccessValidationSchemaDE);
+  } else {
+    resolver = zodResolver(authorizeAccessValidationSchema);
+  }
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(authorizeAccessValidationSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = ({ userId, softwareAccess }) => {
     updateSoftwareAccess({
       _id: userId,

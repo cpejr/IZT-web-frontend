@@ -34,6 +34,8 @@ import {
 } from './Styles';
 import { TranslateText } from './translations';
 import { buildGetUserCoursesErrorMessage } from './utils';
+import { buildGetUserCoursesErrorMessageDE } from './utilsDE';
+import { buildGetUserCoursesErrorMessageEN } from './utilsEN';
 
 export default function CourseAuthorization() {
   const [modalCourseAuthorization, setModalCourseAuthorization] =
@@ -52,9 +54,16 @@ export default function CourseAuthorization() {
   // Backend calls
   const { data: userCourses, isLoading: isLoadingUsers } = useGetUserCourses({
     onError: (err) => {
-      const errorMessage = buildGetUserCoursesErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildGetUserCoursesErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildGetUserCoursesErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildGetUserCoursesErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
@@ -174,7 +183,10 @@ export default function CourseAuthorization() {
         centered
         destroyOnClose
       >
-        <ModalAuthorizeAccess close={closeModalCourseAuthorization} />
+        <ModalAuthorizeAccess
+          close={closeModalCourseAuthorization}
+          language={globalLanguage}
+        />
       </ModalStyle>
 
       <ModalStyle
