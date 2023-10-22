@@ -8,6 +8,9 @@ import { Controller, useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
+import { TranslateText } from './translations';
+
 import { useUpdateSoftwareAccess } from '../../../hooks/query/users';
 import {
   Container,
@@ -30,6 +33,9 @@ export default function ModalEditAuthorizeSoftwareAccess({
   authorizeUser,
   close,
 }) {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   // Variables
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const queryClient = useQueryClient();
@@ -40,7 +46,7 @@ export default function ModalEditAuthorizeSoftwareAccess({
       queryClient.invalidateQueries({
         queryKey: ['users-with-software-access'],
       });
-      toast.success('Autorização de acesso ao software alterada com sucesso!');
+      toast.success(<p>{translations.softwareAuthorizationEdited}</p>);
       close();
     },
     onError: (err) => {
@@ -73,12 +79,12 @@ export default function ModalEditAuthorizeSoftwareAccess({
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
           <div>
-            <Label>Email:</Label>
+            <Label>{translations.email}</Label>
             <EmailText>{authorizeUser.email}</EmailText>
           </div>
 
           <div>
-            <Label>Validade do acesso:</Label>
+            <Label>{translations.accessValidity}</Label>
             <AccessExpirationContainer>
               <ThemeProvider theme={themeDatePicker}>
                 <Controller
@@ -114,10 +120,10 @@ export default function ModalEditAuthorizeSoftwareAccess({
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loading}</p>
               </>
             ) : (
-              <p>Salvar Alterações</p>
+              <p>{translations.save}</p>
             )}
           </ModalButton>
         </ModalContent>

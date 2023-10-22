@@ -5,11 +5,17 @@ import PropTypes from 'prop-types';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
+import { TranslateText } from './translations';
+
 import { useDeleteProducts } from '../../../hooks/query/products';
 import { Container, DeleteButton, Message } from './Styles';
 import { buildDeleteProductErrorMessage } from './utils';
 
 export default function ModalDeleteProduct({ _id, close }) {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [isPending, setIsPending] = useState(false); // Important for modals usage
   const queryClient = useQueryClient();
 
@@ -32,7 +38,7 @@ export default function ModalDeleteProduct({ _id, close }) {
 
   return (
     <Container>
-      <Message>Tem certeza que deseja excluir o produto?</Message>
+      <Message>{translations.confirmation}</Message>
       <DeleteButton
         type="button"
         disabled={isPending || isLoading}
@@ -50,10 +56,10 @@ export default function ModalDeleteProduct({ _id, close }) {
               ariaLabel="tail-spin-loading"
               radius="5"
             />
-            <p>Carregando</p>
+            <p>{translations.awaiting}</p>
           </>
         ) : (
-          'Excluir'
+          <p>{translations.deleteProd}</p>
         )}
       </DeleteButton>
     </Container>

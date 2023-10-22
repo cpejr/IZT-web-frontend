@@ -8,7 +8,7 @@ export const editProductValidationSchema = z.object({
     .string()
     .nonempty('Favor digitar o nome do produto')
     .max(20, 'Nome do produto deve ter no máximo 20 caracteres'),
-  category: z.string({ required_error: 'Product category ID is required' }), // Here we need to pass the category id only
+  category: z.string({ required_error: 'Product category ID é obrigatório' }), // Here we need to pass the category id only
   description: z
     .string()
     .nonempty('Favor inserir uma descrição do produto')

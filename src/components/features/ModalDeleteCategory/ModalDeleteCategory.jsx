@@ -5,11 +5,17 @@ import PropTypes from 'prop-types';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
+import { TranslateText } from './translations';
+
 import { useDeleteCategory } from '../../../hooks/query/categories';
 import { Container, DeleteButton, Message } from './Styles';
 import { buildDeleteCategoryErrorMessage } from './utils';
 
 export default function ModalDeleteCategory({ _id, close }) {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+  
   const [isPending, setIsPending] = useState(false); // Important for modals usage
   const queryClient = useQueryClient();
 
@@ -19,7 +25,7 @@ export default function ModalDeleteCategory({ _id, close }) {
         queryKey: ['categories'],
       });
 
-      toast.success('Categoria deletada com sucesso.');
+      toast.success(<p>{translations.categoryDeleted}</p>);
       close();
     },
     onError: (err) => {
@@ -32,7 +38,7 @@ export default function ModalDeleteCategory({ _id, close }) {
 
   return (
     <Container>
-      <Message>Tem certeza que deseja excluir a categoria?</Message>
+      <Message>{translations.deleteCategory}</Message>
       <DeleteButton
         type="button"
         disabled={isPending || isLoading}
@@ -50,10 +56,10 @@ export default function ModalDeleteCategory({ _id, close }) {
               ariaLabel="tail-spin-loading"
               radius="5"
             />
-            <p>Carregando</p>
+            <p>{translations.loading}</p>
           </>
         ) : (
-          'Excluir'
+          <p>{translations.exclude}</p>
         )}
       </DeleteButton>
     </Container>

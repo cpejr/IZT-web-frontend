@@ -5,6 +5,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useMediaQuery } from 'react-responsive';
 
 import { useGlobalLanguage } from '../../../stores/globalLanguage';
+import { TranslateText } from './translations';
 
 import ModalCreateCategory from '../ModalCreateCategory/ModalCreateCategory';
 import ModalCreateProduct from '../ModalCreateProduct/ModalCreateProduct';
@@ -24,10 +25,8 @@ import {
   MenuMobile,
   MobileMenuButton,
 } from './Styles';
-import { TranslateText } from './translations';
 
 export default function AdminMenu() {
-
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
 
@@ -68,7 +67,7 @@ export default function AdminMenu() {
               )}
 
               <StyledLink to="/administrador/listar-produtos">
-              {translations.listProducts}
+                {translations.listProducts}
               </StyledLink>
             </Section>
 
@@ -86,7 +85,7 @@ export default function AdminMenu() {
               )}
 
               <StyledLink to="/administrador/listar-categorias">
-              {translations.listCategories}
+                {translations.listCategories}
               </StyledLink>
               <BlackLine />
             </Section>
@@ -97,10 +96,10 @@ export default function AdminMenu() {
           <Section>
             <Title>{translations.accessDefinitions}</Title>
             <StyledLink to="/administrador/liberacao-cursos">
-            {translations.provideCourseAccess}
+              {translations.provideCourseAccess}
             </StyledLink>
             <StyledLink to="/administrador/liberacao-software">
-            {translations.provideSoftwareAccess}
+              {translations.provideSoftwareAccess}
             </StyledLink>
           </Section>
         </MenuMobile>
