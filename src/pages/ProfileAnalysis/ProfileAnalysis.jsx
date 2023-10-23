@@ -14,7 +14,6 @@ import {
   ProductData,
   ParametersRA,
 } from '../../components/features';
-// import AccordionDemo from '../../components/features/Acordeon/Acordeon';
 import Graphic from '../../components/features/Graphic/Graphic';
 import {
   useCreateProfileAnalysis,
@@ -94,7 +93,8 @@ export default function ProfileAnalysis() {
     saveValidationSchema = saveProfileAnalysisValidationSchemaEN;
   }
 
-  const [graphData, setGraphData] = useState({ x: [], y: [] });
+  const [retificationCenterlessDiagram, setRetificationCenterlessDiagram] =
+    useState([]);
   const [formDataStorage, setFormDataStorage] = useState({});
   const queryClient = useQueryClient();
   const [collapse, setCollapse] = useState('');
@@ -105,32 +105,14 @@ export default function ProfileAnalysis() {
     else setCollapse(sectionName);
   };
 
-  /* const handleCalculate = (data) => {
-    const xData = data.x;
-    const yData = data.y;
-
-    setGraphData({ x: xData, y: yData });
-  }; */
-
   // backend calls
   const { mutate: calculateProfileAnalysis, isLoading } =
     useCalculateProfileAnalysis({
       onSuccess: (result) => {
-        const newgraphData = [
-          {
-            x: result.retificationCenterlessDiagram.x,
-            y: result.retificationCenterlessDiagram.y,
-            type: 'contour',
-            size: 2,
-            marker: { color: 'red' },
-          },
-        ];
-        // const xData = result.retificationCenterlessDiagram.x;
-        // const yData = result.retificationCenterlessDiagram.y;
-        // onCalculate({ x: xData, y: yData });
-        // dataInput(formDataStorage);
-
-        setGraphData(newgraphData);
+        setRetificationCenterlessDiagram([
+          result.retificationCenterlessDiagram.x,
+          result.retificationCenterlessDiagram.y,
+        ]);
 
         if (globalLanguage === 'DE') {
           toast.success(translations.successCalculate);
@@ -186,36 +168,21 @@ export default function ProfileAnalysis() {
       }
     },
   });
+
   // Form handlers
   const {
     handleSubmit: calculate,
     register,
     formState: { errors },
-    // setValue,
-    // trigger,
-    // watch,
   } = useForm({
     resolver: zodResolver(validationSchema),
   });
+
   const onSubmit = (data) => {
     setFormDataStorage(data);
     calculateProfileAnalysis(data);
   };
 
-  /* const covertStringToNumber = (fieldId, inputValue) => {
-    const convertedNumber = parseFloat(inputValue);
-    if (!Number.isNaN(convertedNumber)) {
-      setValue(fieldId, convertedNumber);
-      trigger(fieldId);
-    } else {
-      setValue(fieldId, '');
-      trigger(fieldId);
-    }
-  };
-   const handleformDataStorage = (data) => {
-    setFormDataStorage(data);
- };
- */
   useEffect(() => {}, [formDataStorage]);
   const user = useAuthStore((state) => state.auth?.user);
 
@@ -319,10 +286,6 @@ export default function ProfileAnalysis() {
                   )}
                 </Button>
               </DataEntry>
-              {/* <AccordionDemo
-                onCalculate={handleCalculate}
-                dataInput={handleformDataStorage}
-              />  */}
             </Data>
           </Center>
         </Containerleft>
@@ -347,7 +310,7 @@ export default function ProfileAnalysis() {
           <Edit>
             <Text>{translations.grindingClearance} </Text>
             <Container2>
-              <Graphic data={graphData} />
+              <Graphic data={retificationCenterlessDiagram} />
             </Container2>
             <Text>{translations.outputData}</Text>
           </Edit>
