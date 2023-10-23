@@ -63,7 +63,7 @@ const router = createBrowserRouter(
     <Route>
       <Route path="/" element={<AppLayout />}>
         <Route element={<HasFooterRoutes />}>
-          <Route index element={<Home />} /> {/* This is the / route */}
+          <Route index element={<Home />} />
           <Route path="email-confirmado/:token" element={<ConfirmedEmail />} />
           <Route path="verificar-email" element={<VerifyEmail />} />
           <Route path="catalogo" element={<Catalog />} />

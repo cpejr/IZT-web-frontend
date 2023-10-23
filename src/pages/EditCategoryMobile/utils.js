@@ -12,6 +12,10 @@ export const updateCategoryValidationSchema = z.object({
   description: z.string().optional(),
 });
 
+// Toast Success
+
+export const toastSucessMessage = 'Categoria atualizada com sucesso!';
+
 // Error Handling
 const updateCategoryErrorMessages = {
   [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',

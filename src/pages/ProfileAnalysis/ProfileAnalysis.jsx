@@ -186,6 +186,14 @@ export default function ProfileAnalysis() {
   useEffect(() => {}, [formDataStorage]);
   const user = useAuthStore((state) => state.auth?.user);
 
+  let resolver1;
+  if (globalLanguage === 'DE') {
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchemaDE);
+  } else if (globalLanguage === 'EN') {
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchemaEN);
+  } else {
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchema);
+  }
   const {
     handleSubmit: save,
     register: register2,

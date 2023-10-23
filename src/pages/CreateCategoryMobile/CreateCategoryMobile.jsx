@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 
 import { RegisterInput } from '../../components/common';
 import { useCreateCategory } from '../../hooks/query/categories';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -17,46 +18,75 @@ import {
   SaveButton,
   CancelButton,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildCreateCategoryErrorMessage,
   createCategoryValidationSchema,
+  toastSuccessMessage,
 } from './utils';
+import {
+  buildCreateCategoryErrorMessageDE,
+  createCategoryValidationSchemaDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  buildCreateCategoryErrorMessageEN,
+  createCategoryValidationSchemaEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
 export default function CreateCategoryMobile() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const isMediumScreen = useMediaQuery({ minWidth: 700 });
 
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const { mutate: createCategory, isLoading } = useCreateCategory({
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['categories'],
       });
-
-      toast.success('Categoria criada com sucesso!');
+      if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+      else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+      else toast.success(toastSuccessMessage);
       navigate('/administrador/listar-categorias');
     },
     onError: (err) => {
-      const errorMessage = buildCreateCategoryErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildCreateCategoryErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildCreateCategoryErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildCreateCategoryErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
+  // Form Handlers
+
+  let resolver;
+  if (globalLanguage === 'EN')
+    resolver = zodResolver(createCategoryValidationSchemaEN);
+  else if (globalLanguage === 'DE')
+    resolver = zodResolver(createCategoryValidationSchemaDE);
+  else resolver = zodResolver(createCategoryValidationSchema);
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(createCategoryValidationSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = (data) => createCategory(data);
 
   if (isMediumScreen) return <Navigate to="/administrador/listar-categorias" />;
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Adicionar Categoria</Title>
+        <Title>{translations.title}</Title>
 
         <RegisterInput
           label="Nome da categoria:"
@@ -78,18 +108,18 @@ export default function CreateCategoryMobile() {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loadingText}</p>
               </>
             ) : (
               <>
                 <FiSave size={25} />
-                <p>Adicionar Categoria</p>
+                <p>{translations.saveButtonLabel}</p>
               </>
             )}
           </SaveButton>
 
           <CancelButton to="/administrador/listar-categorias">
-            <p>Cancelar</p>
+            <p>{translations.cancelButtonLabel}</p>
           </CancelButton>
         </ButtonsDiv>
       </Form>

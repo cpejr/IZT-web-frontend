@@ -85,6 +85,11 @@ export const themeDatePicker = createTheme({
   },
 });
 
+// Toast Success
+
+export const toastSuccessMessage =
+  'Autorização ao curso concedida com sucesso!';
+
 // Error Handling
 const createUserCourseErrorMessages = {
   [ERROR_CODES.NOT_FOUND]: 'Dados inválidos',

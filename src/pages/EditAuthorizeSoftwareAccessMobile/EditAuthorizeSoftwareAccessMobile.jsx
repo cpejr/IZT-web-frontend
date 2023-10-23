@@ -8,6 +8,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useUpdateSoftwareAccess } from '../../hooks/query/users';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -22,11 +23,23 @@ import {
   Date,
   Field,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   updateAuthorizeAccessValidationSchema,
   themeDatePicker,
   buildUpdateSoftwareAccessErrorMessage,
+  toastSuccessMessage,
 } from './utils';
+import {
+  updateAuthorizeAccessValidationSchemaDE,
+  buildUpdateSoftwareAccessErrorMessageDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  updateAuthorizeAccessValidationSchemaEN,
+  buildUpdateSoftwareAccessErrorMessageEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
 export default function EditAuthorizeSofwareAccessMobile() {
   const navigate = useNavigate();
@@ -34,30 +47,48 @@ export default function EditAuthorizeSofwareAccessMobile() {
   const authorizeUser = useLocation().state;
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   // Backend calls
   const { mutate: updateSoftwareAccess, isLoading } = useUpdateSoftwareAccess({
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['users-with-software-access'],
       });
-      toast.success('Autorização de acesso ao software alterada com sucesso!');
+      if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+      else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+      else toast.success(toastSuccessMessage);
       navigate('/administrador/liberacao-software');
     },
     onError: (err) => {
-      const errorMessage = buildUpdateSoftwareAccessErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
   // Form handlers
+  let resolver;
+  if (globalLanguage === 'EN') {
+    resolver = zodResolver(updateAuthorizeAccessValidationSchemaEN);
+  } else if (globalLanguage === 'DE') {
+    resolver = zodResolver(updateAuthorizeAccessValidationSchemaDE);
+  } else {
+    resolver = zodResolver(updateAuthorizeAccessValidationSchema);
+  }
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(updateAuthorizeAccessValidationSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = ({ softwareAccess }) =>
     updateSoftwareAccess({
       _id: authorizeUser?._id,
@@ -70,14 +101,14 @@ export default function EditAuthorizeSofwareAccessMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Editar Autorização de Acesso</Title>
+        <Title>{translations.pageTitle}</Title>
 
         <Field>
-          <Label>Email:</Label>
+          <Label>{translations.emailLabel}</Label>
           <EmailText>{authorizeUser.email}</EmailText>
         </Field>
         <Field>
-          <Label>Validade do acesso:</Label>
+          <Label>{translations.accessValidityLabel}</Label>
           <AccessExpirationContainer>
             <ThemeProvider theme={themeDatePicker}>
               <Controller
@@ -114,15 +145,15 @@ export default function EditAuthorizeSofwareAccessMobile() {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loadingText}</p>
               </>
             ) : (
-              <p>Salvar Alterações</p>
+              <p>{translations.saveChangesButton}</p>
             )}
           </SaveButton>
 
           <CancelButton to="/administrador/liberacao-software">
-            <p>Cancelar</p>
+            <p>{translations.cancelButton}</p>
           </CancelButton>
         </Buttons>
       </Form>

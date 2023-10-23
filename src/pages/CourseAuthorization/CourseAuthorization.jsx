@@ -13,6 +13,7 @@ import {
   ModalEditAuthorizeAccess,
 } from '../../components/features';
 import { useGetUserCourses } from '../../hooks/query/userCourse';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import formatDate from '../../utils/formatDate';
 import {
   Container,
@@ -31,7 +32,10 @@ import {
   EditBtn,
   DeleteButton,
 } from './Styles';
+import { TranslateText } from './translations';
 import { buildGetUserCoursesErrorMessage } from './utils';
+import { buildGetUserCoursesErrorMessageDE } from './utilsDE';
+import { buildGetUserCoursesErrorMessageEN } from './utilsEN';
 
 export default function CourseAuthorization() {
   const [modalCourseAuthorization, setModalCourseAuthorization] =
@@ -44,12 +48,22 @@ export default function CourseAuthorization() {
   const [authorizeUser, setAuthorizeUser] = useState({});
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   // Backend calls
   const { data: userCourses, isLoading: isLoadingUsers } = useGetUserCourses({
     onError: (err) => {
-      const errorMessage = buildGetUserCoursesErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildGetUserCoursesErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildGetUserCoursesErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildGetUserCoursesErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
@@ -82,29 +96,29 @@ export default function CourseAuthorization() {
   const modalCloseButton = <CloseOutlined style={{ color: 'white' }} />;
   return (
     <Container>
-      <PageTitle>Liberação do curso</PageTitle>
+      <PageTitle>{translations.pageTitle}</PageTitle>
       <AuthorizationDiv>
         {isSmallScreen ? (
           <StyledLink to="/administrador/autorizar-acesso">
             <PlusOutlined size="2rem" />
             {'   '}
-            Autorizar acesso
+            {translations.authorizeAccessLabel}
           </StyledLink>
         ) : (
           <AuthorizeButton onClick={openModalCourseAuthorization}>
             <PlusOutlined size="2rem" />
             {'   '}
-            Autorizar acesso
+            {translations.authorizeAccessLabel}
           </AuthorizeButton>
         )}
 
         <Table>
           <TableHeader>
-            <h2>Email</h2>
-            <h2>Validade do Acesso</h2>
+            <h2>{translations.emailHeader}</h2>
+            <h2>{translations.accessValidityHeader}</h2>
             <SearchContainer>
               <HiSearch size="2rem" />
-              <SearchBox placeholder="Pesquisar Email" />
+              <SearchBox placeholder={translations.searchPlaceholder} />
             </SearchContainer>
           </TableHeader>
 
@@ -169,7 +183,10 @@ export default function CourseAuthorization() {
         centered
         destroyOnClose
       >
-        <ModalAuthorizeAccess close={closeModalCourseAuthorization} />
+        <ModalAuthorizeAccess
+          close={closeModalCourseAuthorization}
+          language={globalLanguage}
+        />
       </ModalStyle>
 
       <ModalStyle

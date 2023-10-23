@@ -13,6 +13,7 @@ import {
   ModalEditAuthorizeSoftwareAccess,
 } from '../../components/features';
 import { useGetUsersWithSoftwareAccess } from '../../hooks/query/users';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import formatDate from '../../utils/formatDate';
 import {
   Container,
@@ -31,7 +32,10 @@ import {
   EditBtn,
   DeleteButton,
 } from './Styles';
+import { TranslateText } from './translations';
 import { buildGetSoftwareAccessErrorMessage } from './utils';
+import { buildGetSoftwareAccessErrorMessageDE } from './utilsDE';
+import { buildGetSoftwareAccessErrorMessageEN } from './utilsEN';
 
 export default function SoftwareAuthorization() {
   const [modalSoftwareAccessAuthorization, setModalSoftwareAuthorization] =
@@ -46,13 +50,23 @@ export default function SoftwareAuthorization() {
   const [authorizeUser, setAuthorizeUser] = useState({});
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   // Backend calls
   const { data: users, isLoading: isLoadingUsers } =
     useGetUsersWithSoftwareAccess({
       onError: (err) => {
-        const errorMessage = buildGetSoftwareAccessErrorMessage(err);
-
-        toast.error(errorMessage);
+        if (globalLanguage === 'EN') {
+          const errorMessage = buildGetSoftwareAccessErrorMessageEN(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'DE') {
+          const errorMessage = buildGetSoftwareAccessErrorMessageDE(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage = buildGetSoftwareAccessErrorMessage(err);
+          toast.error(errorMessage);
+        }
       },
     });
 
@@ -86,29 +100,29 @@ export default function SoftwareAuthorization() {
 
   return (
     <Container>
-      <PageTitle>Liberação do Software</PageTitle>
+      <PageTitle>{translations.pageTitle}</PageTitle>
       <AuthorizationDiv>
         {isSmallScreen ? (
           <StyledLink to="/administrador/autorizar-acesso-software">
             <PlusOutlined size="2rem" />
             {'   '}
-            Autorizar acesso
+            {translations.authorizeAccess}
           </StyledLink>
         ) : (
           <AuthorizeButton onClick={openModalSoftwareAuthorization}>
             <PlusOutlined size="2rem" />
             {'   '}
-            Autorizar acesso
+            {translations.authorizeAccess}
           </AuthorizeButton>
         )}
 
         <Table>
           <TableHeader>
-            <h2>Email</h2>
-            <h2>Validade do Acesso</h2>
+            <h2>{translations.emailLabel}</h2>
+            <h2>{translations.accessValidityLabel}</h2>
             <SearchContainer>
               <HiSearch size="2rem" />
-              <SearchBox placeholder="Pesquisar Email" />
+              <SearchBox placeholder={translations.searchPlaceholder} />
             </SearchContainer>
           </TableHeader>
 
@@ -179,7 +193,10 @@ export default function SoftwareAuthorization() {
         centered
         destroyOnClose
       >
-        <ModalAuthorizeSoftwareAccess close={closeModalSoftwareAuthorization} />
+        <ModalAuthorizeSoftwareAccess
+          language={globalLanguage}
+          close={closeModalSoftwareAuthorization}
+        />
       </ModalStyle>
 
       <ModalStyle

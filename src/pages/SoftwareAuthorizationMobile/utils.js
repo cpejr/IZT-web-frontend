@@ -32,6 +32,11 @@ export const authorizeAccessValidationSchema = z.object({
   }),
 });
 
+// Toast Success
+
+export const toastSuccessMessage =
+  'Autorização ao software concedida com sucesso!';
+
 // MUI DatePicker theme
 export const themeDatePicker = createTheme({
   palette: {

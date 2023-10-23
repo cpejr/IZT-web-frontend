@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 
 import { FormSelect } from '../../components/common';
 import { useGetUsers, useUpdateSoftwareAccess } from '../../hooks/query/users';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -23,11 +24,23 @@ import {
   ErrorMessage,
   Date,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   authorizeAccessValidationSchema,
   themeDatePicker,
   buildCreateUserSoftwareAccessErrorMessage,
+  toastSuccessMessage,
 } from './utils';
+import {
+  authorizeAccessValidationSchemaDE,
+  buildCreateUserSoftwareAccessErrorMessageDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  authorizeAccessValidationSchemaEN,
+  buildCreateUserSoftwareAccessErrorMessageEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
 export default function SoftwareAuthorizationMobile() {
   const navigate = useNavigate();
@@ -35,12 +48,22 @@ export default function SoftwareAuthorizationMobile() {
   const queryClient = useQueryClient();
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   // Backend calls
   const { data: users } = useGetUsers({
     onError: (err) => {
-      const errorMessage = buildCreateUserSoftwareAccessErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
   const { mutate: updateSoftwareAccess } = useUpdateSoftwareAccess({
@@ -48,26 +71,38 @@ export default function SoftwareAuthorizationMobile() {
       queryClient.invalidateQueries({
         queryKey: ['users-with-software-access'],
       });
-
-      toast.success('Autorização ao software concedida com sucesso!');
-      close();
+      if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+      else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+      else toast.success(toastSuccessMessage);
     },
     onError: (err) => {
-      const errorMessage = buildCreateUserSoftwareAccessErrorMessage(err);
-
-      toast.error(errorMessage);
-      setIsPending(false);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildCreateUserSoftwareAccessErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
   // Form handlers
+  let resolver;
+  if (globalLanguage === 'EN') {
+    resolver = zodResolver(authorizeAccessValidationSchemaEN);
+  } else if (globalLanguage === 'DE') {
+    resolver = zodResolver(authorizeAccessValidationSchemaDE);
+  } else {
+    resolver = zodResolver(authorizeAccessValidationSchema);
+  }
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(authorizeAccessValidationSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = ({ userId, softwareAccess }) => {
     updateSoftwareAccess({
       _id: userId,
@@ -83,10 +118,10 @@ export default function SoftwareAuthorizationMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Autorizar Acesso</Title>
+        <Title>{translations.pageTitle}</Title>
 
         <div>
-          <Label>Email:</Label>
+          <Label>{translations.emailLabel}</Label>
           <FormSelect
             id="userId"
             name="userId"
@@ -96,7 +131,7 @@ export default function SoftwareAuthorizationMobile() {
               label: email,
               value: _id,
             }))}
-            placeholder="Selecione o email"
+            placeholder={translations.searchPlaceholder}
             filterOption={(input, option) =>
               option?.children?.toLowerCase()?.includes(input?.toLowerCase())
             }
@@ -106,7 +141,7 @@ export default function SoftwareAuthorizationMobile() {
           />
         </div>
         <div>
-          <Label>Validade do acesso:</Label>
+          <Label>{translations.accessValidityLabel}</Label>
           <AccessExpirationContainer>
             <ThemeProvider theme={themeDatePicker}>
               <Controller
@@ -143,15 +178,15 @@ export default function SoftwareAuthorizationMobile() {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loadingText}</p>
               </>
             ) : (
-              <p>+ Autorizar</p>
+              <p>{translations.authorizeButton}</p>
             )}
           </SaveButton>
 
           <CancelButton to="/administrador/liberacao-software">
-            <p>Cancelar</p>
+            <p>{translations.cancelButton}</p>
           </CancelButton>
         </ButtonsDiv>
       </Form>

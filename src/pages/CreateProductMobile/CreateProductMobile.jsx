@@ -16,10 +16,11 @@ import {
 } from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
 import { useCreateProduct } from '../../hooks/query/products';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../utils/constants';
 import {
-  Container,
   Form,
+  Container,
   Title,
   Subtitle,
   Input,
@@ -33,11 +34,25 @@ import {
   Section,
   ErrorMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildCreateProductErrorMessage,
   buildGetCategoriesErrorMessage,
   createProductValidationSchema,
+  toastSuccessMessage,
 } from './utils';
+import {
+  buildCreateProductErrorMessageDE,
+  buildGetCategoriesErrorMessageDE,
+  createProductValidationSchemaDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  buildCreateProductErrorMessageEN,
+  buildGetCategoriesErrorMessageEN,
+  createProductValidationSchemaEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
 export default function CreateProductMobile() {
   const isMediumScreen = useMediaQuery({ minWidth: 700 });
@@ -46,13 +61,23 @@ export default function CreateProductMobile() {
   const documentsLimit = 3;
   const picturesLimit = 4;
 
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   // Backend calls
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
     {
       onError: (err) => {
-        const errorMessage = buildGetCategoriesErrorMessage(err);
-
-        toast.error(errorMessage);
+        if (globalLanguage === 'EN') {
+          const errorMessage = buildGetCategoriesErrorMessageEN(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'DE') {
+          const errorMessage = buildGetCategoriesErrorMessageDE(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage = buildGetCategoriesErrorMessage(err);
+          toast.error(errorMessage);
+        }
       },
     }
   );
@@ -66,26 +91,39 @@ export default function CreateProductMobile() {
         queryClient.invalidateQueries({
           queryKey: ['categories'], // Refresh catalog page
         });
-
-        toast.success('Produto criado com sucesso!');
+        if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+        else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+        else toast.success(toastSuccessMessage);
         navigate('/administrador');
       },
       onError: (err) => {
-        const errorMessage = buildCreateProductErrorMessage(err);
-
-        toast.error(errorMessage);
+        if (globalLanguage === 'EN') {
+          const errorMessage = buildCreateProductErrorMessageEN(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'DE') {
+          const errorMessage = buildCreateProductErrorMessageDE(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage = buildCreateProductErrorMessage(err);
+          toast.error(errorMessage);
+        }
       },
     });
 
   // Form handlers
+  let resolver;
+  if (globalLanguage === 'EN')
+    resolver = zodResolver(createProductValidationSchemaEN);
+  else if (globalLanguage === 'DE')
+    resolver = zodResolver(createProductValidationSchemaDE);
+  else resolver = zodResolver(createProductValidationSchema);
+
   const {
     handleSubmit,
     register,
     control,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(createProductValidationSchema),
-  });
+  } = useForm({ resolver });
   const {
     fields: fieldsDocuments,
     append: appendDocument,
@@ -118,15 +156,15 @@ export default function CreateProductMobile() {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Adicionar produto</Title>
+        <Title>{translations.pageTitle}</Title>
 
         <Section>
-          <Subtitle>Nome do produto:</Subtitle>
+          <Subtitle>{translations.nameLabel}</Subtitle>
           <Input
             id="name"
             name="name"
             type="text"
-            placeholder="Digite o nome do produto"
+            placeholder={translations.phProduct}
             error={errors?.name?.message}
             {...register('name')}
           />
@@ -134,11 +172,11 @@ export default function CreateProductMobile() {
         </Section>
 
         <Section>
-          <Subtitle>Descrição:</Subtitle>
+          <Subtitle>{translations.descriptionLabel}</Subtitle>
           <TextArea
             id="description"
             name="description"
-            placeholder="Descreva o produto"
+            placeholder={translations.phDescription}
             error={errors?.description?.message}
             {...register('description')}
           />
@@ -146,11 +184,11 @@ export default function CreateProductMobile() {
         </Section>
 
         <Section>
-          <Subtitle>Vantagens:</Subtitle>
+          <Subtitle>{translations.advantagesLabel}</Subtitle>
           <TextArea
             id="advantages"
             type="advantages"
-            placeholder="Descreva as vantagens do produto"
+            placeholder={translations.phAdvantages}
             error={errors?.advantages?.message}
             {...register('advantages')}
           />
@@ -158,9 +196,9 @@ export default function CreateProductMobile() {
         </Section>
 
         <Section>
-          <Title>Imagens:</Title>
+          <Title>{translations.imagesTitle}</Title>
           {fieldsPictures.length < picturesLimit && (
-            <MiniText>Anexe as imagens do produto</MiniText>
+            <MiniText>{translations.addImageHint}</MiniText>
           )}
           <PicturesContainer>
             {fieldsPictures.map(({ id, file: picture }, index) => (
@@ -178,7 +216,7 @@ export default function CreateProductMobile() {
           {fieldsPictures.length < picturesLimit && (
             <AddFileButton
               color="black"
-              label="Novo Imagem"
+              label={translations.addImageButtonLabel}
               appendFn={appendPicture}
               allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
               sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
@@ -188,7 +226,7 @@ export default function CreateProductMobile() {
         </Section>
 
         <Section>
-          <Title>Documentos:</Title>
+          <Title>{translations.documentsTitle}</Title>
           <DocumentsContainer>
             {fieldsDocuments.map(({ id, file: document }, index) => (
               <DocumentFile
@@ -207,7 +245,7 @@ export default function CreateProductMobile() {
           {fieldsDocuments.length < documentsLimit && (
             <AddFileButton
               color="black"
-              label="Novo Documento"
+              label={translations.newDocumentButtonLabel}
               appendFn={appendDocument}
               allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(', ')}
               sizeLimitInMB={DOCUMENTS_CONFIG.sizeLimitInMB}
@@ -216,9 +254,9 @@ export default function CreateProductMobile() {
         </Section>
 
         <CategorySection>
-          <Title>Categoria:</Title>
+          <Title>{translations.categoryLabel}</Title>
           {isLoadingCategories ? (
-            <p>Carregando...</p>
+            <p>{translations.loadingText1}</p>
           ) : (
             <FormSelect
               name="category"
@@ -237,7 +275,7 @@ export default function CreateProductMobile() {
                     }
                   : {}
               }
-              placeholder="Selecione a categoria"
+              placeholder={translations.selectCategoryLabel}
             />
           )}
         </CategorySection>
@@ -255,12 +293,12 @@ export default function CreateProductMobile() {
                 ariaLabel="tail-spin-loading"
                 radius="5"
               />
-              <p>Carregando</p>
+              <p>{translations.loadingText2}</p>
             </>
           ) : (
             <>
               <FiSave size={25} />
-              <p>Criar Produto</p>
+              <p>{translations.saveButtonLabel}</p>
             </>
           )}
         </SaveButton>
@@ -269,7 +307,7 @@ export default function CreateProductMobile() {
           to="/administrador/listar-produtos"
           disabled={isLoadingCreate || isLoadingCategories}
         >
-          <p>Cancelar</p>
+          <p>{translations.cancelButtonLabel}</p>
         </CancelButton>
       </Form>
     </Container>
