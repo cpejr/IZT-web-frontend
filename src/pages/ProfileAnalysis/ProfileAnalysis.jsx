@@ -3,12 +3,22 @@ import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import { AiOutlineDown } from 'react-icons/ai';
 import { TbPencil } from 'react-icons/tb';
+import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import AccordionDemo from '../../components/features/Acordeon/Acordeon';
+import {
+  AnalysisData,
+  MachineData,
+  ProductData,
+  ParametersRA,
+} from '../../components/features';
 import Graphic from '../../components/features/Graphic/Graphic';
-import { useCreateProfileAnalysis } from '../../hooks/query/profileAnalysis';
+import {
+  useCreateProfileAnalysis,
+  useCalculateProfileAnalysis,
+} from '../../hooks/query/profileAnalysis';
 import useAuthStore from '../../stores/auth';
 import { useGlobalLanguage } from '../../stores/globalLanguage';
 import { DivName, ErrorMessage, InputName } from '../StabilityAnalysis/Styles';
@@ -29,8 +39,23 @@ import {
   H1,
   Boddy,
   DataEntry,
+  Collapsable,
+  CollapsableHeader,
+  DataTitle,
 } from './Styles';
 import { TranslateText } from './translations';
+import {
+  buildCalculateProfileAnalysisErrorMessage,
+  calculateProfileAnalysisValidationSchema,
+} from './utils';
+import {
+  buildCalculateProfileAnalysisErrorMessageDE,
+  calculateProfileAnalysisValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildCalculateProfileAnalysisErrorMessageEN,
+  calculateProfileAnalysisValidationSchemaEN,
+} from './utilsEN';
 import {
   buildCalculateStabilityAnalysisErrorMessage,
   saveProfileAnalysisValidationSchema,
@@ -48,19 +73,69 @@ export default function ProfileAnalysis() {
   // Translation
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
+  let validationSchema;
 
-  const [graphData, setGraphData] = useState({ x: [], y: [] });
+  if (globalLanguage === 'DE') {
+    validationSchema = calculateProfileAnalysisValidationSchemaDE;
+  } else if (globalLanguage === 'PT') {
+    validationSchema = calculateProfileAnalysisValidationSchema;
+  } else {
+    validationSchema = calculateProfileAnalysisValidationSchemaEN;
+  }
+
+  let saveValidationSchema;
+
+  if (globalLanguage === 'DE') {
+    saveValidationSchema = saveProfileAnalysisValidationSchemaDE;
+  } else if (globalLanguage === 'PT') {
+    saveValidationSchema = saveProfileAnalysisValidationSchema;
+  } else {
+    saveValidationSchema = saveProfileAnalysisValidationSchemaEN;
+  }
+
+  const [retificationCenterlessDiagram, setRetificationCenterlessDiagram] =
+    useState([]);
   const [formDataStorage, setFormDataStorage] = useState({});
   const queryClient = useQueryClient();
+  const [collapse, setCollapse] = useState('');
 
-  const handleCalculate = (data) => {
-    const xData = data.x;
-    const yData = data.y;
-
-    setGraphData({ x: xData, y: yData });
+  // Open/Close dropdown
+  const handleCollapse = (sectionName) => {
+    if (collapse === sectionName) setCollapse('');
+    else setCollapse(sectionName);
   };
 
   // backend calls
+  const { mutate: calculateProfileAnalysis, isLoading } =
+    useCalculateProfileAnalysis({
+      onSuccess: (result) => {
+        setRetificationCenterlessDiagram([
+          result.retificationCenterlessDiagram.x,
+          result.retificationCenterlessDiagram.y,
+        ]);
+
+        if (globalLanguage === 'DE') {
+          toast.success(translations.successCalculate);
+        } else if (globalLanguage === 'EN') {
+          toast.success(translations.successCalculate);
+        } else {
+          toast.success(translations.successCalculate);
+        }
+      },
+      onError: (err) => {
+        if (globalLanguage === 'DE') {
+          const errorMessage = buildCalculateProfileAnalysisErrorMessageDE(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'PT') {
+          const errorMessage = buildCalculateProfileAnalysisErrorMessage(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage = buildCalculateProfileAnalysisErrorMessageEN(err);
+          toast.error(errorMessage);
+        }
+      },
+    });
+
   const { mutate: createProfileAnalysis } = useCreateProfileAnalysis({
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -68,11 +143,11 @@ export default function ProfileAnalysis() {
       });
 
       if (globalLanguage === 'DE') {
-        toast.success('Bericht erfolgreich erstellt!');
+        toast.success(translations.reportSuccess);
       } else if (globalLanguage === 'EN') {
-        toast.success('Report created successfully');
+        toast.success(translations.reportSuccess);
       } else {
-        toast.success('Relatório criado com sucesso!');
+        toast.success(translations.reportSuccess);
       }
     },
     onError: (err) => {
@@ -94,9 +169,20 @@ export default function ProfileAnalysis() {
     },
   });
 
-  const handleformDataStorage = (data) => {
+  // Form handlers
+  const {
+    handleSubmit: calculate,
+    register,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(validationSchema),
+  });
+
+  const onSubmit = (data) => {
     setFormDataStorage(data);
+    calculateProfileAnalysis(data);
   };
+
   useEffect(() => {}, [formDataStorage]);
   const user = useAuthStore((state) => state.auth?.user);
 
@@ -110,11 +196,11 @@ export default function ProfileAnalysis() {
   }
   const {
     handleSubmit: save,
-    register,
+    register: register2,
     formState: { errors: error },
   } = useForm({
     defaultValues: formDataStorage,
-    resolver: resolver1,
+    resolver: zodResolver(saveValidationSchema),
   });
 
   const onSubmit2 = (data) => {
@@ -134,10 +220,80 @@ export default function ProfileAnalysis() {
           <Center>
             <H1>{translations.dataEntry}</H1>
             <Data>
-              <AccordionDemo
-                onCalculate={handleCalculate}
-                dataInput={handleformDataStorage}
-              />
+              <DataEntry onSubmit={calculate(onSubmit)}>
+                <Collapsable>
+                  <CollapsableHeader
+                    collapse={collapse === 'analysis'}
+                    onClick={() => handleCollapse('analysis')}
+                  >
+                    <DataTitle>{translations.analysisData}</DataTitle>
+                    <AiOutlineDown />
+                  </CollapsableHeader>
+                  <AnalysisData
+                    collapse={collapse === 'analysis'}
+                    register={register}
+                    errors={errors}
+                  />
+                </Collapsable>
+                <Collapsable>
+                  <CollapsableHeader
+                    collapse={collapse === 'machine'}
+                    onClick={() => handleCollapse('machine')}
+                  >
+                    <DataTitle>{translations.machineData}</DataTitle>
+                    <AiOutlineDown />
+                  </CollapsableHeader>
+                  <MachineData
+                    collapse={collapse === 'machine'}
+                    register={register}
+                    errors={errors}
+                  />
+                </Collapsable>
+                <Collapsable>
+                  <CollapsableHeader
+                    collapse={collapse === 'product'}
+                    onClick={() => handleCollapse('product')}
+                  >
+                    <DataTitle>{translations.productData}</DataTitle>
+                    <AiOutlineDown />
+                  </CollapsableHeader>
+                  <ProductData
+                    collapse={collapse === 'product'}
+                    register={register}
+                    errors={errors}
+                  />
+                </Collapsable>
+                <Collapsable>
+                  <CollapsableHeader
+                    collapse={collapse === 'parametersRA'}
+                    onClick={() => handleCollapse('parametersRA')}
+                  >
+                    <DataTitle>{translations.parametersRA}</DataTitle>
+                    <AiOutlineDown />
+                  </CollapsableHeader>
+                  <ParametersRA
+                    collapse={collapse === 'parametersRA'}
+                    register={register}
+                    errors={errors}
+                  />
+                </Collapsable>
+                <Button disabled={isLoading} type="submit">
+                  {isLoading ? (
+                    <>
+                      <TailSpin
+                        height="15"
+                        width="15"
+                        color="white"
+                        ariaLabel="tail-spin-loading"
+                        radius="5"
+                      />
+                      <p>{translations.loading}</p>
+                    </>
+                  ) : (
+                    <p>{translations.calculate}</p>
+                  )}
+                </Button>
+              </DataEntry>
             </Data>
           </Center>
         </Containerleft>
@@ -152,7 +308,7 @@ export default function ProfileAnalysis() {
                   type="text"
                   placeholder={translations.reportName}
                   error={error?.name?.message}
-                  {...register('name')}
+                  {...register2('name')}
                 />
               </DivName>
               <Button>{translations.saveReport}</Button>
@@ -162,7 +318,7 @@ export default function ProfileAnalysis() {
           <Edit>
             <Text>{translations.grindingClearance} </Text>
             <Container2>
-              <Graphic data={graphData} />
+              <Graphic data={retificationCenterlessDiagram} />
             </Container2>
             <Text>{translations.outputData}</Text>
           </Edit>
