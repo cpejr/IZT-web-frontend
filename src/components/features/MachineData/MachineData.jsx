@@ -127,6 +127,40 @@ export default function MachineData({ collapse, register, errors }) {
           />
           <Label>°</Label>
         </Line>
+        <Line>
+          <Label>{translations.quantityPieces}:</Label>
+          <Input
+            id="quantityPieces"
+            {...register('quantityPieces', { valueAsNumber: true })}
+            hasError={errors?.quantityPieces?.message}
+            type="number"
+            step="any"
+          />
+          <Label>pc/min</Label>
+        </Line>
+        <Line>
+          <Label> {translations.speedPassage}:</Label>
+          <Input
+            id="speedPassage"
+            {...register('speedPassage', { valueAsNumber: true })}
+            hasError={errors?.speedPassage?.message}
+            type="number"
+            step="any"
+          />
+          <Label>m/min</Label>
+        </Line>
+        <Line>
+          <Label>{translations.speedPeripheral}: </Label>
+          <Input
+            id="speedPeripheral"
+            {...register('speedPeripheral', { valueAsNumber: true })}
+            hasError={errors?.speedPeripheral?.message}
+            type="number"
+            step="any"
+          />
+          <Label>mm/s</Label>
+        </Line>
+
         <ErrorMessage>{errors?.rwInclination?.message}</ErrorMessage>
       </DataColumn>
     </CollapsableData>
