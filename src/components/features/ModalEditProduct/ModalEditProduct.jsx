@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useUpdateProducts } from '../../../hooks/query/products';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../../utils/constants';
 import separateFileTypes from '../../../utils/separateFileTypes';
 import { FormSelect } from '../../common';
@@ -34,13 +35,27 @@ import {
   DocumentsContainer,
   ErrorMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildEditProductErrorMessage,
   buildGetCategoriesErrorMessage,
   editProductValidationSchema,
 } from './utils';
+import {
+  buildEditProductErrorMessageDE,
+  buildGetCategoriesErrorMessageDE,
+  editProductValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildEditProductErrorMessageEN,
+  buildGetCategoriesErrorMessageEN,
+  editProductValidationSchemaEN,
+} from './utilsEN';
 
 export default function ModalEditProduct({ product, close }) {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   // Variables
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const queryClient = useQueryClient();
@@ -51,9 +66,16 @@ export default function ModalEditProduct({ product, close }) {
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
     {
       onError: (err) => {
-        const errorMessage = buildGetCategoriesErrorMessage(err);
-
-        toast.error(errorMessage);
+        if (globalLanguage === 'PT') {
+          const errorMessage = buildGetCategoriesErrorMessage(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'EN') {
+          const errorMessage = buildGetCategoriesErrorMessageEN(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage = buildGetCategoriesErrorMessageDE(err);
+          toast.error(errorMessage);
+        }
         close();
       },
     }
@@ -64,16 +86,33 @@ export default function ModalEditProduct({ product, close }) {
         queryKey: ['products', 'searchByName'],
       });
 
-      toast.success('Produto alterado com sucesso!');
+      toast.success(<p>{translations.editProduct}</p>);
       close();
     },
     onError: (err) => {
-      const errorMessage = buildEditProductErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'PT') {
+        const errorMessage = buildEditProductErrorMessage(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'EN') {
+        const errorMessage = buildEditProductErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildEditProductErrorMessageDE(err);
+        toast.error(errorMessage);
+      }
       setIsPending(false);
     },
   });
+
+  let validationSchema;
+
+  if (globalLanguage === 'PT') {
+    validationSchema = editProductValidationSchema;
+  } else if (globalLanguage === 'EN') {
+    validationSchema = editProductValidationSchemaEN;
+  } else {
+    validationSchema = editProductValidationSchemaDE;
+  }
 
   // Form handlers
   const {
@@ -82,7 +121,7 @@ export default function ModalEditProduct({ product, close }) {
     control,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(editProductValidationSchema),
+    resolver: zodResolver(validationSchema),
     defaultValues: {
       name: product.name,
       description: product.description,
@@ -147,12 +186,12 @@ export default function ModalEditProduct({ product, close }) {
         <ModalContent>
           <LeftSection>
             <Subsection>
-              <Text>Nome do produto:</Text>
+              <Text>{translations.productName}</Text>
               <Input
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Digite o nome do produto"
+                placeholder={translations.typeProductName}
                 error={errors?.name?.message}
                 {...register('name')}
               />
@@ -160,11 +199,11 @@ export default function ModalEditProduct({ product, close }) {
             </Subsection>
 
             <Subsection>
-              <Text>Descrição:</Text>
+              <Text>{translations.description}</Text>
               <TextAreaModal
                 id="description"
                 name="description"
-                placeholder="Descreva o produto"
+                placeholder={translations.describeProduct}
                 error={errors?.description?.message}
                 {...register('description')}
               />
@@ -172,11 +211,11 @@ export default function ModalEditProduct({ product, close }) {
             </Subsection>
 
             <Subsection>
-              <Text>Vantagens:</Text>
+              <Text>{translations.benefits}</Text>
               <TextAreaModal
                 id="advantages"
                 name="advantages"
-                placeholder="Descreva as vantagens do produto"
+                placeholder={translations.describeBenefits}
                 error={errors?.advantages?.message}
                 {...register('advantages')}
               />
@@ -186,8 +225,8 @@ export default function ModalEditProduct({ product, close }) {
 
           <RightSection>
             <Subsection>
-              <Text>Imagens:</Text>
-              <MiniText>Anexe as imagens do produto</MiniText>
+              <Text>{translations.images}</Text>
+              <MiniText>{translations.attachImages}</MiniText>
               <PicturesContainer>
                 {fieldsPictures.map(({ id, file: picture }, index) => (
                   <PictureFile
@@ -204,7 +243,7 @@ export default function ModalEditProduct({ product, close }) {
 
               {fieldsPictures.length < picturesLimit && (
                 <AddFileButton
-                  label="Novo imagem"
+                  label={translations.newImage}
                   appendFn={appendPicture}
                   allowedMimeTypes={PICTURES_CONFIG.allowedMimeTypes.join(', ')}
                   sizeLimitInMB={PICTURES_CONFIG.sizeLimitInMB}
@@ -214,7 +253,7 @@ export default function ModalEditProduct({ product, close }) {
             </Subsection>
 
             <Subsection>
-              <Text>Documentos:</Text>
+              <Text>{translations.documents}</Text>
               <DocumentsContainer>
                 {fieldsDocuments.map(({ id, file: document }, index) => (
                   <DocumentFile
@@ -234,7 +273,7 @@ export default function ModalEditProduct({ product, close }) {
 
               {fieldsDocuments.length < documentsLimit && (
                 <AddFileButton
-                  label="Novo documento"
+                  label={translations.newDocument}
                   appendFn={appendDocument}
                   allowedMimeTypes={DOCUMENTS_CONFIG.allowedMimeTypes.join(
                     ', '
@@ -245,9 +284,9 @@ export default function ModalEditProduct({ product, close }) {
             </Subsection>
 
             <CategorySubsection>
-              <Text>Categoria:</Text>
+              <Text>{translations.category}</Text>
               {isLoadingCategories ? (
-                <p>Carregando...</p>
+                <p>{translations.loading}...</p>
               ) : (
                 <FormSelect
                   name="category"
@@ -257,7 +296,7 @@ export default function ModalEditProduct({ product, close }) {
                     label: name,
                     value: _id,
                   }))}
-                  placeholder="Selecione a categoria"
+                  placeholder={translations.selectCategory}
                 />
               )}
             </CategorySubsection>
@@ -275,12 +314,12 @@ export default function ModalEditProduct({ product, close }) {
                     ariaLabel="tail-spin-loading"
                     radius="5"
                   />
-                  <p>Carregando</p>
+                  <p>{translations.loading}</p>
                 </>
               ) : (
                 <>
                   <FiSave size={25} />
-                  <p>Salvar Alterações</p>
+                  <p>{translations.saveEditions}</p>
                 </>
               )}
             </ModalButton>

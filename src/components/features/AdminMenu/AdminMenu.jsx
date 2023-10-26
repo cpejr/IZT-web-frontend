@@ -4,6 +4,9 @@ import { CloseOutlined } from '@ant-design/icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useMediaQuery } from 'react-responsive';
 
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
+import { TranslateText } from './translations';
+
 import ModalCreateCategory from '../ModalCreateCategory/ModalCreateCategory';
 import ModalCreateProduct from '../ModalCreateProduct/ModalCreateProduct';
 import {
@@ -24,6 +27,9 @@ import {
 } from './Styles';
 
 export default function AdminMenu() {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [openMenuMobile, setOpenMenuMobile] = useState(false);
   const [modalCreateProduct, setModalCreateProduct] = useState(false);
   const [modalCreateCategory, setModalCreateCategory] = useState(false);
@@ -42,44 +48,44 @@ export default function AdminMenu() {
         <MenuMobile id="collapse" opened={openMenuMobile}>
           <TitleDiv>
             <Section>
-              <Title>Menu do Administrador</Title>
+              <Title>{translations.menuAdmin}</Title>
               <BlackLine />
             </Section>
           </TitleDiv>
           <SectionMobile>
             <Section>
-              <Title>Produtos</Title>
+              <Title>{translations.products}</Title>
 
               {isSmallScreen ? (
                 <StyledLink to="/administrador/criar-produto">
-                  Adicionar produtos
+                  {translations.addProducts}
                 </StyledLink>
               ) : (
                 <Button onClick={openModalCreateProduct}>
-                  Adicionar produtos
+                  {translations.addProducts}
                 </Button>
               )}
 
               <StyledLink to="/administrador/listar-produtos">
-                Listar produtos
+                {translations.listProducts}
               </StyledLink>
             </Section>
 
             <Section>
-              <Title>Categorias</Title>
+              <Title>{translations.categories}</Title>
 
               {isSmallScreen ? (
                 <StyledLink to="/administrador/criar-categoria">
-                  Adicionar categoria
+                  {translations.addCategory}
                 </StyledLink>
               ) : (
                 <Button onClick={openModalCreateCategory}>
-                  Adicionar categoria
+                  {translations.addCategory}
                 </Button>
               )}
 
               <StyledLink to="/administrador/listar-categorias">
-                Listar categorias
+                {translations.listCategories}
               </StyledLink>
               <BlackLine />
             </Section>
@@ -88,12 +94,12 @@ export default function AdminMenu() {
           <BlackLineMobile />
 
           <Section>
-            <Title>Definições de acesso</Title>
+            <Title>{translations.accessDefinitions}</Title>
             <StyledLink to="/administrador/liberacao-cursos">
-              Liberação do curso
+              {translations.provideCourseAccess}
             </StyledLink>
             <StyledLink to="/administrador/liberacao-software">
-              Liberação do Software
+              {translations.provideSoftwareAccess}
             </StyledLink>
           </Section>
         </MenuMobile>

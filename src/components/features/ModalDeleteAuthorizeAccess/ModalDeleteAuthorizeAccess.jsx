@@ -6,10 +6,15 @@ import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useDeleteUserCourse } from '../../../hooks/query/userCourse';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { Container, DeleteButton, Message } from './Styles';
+import { TranslateText } from './translations';
 import { buildDeleteUserCourseErrorMessage } from './utils';
 
 export default function ModalDeleteUserCourse({ _id, close }) {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [isPending, setIsPending] = useState(false); // Important for modals usage
   const queryClient = useQueryClient();
 
@@ -22,7 +27,7 @@ export default function ModalDeleteUserCourse({ _id, close }) {
         queryKey: ['users'],
       });
 
-      toast.success('Autorização ao curso deletada com sucesso.');
+      toast.success(<p>{translations.courseAuthorizationDeleted}</p>);
       close();
     },
     onError: (err) => {
@@ -35,10 +40,7 @@ export default function ModalDeleteUserCourse({ _id, close }) {
 
   return (
     <Container>
-      <Message>
-        Tem certeza que deseja retirar a autorização de acesso ao curso do
-        usuário?
-      </Message>
+      <Message>{translations.deleteCourseAuthorization}</Message>
       <DeleteButton
         type="button"
         disabled={isPending || isLoading}
@@ -58,10 +60,10 @@ export default function ModalDeleteUserCourse({ _id, close }) {
               wrapperStyle={{}}
               wrapperClass=""
             />
-            <p>Carregando</p>
+            <p>{translations.loading}</p>
           </>
         ) : (
-          <p>Excluir</p>
+          <p>{translations.deleteAccess}</p>
         )}
       </DeleteButton>
     </Container>

@@ -9,6 +9,7 @@ import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useUpdateSoftwareAccess } from '../../../hooks/query/users';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -20,16 +21,28 @@ import {
   Date,
   EmailText,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildUpdateSoftwareAccessErrorMessage,
   modalUpdateAuthorizeAccessValidationSchema,
   themeDatePicker,
 } from './utils';
+import {
+  buildUpdateSoftwareAccessErrorMessageDE,
+  modalUpdateAuthorizeAccessValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildUpdateSoftwareAccessErrorMessageEN,
+  modalUpdateAuthorizeAccessValidationSchemaEN,
+} from './utilsEN';
 
 export default function ModalEditAuthorizeSoftwareAccess({
   authorizeUser,
   close,
 }) {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   // Variables
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const queryClient = useQueryClient();
@@ -40,25 +53,41 @@ export default function ModalEditAuthorizeSoftwareAccess({
       queryClient.invalidateQueries({
         queryKey: ['users-with-software-access'],
       });
-      toast.success('Autorização de acesso ao software alterada com sucesso!');
+      toast.success(<p>{translations.softwareAuthorizationEdited}</p>);
       close();
     },
     onError: (err) => {
-      const errorMessage = buildUpdateSoftwareAccessErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'PT') {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessage(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'EN') {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessageDE(err);
+        toast.error(errorMessage);
+      }
       setIsPending(false);
     },
   });
 
-  // Form handlers
+  let validationSchema;
 
+  if (globalLanguage === 'PT') {
+    validationSchema = modalUpdateAuthorizeAccessValidationSchema;
+  } else if (globalLanguage === 'EN') {
+    validationSchema = modalUpdateAuthorizeAccessValidationSchemaEN;
+  } else {
+    validationSchema = modalUpdateAuthorizeAccessValidationSchemaDE;
+  }
+
+  // Form handlers
   const {
     handleSubmit,
     formState: { errors },
     control,
   } = useForm({
-    resolver: zodResolver(modalUpdateAuthorizeAccessValidationSchema),
+    resolver: zodResolver(validationSchema),
   });
   const onSubmit = ({ softwareAccess }) => {
     updateSoftwareAccess({
@@ -73,12 +102,12 @@ export default function ModalEditAuthorizeSoftwareAccess({
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
           <div>
-            <Label>Email:</Label>
+            <Label>{translations.email}</Label>
             <EmailText>{authorizeUser.email}</EmailText>
           </div>
 
           <div>
-            <Label>Validade do acesso:</Label>
+            <Label>{translations.accessValidity}</Label>
             <AccessExpirationContainer>
               <ThemeProvider theme={themeDatePicker}>
                 <Controller
@@ -114,10 +143,10 @@ export default function ModalEditAuthorizeSoftwareAccess({
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loading}</p>
               </>
             ) : (
-              <p>Salvar Alterações</p>
+              <p>{translations.save}</p>
             )}
           </ModalButton>
         </ModalContent>

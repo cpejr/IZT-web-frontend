@@ -158,7 +158,7 @@ export const ModalButton = styled.button`
   border-radius: 0.5rem;
   background-color: transparent;
 
-  width: 22rem;
+  width: auto;
   height: 4.5rem;
   left: 81.3rem;
   top: 70.3rem;

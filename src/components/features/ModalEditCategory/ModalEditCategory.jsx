@@ -9,6 +9,7 @@ import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { useUpdateCategory } from '../../../hooks/query/categories';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import {
   Container,
   Label,
@@ -18,12 +19,24 @@ import {
   Form,
   ErrorMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildUpdateCategoryErrorMessage,
   updateCategoryValidationSchema,
 } from './utils';
+import {
+  buildUpdateCategoryErrorMessageDE,
+  updateCategoryValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildUpdateCategoryErrorMessageEN,
+  updateCategoryValidationSchemaEN,
+} from './utilsEN';
 
 export default function ModalEditCategory({ category, close }) {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const queryClient = useQueryClient();
 
@@ -38,23 +51,40 @@ export default function ModalEditCategory({ category, close }) {
         }),
       ]);
 
-      toast.success('Categoria alterada com sucesso!');
+      toast.success(<p>{translations.categoryEdited}</p>);
       close();
     },
     onError: (err) => {
-      const errorMessage = buildUpdateCategoryErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'PT') {
+        const errorMessage = buildUpdateCategoryErrorMessage(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'EN') {
+        const errorMessage = buildUpdateCategoryErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildUpdateCategoryErrorMessageDE(err);
+        toast.error(errorMessage);
+      }
       setIsPending(false);
     },
   });
+
+  let validationSchema;
+
+  if (globalLanguage === 'PT') {
+    validationSchema = updateCategoryValidationSchema;
+  } else if (globalLanguage === 'EN') {
+    validationSchema = updateCategoryValidationSchemaEN;
+  } else {
+    validationSchema = updateCategoryValidationSchemaDE;
+  }
 
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(updateCategoryValidationSchema),
+    resolver: zodResolver(validationSchema),
   });
   const onSubmit = (data) => {
     updateCategory({ _id: category?._id, newCategoryData: data });
@@ -67,11 +97,11 @@ export default function ModalEditCategory({ category, close }) {
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
-          <Label htmlFor="name">Nome da categoria:</Label>
+          <Label htmlFor="name">{translations.categoryName}</Label>
           <Input
             id="name"
             name="name"
-            placeholder="Digite aqui o nome da categoria"
+            placeholder={translations.typeProductName}
             error={!!errorMessage}
             defaultValue={category?.name}
             {...register('name')}
@@ -87,12 +117,12 @@ export default function ModalEditCategory({ category, close }) {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loading}</p>
               </>
             ) : (
               <>
                 <FiSave size={25} />
-                <p>Salvar Alterações</p>
+                <p>{translations.saveEditions}</p>
               </>
             )}
           </ModalButton>

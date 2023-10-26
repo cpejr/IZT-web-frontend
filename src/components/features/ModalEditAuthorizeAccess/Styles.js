@@ -70,8 +70,9 @@ export const ModalButton = styled.button`
   flex-direction: row;
   align-items: center;
 
-  width: 21.2rem;
+  width: auto;
   height: 4.5rem;
+  padding: 0rem 2rem 0rem 2rem;
 
   background-color: transparent;
   border: 0.1rem solid white;
@@ -89,6 +90,7 @@ export const ModalButton = styled.button`
     font-style: normal;
     font-weight: 600;
     font-size: 1.8rem;
+    text-align: center;
   }
 `;
 

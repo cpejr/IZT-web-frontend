@@ -5,11 +5,17 @@ import PropTypes from 'prop-types';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
+import { TranslateText } from './translations';
+
 import { useDeleteSoftwareAccess } from '../../../hooks/query/users';
 import { Container, DeleteButton, Message } from './Styles';
 import { buildDeleteUserSoftwareAccessErrorMessage } from './utils';
 
 export default function ModalDeleteUserSoftwareAccess({ _id, close }) {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [isPending, setIsPending] = useState(false); // Important for modals usage
   const queryClient = useQueryClient();
 
@@ -20,7 +26,7 @@ export default function ModalDeleteUserSoftwareAccess({ _id, close }) {
           queryKey: ['users-with-software-access'],
         });
 
-        toast.success('Autorização ao curso deletada com sucesso.');
+        toast.success(<p>{translations.softwareAuthorizationDeleted}</p>);
         close();
       },
       onError: (err) => {
@@ -33,10 +39,7 @@ export default function ModalDeleteUserSoftwareAccess({ _id, close }) {
 
   return (
     <Container>
-      <Message>
-        Tem certeza que deseja retirar a autorização de acesso ao software do
-        usuário?
-      </Message>
+      <Message>{translations.deleteSoftwareAuthorization}</Message>
       <DeleteButton
         type="button"
         disabled={isPending || isLoading}
@@ -56,10 +59,10 @@ export default function ModalDeleteUserSoftwareAccess({ _id, close }) {
               wrapperStyle={{}}
               wrapperClass=""
             />
-            <p>Carregando</p>
+            <p>{translations.loading}</p>
           </>
         ) : (
-          <p>Excluir</p>
+          <p>{translations.deleteAccess}</p>
         )}
       </DeleteButton>
     </Container>

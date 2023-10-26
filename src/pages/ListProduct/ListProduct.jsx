@@ -93,7 +93,7 @@ export default function ListProduct() {
         <Subsection>
           <CategoryText>{translations.categoryFilterText}</CategoryText>
           <Select
-            standart="Selecionar"
+            standart={translations.select}
             data={categories}
             getValue={setSelectedCategory}
             maxWidth="25rem"
