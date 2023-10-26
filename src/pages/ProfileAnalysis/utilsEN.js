@@ -93,22 +93,22 @@ export const calculateProfileAnalysisValidationSchemaEN = z.object({
   quantityPieces: z
     .number({
       required_error: 'Quantify of pieces is required',
-      invalid_type_error: 'Quantify of pieces must be a number',
+      invalid_type_error: 'Quantify of pieces should be a number',
     })
-    .positive('Quantify of pieces must be positive'),
+    .positive('Quantify of pieces should be positive'),
   speedPeripheral: z
     .number({
       required_error: 'Cutting wheel peripheral speed is required',
-      invalid_type_error: 'Cutting wheel peripheral speed must be a number',
+      invalid_type_error: 'Cutting wheel peripheral speed should be a number',
     })
-    .positive('Cutting wheel peripheral speed must be positive'),
+    .positive('Cutting wheel peripheral speed should be positive'),
 
   speedPassage: z
     .number({
       required_error: 'Part passing speed is required',
-      invalid_type_error: 'Part passing speed must be a number',
+      invalid_type_error: 'Part passing speed should be a number',
     })
-    .positive('Part passing speed must be positive'),
+    .positive('Part passing speed should be positive'),
 
   // Product Data
   product: z
@@ -181,27 +181,27 @@ export const calculateProfileAnalysisValidationSchemaEN = z.object({
   raRotationnr: z
     .number({
       required_error: 'RA Rotation (nr) is required',
-      invalid_type_error: 'RA Rotation (nr) must be a number',
+      invalid_type_error: 'RA Rotation (nr) should be a number',
     })
-    .positive('RA Rotation (nr) must be a positive number'),
+    .positive('RA Rotation (nr) should be a positive number'),
   heightCenters: z
     .number({
       required_error: 'Hight between centers is required',
-      invalid_type_error: 'Hight between centers  must be a number',
+      invalid_type_error: 'Hight between centers  should be a number',
     })
-    .positive(),
+    .positive('Hight between should be positive'),
   angleTangency: z
     .number({
       required_error: 'Angle of tangencia(y) is required',
-      invalid_type_error: 'Angle of tangencia(y) must be a number',
+      invalid_type_error: 'Angle of tangencia(y) should be a number',
     })
-    .positive(),
+    .positive('Angle of tangencia(y) should be positive'),
   angleRuler: z
     .number({
       required_error: 'Angle of rule is required',
-      invalid_type_error: 'Angle of rule must be a number',
+      invalid_type_error: 'Angle of rule should be a number',
     })
-    .positive(),
+    .positive('Angle of rule should be positive'),
 });
 
 // Error Handling
