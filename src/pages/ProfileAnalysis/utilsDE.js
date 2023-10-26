@@ -200,10 +200,10 @@ export const calculateProfileAnalysisValidationSchemaDE = z.object({
     .positive('Winkel der Tangente(y) muss eine positive Zahl sein'),
   angleRuler: z
     .number({
-      required_error: 'Ângulo da régua é obrigatório',
-      invalid_type_error: 'Ângulo da régua deve ser um número',
+      required_error: 'Winkelmesser ist erforderlich',
+      invalid_type_error: 'Winkelmesser sollte eine Nummer sein',
     })
-    .positive('Ângulo da régua deve ser um número positivo'),
+    .positive('Winkelmesser sollte eine positive Zahl sein'),
 });
 
 // Fehlerbehandlung
