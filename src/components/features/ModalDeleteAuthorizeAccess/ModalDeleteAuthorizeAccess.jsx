@@ -5,11 +5,10 @@ import PropTypes from 'prop-types';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useGlobalLanguage } from '../../../stores/globalLanguage';
-import { TranslateText } from './translations';
-
 import { useDeleteUserCourse } from '../../../hooks/query/userCourse';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { Container, DeleteButton, Message } from './Styles';
+import { TranslateText } from './translations';
 import { buildDeleteUserCourseErrorMessage } from './utils';
 
 export default function ModalDeleteUserCourse({ _id, close }) {

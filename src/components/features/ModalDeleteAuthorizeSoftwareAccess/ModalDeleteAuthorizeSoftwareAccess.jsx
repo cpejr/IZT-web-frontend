@@ -15,7 +15,7 @@ import { buildDeleteUserSoftwareAccessErrorMessage } from './utils';
 export default function ModalDeleteUserSoftwareAccess({ _id, close }) {
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
-  
+
   const [isPending, setIsPending] = useState(false); // Important for modals usage
   const queryClient = useQueryClient();
 

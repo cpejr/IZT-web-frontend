@@ -9,11 +9,9 @@ import { FiSave } from 'react-icons/fi';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useGlobalLanguage } from '../../../stores/globalLanguage';
-import { TranslateText } from './translations';
-
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useUpdateProducts } from '../../../hooks/query/products';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../../utils/constants';
 import separateFileTypes from '../../../utils/separateFileTypes';
 import { FormSelect } from '../../common';
@@ -37,11 +35,22 @@ import {
   DocumentsContainer,
   ErrorMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildEditProductErrorMessage,
   buildGetCategoriesErrorMessage,
   editProductValidationSchema,
 } from './utils';
+import {
+  buildEditProductErrorMessageDE,
+  buildGetCategoriesErrorMessageDE,
+  editProductValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildEditProductErrorMessageEN,
+  buildGetCategoriesErrorMessageEN,
+  editProductValidationSchemaEN,
+} from './utilsEN';
 
 export default function ModalEditProduct({ product, close }) {
   const { globalLanguage } = useGlobalLanguage();
@@ -57,9 +66,16 @@ export default function ModalEditProduct({ product, close }) {
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
     {
       onError: (err) => {
-        const errorMessage = buildGetCategoriesErrorMessage(err);
-
-        toast.error(errorMessage);
+        if (globalLanguage === 'PT') {
+          const errorMessage = buildGetCategoriesErrorMessage(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'EN') {
+          const errorMessage = buildGetCategoriesErrorMessageEN(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage = buildGetCategoriesErrorMessageDE(err);
+          toast.error(errorMessage);
+        }
         close();
       },
     }
@@ -74,12 +90,29 @@ export default function ModalEditProduct({ product, close }) {
       close();
     },
     onError: (err) => {
-      const errorMessage = buildEditProductErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'PT') {
+        const errorMessage = buildEditProductErrorMessage(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'EN') {
+        const errorMessage = buildEditProductErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildEditProductErrorMessageDE(err);
+        toast.error(errorMessage);
+      }
       setIsPending(false);
     },
   });
+
+  let validationSchema;
+
+  if (globalLanguage === 'PT') {
+    validationSchema = editProductValidationSchema;
+  } else if (globalLanguage === 'EN') {
+    validationSchema = editProductValidationSchemaEN;
+  } else {
+    validationSchema = editProductValidationSchemaDE;
+  }
 
   // Form handlers
   const {
@@ -88,7 +121,7 @@ export default function ModalEditProduct({ product, close }) {
     control,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(editProductValidationSchema),
+    resolver: zodResolver(validationSchema),
     defaultValues: {
       name: product.name,
       description: product.description,

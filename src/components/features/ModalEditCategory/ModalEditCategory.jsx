@@ -77,7 +77,7 @@ export default function ModalEditCategory({ category, close }) {
           <Input
             id="name"
             name="name"
-            placeholder= {translations.typeProductName}
+            placeholder={translations.typeProductName}
             error={!!errorMessage}
             defaultValue={category?.name}
             {...register('name')}

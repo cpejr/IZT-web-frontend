@@ -14,7 +14,7 @@ export default function RegisterInput({
   const errorMessage = errors?.[name]?.message;
   return (
     <Container>
-      <Label htmlFor={name} style={labelStyle} >
+      <Label htmlFor={name} style={labelStyle}>
         {label}
       </Label>
       <Input id={name} error={!!errorMessage} {...register(name)} {...props} />
