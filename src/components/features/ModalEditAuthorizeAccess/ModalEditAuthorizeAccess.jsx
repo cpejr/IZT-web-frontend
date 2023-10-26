@@ -8,10 +8,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useGlobalLanguage } from '../../../stores/globalLanguage';
-import { TranslateText } from './translations';
-
 import { useUpdateUserCourse } from '../../../hooks/query/userCourse';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -23,11 +21,20 @@ import {
   Date,
   EmailText,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildUpdateUserCourseErrorMessage,
   modalUpdateAuthorizeAccessValidationSchema,
   themeDatePicker,
 } from './utils';
+import {
+  buildUpdateUserCourseErrorMessageDE,
+  modalUpdateAuthorizeAccessValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildUpdateUserCourseErrorMessageEN,
+  modalUpdateAuthorizeAccessValidationSchemaEN,
+} from './utilsEN';
 
 export default function ModalEditAuthorizeAccess({ authorizeUser, close }) {
   const { globalLanguage } = useGlobalLanguage();
@@ -47,19 +54,36 @@ export default function ModalEditAuthorizeAccess({ authorizeUser, close }) {
       close();
     },
     onError: (err) => {
-      const errorMessage = buildUpdateUserCourseErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'PT') {
+        const errorMessage = buildUpdateUserCourseErrorMessage(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'EN') {
+        const errorMessage = buildUpdateUserCourseErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildUpdateUserCourseErrorMessageDE(err);
+        toast.error(errorMessage);
+      }
       setIsPending(false);
     },
   });
+
+  let validationSchema;
+
+  if (globalLanguage === 'PT') {
+    validationSchema = modalUpdateAuthorizeAccessValidationSchema;
+  } else if (globalLanguage === 'EN') {
+    validationSchema = modalUpdateAuthorizeAccessValidationSchemaEN;
+  } else {
+    validationSchema = modalUpdateAuthorizeAccessValidationSchemaDE;
+  }
 
   const {
     handleSubmit,
     formState: { errors },
     control,
   } = useForm({
-    resolver: zodResolver(modalUpdateAuthorizeAccessValidationSchema),
+    resolver: zodResolver(validationSchema),
   });
   const onSubmit = ({ expiresAt }) => {
     updateUserCourse({

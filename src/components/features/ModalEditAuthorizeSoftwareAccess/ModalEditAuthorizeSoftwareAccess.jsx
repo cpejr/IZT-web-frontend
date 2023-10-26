@@ -8,10 +8,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useGlobalLanguage } from '../../../stores/globalLanguage';
-import { TranslateText } from './translations';
-
 import { useUpdateSoftwareAccess } from '../../../hooks/query/users';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -23,11 +21,20 @@ import {
   Date,
   EmailText,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildUpdateSoftwareAccessErrorMessage,
   modalUpdateAuthorizeAccessValidationSchema,
   themeDatePicker,
 } from './utils';
+import {
+  buildUpdateSoftwareAccessErrorMessageDE,
+  modalUpdateAuthorizeAccessValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildUpdateSoftwareAccessErrorMessageEN,
+  modalUpdateAuthorizeAccessValidationSchemaEN,
+} from './utilsEN';
 
 export default function ModalEditAuthorizeSoftwareAccess({
   authorizeUser,
@@ -50,21 +57,37 @@ export default function ModalEditAuthorizeSoftwareAccess({
       close();
     },
     onError: (err) => {
-      const errorMessage = buildUpdateSoftwareAccessErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'PT') {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessage(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'EN') {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessageDE(err);
+        toast.error(errorMessage);
+      }
       setIsPending(false);
     },
   });
 
-  // Form handlers
+  let validationSchema;
 
+  if (globalLanguage === 'PT') {
+    validationSchema = modalUpdateAuthorizeAccessValidationSchema;
+  } else if (globalLanguage === 'EN') {
+    validationSchema = modalUpdateAuthorizeAccessValidationSchemaEN;
+  } else {
+    validationSchema = modalUpdateAuthorizeAccessValidationSchemaDE;
+  }
+
+  // Form handlers
   const {
     handleSubmit,
     formState: { errors },
     control,
   } = useForm({
-    resolver: zodResolver(modalUpdateAuthorizeAccessValidationSchema),
+    resolver: zodResolver(validationSchema),
   });
   const onSubmit = ({ softwareAccess }) => {
     updateSoftwareAccess({

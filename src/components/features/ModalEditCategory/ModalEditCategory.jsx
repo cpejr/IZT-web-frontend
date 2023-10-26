@@ -8,10 +8,8 @@ import { FiSave } from 'react-icons/fi';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
-import { useGlobalLanguage } from '../../../stores/globalLanguage';
-import { TranslateText } from './translations';
-
 import { useUpdateCategory } from '../../../hooks/query/categories';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import {
   Container,
   Label,
@@ -21,10 +19,19 @@ import {
   Form,
   ErrorMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildUpdateCategoryErrorMessage,
   updateCategoryValidationSchema,
 } from './utils';
+import {
+  buildUpdateCategoryErrorMessageDE,
+  updateCategoryValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildUpdateCategoryErrorMessageEN,
+  updateCategoryValidationSchemaEN,
+} from './utilsEN';
 
 export default function ModalEditCategory({ category, close }) {
   const { globalLanguage } = useGlobalLanguage();
@@ -48,19 +55,36 @@ export default function ModalEditCategory({ category, close }) {
       close();
     },
     onError: (err) => {
-      const errorMessage = buildUpdateCategoryErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'PT') {
+        const errorMessage = buildUpdateCategoryErrorMessage(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'EN') {
+        const errorMessage = buildUpdateCategoryErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildUpdateCategoryErrorMessageDE(err);
+        toast.error(errorMessage);
+      }
       setIsPending(false);
     },
   });
+
+  let validationSchema;
+
+  if (globalLanguage === 'PT') {
+    validationSchema = updateCategoryValidationSchema;
+  } else if (globalLanguage === 'EN') {
+    validationSchema = updateCategoryValidationSchemaEN;
+  } else {
+    validationSchema = updateCategoryValidationSchemaDE;
+  }
 
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(updateCategoryValidationSchema),
+    resolver: zodResolver(validationSchema),
   });
   const onSubmit = (data) => {
     updateCategory({ _id: category?._id, newCategoryData: data });
