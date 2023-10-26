@@ -77,29 +77,38 @@ export default function ParametersRA({ collapse, register, errors }) {
           <Label>{translations.raRotationnr}:</Label>
           <Input
             id="raRotationnr"
-            {...register('raRotationnr')}
+            {...register('raRotationnr', { valueAsNumber: true })}
             hasError={errors?.raRotationnr?.message}
+            type="number"
+            // step="any"
           />
           <Label>rpm</Label>
         </Line>
+        <ErrorMessage>{errors?.raRotationnr?.message}</ErrorMessage>
         <Line>
-          <Label>{translations.angleTangencia}:</Label>
+          <Label>{translations.angleTangency}:</Label>
           <Input
-            id="angleTangencia"
-            {...register('angleTangencia')}
-            hasError={errors?.angleTangencia?.message}
+            id="angleTangency"
+            {...register('angleTangency', { valueAsNumber: true })}
+            hasError={errors?.angleTangency?.message}
+            type="number"
+            step="any"
           />
           <Label>°</Label>
         </Line>
+        <ErrorMessage>{errors?.angleTangency?.message}</ErrorMessage>
         <Line>
           <Label>{translations.angleRuler}:</Label>
           <Input
             id="angleRuler"
-            {...register('angleRuler')}
+            {...register('angleRuler', { valueAsNumber: true })}
             hasError={errors?.angleRuler?.message}
+            type="number"
+            step="any"
           />
           <Label>°</Label>
         </Line>
+        <ErrorMessage>{errors?.angleRuler?.message}</ErrorMessage>
         <Line>
           <Label>{translations.heightCenters}:</Label>
           <Input
@@ -111,6 +120,7 @@ export default function ParametersRA({ collapse, register, errors }) {
           />
           <Label>mm</Label>
         </Line>
+        <ErrorMessage>{errors?.heightCenters?.message}</ErrorMessage>
       </DataColumn>
     </CollapsableData>
   );

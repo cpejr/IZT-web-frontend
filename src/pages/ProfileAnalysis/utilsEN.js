@@ -159,6 +159,30 @@ export const calculateProfileAnalysisValidationSchemaEN = z.object({
     })
     .min(3, 'Dresser Position should have at least 3 characters')
     .max(20, 'Dresser Position should have at most 20 characters'),
+  raRotationnr: z
+    .number({
+      required_error: 'RA Rotation (nr) is required',
+      invalid_type_error: 'RA Rotation (nr) must be a number',
+    })
+    .positive('RA Rotation (nr) must be a positive number'),
+  heightCenters: z
+    .number({
+      required_error: 'Hight between centers is required',
+      invalid_type_error: 'Hight between centers  must be a number',
+    })
+    .positive(),
+  angleTangency: z
+    .number({
+      required_error: 'Angle of tangencia(y) is required',
+      invalid_type_error: 'Angle of tangencia(y) must be a number',
+    })
+    .positive(),
+  angleRuler: z
+    .number({
+      required_error: 'Angle of rule is required',
+      invalid_type_error: 'Angle of rule must be a number',
+    })
+    .positive(),
 });
 
 // Error Handling

@@ -35,7 +35,7 @@ export function TranslateText({ globalLanguage }) {
   let raDresserInclination;
   let dresserHeight;
   let dresserPosition;
-  let angleTangencia;
+  let angleTangency;
   let angleRuler;
   let heightCenters;
 
@@ -75,7 +75,7 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination = 'RA dresser inclination';
     dresserHeight = 'Dresser height';
     dresserPosition = 'Dresser position';
-    angleTangencia = 'Tangent angle (γ)';
+    angleTangency = 'Tangent angle (γ)';
     angleRuler = 'Angle of the ruler (β)';
     heightCenters = 'Height between centers (hw)';
   } else if (globalLanguage === 'PT') {
@@ -114,7 +114,7 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination = 'Inclinação do dressador RA';
     dresserHeight = 'Altura do dressador';
     dresserPosition = 'Posição do dressador';
-    angleTangencia = 'Ângulo de tangêcia (γ): ';
+    angleTangency = 'Ângulo de tangêcia (γ) ';
     angleRuler = 'Ângulo da régua (β)';
     heightCenters = 'Altura entre centros (hw)';
   } else if (globalLanguage === 'DE') {
@@ -153,7 +153,7 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination = 'RA-Dresser-Neigung';
     dresserHeight = 'Dresser-Höhe';
     dresserPosition = 'Dresser-Position';
-    angleTangencia = 'Tangentwinkel (γ):';
+    angleTangency = 'Tangentwinkel (γ)';
     angleRuler = 'Winkel des Lineals (β)';
     heightCenters = ' Abstand zwischen den Zentren ';
   }
@@ -193,7 +193,7 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination,
     dresserHeight,
     dresserPosition,
-    angleTangencia,
+    angleTangency,
     angleRuler,
     heightCenters,
   };

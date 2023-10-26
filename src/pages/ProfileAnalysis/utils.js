@@ -159,6 +159,30 @@ export const calculateProfileAnalysisValidationSchema = z.object({
     })
     .min(3, 'Posição do Dressador deve ter pelo menos 3 caracteres')
     .max(20, 'Posição do Dressador deve ter pelo menos 20 caracteres'),
+  raRotationnr: z
+    .number({
+      required_error: 'Rotação de RA(nr) é obrigatória',
+      invalid_type_error: 'Rotação de Ra(nr) deve ser um número',
+    })
+    .positive('Rotação de RA(nr) precisa ser um número positivo'),
+  heightCenters: z
+    .number({
+      required_error: 'Altura entre centros é obrigatória',
+      invalid_type_error: 'Altura entre centros deve ser um número',
+    })
+    .positive('Altura entre centros deve ser um número positivo'),
+  angleTangency: z
+    .number({
+      required_error: 'Ângulo de tangência(y) é obrigatório',
+      invalid_type_error: 'Ângulo de tangência(y) deve ser um número',
+    })
+    .positive('Ângulo de tangência(y) deve ser um número positivo'),
+  angleRuler: z
+    .number({
+      required_error: 'Ângulo da régua é obrigatório',
+      invalid_type_error: 'Ângulo da régua deve ser um número',
+    })
+    .positive('Ângulo da régua deve ser um número positivo'),
 });
 
 // Error Handling
