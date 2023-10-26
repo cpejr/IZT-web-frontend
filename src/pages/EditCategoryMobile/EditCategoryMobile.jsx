@@ -14,8 +14,19 @@ import { Container, Title, SaveButton, CancelButton, Form } from './Styles';
 import { TranslateText } from './translations';
 import {
   buildupdateCategoryErrorMessage,
+  toastSucessMessage,
   updateCategoryValidationSchema,
 } from './utils';
+import {
+  buildupdateCategoryErrorMessageDE,
+  toastSuccessMessageDE,
+  updateCategoryValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildupdateCategoryErrorMessageEN,
+  toastSuccessMessageEN,
+  updateCategoryValidationSchemaEN,
+} from './utilsEN';
 
 export default function EditCategoryMobile() {
   const navigate = useNavigate();
@@ -36,24 +47,39 @@ export default function EditCategoryMobile() {
           queryKey: ['category'],
         }),
       ]);
-
-      toast.success('Categoria atualizada com sucesso!');
+      if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+      else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+      else toast.success(toastSucessMessage);
       navigate('/administrador/listar-categorias');
     },
     onError: (err) => {
-      const errorMessage = buildupdateCategoryErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildupdateCategoryErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildupdateCategoryErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildupdateCategoryErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
+  // Form Handlers
+
+  let resolver;
+
+  if (globalLanguage === 'EN')
+    resolver = zodResolver(updateCategoryValidationSchemaEN);
+  else if (globalLanguage === 'DE')
+    resolver = zodResolver(updateCategoryValidationSchemaDE);
+  else resolver = zodResolver(updateCategoryValidationSchema);
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(updateCategoryValidationSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = (data) =>
     updateCategory({ _id: category?._id, newCategoryData: data });
 

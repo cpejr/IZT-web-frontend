@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import objToFormData from 'object-to-formdata';
@@ -14,7 +12,6 @@ import { FormSelect } from '../../components/common';
 import {
   AddFileButton,
   DocumentFile,
-  Header,
   PictureFile,
 } from '../../components/features';
 import { useGetCategories } from '../../hooks/query/categories';
@@ -42,7 +39,20 @@ import {
   buildCreateProductErrorMessage,
   buildGetCategoriesErrorMessage,
   createProductValidationSchema,
+  toastSuccessMessage,
 } from './utils';
+import {
+  buildCreateProductErrorMessageDE,
+  buildGetCategoriesErrorMessageDE,
+  createProductValidationSchemaDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  buildCreateProductErrorMessageEN,
+  buildGetCategoriesErrorMessageEN,
+  createProductValidationSchemaEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
 export default function CreateProductMobile() {
   const isMediumScreen = useMediaQuery({ minWidth: 700 });
@@ -58,9 +68,16 @@ export default function CreateProductMobile() {
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
     {
       onError: (err) => {
-        const errorMessage = buildGetCategoriesErrorMessage(err);
-
-        toast.error(errorMessage);
+        if (globalLanguage === 'EN') {
+          const errorMessage = buildGetCategoriesErrorMessageEN(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'DE') {
+          const errorMessage = buildGetCategoriesErrorMessageDE(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage = buildGetCategoriesErrorMessage(err);
+          toast.error(errorMessage);
+        }
       },
     }
   );
@@ -74,26 +91,39 @@ export default function CreateProductMobile() {
         queryClient.invalidateQueries({
           queryKey: ['categories'], // Refresh catalog page
         });
-
-        toast.success('Produto criado com sucesso!');
+        if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+        else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+        else toast.success(toastSuccessMessage);
         navigate('/administrador');
       },
       onError: (err) => {
-        const errorMessage = buildCreateProductErrorMessage(err);
-
-        toast.error(errorMessage);
+        if (globalLanguage === 'EN') {
+          const errorMessage = buildCreateProductErrorMessageEN(err);
+          toast.error(errorMessage);
+        } else if (globalLanguage === 'DE') {
+          const errorMessage = buildCreateProductErrorMessageDE(err);
+          toast.error(errorMessage);
+        } else {
+          const errorMessage = buildCreateProductErrorMessage(err);
+          toast.error(errorMessage);
+        }
       },
     });
 
   // Form handlers
+  let resolver;
+  if (globalLanguage === 'EN')
+    resolver = zodResolver(createProductValidationSchemaEN);
+  else if (globalLanguage === 'DE')
+    resolver = zodResolver(createProductValidationSchemaDE);
+  else resolver = zodResolver(createProductValidationSchema);
+
   const {
     handleSubmit,
     register,
     control,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(createProductValidationSchema),
-  });
+  } = useForm({ resolver });
   const {
     fields: fieldsDocuments,
     append: appendDocument,
@@ -134,7 +164,7 @@ export default function CreateProductMobile() {
             id="name"
             name="name"
             type="text"
-            placeholder="Digite o nome do produto"
+            placeholder={translations.phProduct}
             error={errors?.name?.message}
             {...register('name')}
           />
@@ -146,7 +176,7 @@ export default function CreateProductMobile() {
           <TextArea
             id="description"
             name="description"
-            placeholder="Descreva o produto"
+            placeholder={translations.phDescription}
             error={errors?.description?.message}
             {...register('description')}
           />
@@ -158,7 +188,7 @@ export default function CreateProductMobile() {
           <TextArea
             id="advantages"
             type="advantages"
-            placeholder="Descreva as vantagens do produto"
+            placeholder={translations.phAdvantages}
             error={errors?.advantages?.message}
             {...register('advantages')}
           />

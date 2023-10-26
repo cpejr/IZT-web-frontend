@@ -62,6 +62,7 @@ export const DataEntry2 = styled.form`
 export const ErrorMessage = styled.p`
   font-weight: 700;
   color: red;
+  text-align: left;
 `;
 
 export const Collapsable = styled.div`

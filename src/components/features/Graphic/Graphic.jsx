@@ -8,8 +8,8 @@ export default function Graphic({ data }) {
     <Plot
       data={[
         {
-          x: data.x,
-          y: data.y,
+          x: data[0],
+          y: data[1],
           mode: 'lines',
           line: {
             color: 'black',

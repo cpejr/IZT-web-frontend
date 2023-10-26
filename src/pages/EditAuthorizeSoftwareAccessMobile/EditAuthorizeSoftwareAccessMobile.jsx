@@ -28,7 +28,18 @@ import {
   updateAuthorizeAccessValidationSchema,
   themeDatePicker,
   buildUpdateSoftwareAccessErrorMessage,
+  toastSuccessMessage,
 } from './utils';
+import {
+  updateAuthorizeAccessValidationSchemaDE,
+  buildUpdateSoftwareAccessErrorMessageDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  updateAuthorizeAccessValidationSchemaEN,
+  buildUpdateSoftwareAccessErrorMessageEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
 export default function EditAuthorizeSofwareAccessMobile() {
   const navigate = useNavigate();
@@ -45,24 +56,39 @@ export default function EditAuthorizeSofwareAccessMobile() {
       queryClient.invalidateQueries({
         queryKey: ['users-with-software-access'],
       });
-      toast.success('Autorização de acesso ao software alterada com sucesso!');
+      if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+      else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+      else toast.success(toastSuccessMessage);
       navigate('/administrador/liberacao-software');
     },
     onError: (err) => {
-      const errorMessage = buildUpdateSoftwareAccessErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildUpdateSoftwareAccessErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
   // Form handlers
+  let resolver;
+  if (globalLanguage === 'EN') {
+    resolver = zodResolver(updateAuthorizeAccessValidationSchemaEN);
+  } else if (globalLanguage === 'DE') {
+    resolver = zodResolver(updateAuthorizeAccessValidationSchemaDE);
+  } else {
+    resolver = zodResolver(updateAuthorizeAccessValidationSchema);
+  }
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(updateAuthorizeAccessValidationSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = ({ softwareAccess }) =>
     updateSoftwareAccess({
       _id: authorizeUser?._id,

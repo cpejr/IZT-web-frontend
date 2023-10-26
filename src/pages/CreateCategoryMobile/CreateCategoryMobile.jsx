@@ -22,7 +22,18 @@ import { TranslateText } from './translations';
 import {
   buildCreateCategoryErrorMessage,
   createCategoryValidationSchema,
+  toastSuccessMessage,
 } from './utils';
+import {
+  buildCreateCategoryErrorMessageDE,
+  createCategoryValidationSchemaDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  buildCreateCategoryErrorMessageEN,
+  createCategoryValidationSchemaEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
 export default function CreateCategoryMobile() {
   const navigate = useNavigate();
@@ -37,24 +48,38 @@ export default function CreateCategoryMobile() {
       queryClient.invalidateQueries({
         queryKey: ['categories'],
       });
-
-      toast.success('Categoria criada com sucesso!');
+      if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+      else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+      else toast.success(toastSuccessMessage);
       navigate('/administrador/listar-categorias');
     },
     onError: (err) => {
-      const errorMessage = buildCreateCategoryErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildCreateCategoryErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildCreateCategoryErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildCreateCategoryErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
 
+  // Form Handlers
+
+  let resolver;
+  if (globalLanguage === 'EN')
+    resolver = zodResolver(createCategoryValidationSchemaEN);
+  else if (globalLanguage === 'DE')
+    resolver = zodResolver(createCategoryValidationSchemaDE);
+  else resolver = zodResolver(createCategoryValidationSchema);
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(createCategoryValidationSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = (data) => createCategory(data);
 
   if (isMediumScreen) return <Navigate to="/administrador/listar-categorias" />;

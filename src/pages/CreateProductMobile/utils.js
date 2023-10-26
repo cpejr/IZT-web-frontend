@@ -28,6 +28,10 @@ export const createProductValidationSchema = z.object({
     .transform((documents) => documents.map(({ file }) => file)),
 });
 
+// Toast Success
+
+export const toastSuccessMessage = 'Produto criado com sucesso!';
+
 // Error Handling
 const createProductErrorMessages = {
   [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',

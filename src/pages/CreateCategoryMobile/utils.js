@@ -12,6 +12,10 @@ export const createCategoryValidationSchema = z.object({
   description: z.string().optional(),
 });
 
+// Toast Success
+
+export const toastSuccessMessage = 'Categoria criada com sucesso!';
+
 // Error Handling
 const createCategoryErrorMessages = {
   [ERROR_CODES.BAD_REQUEST]: 'Dados inválidos',

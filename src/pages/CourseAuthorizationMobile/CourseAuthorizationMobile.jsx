@@ -31,7 +31,20 @@ import {
   themeDatePicker,
   buildCreateUserCourseErrorMessage,
   buildGetUsersErrorMessage,
+  toastSuccessMessage,
 } from './utils';
+import {
+  authorizeAccessValidationSchemaDE,
+  buildCreateUserCourseErrorMessageDE,
+  buildGetUsersErrorMessageDE,
+  toastSuccessMessageDE,
+} from './utilsDE';
+import {
+  authorizeAccessValidationSchemaEN,
+  buildCreateUserCourseErrorMessageEN,
+  buildGetUsersErrorMessageEN,
+  toastSuccessMessageEN,
+} from './utilsEN';
 
 export default function CourseAuthorizationMobile() {
   const courseId = '646acfad1bae8cb3a56a05f4';
@@ -46,9 +59,16 @@ export default function CourseAuthorizationMobile() {
   // Backend calls
   const { data: users } = useGetUsers({
     onError: (err) => {
-      const errorMessage = buildGetUsersErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildGetUsersErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildGetUsersErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildGetUsersErrorMessage(err);
+        toast.error(errorMessage);
+      }
     },
   });
   const { mutate: createUserCourse } = useCreateUserCourse({
@@ -59,25 +79,39 @@ export default function CourseAuthorizationMobile() {
       queryClient.invalidateQueries({
         queryKey: ['users'],
       });
-
-      toast.success('Autorização ao curso concedida com sucesso!');
+      if (globalLanguage === 'EN') toast.success(toastSuccessMessageEN);
+      else if (globalLanguage === 'DE') toast.success(toastSuccessMessageDE);
+      else toast.success(toastSuccessMessage);
     },
     onError: (err) => {
-      const errorMessage = buildCreateUserCourseErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'EN') {
+        const errorMessage = buildCreateUserCourseErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'DE') {
+        const errorMessage = buildCreateUserCourseErrorMessageDE(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildCreateUserCourseErrorMessage(err);
+        toast.error(errorMessage);
+      }
       setIsLoading(false);
     },
   });
 
   // Form handlers
+  let resolver;
+  if (globalLanguage === 'EN') {
+    resolver = zodResolver(authorizeAccessValidationSchemaEN);
+  } else if (globalLanguage === 'DE') {
+    resolver = zodResolver(authorizeAccessValidationSchemaDE);
+  } else {
+    resolver = zodResolver(authorizeAccessValidationSchema);
+  }
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(authorizeAccessValidationSchema),
-  });
+  } = useForm({ resolver });
   const onSubmit = ({ userId, expiresAt }) => {
     createUserCourse({
       user: userId,
