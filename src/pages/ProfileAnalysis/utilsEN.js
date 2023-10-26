@@ -90,6 +90,25 @@ export const calculateProfileAnalysisValidationSchemaEN = z.object({
     })
     .max(90, 'RW Inclination should have at most 90°')
     .min(-90, 'RW Inclination should have at least -90°'),
+  quantityPieces: z
+    .number({
+      required_error: 'Quantify of pieces is required',
+      invalid_type_error: 'Quantify of pieces must be a number',
+    })
+    .positive('Quantify of pieces must be positive'),
+  speedPeripheral: z
+    .number({
+      required_error: 'Cutting wheel peripheral speed is required',
+      invalid_type_error: 'Cutting wheel peripheral speed must be a number',
+    })
+    .positive('Cutting wheel peripheral speed must be positive'),
+
+  speedPassage: z
+    .number({
+      required_error: 'Part passing speed is required',
+      invalid_type_error: 'Part passing speed must be a number',
+    })
+    .positive('Part passing speed must be positive'),
 
   // Product Data
   product: z

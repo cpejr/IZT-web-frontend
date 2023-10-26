@@ -80,7 +80,7 @@ export default function ParametersRA({ collapse, register, errors }) {
             {...register('raRotationnr', { valueAsNumber: true })}
             hasError={errors?.raRotationnr?.message}
             type="number"
-            // step="any"
+            step="any"
           />
           <Label>rpm</Label>
         </Line>

@@ -2,7 +2,14 @@ import PropTypes from 'prop-types';
 
 import { ErrorMessage } from '../../../pages/StabilityAnalysis/Styles';
 import { useGlobalLanguage } from '../../../stores/globalLanguage';
-import { CollapsableData, DataColumn, Input, Label, Line } from './Styles';
+import {
+  CollapsableData,
+  Column,
+  DataColumn,
+  Input,
+  Label,
+  Line,
+} from './Styles';
 import { TranslateText } from './translations';
 
 export default function MachineData({
@@ -132,9 +139,9 @@ export default function MachineData({
           />
           <Label>°</Label>
         </Line>
-
+        <ErrorMessage>{errors?.rwInclination?.message}</ErrorMessage>
         {isProfileAnalysis ? (
-          <div>
+          <Column>
             <Line>
               <Label>{translations.quantityPieces}:</Label>
               <Input
@@ -146,6 +153,7 @@ export default function MachineData({
               />
               <Label>pc/min</Label>
             </Line>
+            <ErrorMessage>{errors?.quantityPieces?.message}</ErrorMessage>
             <Line>
               <Label>{translations.speedPassage}:</Label>
               <Input
@@ -157,6 +165,7 @@ export default function MachineData({
               />
               <Label>m/min</Label>
             </Line>
+            <ErrorMessage>{errors?.speedPassage?.message}</ErrorMessage>
             <Line>
               <Label>{translations.speedPeripheral}: </Label>
               <Input
@@ -168,9 +177,9 @@ export default function MachineData({
               />
               <Label>mm/s</Label>
             </Line>
-          </div>
+            <ErrorMessage>{errors?.speedPeripheral?.message}</ErrorMessage>
+          </Column>
         ) : null}
-        <ErrorMessage>{errors?.rwInclination?.message}</ErrorMessage>
       </DataColumn>
     </CollapsableData>
   );

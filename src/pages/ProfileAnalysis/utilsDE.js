@@ -90,6 +90,27 @@ export const calculateProfileAnalysisValidationSchemaDE = z.object({
     })
     .max(90, 'RW Neigung sollte höchstens 90° haben')
     .min(-90, 'RW Neigung sollte mindestens -90° haben'),
+  quantityPieces: z
+    .number({
+      required_error: 'Stückzahl ist erforderlich',
+      invalid_type_error: 'Die Stückzahl muss eine Zahl sein',
+    })
+    .positive('Die Stückzahl muss positiv sein'),
+  speedPeripheral: z
+    .number({
+      required_error: 'Erforderliche Umfangsgeschwindigkeit des Schneidrades',
+      invalid_type_error:
+        'Die Umfangsgeschwindigkeit des Schneidrades muss eine Zahl sein',
+    })
+    .positive('Die Umfangsgeschwindigkeit des Schneidrades muss positiv sein'),
+
+  speedPassage: z
+    .number({
+      required_error: 'Erforderliche Durchgangsgeschwindigkeit des Teils',
+      invalid_type_error:
+        'Die Durchgangsgeschwindigkeit des Teils muss eine Zahl sein',
+    })
+    .positive('Die Durchgangsgeschwindigkeit des Teils muss positiv sein'),
 
   // Produktdaten
   product: z
