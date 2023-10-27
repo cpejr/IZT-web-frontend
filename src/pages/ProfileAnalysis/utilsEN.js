@@ -90,6 +90,25 @@ export const calculateProfileAnalysisValidationSchemaEN = z.object({
     })
     .max(90, 'RW Inclination should have at most 90°')
     .min(-90, 'RW Inclination should have at least -90°'),
+  quantityPieces: z
+    .number({
+      required_error: 'Quantify of pieces is required',
+      invalid_type_error: 'Quantify of pieces should be a number',
+    })
+    .positive('Quantify of pieces should be positive'),
+  speedPeripheral: z
+    .number({
+      required_error: 'Cutting wheel peripheral speed is required',
+      invalid_type_error: 'Cutting wheel peripheral speed should be a number',
+    })
+    .positive('Cutting wheel peripheral speed should be positive'),
+
+  speedPassage: z
+    .number({
+      required_error: 'Part passing speed is required',
+      invalid_type_error: 'Part passing speed should be a number',
+    })
+    .positive('Part passing speed should be positive'),
 
   // Product Data
   product: z
@@ -159,6 +178,30 @@ export const calculateProfileAnalysisValidationSchemaEN = z.object({
     })
     .min(3, 'Dresser Position should have at least 3 characters')
     .max(20, 'Dresser Position should have at most 20 characters'),
+  raRotationnr: z
+    .number({
+      required_error: 'RA Rotation (nr) is required',
+      invalid_type_error: 'RA Rotation (nr) should be a number',
+    })
+    .positive('RA Rotation (nr) should be a positive number'),
+  heightCenters: z
+    .number({
+      required_error: 'Hight between centers is required',
+      invalid_type_error: 'Hight between centers  should be a number',
+    })
+    .positive('Hight between should be positive'),
+  angleTangency: z
+    .number({
+      required_error: 'Angle of tangencia(y) is required',
+      invalid_type_error: 'Angle of tangencia(y) should be a number',
+    })
+    .positive('Angle of tangencia(y) should be positive'),
+  angleRuler: z
+    .number({
+      required_error: 'Angle of rule is required',
+      invalid_type_error: 'Angle of rule should be a number',
+    })
+    .positive('Angle of rule should be positive'),
 });
 
 // Error Handling

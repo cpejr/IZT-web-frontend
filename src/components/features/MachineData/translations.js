@@ -34,6 +34,9 @@ export function TranslateText({ globalLanguage }) {
   let raDresserInclination;
   let dresserHeight;
   let dresserPosition;
+  let quantityPieces;
+  let speedPassage;
+  let speedPeripheral;
 
   if (globalLanguage === 'EN') {
     analysisData = 'Analysis Data';
@@ -70,6 +73,9 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination = 'RA dresser inclination';
     dresserHeight = 'Dresser height';
     dresserPosition = 'Dresser position';
+    quantityPieces = 'Number of pieces per minute (Qp/min)';
+    speedPassage = 'Workpiece feed rate (vfa)';
+    speedPeripheral = 'Cutting wheel peripheral speed (vs) ';
   } else if (globalLanguage === 'PT') {
     analysisData = 'Dados da Análise';
     machineData = 'Dados da Máquina';
@@ -105,6 +111,9 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination = 'Inclinação do dressador RA';
     dresserHeight = 'Altura do dressador';
     dresserPosition = 'Posição do dressador';
+    quantityPieces = ' Quantidade de peças (Qp/min)';
+    speedPassage = 'Velocidade de passagem da peça (vfa)';
+    speedPeripheral = 'Velocidade periférica do rebolo de corte (vs)';
   } else if (globalLanguage === 'DE') {
     analysisData = 'Analyse-Daten';
     machineData = 'Maschinendaten';
@@ -140,6 +149,9 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination = 'RA-Dresser-Neigung';
     dresserHeight = 'Dresser-Höhe';
     dresserPosition = 'Dresser-Position';
+    quantityPieces = 'Stückzahl pro Minute (Qp/min)';
+    speedPassage = ' Werkstückvorschubgeschwindigkeit (vfa)';
+    speedPeripheral = 'Umfangsgeschwindigkeit des Schleifrades (vs)';
   }
   return {
     analysisData,
@@ -176,5 +188,8 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination,
     dresserHeight,
     dresserPosition,
+    quantityPieces,
+    speedPassage,
+    speedPeripheral,
   };
 }

@@ -250,6 +250,7 @@ export default function StabilityAnalysis() {
               collapse={collapse === 'machine'}
               register={register}
               errors={errors}
+              isProfileAnalysis={false}
             />
           </Collapsable>
           <Collapsable>

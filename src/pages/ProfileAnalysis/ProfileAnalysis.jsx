@@ -247,6 +247,7 @@ export default function ProfileAnalysis() {
                     collapse={collapse === 'machine'}
                     register={register}
                     errors={errors}
+                    isProfileAnalysis={true}
                   />
                 </Collapsable>
                 <Collapsable>

@@ -23,6 +23,7 @@ export function TranslateText({ globalLanguage }) {
   let rcEffectiveLength;
   let rcRotation;
   let raRotation;
+  let raRotationnr;
   let rwInclination;
   let stabilityChart;
   let heightStabilityChart;
@@ -34,6 +35,9 @@ export function TranslateText({ globalLanguage }) {
   let raDresserInclination;
   let dresserHeight;
   let dresserPosition;
+  let angleTangency;
+  let angleRuler;
+  let heightCenters;
 
   if (globalLanguage === 'EN') {
     analysisData = 'Analysis Data';
@@ -59,6 +63,7 @@ export function TranslateText({ globalLanguage }) {
     rcEffectiveLength = 'Effective RC Length';
     rcRotation = 'RC Rotation';
     raRotation = 'RA Rotation';
+    raRotationnr = 'RA Rotation(nr)';
     rwInclination = 'Grinding Wheel Inclination';
     stabilityChart = 'Process Stability Chart';
     heightStabilityChart = 'Piece Height Stability Chart';
@@ -70,6 +75,9 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination = 'RA dresser inclination';
     dresserHeight = 'Dresser height';
     dresserPosition = 'Dresser position';
+    angleTangency = 'Tangent angle (γ)';
+    angleRuler = 'Angle of the ruler (β)';
+    heightCenters = 'Height between centers (hw)';
   } else if (globalLanguage === 'PT') {
     analysisData = 'Dados da Análise';
     machineData = 'Dados da Máquina';
@@ -94,6 +102,7 @@ export function TranslateText({ globalLanguage }) {
     rcEffectiveLength = 'Comprimento efetivo do RC';
     rcRotation = 'Rotação do RC';
     raRotation = 'Rotação do RA';
+    raRotationnr = 'Rotação do RA(nr)';
     rwInclination = 'Inclinação da Roda de Retificação';
     stabilityChart = 'Diagrama - Estabilidade de processo';
     heightStabilityChart = 'Diagrama - Estabilidade de altura da peça';
@@ -105,6 +114,9 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination = 'Inclinação do dressador RA';
     dresserHeight = 'Altura do dressador';
     dresserPosition = 'Posição do dressador';
+    angleTangency = 'Ângulo de tangêcia (γ) ';
+    angleRuler = 'Ângulo da régua (β)';
+    heightCenters = 'Altura entre centros (hw)';
   } else if (globalLanguage === 'DE') {
     analysisData = 'Analyse-Daten';
     machineData = 'Maschinendaten';
@@ -129,6 +141,7 @@ export function TranslateText({ globalLanguage }) {
     rcEffectiveLength = 'Effektive RC-Länge';
     rcRotation = 'RC-Rotation';
     raRotation = 'RA-Rotation';
+    raRotationnr = 'RA-Rotation(nr)';
     rwInclination = 'Schleifscheibenneigung';
     stabilityChart = 'Prozessstabilitätsdiagramm';
     heightStabilityChart = 'Höhensstabilitätsdiagramm für das Werkstück';
@@ -140,6 +153,9 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination = 'RA-Dresser-Neigung';
     dresserHeight = 'Dresser-Höhe';
     dresserPosition = 'Dresser-Position';
+    angleTangency = 'Tangentwinkel (γ)';
+    angleRuler = 'Winkel des Lineals (β)';
+    heightCenters = ' Abstand zwischen den Zentren ';
   }
   return {
     analysisData,
@@ -168,6 +184,7 @@ export function TranslateText({ globalLanguage }) {
     rcEffectiveLength,
     rcRotation,
     raRotation,
+    raRotationnr,
     rwInclination,
     download,
     destroy,
@@ -176,5 +193,8 @@ export function TranslateText({ globalLanguage }) {
     raDresserInclination,
     dresserHeight,
     dresserPosition,
+    angleTangency,
+    angleRuler,
+    heightCenters,
   };
 }

@@ -2,10 +2,22 @@ import PropTypes from 'prop-types';
 
 import { ErrorMessage } from '../../../pages/StabilityAnalysis/Styles';
 import { useGlobalLanguage } from '../../../stores/globalLanguage';
-import { CollapsableData, DataColumn, Input, Label, Line } from './Styles';
+import {
+  CollapsableData,
+  Column,
+  DataColumn,
+  Input,
+  Label,
+  Line,
+} from './Styles';
 import { TranslateText } from './translations';
 
-export default function MachineData({ collapse, register, errors }) {
+export default function MachineData({
+  collapse,
+  register,
+  errors,
+  isProfileAnalysis,
+}) {
   // Translation
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
@@ -128,6 +140,46 @@ export default function MachineData({ collapse, register, errors }) {
           <Label>°</Label>
         </Line>
         <ErrorMessage>{errors?.rwInclination?.message}</ErrorMessage>
+        {isProfileAnalysis ? (
+          <Column>
+            <Line>
+              <Label>{translations.quantityPieces}:</Label>
+              <Input
+                id="quantityPieces"
+                {...register('quantityPieces', { valueAsNumber: true })}
+                hasError={errors?.quantityPieces?.message}
+                type="number"
+                step="any"
+              />
+              <Label>pc/min</Label>
+            </Line>
+            <ErrorMessage>{errors?.quantityPieces?.message}</ErrorMessage>
+            <Line>
+              <Label>{translations.speedPassage}:</Label>
+              <Input
+                id="speedPassage"
+                {...register('speedPassage', { valueAsNumber: true })}
+                hasError={errors?.speedPassage?.message}
+                type="number"
+                step="any"
+              />
+              <Label>m/min</Label>
+            </Line>
+            <ErrorMessage>{errors?.speedPassage?.message}</ErrorMessage>
+            <Line>
+              <Label>{translations.speedPeripheral}: </Label>
+              <Input
+                id="speedPeripheral"
+                {...register('speedPeripheral', { valueAsNumber: true })}
+                hasError={errors?.speedPeripheral?.message}
+                type="number"
+                step="any"
+              />
+              <Label>mm/s</Label>
+            </Line>
+            <ErrorMessage>{errors?.speedPeripheral?.message}</ErrorMessage>
+          </Column>
+        ) : null}
       </DataColumn>
     </CollapsableData>
   );
@@ -137,4 +189,5 @@ MachineData.propTypes = {
   collapse: PropTypes.object.isRequired,
   register: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
+  isProfileAnalysis: PropTypes.bool.isRequired,
 };

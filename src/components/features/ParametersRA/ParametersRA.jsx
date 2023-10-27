@@ -73,6 +73,54 @@ export default function ParametersRA({ collapse, register, errors }) {
           />
         </Line>
         <ErrorMessage>{errors?.dresserPosition?.message}</ErrorMessage>
+        <Line>
+          <Label>{translations.raRotationnr}:</Label>
+          <Input
+            id="raRotationnr"
+            {...register('raRotationnr', { valueAsNumber: true })}
+            hasError={errors?.raRotationnr?.message}
+            type="number"
+            step="any"
+          />
+          <Label>rpm</Label>
+        </Line>
+        <ErrorMessage>{errors?.raRotationnr?.message}</ErrorMessage>
+        <Line>
+          <Label>{translations.angleTangency}:</Label>
+          <Input
+            id="angleTangency"
+            {...register('angleTangency', { valueAsNumber: true })}
+            hasError={errors?.angleTangency?.message}
+            type="number"
+            step="any"
+          />
+          <Label>°</Label>
+        </Line>
+        <ErrorMessage>{errors?.angleTangency?.message}</ErrorMessage>
+        <Line>
+          <Label>{translations.angleRuler}:</Label>
+          <Input
+            id="angleRuler"
+            {...register('angleRuler', { valueAsNumber: true })}
+            hasError={errors?.angleRuler?.message}
+            type="number"
+            step="any"
+          />
+          <Label>°</Label>
+        </Line>
+        <ErrorMessage>{errors?.angleRuler?.message}</ErrorMessage>
+        <Line>
+          <Label>{translations.heightCenters}:</Label>
+          <Input
+            id="heightCenters"
+            {...register('heightCenters', { valueAsNumber: true })}
+            hasError={errors?.heightCenters?.message}
+            type="number"
+            step="any"
+          />
+          <Label>mm</Label>
+        </Line>
+        <ErrorMessage>{errors?.heightCenters?.message}</ErrorMessage>
       </DataColumn>
     </CollapsableData>
   );

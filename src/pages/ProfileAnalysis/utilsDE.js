@@ -90,6 +90,27 @@ export const calculateProfileAnalysisValidationSchemaDE = z.object({
     })
     .max(90, 'RW Neigung sollte höchstens 90° haben')
     .min(-90, 'RW Neigung sollte mindestens -90° haben'),
+  quantityPieces: z
+    .number({
+      required_error: 'Stückzahl ist erforderlich',
+      invalid_type_error: 'Die Stückzahl muss eine Zahl sein',
+    })
+    .positive('Die Stückzahl muss positiv sein'),
+  speedPeripheral: z
+    .number({
+      required_error: 'Erforderliche Umfangsgeschwindigkeit des Schneidrades',
+      invalid_type_error:
+        'Die Umfangsgeschwindigkeit des Schneidrades muss eine Zahl sein',
+    })
+    .positive('Die Umfangsgeschwindigkeit des Schneidrades muss positiv sein'),
+
+  speedPassage: z
+    .number({
+      required_error: 'Erforderliche Durchgangsgeschwindigkeit des Teils',
+      invalid_type_error:
+        'Die Durchgangsgeschwindigkeit des Teils muss eine Zahl sein',
+    })
+    .positive('Die Durchgangsgeschwindigkeit des Teils muss positiv sein'),
 
   // Produktdaten
   product: z
@@ -159,6 +180,30 @@ export const calculateProfileAnalysisValidationSchemaDE = z.object({
     })
     .min(3, 'Dresser Position sollte mindestens 3 Zeichen haben')
     .max(20, 'Dresser Position sollte höchstens 20 Zeichen haben'),
+  raRotationnr: z
+    .number({
+      required_error: 'RA Rotation (nr) ist erforderlich',
+      invalid_type_error: 'RA Rotation (nr) muss eine Zahl sein',
+    })
+    .positive('RA Rotation (nr) muss eine positive Zahl sein'),
+  heightCenters: z
+    .number({
+      required_error: 'Höhe zwischen den Zentren ist erforderlich',
+      invalid_type_error: 'Höhe zwischen den Zentren muss eine Zahl sein',
+    })
+    .positive('Höhe zwischen den Zentren muss eine positive Zahl sein'),
+  angleTangency: z
+    .number({
+      required_error: 'Winkel der Tangente(y) ist erforderlich',
+      invalid_type_error: 'Winkel der Tangente(y) muss eine Zahl sein',
+    })
+    .positive('Winkel der Tangente(y) muss eine positive Zahl sein'),
+  angleRuler: z
+    .number({
+      required_error: 'Winkelmesser ist erforderlich',
+      invalid_type_error: 'Winkelmesser sollte eine Nummer sein',
+    })
+    .positive('Winkelmesser sollte eine positive Zahl sein'),
 });
 
 // Fehlerbehandlung

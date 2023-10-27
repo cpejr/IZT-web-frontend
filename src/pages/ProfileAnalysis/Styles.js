@@ -10,7 +10,6 @@ export const Boddy = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  align-items: center;
   flex-direction: row;
   justify-content: flex-start;
   background-color: #123645;
