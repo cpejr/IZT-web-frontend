@@ -7,7 +7,7 @@ export const CollapsableData = styled.div`
   align-items: center;
   gap: 1rem;
   overflow-x: hidden;
-  max-height: ${(props) => (props.collapse ? '50rem' : '0rem')};
+  max-height: ${(props) => (props.collapse ? '35rem' : '0rem')};
   transition: all 200ms ease-in-out 200ms;
 `;
 
