@@ -125,11 +125,11 @@ export default function ModalCreateProduct({ close }) {
         <ModalContent>
           <LeftSection>
             <Subsection>
-              <Text>Nome do produto:</Text>
+              <Text>{translations.productName}</Text>
               <Input
                 id="name"
                 name="name"
-                placeholder="Digite o nome do produto"
+                placeholder={translations.typeproductName}
                 error={errors?.name?.message}
                 {...register('name')}
               />
@@ -137,11 +137,11 @@ export default function ModalCreateProduct({ close }) {
             </Subsection>
 
             <Subsection>
-              <Text>Descrição:</Text>
+              <Text>{translations.description}:</Text>
               <TextAreaModal
                 id="description"
                 name="description"
-                placeholder="Descreva o produto"
+                placeholder={translations.typedescription}
                 error={errors?.description?.message}
                 {...register('description')}
               />
@@ -149,11 +149,11 @@ export default function ModalCreateProduct({ close }) {
             </Subsection>
 
             <Subsection>
-              <Text>Vantagens:</Text>
+              <Text>{translations.adventages}:</Text>
               <TextAreaModal
                 id="advantages"
                 name="advantages"
-                placeholder="Descreva as vantagens do produto"
+                placeholder={translations.typeadventages}
                 error={errors?.advantages?.message}
                 {...register('advantages')}
               />
