@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 
 import { useGetCategories } from '../../../hooks/query/categories';
 import { useCreateProduct } from '../../../hooks/query/products';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import { DOCUMENTS_CONFIG, PICTURES_CONFIG } from '../../../utils/constants';
 import { FormSelect } from '../../common';
 import AddFileButton from '../AddFileButton/AddFileButton';
@@ -33,6 +34,7 @@ import {
   PicturesContainer,
   ErrorMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildCreateProductErrorMessage,
   buildGetCategoriesErrorMessage,
@@ -46,6 +48,9 @@ export default function ModalCreateProduct({ close }) {
   const queryClient = useQueryClient();
   const documentsLimit = 3;
   const picturesLimit = 4;
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   // Backend calls
   const { data: categories, isLoading: isLoadingCategories } = useGetCategories(
@@ -163,8 +168,8 @@ export default function ModalCreateProduct({ close }) {
 
           <RightSection>
             <Subsection>
-              <Text>Imagens:</Text>
-              <MiniText>Anexe as imagens do produto</MiniText>
+              <Text>{translations.images}</Text>
+              <MiniText>{translations.addImages}</MiniText>
               <PicturesContainer>
                 {fieldsPictures.map(({ id, file: picture }, index) => (
                   <PictureFile
@@ -191,7 +196,7 @@ export default function ModalCreateProduct({ close }) {
             </Subsection>
 
             <Subsection>
-              <Text>Documentos:</Text>
+              <Text>{translations.documents}</Text>
               <DocumentsContainer>
                 {fieldsDocuments.map(({ id, file: document }, index) => (
                   <DocumentFile
@@ -220,9 +225,9 @@ export default function ModalCreateProduct({ close }) {
             </Subsection>
 
             <CategorySubsection>
-              <Text>Categoria:</Text>
+              <Text>{translations.category}</Text>
               {isLoadingCategories ? (
-                <p>Carregando...</p>
+                <p>{translations.loading}</p>
               ) : (
                 <FormSelect
                   name="category"
@@ -232,7 +237,7 @@ export default function ModalCreateProduct({ close }) {
                     label: name,
                     value: _id,
                   }))}
-                  placeholder="Selecione a categoria"
+                  placeholder={translations.selectCategory}
                 />
               )}
             </CategorySubsection>
@@ -250,12 +255,12 @@ export default function ModalCreateProduct({ close }) {
                     ariaLabel="tail-spin-loading"
                     radius="5"
                   />
-                  <p>Carregando</p>
+                  <p>{translations.loading}</p>
                 </>
               ) : (
                 <>
                   <FiSave size={25} />
-                  <p>Criar Produto</p>
+                  <p>{translations.createProduct}</p>
                 </>
               )}
             </ModalButton>

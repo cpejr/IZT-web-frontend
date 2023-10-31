@@ -10,6 +10,7 @@ import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
 import { useCreateCategory } from '../../../hooks/query/categories';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -19,6 +20,7 @@ import {
   ModalButton,
   ErrorMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildCreateCategoryErrorMessage,
   createCategoryValidationSchema,
@@ -28,6 +30,8 @@ export default function ModalCreateCategory({ close }) {
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const queryClient = useQueryClient();
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
 
   const { mutate: createCategory } = useCreateCategory({
     onSuccess: () => {
@@ -66,11 +70,11 @@ export default function ModalCreateCategory({ close }) {
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
-          <Label htmlFor="name">Nome da categoria:</Label>
+          <Label htmlFor="name">{translations.categoryName}</Label>
           <Input
             id="name"
             name="name"
-            placeholder="Digite aqui o nome da categoria"
+            placeholder={translations.categoryNamePlaceholder}
             error={!!errorMessage}
             {...register('name')}
           />
@@ -85,12 +89,12 @@ export default function ModalCreateCategory({ close }) {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loadingText}</p>
               </>
             ) : (
               <>
                 <FiSave size={25} />
-                <p>Criar Categoria</p>
+                <p>{translations.creatingCategoryText}</p>
               </>
             )}
           </ModalButton>
