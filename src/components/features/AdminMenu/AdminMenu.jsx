@@ -5,8 +5,6 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useMediaQuery } from 'react-responsive';
 
 import { useGlobalLanguage } from '../../../stores/globalLanguage';
-import { TranslateText } from './translations';
-
 import ModalCreateCategory from '../ModalCreateCategory/ModalCreateCategory';
 import ModalCreateProduct from '../ModalCreateProduct/ModalCreateProduct';
 import {
@@ -16,7 +14,6 @@ import {
   Section,
   SectionMobile,
   Title,
-  Text,
   BlackLine,
   BlackLineMobile,
   StyledLink,
@@ -25,6 +22,7 @@ import {
   MenuMobile,
   MobileMenuButton,
 } from './Styles';
+import { TranslateText } from './translations';
 
 export default function AdminMenu() {
   const { globalLanguage } = useGlobalLanguage();

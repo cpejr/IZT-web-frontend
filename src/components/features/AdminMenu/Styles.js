@@ -94,20 +94,6 @@ export const Title = styled.p`
   }
 `;
 
-export const Text = styled.p`
-  font-weight: 400;
-
-  @media (max-width: 700px) {
-    font-size: 1.7rem;
-  }
-  @media (max-width: 420px) {
-    font-size: 1.4rem;
-  }
-  @media (max-width: 320px) {
-    font-size: 1.2rem;
-  }
-`;
-
 export const BlackLine = styled.p`
   display: flex;
   width: 25rem;
