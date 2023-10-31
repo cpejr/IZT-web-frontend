@@ -51,7 +51,7 @@ export default function ModalEditCategory({ category, close }) {
         }),
       ]);
 
-      toast.success(<p>{translations.categoryEdited}</p>);
+      toast.success(translations.categoryEdited);
       close();
     },
     onError: (err) => {
@@ -101,7 +101,7 @@ export default function ModalEditCategory({ category, close }) {
           <Input
             id="name"
             name="name"
-            placeholder={translations.typeProductName}
+            placeholder={translations.typeCategoryName}
             error={!!errorMessage}
             defaultValue={category?.name}
             {...register('name')}

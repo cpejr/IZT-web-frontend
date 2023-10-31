@@ -10,6 +10,7 @@ import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
 import { useCreateCategory } from '../../../hooks/query/categories';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import {
   Container,
   Form,
@@ -19,12 +20,24 @@ import {
   ModalButton,
   ErrorMessage,
 } from './Styles';
+import { TranslateText } from './translations';
 import {
   buildCreateCategoryErrorMessage,
   createCategoryValidationSchema,
 } from './utils';
+import {
+  buildCreateCategoryErrorMessageDE,
+  createCategoryValidationSchemaDE,
+} from './utilsDE';
+import {
+  buildCreateCategoryErrorMessageEN,
+  createCategoryValidationSchemaEN,
+} from './utilsEN';
 
 export default function ModalCreateCategory({ close }) {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
   const queryClient = useQueryClient();
@@ -35,23 +48,40 @@ export default function ModalCreateCategory({ close }) {
         queryKey: ['categories'],
       });
 
-      toast.success('Categoria criada com sucesso!');
+      toast.success(translations.toastMessage);
       close();
     },
     onError: (err) => {
-      const errorMessage = buildCreateCategoryErrorMessage(err);
-
-      toast.error(errorMessage);
+      if (globalLanguage === 'PT') {
+        const errorMessage = buildCreateCategoryErrorMessage(err);
+        toast.error(errorMessage);
+      } else if (globalLanguage === 'EN') {
+        const errorMessage = buildCreateCategoryErrorMessageEN(err);
+        toast.error(errorMessage);
+      } else {
+        const errorMessage = buildCreateCategoryErrorMessageDE(err);
+        toast.error(errorMessage);
+      }
       setIsPending(false);
     },
   });
+
+  let validationSchema;
+
+  if (globalLanguage === 'PT') {
+    validationSchema = createCategoryValidationSchema;
+  } else if (globalLanguage === 'EN') {
+    validationSchema = createCategoryValidationSchemaEN;
+  } else {
+    validationSchema = createCategoryValidationSchemaDE;
+  }
 
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(createCategoryValidationSchema),
+    resolver: zodResolver(validationSchema),
   });
   const onSubmit = (data) => {
     createCategory(data);
@@ -66,11 +96,11 @@ export default function ModalCreateCategory({ close }) {
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
-          <Label htmlFor="name">Nome da categoria:</Label>
+          <Label htmlFor="name">{translations.categoryName}</Label>
           <Input
             id="name"
             name="name"
-            placeholder="Digite aqui o nome da categoria"
+            placeholder={translations.typeCategoryName}
             error={!!errorMessage}
             {...register('name')}
           />
@@ -85,12 +115,12 @@ export default function ModalCreateCategory({ close }) {
                   ariaLabel="tail-spin-loading"
                   radius="5"
                 />
-                <p>Carregando</p>
+                <p>{translations.loading}</p>
               </>
             ) : (
               <>
                 <FiSave size={25} />
-                <p>Criar Categoria</p>
+                <p>{translations.createCategory}</p>
               </>
             )}
           </ModalButton>
