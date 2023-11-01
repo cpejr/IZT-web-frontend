@@ -83,23 +83,33 @@ export default function ProfileAnalysis() {
                   Altura entre centros (hw):{' '}
                   {inputData?.hwCenterHeight || '___'} mm
                 </Text2>
-                <Text2>Altura do dessador (hd): ___ mm</Text2>
+                <Text2>
+                  Altura do dessador (hd): {inputData?.dresserHeight || '___'}
+                  mm
+                </Text2>
 
-                <Text2>Inclinação do RA (adr): ___ °</Text2>
+                <Text2>
+                  Inclinação do RA (adr): {inputData?.raInclination || '---'} °
+                </Text2>
 
-                <Text2>Inclinação do dressador: ___ °</Text2>
+                <Text2>
+                  Inclinação do dressador:{' '}
+                  {inputData?.raDresserInclination || '___'} °
+                </Text2>
 
-                <Text2>Ângulo da régua (β): ___ °</Text2>
+                <Text2>
+                  Ângulo da régua (β): {inputData?.angleRuler || '___'} °
+                </Text2>
 
                 <Text2>Rotação do rebolo de arraste (nr): ___ rpm</Text2>
 
                 <Text2>Rotação do rebolo de arraste (nr): ___ rps</Text2>
 
                 <Text2>Velocidade periférica da peça (vp): ___ m/s</Text2>
-
-                <Text2>Velocidade de passagem da peça (vfa): ___ m/min</Text2>
               </OutputData>
               <OutputData rightOutputData>
+                <Text2>Velocidade de passagem da peça (vfa): ___ m/min</Text2>
+
                 <Text2> Quantidade de peça (Qp): ___ </Text2>
 
                 <Text2> Tempo de ciclo (tc): ___ min/pc</Text2>
@@ -111,10 +121,6 @@ export default function ProfileAnalysis() {
                 <Text2> Espessura de corte (hef): ___ mm</Text2>
 
                 <Text2> Ângulo de tangêcia (γ): ___ °</Text2>
-
-                <Text2> Ângulo de tangência RA (γra): ___ °</Text2>
-
-                <Text2> Ângulo de tangência RC (γrc) ___ °</Text2>
               </OutputData>
             </Column>
           </ContainerRight>
