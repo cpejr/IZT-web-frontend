@@ -5,9 +5,14 @@ import lottieConfirmedEmail from '../../assets/lotties/confirmedEmail.json';
 import lottieFailedEmail from '../../assets/lotties/failedEmail.json';
 import Loading from '../../components/common/Loading/Loading';
 import { useVerifyUser } from '../../hooks/query/users';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
 import { Container, Title } from './Styles';
+import { TranslateText } from './translations';
 
-export default function NotFound() {
+export default function ConfirmedEmail() {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const { token } = useParams();
   const { data: userName, isLoading } = useVerifyUser({
     token,
@@ -30,8 +35,8 @@ export default function NotFound() {
       />
       <Title>
         {userName
-          ? `Parabéns, ${userName}! Seu e-mail foi validado com sucesso!`
-          : 'Não foi possível validar o seu e-mail'}
+          ? `${translations.congratsMessage} ${userName} ${translations.succesMessage}`
+          : `${translations.errorMessage}`}
       </Title>
     </Container>
   );
