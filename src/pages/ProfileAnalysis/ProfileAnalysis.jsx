@@ -359,7 +359,7 @@ export default function ProfileAnalysis() {
                 </Text2>
                 <Text2>
                   {translations.grindingRotation} (nr):{' '}
-                  {Maths?.raRotationnr || '___'} rps
+                  {Maths?.radragRotationnr || '___'} rps
                 </Text2>
                 <Text2>
                   {translations.peripheralSpeed} (vp):{' '}

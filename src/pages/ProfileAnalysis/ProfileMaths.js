@@ -10,7 +10,7 @@ export default function ProfileMaths(InputDataStorage) {
   const electiveLengthMath = parseFloat(InputDataStorage?.electiveLength);
   const speedPeripheralMath = parseFloat(InputDataStorage?.speedPeripheral);
 
-  const raRotationnr = raRotationnrMath / 60;
+  const radragRotationnr = raRotationnrMath / 60;
   const peripheralSpeed =
     ((Math.PI * raDiameterMath * raRotationMath) / 60000) *
     Math.cos(raInclinationMath);
@@ -31,7 +31,7 @@ export default function ProfileMaths(InputDataStorage) {
     (2 * rcEffectiveLengthMath * totalLengthMath);
   const cutThickness = remove / speedPeripheralMath;
   return {
-    raRotationnr,
+    radragRotationnr,
     peripheralSpeed,
     passingSpeed,
     partQuantity,
