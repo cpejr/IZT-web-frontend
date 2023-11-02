@@ -187,6 +187,7 @@ export default function StabilityAnalysis() {
   // Form handlers
   const user = useAuthStore((state) => state.auth?.user);
   const [formDataStorage, setFormDataStorage] = useState({});
+
   const {
     handleSubmit: calculate,
     register,
@@ -218,7 +219,6 @@ export default function StabilityAnalysis() {
     createStabilityAnalysis(combinedData);
     setFormDataStorage({});
   };
-
   return (
     <Container>
       <DataEntryDiv>

@@ -22,6 +22,7 @@ import {
 import useAuthStore from '../../stores/auth';
 import { useGlobalLanguage } from '../../stores/globalLanguage';
 import { DivName, ErrorMessage, InputName } from '../StabilityAnalysis/Styles';
+import ProfileMaths from './ProfileMaths';
 import {
   Container,
   Column,
@@ -96,6 +97,7 @@ export default function ProfileAnalysis() {
   const [retificationCenterlessDiagram, setRetificationCenterlessDiagram] =
     useState([]);
   const [formDataStorage, setFormDataStorage] = useState({});
+  const [InputDataStorage, setInputDataStorage] = useState({});
   const queryClient = useQueryClient();
   const [collapse, setCollapse] = useState('');
 
@@ -168,6 +170,15 @@ export default function ProfileAnalysis() {
       }
     },
   });
+  let resolver1;
+  if (globalLanguage === 'DE') {
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchemaDE);
+  } else if (globalLanguage === 'EN') {
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchemaEN);
+  } else {
+    // eslint-disable-next-line no-unused-vars
+    resolver1 = zodResolver(saveProfileAnalysisValidationSchema);
+  }
 
   // Form handlers
   const {
@@ -180,20 +191,13 @@ export default function ProfileAnalysis() {
 
   const onSubmit = (data) => {
     setFormDataStorage(data);
+    setInputDataStorage(data);
     calculateProfileAnalysis(data);
   };
 
   useEffect(() => {}, [formDataStorage]);
   const user = useAuthStore((state) => state.auth?.user);
 
-  let resolver1;
-  if (globalLanguage === 'DE') {
-    resolver1 = zodResolver(saveProfileAnalysisValidationSchemaDE);
-  } else if (globalLanguage === 'EN') {
-    resolver1 = zodResolver(saveProfileAnalysisValidationSchemaEN);
-  } else {
-    resolver1 = zodResolver(saveProfileAnalysisValidationSchema);
-  }
   const {
     handleSubmit: save,
     register: register2,
@@ -202,11 +206,13 @@ export default function ProfileAnalysis() {
     defaultValues: formDataStorage,
     resolver: zodResolver(saveValidationSchema),
   });
+  const Maths = ProfileMaths(InputDataStorage);
 
   const onSubmit2 = (data) => {
     const combinedData = {
       ...formDataStorage,
       ...data,
+      ...Maths,
       user: user?._id,
     };
     createProfileAnalysis(combinedData);
@@ -247,7 +253,7 @@ export default function ProfileAnalysis() {
                     collapse={collapse === 'machine'}
                     register={register}
                     errors={errors}
-                    isProfileAnalysis={true}
+                    isProfileAnalysis
                   />
                 </Collapsable>
                 <Collapsable>
@@ -326,25 +332,80 @@ export default function ProfileAnalysis() {
           <ContainerRight>
             <Column>
               <OutputData>
-                <Text2> {translations.heightBetweenCenters} (hw): ___ mm</Text2>
-                <Text2>{translations.dresserHeight} (hd): ___ mm</Text2>
-                <Text2>{translations.raInclination} (adr): ___ °</Text2>
-                <Text2>{translations.dresserInclination}: ___ °</Text2>
-                <Text2>{translations.rulerAngle} (β): ___ °</Text2>
-                <Text2>{translations.grindingRotation} (nr): ___ rpm</Text2>
-                <Text2>{translations.grindingRotation} (nr): ___ rps</Text2>
-                <Text2>{translations.peripheralSpeed} (vp): ___ m/s</Text2>
-                <Text2>{translations.feedSpeed} (vfa): ___ m/min</Text2>
+                <Text2>
+                  {' '}
+                  {translations.heightBetweenCenters} (hw):{' '}
+                  {InputDataStorage?.heightCenters || '___'} mm
+                </Text2>
+                <Text2>
+                  {translations.dresserHeight} (hd):{' '}
+                  {InputDataStorage?.dresserHeight || '___'} mm
+                </Text2>
+                <Text2>
+                  {translations.raInclination} (adr):{' '}
+                  {InputDataStorage?.raInclination || '___'} °
+                </Text2>
+                <Text2>
+                  {translations.dresserInclination}:{' '}
+                  {InputDataStorage?.raDresserInclination || '___'} °
+                </Text2>
+                <Text2>
+                  {translations.rulerAngle} (β):{' '}
+                  {InputDataStorage?.angleRuler || '___'} °
+                </Text2>
+                <Text2>
+                  {translations.grindingRotation} (nr):{' '}
+                  {InputDataStorage?.raRotationnr || '___'} rpm
+                </Text2>
+                <Text2>
+                  {translations.grindingRotation} (nr):{' '}
+                  {Maths?.raRotationnr || '___'} rps
+                </Text2>
+                <Text2>
+                  {translations.peripheralSpeed} (vp):{' '}
+                  {Maths?.peripheralSpeed || '___'} m/s
+                </Text2>
+                <Text2>
+                  {translations.feedSpeed} (vfa): {Maths?.passingSpeed || '___'}{' '}
+                  m/min
+                </Text2>
               </OutputData>
               <OutputData rightOutputData>
-                <Text2> {translations.pieceQuantity} (Qp): ___ </Text2>
-                <Text2> {translations.cycleTime} (tc): ___ min/pc</Text2>
-                <Text2> {translations.revolutionsNumbers} (U): ___ </Text2>
-                <Text2> {translations.removalRate} (Qw’): ___ mm3/mm.s</Text2>
-                <Text2> {translations.cuttingThickness} (hef): ___ mm</Text2>
-                <Text2> {translations.tangentAngle} (γ): ___ °</Text2>
-                <Text2> {translations.tangentAngle} RA (γra): ___ °</Text2>
-                <Text2> {translations.tangentAngle} RC (γrc) ___ °</Text2>
+                <Text2>
+                  {' '}
+                  {translations.pieceQuantity} (Qp):{' '}
+                  {Maths?.partQuantity || '___'}{' '}
+                </Text2>
+                <Text2>
+                  {' '}
+                  {translations.cycleTime} (tc): {Maths?.cycleTime || '___'}{' '}
+                  min/pc
+                </Text2>
+                <Text2>
+                  {' '}
+                  {translations.revolutionsNumbers} (U):{' '}
+                  {Maths?.revolution || '___'}{' '}
+                </Text2>
+                {InputDataStorage?.rectificationProcess ===
+                'Centerless de Passagem' ? (
+                  <>
+                    <Text2>
+                      {translations.removalRate} (Qw’): {Maths?.remove || '___'}{' '}
+                      mm3/mm.s
+                    </Text2>
+                    <Text2>
+                      {' '}
+                      {translations.cuttingThickness} (hef):{' '}
+                      {Maths?.cutThickness || '___'} mm
+                    </Text2>
+                  </>
+                ) : null}
+
+                <Text2>
+                  {' '}
+                  {translations.tangentAngle} (γ):{' '}
+                  {InputDataStorage?.angleTangency || '___'} °
+                </Text2>
               </OutputData>
             </Column>
           </ContainerRight>
