@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import {
@@ -14,51 +14,55 @@ import {
 import { TranslateText } from './translations';
 
 export default function SoftwareLateralMenu() {
-  // Translation
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
 
+  const navigate = useNavigate();
   const [activeMenuItem, setActiveMenuItem] = useState(null);
 
-  const handleMenuItemClick = (index) => {
+  const menuItems = [
+    {
+      id: 'stability',
+      icon: <Cogs />,
+      label: translations.stabilityAnalysis,
+      path: '/software/analise-estabilidade',
+    },
+    {
+      id: 'profile',
+      icon: <CarWheel />,
+      label: translations.profile,
+      path: '/software/perfil',
+    },
+    {
+      id: 'reports',
+      icon: <BackwardTime />,
+      label: translations.reports,
+      path: '/software/secao-relatorio',
+    },
+  ];
+
+  const handleMenuItemClick = (id, path) => {
+    const index = menuItems.findIndex((item) => item.id === id);
     setActiveMenuItem(index);
+    navigate(path);
   };
 
   return (
     <Menu>
-      <MenuItem>
-        <Cogs />
-        <MenuLink
-          as={Link}
-          to="/software/analise-estabilidade"
-          active={activeMenuItem === 0}
-          onClick={() => handleMenuItemClick(0)}
+      {menuItems.map((item) => (
+        <MenuItem
+          key={item.id}
+          active={activeMenuItem === item.id}
+          onClick={() => handleMenuItemClick(item.id, item.path)}
         >
-          {translations.stabilityAnalysis}
-        </MenuLink>
-      </MenuItem>
-      <MenuItem>
-        <CarWheel />
-        <MenuLink
-          as={Link}
-          to="/software/perfil"
-          active={activeMenuItem === 1}
-          onClick={() => handleMenuItemClick(1)}
-        >
-          {translations.profile}
-        </MenuLink>
-      </MenuItem>
-      <MenuItem>
-        <BackwardTime />
-        <MenuLink
-          as={Link}
-          to="/software/secao-relatorio"
-          active={activeMenuItem === 2}
-          onClick={() => handleMenuItemClick(2)}
-        >
-          {translations.reports}
-        </MenuLink>
-      </MenuItem>
+          {React.cloneElement(item.icon, {
+            onClick: () => handleMenuItemClick(item.id, item.path),
+          })}
+          <MenuLink onClick={() => handleMenuItemClick(item.id, item.path)}>
+            {item.label}
+          </MenuLink>
+        </MenuItem>
+      ))}
     </Menu>
   );
 }

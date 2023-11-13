@@ -60,6 +60,8 @@ export const MenuItem = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+
+  cursor: pointer;
 `;
 
 export const MenuLink = styled.div`
@@ -95,6 +97,7 @@ export const MenuLink = styled.div`
     opacity: ${({ active }) => (active ? 1 : 0)};
     transition: opacity 0.2s ease;
   }
+
   @media (max-width: 1180px) {
     font-size: 20px;
   }
