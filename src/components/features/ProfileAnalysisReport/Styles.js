@@ -34,8 +34,8 @@ export const DataColumn = styled.div`
   gap: 0.5rem;
   width: 50%;
   height: 100%;
-  max-height: 25rem;
-  max-width: 28rem;
+  max-height: 26rem;
+  max-width: 29rem;
   /* margin: auto; erro na posição do título /*
   /*margin: 0.5rem;  Adicione o valor de margem que desejar (estava dando erro no alinhamento do pontilhado) */
   padding: 0.5rem; /* Opcional: Adiciona preenchimento interno para a div */
@@ -51,6 +51,19 @@ export const DataColumn = styled.div`
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
+`;
+export const RowDiagram = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  gap: 1rem;
+  justify-content: center;
+`;
+export const Diagram = styled.div`
+  width: 100%;
+  svg {
+    width: 100%;
+  }
 `;
 
 export const DataRow = styled.div`
@@ -76,10 +89,10 @@ export const DataContainer = styled.div`
   gap: 0.5rem;
   width: 100%;
   max-height: 25rem;
-  max-width: 28rem;
-  padding-left: 1.5rem;
+  max-width: 29rem;
+  padding-left: 0rem;
   @media (max-width: 1350px) {
-    max-height: 25rem;
+    max-height: 26rem;
   }
 `;
 

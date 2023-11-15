@@ -197,7 +197,6 @@ export default function ProfileAnalysis() {
 
   useEffect(() => {}, [formDataStorage]);
   const user = useAuthStore((state) => state.auth?.user);
-
   const {
     handleSubmit: save,
     register: register2,
@@ -390,8 +389,8 @@ export default function ProfileAnalysis() {
                 'Centerless de Passagem' ? (
                   <>
                     <Text2>
-                      {translations.removalRate} (Qw’): {Maths?.remove || '___'}{' '}
-                      mm3/mm.s
+                      {translations.removalRate} (Qw’):{' '}
+                      {Maths?.removeRate || '___'} mm3/mm.s
                     </Text2>
                     <Text2>
                       {' '}

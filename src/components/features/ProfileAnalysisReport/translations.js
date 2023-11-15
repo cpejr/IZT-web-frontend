@@ -34,6 +34,15 @@ export function TranslateText({ globalLanguage }) {
   let dresserHeight;
   let dresserPosition;
   let tfCenterlessGrindingGap;
+  let outputData;
+  let radragRotationnr;
+  let peripheralSpeed;
+  let passingSpeed;
+  let partQuantity;
+  let cycleTime;
+  let revolution;
+  let removeRate;
+  let cutThickness;
 
   if (globalLanguage === 'EN') {
     analysisData = 'Analysis Data';
@@ -70,6 +79,15 @@ export function TranslateText({ globalLanguage }) {
     dresserHeight = 'Dresser Height';
     dresserPosition = 'Dresser Position';
     tfCenterlessGrindingGap = 'Through-Feed Centerless Grinding Gap';
+    outputData = 'Output Data';
+    radragRotationnr = 'Grinding wheel rotation';
+    peripheralSpeed = 'Peripheral speed of the workpiece';
+    passingSpeed = 'Workpiece feed speed';
+    partQuantity = 'Quantity of pieces';
+    cycleTime = 'Cycle time';
+    revolution = 'Workpiece revolutions';
+    removeRate = 'Removal rate';
+    cutThickness = 'Cutting thickness';
   } else if (globalLanguage === 'PT') {
     analysisData = 'Dados da Análise';
     machineData = 'Dados da Máquina';
@@ -105,6 +123,15 @@ export function TranslateText({ globalLanguage }) {
     dresserHeight = 'Altura do dressador';
     dresserPosition = 'Posição do dressador';
     tfCenterlessGrindingGap = 'Vão de retificação centerless de passagem';
+    outputData = 'Dados de saída';
+    radragRotationnr = 'Rotação do rebolo de arraste';
+    peripheralSpeed = 'Velocidade periférica da peça';
+    passingSpeed = 'Velocidade de passagem da peça';
+    partQuantity = 'Quantidade de peças';
+    cycleTime = 'Tempo de ciclo';
+    revolution = 'Nr. revoluções da peça';
+    removeRate = 'Taxa de remoção';
+    cutThickness = 'Espessura de corte';
   } else if (globalLanguage === 'DE') {
     analysisData = 'Analyse-Daten';
     machineData = 'Maschinendaten';
@@ -140,6 +167,15 @@ export function TranslateText({ globalLanguage }) {
     dresserHeight = 'Dresser-Höhe';
     dresserPosition = 'Dresser-Position';
     tfCenterlessGrindingGap = 'Durchlauf-Centerless-Schleifspalt';
+    outputData = 'Ausgabedaten';
+    radragRotationnr = 'Schleifscheibendrehung';
+    peripheralSpeed = 'Umfangsgeschwindigkeit des Werkstücks';
+    passingSpeed = 'Werkstückvorschubgeschwindigkeit';
+    partQuantity = 'Werkstückmenge';
+    cycleTime = 'Zykluszeit';
+    revolution = 'Werkstückumdrehungen';
+    removeRate = 'Abtragsrate';
+    cutThickness = 'Schnittdicke';
   }
   return {
     analysisData,
@@ -176,5 +212,14 @@ export function TranslateText({ globalLanguage }) {
     dresserHeight,
     dresserPosition,
     tfCenterlessGrindingGap,
+    outputData,
+    radragRotationnr,
+    peripheralSpeed,
+    passingSpeed,
+    partQuantity,
+    cycleTime,
+    revolution,
+    removeRate,
+    cutThickness,
   };
 }

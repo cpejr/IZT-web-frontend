@@ -225,6 +225,35 @@ export default function ProfileAnalysisPDF({ data }) {
               </Text>
               <Text style={styles.item}>Sobremetal: {data?.allowance} mm</Text>
             </div>
+
+            <Text style={styles.section}>Dados de Saída</Text>
+
+            <div style={styles.space}>
+              <Text style={styles.item}>
+                Rotação do rebolo de arraste (nr): {data?.radragRotationnr} rps
+              </Text>
+              <Text style={styles.item}>
+                Velocidade periférica da peça (vp): {data?.peripheralSpeed} m/s
+              </Text>
+              <Text style={styles.item}>
+                Velocidade de passagem da peça (vfa): {data?.passingSpeed} m/min
+              </Text>
+              <Text style={styles.item}>
+                Quantidade de peça (Qp): {data?.partQuantity}
+              </Text>
+              <Text style={styles.item}>
+                Tempo de ciclo (tc): {data?.cycleTime} min/pc
+              </Text>
+              <Text style={styles.item}>
+                Nr. revoluções da peça: {data?.revolution} min/pc
+              </Text>
+              <Text style={styles.item}>
+                Taxa de remoção: {data?.removeRate} mm3/mm.s
+              </Text>
+              <Text style={styles.item}>
+                Espessura de corte: {data?.cutThickness} mm
+              </Text>
+            </div>
           </div>
           <div style={styles.collumn2}>
             {/* <Image style={styles.image} src={data?.graphImage[0].url} /> */}
