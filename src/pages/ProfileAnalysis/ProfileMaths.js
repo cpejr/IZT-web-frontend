@@ -22,14 +22,14 @@ export default function ProfileMaths(InputDataStorage) {
   const revolution =
     rcEffectiveLengthMath /
     (Math.PI * diameterMath * Math.tan(raInclinationMath));
-  const remove =
+  const removeRate =
     (allowanceMath *
       passingSpeed *
       Math.PI *
       diameterMath *
       electiveLengthMath) /
     (2 * rcEffectiveLengthMath * totalLengthMath);
-  const cutThickness = remove / speedPeripheralMath;
+  const cutThickness = removeRate / speedPeripheralMath;
   return {
     radragRotationnr,
     peripheralSpeed,
@@ -37,7 +37,7 @@ export default function ProfileMaths(InputDataStorage) {
     partQuantity,
     cycleTime,
     revolution,
-    remove,
+    removeRate,
     cutThickness,
   };
 }

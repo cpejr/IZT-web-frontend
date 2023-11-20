@@ -25,6 +25,8 @@ import {
   ReportName,
   DashedBar,
   ModalStyle,
+  RowDiagram,
+  Diagram,
 } from './Styles';
 import { TranslateText } from './translations';
 
@@ -203,12 +205,53 @@ export default function ProfileAnalysisReport({
             </DataColumn>
           </Row>
         </Columns>
-        <div>
-          <Title>{translations.tfCenterlessGrindingGap}</Title>
-          <ProfileAnalysisGraph
-            data={data?.profileAnalysisDiagram?.retificationCenterlessDiagram}
-          />
-        </div>
+        <RowDiagram>
+          <Diagram>
+            <Title>{translations.tfCenterlessGrindingGap}</Title>
+            <ProfileAnalysisGraph
+              data={data?.profileAnalysisDiagram?.retificationCenterlessDiagram}
+            />
+          </Diagram>
+          <DashedBar />
+          <DataColumn>
+            <Title>{translations.outputData}</Title>
+            <DataContainer>
+              <DataRow>
+                <Label>{translations.radragRotationnr}: (nr)</Label>
+                <Data>{data?.radragRotationnr} rps</Data>
+              </DataRow>
+              <DataRow>
+                <Label>{translations.peripheralSpeed} (vp):</Label>
+                <Data>{data?.peripheralSpeed} m/s</Data>
+              </DataRow>
+              <DataRow>
+                <Label>{translations.passingSpeed} (vfa):</Label>
+                <Data>{data?.passingSpeed} m/min</Data>
+              </DataRow>
+              <DataRow>
+                <Label>{translations.partQuantity} (Qp):</Label>
+                <Data>{data?.partQuantity} </Data>
+              </DataRow>
+              <DataRow>
+                <Label>{translations.cycleTime} (tc):</Label>
+                <Data>{data?.cycleTime} min/pc</Data>
+              </DataRow>
+              <DataRow>
+                <Label>{translations.revolution}:</Label>
+                <Data>{data?.revolution} min/pc</Data>
+              </DataRow>
+              <DataRow>
+                <Label>{translations.removeRate}:</Label>
+                <Data>{data?.removeRate} mm3/mm.s</Data>
+              </DataRow>
+              <DataRow>
+                <Label>{translations.cutThickness}:</Label>
+                <Data>{data?.cutThickness} mm</Data>
+              </DataRow>
+            </DataContainer>
+          </DataColumn>
+        </RowDiagram>
+
         <ButtonRow>
           <button type="button" onClick={saveFile}>
             {translations.download}

@@ -24,7 +24,7 @@ export default function ProfileAnalysisGraph({ data }) {
           title: 'Y Axis',
         },
       }}
-      style={{ width: '40%', height: '300px' }}
+      style={{ width: '100%', height: '300px' }}
       useResizeHandler="true"
     />
   );
