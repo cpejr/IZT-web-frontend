@@ -2,6 +2,7 @@ import { DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons';
 import { toast } from 'react-toastify';
 
 import { useGetVideo } from '../../../hooks/query/videos';
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import useVideoStore from '../../../stores/video';
 import { Loading } from '../../common';
 import Player from '../Player/Player';
@@ -16,8 +17,13 @@ import {
   Description,
 } from './Styles';
 import { buildGetVideoErrorMessage, playerConfig } from './utils';
+import { TranslateText } from './translations';
 
 export default function Video() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const currVideoId = useVideoStore((state) => state.currVideoId);
   const previous = useVideoStore((state) => state.previous);
   const next = useVideoStore((state) => state.next);
@@ -41,7 +47,7 @@ export default function Video() {
   return (
     <Container>
       <VideoBody>
-        <VideoTitle>{currVideo?.title}</VideoTitle>
+        <VideoTitle>{translations[`video${currVideoId}`]}</VideoTitle>
         <Player
           videoId={currVideoId}
           url={currVideo?.url}
@@ -52,16 +58,16 @@ export default function Video() {
         <Buttons>
           <ChangeVideoButton onClick={previous}>
             <DoubleLeftOutlined />
-            Anterior
+            {translations.previous}
           </ChangeVideoButton>
           <ChangeVideoButton onClick={next}>
-            Próximo
+            {translations.next}
             <DoubleRightOutlined />
           </ChangeVideoButton>
         </Buttons>
       </VideoBody>
       <VideoFooter>
-        <Description>Descrição</Description>
+        <Description>{translations.description}</Description>
         <Text>{currVideo?.description}</Text>
       </VideoFooter>
     </Container>

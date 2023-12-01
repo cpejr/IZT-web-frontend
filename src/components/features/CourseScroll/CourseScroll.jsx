@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import { useGlobalLanguage } from '../../../stores/globalLanguage';
 import VideoSelect from '../VideoSelect/VideoSelect';
 import {
@@ -19,22 +20,19 @@ export default function CourseScroll({ chapters = [] }) {
 
   return (
     <CourseContent>
-            {chapters?.map(({ _id, title, videos }) => (
+      {chapters?.map(({ _id, videos }, index) => (
         <ChaptersContainer key={_id}>
-          <ChapterTitle>{title}</ChapterTitle>
-      {/* {chapters?.map(({ _id, title, videos }, index) => (
-        
-        <ChaptersContainer key={_id}>
-          <ChapterTitle>{translationsChapters[`chapter${index + 1}`]}</ChapterTitle> */}
+          <ChapterTitle>
+            {translationsChapters[`chapter${index + 1}`]}{' '}
+          </ChapterTitle>
           <GreyLine />
           <ChaptersContent>
             {videos?.map((video) => (
-              // <VideoSelect key={video?._id} video={video} />
               <VideoSelect
                 key={video?._id}
                 video={{
                   ...video,
-                  title: translationsVideos[`video${video?._id}`], 
+                  title: translationsVideos[`video${video?._id}`],
                 }}
               />
             ))}
