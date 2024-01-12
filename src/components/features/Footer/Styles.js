@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+const mobileBreakPoint = '850px';
+
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
-  height: 326px;
+  height: 30rem;
   width: 100%;
 
-  @media (max-width: 850px) {
+  @media (max-width: ${mobileBreakPoint}) {
     flex-direction: column;
-    height: 500px;
   }
 `;
 
@@ -20,12 +21,18 @@ export const SideContainer = styled.div`
   width: 33.33%;
   justify-content: center;
   align-items: center;
-  padding: 7%;
+  padding: 0% 7%;
 
-  @media (max-width: 850px) {
+  @media (max-width: ${mobileBreakPoint}) {
     width: 100%;
     height: auto;
     padding: 3% 7%;
+  }
+`;
+
+export const LogoSection = styled.div`
+  @media (max-width: ${mobileBreakPoint}) {
+    padding-top: 3rem;
   }
 `;
 
@@ -33,14 +40,14 @@ export const Text = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 500;
-  font-size: 15px;
-  line-height: 18px;
+  font-size: 1.5rem;
+  line-height: 1.8rem;
   text-align: center;
   color: black;
-  padding-top: 16px;
+  padding-top: 1.6rem;
 
-  @media (max-width: 850px) {
-    font-size: 14px;
+  @media (max-width: ${mobileBreakPoint}) {
+    font-size: 1.4rem;
   }
 `;
 
@@ -53,7 +60,7 @@ export const MiddleContainer = styled.div`
   align-items: center;
   padding: 0% 7%;
 
-  @media (max-width: 850px) {
+  @media (max-width: ${mobileBreakPoint}) {
     display: none;
   }
 `;
@@ -62,13 +69,13 @@ export const Tittle = styled.p`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
 
   color: #203699;
 
-  @media (max-width: 850px) {
-    font-size: 16px;
+  @media (max-width: ${mobileBreakPoint}) {
+    font-size: 1.6rem;
   }
 `;
 
@@ -77,14 +84,14 @@ export const SocialMedias = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 5px 0px;
-  gap: 10px;
-  margin-bottom: 10px;
-  margin-top: 15px;
+  padding: 0.5rem 0rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
 
-  @media (max-width: 850px) {
-    margin-bottom: 20px;
-    margin-top: 20px;
+  @media (max-width: ${mobileBreakPoint}) {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
   }
 `;
 
@@ -93,8 +100,9 @@ export const SocialMediaButton = styled.a`
 
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  text-align: center;
+  width: 3.8rem;
+  height: auto;
   border: none;
   background: none;
 
@@ -111,11 +119,11 @@ export const GoTo = styled(Link)`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 700;
-  font-size: 15px;
-  line-height: 18px;
+  font-size: 1.5rem;
+  line-height: 1.8rem;
 
   color: #000000;
-  padding-top: 13px;
+  padding-top: 1.3rem;
 
   &:hover {
     color: ${(props) => props.theme.colors.blue};
@@ -125,16 +133,16 @@ export const GoTo = styled(Link)`
 export const ButtonMobile = styled.div`
   display: none;
   width: 80%;
-  height: 80px;
-  font-size: 15px;
-  margin-bottom: 40px;
+  height: 8rem;
+  font-size: 1.5rem;
+  margin-bottom: 4rem;
 
-  @media (max-width: 850px) {
+  @media (max-width: ${mobileBreakPoint}) {
     display: flex;
     height: auto;
     justify-content: center;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
     width: 70%;
   }
 `;
@@ -145,8 +153,9 @@ export const SectionGoTo = styled.section`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 850px) {
-    padding-bottom: 20px;
+  @media (max-width: ${mobileBreakPoint}) {
+    padding-bottom: 2rem;
+    /* display: none; */
   }
 `;
 
@@ -157,20 +166,20 @@ export const ContactButton = styled.button`
   box-sizing: border-box;
 
   width: 100%;
-  height: 62px;
-  margin-top: 35px;
+  height: 6.2rem;
+  margin-top: 3.5rem;
 
   background: ${(props) => props.theme.colors.blue};
   border: 0;
-  border-radius: 4px;
+  border-radius: 0.4rem;
 
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 2rem;
+  line-height: 2.4rem;
   text-align: center;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2rem;
 
   color: white;
 
@@ -182,16 +191,22 @@ export const ContactButton = styled.button`
   }
 
   @media (max-width: 700px) {
-    font-size: 15px;
-    height: 40px;
-    margin-top: 0px;
+    font-size: 1.5rem;
+    letter-spacing: 0.15rem;
+    height: 4rem;
+    margin-top: 0rem;
     max-width: 80%;
   }
   @media (max-width: 1200px) {
-    font-size: 16px;
-    height: 45px;
+    font-size: 1.6rem;
+    letter-spacing: 0.16rem;
+    height: 4.5rem;
   }
   @media (max-width: 320px) {
     max-width: 95%;
   }
+`;
+
+export const Centralize = styled.div`
+  text-align: center;
 `;

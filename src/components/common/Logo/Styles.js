@@ -7,34 +7,30 @@ export const LinkContainer = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 15px;
+  gap: 1.5rem;
   width: auto;
-  min-width: 179px;
+  min-width: 17.9rem;
 
   h1 {
     font-family: ${(props) => props.theme.fonts.montserrat};
     font-weight: 500;
-    font-size: 22px;
+    font-size: 2.2rem;
     color: ${(props) => props.theme.colors.blue};
 
     @media (max-width: 990px) {
-      gap: 5px;
+      gap: 0.5rem;
       font-weight: 600;
     }
     @media (max-width: 320px) {
-      font-size: 18px;
+      font-size: 1.8rem;
     }
-  }
-
-  @media (max-width: 990px) {
-    gap: 5px;
   }
 `;
 export const Image = styled.img`
   width: auto;
-  height: 75px;
+  height: 7.5rem;
 
   @media (max-width: 990px) {
-    height: 50px;
+    height: 5rem;
   }
 `;

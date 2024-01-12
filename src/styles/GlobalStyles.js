@@ -9,9 +9,13 @@ export default createGlobalStyle`
   box-sizing: border-box;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-family: ${(props) => props.theme.fonts.montserrat}, sans-serif;
+  font-size: 1.4rem;
   background: white;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

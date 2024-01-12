@@ -4,29 +4,24 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 30%;
+  gap: 4rem;
 
-  width: 100vw;
-
-  position: absolute;
-  bottom: 10vh;
-  left: 10vw;
+  width: 100%;
+  margin: 4.5rem auto;
 
   margin-right: auto;
   margin-left: auto;
 
   @media screen and (min-width: 1440px) {
-    width: 1440px;
+    width: 144rem;
     padding-left: 10%;
   }
 
   @media screen and (max-width: 1024px) {
-    position: static;
     align-items: center;
     justify-content: center;
     gap: 1vh;
 
-    height: 100vh;
     width: 90vw;
   }
 `;
@@ -39,7 +34,7 @@ export const Title = styled.h1`
 
   color: #af0c0c;
   @media screen and (min-width: 1440px) {
-    font-size: 256px;
+    font-size: 25.6rem;
   }
 
   @media screen and (max-width: 1024px) {
@@ -57,7 +52,7 @@ export const Subtitle = styled.p`
 
   color: #123645;
   @media screen and (min-width: 1440px) {
-    font-size: 96px;
+    font-size: 9.6rem;
   }
 
   @media screen and (max-width: 1024px) {
@@ -76,7 +71,7 @@ export const Description = styled.h3`
   color: #000000;
 
   @media screen and (min-width: 1440px) {
-    font-size: 32px;
+    font-size: 3.2rem;
   }
 
   @media screen and (max-width: 1024px) {

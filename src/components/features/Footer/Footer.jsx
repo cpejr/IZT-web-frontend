@@ -1,9 +1,14 @@
-import { BsInstagram, BsWhatsapp } from 'react-icons/bs';
 import { AiOutlineLinkedin, AiOutlineFacebook } from 'react-icons/ai';
+import { BsInstagram, BsWhatsapp } from 'react-icons/bs';
 import { HiOutlineMail } from 'react-icons/hi';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { useGlobalLanguage } from '../../../stores/globalLanguage';
+import { Logo } from '../../common';
 import {
   Container,
   SideContainer,
+  LogoSection,
   MiddleContainer,
   Text,
   Tittle,
@@ -13,61 +18,94 @@ import {
   ButtonMobile,
   SectionGoTo,
   ContactButton,
+  Centralize,
 } from './Styles';
-import { Logo } from '../../common';
+import { TranslateText } from './translations';
 
 export default function Footer() {
+  // Translation
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleContactButtonClick = () => {
+    const currentURL = window.location.href;
+    const isHomePage = !currentURL.includes('/');
+    function changeUrl() {
+      window.history.replaceState(
+        {},
+        document.title,
+        location.pathname + location.search
+      );
+    }
+
+    if (isHomePage) {
+      window.location.href = '/#contact';
+      window.location.href = '/#home';
+      changeUrl();
+    } else if (currentURL.includes('#contact')) {
+      window.location.href = '/#contact';
+      window.location.href = '/#home';
+      changeUrl();
+    } else {
+      navigate('/');
+      window.location.href = '/#contact';
+      changeUrl();
+    }
+  };
+
   return (
     <Container>
       <SideContainer>
-        <Logo />
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-          aliquam blandit convallis. Proin luctus turpis vitae urna feugiat
-          eleifend. Orci varius natoque penatibus et magnis dis parturient
-          montes, nascetur ridiculus.
-        </Text>
+        <LogoSection>
+          <Logo />
+        </LogoSection>
+        <Text> {translations.IZTDescription} </Text>
       </SideContainer>
-
       <MiddleContainer>
-        <Tittle>Contato</Tittle>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in
-          risus ullamcorper, venenatis sem vulputate, dapibus lacus. Integer
-          risus turpis.
-        </Text>
-        <ContactButton>Fale Conosco</ContactButton>
+        <Tittle>{translations.contact}</Tittle>
+        <Text>{translations.contactDescription}</Text>
+
+        <ContactButton onClick={handleContactButtonClick}>
+          {translations.button}
+        </ContactButton>
       </MiddleContainer>
 
       <SideContainer>
-        <Tittle>Nossas Redes</Tittle>
+        <Tittle>
+          <Centralize>{translations.socialMedia}</Centralize>
+        </Tittle>
         <SocialMedias>
           <SocialMediaButton href="https://cpejr.com/">
-            <BsInstagram size={35} />
+            <BsInstagram size={30} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
-            <AiOutlineLinkedin size={35} />
+            <AiOutlineLinkedin size={40} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
-            <AiOutlineFacebook size={35} />
+            <AiOutlineFacebook size={40} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
-            <BsWhatsapp size={35} />
+            <BsWhatsapp size={30} />
           </SocialMediaButton>
           <SocialMediaButton href="https://cpejr.com/">
-            <HiOutlineMail size={35} />
+            <HiOutlineMail size={40} />
           </SocialMediaButton>
         </SocialMedias>
 
         <ButtonMobile>
-          <ContactButton>Fale Conosco</ContactButton>
+          <ContactButton onClick={handleContactButtonClick}>
+            {translations.button}
+          </ContactButton>
         </ButtonMobile>
 
         <SectionGoTo>
-          <Tittle>Ir para</Tittle>
-          <GoTo to="/">Produtos</GoTo>
-          <GoTo to="/">Cursos</GoTo>
-          <GoTo to="/">Software</GoTo>
+          <Tittle>{translations.goTo}</Tittle>
+          <GoTo to="/catalogo">{translations.products}</GoTo>
+          <GoTo to="/curso">{translations.courses}</GoTo>
+          <GoTo to="/software">Software</GoTo>
         </SectionGoTo>
       </SideContainer>
     </Container>
