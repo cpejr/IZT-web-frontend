@@ -71,7 +71,9 @@ export default function Register() {
   // Backend calls
   const { mutate: createUser, isLoading } = useCreateUser({
     onSuccess: (user) => {
-      navigate('/verificar-email', { state: user.email });
+      setTimeout(() => {
+        navigate('/verificar-email', { state: user.email });
+      }, 2000);
     },
     onError: (err) => {
       if (globalLanguage === 'DE') {
