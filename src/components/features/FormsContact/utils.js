@@ -14,6 +14,10 @@ export const formsValidationSchema = z.object({
   telephone: z
     .string()
     .nonempty('Favor digitar o número do telefone')
+    .regex(
+      /^\+\d{2} \(\d{2}\) \d{5}-\d{4}$/,
+      'Insira um número de telefone válido'
+    )
     .transform((value) => value.replace(/[\s()-]*/g, '')),
   message: z
     .string()
