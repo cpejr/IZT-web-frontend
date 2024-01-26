@@ -1,3 +1,5 @@
+import { TitleRow } from '../../../pages/StabilityAnalysis/Styles';
+
 // eslint-disable-next-line import/prefer-default-export
 export function TranslateText({ globalLanguage }) {
   let loading;
@@ -15,6 +17,7 @@ export function TranslateText({ globalLanguage }) {
   let label9;
   let label10;
   let succesToast;
+  let title;
 
   if (globalLanguage === 'PT') {
     loading = 'Carregando';
@@ -32,6 +35,7 @@ export function TranslateText({ globalLanguage }) {
     label9 = 'Endereço:';
     label10 = 'Enviar';
     succesToast = 'Pedido enviado com sucesso!';
+    title = 'Requisite um orçamento';
   } else if (globalLanguage === 'EN') {
     loading = 'Loading';
     label1 = 'Name:';
@@ -48,6 +52,7 @@ export function TranslateText({ globalLanguage }) {
     label9 = 'Address:';
     label10 = 'Send';
     succesToast = 'Order sent successfully!';
+    title = 'Request a quote';
   } else if (globalLanguage === 'DE') {
     loading = 'Laden';
     label1 = 'Name:';
@@ -64,6 +69,7 @@ export function TranslateText({ globalLanguage }) {
     label9 = 'Adresse:';
     label10 = 'Senden';
     succesToast = 'Bestellung erfolgreich versandt!';
+    title = 'Fordern Sie ein Angebot an';
   }
 
   return {
@@ -82,5 +88,6 @@ export function TranslateText({ globalLanguage }) {
     label9,
     label10,
     succesToast,
+    title,
   };
 }

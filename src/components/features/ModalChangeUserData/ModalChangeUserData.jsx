@@ -59,7 +59,7 @@ export default function ModalChangeUserData({ close, language }) {
     onSuccess: (data) => {
       setUser(data);
 
-      toast.success('Dados Alterados com Sucesso');
+      toast.success(translations.toast);
       close();
     },
     onError: (err) => {

@@ -7,6 +7,7 @@ export function TranslateText({ globalLanguage }) {
   let loginNotAccount;
   let loginHere;
   let loading;
+  let toast;
 
   if (globalLanguage === 'EN') {
     loginJoin = 'Log in to your account';
@@ -16,6 +17,7 @@ export function TranslateText({ globalLanguage }) {
     loginNotAccount = 'Do not have an account yet? ';
     loginHere = 'Sign up here!';
     loading = 'Loading';
+    toast = 'User logged in successfully!';
   } else if (globalLanguage === 'PT') {
     loginJoin = 'Entre na sua conta';
     loginPassword = 'Senha:';
@@ -24,6 +26,7 @@ export function TranslateText({ globalLanguage }) {
     loginNotAccount = 'Ainda não tem uma conta? ';
     loginHere = 'Cadastre-se aqui!';
     loading = 'Carregando';
+    toast = 'Usuário logado com sucesso!';
   } else if (globalLanguage === 'DE') {
     loginJoin = 'Melden Sie sich an Ihrem Konto an';
     loginPassword = 'Passwort:';
@@ -32,6 +35,7 @@ export function TranslateText({ globalLanguage }) {
     loginNotAccount = 'Haben Sie noch kein Konto? ';
     loginHere = 'Hier registrieren!';
     loading = 'Wird geladen';
+    toast = 'Benutzer hat sich erfolgreich angemeldet!';
   }
   return {
     loginJoin,
@@ -41,5 +45,6 @@ export function TranslateText({ globalLanguage }) {
     loginNotAccount,
     loginHere,
     loading,
+    toast,
   };
 }

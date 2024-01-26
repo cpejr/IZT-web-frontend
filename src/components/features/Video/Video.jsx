@@ -16,8 +16,8 @@ import {
   Text,
   Description,
 } from './Styles';
-import { buildGetVideoErrorMessage, playerConfig } from './utils';
 import { TranslateText } from './translations';
+import { buildGetVideoErrorMessage, playerConfig } from './utils';
 
 export default function Video() {
   // Translation
