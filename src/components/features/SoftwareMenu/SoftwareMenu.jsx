@@ -58,7 +58,10 @@ export default function SoftwareLateralMenu() {
           {React.cloneElement(item.icon, {
             onClick: () => handleMenuItemClick(item.id, item.path),
           })}
-          <MenuLink onClick={() => handleMenuItemClick(item.id, item.path)}>
+          <MenuLink
+            onClick={() => handleMenuItemClick(item.id, item.path)}
+            language={globalLanguage}
+          >
             {item.label}
           </MenuLink>
         </MenuItem>

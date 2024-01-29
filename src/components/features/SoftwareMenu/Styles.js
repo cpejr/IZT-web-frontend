@@ -70,7 +70,12 @@ export const MenuLink = styled.div`
   font-family: ${(props) => props.theme.fonts.montserrat};
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
+  font-size: ${(props) =>
+    props.language === 'PT'
+      ? '24px'
+      : props.language === 'DE'
+      ? '18px'
+      : '24px'};
   line-height: 29px;
   text-align: center;
   padding-top: 10px;
@@ -114,6 +119,7 @@ export const MenuLink = styled.div`
     font-size: 15px;
   }
 `;
+
 export const Line = styled.div`
   border-bottom: 2px solid #ffffff;
   width: 100%;
