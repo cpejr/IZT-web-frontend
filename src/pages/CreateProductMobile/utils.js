@@ -25,7 +25,8 @@ export const createProductValidationSchema = z.object({
   documents: z
     .array(z.object({ file: z.instanceof(File) }))
     .default([])
-    .transform((documents) => documents.map(({ file }) => file)),
+    .transform((documents) => documents.map(({ file }) => file))
+    .optional(),
 });
 
 // Toast Success

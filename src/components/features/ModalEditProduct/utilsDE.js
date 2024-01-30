@@ -34,21 +34,11 @@ export const editProductValidationSchemaDE = z.object({
     )
     .nonempty('Sie müssen mindestens ein Foto hochladen')
     .transform((pictures) => pictures.map(({ file }) => file)),
-  documents: z
-    .array(
-      z.object({
-        file: z.instanceof(File).or(
-          z.object({
-            name: z.string(),
-            mimeType: z.string(),
-            url: z.string(),
-            key: z.string(),
-          })
-        ),
-      })
-    )
-    .nonempty('Sie müssen mindestens ein Dokument hochladen')
-    .transform((documents) => documents.map(({ file }) => file)),
+    documents: z
+    .array(z.object({ file: z.instanceof(File) }))
+    .default([])
+    .transform((documents) => documents.map(({ file }) => file))
+    .optional(),
 });
 
 // Error Handling
