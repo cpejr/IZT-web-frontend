@@ -49,7 +49,7 @@ export const DataColumn = styled.div`
   width: 50%;
   height: 100%;
   max-height: 25rem;
-  max-width: 28rem;
+  max-width: 38rem;
   padding: 0.5rem;
 
   @media (max-width: 1350px) {
@@ -69,7 +69,7 @@ export const DataContainer = styled.div`
   gap: 0.5rem;
   width: 100%;
   height: 100%;
-  max-height: 15rem;
+  max-height: 30rem;
   max-width: 28rem;
   padding-left: 1.5rem;
   @media (max-width: 1350px) {
@@ -112,7 +112,7 @@ export const DataRow = styled.div`
   gap: 1rem;
   width: 100%;
   //height: 100%; // tá aquiii
-  margin-left: 1rem;
+
   @media (max-width: 1075px) {
     gap: 0.5rem;
   }
@@ -183,6 +183,7 @@ export const Data = styled.div`
   line-height: 1.83rem;
   color: white;
   white-space: nowrap;
+
   @media (max-width: 1580px) {
     font-size: 1.4rem;
   }
