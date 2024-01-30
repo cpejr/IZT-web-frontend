@@ -45,7 +45,7 @@ export const editProductValidationSchema = z.object({
         ),
       })
     )
-    .nonempty('Você deve inserir ao menos uma foto')
+    .nonempty('Você deve inserir ao menos um documento')
     .transform((documents) => documents.map(({ file }) => file)),
 });
 
