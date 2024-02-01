@@ -19,6 +19,7 @@ export default function VerifyEmail() {
         {translations.checkEmail} {email}
       </h1>
       <Text>{translations.emailSent}</Text>
+      <Text>{translations.checkSpam}</Text>
     </Container>
   );
 }

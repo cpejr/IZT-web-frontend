@@ -34,7 +34,7 @@ export function TranslateText({ globalLanguage }) {
     profileCourse = 'Course ';
     profileAccess = 'Access Validity: ';
     profileUnlimitedAccess = 'Unlimited Access ';
-    profileNoAccess = 'No access: ';
+    profileNoAccess = 'No access';
     profileChangeInformation = 'Change Information';
   } else if (globalLanguage === 'PT') {
     profileTitle1 = 'Informações do Usuário';
@@ -52,7 +52,7 @@ export function TranslateText({ globalLanguage }) {
     profileCourse = 'Curso ';
     profileAccess = 'Validade de Acesso: ';
     profileUnlimitedAccess = 'Acesso Ilimitado ';
-    profileNoAccess = 'Sem Acesso: ';
+    profileNoAccess = 'Sem Acesso ';
     profileChangeInformation = 'Alterar Infomações';
   } else if (globalLanguage === 'DE') {
     profileTitle1 = 'Benutzerinformationen';

@@ -42,7 +42,7 @@ export default function Login() {
 
   const { mutate: login, isLoading } = useLogin({
     onSuccess: () => {
-      toast.success('Usuário logado com sucesso!');
+      toast.success(translations.toast);
 
       const { auth } = useAuthStore.getState();
       const isAdminPath = auth?.user?.isAdmin ? '/administrador' : '/perfil';

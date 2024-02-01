@@ -25,7 +25,7 @@ export default function ModalDeleteProduct({ _id, close }) {
         queryKey: ['products'],
       });
 
-      toast.success('Produto deletado com sucesso.');
+      toast.success(translations.toast);
       close();
     },
     onError: (err) => {

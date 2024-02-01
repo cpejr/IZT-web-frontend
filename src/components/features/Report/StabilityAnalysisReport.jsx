@@ -207,6 +207,7 @@ export default function StabilityAnalysisReport({
           <ModalDeleteStabilityAnalysis
             _id={stabilityId}
             close={closeModalDeleteStabilityAnalysis}
+            globalLanguage={globalLanguage}
           />
         </ModalStyle>
       </Container>
