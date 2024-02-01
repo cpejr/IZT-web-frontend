@@ -8,11 +8,19 @@ export const Container = styled.div`
   width: 100%;
   height: auto;
 
-  @media (max-width: 700px) {
+  @media (max-width: 767px) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
+`;
+
+export const ContainerMobile = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 100%;
+  height: auto;
 `;
 
 export const ErrorMessageArea = styled.div`
@@ -36,6 +44,7 @@ export const ImageArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `;
 
 export const Image = styled.img`

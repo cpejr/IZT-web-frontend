@@ -8,11 +8,12 @@ import {
   ErrorMessageArea,
   ImageArea,
   Image,
+  ContainerMobile,
 } from './Styles';
 import { useMediaQuery } from 'react-responsive';
 import { useGlobalLanguage } from '../../stores/globalLanguage';
 import { TranslateTextSoftwareLayouts } from './translations';
-import ErrorimageMobile from '../../assets/ErrorImageMobile/ErrorImageMobile.png';
+import ErrorImage from '../../assets/ErrorImageMobile/ErrorImage.png';
 
 export default function SoftwareLayout() {
   const user = useAuthStore((state) => state.auth?.user);
@@ -26,15 +27,15 @@ export default function SoftwareLayout() {
   return (
     <Container>
       {isMobile ? (
-        <Container>
+        <ContainerMobile>
           <ErrorMessageArea>
             <ErrorMessage>{translation.textMobile1}</ErrorMessage>
             <ErrorMessage>{translation.textMobile2}</ErrorMessage>
           </ErrorMessageArea>
           <ImageArea>
-            <Image src={ErrorimageMobile} alt="ImageBuildingWeb" />
+            <Image src={ErrorImage} alt="ImageBuildingWeb" />
           </ImageArea>
-        </Container>
+        </ContainerMobile>
       ) : (
         <>
           <SoftwareMenu />

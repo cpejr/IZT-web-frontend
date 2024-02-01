@@ -62,7 +62,7 @@ export const DataColumn = styled.div`
 
 export const DataContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex;
   flex-wrap: wrap;
   padding: 15px 20px;
@@ -107,12 +107,12 @@ export const Row = styled.div`
 export const DataRow = styled.div`
   display: flex;
   flex-direction: row;
-  display: flex;
   justify-content: flex-start;
   gap: 1rem;
   width: 100%;
   //height: 100%; // tá aquiii
-
+  margin-left: 1rem;
+  flex-wrap: wrap;
   @media (max-width: 1075px) {
     gap: 0.5rem;
   }
