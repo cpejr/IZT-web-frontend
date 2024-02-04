@@ -61,7 +61,6 @@ export default function ProfileAnalysisReport({
       .toBlob()
       .then((blob) => saveAs(blob, `${data?.name}.pdf`));
   };
-
   return (
     <div>
       <ReportName isOpened={isOpened} onClick={() => handleOpened(data._id)}>
@@ -210,6 +209,7 @@ export default function ProfileAnalysisReport({
             <Title>{translations.tfCenterlessGrindingGap}</Title>
             <ProfileAnalysisGraph
               data={data?.profileAnalysisDiagram?.retificationCenterlessDiagram}
+              globalLanguage={globalLanguage}
             />
           </Diagram>
           <DashedBar />
@@ -279,6 +279,7 @@ export default function ProfileAnalysisReport({
           <ModalDeleteProfileAnalysis
             _id={profileId}
             close={closeModalDeleteProfileAnalysis}
+            globalLanguage={globalLanguage}
           />
         </ModalStyle>
       </Container>

@@ -2,8 +2,11 @@
 import React from 'react';
 
 import Plot from 'react-plotly.js';
+import { TranslateText } from './translations';
 
-export default function Graphic({ data }) {
+export default function Graphic({ data, globalLanguage }) {
+  const translations = TranslateText({ globalLanguage });
+
   return (
     <Plot
       data={[
@@ -18,7 +21,7 @@ export default function Graphic({ data }) {
       ]}
       layout={{
         autosize: true,
-        title: 'Gráfico IZT',
+        title: translations.chart,
         xaxis: {
           title: 'X Axis',
         },

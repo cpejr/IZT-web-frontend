@@ -19,6 +19,7 @@ export function TranslateText({ language }) {
   let profileStreet;
   let profileChangeInformation;
   let profileLoading;
+  let toast;
 
   if (language === 'EN') {
     profilePersonalInfo = 'Personal information';
@@ -40,6 +41,7 @@ export function TranslateText({ language }) {
     profileStreet = 'Street: ';
     profileChangeInformation = 'Save Information';
     profileLoading = 'Loading';
+    toast = 'Successfully changed data';
   } else if (language === 'PT') {
     profilePersonalInfo = 'Informações Pessoais';
     profileCompany = 'Empresa: ';
@@ -60,6 +62,7 @@ export function TranslateText({ language }) {
     profileStreet = 'Rua: ';
     profileChangeInformation = 'Salvar Infomações';
     profileLoading = 'Carregando';
+    toast = 'Dados Alterados com Sucesso';
   } else if (language === 'DE') {
     profilePersonalInfo = 'Persönliche Informationen';
     profileCompany = 'Unternehmen: ';
@@ -80,6 +83,7 @@ export function TranslateText({ language }) {
     profileStreet = 'Straße: ';
     profileChangeInformation = 'Informationen speichern';
     profileLoading = 'Laden';
+    toast = 'Daten erfolgreich geändert';
   }
   return {
     profilePersonalInfo,
@@ -101,5 +105,6 @@ export function TranslateText({ language }) {
     profileStreet,
     profileChangeInformation,
     profileLoading,
+    toast,
   };
 }

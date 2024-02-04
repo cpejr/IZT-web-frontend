@@ -9,7 +9,15 @@ import { useDeleteProfileAnalysis } from '../../../hooks/query/profileAnalysis';
 import { Container, DeleteButton, Message } from './Styles';
 import { buildDeleteProfileAnalysisErrorMessage } from './utils';
 
-export default function ModalDeleteProfileAnalysis({ _id, close }) {
+import { TranslateText } from './translations';
+
+export default function ModalDeleteProfileAnalysis({
+  _id,
+  close,
+  globalLanguage,
+}) {
+  const translations = TranslateText({ globalLanguage });
+
   const [isPending, setIsPending] = useState(false); // Important for modals usage
   const queryClient = useQueryClient();
 
@@ -20,7 +28,7 @@ export default function ModalDeleteProfileAnalysis({ _id, close }) {
           queryKey: ['profile-analysis'],
         });
 
-        toast.success('Relatório deletado com sucesso.');
+        toast.success(translations.toast);
         close();
       },
       onError: (err) => {
@@ -34,7 +42,7 @@ export default function ModalDeleteProfileAnalysis({ _id, close }) {
 
   return (
     <Container>
-      <Message>Tem certeza que deseja apagar o relatório?</Message>
+      <Message>{translations.messageDelete}</Message>
 
       <DeleteButton
         type="button"
@@ -55,10 +63,10 @@ export default function ModalDeleteProfileAnalysis({ _id, close }) {
               wrapperStyle={{}}
               wrapperClass=""
             />
-            <p>Carregando</p>
+            <p>{translations.loading}</p>
           </>
         ) : (
-          <p>Excluir</p>
+          <p>{translations.destroy}</p>
         )}
       </DeleteButton>
     </Container>
