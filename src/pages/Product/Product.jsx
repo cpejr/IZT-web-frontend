@@ -45,10 +45,11 @@ import {
 } from './Styles';
 import { TranslateText } from './translations';
 import buildGetProducErrorMessage from './utils';
-
+import translateText from '../../utils/translateAPI';
 export default function Product() {
   // Translations
   const { globalLanguage } = useGlobalLanguage();
+  const translateLanguage = globalLanguage.toLowerCase();
   const translations = TranslateText({ globalLanguage });
 
   const { _id } = useParams();
@@ -65,6 +66,14 @@ export default function Product() {
       navigate('*'); // Go to NotFound page
     },
   });
+
+  translateText(product?.description, translateLanguage)
+    .then((translate) => {
+      console.log('Tradução', translate);
+    })
+    .catch((error) => {
+      console.error('Erro ao traduzir:', error);
+    });
 
   const pictures = useMemo(
     () =>
