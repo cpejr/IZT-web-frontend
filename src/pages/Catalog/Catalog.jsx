@@ -21,12 +21,16 @@ import {
   ProductName,
 } from './Styles';
 import { TranslateText } from './translations';
+import translateText from '../../utils/translateAPI';
 import buildGetCategoriesErrorMessage from './utils';
+import { useState } from 'react';
 
 export default function Catalog() {
   // Translations
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
+  const translateLanguage = globalLanguage.toLowerCase();
+  const [catedoryName, setCategoryName] = useState('');
 
   const navigate = useNavigate();
 
@@ -37,6 +41,21 @@ export default function Catalog() {
       toast.error(errorMessage);
     },
   });
+
+  var translateCategoryName = (nameCategory) => {
+    translateText(nameCategory, translateLanguage)
+      .then((translate) => {
+        console.log(translate);
+        return translate;
+      })
+      .catch((error) => {
+        console.error('Erro ao traduzir:', error);
+      });
+  };
+
+  let catName = categories?.map((category) =>
+    translateCategoryName(category.name)
+  );
 
   return (
     <Page>
@@ -61,14 +80,16 @@ export default function Catalog() {
             <ButtonRow>
               {categories?.map((category) => (
                 <Anchor key={category.name} href={`#${category.name}`}>
-                  <Button>{category.name}</Button>
+                  <Button>{catName}</Button>
                 </Anchor>
               ))}
             </ButtonRow>
             {categories?.map((category) => (
               <ProductCategory key={category.name}>
                 <Divider />
-                <CategoryName>{category.name}</CategoryName>
+                <CategoryName>
+                  {translateCategoryName(category.name)}
+                </CategoryName>
                 <ProductRow>
                   {category?.products?.map((product) => (
                     <Product
