@@ -9,6 +9,7 @@ export function TranslateText({ globalLanguage }) {
   let text6;
   let text7;
   let text8;
+  let document;
 
   if (globalLanguage === 'EN') {
     loading = 'Loading...';
@@ -20,6 +21,7 @@ export function TranslateText({ globalLanguage }) {
     text6 = 'We produce your piece';
     text7 = 'We perform product inspection';
     text8 = 'We ship it to you';
+    document = 'Document';
   } else if (globalLanguage === 'PT') {
     loading = 'Carregando...';
     text1 = 'Descrição do produto';
@@ -30,6 +32,7 @@ export function TranslateText({ globalLanguage }) {
     text6 = 'Produzimos a sua peça';
     text7 = 'Realizamos a inspeção do produto';
     text8 = 'Enviamos para você';
+    document = 'Documento';
   } else if (globalLanguage === 'DE') {
     loading = 'Laden...';
     text1 = 'Produktbeschreibung';
@@ -40,6 +43,7 @@ export function TranslateText({ globalLanguage }) {
     text6 = 'Wir produzieren Ihr Stück';
     text7 = 'Wir führen eine Produktinspektion durch';
     text8 = 'Wir versenden es an Sie';
+    document = 'Dokumentieren';
   }
 
   return {
@@ -52,5 +56,6 @@ export function TranslateText({ globalLanguage }) {
     text6,
     text7,
     text8,
+    document,
   };
 }

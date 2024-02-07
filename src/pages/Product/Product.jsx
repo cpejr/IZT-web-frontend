@@ -51,6 +51,8 @@ export default function Product() {
   const { globalLanguage } = useGlobalLanguage();
   const translateLanguage = globalLanguage.toLowerCase();
   const translations = TranslateText({ globalLanguage });
+  const [productDescription, setProductDescription] = useState('');
+  const [productAdvanges, setProductAdvanges] = useState('');
 
   const { _id } = useParams();
   const navigate = useNavigate();
@@ -70,6 +72,16 @@ export default function Product() {
   translateText(product?.description, translateLanguage)
     .then((translate) => {
       console.log('Tradução', translate);
+      setProductDescription(translate);
+    })
+    .catch((error) => {
+      console.error('Erro ao traduzir:', error);
+    });
+
+  translateText(product?.advantages, translateLanguage)
+    .then((translate) => {
+      console.log('Tradução', translate);
+      setProductAdvanges(translate);
     })
     .catch((error) => {
       console.error('Erro ao traduzir:', error);
@@ -87,7 +99,7 @@ export default function Product() {
   const documents = useMemo(
     () =>
       product?.documents?.map((document, index) => ({
-        name: `Documento ${index + 1}`,
+        name: `${translations.document}  ${index + 1}`,
         url: document.url,
       })),
     [product]
@@ -123,11 +135,11 @@ export default function Product() {
               <TextInfoContainer>
                 <ProductDescription>
                   <DescriptionTitle>{translations.text1}</DescriptionTitle>
-                  <Description>{product?.description}</Description>
+                  <Description>{productDescription}</Description>
                 </ProductDescription>
                 <ProductBenefits>
                   <BenefitsTitle>{translations.text2}</BenefitsTitle>
-                  <Benefits>{product?.advantages}</Benefits>
+                  <Benefits>{productAdvanges}</Benefits>
                 </ProductBenefits>
                 <ProductInfos>
                   <InfoTitle>{translations.text3}</InfoTitle>
