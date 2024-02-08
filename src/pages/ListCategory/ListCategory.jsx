@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
@@ -30,6 +30,7 @@ import {
   DeleteButton,
 } from './Styles';
 import { TranslateText } from './translations';
+import translateText from '../../utils/translateAPI';
 import { buildGetCategoriesErrorMessage } from './utils';
 
 export default function ListCategory() {
@@ -42,7 +43,10 @@ export default function ListCategory() {
   const debouncedName = useDebounce(name);
 
   const { globalLanguage } = useGlobalLanguage();
+  const translateLanguage = globalLanguage.toLowerCase();
   const translations = TranslateText({ globalLanguage });
+  const [CategoryName, setCategoryName] = useState('');
+
 
   const { data: categories, isLoading } = useSearchByNameCategories({
     name: debouncedName,
@@ -52,6 +56,28 @@ export default function ListCategory() {
       toast.error(errorMessage);
     },
   });
+
+  const translateTextCategory = (nameCategory) => {
+    translateText(nameCategory, translateLanguage)
+  .then((translate) => {
+    setCategoryName((prevTranslations) => ({
+      ...prevTranslations,
+      [nameCategory]: translate,
+    }))
+  })
+  .catch((error) => {
+    return {error};
+  })
+  }
+
+  useEffect(() => {
+    if(categories){
+      categories.forEach((category) => {
+        translateTextCategory(category.name);
+      })
+    }
+  },[categories, translateLanguage])
+
 
   const openModalEditCategory = (category) => {
     setSelectedCategory(category);
@@ -88,7 +114,7 @@ export default function ListCategory() {
         <CategoryList>
           {categories?.map((category) => (
             <Row key={category._id}>
-              <Text>{category.name}</Text>
+              <Text>{CategoryName[category.name] || category.name}</Text>
               {isSmallScreen ? (
                 <StyledLink
                   to="/administrador/editar-categoria"
