@@ -45,8 +45,6 @@ export default function ListCategory() {
   const { globalLanguage } = useGlobalLanguage();
   const translateLanguage = globalLanguage.toLowerCase();
   const translations = TranslateText({ globalLanguage });
-  const [CategoryName, setCategoryName] = useState('');
-
 
   const { data: categories, isLoading } = useSearchByNameCategories({
     name: debouncedName,
@@ -56,28 +54,6 @@ export default function ListCategory() {
       toast.error(errorMessage);
     },
   });
-
-  const translateTextCategory = (nameCategory) => {
-    translateText(nameCategory, translateLanguage)
-  .then((translate) => {
-    setCategoryName((prevTranslations) => ({
-      ...prevTranslations,
-      [nameCategory]: translate,
-    }))
-  })
-  .catch((error) => {
-    return {error};
-  })
-  }
-
-  useEffect(() => {
-    if(categories){
-      categories.forEach((category) => {
-        translateTextCategory(category.name);
-      })
-    }
-  },[categories, translateLanguage])
-
 
   const openModalEditCategory = (category) => {
     setSelectedCategory(category);
@@ -114,7 +90,7 @@ export default function ListCategory() {
         <CategoryList>
           {categories?.map((category) => (
             <Row key={category._id}>
-              <Text>{CategoryName[category.name] || category.name}</Text>
+              <Text>{category.name}</Text>
               {isSmallScreen ? (
                 <StyledLink
                   to="/administrador/editar-categoria"

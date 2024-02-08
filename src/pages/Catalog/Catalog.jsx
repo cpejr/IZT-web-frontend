@@ -23,14 +23,14 @@ import {
 import { TranslateText } from './translations';
 import translateText from '../../utils/translateAPI';
 import buildGetCategoriesErrorMessage from './utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Catalog() {
   // Translations
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
   const translateLanguage = globalLanguage.toLowerCase();
-  const [catedoryName, setCategoryName] = useState('');
+  const [categoryName, setCategoryName] = useState('');
 
   const navigate = useNavigate();
 
@@ -42,20 +42,25 @@ export default function Catalog() {
     },
   });
 
-  var translateCategoryName = (nameCategory) => {
+  const translateCategoryName = (nameCategory) => {
     translateText(nameCategory, translateLanguage)
-      .then((translate) => {
-        console.log(translate);
-        return translate;
-      })
+      .then((translate) =>
+        setCategoryName((prevTranslation) => ({
+          ...prevTranslation,
+          [nameCategory]: translate,
+        }))
+      )
       .catch((error) => {
-        console.error('Erro ao traduzir:', error);
+        return error;
       });
   };
-
-  let catName = categories?.map((category) =>
-    translateCategoryName(category.name)
-  );
+  useEffect(() => {
+    if (categories) {
+      categories.forEach((category) => {
+        translateCategoryName(category.name);
+      });
+    }
+  }, [categories, translateLanguage]);
 
   return (
     <Page>
@@ -80,7 +85,9 @@ export default function Catalog() {
             <ButtonRow>
               {categories?.map((category) => (
                 <Anchor key={category.name} href={`#${category.name}`}>
-                  <Button>{catName}</Button>
+                  <Button>
+                    {categoryName[category.name] || category.name}
+                  </Button>
                 </Anchor>
               ))}
             </ButtonRow>
@@ -88,7 +95,7 @@ export default function Catalog() {
               <ProductCategory key={category.name}>
                 <Divider />
                 <CategoryName>
-                  {translateCategoryName(category.name)}
+                  {categoryName[category.name] || category.name}
                 </CategoryName>
                 <ProductRow>
                   {category?.products?.map((product) => (
