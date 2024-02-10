@@ -16,7 +16,7 @@ export function TranslateText({ globalLanguage }) {
     text1 = 'Product Description';
     text2 = 'Product Advantages';
     text3 = 'More Information';
-    text4 = 'How We Process Your Quote';
+    text4 = 'How We Process Your Request?';
     text5 = 'We get in touch to plan the product';
     text6 = 'We produce your piece';
     text7 = 'We perform product inspection';
@@ -27,7 +27,7 @@ export function TranslateText({ globalLanguage }) {
     text1 = 'Descrição do produto';
     text2 = 'Vantagens do Produto';
     text3 = 'Mais informações';
-    text4 = 'Como processamos seu orçamento?';
+    text4 = 'Como processamos seu pedido?';
     text5 = 'Entramos em contato para planejar o produto';
     text6 = 'Produzimos a sua peça';
     text7 = 'Realizamos a inspeção do produto';
@@ -38,7 +38,7 @@ export function TranslateText({ globalLanguage }) {
     text1 = 'Produktbeschreibung';
     text2 = 'Vorteile des Produkts';
     text3 = 'Weitere Informationen';
-    text4 = 'Wie wir Ihre Anfrage verarbeiten';
+    text4 = 'Wie bearbeiten wir Ihre Bestellung?';
     text5 = 'Wir setzen uns in Verbindung, um das Produkt zu planen';
     text6 = 'Wir produzieren Ihr Stück';
     text7 = 'Wir führen eine Produktinspektion durch';

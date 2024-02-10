@@ -217,7 +217,6 @@ export default function ProfileAnalysis() {
     createProfileAnalysis(combinedData);
     setFormDataStorage({});
   };
-
   return (
     <Boddy>
       <Container>
@@ -324,7 +323,10 @@ export default function ProfileAnalysis() {
           <Edit>
             <Text>{translations.grindingClearance} </Text>
             <Container2>
-              <Graphic data={retificationCenterlessDiagram} />
+              <Graphic
+                data={retificationCenterlessDiagram}
+                globalLanguage={globalLanguage}
+              />
             </Container2>
             <Text>{translations.outputData}</Text>
           </Edit>
