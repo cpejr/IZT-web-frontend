@@ -44,7 +44,7 @@ import {
 
 export default function ModalAuthorizeAccess({ close, language }) {
   // Variables
-  const courseId = '646acfad1bae8cb3a56a05f4';
+  const courseId = '649b66dd090a10350f3e341b';
   const [isPending, setIsPending] = useState(false); // Important for modal loading
   const queryClient = useQueryClient();
   const translations = TranslateText({ language });

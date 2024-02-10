@@ -47,7 +47,7 @@ import {
 } from './utilsEN';
 
 export default function CourseAuthorizationMobile() {
-  const courseId = '646acfad1bae8cb3a56a05f4';
+  const courseId = '649b66dd090a10350f3e341b';
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
