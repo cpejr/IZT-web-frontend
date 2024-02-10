@@ -24,6 +24,9 @@ const queryClient = new QueryClient({
     },
   },
 });
+console.error = () => {};
+console.warn = () => {};
+console.log = () => {};
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
