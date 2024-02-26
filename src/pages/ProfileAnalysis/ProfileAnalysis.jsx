@@ -185,6 +185,7 @@ export default function ProfileAnalysis() {
     handleSubmit: calculate,
     register,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(validationSchema),
   });
@@ -216,6 +217,7 @@ export default function ProfileAnalysis() {
     };
     createProfileAnalysis(combinedData);
     setFormDataStorage({});
+    reset();
   };
   return (
     <Boddy>
