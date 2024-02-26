@@ -1,5 +1,3 @@
-import { TitleRow } from '../../../pages/StabilityAnalysis/Styles';
-
 // eslint-disable-next-line import/prefer-default-export
 export function TranslateText({ globalLanguage }) {
   let loading;
@@ -18,6 +16,7 @@ export function TranslateText({ globalLanguage }) {
   let label10;
   let succesToast;
   let title;
+  let phonePH;
 
   if (globalLanguage === 'PT') {
     loading = 'Carregando';
@@ -36,6 +35,7 @@ export function TranslateText({ globalLanguage }) {
     label10 = 'Enviar';
     succesToast = 'Pedido enviado com sucesso!';
     title = 'Requisite um orçamento';
+    phonePH = '(99) 99999-9999';
   } else if (globalLanguage === 'EN') {
     loading = 'Loading';
     label1 = 'Name:';
@@ -53,6 +53,7 @@ export function TranslateText({ globalLanguage }) {
     label10 = 'Send';
     succesToast = 'Order sent successfully!';
     title = 'Request a quote';
+    phonePH = '+9 (999) 999-9999';
   } else if (globalLanguage === 'DE') {
     loading = 'Laden';
     label1 = 'Name:';
@@ -70,6 +71,7 @@ export function TranslateText({ globalLanguage }) {
     label10 = 'Senden';
     succesToast = 'Bestellung erfolgreich versandt!';
     title = 'Fordern Sie ein Angebot an';
+    phonePH = '+99 999 999999';
   }
 
   return {
@@ -89,5 +91,6 @@ export function TranslateText({ globalLanguage }) {
     label10,
     succesToast,
     title,
+    phonePH,
   };
 }

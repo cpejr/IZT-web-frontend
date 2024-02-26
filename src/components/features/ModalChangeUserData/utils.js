@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { ERROR_CODES } from '../../../utils/constants';
 
 // Form Validation
+
 export const updateUserSchema = z.object({
   company: z.string().nonempty('Favor digitar o nome da empresa'),
   name: z

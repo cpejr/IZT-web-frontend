@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { ERROR_CODES } from '../../../utils/constants';
 
 // eslint-disable-next-line import/prefer-default-export
+
 export const formsValidationSchemaDE = z.object({
   company: z.string().nonempty('Bitte geben Sie den Firmennamen ein'),
   representative: z
@@ -16,6 +17,10 @@ export const formsValidationSchemaDE = z.object({
   telephone: z
     .string()
     .nonempty('Bitte geben Sie die Telefonnummer ein')
+    .regex(
+      /^\+\d{2} \d{3} \d{6}$/,
+      'Geben Sie eine gültige Telefonnummer ein, im Format: +49 941 908140'
+    )
     .transform((value) => value.replace(/[\s()-]*/g, '')),
   message: z
     .string()

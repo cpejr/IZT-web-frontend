@@ -41,6 +41,9 @@ export default function FormsContact() {
   } else {
     validationSchema = formsValidationSchemaEN;
   }
+  let phoneMask = '+99 (99) 99999-9999';
+  if (globalLanguage === 'DE') phoneMask = '+99 999 999999';
+  else if (globalLanguage === 'EN') phoneMask = '+9 (999) 999-9999';
 
   const isSmallScreen = useMediaQuery({ maxWidth: 700 });
 
@@ -109,7 +112,7 @@ export default function FormsContact() {
             defaultValue=""
             control={control}
             placeholder={translations.placeholder4}
-            mask="+99 (99) 99999-9999"
+            mask={phoneMask}
             errors={errors}
           />
         </Section>

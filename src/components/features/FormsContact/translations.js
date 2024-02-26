@@ -30,7 +30,7 @@ export function TranslateText({ globalLanguage }) {
     placeholder3 = 'email@example.com';
 
     label4 = 'Phone:';
-    placeholder4 = '(99) 99999-9999';
+    placeholder4 = '+9 (999) 999-9999';
 
     label5 = 'Message:';
     placeholder5 = 'Write your message here';
@@ -76,7 +76,7 @@ export function TranslateText({ globalLanguage }) {
     placeholder3 = 'email@example.com';
 
     label4 = 'Telefon:';
-    placeholder4 = '(99) 99999-9999';
+    placeholder4 = '(99) 999 999999';
 
     label5 = 'Nachricht:';
     placeholder5 = 'Schreiben Sie hier Ihre Nachricht';

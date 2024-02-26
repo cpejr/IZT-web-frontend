@@ -3,21 +3,23 @@ import { z } from 'zod';
 import { ERROR_CODES } from '../../../utils/constants';
 
 // Form Validation
+
 export const budgetEmailSchema = z.object({
   name: z
     .string()
     .nonempty('Digite o seu nome completo')
     .min(3, 'Digite um nome com no mínimo 3 caracteres'),
   company: z.string().nonempty('Digite o nome da empresa'),
-  email: z
-    .string()
-    .nonempty('Digite o email')
-    .email('Insira um email válido')
-    .trim(),
+  email: z.string().nonempty('Digite o email').email('Insira um email válido'),
   telephone: z
     .string()
     .nonempty('Digite o seu número do telefone')
+    .regex(
+      /^\+\d{2} \(\d{2}\) \d{5}-\d{4}$/,
+      'Insira um número de telefone válido'
+    )
     .transform((value) => value.replace(/[\s()-]*/g, '')), // Taking off mask chars
+
   country: z
     .string({
       errorMap: () => ({

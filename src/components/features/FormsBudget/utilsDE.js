@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { ERROR_CODES } from '../../../utils/constants';
 
 // Form Validation
+
 export const budgetEmailSchemaDE = z.object({
   name: z
     .string()
@@ -17,6 +18,10 @@ export const budgetEmailSchemaDE = z.object({
   telephone: z
     .string()
     .nonempty('Geben Sie Ihre Telefonnummer ein')
+    .regex(
+      /^\+\d{2} \d{3} \d{6}$/,
+      'Geben Sie eine gültige Telefonnummer ein, im Format: +49 941 908140'
+    )
     .transform((value) => value.replace(/[\s()-]*/g, '')), // Maskierungszeichen entfernen
   country: z
     .string({

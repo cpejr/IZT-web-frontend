@@ -123,6 +123,9 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
       setCities(null);
     }
   }, [setValue, selectedState]);
+  let phoneMask = '+99 (99) 99999-9999';
+  if (globalLanguage === 'DE') phoneMask = '+99 999 999999';
+  else if (globalLanguage === 'EN') phoneMask = '+9 (999) 999-9999';
 
   return (
     <ContactUs>
@@ -156,8 +159,8 @@ export default function FormsBudget({ productId, isLoadingProduct = false }) {
               name="telephone"
               defaultValue=""
               control={control}
-              placeholder="(99) 99999-9999"
-              mask="+99 (99) 99999-9999"
+              placeholder={translations.phonePH}
+              mask={phoneMask}
               errors={errors}
             />
           </Section>
@@ -253,5 +256,4 @@ FormsBudget.defaultProps = {
 FormsBudget.propTypes = {
   productId: PropTypes.string.isRequired,
   isLoadingProduct: PropTypes.bool,
-  currentLanguage: PropTypes.string.isRequired,
 };
