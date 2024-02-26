@@ -217,7 +217,9 @@ export default function ProfileAnalysis() {
     };
     createProfileAnalysis(combinedData);
     setFormDataStorage({});
-    reset();
+    setTimeout(() => {
+      reset();
+    }, 1000);
   };
   return (
     <Boddy>
