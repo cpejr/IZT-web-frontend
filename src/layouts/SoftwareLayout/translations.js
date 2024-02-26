@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 export function TranslateTextSoftwareLayouts({ globalLanguage }) {
   let textMobile1;
   let textMobile2;

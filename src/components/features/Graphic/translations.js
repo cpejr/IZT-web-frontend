@@ -1,5 +1,4 @@
-import { TitleRow } from '../../../pages/StabilityAnalysis/Styles';
-
+/* eslint-disable import/prefer-default-export */
 export function TranslateText({ globalLanguage }) {
   let chart;
 

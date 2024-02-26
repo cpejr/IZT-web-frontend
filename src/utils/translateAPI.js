@@ -10,7 +10,6 @@ export default async function translateText(text, language) {
 
     return translation;
   } catch (error) {
-    console.error('Erro ao traduzir o texto:', error);
     return null;
   }
 }

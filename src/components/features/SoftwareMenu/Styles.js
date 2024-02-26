@@ -71,6 +71,7 @@ export const MenuLink = styled.div`
   font-style: normal;
   font-weight: 600;
   font-size: ${(props) =>
+    // eslint-disable-next-line no-nested-ternary
     props.language === 'PT'
       ? '24px'
       : props.language === 'DE'

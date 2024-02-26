@@ -78,19 +78,19 @@ export default function Footer() {
           <Centralize>{translations.socialMedia}</Centralize>
         </Tittle>
         <SocialMedias>
-          <SocialMediaButton href="https://cpejr.com/">
+          <SocialMediaButton href="https://www.instagram.com/iztcore/" target="_blank">
             <BsInstagram size={30} />
           </SocialMediaButton>
-          <SocialMediaButton href="https://cpejr.com/">
+          <SocialMediaButton href="https://cpejr.com/" target="_blank">
             <AiOutlineLinkedin size={40} />
           </SocialMediaButton>
-          <SocialMediaButton href="https://cpejr.com/">
+          <SocialMediaButton href="https://cpejr.com/" target="_blank">
             <AiOutlineFacebook size={40} />
           </SocialMediaButton>
-          <SocialMediaButton href="https://cpejr.com/">
+          <SocialMediaButton href="https://api.whatsapp.com/send/?phone=%2B5531993912235&text&type=phone_number&app_absent=0" target="_blank">
             <BsWhatsapp size={30} />
           </SocialMediaButton>
-          <SocialMediaButton href="https://cpejr.com/">
+          <SocialMediaButton href="mailto:contato@iztcore.com" target="_blank">
             <HiOutlineMail size={40} />
           </SocialMediaButton>
         </SocialMedias>

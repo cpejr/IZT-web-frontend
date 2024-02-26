@@ -32,21 +32,11 @@ export const editProductValidationSchema = z.object({
     )
     .nonempty('Você deve inserir ao menos uma foto')
     .transform((pictures) => pictures.map(({ file }) => file)),
-  documents: z
-    .array(
-      z.object({
-        file: z.instanceof(File).or(
-          z.object({
-            name: z.string(),
-            mimeType: z.string(),
-            url: z.string(),
-            key: z.string(),
-          })
-        ),
-      })
-    )
-    .nonempty('Você deve inserir ao menos um documento')
-    .transform((documents) => documents.map(({ file }) => file)),
+    documents: z
+    .array(z.object({ file: z.instanceof(File) }))
+    .default([])
+    .transform((documents) => documents.map(({ file }) => file))
+    .optional(),
 });
 
 // Toast Success
