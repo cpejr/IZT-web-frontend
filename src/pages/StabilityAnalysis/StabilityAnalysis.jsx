@@ -192,6 +192,7 @@ export default function StabilityAnalysis() {
     handleSubmit: calculate,
     register,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(validationSchema),
   });
@@ -218,6 +219,9 @@ export default function StabilityAnalysis() {
     };
     createStabilityAnalysis(combinedData);
     setFormDataStorage({});
+    setTimeout(() => {
+      reset();
+    }, 1000);
   };
   return (
     <Container>
