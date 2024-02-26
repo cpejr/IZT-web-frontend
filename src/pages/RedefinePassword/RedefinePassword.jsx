@@ -7,6 +7,10 @@ import { toast } from 'react-toastify';
 import IZTLogo from '../../assets/IZTLogo.svg';
 import { DataInput } from '../../components/common';
 import { useRedefinePassword } from '../../hooks/query/users';
+
+import { TranslateText } from './translations';
+import { useGlobalLanguage } from '../../stores/globalLanguage';
+
 import {
   Page,
   Container,
@@ -22,12 +26,15 @@ import {
 } from './utils';
 
 export default function RedefinePassword() {
+  const { globalLanguage } = useGlobalLanguage();
+  const translations = TranslateText({ globalLanguage });
+
   const { token } = useParams();
   const navigate = useNavigate();
 
   const { mutate: redefinePassword, isLoading } = useRedefinePassword({
     onSuccess: () => {
-      toast.success('Senha alterada com sucesso');
+      toast.success(translations.toast);
       navigate('/login');
     },
     onError: (err) => {
@@ -57,10 +64,10 @@ export default function RedefinePassword() {
           alt="Logo da IZT: Um I atravessando um Z dentro de um circulo"
         />
         <DataEntry>
-          <Title>Redefinir Senha</Title>
+          <Title>{translations.title}</Title>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <DataInput
-              label="Insira a nova senha"
+              label={translations.newPassword}
               name="password"
               placeholder="********"
               register={register}
@@ -68,7 +75,7 @@ export default function RedefinePassword() {
               type="password"
             />
             <DataInput
-              label="Confirme a nova senha"
+              label={translations.confirmNewPassword}
               name="confirmPassword"
               placeholder="********"
               register={register}
@@ -88,7 +95,7 @@ export default function RedefinePassword() {
                   Carregando
                 </>
               ) : (
-                'Salvar'
+                translations.save
               )}
             </SubmitButton>
           </Form>

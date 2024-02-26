@@ -115,6 +115,7 @@ export default function Profile() {
                           accessGranted = true;
                           return (
                             <h2 key={index}>
+                              {' '}
                               {translations.profileUnlimitedAccess}
                             </h2>
                           );

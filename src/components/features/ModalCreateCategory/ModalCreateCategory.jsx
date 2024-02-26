@@ -35,6 +35,19 @@ import {
 } from './utilsEN';
 
 export default function ModalCreateCategory({ close }) {
+  // const translate = new Translate();
+
+  // const translateText = async () => {
+  //   let [translationsAPI] = await translate.translate(text, target);
+  //   translationsAPI = Array.isArray(translationsAPI)
+  //     ? translationsAPI
+  //     : [translationsAPI];
+  //   console.log('Translations:');
+  //   translationsAPI.forEach((translation, i) => {
+  //     console.log(`${text[i]} => (${target}) ${translation}`);
+  //   });
+  // };
+
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
 

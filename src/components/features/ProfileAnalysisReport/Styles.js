@@ -68,13 +68,13 @@ export const Diagram = styled.div`
 
 export const DataRow = styled.div`
   display: flex;
-  flex-direction: row;
-  display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
   width: 100%;
   height: 100%;
   margin-left: 1rem;
+
   @media (max-width: 1075px) {
     gap: 0.5rem;
   }
@@ -82,7 +82,7 @@ export const DataRow = styled.div`
 
 export const DataContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   padding: 15px 20px;
   flex-wrap: wrap;

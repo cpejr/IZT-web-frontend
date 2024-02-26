@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types';
 import Plot from 'react-plotly.js';
 
-export default function ProfileAnalysisGraph({ data }) {
+import { TranslateText } from './translations';
+
+export default function ProfileAnalysisGraph({ data, globalLanguage }) {
+  const translations = TranslateText({ globalLanguage });
+
   return (
     <Plot
       data={[
@@ -16,7 +20,7 @@ export default function ProfileAnalysisGraph({ data }) {
       ]}
       layout={{
         autosize: true,
-        title: 'Gráfico IZT',
+        title: translations.chart,
         xaxis: {
           title: 'X Axis',
         },

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { HiSearch } from 'react-icons/hi';
@@ -30,6 +30,7 @@ import {
   DeleteButton,
 } from './Styles';
 import { TranslateText } from './translations';
+import translateText from '../../utils/translateAPI';
 import { buildGetCategoriesErrorMessage } from './utils';
 
 export default function ListCategory() {
@@ -42,6 +43,7 @@ export default function ListCategory() {
   const debouncedName = useDebounce(name);
 
   const { globalLanguage } = useGlobalLanguage();
+  const translateLanguage = globalLanguage.toLowerCase();
   const translations = TranslateText({ globalLanguage });
 
   const { data: categories, isLoading } = useSearchByNameCategories({

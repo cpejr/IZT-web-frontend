@@ -21,12 +21,16 @@ import {
   ProductName,
 } from './Styles';
 import { TranslateText } from './translations';
+import translateText from '../../utils/translateAPI';
 import buildGetCategoriesErrorMessage from './utils';
+import { useEffect, useState } from 'react';
 
 export default function Catalog() {
   // Translations
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
+  const translateLanguage = globalLanguage.toLowerCase();
+  const [categoryName, setCategoryName] = useState('');
 
   const navigate = useNavigate();
 
@@ -37,6 +41,26 @@ export default function Catalog() {
       toast.error(errorMessage);
     },
   });
+
+  const translateCategoryName = (nameCategory) => {
+    translateText(nameCategory, translateLanguage)
+      .then((translate) =>
+        setCategoryName((prevTranslation) => ({
+          ...prevTranslation,
+          [nameCategory]: translate,
+        }))
+      )
+      .catch((error) => {
+        return error;
+      });
+  };
+  useEffect(() => {
+    if (categories) {
+      categories.forEach((category) => {
+        translateCategoryName(category.name);
+      });
+    }
+  }, [categories, translateLanguage]);
 
   return (
     <Page>
@@ -61,14 +85,18 @@ export default function Catalog() {
             <ButtonRow>
               {categories?.map((category) => (
                 <Anchor key={category.name} href={`#${category.name}`}>
-                  <Button>{category.name}</Button>
+                  <Button>
+                    {categoryName[category.name] || category.name}
+                  </Button>
                 </Anchor>
               ))}
             </ButtonRow>
             {categories?.map((category) => (
               <ProductCategory key={category.name}>
                 <Divider />
-                <CategoryName>{category.name}</CategoryName>
+                <CategoryName>
+                  {categoryName[category.name] || category.name}
+                </CategoryName>
                 <ProductRow>
                   {category?.products?.map((product) => (
                     <Product
