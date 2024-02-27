@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
@@ -70,6 +70,7 @@ export default function StabilityAnalysis() {
   // Translation
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   let validationSchema;
 
@@ -201,6 +202,9 @@ export default function StabilityAnalysis() {
     setFormDataStorage(data);
     calculateStabilityAnalysis(data);
   };
+  useEffect(() => {
+    setShowErrorMessage(Object.keys(errors).length > 0);
+  }, [errors]);
 
   const {
     handleSubmit: save,
@@ -271,6 +275,12 @@ export default function StabilityAnalysis() {
               errors={errors}
             />
           </Collapsable>
+          {showErrorMessage && (
+            <ErrorMessage>
+              Por favor, preencha todos os campos obrigatórios.
+            </ErrorMessage>
+          )}
+
           <Button disabled={isLoading} type="submit">
             {isLoading ? (
               <>

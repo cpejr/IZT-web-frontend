@@ -7,6 +7,7 @@ import { AiOutlineDown } from 'react-icons/ai';
 import { TbPencil } from 'react-icons/tb';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
+import { isDirty } from 'zod';
 
 import {
   AnalysisData,
@@ -75,7 +76,6 @@ export default function ProfileAnalysis() {
   const { globalLanguage } = useGlobalLanguage();
   const translations = TranslateText({ globalLanguage });
   let validationSchema;
-
   if (globalLanguage === 'DE') {
     validationSchema = calculateProfileAnalysisValidationSchemaDE;
   } else if (globalLanguage === 'PT') {
@@ -101,6 +101,7 @@ export default function ProfileAnalysis() {
   const [InputDataStorage, setInputDataStorage] = useState({});
   const queryClient = useQueryClient();
   const [collapse, setCollapse] = useState('');
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   // Open/Close dropdown
   const handleCollapse = (sectionName) => {
@@ -198,6 +199,11 @@ export default function ProfileAnalysis() {
       calculateProfileAnalysis(data);
     }, 1000);
   };
+  useEffect(() => {
+    if (!isDirty) return;
+    setShowErrorMessage(Object.keys(errors).length > 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errors, isDirty]);
 
   useEffect(() => {}, [formDataStorage]);
   const user = useAuthStore((state) => state.auth?.user);
@@ -289,6 +295,12 @@ export default function ProfileAnalysis() {
                     errors={errors}
                   />
                 </Collapsable>
+                {showErrorMessage && isDirty && (
+                  <ErrorMessage>
+                    Por favor, preencha todos os campos obrigatórios.
+                  </ErrorMessage>
+                )}
+
                 <Button disabled={isLoading} type="submit">
                   {isLoading ? (
                     <>
