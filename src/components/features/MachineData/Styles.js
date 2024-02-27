@@ -15,6 +15,7 @@ export const Line = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.5vw;
+  flex-wrap: wrap;
 `;
 
 export const DataColumn = styled.div`

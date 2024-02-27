@@ -167,7 +167,9 @@ export default function MachineData({
             </Line>
             <ErrorMessage>{errors?.speedPassage?.message}</ErrorMessage>
             <Line>
-              <Label>{translations.speedPeripheral}: </Label>
+              <Label style={{ flexWrap: 'wrap', whiteSpace: 'normal' }}>
+                {translations.speedPeripheral}:
+              </Label>
               <Input
                 id="speedPeripheral"
                 {...register('speedPeripheral', { valueAsNumber: true })}
