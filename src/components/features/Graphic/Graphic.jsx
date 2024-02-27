@@ -2,6 +2,7 @@
 import React from 'react';
 
 import Plot from 'react-plotly.js';
+
 import { TranslateText } from './translations';
 
 export default function Graphic({ data, globalLanguage }) {

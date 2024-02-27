@@ -71,7 +71,6 @@ export default function Product() {
 
   translateText(product?.description, translateLanguage)
     .then((translate) => {
-      console.log('Tradução', translate);
       setProductDescription(translate);
     })
     .catch((error) => {
@@ -80,11 +79,10 @@ export default function Product() {
 
   translateText(product?.advantages, translateLanguage)
     .then((translate) => {
-      console.log('Tradução', translate);
       setProductAdvanges(translate);
     })
     .catch((error) => {
-      console.error('Erro ao traduzir:', error);
+      return { error };
     });
 
   const pictures = useMemo(

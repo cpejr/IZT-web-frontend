@@ -96,6 +96,7 @@ export default function ProfileAnalysis() {
 
   const [retificationCenterlessDiagram, setRetificationCenterlessDiagram] =
     useState([]);
+
   const [formDataStorage, setFormDataStorage] = useState({});
   const [InputDataStorage, setInputDataStorage] = useState({});
   const queryClient = useQueryClient();
@@ -193,7 +194,9 @@ export default function ProfileAnalysis() {
   const onSubmit = (data) => {
     setFormDataStorage(data);
     setInputDataStorage(data);
-    calculateProfileAnalysis(data);
+    setTimeout(() => {
+      calculateProfileAnalysis(data);
+    }, 1000);
   };
 
   useEffect(() => {}, [formDataStorage]);
