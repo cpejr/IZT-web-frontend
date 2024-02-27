@@ -36,4 +36,5 @@ export default function ProfileAnalysisGraph({ data, globalLanguage }) {
 
 ProfileAnalysisGraph.propTypes = {
   data: PropTypes.object.isRequired,
+  globalLanguage: PropTypes.string.isRequired,
 };
