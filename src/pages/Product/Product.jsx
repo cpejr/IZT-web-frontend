@@ -9,14 +9,10 @@ import step1 from '../../assets/productPage/steps/Group75.png';
 import step2 from '../../assets/productPage/steps/Group76.png';
 import step3 from '../../assets/productPage/steps/Group77.png';
 import step4 from '../../assets/productPage/steps/Group78.png';
-import {
-  FilesList,
-  FormsBudget,
-  Carousel,
-  Header,
-} from '../../components/features';
+import { FilesList, FormsBudget, Carousel } from '../../components/features';
 import { useGetProductById } from '../../hooks/query/products';
 import { useGlobalLanguage } from '../../stores/globalLanguage';
+import translateText from '../../utils/translateAPI';
 import {
   Container,
   ProductData,
@@ -45,7 +41,7 @@ import {
 } from './Styles';
 import { TranslateText } from './translations';
 import buildGetProducErrorMessage from './utils';
-import translateText from '../../utils/translateAPI';
+
 export default function Product() {
   // Translations
   const { globalLanguage } = useGlobalLanguage();
