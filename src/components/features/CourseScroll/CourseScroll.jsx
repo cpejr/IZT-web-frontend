@@ -1,6 +1,9 @@
+import React, { useState, useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 
 import { useGlobalLanguage } from '../../../stores/globalLanguage';
+import translateText from '../../../utils/translateAPI';
 import VideoSelect from '../VideoSelect/VideoSelect';
 import {
   GreyLine,
@@ -10,29 +13,44 @@ import {
   ChaptersContent,
 } from './Styles';
 import { TranslateTextChapters } from './translationsChapters';
-import { TranslateTextVideos } from './translationsVideos';
 
 export default function CourseScroll({ chapters = [] }) {
   // Translation
   const { globalLanguage } = useGlobalLanguage();
   const translationsChapters = TranslateTextChapters({ globalLanguage });
-  const translationsVideos = TranslateTextVideos({ globalLanguage });
+  const [translationsVideos, setTranslationsVideos] = useState({});
+
+  useEffect(() => {
+    const translatedVideos = {};
+    chapters.forEach((chapter, chapterIndex) => {
+      chapter.videos.forEach((video) => {
+        translateText(video.title, globalLanguage.toLowerCase())
+          .then((translatedTitle) => {
+            translatedVideos[video._id] = translatedTitle;
+            setTranslationsVideos(translatedVideos);
+          })
+          .catch((error) => {
+            console.error('Translation error:', error);
+          });
+      });
+    });
+  }, [chapters, globalLanguage]);
 
   return (
     <CourseContent>
-      {chapters?.map(({ _id, videos }, index) => (
-        <ChaptersContainer key={_id}>
+      {chapters?.map((chapter, index) => (
+        <ChaptersContainer key={chapter._id}>
           <ChapterTitle>
             {translationsChapters[`chapter${index + 1}`]}{' '}
           </ChapterTitle>
           <GreyLine />
           <ChaptersContent>
-            {videos?.map((video) => (
+            {chapter.videos?.map((video) => (
               <VideoSelect
-                key={video?._id}
+                key={video._id}
                 video={{
                   ...video,
-                  title: translationsVideos[`video${video?._id}`],
+                  title: translationsVideos[video._id] || video.title,
                 }}
               />
             ))}

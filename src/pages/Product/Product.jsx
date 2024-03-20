@@ -70,7 +70,7 @@ export default function Product() {
       setProductDescription(translate);
     })
     .catch((error) => {
-      console.error('Erro ao traduzir:', error);
+      return { error };
     });
 
   translateText(product?.advantages, translateLanguage)
